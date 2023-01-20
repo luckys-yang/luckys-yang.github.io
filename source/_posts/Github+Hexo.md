@@ -366,8 +366,9 @@ git rm -r --cached .	# 删除本地缓存，将文件改为未track状态，然�
 
 ### 1.15
 
-- 在输入 `hexo d` 后出现错误：`fatal: not a git repository (or any of the parent directories): .git`，意思是（当前）不是一个git的目录（或任何一个父目录），需要使用命令 `git init` 新建一个.git目录即可
+- 在输入 `hexo d` 后出现错误：`fatal: not a git repository (or any of the parent directories): .git`，意思是（当前）不是一个git的目录（或任何一个父目录），需要使用命令 `git init` 新建一个.git目录即可，然后推送，需要把 Butterfly那个主题文件移回你根目录主题那，然后仓库会buid报错不用管，部署在vercel的不用怕正常访问网站。还有就是访问github不了就把加速器关了
 - 然后还有生成很多分支啥的，可以重新生成ssh秘钥步骤，如果还不行就重装Hexo，最好一开始备份一个blog，我就是这样，还有就是配置文件里把git...改成https...那个
+- 不能直接推送整个项目不然build会报错，只需要本地 `hexo c && hexo g`，然后把 `public`文件夹推送上去即可
 
 ## vercel部署Hexo
 
