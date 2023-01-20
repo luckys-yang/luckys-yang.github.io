@@ -1,0 +1,292 @@
+﻿/* QQ图标样式 */
+i.fab.fa-qq {
+    color: #ad9123;
+}
+
+/* Github图标样式 */
+i.fab.fa-github {
+    color: #3ac7ae;
+}
+
+/* 页脚图标样式 */
+i.fa.fa-sun-o.fa-spin {
+    color: #00ffc7d9;
+}
+
+/* 侧栏图标分类样式 */
+i.fas.fa-folder-open {
+    color: coral;
+}
+
+/* 侧栏图标网站信息样式 */
+i.fas.fa-chart-line {
+    color: olivedrab;
+}
+
+/* 顶部图标搜索样式 */
+i.fas.fa-search.fa-fw {
+    color: #22c922d4;
+}
+
+/* 顶部图标首页样式 */
+i.fa-fw.fas.fa-home {
+    color: rgb(89, 201, 136);
+}
+
+/* 顶部图标友链样式 */
+i.fa-fw.fas.fa-link {
+    color: rgb(89, 201, 136);
+}
+
+/* 顶部图标收藏样式 */
+i.fa-fw.fas.fa-star {
+    color: rgb(89, 201, 136);
+}
+
+/* 顶部图标留言样式 */
+i.fa-fw.fas.fa-comment {
+    color: rgb(89, 201, 136);
+}
+
+/* 顶部图标关于样式 */
+i.fa-fw.fas.fa-info-circle {
+    color: rgb(89, 201, 136);
+}
+
+/* 顶部图标目录样式 */
+i.fa-fw.fas.fa-list {
+    color: rgb(89, 201, 136);
+}
+
+/* 顶部图标归档样式 */
+i.fa-fw.fas.fa-list-alt {
+    color: coral;
+}
+
+/* 顶部图标标签样式 */
+i.fa-fw.fas.fa-tags {
+    color: coral;
+}
+
+/* 手机端右上角图标样式 */
+i.fas.fa-bars.fa-fw {
+    color: #f8ff00d1;
+}
+
+/* 页脚透明化begin */
+#footer {
+    background: #524f4f;
+    color: #000;
+    backdrop-filter: saturate(100%) blur(5px);
+}
+
+#footer::before {
+    background: rgba(255, 255, 255, .15);
+}
+
+#footer #footer-wrap {
+    color: var(--font-color);
+}
+
+#footer #footer-wrap a {
+    color: var(--font-color);
+}
+
+/* 页脚透明化end */
+
+/* 文章页标题居中，需要配置文件disable_top_img: true 才能生效 */
+#page h1.page-title,
+#post>#post-info {
+    text-align: center;
+}
+
+/* 页脚图片不重复只显示一次 */
+/* 图片居中方法：利用“margin:0 auto”实现水平居中；2、利用“text-align:center”实现水平居中； */
+footer#footer {
+    background-repeat: no-repeat;
+}
+
+/* 页脚备案美化begin */
+.github-badge {
+    /* display: inline-block; */
+    border-radius: 4px;
+    text-shadow: none;
+    font-size: 12px;
+    color: #fff;
+    line-height: 15px;
+    margin-bottom: 5px;
+}
+
+.github-badge .badge-subject {
+    display: inline-block;
+    background-color: #998281;
+    padding: 4px 4px 4px 4px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.github-badge .badge-value {
+    display: inline-block;
+    padding: 4px 4px 4px 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.github-badge .bg-green {
+    background: linear-gradient(to right, #a8caba 0%, #5d4157 100%);
+}
+
+/*099 Strong Stick*/
+.github-badge .bg-purple {
+    background: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 100%);
+}
+
+/* end */
+
+/* 重写顶部导航背景 */
+[data-theme='dark'] #page-header.nav-fixed>#nav,
+[data-theme='dark'] #page-header.not-top-img>#nav {
+    background: #524f4fab !important;
+    -webkit-box-shadow: 0 5px 6px -5px rgb(133 133 133 / 0%) !important;
+    box-shadow: 0 5px 6px -5px rgb(133 133 133 / 0%) !important;
+}
+
+/* 侧栏个人卡片魔改begin */
+#aside-content>.card-widget.card-info {
+    background: #fff url(https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/QQ%E6%88%AA%E5%9B%BE20230119200147.webp) top 33% center no-repeat;
+    position: relative;
+    background-size: cover;
+    /*铺满*/
+}
+
+#aside-content .card-info #card-info-btn {
+    display: none;
+}
+
+/* 名字 */
+#aside-content .card-info .author-info__name {
+    font-weight: 700;
+    /* color: black; */
+}
+
+/* 网站描述 */
+/* #aside-content .card-info .author-info__description {
+    font-weight: 600;
+    color: black;
+} */
+/* 文章，标签，分类字体颜色 */
+.site-data>a .headline {
+    color: rgb(255 243 208 / 70%);
+}
+
+/* end */
+/* 文章目录蒙版效果样式begin */
+/* 文章目录 */
+#aside-content #card-toc .toc-content {
+    margin: 10px -18px;
+}
+
+#aside-content #card-toc .toc-content .toc-link.active {
+    line-height: 1.2;
+    border-radius: 12px;
+    border-left-color: var(--heo-hovertext);
+    background-color: var(--heo-card-bg);
+    color: var(--heo-lighttext);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+[data-theme=dark].toc .toc-item.active .toc-link .toc-text {
+    color: var(--heo-white);
+}
+
+#aside-content #card-toc .toc-content .toc-item.active .toc-link {
+    opacity: 1;
+    border-radius: 8px;
+}
+
+#aside-content #card-toc .toc-content .toc-link {
+    line-height: 1.2;
+    padding: 8px;
+    border-left: 0px solid transparent;
+    border-radius: 12px;
+    color: var(--heo-secondtext);
+    cursor: default;
+}
+
+#aside-content #card-toc .toc-content .toc-link:not(.active) span {
+    opacity: 0.6;
+    cursor: pointer;
+    filter: blur(1px);
+    transition: 0.3s;
+}
+
+#aside-content #card-toc:hover .toc-content .toc-link:not(.active) span {
+    filter: blur(0px);
+    opacity: 1;
+}
+
+#aside-content #card-toc .toc-content .toc-link:not(.active) span:hover {
+    color: var(--heo-lighttext);
+}
+/* end */
+
+/* 右下角按钮样式 */
+/*右下角按钮*/
+#rightside > div > button, #rightside > div > a {
+    display: block;
+    margin-bottom: 6px;
+    width: 40px;
+    height: 40px;
+    border-radius: 25px;
+    background-color: #f1f1f1;
+    color: #2d587a;
+    text-align: center;
+    font-size: 16px;
+    line-height: 40px;
+}
+/* 选中字体颜色样式 */
+*::selection {
+    background: #858585;
+    color: #f7f7f7;
+}
+/* 重写all.min.css某处，卡片下的图标鼠标放过去不抖 */
+.fa, .fa-brands, .fa-classic, .fa-regular, .fa-sharp, .fa-solid, .fab, .far, .fas {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    /* 不想要之前的某个属性，想设置默认值是unset */
+    display: unset;
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+    text-rendering: auto;
+}
+/*文章页卡片宽幅占比【暂时不想改留着】*/
+/* .layout {
+    max-width: 1280px;
+} */
+/* 目录圆角化 */
+#aside-content .card-widget {
+    border-radius: 20px !important;
+}
+
+/* 侧栏欢迎页(IP)begin */
+/* 加粗字体颜色 */
+:root {
+    --ichika-emphasis-color: #f1ff6c91;
+}
+.card-announcement {
+    /* 背景颜色 */
+    background: linear-gradient(to top left, #a1836082 0%, #0300945e 100%) !important; 
+    line-height:30px;
+    font-size:16px;
+}
+.card-announcement .item-headline span{
+    margin-left:0!important;
+}
+.card-announcement span{
+    font-weight:bold;
+    font-size:20px!important;
+    color:var(--ichika-emphasis-color);
+}
+/* end */
