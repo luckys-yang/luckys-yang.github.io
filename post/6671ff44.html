@@ -1,0 +1,1411 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>C语言-扫雷游戏 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="main.cpp &#x2F;*********************程序源码***********************************&#x2F; # include &lt;stdio.h&gt; # include &lt;string.h&gt; # include &lt;stdlib.h&gt; # include &lt;easyx.h&gt; # include &amp;l">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言-扫雷游戏">
+<meta property="og:url" content="https://mdcm.yang5201314.cn/post/6671ff44.html">
+<meta property="og:site_name" content="Luckys-Yangの小栈">
+<meta property="og:description" content="main.cpp &#x2F;*********************程序源码***********************************&#x2F; # include &lt;stdio.h&gt; # include &lt;string.h&gt; # include &lt;stdlib.h&gt; # include &lt;easyx.h&gt; # include &amp;l">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mdcm.yang5201314.cn/img/num59.webp">
+<meta property="article:published_time" content="2022-03-05T09:50:00.000Z">
+<meta property="article:modified_time" content="2022-06-08T15:36:05.000Z">
+<meta property="article:author" content="Luckys-Yang">
+<meta property="article:tag" content="项目">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mdcm.yang5201314.cn/img/num59.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"><link rel="canonical" href="https://mdcm.yang5201314.cn/post/6671ff44.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'C语言-扫雷游戏',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-06-08 23:36:05'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">67</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">71</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">C语言-扫雷游戏</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-05T09:50:00.000Z" title="发表于 2022-03-05 17:50:00">2022-03-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-06-08T15:36:05.000Z" title="更新于 2022-06-08 23:36:05">2022-06-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">C语言学习笔记</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><p>main.cpp</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*********************程序源码***********************************&#x2F;
+# include &lt;stdio.h&gt;
+# include &lt;string.h&gt;
+# include &lt;stdlib.h&gt;
+# include &lt;easyx.h&gt;
+# include &lt;time.h&gt;
+# include &lt;tool.h&gt;
+# include &lt;stdbool.h&gt;
+# include &lt;conio.h&gt;
+# include &lt;Commctrl.h&gt;
+# pragma comment(lib,&quot;winmm.lib&quot;)
+# define  ROW	10&#x2F;&#x2F;行
+# define	 COLS	10&#x2F;&#x2F;列
+# define  WINDOW_W	ROW*40&#x2F;&#x2F;地图宽
+# define  WINDOW_H	(COLS*40)+50&#x2F;&#x2F;地图高
+# define  IMG_W		40&#x2F;&#x2F;图片宽
+# define  IMG_H		40&#x2F;&#x2F;图片高
+# define  MINE		10&#x2F;&#x2F;雷的数量
+# define  IMG_NUM	14&#x2F;&#x2F;素材数量
+# define   MINUTE		3&#x2F;&#x2F;关卡限时（分）
+# define	  DELAY_X      50
+&#x2F;&#x2F;矩形1
+# define   ROUND_X1	185
+# define   ROUND_Y1	200
+# define   ROUND_X2	320	
+# define   ROUND_Y2	230
+&#x2F;&#x2F;矩形2
+# define   ROUND2_X1	185
+# define   ROUND2_Y1	250
+# define   ROUND2_X2	320	
+# define   ROUND2_Y2	280
+&#x2F;&#x2F;矩形3
+# define   ROUND3_X1	185
+# define   ROUND3_Y1	300
+# define   ROUND3_X2	320	
+# define   ROUND3_Y2	330
+&#x2F;&#x2F;矩形4
+# define   ROUND4_X1	185
+# define   ROUND4_Y1	350
+# define   ROUND4_X2	320	
+# define   ROUND4_Y2	380
+&#x2F;&#x2F;客服按钮
+# define   SER_X1	0
+# define   SER_Y1	31
+# define   SER_X2	104	
+# define   SER_Y2	55
+ 
+ 
+ 
+ 
+void init(int map[][COLS]);
+void create_mine(int map[][COLS]);
+void Show(int map[][COLS]);
+void mine_Sodoku(int map[][COLS]);
+void load_img(IMAGE TP[]);
+void draw(int map[][COLS], IMAGE TP[]);
+void mouse_handle(ExMessage* m, int map[][COLS], int r, int c,int flag,int m_x,int m_y);
+void blank_chain(int map[][COLS], int r, int c);
+int win_lose(int map[][COLS]);
+void menu(ExMessage* m2);
+void count_down(int m, int s, IMAGE TP2[]);
+void Loading();
+static int min &#x3D; MINUTE;&#x2F;&#x2F;分
+static int s &#x3D; 60;&#x2F;&#x2F;秒
+static double t &#x3D; 0;&#x2F;&#x2F;当t满足条件s--
+static int X &#x3D; DELAY_X;
+bool face &#x3D; true; &#x2F;&#x2F;true:笑脸 false:哭脸
+bool key &#x3D; false;&#x2F;&#x2F;true:开始计时 false:未开始
+bool landing &#x3D; false;
+int main()
+&#123;
+	
+&#x2F;&#x2F;主页面	
+HOME:
+	&#123;
+		static double i &#x3D;500;&#x2F;&#x2F;公告字体
+		double run3 &#x3D; 0;
+		initgraph(505, 500,EW_SHOWCONSOLE);&#x2F;&#x2F;EW_SHOWCONSOLE
+		system(&quot;color fd&quot;);
+		IMAGE TuPian[3];&#x2F;&#x2F;背景和标题
+		IMAGE Gif[14];&#x2F;&#x2F;斩杀图
+		IMAGE Lightning[8];&#x2F;&#x2F;闪电图
+		IMAGE Bulletin;&#x2F;&#x2F;公告栏
+		IMAGE Woman[8];&#x2F;&#x2F;女孩
+		IMAGE Service;&#x2F;&#x2F;客服
+		mciSendString(&quot;open music&#x2F;wzry.mp3&quot;, 0, 0, 0);
+		mciSendString(&quot;play music&#x2F;wzry.mp3 repeat&quot;, 0, 0, 0);
+		char s1[] &#x3D; &quot;公告:尊敬的扫雷玩家您好：自2022年1月15日开始《扫雷游戏》将推出“防白嫖系统”，请自觉充钱！充钱不白嫖，白嫖要充钱！  修复了一些bug:①修复了平民玩家过多的问题②修复了不充钱还能玩的bug③优化了没钱玩你麻痹的效果&quot;;
+		int len &#x3D; strlen(s1);
+		char s[10];
+		char a2[50];
+		for (int i &#x3D; 1; i &lt; 14; i++)
+		&#123;
+			sprintf(a2, &quot;gif&#x2F;%d.png&quot;, i);
+			loadimage(Gif + i, a2, 300, 300);
+		&#125;
+		for (int j &#x3D;0; j &lt;8; j++)
+		&#123;
+			sprintf(a2, &quot;gif&#x2F;0%d.png&quot;,j);
+			loadimage(Lightning +j, a2, 64, 240);
+			sprintf(a2, &quot;gif&#x2F;000%d.png&quot;, j);
+			loadimage(Woman + j, a2, 88, 78);
+		&#125;
+		
+		loadimage(TuPian + 0, &quot;images&#x2F;sky.jpg&quot;, 505, 500, 0);
+		loadimage(TuPian + 2, &quot;images&#x2F;bt.png&quot;, 395, 125, 0);
+		loadimage(&amp;Service, &quot;images&#x2F;kf.png&quot;, 104, 26, 0);
+		loadimage(&amp;Bulletin,&quot;images&#x2F;dhk.png&quot;, 520,30);
+		BeginBatchDraw();	&#x2F;&#x2F;开始双缓冲绘图
+		while (1)
+		&#123;
+			cleardevice();
+			Sleep(5);
+			putimage(0, 0, TuPian + 0, SRCPAINT);
+			drawImg(20, 50, TuPian + 2);
+			drawImg(0,30, &amp;Service);
+			static int z2 &#x3D; 0;
+			static int z3 &#x3D; 0;
+			static int flag4 &#x3D; 0;
+			
+			drawImg(-5, 0, &amp;Bulletin);
+			drawImg(80,100 , Gif + z2);
+			drawImg(380, 0, Lightning + z3);
+			drawImg(run3, 428, Woman + z3);
+			flag4++;
+			run3 ++;
+			if (flag4 &#x3D;&#x3D;7)
+			&#123;
+				z2++;
+				z3++;
+				flag4 &#x3D; 0;
+			&#125;
+			if (z2 &#x3D;&#x3D; 14)
+			&#123;
+				z2 &#x3D; 0;
+			&#125;
+			if (z3 &#x3D;&#x3D; 8)
+			&#123;
+				z3 &#x3D; 0;
+			&#125;
+			if (run3 &gt;&#x3D; 593)
+			&#123;
+				run3 &#x3D;-88;
+			&#125;
+			settextstyle(20, 0, &quot;华文新魏&quot;);
+			settextcolor(RGB(128, 255, 255));
+		    outtextxy(i, 1,s1);
+			 Loading();
+			ExMessage m2;
+			if (peekmessage(&amp;m2, EM_MOUSE))
+			&#123;
+				int r2 &#x3D; m2.x;&#x2F;&#x2F;行
+				int c2 &#x3D; m2.y;&#x2F;&#x2F;列
+				
+				switch (m2.message)
+				&#123;
+				case WM_LBUTTONDOWN:
+				&#123;
+					
+					if ((r2 &gt;&#x3D; ROUND_X1 &amp;&amp; r2 &lt;&#x3D; ROUND_X2) &amp;&amp; (c2 &gt;&#x3D; ROUND_Y1 &amp;&amp; c2 &lt;&#x3D; ROUND_Y2))
+					&#123;
+						PlaySound(&quot;music&#x2F;6.wav&quot;, NULL, SND_ASYNC | SND_FILENAME);
+						if (landing&#x3D;&#x3D;true)
+						&#123;
+							
+							i &#x3D; 500;
+							mciSendString(&quot;close music&#x2F;wzry.mp3&quot;, 0, 0, 0);
+							goto GAME;
+						&#125;
+						else if (landing &#x3D;&#x3D;false)
+						&#123;
+							int select4&#x3D; MessageBox(GetHWnd(), &quot;请先登陆！！！！&quot;, &quot;麻豆传媒&quot;, MB_OKCANCEL);
+							if (select4 &#x3D;&#x3D; IDOK)
+							&#123;
+								;
+							&#125;
+							else
+							&#123;
+								;
+							&#125;
+						&#125;
+							
+					&#125;
+					else if ((r2 &gt;&#x3D; ROUND2_X1 &amp;&amp; r2 &lt;&#x3D; ROUND2_X2) &amp;&amp; (c2 &gt;&#x3D; ROUND2_Y1 &amp;&amp; c2 &lt;&#x3D; ROUND2_Y2))
+					&#123;
+						PlaySound(&quot;music&#x2F;6.wav&quot;, NULL, SND_ASYNC | SND_FILENAME);
+						i &#x3D; 500;
+						goto Top_up;
+					&#125;
+					else if ((r2 &gt;&#x3D; ROUND3_X1 &amp;&amp; r2 &lt;&#x3D; ROUND3_X2) &amp;&amp; (c2 &gt;&#x3D; ROUND3_Y1 &amp;&amp; c2 &lt;&#x3D; ROUND3_Y2))
+					&#123;
+						if (landing &#x3D;&#x3D; false)
+						&#123;
+							PlaySound(&quot;music&#x2F;6.wav&quot;, NULL, SND_ASYNC | SND_FILENAME);
+							i &#x3D; 500;
+							goto Convert;
+						&#125;
+						else
+						&#123;
+							int select5 &#x3D; MessageBox(GetHWnd(), &quot;已登陆，无须再登陆！&quot;, &quot;麻豆传媒&quot;, MB_OKCANCEL);
+							if (select5 &#x3D;&#x3D; IDOK)
+							&#123;
+								;
+							&#125;
+							else
+							&#123;
+								;
+							&#125;
+						&#125;
+						
+						
+					&#125;
+					else if ((r2 &gt;&#x3D; ROUND4_X1 &amp;&amp; r2 &lt;&#x3D; ROUND4_X2) &amp;&amp; (c2 &gt;&#x3D; ROUND4_Y1 &amp;&amp; c2 &lt;&#x3D; ROUND4_Y2))
+					&#123;
+						int select6 &#x3D; MessageBox(GetHWnd(), &quot;是否退出？&quot;, &quot;麻豆传媒&quot;, MB_OKCANCEL);
+						if (select6&#x3D;&#x3D; IDOK)
+						&#123;
+							exit(0);
+						&#125;
+						else
+						&#123;
+							;
+						&#125;
+					&#125;
+					else if ((r2 &gt;&#x3D; SER_X1 &amp;&amp; r2 &lt;&#x3D; SER_X2) &amp;&amp; (c2 &gt;&#x3D; SER_Y1 &amp;&amp; c2 &lt;&#x3D; SER_Y2))
+					&#123;
+						PlaySound(&quot;music&#x2F;6.wav&quot;, NULL, SND_ASYNC | SND_FILENAME);
+						i &#x3D; 500;
+						goto Ser;
+					&#125;
+					break;
+				&#125;
+				&#125;
+			&#125;
+			menu(&amp;m2);
+			
+			i-&#x3D;1;
+			if (i &#x3D;&#x3D;(double)(-40)+(-10*len))
+			&#123;
+				i &#x3D; 500;
+			&#125;
+			
+			FlushBatchDraw();	&#x2F;&#x2F;刷新
+			
+		&#125;
+		EndBatchDraw();
+	&#125;
+	&#x2F;&#x2F;客服
+Ser:
+	&#123;
+		initgraph(435,225);
+		IMAGE Black;&#x2F;&#x2F;黑背景
+		IMAGE Tx;&#x2F;&#x2F;头像
+		IMAGE TxK[11];&#x2F;&#x2F;头像框
+		IMAGE QQ[2];&#x2F;&#x2F;QQ图标
+		IMAGE Return[2];&#x2F;&#x2F;返回
+		static int z4&#x3D; 0;
+		static int flag6 &#x3D; 0;
+		loadimage(&amp;Black, &quot;images&#x2F;black.png&quot;, 450, 240);
+		loadimage(&amp;Tx, &quot;images&#x2F;Tx.png&quot;, 50,50);
+		loadimage(Return+0, &quot;images&#x2F;return2.png&quot;, 113, 27);
+		loadimage(Return +1, &quot;images&#x2F;return22.png&quot;, 113, 27);
+		char a4[20];
+		for (int i &#x3D;0; i &lt;11; i++)
+		&#123;
+			sprintf(a4, &quot;gif&#x2F;0000%d.png&quot;, i);
+			loadimage(TxK + i, a4, 50, 50);
+		&#125;
+		loadimage(QQ+0, &quot;images&#x2F;qq1.png&quot;, 35, 35);
+		loadimage(QQ +1, &quot;images&#x2F;qq.png&quot;, 35, 35);
+		BeginBatchDraw();
+		while (1)
+		&#123;
+			
+			putimage(-8,-8, &amp;Black);
+			putimage(90,60, &amp;Tx);
+			drawImg(90,60, TxK + z4);
+			putimage(180, 80, QQ + 0, SRCPAINT);&#x2F;&#x2F;黑白图
+			putimage(180, 80, QQ + 1, SRCAND); &#x2F;&#x2F;原图
+			putimage(320, 15, Return + 0, SRCPAINT);&#x2F;&#x2F;黑白图
+			putimage(320, 15, Return + 1, SRCAND); &#x2F;&#x2F;原图
+			
+			flag6++;
+			if (flag6 &#x3D;&#x3D;500)
+			&#123;
+				z4++;
+				flag6 &#x3D; 0;
+			&#125;
+			if (z4 &#x3D;&#x3D; 11)
+			&#123;
+				z4 &#x3D; 0;
+			&#125;
+			setbkmode(TRANSPARENT);&#x2F;&#x2F;透明
+			settextcolor(BLACK);
+			settextstyle(20, 0, &quot;华文新魏&quot;);
+			outtextxy(175, 60, &quot;作者:&quot;);
+ 
+			settextcolor(BLUE);
+			settextstyle(20,0, &quot;隶书&quot;);
+			outtextxy(230, 60, &quot;蓝色的羽&quot;);
+			settextcolor(RGB(0, 255, 255));
+			outtextxy(230, 90, &quot;444783764&quot;);
+ 
+			settextcolor(BLACK);
+			settextstyle(15, 0, &quot;宋体&quot;);
+			outtextxy(30, 130, &quot;游戏信息:&quot;);
+			outtextxy(95, 130, &quot;《扫雷简单版》制作于2022.1.15,完成于1.17,&quot;);
+			outtextxy(95, 150, &quot;代码1000行左右,纯属娱乐&quot;);
+			ExMessage m4;
+			if (peekmessage(&amp;m4, EM_MOUSE))
+			&#123;
+				int r4 &#x3D; m4.x;&#x2F;&#x2F;行
+				int c4 &#x3D; m4.y;&#x2F;&#x2F;列
+				switch (m4.message)
+				&#123;
+				case WM_LBUTTONDOWN:
+				&#123;
+					if ((r4 &gt;&#x3D;330 &amp;&amp; r4 &lt;&#x3D; 420) &amp;&amp; (c4 &gt;&#x3D;16 &amp;&amp; c4 &lt;&#x3D; 40))
+					&#123;
+						PlaySound(&quot;music&#x2F;6.wav&quot;, NULL, SND_ASYNC | SND_FILENAME);
+						goto HOME;
+					&#125;
+				&#125;
+				&#125;
+			&#125;
+ 
+			
+ 
+			
+ 
+			FlushBatchDraw();	&#x2F;&#x2F;刷新
+		&#125;
+		EndBatchDraw();
+	&#125;
+	
+&#x2F;&#x2F;登陆入口
+Convert:
+	&#123;
+		int flag2 &#x3D; 0;
+		char ID[] &#x3D; &quot;5201314&quot;;
+		char PassWord[] &#x3D; &quot;a123456&quot;;
+		char R[] &#x3D; &quot;RETURN&quot;;
+		char id[100];
+		char ch1;
+		char password[100];
+		int count1 &#x3D;2;
+		int count3 &#x3D;2;
+	Print:
+		&#123;
+			while (1)
+			&#123;
+				printf(&quot;*********************登陆界面*********************\n&quot;);
+				printf(&quot;**************************************************\n&quot;);
+				printf(&quot;**************************************************\n&quot;);
+				printf(&quot;********************1.请输入账号******************\n&quot;);
+				printf(&quot;********************2.请输入密码******************\n&quot;);
+				printf(&quot;********************3. 回车登陆 ******************\n&quot;);
+				printf(&quot;*********4.任意地方输入&#39;RETURN&#39;则返回主页面*******\n&quot;);
+ 
+				while (count1 &gt; 0)
+				&#123;
+					printf(&quot;请输入账号：&quot;);
+					scanf(&quot;%s&quot;, id);
+					&#x2F;&#x2F;判断是否相同，相同则返回主页面
+					if (strcmp(R, id) &#x3D;&#x3D; 0)
+					&#123;
+						system(&quot;cls&quot;);
+						goto HOME;
+					&#125;
+					int len1 &#x3D; strlen(ID);
+					int len2 &#x3D; strlen(id);
+					if (len1 !&#x3D; len2)
+					&#123;
+						printf(&quot;账号错误！\n&quot;);
+						Sleep(200);
+						system(&quot;cls&quot;);
+						goto Print;
+ 
+					&#125;
+					else if (len1 &#x3D;&#x3D; len2)
+					&#123;
+						for (int i &#x3D; 0; i &lt; len2; i++)
+						&#123;
+							if (id[i] !&#x3D; ID[i])
+							&#123;
+								count1 &#x3D; 1;
+								i &#x3D; len2;
+								printf(&quot;账号错误！\n&quot;);
+								Sleep(200);
+								system(&quot;cls&quot;);
+								goto Print;
+							&#125;
+							else
+							&#123;
+								count1 &#x3D; 0;
+								i &#x3D; len2;
+							&#125;
+						&#125;
+					&#125;
+				&#125;
+				printf(&quot;请输入密码：&quot;);
+				while (count3 &gt; 0)
+				&#123;
+					
+					while ((ch1 &#x3D; getch()) !&#x3D; &#39;\r&#39;)
+					&#123;
+ 
+						if ((ch1 &#x3D;&#x3D; &#39;\b&#39;))
+						&#123;
+							if (flag2 &gt; 0)
+							&#123;
+								flag2--;
+								printf(&quot;\b \b&quot;);
+							&#125;
+							else
+								flag2 &#x3D; 0;
+ 
+						&#125;
+						else
+						&#123;
+							password[flag2++] &#x3D; ch1;
+							printf(&quot;*&quot;);
+						&#125;
+ 
+					&#125;
+					password[flag2] &#x3D; &#39;\0&#39;;
+					int len3 &#x3D; strlen(PassWord);
+					int len4 &#x3D; strlen(password);
+					&#x2F;&#x2F;判断是否相同，相同则返回主页面
+					if (strcmp(R, password) &#x3D;&#x3D; 0)
+					&#123;
+						system(&quot;cls&quot;);
+						goto HOME;
+					&#125;
+					if (len3 !&#x3D; len4)
+					&#123;
+						&#x2F;&#x2F;密码输入错误则重新回到起点
+						password[99] &#x3D; &#123; 0 &#125;;
+						flag2 &#x3D; 0;
+						for (int i &#x3D; 0; i &lt;len4; i++)
+						&#123;
+							printf(&quot;\b \b&quot;);
+						&#125;
+						
+						Sleep(200);
+					&#125;
+					else if (len3 &#x3D;&#x3D; len4)
+					&#123;
+						for (int j &#x3D; 0; j &lt; len4; j++)
+						&#123;
+ 
+							if (PassWord[j] !&#x3D; password[j])
+							&#123;
+								count3++;
+								password[99] &#x3D; &#123; 0 &#125;;
+								flag2 &#x3D; 0;
+								for (int j &#x3D; 0; j &lt; len4; j++)
+								&#123;
+									printf(&quot;\b \b&quot;);
+								&#125;
+								Sleep(200);
+								
+							&#125;
+							else if(j&#x3D;&#x3D;len4-1&amp;&amp;count3&#x3D;&#x3D;2)
+							&#123;
+								count3 &#x3D; 0;
+							&#125;
+						&#125;
+					&#125;
+				&#125;
+				break;
+			&#125;
+		&#125;
+		
+		if (count1 &#x3D;&#x3D; count3)
+		&#123;
+			printf(&quot;\n&quot;);
+			printf(&quot;登陆成功！\n&quot;);
+			for (int i &#x3D; 3; i &gt; 0; i--)
+			&#123;
+				printf(&quot;还有%d秒返回主页面！\n&quot;,i);
+				Sleep(1000);
+			&#125;
+			landing &#x3D; true;
+			system(&quot;cls&quot;);
+			
+			goto HOME;
+		&#125;
+	&#125;
+	&#x2F;&#x2F;充值入口
+Top_up:
+	&#123;
+		initgraph(505, 500);
+		IMAGE TP3[2];&#x2F;&#x2F;二维码和返回
+		IMAGE Man[8];&#x2F;&#x2F;男孩
+		char a3[20];
+		for (int k &#x3D; 0; k &lt;8; k++)
+		&#123;
+			sprintf(a3, &quot;gif&#x2F;00%d.png&quot;, k);
+			loadimage(Man + k, a3, 80, 74);
+		&#125;
+		double run2 &#x3D; 0;
+		BeginBatchDraw();	&#x2F;&#x2F;开始双缓冲绘图
+		while (1)
+		&#123;
+			loadimage(TP3+ 0, &quot;images&#x2F;QR.jpg&quot;, 505, 500, 0);
+			loadimage(TP3 +1, &quot;images&#x2F;return.png&quot;, 90,35, 0);
+			putimage(0, 0, TP3 + 0);
+			drawImg(6,450, TP3 +1);
+			static int z3 &#x3D; 0;
+			static int flag5&#x3D; 0;
+			drawImg(run2, 0, Man+z3);
+			run2+&#x3D;0.5;
+			flag5++;
+			if (flag5&#x3D;&#x3D;15)
+			&#123;
+				z3++;
+				flag5&#x3D; 0;
+			&#125;
+			if (z3 &#x3D;&#x3D;8)
+			&#123;
+				z3 &#x3D; 0;
+			&#125;
+			if (run2 &gt;&#x3D; 505)
+			&#123;
+				run2 &#x3D; 0;
+			&#125;
+			ExMessage m3;
+			if (peekmessage(&amp;m3, EM_MOUSE))
+			&#123;
+				int r3 &#x3D; m3.x;&#x2F;&#x2F;行
+				int c3 &#x3D; m3.y;&#x2F;&#x2F;列
+				switch (m3.message)
+				&#123;
+				case WM_LBUTTONDOWN:
+				&#123;
+					if ((r3 &gt;&#x3D; 6 &amp;&amp; r3&lt;&#x3D; 90) &amp;&amp; (c3 &gt;&#x3D; 450 &amp;&amp; c3&lt;&#x3D; 480))
+					&#123;
+						PlaySound(&quot;music&#x2F;6.wav&quot;, NULL, SND_ASYNC | SND_FILENAME);
+						goto HOME;
+					&#125;
+				&#125;
+				&#125;
+			&#125;
+			FlushBatchDraw();	&#x2F;&#x2F;刷新
+		&#125;
+		EndBatchDraw();
+		
+	&#125;
+	
+	
+&#x2F;&#x2F;游戏页面
+GAME:
+	&#123;
+		initgraph(WINDOW_W, WINDOW_H);&#x2F;&#x2F;地图 EW_SHOWCONSOLE
+		int map[ROW][COLS] &#x3D; &#123; 0 &#125;;
+		srand((unsigned int)time(NULL));&#x2F;&#x2F;随机
+		IMAGE TP[IMG_NUM];&#x2F;&#x2F;定义素材
+		IMAGE TP2[5];
+		mciSendString(&quot;open music&#x2F;2.mp3&quot;, 0, 0, 0);
+		mciSendString(&quot;open music&#x2F;3.mp3&quot;, 0, 0, 0);
+		mciSendString(&quot;play music&#x2F;2.mp3 repeat&quot;, 0, 0, 0);
+		load_img(TP);
+		init(map);
+ 
+		BeginBatchDraw();	&#x2F;&#x2F;开始双缓冲绘图
+		while (1)
+		&#123;
+			
+			int win &#x3D;1;
+			count_down(min, s,TP2);
+			
+			ExMessage m;&#x2F;&#x2F;定义鼠标消息
+			static int flag &#x3D; 1;&#x2F;&#x2F;右键切换标记
+		
+			draw(map, TP);&#x2F;&#x2F;绘图
+			
+			if (peekmessage(&amp;m, EM_MOUSE))&#x2F;&#x2F;如果获取到一条鼠标消息
+			&#123;
+ 
+				&#x2F;&#x2F;鼠标的坐标对应数组下标
+				int r &#x3D; m.y &#x2F; IMG_H;&#x2F;&#x2F;行
+				int c &#x3D; m.x &#x2F; IMG_W;&#x2F;&#x2F;列
+				int m_x &#x3D; m.x;&#x2F;&#x2F;鼠标坐标
+				int m_y &#x3D; m.y;
+				mouse_handle(&amp;m, map, r, c, flag,m_x,m_y);
+				win &#x3D; win_lose(map);
+				&#x2F;&#x2F;赢
+				if (win &#x3D;&#x3D; 0)
+				&#123;
+					X--;
+					if (X &#x3D;&#x3D;30)
+					&#123;
+						int select2 &#x3D; MessageBox(GetHWnd(), &quot;恭喜你，通关！是否返回主页面？&quot;, &quot;麻豆传媒&quot;, MB_OKCANCEL);
+						if (select2 &#x3D;&#x3D; IDOK)
+						&#123;
+							mciSendString(&quot;close music&#x2F;3.mp3 &quot;, 0, 0, 0);
+							X &#x3D; DELAY_X;
+							min &#x3D; MINUTE;
+							s &#x3D; 60;
+							t &#x3D; 0;
+							init(map);
+							goto HOME;
+ 
+						&#125;
+						else
+						&#123;
+							mciSendString(&quot;close music&#x2F;3.mp3 &quot;, 0, 0, 0);
+							X &#x3D; DELAY_X;
+							min &#x3D; MINUTE;
+							s &#x3D; 60;
+							t &#x3D; 0;
+							init(map);
+						&#125;
+							
+					&#125;
+					
+				&#125;
+				if (win &#x3D;&#x3D; -1)
+				&#123;
+					X--;
+					if (X&#x3D;&#x3D; 0)
+					&#123;
+						int select3 &#x3D; MessageBox(GetHWnd(), &quot;踩雷专家！ 是否返回主页面？&quot;,&quot;麻豆传媒&quot; ,MB_OKCANCEL);
+						if (select3 &#x3D;&#x3D; IDOK)
+						&#123;
+							mciSendString(&quot;close music&#x2F;3.mp3 &quot;, 0, 0, 0);
+							mciSendString(&quot;close music&#x2F;2.mp3 &quot;, 0, 0, 0);
+							win &#x3D; 1;
+							X &#x3D; DELAY_X;
+							min &#x3D; MINUTE;
+							s &#x3D; 60;
+							t &#x3D; 0;
+							init(map);
+							goto HOME;
+						&#125;
+						else
+						&#123;
+							mciSendString(&quot;close music&#x2F;3.mp3 &quot;, 0, 0, 0);
+							X &#x3D; DELAY_X;
+							min &#x3D; MINUTE;
+							s &#x3D; 60;
+							t &#x3D; 0;
+							init(map);
+						&#125;
+							
+					&#125;
+					
+ 
+				&#125;
+			&#125;
+			
+			if (face &#x3D;&#x3D; false)
+			&#123;
+				
+				mciSendString(&quot;close music&#x2F;3.mp3 &quot;, 0, 0, 0);
+					X--;
+					if (X&#x3D;&#x3D;0)
+					&#123;
+						min &#x3D; MINUTE;
+						s &#x3D; 60;
+						t &#x3D; 0;
+						init(map);
+						X&#x3D;DELAY_X;
+						face &#x3D; true;
+					&#125;	
+			&#125;
+			
+			if (key&#x3D;&#x3D;true)
+			&#123;
+				t++;
+			&#125;
+			
+			if ((t &#x3D;&#x3D; 400)&amp;&amp;(win&#x3D;&#x3D;1))
+			&#123;
+				s--;
+				t &#x3D; 0;
+			&#125;
+			else if (s &#x3D;&#x3D; 0)
+			&#123;
+				min--;
+				s &#x3D; 60;
+			&#125;
+			else if (min &lt; 0)&#x2F;&#x2F;当时间到则弹出提示框选择
+			&#123;
+				int select &#x3D; MessageBox(GetHWnd(), &quot;时间到了，重开吧你！按“确定”重新玩，按”否“退出&quot;, &quot;麻豆传媒&quot;, MB_OKCANCEL);
+				if (select &#x3D;&#x3D; IDOK)&#x2F;&#x2F;重新玩
+				&#123;
+					mciSendString(&quot;close music&#x2F;3.mp3 &quot;, 0, 0, 0);
+					min &#x3D; MINUTE;
+					s &#x3D; 60;
+					init(map);
+				&#125;
+				else
+				&#123;
+					exit(0);
+				&#125;
+			&#125;
+ 
+			FlushBatchDraw();	&#x2F;&#x2F;刷新
+		&#125;
+		EndBatchDraw();
+	&#125;
+	
+	while (1);
+	return 0;
+&#125;
+&#x2F;&#x2F;初始化
+void init(int map[][COLS])
+&#123;
+	key &#x3D;false;
+	memset(map, 0, sizeof(int) * ROW * COLS);&#x2F;&#x2F;把map全部初始化为0
+	create_mine(map);
+	mine_Sodoku(map);
+	&#x2F;&#x2F;Show(map);
+&#125;
+&#x2F;&#x2F;显示
+void Show(int map[][COLS])
+&#123;
+	for (int i &#x3D; 0; i &lt; ROW; i++)
+	&#123;
+		for (int j &#x3D; 0; j &lt; COLS; j++)
+		&#123;
+			printf(&quot;%2d &quot;, map[i][j]);
+		&#125;
+		printf(&quot;\n&quot;);
+	&#125;
+&#125;
+&#x2F;&#x2F;随机生成雷
+void create_mine(int map[][COLS])
+&#123;
+	for (int i &#x3D; 0; i &lt;MINE;)
+	&#123;
+		int r &#x3D; rand() %ROW;
+		int c &#x3D; rand() %COLS;
+		if (map[r][c] &#x3D;&#x3D; 0)
+		&#123;
+			map[r][c] &#x3D; -1;
+			++i;
+		&#125;
+	&#125;
+&#125;
+&#x2F;&#x2F;雷周围的九宫格
+void mine_Sodoku(int map[][COLS])
+&#123;
+	for (int i &#x3D; 0; i &lt; ROW; i++)
+	&#123;
+		for (int j &#x3D; 0; j &lt; COLS; j++)
+		&#123;
+			if (map[i][j] &#x3D;&#x3D; -1)
+			&#123;
+				for (int r &#x3D; i - 1; r &lt;&#x3D; i + 1; r++)
+				&#123;
+					for (int c &#x3D; j - 1; c &lt;&#x3D; j + 1; c++)
+					&#123;
+						if ((map[r][c]!&#x3D;-1)&amp;&amp;(r &gt;&#x3D; 0 &amp;&amp; r &lt; 10 &amp;&amp; c &gt;&#x3D; 0 &amp;&amp; c &lt; 10))&#x2F;&#x2F;排除雷并且在范围内
+						&#123;
+							map[r][c] +&#x3D; 1;
+						&#125;
+						
+					&#125;
+				&#125;
+			&#125;
+		&#125;
+	&#125;
+	for (int i2 &#x3D; 0; i2 &lt; ROW; i2++)
+	&#123;
+		for (int j2 &#x3D; 0; j2 &lt; COLS; j2++)
+		&#123;
+			map[i2][j2] +&#x3D; 20;
+		&#125;
+	&#125;
+&#125;
+&#x2F;&#x2F;加载图片
+void load_img(IMAGE TP[])
+&#123;
+	char arr[50];
+	for (int i &#x3D; 0; i &lt; IMG_NUM; i++)
+	&#123;
+		sprintf(arr, &quot;images&#x2F;%d.jpg&quot;, i);
+		loadimage(TP+i, arr, IMG_W,IMG_H, 0);
+	&#125;
+	
+&#125;
+&#x2F;&#x2F;绘制图片
+void draw(int map[][COLS], IMAGE TP[])
+&#123;
+	for (int i &#x3D; 0; i &lt;ROW; i++)
+	&#123;
+		for (int j &#x3D; 0; j &lt;COLS; j++)
+		&#123;
+			if (map[i][j] &gt;&#x3D; -1 &amp;&amp; map[i][j] &lt;&#x3D; 8)
+			&#123;
+				switch (map[i][j])
+				&#123;
+				case 0:putimage(j * IMG_W, i * IMG_H, TP + 0); break;&#x2F;&#x2F;注意这里不要反了不然数据和实际图片不同
+				case 1:putimage(j * IMG_W, i * IMG_H, TP + 1); break;
+				case 2:putimage(j * IMG_W, i * IMG_H, TP + 2); break;
+				case 3:putimage(j * IMG_W, i * IMG_H, TP + 3); break;
+				case 4:putimage(j * IMG_W, i * IMG_H, TP + 4); break;
+				case 5:putimage(j * IMG_W, i * IMG_H, TP + 5); break;
+				case 6:putimage(j * IMG_W, i * IMG_H, TP + 6); break;
+				case 7:putimage(j * IMG_W, i * IMG_H, TP + 7); break;
+				case 8:putimage(j * IMG_W, i * IMG_H, TP + 8); break;
+				case -1:putimage(j * IMG_W, i * IMG_H, TP + 9); break;
+				&#125;
+			&#125;
+			else if (map[i][j] &gt;&#x3D; 19 &amp;&amp; map[i][j] &lt;&#x3D; 28)&#x2F;&#x2F;贴白盒子
+			&#123;
+				putimage(j * IMG_W, i * IMG_H, TP +10);
+			&#125;
+			else if (map[i][j] &gt;&#x3D; 39 &amp;&amp; map[i][j] &lt;&#x3D; 48)&#x2F;&#x2F;贴旗
+			&#123;
+				putimage(j * IMG_W, i * IMG_H, TP + 11);
+			&#125;
+			else if (map[i][j] &gt;&#x3D; 59 &amp;&amp; map[i][j] &lt;&#x3D; 68)&#x2F;&#x2F;贴问号
+			&#123;
+				putimage(j * IMG_W, i * IMG_H, TP + 12);
+			&#125;
+			else if (map[i][j] &#x3D;&#x3D; -2)
+			&#123;
+				putimage(j * IMG_W, i * IMG_H, TP + 13);
+			&#125;
+			
+		&#125;
+	&#125;
+	
+&#125;
+ 
+&#x2F;&#x2F;鼠标操作
+void mouse_handle(ExMessage* m,int map[][COLS],int r,int c,int flag,int m_x,int m_y)
+&#123;
+	
+	switch ((*m).message)
+	&#123;
+		
+	case WM_LBUTTONDOWN:&#x2F;&#x2F;左键打开盒子
+	&#123;
+		key &#x3D; true;
+		if (map[r][c] &gt; 19 &amp;&amp; map[r][c] &lt;&#x3D; 28&amp;&amp;map[r][c]!&#x3D;20)
+		&#123;
+			
+			
+			PlaySound(&quot;music&#x2F;0.wav&quot;, NULL, SND_ASYNC | SND_FILENAME);&#x2F;&#x2F;异步播放，只能播放wav格式
+			Sleep(80);
+			map[r][c] -&#x3D; 20;
+			
+			break;
+		&#125;
+		else if (map[r][c] &#x3D;&#x3D; 20)&#x2F;&#x2F;如果点到空白就展开
+		&#123;	
+			PlaySound(&quot;music&#x2F;1.wav&quot;, NULL, SND_ASYNC | SND_FILENAME);
+			blank_chain(map,r,c);
+			break;
+		&#125;
+		else if (map[r][c] &#x3D;&#x3D; 19)&#x2F;&#x2F;如果点到炸弹
+		&#123;
+			mciSendString(&quot;play music&#x2F;3.mp3 &quot;, 0, 0, 0);
+			map[r][c] -&#x3D;21;
+			for (int i &#x3D; 0; i &lt; ROW; i++)
+			&#123;
+				for (int j &#x3D; 0; j &lt; COLS; j++)
+				&#123;
+					if (map[i][j] &#x3D;&#x3D; 19)
+					&#123;
+						map[i][j] -&#x3D; 20;
+						
+					&#125;
+				&#125;
+			&#125;	
+		&#125;
+		else if (m_x &gt;&#x3D; 166 &amp;&amp; m_x &lt;&#x3D; 206 &amp;&amp; m_y &gt;&#x3D; 405 &amp;&amp; m_y &lt;&#x3D; 445)
+		&#123;
+			PlaySound(&quot;music&#x2F;5.wav&quot;, NULL, SND_ASYNC | SND_FILENAME);
+			face &#x3D; !face;
+		&#125;
+		break;
+	&#125;
+	case WM_RBUTTONDOWN:&#x2F;&#x2F;右键插旗&#x2F;插问号
+	&#123;
+		
+		switch (flag)
+		&#123;
+		case 1:
+		&#123;
+			if (map[r][c] &gt;&#x3D; 19 &amp;&amp; map[r][c] &lt;&#x3D; 28)
+			&#123;
+				PlaySound(&quot;music&#x2F;4.wav&quot;, NULL, SND_ASYNC | SND_FILENAME);
+				map[r][c] +&#x3D; 20;
+				flag &#x3D; 2;
+				break;
+			&#125;
+		&#125;
+		case 2:
+		&#123;
+			if (map[r][c] &gt;&#x3D; 39 &amp;&amp; map[r][c] &lt;&#x3D; 48)
+			&#123;
+				PlaySound(&quot;music&#x2F;4.wav&quot;, NULL, SND_ASYNC | SND_FILENAME);
+				map[r][c] +&#x3D; 20;
+				flag &#x3D; 3;
+				break;
+			&#125;
+		&#125;
+		case 3:
+		&#123;
+			if (map[r][c] &gt;&#x3D; 59 &amp;&amp; map[r][c] &lt;&#x3D; 68)
+			&#123;
+				PlaySound(&quot;music&#x2F;4.wav&quot;, NULL, SND_ASYNC | SND_FILENAME);
+				map[r][c] -&#x3D; 40;
+				flag &#x3D; 1;
+				break;
+			&#125;
+		&#125;
+		&#125;
+ 
+	&#125;
+	&#125;
+	
+&#125;
+&#x2F;&#x2F;空白就炸开当前点击的下标
+void blank_chain(int map[][COLS],int r,int c)
+&#123;
+	for (int i &#x3D; r - 1; i &lt;&#x3D; r + 1; i++)
+	&#123;
+		for (int j &#x3D; c - 1; j &lt;&#x3D; c + 1; j++)
+		&#123;
+			if ((map[i][j] !&#x3D; -1) &amp;&amp; (i &gt;&#x3D; 0
+				&amp;&amp; i &lt; 10 &amp;&amp; j &gt;&#x3D; 0 &amp;&amp; j &lt; 10) 
+				&amp;&amp; (map[i][j] &gt;&#x3D; 19 &amp;&amp; map[i][j] &lt;&#x3D; 28))&#x2F;&#x2F;不是炸弹并且是关闭状态，不能越界
+			&#123;
+				map[i][j] -&#x3D; 20;
+				blank_chain(map, r, c);&#x2F;&#x2F;递归
+			&#125;
+		&#125;
+	&#125;
+&#125;
+&#x2F;&#x2F;倒计时
+void count_down(int m,int s, IMAGE TP2[])
+&#123;
+	loadimage(TP2+0, &quot;images&#x2F;14.jpg&quot;, WINDOW_W, WINDOW_H, 0);
+	loadimage(TP2+1, &quot;images&#x2F;face1.jpg&quot;, IMG_W+13, IMG_H+13, 0);
+	loadimage(TP2+2, &quot;images&#x2F;face.jpg&quot;, IMG_W+13,IMG_H+13, 0);
+	loadimage(TP2 +3, &quot;images&#x2F;cry1.jpg&quot;, IMG_W+13, IMG_H+13, 0);
+	loadimage(TP2 +4, &quot;images&#x2F;cry.jpg&quot;, IMG_W+13, IMG_H+13, 0);
+	putimage(0, 300, TP2+0);
+	if (face)
+	&#123;
+		putimage(160, 400, TP2 + 1, SRCPAINT);&#x2F;&#x2F;黑白图
+		putimage(160, 400, TP2 + 2, SRCAND); &#x2F;&#x2F;原图
+	&#125;
+	else
+	&#123;
+		putimage(160, 400, TP2 + 3, SRCPAINT);&#x2F;&#x2F;黑白图
+		putimage(160, 400, TP2 + 4, SRCAND); &#x2F;&#x2F;原图
+	&#125;
+		char arr[50];
+		sprintf(arr, &quot;剩余时间:%d ：%d&quot;,m,s);
+		setbkmode(TRANSPARENT);&#x2F;&#x2F;透明
+		settextstyle(20, 0, &quot;华文新魏&quot;);
+		settextcolor(BLACK);
+		outtextxy(250, 420, arr);
+&#125;
+int win_lose(int map[][COLS])
+&#123;
+	int count &#x3D; 0;&#x2F;&#x2F;记录打开盒子的个数
+	int count2&#x3D; 0;
+	for (int i &#x3D; 0; i &lt; ROW; i++)
+	&#123;
+		for (int j &#x3D; 0; j &lt; COLS; j++)
+		&#123;
+			if (map[i][j] &gt;&#x3D; 0 &amp;&amp; map[i][j] &lt;&#x3D; 8)
+				count++;
+			if (map[i][j] &#x3D;&#x3D; -2)
+			&#123;
+				count2++;
+			&#125;
+		&#125;
+ 
+	&#125;
+	if (count &#x3D;&#x3D; ROW * COLS - MINE)
+	&#123;
+		return 0;
+	&#125;
+	else if (count2&gt;0)
+	&#123;
+		return -1;
+	&#125;
+	else
+		return 1;
+&#125;
+ 
+void menu(ExMessage* m2)
+&#123;
+	&#x2F;&#x2F;感应鼠标的位置
+	setbkmode(TRANSPARENT);&#x2F;&#x2F;透明
+	if ((m2-&gt;x &gt;&#x3D; ROUND_X1 &amp;&amp; m2-&gt;x &lt;&#x3D; ROUND_X2) &amp;&amp; (m2-&gt;y &gt;&#x3D; ROUND_Y1 &amp;&amp; m2-&gt;y &lt;&#x3D; ROUND_Y2))
+	&#123;
+		setlinecolor(RED);
+		setfillcolor(BLACK);
+		fillroundrect(ROUND_X1, ROUND_Y1, ROUND_X2, ROUND_Y2, 20, 30);
+	&#125;
+	else
+	&#123;
+		setlinecolor(RED);
+		setfillcolor(LIGHTMAGENTA);
+		fillroundrect(ROUND_X1, ROUND_Y1, ROUND_X2, ROUND_Y2, 20, 30);
+	&#125;
+	settextstyle(30, 0, &quot;华文新魏&quot;);
+	settextcolor(YELLOW);
+	outtextxy(195, 200, &quot;进入游戏&quot;);
+	
+	
+	if ((m2-&gt;x &gt;&#x3D; ROUND2_X1 &amp;&amp; m2-&gt;x &lt;&#x3D; ROUND2_X2) &amp;&amp; (m2-&gt;y &gt;&#x3D; ROUND2_Y1 &amp;&amp; m2-&gt;y &lt;&#x3D; ROUND2_Y2))
+	&#123;
+		setlinecolor(RED);
+		setfillcolor(BLACK);
+		fillroundrect(ROUND2_X1, ROUND2_Y1, ROUND2_X2, ROUND2_Y2, 20, 30);
+	&#125;
+	else
+	&#123;
+		setlinecolor(RED);
+		setfillcolor(LIGHTMAGENTA);
+		fillroundrect(ROUND2_X1, ROUND2_Y1, ROUND2_X2, ROUND2_Y2, 20, 30);
+	&#125;
+	settextstyle(30, 0, &quot;华文新魏&quot;);
+	settextcolor(YELLOW);
+	outtextxy(195, 250, &quot;充值入口&quot;);
+	
+	if ((m2-&gt;x &gt;&#x3D; ROUND3_X1 &amp;&amp; m2-&gt;x &lt;&#x3D; ROUND3_X2) &amp;&amp; (m2-&gt;y &gt;&#x3D; ROUND3_Y1 &amp;&amp; m2-&gt;y &lt;&#x3D; ROUND3_Y2))
+	&#123;
+		setlinecolor(RED);
+		setfillcolor(BLACK);
+		fillroundrect(ROUND3_X1, ROUND3_Y1, ROUND3_X2, ROUND3_Y2, 20, 30);
+	&#125;
+	else
+	&#123;
+		setlinecolor(RED);
+		setfillcolor(LIGHTMAGENTA);
+		fillroundrect(ROUND3_X1, ROUND3_Y1, ROUND3_X2, ROUND3_Y2, 20, 30);
+	&#125;
+	settextstyle(30, 0, &quot;华文新魏&quot;);
+	settextcolor(RED);
+	settextcolor(YELLOW);
+	outtextxy(195, 300, &quot;登陆入口&quot;);
+ 
+	if ((m2-&gt;x &gt;&#x3D; ROUND4_X1 &amp;&amp; m2-&gt;x &lt;&#x3D; ROUND4_X2) &amp;&amp; (m2-&gt;y &gt;&#x3D; ROUND4_Y1 &amp;&amp; m2-&gt;y &lt;&#x3D; ROUND4_Y2))
+	&#123;
+		setlinecolor(RED);
+		setfillcolor(BLACK);
+		fillroundrect(ROUND4_X1, ROUND4_Y1, ROUND4_X2, ROUND4_Y2, 20, 30);
+	&#125;
+	else
+	&#123;
+		setlinecolor(RED);
+		setfillcolor(LIGHTMAGENTA);
+		fillroundrect(ROUND4_X1, ROUND4_Y1, ROUND4_X2, ROUND4_Y2, 20, 30);
+	&#125;
+	settextstyle(30, 0, &quot;华文新魏&quot;);
+	settextcolor(YELLOW);
+	outtextxy(195, 350, &quot;退出程序&quot;);
+&#125;
+	
+&#x2F;&#x2F;加载图片
+void Loading()
+&#123;
+	
+	static double run &#x3D;-160;
+	IMAGE Dog[6];
+	IMAGE Gif[14];
+	
+	&#x2F;&#x2F;定义结构体
+	struct Sprite
+	&#123;
+	    int x;
+		int y;
+		int w;
+		int h;
+ 
+	&#125;;
+	Sprite dog
+	&#123;
+		dog.x &#x3D; run,
+		dog.y &#x3D; 435,
+		dog.w &#x3D; 102,
+		dog.h &#x3D; 72,
+	&#125;;
+	char a[50];
+	for (int i &#x3D; 1; i &lt;6; i++)
+	&#123;
+		sprintf(a, &quot;images&#x2F;0%d.png&quot;, i);
+		loadimage(Dog + (i - 1), a, dog.w, dog.h);
+	&#125;
+	
+	static int z &#x3D; 0;
+	static int flag3 &#x3D; 0;
+ 
+	drawImg(dog.x, dog.y, Dog + z);
+	flag3++;
+	run++;	
+	if (flag3 &#x3D;&#x3D;5)
+	&#123;
+		z++;
+		flag3 &#x3D; 0;
+	&#125;
+	if (z &#x3D;&#x3D;5)
+	&#123;
+		z &#x3D; 0;
+	&#125;
+	if (dog.x &gt;&#x3D;505)
+	&#123;
+		run &#x3D; -160;
+	&#125;
+	
+	
+&#125;</code></pre>
+<p>运行示例：</p>
+<div class="video-bilibili">
+  <iframe
+    src="https://player.bilibili.com/player.html?aid=808216415&bvid=BV1G34y1i7YG&cid=486737542&page=1"
+    scrolling="no"
+    border="0"
+    frameborder="no"
+    framespacing="0"
+    high_quality="1"
+    danmaku="1"
+    allowfullscreen="true"
+  ></iframe>
+</div>
+<div class="btns rounded grid5">
+            <a class="button" href='https://pan.baidu.com/s/1UfhWNjLfcFa41bwebAD-iA' title='下载源码|2022'><i class='fas fa-download'></i>下载源码|2022</a>
+          </div>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%A1%B9%E7%9B%AE/">项目</a></div><div class="post_share"><div class="social-share" data-image="/img/num59.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="card-info-avatar"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-status-box"><div class="author-status"><g-emoji class="g-emoji" alias="palm_tree" fallback-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/ssaa1324234.png">🐟</g-emoji><span>摸鱼中</span></div></div></div><div class="author-info__name">Luckys-Yang</div><div class="author-info__description">关于嵌入式的个人博客</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">67</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">71</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/luckys-yang?tab=repositories" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=444783764&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="/weixin/" target="_blank" title="微信"><i class="fab fa-weixin"></i></a></div></div><div class="card-widget card-announcement"><div id="welcome-info"></div><div class="item-headline"></div></div><div class="sticky_layout"></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://api2.acozycotage.net/Pweb" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '可惜你不听王杰，也不懂我...' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
