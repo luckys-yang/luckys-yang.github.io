@@ -1,0 +1,867 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>51单片机-LCD1602液晶 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="LCD1602 简介  1602 液晶也叫 1602 字符型液晶，它能显示  2 行字符信息，每行又能显示 16 个字符。它是一种专门用来显示字母、数字、符号的点阵型液晶模块。它是由若干个 5x7 或者 5x10 的点阵字符位组成，每个点阵字符位都可以用显示一个字符，每位之间有一个点距的间隔，每行之间也有间隔，起到了字符间距和行间距的作用，正因为如此，所以它不能很好的显示图片。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="51单片机-LCD1602液晶">
+<meta property="og:url" content="https://mdcm.yang5201314.cn/post/6252859c.html">
+<meta property="og:site_name" content="Luckys-Yangの小栈">
+<meta property="og:description" content="LCD1602 简介  1602 液晶也叫 1602 字符型液晶，它能显示  2 行字符信息，每行又能显示 16 个字符。它是一种专门用来显示字母、数字、符号的点阵型液晶模块。它是由若干个 5x7 或者 5x10 的点阵字符位组成，每个点阵字符位都可以用显示一个字符，每位之间有一个点距的间隔，每行之间也有间隔，起到了字符间距和行间距的作用，正因为如此，所以它不能很好的显示图片。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mdcm.yang5201314.cn/img/num21.webp">
+<meta property="article:published_time" content="2022-04-07T06:17:00.000Z">
+<meta property="article:modified_time" content="2022-06-03T09:55:25.000Z">
+<meta property="article:author" content="Luckys-Yang">
+<meta property="article:tag" content="LCD">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mdcm.yang5201314.cn/img/num21.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"><link rel="canonical" href="https://mdcm.yang5201314.cn/post/6252859c.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '51单片机-LCD1602液晶',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-06-03 17:55:25'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">56</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">51单片机-LCD1602液晶</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-07T06:17:00.000Z" title="发表于 2022-04-07 14:17:00">2022-04-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-06-03T09:55:25.000Z" title="更新于 2022-06-03 17:55:25">2022-06-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/51%E7%B3%BB%E5%88%97/">51系列</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><h2 id="LCD1602">LCD1602</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>简介</p>
+</div>
+<p>1602 液晶也叫 1602 字符型液晶，它能显示  <code>2 行字符信息，每行又能显示 16 个字符</code>。它是一种专门用来显示字母、数字、符号的点阵型液晶模块。它是由若干个<code> 5x7</code> 或者 <code>5x10</code> 的点阵字符位组成，每个点阵字符位都可以用显示一个字符，每位之间有一个点距的间隔，每行之间也有间隔，起到了字符间距和行间距的作用，正因为如此，所以它不能很好的显示图片。</p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202204071927667.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202204071927066.jpg","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<p>从左至右管脚编号顺序是 <code>1-16</code>，其功能定义如下所示：<br>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204071930227.jpg" alt=""></p>
+<p>下面对几个管脚做下说明：</p>
+<ul>
+<li>
+<p>3脚（ <code>VL</code>）</p>
+<p>液晶显示偏压信号，用于调整 LCD1602 的显示对比度，一般会外接电位器用以调整偏压信号，注意 `此脚电压为 0 时可以得到最强的对比度</p>
+</li>
+<li>
+<p>4脚（ <code>RS</code>）</p>
+<p>数据/命令选择端，当此脚为 <code>高电平时，可以对 1602 进行数据字节的传输操作</code>， <code>而为低电平时，则是进行命令字节的传输操作</code>。命令字节，即是用来对LCD1602 的一些工作方式作设置的字节；数据字节，即使用以在 1602 上显示的字节。值得一提的是，LCD1602 的数据是  <code>8 位</code> 的。</p>
+</li>
+<li>
+<p>5脚（ <code>R/W</code>）</p>
+<p>读写选择端。当此脚为 <code>高电平</code> 可对 LCD1602 进行读数据操作，反之进行写数据操作。</p>
+</li>
+<li>
+<p>6脚（<code>E</code>）</p>
+<p>使能信号，其实是 LCD1602 的数据控制时钟信号，利用该信号的 上升沿实现对 LCD1602 的数据传输。</p>
+</li>
+<li>
+<p>7~14脚</p>
+<p><code>8 位并行数据口</code>，而 51 单片机一组 IO 也是 8 位，使得对 LCD1602的数据读写大为方便。</p>
+</li>
+</ul>
+<p>在 LCD1602 内部含有 <code>80 个字节的 DDRAM</code>，它是用来寄存显示字符的。其地址和屏幕的对应关系如下表：</p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202204071938296.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202204071938751.jpg","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<p>不是所有的地址都可以直接用来显示字符数据，只有第一行中的 <code>00-0F</code>，第二行中的 <code>40-4F</code> 才能显示，其他地址只能用于存储。</p>
+<p><code>要显示字符时要先输入显示字符地址</code>，也就是告诉模块在哪里显示字符，例如第二行第一个字符的地址是 40H，那么是否直接写入 40H 就可以将光标定位在第二行第一个字符的位置呢？这样不行，<code>因为写入显示地址时要求最高位 D7 恒定为高电平 1</code> 所以实际写入的数据应该是 ：</p>
+<p>01000000B(40H）+10000000B(80H)=11000000B(C0H)</p>
+<p>在 1602 中我们就用前 16 个就行了。第二行也一样用前 16 个地址。</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>LCD1602 常用命令</p>
+</div>
+<p>注意：这些指令对于 LCD1602 初始化是必须的。</p>
+<ul>
+<li>
+<p>清屏指令</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204071943312.png" alt=""></p>
+<p>功能：</p>
+<p>&lt;1&gt;  <code>清除液晶显示器</code>，即将 DDRAM 的内容全部填入&quot;空白&quot;的 ASCII 码 20H;<br>
+&lt;2&gt;  <code>光标归位</code>，即将光标撤回液晶显示屏的左上方;<br>
+&lt;3&gt; <code> 将地址计数器(AC)的值设为 0</code>。</p>
+<p>注：下面软件编程那个0x01是DB0~DB7：0 0 0 0       0 0 0 1</p>
+</li>
+<li>
+<p>模式设置指令</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204071945955.png" alt=""></p>
+<p>功能：</p>
+<p>​    设定每次写入 1 位数据后 <code>光标的移位方向</code>，并且设定每次写入的一个字符是否移动。</p>
+<p>I/D：0=写入新数据后光标 <code>左移</code> 1=写入新数据后光标 <code>右移</code></p>
+<p>S：0=写入新数据后 <code>显示屏不移动</code> 1=写入新数据后 <code>显示屏整体右移 1 个字符</code></p>
+<p>注：下面软件编程那个0x06是DB0~DB7：0 0 0 0        0 1 1 0</p>
+</li>
+<li>
+<p>显示开关控制指令</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204071948735.png" alt=""></p>
+<p>功能：</p>
+<p><code>控制显示器开/关、光标显示/关闭以及光标是否闪烁</code></p>
+<p><code>D</code>：0=显示功能关       1=显示功能开<br>
+<code>C</code>：0=无光标               1=有光标<br>
+<code>B</code>：0=光标闪烁            1=光标不闪烁</p>
+<p>注：下面软件编程那个0x0c是DB0~DB7：0 0 0 0       1 1 0 0</p>
+</li>
+<li>
+<p>功能设定指令</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204071950764.png" alt=""></p>
+<p>功能：</p>
+<p><code>设定数据总线位数、显示的行数及字型。</code></p>
+<p><code>DL</code>：0=数据总线为 4 位    1=数据总线为 8 位<br>
+<code>N</code>：0=显示 1 行    1=显示 2 行<br>
+<code>F</code>：0=5×7 点阵/每字符    1=5×10 点阵/每字符</p>
+</li>
+</ul>
+<p>注：下面软件编程那个0x38是DB0~DB7：0 0 1 1       1 0 0 0</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>LCD1602 使用</p>
+</div>
+<p>要使用 LCD1602，首先需要对其 <code>初始化</code>，即通过写入一些特定的指令实现。<code>然后选择要在 LCD1602 的哪个位置显示并将所要显示的数据发送到 LCD 的DDRAM</code>。使用 LCD1602  <code>通常都是用于写数据进去，很少使用读功能</code>。</p>
+<p>LCD1602 操作步骤如下所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204071955309.png" alt=""></p>
+<p>在此，不需要读出它的数据的状态或者数据本身。所以只需要看两个写时序：</p>
+<ul>
+<li>当要写 <code>指令字</code>，设置 LCD1602 的工作方式时：需要把 RS 置为 <code>低电平</code>，RW置为 <code>低电平</code>，然后将数据送到数据口  <code>D0~D7</code>，最后 E 引脚一个高脉冲将数据写入。</li>
+<li>当要写入 <code>数据字</code>，在 1602 上实现显示时：需要把 RS 置为 <code>高电平</code>，RW 置为 <code>低电平</code>，然后将数据送到数据口  <code>D0~D7</code>，最后 E 引脚一个高脉冲将数据写入。</li>
+</ul>
+<p>写指令和写数据，差别仅仅在于 RS 的电平不一样而已。</p>
+<p>以下是 LCD1602 的时序图：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204071959889.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204071959360.jpg" alt=""></p>
+<p>从上图可以看到，以上给的时间参数全部是 <code> ns</code> 级别的，而 51 单片机的机器周期是 1us，指令周期是 2-4 个机器周期，<code>所以即便在程序里不加延时程序，也可以很好的配合 LCD1602 的时序要求了</code>。</p>
+<p>当要写命令字节的时候，时间由左往右，RS 变为低电平，R/W 变为低电平，注意看是 RS 的状态先变化完成。然后这时， <code>DB0~DB7</code> 上数据进入有效阶段，接着  <code>E 引脚</code>有一个整脉冲的跳变，接着要维持时间最小值为 <code>tpw=400ns</code> 的 E 脉冲宽度。然后 <code>E引脚负跳变</code>，RS电平变化，R/W 电平变化。这样便是一个完整的LCD1602写命令的时序。</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>注意</p>
+</div>
+<p>使用 4 位 LCD1602 时，应该多看手册，找到不同点，对原有程序加以修改</p>
+<div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202204072005653.png" style="width:50%;"/></div></div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204072005960.png" alt=""></p>
+<p>从上图中可知，LCD1602 的 8 位数据口 <code> DB0-DB7 与单片机的 P0.0-P0.7 管脚连接</code>，LCD1602 的  <code>RS、RW、E 脚与单片机的 P2.6、P2.5、P2.7 管脚连接</code>。RJ1是一个电位器，用来调节 LCD1602 对比度即显示亮度。</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>注意</p>
+</div>
+<p>这里原理图是使用的 8 位 LCD1602 接口设计，是可以兼容 4 位 LCD1602的。对于非标准接口的 LCD1602，我们也会通过转接板将其转接为对应开发板接口的。 <code>对于 4 位 LCD1602 在传输数据的时候需要将 8 位的数据截成两段，先发送高四位，在发送低四位</code>。其它引脚操作方法不变。</p>
+<h2 id="软件编写">软件编写</h2>
+<p>main.c</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &quot;kd1602.h&quot;
+
+
+void main()
+&#123;
+	 lcd1602_init();
+	lcd1602_show_string(0,0,&quot;Hello World!&quot;);
+	lcd1602_show_string(0,1,&quot;0123456789&quot;);
+	
+    while(1)
+    &#123;
+       
+    &#125;    
+&#125;</code></pre>
+<p>kd1602.c</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &quot;kd1602.h&quot;
+
+
+void delay_ms(u16 ms)
+&#123;
+	u16 i,j;
+	for(i&#x3D;ms;i&gt;0;i--)
+	&#123;
+		for(j&#x3D;110;j&gt;0;j--);
+	&#125;
+&#125;
+
+&#x2F;*******************************************************************************
+* 函 数 名       : lcd1602_write_cmd
+* 函数功能		 : LCD1602写命令
+* 输    入       : cmd：指令
+* 输    出    	 : 无
+*******************************************************************************&#x2F;
+void lcd1602_write_cmd(u8 cmd)
+&#123;
+	LCD1602_RS&#x3D;0;&#x2F;&#x2F;选择命令
+	LCD1602_RW&#x3D;0;&#x2F;&#x2F;选择写
+	LCD1602_E&#x3D;0;
+	LCD1602_DATAPORT&#x3D;cmd;&#x2F;&#x2F;准备命令
+	delay_ms(1);
+	LCD1602_E&#x3D;1;&#x2F;&#x2F;使能脚E先上升沿写入
+	delay_ms(1);
+	LCD1602_E&#x3D;0;&#x2F;&#x2F;使能脚E后负跳变完成写入
+&#125;
+
+&#x2F;*******************************************************************************
+* 函 数 名       : lcd1602_write_data
+* 函数功能		 : LCD1602写数据
+* 输    入       : dat：数据
+* 输    出    	 : 无
+*******************************************************************************&#x2F;
+void lcd1602_write_data(u8 dat)
+&#123;
+	LCD1602_RS&#x3D;1;&#x2F;&#x2F;选择数据
+	LCD1602_RW&#x3D;0;&#x2F;&#x2F;选择写
+	LCD1602_E&#x3D;0;
+	LCD1602_DATAPORT&#x3D;dat;&#x2F;&#x2F;准备数据
+	delay_ms(1);
+	LCD1602_E&#x3D;1;&#x2F;&#x2F;使能脚E先上升沿写入
+	delay_ms(1);
+	LCD1602_E&#x3D;0;&#x2F;&#x2F;使能脚E后负跳变完成写入	
+&#125;
+&#x2F;*******************************************************************************
+* 函 数 名       : lcd1602_init
+* 函数功能		 : LCD1602初始化
+* 输    入       : 无
+* 输    出    	 : 无
+*******************************************************************************&#x2F;
+void lcd1602_init()
+&#123;
+	lcd1602_write_cmd(0x38);&#x2F;&#x2F;数据总线8位，显示2行，5*7点阵&#x2F;字符
+	lcd1602_write_cmd(0x0c);&#x2F;&#x2F;显示功能开，无光标，光标闪烁
+	lcd1602_write_cmd(0x06);&#x2F;&#x2F;写入新数据后光标右移，显示屏不移动
+	lcd1602_write_cmd(0x01);&#x2F;&#x2F;清屏	
+&#125;
+
+
+&#x2F;*******************************************************************************
+* 函 数 名       : lcd1602_clear
+* 函数功能		 : LCD1602清屏
+* 输    入       : 无
+* 输    出    	 : 无
+*******************************************************************************&#x2F;
+void lcd1062_clear()
+&#123;
+	lcd1602_write_cmd(0x01);&#x2F;&#x2F;清屏
+&#125;
+
+&#x2F;*******************************************************************************
+* 函 数 名       : lcd1602_show_string
+* 函数功能		 : LCD1602显示字符
+* 输    入       : x,y：显示坐标，x&#x3D;0~15，y&#x3D;0~1;
+				   str：显示字符串
+* 输    出    	 : 无
+*******************************************************************************&#x2F;
+void lcd1602_show_string(u8 x,u8 y,u8 *str)
+&#123;
+	u8 i&#x3D;0;
+	if(y&gt;1 || x&gt;15)&#x2F;&#x2F;行列参数不对则强制退出
+		return;
+	if(y&lt;1)&#x2F;&#x2F;第一行开始
+	&#123;
+		while(*str!&#x3D;&#39;\0&#39;)&#x2F;&#x2F;字符串是以&#39;\0&#39;结尾，只要前面有内容就显示
+		&#123;
+			if(i&lt;16-x)&#x2F;&#x2F;如果字符长度超过第一行显示范围，则在第二行继续显示
+			&#123;
+				lcd1602_write_cmd(0x80+x+i);&#x2F;&#x2F;第一行显示地址设置	
+			&#125;
+			else
+			&#123;
+				lcd1602_write_cmd(0x40+0x80+x+i-16);&#x2F;&#x2F;第二行显示地址设置
+			&#125;
+			lcd1602_write_data(*str);&#x2F;&#x2F;显示内容
+			str++;&#x2F;&#x2F;指针递增
+			i++;
+		&#125;
+	&#125;
+	else&#x2F;&#x2F;第二行开始
+	&#123;
+		while(*str!&#x3D;&#39;\0&#39;)&#x2F;&#x2F;字符串是以&#39;\0&#39;结尾，只要前面有内容就显示
+		&#123;
+			if(i&lt;16-x)&#x2F;&#x2F;如果字符长度超过第一行显示范围，则在第二行继续显示
+			&#123;
+				lcd1602_write_cmd(0x40+0x80+x+i);&#x2F;&#x2F;第二行显示地址设置	
+			&#125;
+			else
+			&#123;
+				lcd1602_write_cmd(0x80+x+i-16);&#x2F;&#x2F;第一行显示地址设置
+			&#125;
+			lcd1602_write_data(*str);&#x2F;&#x2F;显示内容
+			str++;&#x2F;&#x2F;指针递增
+			i++;
+		&#125;
+	&#125;
+&#125;</code></pre>
+<p>kd1602.h</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># ifndef _kd1602_H
+# define _kd1602_H
+
+# include &quot;reg52.h&quot;
+
+typedef unsigned char u8;
+typedef unsigned int u16;
+
+sbit LCD1602_RS&#x3D;P2^6;&#x2F;&#x2F;数据命令选择
+sbit LCD1602_RW&#x3D;P2^5;&#x2F;&#x2F;读写选择
+sbit LCD1602_E&#x3D;P2^7;&#x2F;&#x2F;使能信号
+# define LCD1602_DATAPORT P0  &#x2F;&#x2F;宏定义LCD1602数据端口
+
+void delay_ms(u16 ms);
+void lcd1602_write_cmd(u8 cmd);
+void lcd1602_write_data(u8 dat);
+void lcd1602_init();
+void lcd1062_clear();
+void lcd1602_show_string(u8 x,u8 y,u8 *str);
+
+# endif
+</code></pre>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202204081040056.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202204081040389.jpg","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<h2 id="例子">例子</h2>
+<p>在开发中通常会显示数值，比如温度数据，程序中我们获取的温度数据通常存储在 float 变量中，并非字符串，此时需要想办法将 float 变量中的值转换为字符串，比如 float temp=31.2，那么我们可以再定义一个数组 temp_buf[] 用于保存 temp 中的每一个位，操作如下：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">float temp&#x3D;31.2;
+u8 temp_buf[5];
+u16 temp_value&#x3D;temp*10;
+
+temp_buf[0]&#x3D;temp_value&#x2F;100+0x30;
+temp_buf[1]&#x3D;temp_value%100&#x2F;10+0x30;
+temp_buf[2]&#x3D;&#39;.&#39;;
+temp_buf[3]&#x3D;temp_value%100%10+0x30;
+temp_buf[4]&#x3D;&#39;\0&#39;;
+lcd1602_show_string(0,0,temp_buf);</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>解释</p>
+</div>
+<p>将浮点数转换为整型变量，然后将整型值的每一个位取出来存储在数组temp_buf 中，细心的朋友会发现取出的每一位后面加了 0X30，这个值是将数字0-9 转换为 ASCII 码，因为液晶是以ASCII 码显示的。最后一个数组元素赋值了’\0’，这是为了让 LCD1602 显示函数知道数组内结束位置。</p>
+<p>此时调用 LCD1602 显示函数时，只需要将数组名传递进去即可，因为数组名即为该数组的起始地址，然后显示函数内部通过指针访问数组的每一位。</p>
+<h2 id="LCD显示时分秒">LCD显示时分秒</h2>
+<p>main.c</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*	
+实验现象：
+	LCD1602上显示秒表
+*&#x2F;
+
+# include&lt;reg52.h&gt;
+# include &quot;lcd.h&quot;
+
+typedef unsigned char uint8;
+typedef unsigned int uint16;
+
+uint8 a[]&#x3D;&quot;LCD Design of Tm&quot;;  &#x2F;&#x2F;要显示的字符
+uint8 num[]&#x3D;&quot;0123456789&quot;;
+uint8 b[8],shi,fen,miao;
+void delay(uint16 i)
+&#123;
+	while(i--);
+&#125;
+void wrc(uint8 c)	 &#x2F;&#x2F;写命令
+&#123;
+	LcdWriteCom(c);
+&#125;
+void wrd(uint8 dat)	  &#x2F;&#x2F;写数据
+&#123;
+	LcdWriteData(dat);
+&#125;
+void lcd_init()
+&#123;
+	LcdInit();	
+&#125;
+void time0init()
+&#123;
+	TMOD&#x3D;0X01;
+	TH0&#x3D;0XFC;
+	TL0&#x3D;0X18; &#x2F;&#x2F;1ms
+	TR0&#x3D;1;
+	ET0&#x3D;1;
+	EA&#x3D;1;
+&#125;
+void timepros()
+&#123;
+	b[0]&#x3D;num[shi&#x2F;10];
+	b[1]&#x3D;num[shi%10];
+	b[2]&#x3D;0x3a;
+	b[3]&#x3D;num[fen&#x2F;10];
+	b[4]&#x3D;num[fen%10];
+	b[5]&#x3D;0x3a;
+	b[6]&#x3D;num[miao&#x2F;10];
+	b[7]&#x3D;num[miao%10];
+&#125;
+void display()
+&#123;
+	uint8 i;
+	timepros();
+	wrc(0x00+0x80);
+	for(i&#x3D;0;i&lt;16;i++)
+	&#123;
+		wrd(a[i]);
+	&#125;
+	wrc(0x44+0x80);
+	wrd(b[0]);
+	wrd(b[1]);
+	wrd(b[2]);
+	wrd(b[3]);
+	wrd(b[4]);
+	wrd(b[5]);
+	wrd(b[6]);
+	wrd(b[7]);
+&#125;
+void main()
+&#123;
+	lcd_init();
+	time0init();
+	while(1)
+	&#123;
+		display();
+	&#125;	
+&#125;
+void tim0() interrupt 1
+&#123;
+	static uint16 n;
+	TH0&#x3D;0XFC;
+	TL0&#x3D;0X18;&#x2F;&#x2F;1ms
+	n++;
+	if(n&#x3D;&#x3D;1000)
+	&#123;
+		n&#x3D;0;
+		miao++;
+		if(miao&#x3D;&#x3D;60)
+		&#123;
+			miao&#x3D;0;
+			fen++;
+			if(fen&#x3D;&#x3D;60)
+			&#123;
+				fen&#x3D;0;
+				shi++;
+				if(shi&#x3D;&#x3D;60)
+				&#123;
+					shi&#x3D;0;
+					miao&#x3D;0;
+					fen&#x3D;0;
+				&#125;
+			&#125;
+		&#125;
+	&#125;
+&#x2F;&#x2F;	display();
+&#125;
+
+</code></pre>
+<p>lcd.c</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &quot;lcd.h&quot;
+
+&#x2F;*******************************************************************************
+* 函 数 名         : Lcd1602_Delay1ms
+* 函数功能		   : 延时函数，延时1ms
+* 输    入         : c
+* 输    出         : 无
+* 说    名         : 该函数是在12MHZ晶振下，12分频单片机的延时。
+*******************************************************************************&#x2F;
+
+void Lcd1602_Delay1ms(uint c)   &#x2F;&#x2F;误差 0us
+&#123;
+    uchar a,b;
+	for (; c&gt;0; c--)
+	&#123;
+		 for (b&#x3D;199;b&gt;0;b--)
+		 &#123;
+		  	for(a&#x3D;1;a&gt;0;a--);
+		 &#125;      
+	&#125;
+    	
+&#125;
+
+&#x2F;*******************************************************************************
+* 函 数 名         : LcdWriteCom
+* 函数功能		   : 向LCD写入一个字节的命令
+* 输    入         : com
+* 输    出         : 无
+*******************************************************************************&#x2F;
+# ifndef 	LCD1602_4PINS	 &#x2F;&#x2F;当没有定义这个LCD1602_4PINS时
+void LcdWriteCom(uchar com)	  &#x2F;&#x2F;写入命令
+&#123;
+	LCD1602_E &#x3D; 0;     &#x2F;&#x2F;使能
+	LCD1602_RS &#x3D; 0;	   &#x2F;&#x2F;选择发送命令
+	LCD1602_RW &#x3D; 0;	   &#x2F;&#x2F;选择写入
+	
+	LCD1602_DATAPINS &#x3D; com;     &#x2F;&#x2F;放入命令
+	Lcd1602_Delay1ms(1);		&#x2F;&#x2F;等待数据稳定
+
+	LCD1602_E &#x3D; 1;	          &#x2F;&#x2F;写入时序
+	Lcd1602_Delay1ms(5);	  &#x2F;&#x2F;保持时间
+	LCD1602_E &#x3D; 0;
+&#125;
+# else 
+void LcdWriteCom(uchar com)	  &#x2F;&#x2F;写入命令
+&#123;
+	LCD1602_E &#x3D; 0;	 &#x2F;&#x2F;使能清零
+	LCD1602_RS &#x3D; 0;	 &#x2F;&#x2F;选择写入命令
+	LCD1602_RW &#x3D; 0;	 &#x2F;&#x2F;选择写入
+
+	LCD1602_DATAPINS &#x3D; com;	&#x2F;&#x2F;由于4位的接线是接到P0口的高四位，所以传送高四位不用改
+	Lcd1602_Delay1ms(1);
+
+	LCD1602_E &#x3D; 1;	 &#x2F;&#x2F;写入时序
+	Lcd1602_Delay1ms(5);
+	LCD1602_E &#x3D; 0;
+
+	LCD1602_DATAPINS &#x3D; com &lt;&lt; 4; &#x2F;&#x2F;发送低四位
+	Lcd1602_Delay1ms(1);
+
+	LCD1602_E &#x3D; 1;	 &#x2F;&#x2F;写入时序
+	Lcd1602_Delay1ms(5);
+	LCD1602_E &#x3D; 0;
+&#125;
+# endif
+&#x2F;*******************************************************************************
+* 函 数 名         : LcdWriteData
+* 函数功能		   : 向LCD写入一个字节的数据
+* 输    入         : dat
+* 输    出         : 无
+*******************************************************************************&#x2F;		   
+# ifndef 	LCD1602_4PINS		   
+void LcdWriteData(uchar dat)			&#x2F;&#x2F;写入数据
+&#123;
+	LCD1602_E &#x3D; 0;	&#x2F;&#x2F;使能清零
+	LCD1602_RS &#x3D; 1;	&#x2F;&#x2F;选择输入数据
+	LCD1602_RW &#x3D; 0;	&#x2F;&#x2F;选择写入
+
+	LCD1602_DATAPINS &#x3D; dat; &#x2F;&#x2F;写入数据
+	Lcd1602_Delay1ms(1);
+
+	LCD1602_E &#x3D; 1;   &#x2F;&#x2F;写入时序
+	Lcd1602_Delay1ms(5);   &#x2F;&#x2F;保持时间
+	LCD1602_E &#x3D; 0;
+&#125;
+# else
+void LcdWriteData(uchar dat)			&#x2F;&#x2F;写入数据
+&#123;
+	LCD1602_E &#x3D; 0;	  &#x2F;&#x2F;使能清零
+	LCD1602_RS &#x3D; 1;	  &#x2F;&#x2F;选择写入数据
+	LCD1602_RW &#x3D; 0;	  &#x2F;&#x2F;选择写入
+
+	LCD1602_DATAPINS &#x3D; dat;	&#x2F;&#x2F;由于4位的接线是接到P0口的高四位，所以传送高四位不用改
+	Lcd1602_Delay1ms(1);
+
+	LCD1602_E &#x3D; 1;	  &#x2F;&#x2F;写入时序
+	Lcd1602_Delay1ms(5);
+	LCD1602_E &#x3D; 0;
+
+	LCD1602_DATAPINS &#x3D; dat &lt;&lt; 4; &#x2F;&#x2F;写入低四位
+	Lcd1602_Delay1ms(1);
+
+	LCD1602_E &#x3D; 1;	  &#x2F;&#x2F;写入时序
+	Lcd1602_Delay1ms(5);
+	LCD1602_E &#x3D; 0;
+&#125;
+# endif
+&#x2F;*******************************************************************************
+* 函 数 名       : LcdInit()
+* 函数功能		 : 初始化LCD屏
+* 输    入       : 无
+* 输    出       : 无
+*******************************************************************************&#x2F;		   
+# ifndef		LCD1602_4PINS
+void LcdInit()						  &#x2F;&#x2F;LCD初始化子程序
+&#123;
+ 	LcdWriteCom(0x38);  &#x2F;&#x2F;开显示
+	LcdWriteCom(0x0c);  &#x2F;&#x2F;开显示不显示光标
+	LcdWriteCom(0x06);  &#x2F;&#x2F;写一个指针加1
+	LcdWriteCom(0x01);  &#x2F;&#x2F;清屏
+	LcdWriteCom(0x80);  &#x2F;&#x2F;设置数据指针起点
+&#125;
+# else
+void LcdInit()						  &#x2F;&#x2F;LCD初始化子程序
+&#123;
+	LcdWriteCom(0x32);	 &#x2F;&#x2F;将8位总线转为4位总线
+	LcdWriteCom(0x28);	 &#x2F;&#x2F;在四位线下的初始化
+	LcdWriteCom(0x0c);  &#x2F;&#x2F;开显示不显示光标
+	LcdWriteCom(0x06);  &#x2F;&#x2F;写一个指针加1
+	LcdWriteCom(0x01);  &#x2F;&#x2F;清屏
+	LcdWriteCom(0x80);  &#x2F;&#x2F;设置数据指针起点
+&#125;
+# endif
+</code></pre>
+<p>lcd.h</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># ifndef __LCD_H_
+# define __LCD_H_
+&#x2F;**********************************
+当使用的是4位数据传输的时候定义，
+使用8位取消这个定义
+**********************************&#x2F;
+&#x2F;&#x2F;# define LCD1602_4PINS
+
+&#x2F;**********************************
+包含头文件
+**********************************&#x2F;
+# include&lt;reg52.h&gt;
+
+&#x2F;&#x2F;---重定义关键词---&#x2F;&#x2F;
+# ifndef uchar
+# define uchar unsigned char
+# endif
+
+# ifndef uint 
+# define uint unsigned int
+# endif
+
+&#x2F;**********************************
+PIN口定义
+**********************************&#x2F;
+# define LCD1602_DATAPINS P0
+sbit LCD1602_E&#x3D;P2^7;
+sbit LCD1602_RW&#x3D;P2^5;
+sbit LCD1602_RS&#x3D;P2^6;
+
+&#x2F;**********************************
+函数声明
+**********************************&#x2F;
+&#x2F;*在51单片机12MHZ时钟下的延时函数*&#x2F;
+void Lcd1602_Delay1ms(uint c);   &#x2F;&#x2F;误差 0us
+&#x2F;*LCD1602写入8位命令子函数*&#x2F;
+void LcdWriteCom(uchar com);
+&#x2F;*LCD1602写入8位数据子函数*&#x2F;	
+void LcdWriteData(uchar dat)	;
+&#x2F;*LCD1602初始化子程序*&#x2F;		
+void LcdInit();						  
+
+# endif
+</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202204092142061.jpg" style="width:400px;height:700px;"></img></p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/LCD/">LCD</a></div><div class="post_share"><div class="social-share" data-image="/img/num21.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#LCD1602"><span class="toc-number">1.</span> <span class="toc-text">LCD1602</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E7%BC%96%E5%86%99"><span class="toc-number">2.</span> <span class="toc-text">软件编写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90"><span class="toc-number">3.</span> <span class="toc-text">例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LCD%E6%98%BE%E7%A4%BA%E6%97%B6%E5%88%86%E7%A7%92"><span class="toc-number">4.</span> <span class="toc-text">LCD显示时分秒</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://api2.acozycotage.net/Pweb" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '可惜你不听王杰，也不懂我...' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>

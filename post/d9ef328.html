@@ -1,0 +1,1844 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Python入门 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="安装 Pycharm 和配置环境  去官网下载，我下载的是 2021版本 安装步骤            [{&quot;url&quot;:&quot;https:&#x2F;&#x2F;image-1309791158.cos.ap-guangzhou.myqcloud.com&#x2F;其他&#x2F;202205251804674.png&quot;,&quot;alt&quot;:&quot;&quot;},{&quot;url&quot;:&quot;https:&#x2F;&#x2F;image-1309791158.cos.ap-guangzhou">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python入门">
+<meta property="og:url" content="https://mdcm.yang5201314.cn/post/d9ef328.html">
+<meta property="og:site_name" content="Luckys-Yangの小栈">
+<meta property="og:description" content="安装 Pycharm 和配置环境  去官网下载，我下载的是 2021版本 安装步骤            [{&quot;url&quot;:&quot;https:&#x2F;&#x2F;image-1309791158.cos.ap-guangzhou.myqcloud.com&#x2F;其他&#x2F;202205251804674.png&quot;,&quot;alt&quot;:&quot;&quot;},{&quot;url&quot;:&quot;https:&#x2F;&#x2F;image-1309791158.cos.ap-guangzhou">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mdcm.yang5201314.cn/img/num56.webp">
+<meta property="article:published_time" content="2022-05-25T22:46:00.000Z">
+<meta property="article:modified_time" content="2022-10-11T15:45:37.000Z">
+<meta property="article:author" content="Luckys-Yang">
+<meta property="article:tag" content="博客,个人博客,技术,学习,Hexo,Blog,STM32,嵌入式,单片机">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mdcm.yang5201314.cn/img/num56.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"><link rel="canonical" href="https://mdcm.yang5201314.cn/post/d9ef328.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Python入门',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-11 23:45:37'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">56</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Python入门</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-25T22:46:00.000Z" title="发表于 2022-05-26 06:46:00">2022-05-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-11T15:45:37.000Z" title="更新于 2022-10-11 23:45:37">2022-10-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Python学习笔记</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><h2 id="安装-Pycharm-和配置环境">安装 Pycharm 和配置环境</h2>
+<ul>
+<li>去官网下载，我下载的是 2021版本</li>
+<li>安装步骤</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205251804674.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205251804318.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205251804950.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>安装完开始破解啦（书签里有工具和教程），破解完成如图：</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205251849377.jpg" alt=""></p>
+<h3 id="Python解释器安装">Python解释器安装</h3>
+<div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>注意：有两种解释器可以选择</p>
+</div>
+<p>一个是普通没有集成库（需要手动下载）的<font color='orange'> python解释器</font></p>
+<p>一个是已经集成了很多库的<font color='orange'> Anaconda 解释器</font></p>
+<p>安装哪个都可以，看选择下面都有介绍安装过程</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>python 解释器</p>
+</div>
+<ul>
+<li>然后去下载安装 Python 解释器 官网：<a href="https://www.python.org/">Welcome to Python.org</a></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205251911282.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205251911342.png" alt=""></p>
+<ul>
+<li>一定要选择这个不要点其他类型（他喵不然配置环境变量时你找不到 Scripts 文件夹）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252109232.png" alt=""></p>
+<ul>
+<li>按下面步骤安装</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252109605.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252109499.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252109332.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li><font color='orange'>检查环境变量配置了没</font>，但是还是谨慎点好</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252125808.png" alt=""></p>
+<p>如果没则需要去安装路径找</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252125438.png" alt=""></p>
+<ul>
+<li>打开 Pycharm</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205251949595.jpg" alt=""></p>
+<ul>
+<li>创建新项目，可以用快捷键 【ALT】+【INS】</li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>Anacinda 解释器</p>
+</div>
+<p>官网：<a href="https://www.anaconda.com/">Anaconda</a></p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252216409.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205260602873.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205260607303.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205260602665.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205260602232.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>安装完成可以去 Pycharm 里替换现在这个解释器了（注意：如果安装完成没看到有 python.exe 可能就是你的盘符内存不足，刚刚安装时没装上，至少要5G以上内存）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205260622637.png" alt=""></p>
+<h3 id="好用插件-背景图片设置">好用插件+背景图片设置</h3>
+<ul>
+<li><font color='orange'>插件1：</font><font color='cornflowerblue'>Chinese</font>（汉化工具）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205251957923.jpg" alt=""></p>
+<ul>
+<li><font color='orange'>插件2：</font><font color='cornflowerblue'>Translation</font>（中英互译，看文档必备）</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252226164.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252226101.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li><font color='orange'>插件3：</font><font color='cornflowerblue'>AiXcoder Code Completer</font>（代码补全，新手建议还是自己敲）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252233359.png" alt=""></p>
+<ul>
+<li><font color='orange'>插件4：</font><font color='cornflowerblue'>Rainbow Brackets</font>（括号显示不同颜色，好分辨）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252233317.png" alt=""></p>
+<ul>
+<li><font color='orange'>插件5：</font><font color='cornflowerblue'>Indent Rainbow</font>（对于不同层级缩进的空格标注不同的颜色）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252238742.jpg" alt=""></p>
+<ul>
+<li><font color='orange'>插件6：</font><font color='cornflowerblue'>CodeGlance</font>（在<code>IDE</code>的最右侧生成一条工具栏）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252242408.jpg" alt=""></p>
+<ul>
+<li><font color='orange'>插件7：</font> <font color='cornflowerblue'>CSV</font>（用于编辑CSV/TSV/PSV文件，语法验证，结构高亮，可定制着色）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252248609.jpg" alt=""></p>
+<ul>
+<li><font color='orange'>插件8：</font><font color='cornflowerblue'>Key Promoter X</font>（学习IDE快捷键必备）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252255704.jpg" alt=""></p>
+<ul>
+<li>背景设置</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252004698.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252005952.jpg","alt":"原图"}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>这敲起代码都有劲呢！</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252004125.jpg" alt=""></p>
+<ul>
+<li>字体也可以改，找到 Pycharm安装路径，点击【<font color='orange'>jbr</font>】-&gt;【<font color='orange'>lib</font>】-&gt;【<font color='orange'>fonts</font>】文件下，把你的 <font color='cornflowerblue'>.ttf</font> 字体文件粘贴过去即可</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252019067.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252024594.jpg","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<h3 id="安装外部库">安装外部库</h3>
+<ul>
+<li>打开电脑【<font color='orange'>cmd</font>】安装即可</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252130701.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252140746.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252140346.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>但是这种安装外部库一般都很慢，因为站点是在国外的，所以可以通过国内的镜像源站点来下载，速度杠杠的！</li>
+</ul>
+<p><font color='cornflowerblue'>清华镜像</font>：<a href="https://pypi.tuna.tsinghua.edu.cn/simple/">https://pypi.tuna.tsinghua.edu.cn/simple/</a></p>
+<p><font color='cornflowerblue'>豆瓣镜像</font>：<a href="http://pypi.douban.com/simple/">http://pypi.douban.com/simple/</a></p>
+<p><font color='cornflowerblue'>阿里云</font>：<a href="https://mirrors.aliyun.com/pypi/simple/">https://mirrors.aliyun.com/pypi/simple/</a></p>
+<p>命令格式</p>
+<pre class="line-numbers language-cmd" data-language="cmd"><code class="language-cmd">pip install 库名 -i 镜像地址</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252200167.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252200596.png" alt=""></p>
+<h2 id="python前言">python前言</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>解释器</p>
+</div>
+<p><font color='orange'>计算机不能直接理解任何除机器语言以外的语言</font>，必须要把程序语言翻译成机器语言，计算机才能执行程序。</p>
+<p>编译器：<font color='orange'>将其他语言翻译成机器语言的工具</font>（编译器翻译方式：编译，解释）</p>
+<p>两种方式的区别在于<font color='cornflowerblue'>翻译时间点的不同</font>。当编译器<font color='orange'>以解释方式运行的时候</font>，也称之为<font color='orange'>解释器</font></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205260836434.png" alt=""></p>
+<ul>
+<li>
+<p><font color='red'>编译型语言：</font><font color='orange'>程序执行之前需要有一个专门的编译过程</font>，把程序编译成为机器语言的文件，运行时不需要重新翻译，直接使用编译的结果就行了。<font color='orange'>程序执行效率高，依赖编译器，跨平台性差些。</font></p>
+</li>
+<li>
+<p><font color='red'>解释型语言：</font><font color='orange'>解释型语言编写的程序不进行预先编译</font>，以文本方式存储程序代码，会将代码一句一句直接运行。在发布程序时，看起来省了道编译工序，但是在运行程序的时候，<font color='orange'>必须先解释再运行</font></p>
+</li>
+<li>
+<p><font color='red'>速度：</font><font color='orange'>编译比解释型快</font></p>
+</li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>python特点</p>
+</div>
+<ul>
+<li>完全面向对象的语言</li>
+<li>拥有一个强大的标准库</li>
+<li>有大量的第三方模块</li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>面向对象的思维方式</p>
+</div>
+<ul>
+<li><font color='cornflowerblue'>面向对象</font> 是一种 <font color='cornflowerblue'>思维方式</font>，也是一门 <font color='cornflowerblue'>程序设计技术</font></li>
+<li>要解决一个问题前，首先考虑 <font color='orange'>由谁</font> 来做，怎么做事情是 <font color='orange'>谁</font> 的职责，最后把事情做好就行！<font color='orange'>对象</font> 就是 <font color='orange'>谁</font></li>
+<li>要解决复杂的问题，就可以<font color='orange'>找多个不同的对象</font>，各司其职，共同实现，最终完成需求</li>
+<li>先找一个可以完成功能的对象，并且使用对象所提供的能力来解决问题</li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>python优缺点</p>
+</div>
+<p><font color='red'>优点</font></p>
+<ul>
+<li>
+<p>简单、易学</p>
+</li>
+<li>
+<p>免费、开源</p>
+</li>
+<li>
+<p><font color='cornflowerblue'>面向对象</font></p>
+</li>
+<li>
+<p>丰富的库</p>
+</li>
+<li>
+<p>可扩展性</p>
+<p>如果需要一段关键代码运行得更快或者希望某些算法不公开，可以把这部分程序用 <code>C</code> 或 <code>C++</code> 编写，然后在 <code>Python</code> 程序中使用它们</p>
+</li>
+</ul>
+<p><font color='red'>缺点</font></p>
+<ul>
+<li>运行速度差一点</li>
+<li>国内市场较小</li>
+<li>中文资料匮乏</li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>执行 python 程序的三种方式</p>
+</div>
+<ul>
+<li>解释器 — <code>python</code> / <code>python3</code></li>
+<li>交互式 — <code>ipython</code></li>
+<li>集成开发环境 — <code>Pycharm</code></li>
+</ul>
+<p><font color='gree'>注</font>：<font color='orange'>文件扩展名</font>通常是 <code>.py</code></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>python 的运行方式</p>
+</div>
+<p>Python 的解释器</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 使用 python 2.x 解释器
+$ python xxx.py
+# 使用 ptyhon 3.x 解释器
+$ python3 xxx.py</code></pre>
+<h2 id="python基础知识">python基础知识</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>注释</p>
+</div>
+<ul>
+<li>单行注释：以 <code># </code> 开头，后面加一个 <code>空格</code></li>
+<li>多行注释：用一对连续的 <code>三个引号</code> 即可（单，双引号均可）</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 这是一条注释
+&#39;&#39;&#39;
+这是
+多行
+注释
+&#39;&#39;&#39;</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>行与缩进</p>
+</div>
+<ul>
+<li>python 与其他语言明显的区别是<font color='orange'>没有大括号</font>，而是用<font color='cornflowerblue'>缩进表示代码块</font></li>
+<li>需要注意的是每行代码语句不需要以 <code>;</code> 结尾（学过C语言的注意一下）</li>
+<li><font color='red'>注意：</font>Python字符串不是通过 <code>NUL</code>（‘\0’）来结束，<font color='cornflowerblue'>其字符串值只包含所定义的内容</font></li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>变量的输入</p>
+</div>
+<ul>
+<li>在 Python 中可以使用 <code>input</code> 函数从键盘等待用户输入</li>
+<li>用户输入的<font color='orange'>任何内容</font> Python <font color='orange'>都认为是一个字符串</font></li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 语法
+s &#x3D; input(&quot;请输入：&quot;)
+print(&quot;你输入了：&quot;+s)</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205281803714.png" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>变量的格式化输出</p>
+</div>
+<ul>
+<li><code>%</code> 被称为格式化操作符，专门用于处理字符串中的格式</li>
+<li>包含 <code>%</code> 的字符串，被称为<font color='cornflowerblue'>格式化字串符</font></li>
+<li><code>%</code> 和<font color='orange'>不同的字符</font>连用，<font color='orange'>不同类型的数据</font>需要<font color='orange'>使用不同的格式化字符</font></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205281808986.png" alt=""></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 语法
+a1 &#x3D; &quot;1&quot;
+a2 &#x3D; &quot;2&quot;
+num1 &#x3D; 3.14
+num2 &#x3D; 12
+num3 &#x3D; 3
+print(&quot;%s+%s&#x3D;3&quot; % (a1, a2))  # 1+2&#x3D;3
+print(&quot;%s&#x3D;&#x3D;1&quot; % a1)  # 1&#x3D;&#x3D;1
+print(&quot;%s!&#x3D;%f&quot; % (a1, num1))  # 1!&#x3D;3.140000
+print(&quot;%d*%d&quot; % (num2, num3))  # 12*3</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>变量的命名规则</p>
+</div>
+<p>注意 <code>Python</code> 中的 <font color='orange'>标识符</font> 是<font color='orange'> 区分大小写的</font></p>
+<ul>
+<li>
+<p>在定义变量时，为了保证代码格式，<code>=</code>  的左右应该<font color='orange'>各保留一个空格</font></p>
+</li>
+<li>
+<p>在 <code>Python</code> 中，如果 <font color='orange'>变量名</font> 需要由 <font color='cornflowerblue'>二个 或 多个单词</font> 组成时，可以按照以下方式命名：</p>
+<p><font color='gree'>① </font>每个单词都使用小写字母<br>
+<font color='gree'>②</font> 小驼峰式命名法（第一个单词以小写字母开始，后续单词的首字母大写）<br>
+<font color='gree'>③</font> 大驼峰式命名法（每一个单词的首字母都采用大写字母）</p>
+</li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>变量的进阶</p>
+</div>
+<ul>
+<li>
+<p>变量和数据 都是保存在 <font color='orange'>内存</font> 中的</p>
+</li>
+<li>
+<p>在 <code>Python</code> 中 <font color='orange'>函数</font> 的 <font color='orange'>参数传递</font> 以及 <font color='orange'>返回值</font> 都是靠 <font color='cornflowerblue'>引用</font> 传递的</p>
+</li>
+<li>
+<p>引用的概念：</p>
+<p><font color='gree'>①</font> <font color='orange'>变量</font> 和 <font color='orange'>数据</font> 是<font color='cornflowerblue'>分开存储的</font></p>
+<p><font color='gree'>②</font><font color='orange'> 数据</font> 保存在内存中的一个位置</p>
+<p><font color='gree'>③</font><font color='orange'> 变量</font> 中保存着数据在内存中的地址</p>
+<p><font color='gree'>④</font> <font color='orange'>变量</font> 中 <font color='orange'>记录数据的地址</font>，即 <font color='cornflowerblue'>引用</font></p>
+<p><font color='gree'>⑤ </font>使用 <code>id()</code>  函数查看变量中保存数据所在的 <font color='cornflowerblue'>内存地址</font></p>
+</li>
+</ul>
+<p><font color='red'>注意</font>：若变量已被定义，当给一个变量赋值的时候，本质上是 <font color='cornflowerblue'>修改了数据的引用</font></p>
+<p><font color='gree'>①</font> 变量 <font color='orange'>不再</font> 对之前的数据引用</p>
+<p><font color='gree'>②</font> 变量 <font color='orange'>改为</font> 对新赋值的数据引用</p>
+<ul>
+<li>在 <code>Python</code> 中，函数的 <font color='orange'>实参/返回值</font> 都是是靠 <font color='cornflowerblue'>引用</font> 来传递来的</li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>可变和不可变类型</p>
+</div>
+<ul>
+<li>
+<p><font color='cornflowerblue'>不可变类型</font>，内存中的数据<font color='orange'>不允许</font>被修改：</p>
+<p><font color='gree'>①</font> 数字类型 <code>int</code>, <code>bool</code>, <code>float</code>, <code>complex</code>, <code>long(2.x)</code></p>
+<p><font color='gree'>②</font> 字符串 <code>str</code></p>
+<p><font color='gree'>③</font> 元组 <code>tuple</code></p>
+</li>
+<li>
+<p><font color='cornflowerblue'>可变类型</font>，内存中的数据<font color='orange'>可以</font>被修改：</p>
+<p><font color='gree'>①</font> 列表 <code>list</code></p>
+<p><font color='gree'>②</font> 字典 <code>dict</code></p>
+</li>
+</ul>
+<p><font color='red'>注意</font>：字典的 <code>key</code> <font color='cornflowerblue'>只能使用不可变类型的数据</font></p>
+<p>可变类型的数据变化，是通过 <font color='orange'>方法</font> 来实现的</p>
+<p>若给一个可变类型的变量，赋值了一个新的数据，<font color='cornflowerblue'>引用会修改</font></p>
+<ul>
+<li>变量 <font color='orange'>不再</font> 对之前的数据引用</li>
+<li>变量 <font color='orange'>改为</font> 对新赋值的数据引用</li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>哈希（hash）</p>
+</div>
+<ul>
+<li><code>Python</code> 中内置有一个名字叫做 <code>hash(o)</code> 的函数，接收一个 <font color='orange'>不可变类型</font> 的数据作为 <font color='cornflowerblue'>参数</font>，<font color='orange'>返回</font> 结果是一个 <font color='cornflowerblue'>整数</font></li>
+<li><code>哈希</code> 是一种 <font color='orange'>算法</font>，其作用就是提取数据的 特征码（指纹）<br>
+<font color='gree'>① </font><font color='orange'>相同的内容</font> 得到 <font color='cornflowerblue'>相同的结果</font><br>
+<font color='gree'>②</font> <font color='orange'>不同的内容</font> 得到 <font color='cornflowerblue'>不同的结果</font></li>
+<li>在 <code>Python</code> 中，设置字典的 <font color='orange'>键值对</font> 时，会首先对 <code>key</code> 进行 <code>hash</code> 已决定如何在内存中保存字典的数据，以方便 后续 对字典的操作：<font color='red'>增、删、改、查</font></li>
+<li><code>key</code> 必须是<font color='orange'>不可变类型数据</font>   <code>value</code> 可以是<font color='orange'>任意类型的数据</font></li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>局部变量和全局变量</p>
+</div>
+<ul>
+<li>不同的函数，可以定义<font color='orange'>相同的名字的局部变量</font>，但是 <font color='orange'>彼此之间</font> 不会产生影响，局部变量在<font color='cornflowerblue'>函数执行时才会被创建</font>，<font color='cornflowerblue'>函数执行结束后，局部变量会被系统回收</font></li>
+</ul>
+<p><font color='red'>注意</font>：函数执行时，需要<font color='orange'>处理变量时 </font>会：</p>
+<p><font color='gree'>①</font> <font color='orange'>首先</font> 查找 <font color='orange'>函数内部</font> 是否存在 <font color='orange'>指定名称</font> 的<font color='cornflowerblue'>局部变量</font>，<font color='orange'>如果有，直接使用</font></p>
+<p><font color='gree'>②</font> 若没有，查找 <font color='orange'>函数外部</font> 是否存在 <font color='orange'>指定名称</font> 的<font color='cornflowerblue'>全局变量</font>，<font color='orange'>如果有，直接使用</font></p>
+<p><font color='gree'>③</font> 若还没有，<font color='cornflowerblue'>程序报错！</font></p>
+<ul>
+<li>
+<p><font color='red'>函数不能直接修改</font> <code>全局变量的引用</code></p>
+<p><font color='gree'>①</font> 全局变量 是在 <font color='orange'>函数外部定义 </font>的变量（没有定义在某一个函数内），<font color='orange'>所有函数</font> <code>内部</code>  <font color='orange'>都可以使用这个变量</font></p>
+<p><font color='gree'>②</font> 在函数内部，可以 <font color='orange'>通过全局变量的引用获取对应的数据</font></p>
+<p><font color='gree'>③ </font>但是，<font color='red'>不允许直接修改全局变量的引用</font> —— 使用赋值语句修改全局变量的值</p>
+</li>
+</ul>
+<p><font color='red'>注意</font>：注：只是在函数内部定义了一个局部变量而已，只是变量名相同 —— 在函数内部不能直接修改全局变量的值</p>
+<ul>
+<li>若在函数中<font color='orange'>需要修改全局变量</font>，需要使用 <code>global</code> 进行声明</li>
+<li>全局变量定义的<font color='cornflowerblue'>位置</font>：<font color='orange'>定义在其他函数的上方</font></li>
+<li><code>global</code> 需要在函数内部声明</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">def fun():
+    global a
+    a &#x3D; 99
+
+
+a &#x3D; 4
+b &#x3D; 6
+fun()
+print(a)  # 99</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>算术运算符</p>
+</div>
+<ul>
+<li>在 Python 中 <code>*</code> 还可以用于字符串，结果是字符串<font color='orange'>重复指定次数</font>的结果</li>
+<li>Python 2.x 中判断 <font color='orange'>不等于</font> 还可以使用 <code>&lt;&gt;</code> 运算符； <code>!=</code> 在 Python 2.x 中同样可以用来判断 <font color='orange'>不等于</font></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205281904995.png" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>逻辑运算符</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205281911908.png" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>赋值运算符</p>
+</div>
+<ul>
+<li><font color='red'>注</font>：<font color='orange'>赋值运算符中间不能使用空格</font></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205282054406.png" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>运算符的优先级</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205272211795.png" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>sort 与 sorted 区别</p>
+</div>
+<ul>
+<li><code>sort</code> 是应用在 <font color='orange'>list</font> 上的方法，<code>sorted</code> 可以对<font color='orange'>所有可迭代的对象进行排序操作</font></li>
+<li>list 的 <code>sort</code> 方法返回的是<font color='cornflowerblue'>对已经存在的列表进行操作</font>，<font color='orange'>无返回值</font></li>
+<li>内建函数 <code>sorted</code> 方法返回的是<font color='cornflowerblue'>一个新的 list</font>，<font color='orange'>而不是在原来的基础上进行的操作</font></li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>print 函数</p>
+</div>
+<ul>
+<li>在默认情况下，<code>print</code> 函数输出内容之后，<font color='orange'>会自动在内容末尾增加换行</font></li>
+<li><font color='orange'>如果不希望末尾增加换行</font>，可以在 <code>print</code> 函数输出内容的后面增加 <code>, end=&quot;&quot;</code></li>
+<li>其中 <code>&quot;&quot;</code> 中间可以指定 <code>print</code> 函数输出内容之后，继续希望显示的内容</li>
+<li>语法格式如下：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 不会换行
+print(&quot;123&quot;, end&#x3D;&quot;&quot;)
+# 单纯换行
+print(&quot;&quot;)</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>公共方法</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205291454622.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205291454031.png" alt=""></p>
+<ul>
+<li>运算符</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205291456117.png" alt=""></p>
+<ul>
+<li>成员运算符</li>
+</ul>
+<p>① <code>in</code> 在对<font color='orange'> 字典 </font>操作时，判断的是 <font color='orange'>字典的键</font></p>
+<p>② <code>in</code> 和 <code>not in</code> 被称为<font color='cornflowerblue'> 成员运算符</font></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205291456161.png" alt=""></p>
+<h2 id="常见关键字">常见关键字</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>Python一共33个关键字</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205281246664.png" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>常用的关键字用法与注意事项</p>
+</div>
+<ul>
+<li><font color='red'>del</font></li>
+</ul>
+<p><font color='gree'>①</font> 使用 <code>del</code> 关键字(<code>delete</code>) 同样可以删除列表中元素</p>
+<p><font color='gree'>②</font> <code>del</code> 关键字本质上是用来 <font color='orange'>将一个变量从内存中删除的</font></p>
+<p><font color='gree'>③</font> 如果使用 <code>del</code> 关键字将变量从内存中删除，<font color='orange'>后续的代码就不能再使用这个变量了</font></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">del list1[1]</code></pre>
+<ul>
+<li><font color='red'>as</font></li>
+</ul>
+<p><font color='gree'>①</font> <code>with...as...</code> ，主要用于文件的<font color='orange'>读写操作</font>，省去关闭文件的麻烦</p>
+<p><font color='gree'>②</font> <code>导入模块起别名</code> ，对导入的模块进行<font color='orange'>重命名</font>，或者导入函数对函数<font color='orange'>重命名 </font></p>
+<p><font color='gree'>③</font> 将捕获到的异常对象赋值给 <code>except</code></p>
+<h2 id="数据类型">数据类型</h2>
+<ul>
+<li>Python 中数据类型可以分为 <font color='orange'>数字型</font> 和 <font color='orange'>非数字型</font></li>
+<li><font color='cornflowerblue'>数字型</font></li>
+</ul>
+<p>整型（<code>int</code>），浮点型（<code>float</code>），布尔型（<code>bool</code>），复数型（<code>complex</code>）</p>
+<ul>
+<li><font color='cornflowerblue'>非数字型</font></li>
+</ul>
+<p>字符串，列表，元组，字典</p>
+<ul>
+<li>在 Python 中，所有 <font color='orange'>非数字型变量</font> 都支持以下<font color='cornflowerblue'>特点</font>：</li>
+</ul>
+<p>① 都是一个 <font color='orange'>序列</font>（<code>sequence</code>），也可以理解为<font color='orange'> 容器</font></p>
+<p>② 取值（<code>[]</code>）</p>
+<p>③ 遍历（<code>for in</code>）</p>
+<p>④ 计算长度，最大/最小值，比较，删除</p>
+<p>⑤ 链接（<code>+</code>）和 重复（<code>*</code>）</p>
+<p>⑥ 切片</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>整数类型</p>
+</div>
+<ul>
+<li>与数学中的整数概念一样，没有<font color='orange'>取值范围限制</font></li>
+<li>一共有4种进制表示，默认十进制，其他进制需要增加引导符（不区分大小写）</li>
+<li>二进制：<code>0b</code> 或者 <code>0B</code>    八进制：<code>0o</code> 或者 <code>0O</code>    十六进制：<code>0x</code> 或者 <code>0X</code></li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>浮点数类型</p>
+</div>
+<ul>
+<li>浮点数类型与数学中实数的概念一样，表示带有小数的数值。<font color='orange'>必须有小数部分，小数部分可以是0</font></li>
+<li>浮点数两种表示方式：十进制（10.0），科学计数法（1.01e3）</li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>复数类型</p>
+</div>
+<ul>
+<li>Python 语言中，复数可以看做是<font color='orange'>二元有序实数对</font>（相当于坐标吧），<code>(a,b)</code> 表示 <code>a+bj</code> ，其中，<code>a</code> 是实数部分，<code>b</code> 是虚数部分</li>
+<li><font color='gree'>z = 1.23e-4+5.6e+89j</font>，对于复数 <code>z</code>，可以用 <code>z.real</code> 获取实数部分，<code>z.imag</code> 获取虚数部分</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">z &#x3D; 12-3j
+a &#x3D; z.real
+b &#x3D; z.imag
+print(a, b)  # a &#x3D; 12.0  b &#x3D; -3.0</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>数字类型的运算</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205261357620.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205261357748.png" alt=""></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 取商的整数部分，与浮点数运算结果也是浮点数
+print(1010.0&#x2F;&#x2F;3)  # 336.0
+# ** 幂运算
+print(2**3)  # 8
+# 整数或浮点数与复数运算，结果是复数
+print(10 - (1+1j))  # (9-1j)
+# 绝对值
+print(abs(-9))  # 9
+# 把除数和余数运算结果结合起来，返回一个包含商和余数的元组
+print(divmod(8, 2))  # (4,0)
+# 也是幂运算
+print(pow(3, 2))  # 9
+# 对参数1四舍五入，参数2是保留多少位小数可省略
+print(round(6.111, 2))  # 6.11
+# 取最大值，没有限定多少个
+print(max(1, 2, 3, 4, 5, 6, 7))  # 7
+# 取最小值
+print(min(1.2, -2, 0, 3))  # -2</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>字符串类型</p>
+</div>
+<ul>
+<li>根据字符串的内容多少分为<font color='orange'>单行字符串</font>和<font color='orange'>多行字符串</font></li>
+<li>单行字符串由 <code>' '</code> 或者 <code>&quot; &quot;</code> 括起来</li>
+<li>多行字符串可以由一对三单引号 <code>'''</code> 或者三单双引号 <code>&quot;&quot;&quot;</code> 括起来</li>
+<li>转义字符用 <code>\</code> 表示，例如：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">\n # 表示换行
+\\ # 表示反斜杠
+\&#39; # 表示单引号
+\&quot; # 表示双引号
+\t # 表示Tab键
+\r # 表示回车</code></pre>
+<ul>
+<li>字符串的索引</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205261432953.png" alt=""></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">s &#x3D; &quot;你是傻逼吗？&quot;
+print(s[0])  # 表示第0个字符</code></pre>
+<ul>
+<li>字符串的切片（对字符串中某个子串或区间的检索）</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">s &#x3D; &quot;你是傻逼吗？&quot;
+# s[n:m]取值方式左到右，n从0开始，m是列表元素索引值减1
+# n始终比m小（n,m可以是正数，0，负数）
+# 记忆法：从列表s的第n个元素开始，取出来m-n个元素
+# n和m都可以同时缺省表示输出整个字串符（m可以超出字串符数量也不会报错）
+# 后面数-1开始
+# 步长默认是1
+print(s[0:6])  # 你是傻逼吗？
+print(s[-1])  # ？</code></pre>
+<ul>
+<li>高级用法【步长】（切片截取的内容<font color='orange'>不包含结束下标对应的数据</font>,<font color='cornflowerblue'>步长指的是隔几个下标获取一个字符</font>）</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 每隔2个取值
+print(s[1:6:2])  # 是逼？
+print(s[::2])  # 你傻吗</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205261512752.png" alt=""></p>
+<ul>
+<li>字符串操作符</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205262235191.png" alt=""></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 连接两个字符串
+s &#x3D; &quot;锄禾日当午&quot;
+s2 &#x3D; &quot;汗滴禾下土&quot;
+s3 &#x3D; &quot;锄禾日当午&quot;
+print(s+s2)  # 锄禾日当午汗滴禾下土
+# 复制n次字符串x
+print(s*2)  # 锄禾日当午锄禾日当午
+# 如果x是s的子串返回True，否则返回False
+print(s2 in s)  # False
+print(s3 in s)  # True</code></pre>
+<ul>
+<li>字符串处理函数</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205262335680.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205262337294.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205271835344.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">s &#x3D; &quot;锄禾日当午&quot;
+# 返回字符串长度
+print(len(s))  # 5
+# 任意类型x所对应的字符串形式
+a &#x3D; str(123)
+print(a)  # 123
+# type函数返回变量的数据类型
+print(type(a))  # &lt;class &#39;str&#39;&gt;
+# 整数x的十六进制或八进制小写形式字符串
+num &#x3D; 12345
+print(hex(num))  # 0x3039
+print(oct(num))  # 0o30071
+# x为Unicode编码，返回其对应的ASCII字符
+print(chr(65))  # A
+# x为字符，返回其对应的Unicode编码
+print(ord(&#39;A&#39;))  # 65</code></pre>
+<ul>
+<li>字符串处理方法</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205270013756.png" alt=""></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">s &#x3D; &quot;aa,Bbcc,Ddf&quot;
+# 返回全部字符大写
+print(s.upper())  # AA,BBCC,DDF
+# 返回全部字符小写
+print(s.lower())  # aa,bbcc,ddf
+# 返回一个列表，由字符串被分割部分组成
+# str -- 分隔符，默认为所有的空字符，包括空格、换行(\n)、制表符(\t)等
+# num -- 分割次数。默认为 -1, 即分隔所有
+print(s.split(&#39;,&#39;))  # [&#39;aa&#39;,&#39;Bbcc&#39;,&#39;Ddf&#39;]
+# 以哪个为分隔符，哪个分割符就不会出现在结果
+print(s.split(&#39;b&#39;, 1))  # [&#39;aa,B&#39;,&#39;cc,Ddf&#39;]
+# 返回子串sub在str中出现的次数，区分大小写并且区分顺序
+print(s.count(&quot;a&quot;))  # 2
+print(s.count(&quot;aa&quot;))  # 0
+# 返回字符串str副本，所有old字符串被替换成new
+# 但对原来的字串符没影响
+# 第三个参数默认-1：替换所有old出现的次数 0:不替换 1:替换出现的第一次
+flag &#x3D; s.replace(&quot;a&quot;, &quot;PP&quot;)
+print(s)  # aa,Bbcc,Ddf
+print(flag)  # PPPP,Bbcc,Ddf
+# 通过指定一个宽度值width，将str在该宽度内居中
+# 参数二为填充的内容默认是空格填充可选，只能是单个字符
+# 如果width值小于str的值则原样返回str
+# 当str为奇数，指定宽度为偶数时，优先向右边补填充内容
+# 当str为偶数，指定宽度为奇数时，优先向左边补填充内容
+print(s.center(21, &quot;@&quot;))  # @@@@@aa,Bbcc,Ddf@@@@@
+# 从str中去掉在其左侧和右侧chars中列出的值
+# 只能删除开头或是结尾的字符，不能删除中间部分的字符
+# 没参数默认为空格或换⾏符
+print(s.strip(&quot;af&quot;))  # ,Bbcc,Dd
+# 在iter变量除最后元素外每个元素后增加一个str
+s2 &#x3D; &#39;-&#39;
+s3 &#x3D; [&#39;2022&#39;, &#39;05&#39;, &#39;27&#39;]
+print(s2.join(s3))  # 2022-05-27
+print(s2.join(&#39;我还是我以前的我&#39;))  # 我-还-是-我-以-前-的-我</code></pre>
+<ul>
+<li><font color='pink'>str.replace()</font> 函数第三参数取值范围如下</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205271820797.png" alt=""></p>
+<ul>
+<li>字符串类型的格式化</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205272010594.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205272010436.png" alt=""></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 通过关键字（关键字&#x3D; 不需要空格隔开）
+print(&quot;&#123;name&#125;在&#123;option&#125;&quot;.format(name&#x3D;&quot;小明&quot;, option&#x3D;&quot;吃饭&quot;))  # 小明在吃饭
+# 通过位置
+print(&quot;&#123;&#125;在&#123;&#125;&quot;.format(&quot;小芳&quot;, &quot;跳舞&quot;))  # 小芳在跳舞
+print(&quot;&#123;0&#125;在&#123;1&#125;&quot;.format(&quot;小芳&quot;, &quot;跳舞&quot;))  # 小芳在跳舞
+print(&quot;&#123;1&#125;在&#123;0&#125;&quot;.format(&quot;小芳&quot;, &quot;跳舞&quot;))  # 跳舞在小芳
+# 居中
+# 20:字段长度（最左到最右之间的长度）
+print(&quot;&#123;:&#x3D;^20&#125;&quot;.format(&quot;123&quot;))  # &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;123&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+# 左对齐
+print(&quot;&#123;:&lt;20&#125;&quot;.format(&quot;123&quot;))
+# 右对齐
+print(&quot;&#123;:&gt;20&#125;&quot;.format(&quot;123&quot;))
+# 精度控制（保留2位小数并且四舍五入）
+print(&quot;&#123;:.2f&#125;&quot;.format(3.14859))  # 3.15
+# 进制转换 b o d x 分别表示二、八、十、十六进制
+print(&quot;&#123;:b&#125;&quot;.format(29))  # 11101
+print(&quot;&#123;:o&#125;&quot;.format(29))  # 35
+print(&quot;&#123;:d&#125;&quot;.format(29))  # 29
+print(&quot;&#123;:x&#125;&quot;.format(29))  # 1d</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205272055933.png" alt=""></p>
+<h3 id="附录1-字符串常用操作">附录1  字符串常用操作</h3>
+<ul>
+<li>判断类型</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205272219064.png" alt=""></p>
+<ul>
+<li>查找和替换</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205272219307.png" alt=""></p>
+<ul>
+<li>大小写转换</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205272219182.png" alt=""></p>
+<ul>
+<li>文本对齐</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205272219974.png" alt=""></p>
+<ul>
+<li>去除空白字符</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205272219877.png" alt=""></p>
+<ul>
+<li>拆分和连接</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205272219897.png" alt=""></p>
+<h2 id="数据类型之序列类型">数据类型之序列类型</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>定义</p>
+</div>
+<ul>
+<li>序列是具有<font color='orange'>先后</font>关系的一组元素</li>
+<li>序列是一维元素向量，<font color='orange'>元素类型可以不同</font></li>
+<li>元素间由<font color='orange'>序号</font>引导，通过<font color='orange'>下标访问</font>序列的特定元素</li>
+<li>Python语言中很多数据类型都是<font color='orange'>序列类型</font>，其中比较重要的是<font color='cornflowerblue'>字符串类型，元组类型和列表类型</font>。</li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>通用操作符与函数</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205272104143.png" alt=""></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">arr &#x3D; [&quot;python&quot;, &quot;C语言&quot;, &quot;1223&quot;]
+brr &#x3D; [&quot;MySQL&quot;, &quot;挂科&quot;]
+# 如果x是序列arr的元素返回True,否则返回false
+print(&quot;C语言&quot; in arr)  # True
+print(&quot;C语&quot; in arr)  # False
+# 如果x是序列arr的元素，返回False,否则返回True
+print(&quot;python&quot; not in arr)  # False
+print(&quot;sb&quot; not in arr)  # True
+# 连接两个序列arr和brr
+print(arr+brr)  # [&#39;python&#39;, &#39;C语言&#39;, &#39;1223&#39;, &#39;MySQL&#39;, &#39;挂科&#39;]
+# 将序列arr复制n次
+print(arr*2)  # [&#39;python&#39;, &#39;C语言&#39;, &#39;1223&#39;, &#39;python&#39;, &#39;C语言&#39;, &#39;1223&#39;]
+# 索引，返回arr中第i个元素
+print(arr[0])  # python
+# 切片，返回序列arr第i到第j个元素（不包括第j个元素）
+# 跟字符串操作一样
+print(arr[1:3])  # [&#39;C语言&#39;, &#39;1223&#39;]
+# 切片，返回序列arr第i到第j个元素（不包括第j个元素），以k为步长
+print(arr[0:3:2])  # [&#39;python&#39;, &#39;1223&#39;]
+print(arr[::-1])  # [&#39;1223&#39;, &#39;C语言&#39;, &#39;python&#39;]</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205272124151.png" alt=""></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">arr &#x3D; [&quot;python&quot;, &quot;C语言&quot;, &quot;A&quot;]
+brr &#x3D; [&quot;12&quot;, &quot;12&quot;, &quot;12&quot;, &quot;23&quot;]
+# 返回序列arr的长度，即元素个数
+print(len(arr))  # 3
+# 返回序列arrASCII码最小的元素，arr中元素需要能比较
+print(min(arr))  # A
+# 返回序列arrASCII最大元素
+print(max(arr))  # python
+# 返回序列arr从i到j第一次出现元素x的位置
+# 如果i到j都没有这个元素则报错
+print(arr.index(&quot;python&quot;))  # 0
+print(arr.index(&quot;A&quot;, 0, 3))  # 2
+# 返回序列arr中出现x的总次数
+print(brr.count(&quot;12&quot;))  # 3</code></pre>
+<h3 id="数据类型之列表类型">数据类型之列表类型</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>定义</p>
+</div>
+<ul>
+<li><code>List</code>（列表） 是 <code>Python</code> 中使用 <font color='orange'>最频繁</font> 的数据类型，在其他语言中通常叫做 <font color='cornflowerblue'>数组</font></li>
+<li>专门用于存储 <font color='orange'>一串 信息</font></li>
+<li>列表用 <code>[]</code> 定义，<font color='orange'>数据</font> 之间使用 <code>,</code> 分隔</li>
+<li>列表中<font color='orange'>各元素类型可以不同</font>，<font color='cornflowerblue'>无长度限制</font></li>
+<li>列表的索引从<font color='orange'>0</font>开始</li>
+</ul>
+<p><font color='red'>注意</font>：从列表中取值时，如果 <font color='orange'>超出索引范围</font>，程序会<font color='cornflowerblue'>报错</font></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205272355249.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205281158578.jpg" alt=""></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 创建列表
+list1 &#x3D; [1, 2, 3, 4, 5]
+list2 &#x3D; [&quot;C语言&quot;, &quot;C++&quot;]
+
+# 在指定位置插入数据
+list1.insert(0, 0)
+print(list1)  # [0, 1, 2, 3, 4, 5]
+# 在末尾追加数据
+list1.append(6)
+print(list1)  # [0, 1, 2, 3, 4, 5, 6]
+# 将list2的数据追加到list1
+list1.extend(list2)
+print(list1)  # [0, 1, 2, 3, 4, 5, 6, &#39;C语言&#39;, &#39;C++&#39;]
+# 修改指定索引数据
+list1[0] &#x3D; -1
+print(list1)  # [-1, 1, 2, 3, 4, 5, 6, &#39;C语言&#39;, &#39;C++&#39;]
+# 删除指定索引的数据
+del list1[8]
+print(list1)  # [-1, 1, 2, 3, 4, 5, 6, &#39;C语言&#39;]
+# 删除第一个出现的指定数据
+list1.remove(1)
+print(list1)  # [-1, 2, 3, 4, 5, 6, &#39;C语言&#39;]
+# 删除末尾数据
+list1.pop()
+print(list1)  # [-1, 2, 3, 4, 5, 6]
+# 删除指定索引数据
+list1.pop(5)
+print(list1)  # [-1, 2, 3, 4, 5]
+# 列表长度
+print(len(list1))  # 5
+# 数据在列表中出现的次数
+print(list1.count(2))  # 1
+# 升序排序，没参数默认升序
+list1.sort()
+print(list1)  # [-1, 2, 3, 4, 5]
+# 降序
+list1.sort(reverse&#x3D;True)
+print(list1)  # [5, 4, 3, 2, -1]
+# 逆序
+list1.reverse()
+print(list1)  # [-1, 2, 3, 4, 5]
+# 复制列表，生成新的列表
+list3 &#x3D; list1.copy()
+print(list3)  # [-1, 2, 3, 4, 5]
+# 清空列表
+list1.clear()
+print(list1)  # []</code></pre>
+<ul>
+<li>迭代遍历</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">list1 &#x3D; [1, 2, 3, 4, 5]
+# 遍历
+for name in list1:
+    print(name)</code></pre>
+<h3 id="数据类型之元组类型">数据类型之元组类型</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>定义</p>
+</div>
+<ul>
+<li>元组是<font color='orange'>序列类型的一种扩展</font></li>
+<li><font color='orange'>一旦创建就不能被修改</font></li>
+<li>使用小括号 <font color='cornflowerblue'>()</font> 或 <font color='cornflowerblue'>tuple()</font> 创建，元素间用<font color='orange'>逗号分隔</font>（字符串元素用单引号或者双引号括起来，数值则不需要）</li>
+<li><font color='orange'>可以使用或不使用小括号</font></li>
+<li>索引也是从<font color='orange'>0</font>开始</li>
+<li>元组是不可变类型，它的<font color='orange'>指针数组无需变动</font>，故内存分配乃一次性完成。另外，系统会缓存复用一定长度的元组内存。创建时，按长度提取复用，无需额外内存分配(包括指针数组)。从这点上看，<font color='orange'>元组的性能要好于列表</font>。</li>
+<li><font color='cornflowerblue'>元组</font>可当做<font color='cornflowerblue'>列表</font>的<font color='orange'>只读</font>版本使用</li>
+<li>元组相同序号总是返回<font color='orange'>同一对象</font>，<font color='orange'>故可为序号取个别名</font></li>
+</ul>
+<p><font color='red'>注意</font>：元组中 <font color='cornflowerblue'>只包含一个元素</font> 时，需要 <font color='orange'>在元素后面添加逗号</font></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tuple1 &#x3D; (12,)</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205272229746.png" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>常用操作</p>
+</div>
+<p>元组继承了序列类型的全部<font color='orange'>通用操作</font>，但是由于创建后不能修改，因此<font color='orange'>没有特殊操作</font></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 创建空元组
+tuple1 &#x3D; ()
+# 可以不使用小括号
+tuple2 &#x3D; 12, 13, 14, 15
+tuple3 &#x3D; (&quot;abc&quot;, &quot;def&quot;)
+print(tuple2)  # (12, 13, 14, 15)
+# 访问元组
+print(tuple2[2])  # 14
+# 倒序
+print(tuple2[::-1])  # (15, 14, 13, 12)
+# 元组中的元素值是不允许修改的，但我们可以对元组进行连接组合
+tuple4 &#x3D; tuple2 + tuple3
+print(tuple4)  # (12, 13, 14, 15, &#39;abc&#39;, &#39;def&#39;)
+print(type(tuple4))  # &lt;class &#39;tuple&#39;&gt;
+# 元组中的元素值是不允许删除的，但我们可以使用del语句来删除整个元组
+del tuple4
+print(&quot;删除后：\n&quot;)
+print(tuple4)  # 报错：未定义&#39;tuple4&#39;
+# 计算元素个数
+print(len(tuple2))  # 4
+# 复制
+print(tuple2*2)  # (12, 13, 14, 15, 12, 13, 14, 15)
+# 元素是否存在
+print(12 in tuple2)  # True
+# 遍历
+for my_tuple in tuple2:
+    print(my_tuple)  # 12 13 14 15</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>应用场景</p>
+</div>
+<ul>
+<li>尽管可以使用 <code>for in</code> 遍历 元组</li>
+<li>在开发中应用场景是：<br>
+①<font color='cornflowerblue'> 函数的 参数 和 返回值</font>，一个函数可以接收 <font color='orange'>任意多个参数</font>，或者 <font color='orange'>一次返回多个数据</font><br>
+② <font color='cornflowerblue'>格式字符串</font>，格式化字符串后面的 <code>()</code> 本质上就是一个元组<br>
+③ <font color='cornflowerblue'>让列表不可以被修改</font>，以保护数据安全</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">info &#x3D; (&quot;小明&quot;, 18)
+print(&quot;%s的年龄是%d&quot; % info)  # 小明的年龄是18</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>元组和列表之间的转换</p>
+</div>
+<ul>
+<li>使用 <code>list</code> 函数可以把元组转换成列表</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">list(元组)</code></pre>
+<ul>
+<li>使用 <code>tuple</code> 函数可以把列表转换成元组</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tuple(列表)</code></pre>
+<h3 id="数据类型之字典类型">数据类型之字典类型</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>定义</p>
+</div>
+<ul>
+<li><code>dictionary</code>（字典） 是 除列表以外 <code>Python</code> 之中 最灵活 的数据类型（类似C语言的结构体）</li>
+<li>字典同样可以用来 <font color='orange'>存储多个数据</font>（通常用于存储 <font color='cornflowerblue'>描述一个</font> <code>物体</code> 的相关信息）</li>
+<li>和列表的区别<br>
+列表 是 <font color='orange'>有序</font> 的对象集合<br>
+字典 是 <font color='orange'>无序 </font>的对象集合</li>
+<li>字典用 <code>&#123;&#125;</code> 定义<br>
+字典使用<font color='orange'> 键值对 </font>存储数据，键值对之间使用 <code>,</code> 分隔</li>
+<li>键 <code>key</code> 是<font color='orange'>索引</font>    值 <code>value</code> 是<font color='orange'>数据</font></li>
+<li>键 和 值 之间使用 <code>:</code> 分隔       <font color='orange'>键必须是唯一的</font><br>
+<font color='orange'>值</font> 可以取任何数据类型，但 <font color='orange'>键</font> 只能使用 <font color='cornflowerblue'>字符串、数字或 元组</font>（列表不行）</li>
+<li>字典是包含<font color='orange'>0个或多个键值对</font>的集合，<font color='orange'>没有长度限制</font>，可以根据键索引值的内容</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205281501342.jpg" alt=""></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 定义一个字典
+# 使用字典来存储用户提供的数据或在编写能自动生成大量键-值对的代码时，都通常需要先定义一个空字典
+dict1 &#x3D; &#123;&quot;name&quot;: &quot;小红&quot;, &quot;年龄&quot;: 19, &quot;电话&quot;: 123456&#125;
+print(type(dict1))  # &lt;class &#39;dict&#39;&gt;
+# 返回所有key(键)
+# 返回所有value(值)
+print(dict1.keys())  # dict_keys([&#39;name&#39;, &#39;年龄&#39;, &#39;电话&#39;])
+print(dict1.values())  # dict_values([&#39;小红&#39;, 19, 123456])
+# 返回(key, value)元组列表
+print(dict1.items())  # dict_items([(&#39;name&#39;, &#39;小红&#39;), (&#39;年龄&#39;, 19), (&#39;电话&#39;, 123456)])
+# 取值，key不存在会报错（注意要加引号）
+print(dict1[&quot;name&quot;])  # 小红
+# 取值，key不存在不会报错，会返回default值：None
+print(dict1.get(&quot;na&quot;))  # None
+# 如果key存在，修改数据，不存在则新建键值对
+dict1[&quot;生日&quot;] &#x3D; 20020829
+print(dict1)  # &#123;&#39;name&#39;: &#39;小红&#39;, &#39;年龄&#39;: 19, &#39;电话&#39;: 123456, &#39;生日&#39;: 20020829&#125;
+dict1[&quot;name&quot;] &#x3D; &quot;李四&quot;
+print(dict1[&quot;name&quot;])  # 李四
+# 如果key存在，不会修改数据，不存在则新建
+dict1.setdefault(&quot;name&quot;, &quot;小虎&quot;)
+print(dict1)  # &#123;&#39;name&#39;: &#39;李四&#39;, &#39;年龄&#39;: 19, &#39;电话&#39;: 123456, &#39;生日&#39;: 20020829&#125;
+dict1.setdefault(&quot;height&quot;, &quot;1.75&quot;)
+print(dict1)  # &#123;&#39;name&#39;: &#39;李四&#39;, &#39;年龄&#39;: 19, &#39;电话&#39;: 123456, &#39;生日&#39;: 20020829, &#39;height&#39;: &#39;1.75&#39;&#125;
+# 将dict2的数据合并到dict1中
+dict2 &#x3D; &#123;&quot;学号&quot;: 2021&#125;
+dict3 &#x3D; dict1.update(dict2)  # 不能赋值，这是错误的
+print(dict1)  # &#123;&#39;name&#39;: &#39;李四&#39;, &#39;年龄&#39;: 19, &#39;电话&#39;: 123456, &#39;生日&#39;: 20020829, &#39;height&#39;: &#39;1.75&#39;, &#39;学号&#39;: 2021&#125;
+# 删除指定键值对，key不存在会报错（两种方法）
+dict1.pop(&#39;电话&#39;)
+print(dict1)  # &#123;&#39;name&#39;: &#39;李四&#39;, &#39;年龄&#39;: 19, &#39;生日&#39;: 20020829, &#39;height&#39;: &#39;1.75&#39;, &#39;学号&#39;: 2021&#125;
+del dict1[&quot;生日&quot;]
+print(dict1)  # &#123;&#39;name&#39;: &#39;李四&#39;, &#39;年龄&#39;: 19, &#39;height&#39;: &#39;1.75&#39;, &#39;学号&#39;: 2021&#125;
+# 随机删除一个键值对（一般删除末尾对）
+dict1.popitem()
+print(dict1)  # &#123;&#39;name&#39;: &#39;李四&#39;, &#39;年龄&#39;: 19, &#39;height&#39;: &#39;1.75&#39;&#125;
+# 返回字典的键值对数
+print(len(dict1))  # 3
+# 判断键是否在字典dict1中，如果在返回True，否则False
+print(&quot;name&quot; in dict1)  # True
+# 清空字典
+dict1.clear()
+print(dict1)  # &#123;&#125;</code></pre>
+<ul>
+<li>遍历字典（可遍历字典的所有<font color='orange'>键值对、键或值</font>）</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 遍历所有键值对
+dict1 &#x3D; &#123;&quot;name&quot;: &quot;小红&quot;, &quot;年龄&quot;: 19, &quot;电话&quot;: 123456&#125;
+for name in dict1:
+    print(&quot;%s: %s&quot; % (name, dict1[name]))</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205281525088.png" alt=""></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 需要字典的值都是字符串类型，否则报错
+dict1 &#x3D; &#123;&quot;name&quot;: &quot;小红&quot;, &quot;年龄&quot;: &quot;19&quot;, &quot;电话&quot;: &quot;123456&quot;&#125;
+for key, value in dict1.items():
+    print(&quot;\nkey:&quot; + key)
+    print(&quot;value:&quot; + value)</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205281542936.png" alt=""></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 输出所有的键
+dict1 &#x3D; &#123;&quot;name&quot;: &quot;小红&quot;, &quot;年龄&quot;: &quot;19&quot;, &quot;电话&quot;: &quot;123456&quot;&#125;
+for key in dict1.keys():
+    print(key)
+# 或者
+dict1 &#x3D; &#123;&quot;name&quot;: &quot;小红&quot;, &quot;年龄&quot;: &quot;19&quot;, &quot;电话&quot;: &quot;123456&quot;&#125;
+for name in dict1:
+    print(name)</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205281542750.png" alt=""></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 输出所有的值
+dict1 &#x3D; &#123;&quot;name&quot;: &quot;小红&quot;, &quot;年龄&quot;: &quot;19&quot;, &quot;电话&quot;: &quot;123456&quot;&#125;
+for value in dict1.values():
+    print(value)</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205281542514.png" alt=""></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># sorted默认时是对键进行排序
+dict1 &#x3D; &#123;&quot;A&quot;: &quot;2&quot;, &quot;C&quot;: &quot;5&quot;, &quot;B&quot;: &quot;1&quot;&#125;
+# 键排序
+for name in sorted(dict1):
+    print(name)
+# 值排序（降序）
+for name in sorted(dict1.values(), reverse&#x3D;True):
+    print(name)</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205281609843.png" alt=""></p>
+<ul>
+<li>为<font color='orange'>剔除重复项</font>，可以使用集合<code>（set）</code>。<font color='orange'>集合类似于列表</font>，但对<font color='cornflowerblue'>每个元素都必须是独一无二的</font>。通过对包含重复元素的列表调用 <code>set()</code>，可以让Python<font color='orange'>找出列表中独一无二的元素，并使用这些元素来创建集合</font></li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">dict1 &#x3D; &#123;&quot;A&quot;: &quot;2&quot;, &quot;C&quot;: &quot;2&quot;, &quot;B&quot;: &quot;1&quot;, &quot;F&quot;: &quot;2&quot;&#125;
+# 值去重
+for name in set(dict1.values()):
+    print(name)</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205281615721.png" alt=""></p>
+<h3 id="数据类型之集合类型">数据类型之集合类型</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>定义</p>
+</div>
+<ul>
+<li>集合是多个元素的<font color='orange'>无序</font>组合</li>
+<li>集合元素之间<font color='orange'>无序</font>，<font color='orange'>每个元素唯一，不存在相同元素</font>（<font color='red'>应用于数据去重，即集合类型所有元素无重复</font>）</li>
+<li>集合元素<font color='orange'>不可更改</font>，不能是可变数据类型</li>
+<li>集合用大括号 <code> &#123;&#125;</code> 表示，元素间用 <code>,</code> 分隔</li>
+<li>建立集合类型用 <code>&#123;&#125;</code> 或 <code>set()</code></li>
+<li>建立<font color='orange'>空集合</font>类型，必须使用 <code>set()</code></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205281627149.png" alt=""></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">gather &#x3D; &#123;123, &quot;123&quot;, &quot;A&quot;, &quot;BB&quot;&#125;
+gather2 &#x3D; &#123;123, &quot;金&quot;, &quot;木&quot;&#125;
+# 返回类型
+print(type(gather))  # &lt;class &#39;set&#39;&gt;
+# S|T，返回所有元素的新集合
+gather3 &#x3D; gather | gather2
+print(gather3)  # &#123;&#39;BB&#39;, &#39;金&#39;, &#39;木&#39;, &#39;A&#39;, 123, &#39;123&#39;&#125;
+# S&amp;T，返回两个集合相同的元素
+gather3 &#x3D; gather &amp; gather2
+print(gather3)  # &#123;123&#125;
+# S-T，返回包括在集合S但不在T中的元素
+gather3 &#x3D; gather - gather2
+print(gather3)  # &#123;&#39;A&#39;, &#39;123&#39;, &#39;BB&#39;&#125;
+# S^T，返回包括集合S和T中的非相同的元素
+gather3 &#x3D; gather ^ gather2
+print(gather3)  # &#123;&#39;A&#39;, &#39;123&#39;, &#39;BB&#39;, &#39;金&#39;, &#39;木&#39;&#125;
+# S&lt;&#x3D;T或S&lt;T，返回True&#x2F;False，判断两个集合的子集关系
+# 如果集合S的元素都属于集合T的元素，那说明T包含S，T&lt;&#x3D;S（两个集合元素一样需要&lt;&#x3D;&#x2F;&#x3D;&#x3D;）
+gather4 &#x3D; &#123;123&#125;
+gather3 &#x3D; gather &lt;&#x3D; gather2
+print(gather3)  # False
+gather3 &#x3D; gather4 &lt;&#x3D; gather  # 等同于 gather &gt;&#x3D; gather4
+print(gather3)  # True
+# S|&#x3D;T，并，更新集合S，跟上面那个一样（这个不会生成新集合）
+gather |&#x3D; gather2
+print(gather)  # &#123;&#39;木&#39;, &#39;BB&#39;, &#39;A&#39;, 123, &#39;金&#39;, &#39;123&#39;&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205281629093.png" alt=""></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">gather &#x3D; &#123;123, &quot;123&quot;, &quot;A&quot;, &quot;BB&quot;&#125;
+# 如果x不在集合S中，将x增加到S
+gather.add(666)
+print(gather)  # &#123;&#39;A&#39;, &#39;123&#39;, 666, 123, &#39;BB&#39;&#125;
+# discard:移除S中元素x，如果x不在集合S中，不报错
+# remove:移除S中元素x，如果x不在集合S中，产生KeyError异常
+gather.discard(123)
+print(gather)  # &#123;&#39;A&#39;, &#39;BB&#39;, &#39;123&#39;, 666&#125;
+# gather.remove(0)
+# print(gather)  # KeyError: 0
+# 随机删除S的一个元素，更新S，若S为空，则产生KeyError异常
+gather.pop()
+print(gather)  # &#123;&#39;BB&#39;, 666, &#39;123&#39;&#125;
+# 返回集合S的一个副本
+gather2 &#x3D; gather.copy()
+print(gather2)  # &#123;&#39;BB&#39;, 666, &#39;123&#39;&#125;
+print(len(gather))  # 3
+# 判断S中元素x，x在集合S中，返回True，否则返回False
+print(123 in gather)  # False
+# 判断S中元素x，x不在集合S中，返回True，否则返回False
+print(123 not in gather)  # True
+# 将其他类型变量x转变为集合类型（去重）
+tuple1 &#x3D; (1, 2, 1, 3, 6)
+print(set(tuple1))  # &#123;1, 2, 3, 6&#125;</code></pre>
+<h2 id="控制语句">控制语句</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>分支结构与选择结构</p>
+</div>
+<ul>
+<li><code>Python</code> 程序语言指定<font color='orange'>任何非0和非空（null）值</font>为 <code>true</code>，<font color='orange'>0 或者 null</font>为 <code>false</code></li>
+<li><code>Python</code> 是⼀种靠 <code>缩进</code> 来判断逻辑的语言！所以缩进尤为重要，<font color='red'>如果缺失缩进程序运行会报错！</font></li>
+<li><code>Python</code> 采用 <code>代码缩进</code> 和 <code>冒号（ : ）</code> 来<font color='orange'>区分代码块之间的层次</font></li>
+<li>对于<font color='orange'>类定义、函数定义、流程控制语句、异常处理语句等</font>，<font color='cornflowerblue'>行尾的冒号</font>和<font color='cornflowerblue'>下一行的缩进</font>，<font color='orange'>表示下一个代码块的开始</font>，<font color='cornflowerblue'>而缩进的结束</font>则<font color='orange'>表示此代码块的结束</font></li>
+<li>通常情况下都是采用 <font color='red'>4 个空格长度作为一个缩进量</font>（默认情况下，一个 Tab 键就表示 4 个空格）</li>
+<li><code>Python</code> 要求<font color='orange'>属于同一作用域中的各行代码</font>，<font color='red'>它们的缩进量必须一致</font>，但具体缩进量为多少，并不做硬性规定</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 注意缩进
+if 2 &gt; 1:
+    print(&quot;true&quot;)
+    print(&quot;True&quot;)
+# 运行结果：true True
+
+a &#x3D; 2
+if a &#x3D;&#x3D; 0:  # 注意不能直接2&#x3D;&#x3D;0
+    print(&quot;你好&quot;)
+else:
+    print(&quot;不好&quot;)
+# 运行结果：不好
+
+# 紧凑形式
+# &lt;表达式1&gt; if &lt;条件&gt; else &lt;表达式2&gt;
+# 条件成立则输出表达式1，不成立则输出表达式2
+guess &#x3D; eval(input(&quot;请输入数字：&quot;))
+print(&quot;你猜&#123;&#125;了&quot;.format(&quot;对&quot; if guess &#x3D;&#x3D; 99 else &quot;错&quot;))  # 99  你猜对了
+</code></pre>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">a &#x3D; 1
+b &#x3D; 2
+# and:与 or:或 not:非
+if (a and b) &gt; 0:
+    print(&quot;大于0&quot;)
+else:
+    print(&quot;小于0&quot;)
+# 输出结果：大于0</code></pre>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">a &#x3D; 1
+b &#x3D; 2
+# 从上到下运行
+if (a and b) &gt; 0:
+    print(&quot;第一&quot;)
+elif a &#x3D;&#x3D; 1:
+    print(&quot;第二&quot;)
+elif b &#x3D;&#x3D; 2:
+    print(&quot;第三&quot;)
+else:
+    print(&quot;第四&quot;)
+# 输出结果：第一</code></pre>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 嵌套
+a &#x3D; 1
+b &#x3D; 2
+if (a and b) &gt; 0:
+    if a &#x3D;&#x3D; 1:
+        print(&quot;666&quot;)
+    else:
+        print(&quot;999&quot;)
+else:
+    print(&quot;123&quot;)
+# 输出结果：666</code></pre>
+<p><font color='red'>注意</font>：<code>elif</code> 和 <code>else</code> 都必须和 <code>if</code> 联合使用，不能单独使用，虽然该语句的备选动作较多，但是<font color='orange'>有且只有一组动作被执行</font></p>
+<ul>
+<li>pass语句</li>
+</ul>
+<p>​       <code>Python</code> 提供了一个关键字 <font color='red'>pass</font>,<font color='orange'>类似于空语句</font>，可以用在类和函数的定义中或者选择结构中。当暂时没有确定如何实现功能，或者为以后的软件升级预留空间，都<font color='cornflowerblue'>可以使用该关键字来“占位”</font>。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">a &#x3D; 1
+b &#x3D; 2
+if (a and b) &gt; 0:
+    pass
+else:
+    pass
+# 输出结果：无</code></pre>
+<ul>
+<li>随机数的处理</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 导入模块
+import random
+num1 &#x3D; random.randint(1, 10)  # 生成随机数n：1&lt;&#x3D;n&lt;&#x3D;10
+num2 &#x3D; random.randint(3, 3)  # 结果永远是3
+num3 &#x3D; random.randint(10, 3)  # 错误，下限必须小于上限</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>循环结构</p>
+</div>
+<ul>
+<li><font color='red'>while 循环</font></li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">a &#x3D; 1
+while a &lt; 20:
+    print(a)
+    a +&#x3D; 5
+# 输出结果：1 6 11 16</code></pre>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># while … else 在循环条件为 false 时执行 else 语句块
+# 循环正常执行完才会执行else，break导致退出的不会执行
+a &#x3D; 1
+while a &lt; 4:
+    print(a)
+    a +&#x3D; 1
+else:
+    print(666)
+# 输出结果：1 2 3 666
+
+# 如果你的 while 循环体中只有一条语句，你可以将该语句与while写在同一行中
+while 1: print(6)</code></pre>
+<ul>
+<li><font color='red'>for循环</font></li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 从遍历结构中逐一提取元素，放在循环变量中
+# 每次循环，所获得元素放入循环变量，并执行一次语句块
+for&lt;循环变量&gt; in &lt;遍历结构&gt;：
+    &lt;语句块&gt;</code></pre>
+<ul>
+<li><font color='pink'>range(start, stop[, step])</font> 函数可创建一个对象（Python3），<font color='gree'>参数1</font>：计数开始处，默认 <code>0</code>；<font color='gree'>参数2</font>：结束处，不包括参数2本身；<font color='gree'>参数3</font>：步长，默认 <code>1</code></li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">str1 &#x3D; &quot;123456&quot;
+for i in range(len(str1)):
+    print(str1[i])  # 1 2 3 4 5 6
+# 0-3,步长为2
+# for ... else 跟 while ... else 一样
+num &#x3D; 0
+for i in range(0, 4, 2):
+    print(num+i)  
+else:
+    print(&quot;正常结束&quot;)
+# 输出结果：# 0 2 正常结束
+
+# 列表循环遍历
+for i in [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;]:
+    print(i)  # 1 2 3
+    
+# 文件遍历循环
+# fi是一个文件标识符，遍历每行产生循环
+for line in fi
+	&lt;语句块&gt;</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>循环控制保留字</p>
+</div>
+<ul>
+<li><font color='red'>break 语句</font></li>
+</ul>
+<p>break用来跳出<font color='orange'>最内层for或while循环</font>，脱离该循环后程序从循环代码后<font color='orange'>继续执行</font></p>
+<p><font color='red'>注意</font>：若有双重循环时，<font color='orange'>仅退出当前层次循环</font></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">s1 &#x3D; &quot;abcde&quot;
+for name in s1:
+    if name &#x3D;&#x3D; &quot;c&quot;:  # 遇到c直接退出循环
+        break
+    print(name)  # a b </code></pre>
+<ul>
+<li><font color='red'>continue语句</font></li>
+</ul>
+<p>用来<font color='orange'>结束当前当次循环</font>，即跳出循环体中下面尚未执行的语句，<font color='orange'>但不跳出当前循环</font></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">s1 &#x3D; &quot;abcde&quot;
+for name in s1:
+    if name &#x3D;&#x3D; &quot;c&quot;:  # 跳过c
+        continue
+    print(name)  # a b d e</code></pre>
+<p><font color='red'>注意</font>：<code>break</code> 和 <code>continue</code> 只针对 <font color='orange'>当前所在循环</font> 有效</p>
+<h2 id="try-except语句">try-except语句</h2>
+<ul>
+<li>这个 <code>try-except</code> 语句是 <code>异常捕获</code> 语句</li>
+<li><font color='pink'>eval()</font> 函数用来执行一个字符串的表达式，<font color='orange'>并返回表达式的值</font></li>
+<li>还可以把<font color='orange'>字符串</font>转化为<font color='orange'>list、tuple、dict</font></li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">s1 &#x3D; &quot;[1, 2, 3, 4, 5]&quot;
+print(type(s1))  # &lt;class &#39;str&#39;&gt;
+s2 &#x3D; eval(s1)
+print(type(s2))  # &lt;class &#39;list&#39;&gt;
+# 主要看&quot; &quot;里面是什么类型就转换成什么类型
+# []-&gt;列表   &#123;&#125;-&gt;字典  ()-&gt;元组
+
+# 还可以返回表达式的值
+a &#x3D; 4
+print(eval(&quot;a+1&quot;))  # 5
+
+x&#x3D;10
+b&#x3D;20
+c&#x3D;30
+g&#x3D;&#123;&#39;a&#39;:6,&#39;b&#39;:8&#125;  # a&#x3D;6 b&#x3D;8
+t&#x3D;&#123;&#39;b&#39;:100,&#39;c&#39;:10&#125;  # b&#x3D;100 c&#x3D;10
+eval(&#39;a+b+c&#39;,g,t)  # 优先使用局部变量所以上面的x,b,c不会用到，然后按顺序执行，把g,t位置调换结果也会不同 
+ 
+# 返回值为116</code></pre>
+<ul>
+<li>异常处理</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 语法
+try:  # # 写一个 try 把可能出错的代码放进去
+    &lt;语句块1&gt;
+except &lt;异常类型&gt;:  # 写一个except
+    &lt;语句块2&gt;		# 书写捕获异常的处理方案</code></pre>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">try:
+    print(&quot;-----test--1----&quot;)
+    open(&quot;123.txt&quot;, &quot;r&quot;)
+    print(&quot;-----test--2--- &quot;)
+except IOError as e:
+    print(&quot;捕获异常&quot;, e)
+# 捕获到异常，没有这个123.txt文件
+# 运行结果：
+# -----test--1----
+# 捕获异常 [Errno 2] No such file or directory: &#39;123.txt&#39;</code></pre>
+<p><font color='gree'>① </font>此程序捕获到错误，因为用 <code>except</code> 捕获到了 <code>IOError</code> 异常，并添加了处理的方法<br>
+<font color='gree'>②</font> <code>except</code> 添加错误基类 <code>IOError</code>  <code>try</code>语句出错则执行 <code>except</code> 下<font color='orange'>print</font>语句，那么就会输出错误信息<br>
+<font color='gree'>③</font> 从执行结果可以看到：<font color='orange'>捕获到的错误保存到变量</font>，控制台可以打印出具体的错误信息。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">try:
+    print(num)
+except IOError:
+    print(&quot;捕获异常&quot;)</code></pre>
+<p>运行结果：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205291116784.png" alt=""></p>
+<p><font color='red'>注意</font>：<code>except</code> 捕获的错误类型是 <code>IOError</code> ，而此时程序产生的异常为 <code>NameError</code> ，所以 <code>except</code> <font color='orange'>没有生效</font></p>
+<ul>
+<li>当捕获<font color='orange'>多个异常时</font>，可以把要捕获的异常的名字，放到 <code>except</code> 后，并<font color='orange'>使用元组的方式仅进行存储</font></li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">try:
+    print(&#39;-----test--1---&#39;)
+    open(&#39;123.tx&#39;,&#39;r&#39;) # 如果123.txt文件不存在，那么会产生 IOError 异常
+    print(&#39;-----test--2---&#39;)
+    print(num)# 如果num变量没有定义，那么会产生 NameError 异常
+
+except (IOError,NameError) as e:
+    # 如果想通过一次except捕获到多个异常可以用一个元组的方式
+    print(&#39;捕获到异常信息:&#39;,e)
+</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205291121024.png" alt=""></p>
+<ul>
+<li>
+<p>此处的 <code>else</code> 语句与 <code>for</code> 循环和 <code>while</code> 循环中 <code>else</code> 一样，当 <code>try</code> 中的<font color='orange'>语句块1</font>正常执行结束且没有发生异常时，<code>else</code> 中的<font color='orange'>语句块3</font>执行。</p>
+<p>2、<code>finall</code> 语句块则不一样，无论 <code>try</code> 中的<font color='orange'>语句块1</font>是否发生异常，<font color='orange'>语句块4</font>都会执行，<font color='cornflowerblue'>因此将程序执行语句块1的一些收尾工作放在这里，例如：关闭、打开文件等。</font></p>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">try:
+    &lt;语句块1&gt;
+except&lt;异常类型1&gt;:
+    &lt;语句块2&gt;
+else:
+    &lt;语句块3&gt;
+finally：
+    &lt;语句块4&gt;</code></pre>
+<ul>
+<li>当你不知道错误基类时，就统一用 <code>Exception</code> （可以捕获所有错误）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205291125343.png" alt=""></p>
+<h2 id="函数的定义与使用">函数的定义与使用</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>函数的定义</p>
+</div>
+<ul>
+<li><code>def</code> 是英文 <code>define</code> 的缩写</li>
+<li>函数命名应该符合 <font color='orange'>标识符的命名规则</font></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205291131278.png" alt=""></p>
+<ul>
+<li>
+<p>函数调用：通过 <code>函数名()</code> 即可对函数调用，定义完成后，<font color='orange'>若不自动调用函数，函数不会自动执行</font></p>
+</li>
+<li>
+<p>在函数名后面的小括号内部填写<font color='orange'> 参数</font>，参数之间用 <code>,</code> 分隔</p>
+</li>
+<li>
+<p><font color='red'>形参和实参</font>：</p>
+<p><font color='gree'>①</font> 形参：定义函数时，小括号中的参数，用于接收参数，在<font color='orange'>函数内部</font> 作为<font color='orange'>变量使用</font></p>
+<p><font color='gree'>② </font>实参：调用 函数时，小括号中的参数，将数据传递到 函数内部</p>
+</li>
+<li>
+<p><code>return</code> 表示<font color='orange'>返回</font>，后续的代码都不会被执行</p>
+</li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>lambda 函数</p>
+</div>
+<p>​     <code>lambda</code>  表达式可以用来声明匿名函数，又称 <code>lambda函数</code> ，匿名函数不是真的没有名字，而是<font color='orange'>将函数名作为函数结果返回</font></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">&lt;函数名&gt; &#x3D; lambda &lt;参数列表&gt;: &lt;表达式&gt; 
+
+# 等价于下面形式
+def &lt;函数名&gt;(&lt;参数列表&gt;):
+    return &lt;表达式&gt;</code></pre>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 将lambda 函数赋给一个变量
+num &#x3D; lambda x, y: x+y
+print(type(num))  # &lt;class &#39;function&#39;&gt;
+print(num(1, 2))  # 3
+# 警告：PEP 8:E731 do not assign a lambda expression,use a def
+# PEP8规范并不推荐将lambda表达式赋值给一个变量，再通过变量调用函数这种方式。
+# 这种方式不能体现lambda表达式的特色，基本只是复制def的功能，
+# 同时这个变量名其实也不是lambda表达式真正的函数名，还显得比def方式更容易混淆</code></pre>
+<ul>
+<li>写完函数和类之后要空出<font color='orange'>两个空行</font>（方便区分）</li>
+<li>如果定义的函数没有返回值，<code>Python</code> 解释器就会（强行地）<font color='orange'>默认给我们注入一段返回逻辑</font>！（None）</li>
+<li>return语句同时可以将<font color='orange'>0个、1个或多个函数运算完的结果</font>返回给函数被调用处的变量，<font color='cornflowerblue'>返回多个值时以元组类型保存</font></li>
+<li>如果一个函数返回的是元组，<font color='orange'>括号可以省略</font></li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 函数可以没参数，但是括号必须保留
+def fact():
+    print(&quot;这是个函数&quot;)
+
+
+def fact2(x, y):
+    return x+y
+
+
+print(fact())  # 这是个函数  None
+print(fact2(2, 4))  # 6</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>参数</p>
+</div>
+<ul>
+<li>定义函数时，给某个参数指定一个默认值，叫做 <code>缺省</code></li>
+<li>调用函数时，如果没有传入参数则默认使用 <code>默认参数</code></li>
+</ul>
+<p><font color='red'>注意</font>：必须保证带有默认值的缺省参数在<font color='orange'>参数列表末尾</font>，在调用函数时，<font color='orange'>如果有多个缺省参数，需要指定参数名</font>，这样解释器才能够知道参数的对应关系！</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205291318842.png" alt=""></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">def fact2(x&#x3D;1, y&#x3D;2):
+    return x+y
+
+
+# 指定参数名，不指定默认是替换左边
+print(fact2(y&#x3D;9))  # 10</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>使用模块中的函数</p>
+</div>
+<ul>
+<li><font color='orange'>模块</font> 就好比是 <font color='orange'>工具包</font>，要想使用这个工具包中的工具，就需要 <font color='orange'>导入 import</font> 这个模块</li>
+<li>每一个以扩展名 <code>py</code> 结尾的 <code>Python</code> 源代码文件都是一个 <font color='orange'>模块</font></li>
+<li>在模块中定义的 <font color='orange'>全局变量 、 函数</font> 都是模块能够提供给外界直接使用的工具</li>
+<li>可以 <font color='orange'>在一个 Python 文件 中</font> 定义 <font color='cornflowerblue'>变量 或者 函数</font>，然后在 <font color='orange'>另外一个文件中</font> 使用 <code>import</code> 导入这个模块</li>
+<li>导入之后，就可以使用 <code>模块名.变量</code> / <code>模块名.函数</code> 的方式，使用这个模块中定义的变量或者函数</li>
+<li>模块名也是遵循标志符起名规则</li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>不可变和可变参数</p>
+</div>
+<ul>
+<li>在 <code>Python</code> 中，<code>string</code>（字符串）, <code>tuples</code>（元组）, 和<code>number</code>（数值）是<font color='cornflowerblue'>不可更改的对象</font>（形参），而 <code>list</code>（列表）, <code>dict</code>（字典）等则是<font color='cornflowerblue'>可以修改的对象</font>（实参）</li>
+<li><code>Python</code> 中一切都是 <code>对象</code> ，严格意义我们不能说 <code>值传递</code> 还是 <code>引用传递</code> ，我们应该说 <code>传不可变对象</code>和 <code>传可变对象</code></li>
+<li><font color='orange'>形参的数值对于外部的实参的数值（number类型，不可变）来说是没有任何关系的</font>，他们<font color='cornflowerblue'>虽然是同一个名字</font>，<font color='orange'>但是其指向对象是不一样的</font></li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">x &#x3D; 1
+y &#x3D; 2
+
+
+def fact2(x,  y):
+    x &#x3D; 3
+    y &#x3D; 6
+    return x+y
+
+
+fact2(x, y)
+print(x, y)  # 1 2
+# 修改实参
+def change(list1):
+    list1.append(6)
+    print(list1)  # [1, 2, 3, 6]
+
+
+my_list &#x3D; [1, 2, 3]
+change(my_list)
+print(my_list)  # [1, 2, 3, 6]
+</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>多值参数</p>
+</div>
+<ul>
+<li>
+<p>有时可能需要 <font color='orange'>一个函数</font> 能够处理的参数 <font color='orange'>个数</font> 是不确定的，这个时候，就可以使用 <font color='orange'>多值参数</font></p>
+</li>
+<li>
+<p>python中有<font color='orange'>两种</font>多值参数：</p>
+<p><font color='gree'>①</font> 参数名前增加 <font color='cornflowerblue'>一个</font> <code>*</code> 可以接收 <font color='orange'>元组</font> 如：<code>*args</code></p>
+<p><font color='gree'>②</font> 参数名前增加 <font color='cornflowerblue'>两个</font> <code>*</code> 可以接收 <font color='orange'>字典</font> 如：<code>**kwargs</code></p>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">def power(*tuple1):
+    result &#x3D; 0
+    for n in tuple1:
+        result +&#x3D; n
+    return result
+
+
+my_tuple &#x3D; (1, 3, 5, 7)
+print(power(*my_tuple))  # 16
+
+def power(name, age, **dict1):
+    print(&quot;name:&quot;, name, &quot;age:&quot;, age, &quot;other:&quot;, dict1 )
+
+
+my_dict &#x3D; &#123;&quot;A&quot;: 1, &quot;B&quot;: 2, &quot;C&quot;: 3&#125;
+power(&quot;Jack&quot;, 18, **my_dict)
+# 运行结果：name: Jack age: 18 other: &#123;&#39;A&#39;: 1, &#39;B&#39;: 2, &#39;C&#39;: 3&#125;
+# 注意：要两个*才代表字典，一个*是元组</code></pre>
+<ul>
+<li>可变参数既可以直接传入：<font color='pink'>func(1, 2, 3)</font>，又可以先组装 <code>list</code> 或 <code>tuple</code>，再通过 <code>*args</code> 传入：<font color='pink'>func(*(1, 2, 3))</font></li>
+<li>关键字参数既可以直接传入：<font color='pink'>func(a=1, b=2)</font>，又可以先组装<code>dict</code> ，再通过 <code>**kw</code> 传入：<font color='pink'>func(**{‘a’: 1, ‘b’: 2})</font></li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">def power(*dict1):
+    print(&quot;other:&quot;, dict1)
+
+
+power(*(1, 2, 3, 4))
+# 运行结果：other: (1, 2, 3, 4)</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>递归的关键特征</p>
+</div>
+<ul>
+<li>存在<font color='cornflowerblue'>一个或多个基例，基例不需要再次递归</font>，它是确定的表达式（是一个能直接算出值的表达式）。</li>
+<li>所有递归链要以<font color='orange'>一个或多个基例结尾</font></li>
+<li><code>Python</code> 的递归深度是有限制的，默认为<font color='orange'>1000</font>。当递归深度超过1000时，<font color='orange'>就会报错</font></li>
+</ul>
+<p>字符串倒序：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">def reverse(s):
+    if s &#x3D;&#x3D; &quot;&quot;:
+        return s
+    else:
+        return reverse(s[1:]) + s[0]
+
+
+arr &#x3D; input(&quot;请输入一个字符串：&quot;)
+print(reverse(arr))
+# 或者
+print(arr[::-1])</code></pre>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 斐波那契数列
+def f(n):
+    if n &#x3D;&#x3D; 1 or n &#x3D;&#x3D; 2 :
+        return 1
+    else:
+        return f(n-1) + f(n-2)
+n &#x3D; eval(input(&quot;请输入一个整数：&quot;))
+x &#x3D; f(n)
+print(x)</code></pre>
+<h2 id="一维数据与二维数据">一维数据与二维数据</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>一维数据</p>
+</div>
+<ul>
+<li>
+<p>一维数据的表示：<font color='orange'>列表类型</font>可以表达一维<font color='cornflowerblue'>有序</font>数据，<font color='orange'>集合类型</font>可以表达一维<font color='cornflowerblue'>无序</font>数据</p>
+</li>
+<li>
+<p><code>for</code> 循环可以遍历数据，进而对每个数据进行处理</p>
+</li>
+<li>
+<p>一维数据的存储</p>
+<p><font color='gree'>①</font> 存储方式一：空格分隔</p>
+<p>使用 <code>一个或多个空格</code> 分隔进行存储，<font color='cornflowerblue'>不换行</font></p>
+<p><font color='gree'>②</font> 存储方式二：逗号分隔</p>
+<p>使用 <code>英文半角逗号</code> 分隔数据进行存储，<font color='cornflowerblue'>不换行</font></p>
+<p><font color='gree'>③</font> 存储方式三：其他方式</p>
+<p>使用 <code>其他符号或符号组合</code> 分隔，<font color='cornflowerblue'>建议采用特殊符号</font></p>
+</li>
+<li>
+<p>一维数据的写入处理</p>
+<p><font color='gree'>①</font> 采用空格分隔方式将数据写入文件：</p>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">Is &#x3D; [&quot;李白&quot;, &quot;张飞&quot;, &quot;周瑜&quot;, &quot;孙尚香&quot;, &quot;孙悟空&quot;]
+tf &#x3D; open(&quot;E:\\测试.txt&quot;, &quot;w&quot;)
+tf.write(&quot; &quot;.join(Is))
+tf.close()</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205291612967.png" alt=""></p>
+<p>​		<font color='gree'>②</font> 采用特殊符号分隔方式将数据写入文件：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">Is &#x3D; [&quot;李白&quot;, &quot;张飞&quot;, &quot;周瑜&quot;, &quot;孙尚香&quot;, &quot;孙悟空&quot;]
+tf &#x3D; open(&quot;E:\\测试.txt&quot;, &quot;w&quot;)
+tf.write(&quot;@&quot;.join(Is))
+tf.close()</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205291614598.png" alt=""></p>
+<ul>
+<li>
+<p>一维数据的读入处理</p>
+<p><font color='gree'>①</font> 从空格分隔的文件中读入数据：</p>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tf &#x3D; open(&quot;E:\\测试.txt&quot;, &quot;r&quot;, encoding&#x3D;&quot;gb2312&quot;)
+txt &#x3D; tf.read()
+Is &#x3D; txt.split()  # 如果屏蔽此句则原样输出
+print(Is)
+tf.close()
+
+# 输出为列表形式
+# 运行结果：[&#39;李白&#39;, &#39;张飞&#39;, &#39;周瑜&#39;, &#39;孙尚香&#39;, &#39;孙悟空&#39;]</code></pre>
+<p><font color='red'>注意</font>：如果报错：<font color='grey'>UnicodeDecodeError: ‘utf-8’ codec can’t decode byte 0xc0 in position 0: invalid start byte</font> ； 则需要把 <code>utf-8</code> 改成 <code>gb2312</code></p>
+<p><font color='gree'>②</font> 从特殊符号分隔的文件中读入数据：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tf &#x3D; open(&quot;E:\\测试.txt&quot;, &quot;r&quot;, encoding&#x3D;&#39;gb2312&#39;)
+txt &#x3D; tf.read()
+Is &#x3D; txt.split(&quot;@&quot;)
+print(Is)
+tf.close()
+
+# 运行结果：[&#39;李白&#39;, &#39;张飞&#39;, &#39;周瑜&#39;, &#39;孙尚香&#39;, &#39;孙悟空&#39;]</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>二维数据</p>
+</div>
+<ul>
+<li><font color='cornflowerblue'>列表类型</font>可以表达二维数据(使用二维列表)</li>
+<li>使用 <code>两</code> 层 <code>for</code> 循环遍历每个元素</li>
+<li><code>CSV</code> 格式与二维数据存储</li>
+</ul>
+<p><font color='red'>注意</font>：每行<font color='orange'>一个一维数据</font>，采用 <code>,</code> 分隔，<font color='orange'>无空行</font></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205291631048.png" alt=""></p>
+<p><font color='red'>注意</font>：</p>
+<p>① 纯文本格式，通过单一编码表示字符。<br>
+② 以<font color='orange'>行</font>为单位，<font color='cornflowerblue'>开头不留空行，行之间没有空行</font><br>
+③ <font color='cornflowerblue'>每行表示一个一维数据，多行表示二维数据</font>。<br>
+④ 以<font color='orange'>逗号（英文，半角）</font>分割每列数据，<font color='orange'>列数据为空也要保留逗号</font><br>
+⑤ 对于表格数据，可以包含或不包含列名，<font color='orange'>包含时列名放置在文件第一行。</font></p>
+<p><font color='gree'>① </font>二维数据的写入处理(将数据写入CSV格式的文件)</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 方法1
+import csv  # 导入模块
+
+Is &#x3D; [[&quot;姓名&quot;, &quot;数学&quot;, &quot;英语&quot;], [&quot;小虎&quot;, &quot;56&quot;, &quot;87&quot;], [&quot;小兰&quot;, &quot;76&quot;, &quot;89&quot;]]
+# 表示写入csv文件,如果不加上参数 newline&#x3D;&#39;&#39; 表示以空格作为换行符不加会出现一行隔一行
+tf &#x3D; open(&quot;E:\\测试.csv&quot;, &quot;w&quot;, newline&#x3D;&quot;&quot;)
+writer &#x3D; csv.writer(tf)
+for name in Is:
+    writer.writerow(name)  # 将多列数据写入一行
+tf.close()</code></pre>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 方法2
+Is &#x3D; [[&quot;姓名&quot;, &quot;数学&quot;, &quot;英语&quot;], [&quot;小虎&quot;, &quot;56&quot;, &quot;87&quot;], [&quot;小兰&quot;, &quot;76&quot;, &quot;89&quot;]]
+tf &#x3D; open(&quot;E:\\测试.csv&quot;, &quot;w&quot;)
+for name in Is:
+    tf.write(&quot;,&quot;.join(name) + &quot;\n&quot;)  # 列表item以“,”为分隔符转换成字符串写入
+tf.close()</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205291642663.png" alt=""></p>
+<p><font color='gree'>②</font> 二维数据的读入处理(从CSV格式的文件中读入数据)</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 方法1
+tf &#x3D; open(&quot;E:\\测试.csv&quot;, &quot;r&quot;)
+Is &#x3D; []  # 建一个空白列表
+for name in tf:
+    name &#x3D; name.replace(&quot;\n&quot;, &quot; &quot;)  # 把换行换成空格
+    Is.append(name.split(&quot;,&quot;))
+print(Is)  # 此时Is为二维数据，所以应注意输出格式
+for name in Is:
+    name &#x3D; &quot;,&quot;.join(name)  # 列表以“,”为分隔符转换成字符串传输出
+    print(name)
+tf.close()</code></pre>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 方法2
+import csv
+
+tf &#x3D; open(&quot;E:\\测试.csv&quot;, &quot;r&quot;)
+reader &#x3D; csv.reader(tf)
+# 因为csv.reader()返回是一个迭代类型，需要通过循环或迭代器访问
+# 所以你需要自己开一个列表，循环这个reader将内容添加至新的列表中即可
+print(reader)  # &lt;_csv.reader object at 0x0000023F6D36F340&gt;
+show &#x3D; []
+for i in reader:
+    show.append(i)
+print(show)  # # 此时Is为二维数据，所以应注意输出格式
+for i in show:
+    print(i)</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205291738481.png" alt=""></p>
+<h2 id="文件操作-待更新">文件操作(待更新)</h2>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num56.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Pycharm-%E5%92%8C%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83"><span class="toc-number">1.</span> <span class="toc-text">安装 Pycharm 和配置环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Python%E8%A7%A3%E9%87%8A%E5%99%A8%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.</span> <span class="toc-text">Python解释器安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A5%BD%E7%94%A8%E6%8F%92%E4%BB%B6-%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.2.</span> <span class="toc-text">好用插件+背景图片设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%A4%96%E9%83%A8%E5%BA%93"><span class="toc-number">1.3.</span> <span class="toc-text">安装外部库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#python%E5%89%8D%E8%A8%80"><span class="toc-number">2.</span> <span class="toc-text">python前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">3.</span> <span class="toc-text">python基础知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">4.</span> <span class="toc-text">常见关键字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">5.</span> <span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%99%84%E5%BD%951-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="toc-number">5.1.</span> <span class="toc-text">附录1  字符串常用操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E5%BA%8F%E5%88%97%E7%B1%BB%E5%9E%8B"><span class="toc-number">6.</span> <span class="toc-text">数据类型之序列类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E5%88%97%E8%A1%A8%E7%B1%BB%E5%9E%8B"><span class="toc-number">6.1.</span> <span class="toc-text">数据类型之列表类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E5%85%83%E7%BB%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">6.2.</span> <span class="toc-text">数据类型之元组类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E5%AD%97%E5%85%B8%E7%B1%BB%E5%9E%8B"><span class="toc-number">6.3.</span> <span class="toc-text">数据类型之字典类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="toc-number">6.4.</span> <span class="toc-text">数据类型之集合类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5"><span class="toc-number">7.</span> <span class="toc-text">控制语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#try-except%E8%AF%AD%E5%8F%A5"><span class="toc-number">8.</span> <span class="toc-text">try-except语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E4%BD%BF%E7%94%A8"><span class="toc-number">9.</span> <span class="toc-text">函数的定义与使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E7%BB%B4%E6%95%B0%E6%8D%AE%E4%B8%8E%E4%BA%8C%E7%BB%B4%E6%95%B0%E6%8D%AE"><span class="toc-number">10.</span> <span class="toc-text">一维数据与二维数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C-%E5%BE%85%E6%9B%B4%E6%96%B0"><span class="toc-number">11.</span> <span class="toc-text">文件操作(待更新)</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://api2.acozycotage.net/Pweb" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '可惜你不听王杰，也不懂我...' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>

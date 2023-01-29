@@ -1,0 +1,594 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>51单片机-中断 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="中断系统 引起 CPU 中断的根源称为 中断源。中断源向 CPU 提出中断请求，CPU 暂时中断原来的事务 A，转去处理事件 B，对事件 B 处理完毕后，再回到原来被中断的地方(即断点)，称为 中断返回。实现上述中断功能的部件称为 中断系统(中断机构)。 CPU 总是先响应 优先级别最高的中断请求。发生了另外一个 优先级比它还高的中断源请求。如果 CPU 能够暂停对原来中断源的服务程序，转而去处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="51单片机-中断">
+<meta property="og:url" content="https://mdcm.yang5201314.cn/post/3d71ff66.html">
+<meta property="og:site_name" content="Luckys-Yangの小栈">
+<meta property="og:description" content="中断系统 引起 CPU 中断的根源称为 中断源。中断源向 CPU 提出中断请求，CPU 暂时中断原来的事务 A，转去处理事件 B，对事件 B 处理完毕后，再回到原来被中断的地方(即断点)，称为 中断返回。实现上述中断功能的部件称为 中断系统(中断机构)。 CPU 总是先响应 优先级别最高的中断请求。发生了另外一个 优先级比它还高的中断源请求。如果 CPU 能够暂停对原来中断源的服务程序，转而去处理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mdcm.yang5201314.cn/img/num11.webp">
+<meta property="article:published_time" content="2022-03-31T06:35:00.000Z">
+<meta property="article:modified_time" content="2022-06-03T07:49:17.000Z">
+<meta property="article:author" content="Luckys-Yang">
+<meta property="article:tag" content="中断">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mdcm.yang5201314.cn/img/num11.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"><link rel="canonical" href="https://mdcm.yang5201314.cn/post/3d71ff66.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '51单片机-中断',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-06-03 15:49:17'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">56</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">51单片机-中断</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-31T06:35:00.000Z" title="发表于 2022-03-31 14:35:00">2022-03-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-06-03T07:49:17.000Z" title="更新于 2022-06-03 15:49:17">2022-06-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/51%E7%B3%BB%E5%88%97/">51系列</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><h2 id="中断系统">中断系统</h2>
+<p>引起 CPU 中断的根源称为 <code>中断源</code>。中断源向 CPU 提出中断请求，CPU 暂时中断原来的事务 A，转去处理事件 B，对事件 B 处理完毕后，再回到原来被中断的地方(即断点)，称为 <code>中断返回</code>。实现上述中断功能的部件称为 <code>中断系统</code>(中断机构)。</p>
+<p>CPU 总是先响应 <code>优先级别最高</code>的中断请求。发生了另外一个 <code>优先级比它还高</code>的中断源请求。如果 CPU 能够暂停对原来中断源的服务程序，转而去处理优先级更高的中断请求源，处理完以后，再回到原低级中断服务程序，这样的过程称为 <code>中断嵌套</code>。这样的中断系统称为 <code>多级中断系统</code>，没有中断嵌套功能的中断系统称为 <code>单级中断系统</code>。</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>中断优点</p>
+</div>
+<ul>
+<li>
+<p>分时操作</p>
+<p>CPU 可以分时为多个 I/O 设备服务，提高了计算机的利用率；</p>
+</li>
+<li>
+<p>实时响应</p>
+<p>CPU 能够及时处理应用系统的随机事件，系统的实时性大大增强；</p>
+</li>
+<li>
+<p>可靠性高</p>
+<p>CPU 具有处理设备故障及掉电等突发性事件能力，从而使系统可靠性提高</p>
+</li>
+</ul>
+<div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>注意</p>
+</div>
+<p>51系列单片机一定有基本的 <code>5</code> 个中断，但不全有8个中断，需要查看芯片手册，通常我们使用的都是基本的5个中断： <code>INT0、INT1、定时器0/1，串口中断</code>，所有的中断都具有 <code>四个</code> 中断优先级（基本型只有两个）。</p>
+<ul>
+<li>
+<p><code>高优先级的中断请求可以打断低优先级的中断，反之，低优先级的中断请求不可以打断高优先级及同优先级的中断。</code></p>
+</li>
+<li>
+<p><code>当两个相同优先级的中断同时产生时，将由查询次序来决定系统先响应哪个中断。</code></p>
+</li>
+<li>
+<p><code>中断查询次序即为中断号，这个中断号在编程时非常重要，当中断来临时，只有中断号正确才能进入中断。</code></p>
+</li>
+</ul>
+<p>下面是51单片机均有的5个基本中断：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203311421732.png" alt=""></p>
+<p>① <code>INT0</code> 对应的是 <code>P3.2口</code> 的附加功能，可由 IT0(TCON.0) 选择其为 <code>低电平有效还是下降沿有效</code> 。当 CPU 检测到 P3.2 引脚上出现有效的中断信号时，中断标志IE0(TCON.1)  <code>置1</code> ，向 CPU 申请中断。</p>
+<p>②  <code>INT1</code> 对应的是  <code>P3.3口</code> 的附加功能，可由 IT1(TCON.2) 选择其为 <code>低电平有效还是下降沿有效</code>。当 CPU 检测到 P3.3 引脚上出现有效的中断信号时，中断标志IE1(TCON.3) <code>置1</code> ,向 CPU 申请中断。</p>
+<p>③  <code>T0</code> 对应的是  <code>P3.4口</code> 的附加功能，TF0(TCON.5),片内定时/计数器 T0 溢出中断请求标志。当 <code>定时/计数器T0发生溢出时</code>，置位 TF0，并向 CPU 申请中断。</p>
+<p>④ <code> T1</code> 对应的是  <code>P3.5口</code> 的附加功能，TF1(TCON.7)，片内定时/计数器 T1 溢出中断请求标志。 <code>当定时/计数器T1发生溢出时</code> ，置位 TF1，并向 CPU 申请中断。</p>
+<p>⑤  <code>RXD 和 TXD </code> 对应的是 <code> P3.0 和 P3.1口</code> 的附加功能，RI(SCON.0) 或 TI(SCON.1)，串行口中断请求标志。当 <code>串行口接收完一帧串行数据时置位RI或当串行口发送完一帧串行数据时置位TI</code> ，向 CPU 申请中断。</p>
+<h2 id="中断相关寄存器">中断相关寄存器</h2>
+<p>（1）中断允许控制CPU对中断系统所有中断以及某个中断源的开放和屏蔽是由 <code>中断允许寄存器IE控制</code> 的。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203311421909.png" alt=""></p>
+<p><code>EX0(IE.0)</code>，外部中断0 允许位；</p>
+<p><code>ET0(IE.1)</code>， 定时/计数器T0 中断允许位；</p>
+<p><code>EX1(IE.2)</code>，外部中断0 允许位；</p>
+<p><code>ET1(IE.3)</code>， 定时/计数器T1 中断允许位；</p>
+<p><code>ES(IE.4)</code>， 串行口 中断允许位；</p>
+<p><code>EA(IE.7)</code>， CPU 中断允许（ 总允许）位</p>
+<p>（2）中断请求标志TCON：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203311421481.png" alt=""></p>
+<p><code>IT0（TCON.0）</code>，外部中断0触发方式控制位。当 <code> IT0=0</code>时，为 <code>电平触发方式</code>；当  <code>IT0=1</code>时，为 <code>边沿触发方式（下降沿有效）</code>。</p>
+<p><code>IE0（TCON.1）</code>，外部中断0 中断请求标志位。</p>
+<p><code>IT1（TCON.2）</code>，外部中断1 触发方式控制位。</p>
+<p><code>IE1（TCON.3）</code>，外部中断1 中断请求标志位。</p>
+<p><code>TF0（TCON.5）</code>，定时/计数器T0 溢出中断请求标志位。</p>
+<p><code>TF1（TCON.7）</code>，定时/计数器T1 溢出中断请求标志位。</p>
+<p>（3）中断优先级：同一优先级中的中断申请不止一个时，则有中断优先权排队问题。同一优先级的中断优先权排队，由中断系统硬件确定的自然优先级形成。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203311421518.png" alt=""></p>
+<p>（4）中断号：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203311421416.png" alt=""></p>
+<p>（5）中断响应条件 ： <code>①中断源有中断请求；②此中断源的中断允许位为1；③CPU开中断（即EA=1）</code>。以上三条 <code>同时满足</code> 时，CPU 才有可能响应中断。</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>在使用中断时我们需要做什么呢？</p>
+</div>
+<p><code>①你想使用的中断是哪个？选择相应的中断号；</code></p>
+<p><code>②你所希望的触发条件是什么？</code></p>
+<p><code>③你希望在中断之后干什么？</code></p>
+<p>中断服务函数：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void break_off()interrupt 0 using 1
+&#123;
+	&#x2F;&#x2F;编写用户所需的功能代码
+&#125;
+&#x2F;&#x2F;interrupt是一个关键字，表示51单片机中断。后面的“0”是中断号
+&#x2F;&#x2F;using 1 可以省略</code></pre>
+<p>外部中断0操作函数代码：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;********************************************************************************
+*利用外部中断0让LED1亮灭*
+********************************************************************************&#x2F;
+
+# include &quot;reg52.h&quot;
+
+typedef unsigned int u16;
+typedef unsigned char u8;
+
+&#x2F;&#x2F;定义按键管脚
+sbit key3&#x3D;P3^2;
+sbit key&#x3D;P3^3;
+&#x2F;&#x2F;定义LED管脚
+sbit LED1&#x3D;P2^0;
+
+&#x2F;&#x2F;延时函数
+void delay_10us(u16 ten_us)
+&#123;
+	while(ten_us--);
+&#125;
+
+&#x2F;&#x2F;中断函数初始化
+void external_init(void)
+&#123;
+	EX0&#x3D;1;&#x2F;&#x2F;开外部中断0
+	IT0&#x3D;1;&#x2F;&#x2F;下降沿触发
+	EA&#x3D;1;&#x2F;&#x2F;CPU总中断
+&#125;
+
+void external_0()interrupt 0
+&#123;
+	delay_10us(1000);
+	if(key3&#x3D;&#x3D;0)
+	&#123;
+		LED1&#x3D;!LED1;
+	&#125;
+&#125;
+
+void main(void)
+&#123;
+
+	external_init();&#x2F;&#x2F;进入中断函数
+	while(1)
+	&#123;
+		
+	&#125;
+	while(1);
+&#125;</code></pre>
+<h2 id="定时器中断">定时器中断</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>CPU 时序的知识</p>
+</div>
+<ul>
+<li>振荡周期（T）</li>
+</ul>
+<p>振荡周期指为单片机 <code>提供定时信号</code> 的振荡源的周期或外部输入时钟的周期</p>
+<ul>
+<li>状态周期（S）</li>
+</ul>
+<p>它是振荡周期的 <code>两倍</code>，分为  <code>P1 节拍和 P2 节拍</code>，通常在 P1节拍 完成 <code>算术逻辑操作</code>，在 P2节拍 完成 <code>内部寄存器之间的数据传送操作</code>。（注意P1 和P2的相位关系）</p>
+<ul>
+<li>
+<p>机器周期</p>
+<p>一个机器周期由 <code>6个状态周期组成</code> ，如果把一条指令的执行过程分作几个基本操作，则将 <code>完成一个基本操作所需的时间称作机器周期</code>。单片机的单周期指令执行时间就为一个机器周期。</p>
+</li>
+<li>
+<p>指令周期</p>
+</li>
+</ul>
+<p>指令周期是 <code>执行一条指令所需的全部时间</code>。MCS-51单片机的指令周期通常由1、2、4个机器周期组成。</p>
+<div class="note green icon-padding flat"><i class="note-icon fas fa-fan"></i><p>例如</p>
+</div>
+<p>外接晶振为 12MHz时，51单片机相关周期的具体值为：振荡周期=1/12us；状态周期=1/6us；机器周期=1us；指令周期=1~4us；</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>学习定时器前需要明白的几点</p>
+</div>
+<ul>
+<li>51 单片机有两组定时器/计数器，因为 <code>既可以定时，又可以计数</code>，故称之为定时器/计数器。</li>
+<li>定时器/计数器和单片机的 CPU 是 <code>相互独立的</code>。定时器/计数器工作的过程是自动完成的， <code>不需要 CPU 的参与</code> 。</li>
+<li>51 单片机中的定时器/计数器是根据机器内部的时钟或者是外部的脉冲信号对寄存器中的数据 <code>加 1</code>。</li>
+</ul>
+<p>有了定时器/计数器之后，可以增加单片机的效率，一些简单的重复加 1 的工作可以交给定时器/计数器处理。CPU 转而处理一些复杂的事情。同时可以实现精确定时作用。</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>定时器原理</p>
+</div>
+<p>定时/计数器的实质是加 1 计数器（16 位），由 <code>高 8 位和低 8 位</code> 两个寄存器  <code>THx 和 TLx</code>  组成它随着计数器的输入脉冲进行 <code>自加 1</code> ，也就是 <code>每来一个脉冲，计数器就自动加 1</code> ， 当加到计数器为全 1 时，再输入一个脉冲就使计数器 <code>回零</code> ，且计数器的溢出使相应的中断标志位置 1，向 CPU  <code>发出中断请求</code>（定时/计数器中断允许时）。 如果定时/计数器工作于定时模式，则表示定时时间已到； 如果工作于计数模式，则表示计数值已满。可见， <code>由溢出时计数器的值减去计数初值才是加 1 计数器的计数值。</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203312018328.jpg" alt=""></p>
+<p>上图中的  <code>T0 和 T1</code> 引脚对应的是单片机 <code> P3.4 和 P3.5</code> 管脚</p>
+<ul>
+<li><code>TMOD</code> 是定时/计数器的工作方式寄存器， 确定工作方式和功能；</li>
+<li><code>TCON</code> 是控制寄存器，控制 T0、T1 的启动和停止及设置溢出标志。</li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>工作方式寄存器 TMOD</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203312121539.png" alt=""></p>
+<ul>
+<li>GATE 是门控位,  <code>GATE ＝ 0</code> 时，用于控制定时器的启动是否受外部中断源信号的影响。只要用软件使 TCON 中的  <code>TR0 或 TR1 为 1</code>， 就可以启动定时/计数器工作；</li>
+<li><code>GATA ＝ 1 </code>时，要用软件 <code>使 TR0 或 TR1 为 1</code>，同时外部中断引脚 <code> INT0/1 也为高电平时</code>，才能启动定时/计数器工作。即此时定时器的启动条件，加上了 INT0/1 引脚为高电平这一条件。</li>
+<li>C/T：定时/计数模式选择位。C/T ＝0 为定时模式；C/T =1 为计数模式</li>
+<li>M1M0：工作方式设置位。定时/计数器有 <code>四种工作方式</code>：</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203312126774.png" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>控制寄存器 TCON</p>
+</div>
+<p>TCON 的 <code>低 4 位</code> 用于 <code>控制外部中断</code>，TCON 的 <code>高 4 位</code> 用于 <code>控制定时/计数器的启动和中断申请</code>。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203312130612.png" alt=""></p>
+<ul>
+<li><code>TF1（TCON.7）</code>：T1 溢出中断请求标志位。T1 计数溢出时由硬件自动置 TF1为 1。CPU 响应中断后 TF1 由硬件自动清 0。T1 工作时，CPU 可随时查询 TF1 的状态。所以，TF1 可用作查询测试的标志。TF1 也可以用软件置 1 或清 0，同硬件置 1 或清 0 的效果一样。</li>
+<li><code>TR1（TCON.6）</code>：T1 运行控制位。TR1 置 1 时，T1 开始工作；TR1 置 0 时，T1 停止工作。TR1 由软件置 1 或清 0。所以，用软件可控制定时/计数器的启动与停止。</li>
+<li><code>TF0（TCON.5）</code>：T0 溢出中断请求标志位，其功能与 TF1 类同。</li>
+<li><code>TR0（TCON.4）</code>：T0 运行控制位，其功能与 TR1 类同。</li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>单片机定时/计数器的工作方式</p>
+</div>
+<p><code>方式 0</code>：</p>
+<p>方式 0 为  <code>13 位计数</code>， 由 TL0 的低 5 位（高 3 位未用）和 TH0 的 8 位组成。TL0 的低 5 位溢出时向 TH0 进位，TH0 溢出时，置位 TCON 中的 TF0 标志，向 CPU  发出中断请求。其结构图如下所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203312220161.jpg" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203312235282.jpg" alt=""></p>
+<p>当 GATE =  0 时，经过 &quot;非门&quot;变成 1，然后再到 “或门”(只要一个为真，都为真)，这时候不管 INTO 引脚是否为真，然后来到 “与门”，这时候取决于 TR0,当 TR0 为1(真) 开关才会闭合工作。计数初值与计数个数的关系为：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>X</mi><mo>=</mo><msup><mn>2</mn><mn>13</mn></msup><mo>−</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">X=2^{13}-N
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9474em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">13</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span></span></p>
+<p><code>方式1</code>：</p>
+<p>方式 1 的计数位数是  <code>16 位</code>，由 TL0 作为低 8 位，TH0 作为高 8 位，组成了16 位加 1 计数器。其结构图如下所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203312240954.jpg" alt=""></p>
+<p>原理跟方式 0 差不多唯一不同的就是计数方式不同， 计数初值与计数个数的关系为：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>X</mi><mo>=</mo><msup><mn>2</mn><mn>16</mn></msup><mo>−</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">X=2^{16}-N
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9474em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">16</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span></span></p>
+<p><code>方式 2</code>：</p>
+<p>方式 2 为 <code>自动重装初值的 8 位计数方式</code>。工作方式 2 特别适合于用作较<br>
+精确的脉冲信号发生器。其结构图如下所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203312246140.jpg" alt=""></p>
+<p>计数初值与计数个数的关系为：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>X</mi><mo>=</mo><msup><mn>2</mn><mn>8</mn></msup><mo>−</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">X=2^8-N
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9474em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span></span></p>
+<p><code>方式 3</code>：</p>
+<p>方式 3 <code> 只适用于定时/计数器 T0</code>， 定时器 T1 处于方式 3 时相当于 TR1=0，停止计数。工作方式 3 将 T0 分成为 两个独立的 8 位计数器 TL0 和 TH0。其结构如下所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203312250888.jpg" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>小结</p>
+</div>
+<p>这几种工作方式中应用较多的是方式 1 和方式 2。 <code>定时器中通常使用定时器 方式 1，串口通信中通常使用方式 2</code></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>定时器配置(顺序可调换)</p>
+</div>
+<ul>
+<li><code>①对 TMOD 赋值，以确定 T0 和 T1 的工作方式，如果使用定时器 0 即对 T0    	配置，如果使用定时器 1 即对 T1 配置。</code></li>
+<li><code>②根据所要定时的时间计算初值,并将其写入 TH0、TL0 或 TH1、TL1。</code></li>
+<li><code>③如果使用中断，则对 EA 赋值，开放定时器中断。</code></li>
+<li><code>④使 TR0 或 TR1 置位，启动定时/计数器定时或计数。</code></li>
+</ul>
+<div class="note green'fas icon-padding flat"><i class="note-icon fa-fan'"></i><p>如何计算定时/计数器初值？</p>
+</div>
+<p>12MHz晶振情况下，1个机器周期=1us，假如需要定时1ms则</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>1</mn><mi>m</mi><mi>s</mi><mi mathvariant="normal">/</mi><mn>1</mn><mi>u</mi><mi>s</mi><mo>=</mo><mn>1000</mn><mtext>次</mtext></mrow><annotation encoding="application/x-tex">1ms/1us=1000\text{次}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord mathnormal">m</span><span class="mord mathnormal">s</span><span class="mord">/1</span><span class="mord mathnormal">u</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">1000</span><span class="mord text"><span class="mord cjk_fallback">次</span></span></span></span></span></span></p>
+<p>溢出是65536，则用</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>65536</mn><mo>−</mo><mn>1000</mn><mo>=</mo><mn>64536</mn><mo>=</mo><mi>F</mi><mi>C</mi><mn>18</mn><mi>H</mi></mrow><annotation encoding="application/x-tex">65536-1000=64536=FC18H
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">65536</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1000</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">64536</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">FC</span><span class="mord">18</span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span></span></span></span></span></p>
+<p>所以初值为  <code>THx=0XFC，TLx=0X18</code>  或者使用小工具进行换算不用手动算。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203312320469.png" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>注意</p>
+</div>
+<p>这种只能定时时间小的如果是定时500ms则需要另找办法(可以多设置一个变量来记录定时次数)</p>
+<p>这里以定时器 0 为例介绍配置定时器工作方式 1、设定 1ms 初值，开启定时<br>
+器计数功能以及总中断，如下：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void time0_init(void)
+&#123;
+TMOD|&#x3D;0X01;&#x2F;&#x2F;选择为定时器 0 模式，工作方式 1(为了不干扰T1定时器所以用|);如果是定时器1则把0x01改成0x10
+TH0&#x3D;0XFC; &#x2F;&#x2F;给定时器赋初值，定时 1ms;如果是定时器1则把TH0改成TL0
+TL0&#x3D;0X18;&#x2F;&#x2F;如果是定时器1则把TH1改成TL1
+ET0&#x3D;1;&#x2F;&#x2F;打开定时器 0 中断允许
+EA&#x3D;1;&#x2F;&#x2F;打开总中断
+TR0&#x3D;1;&#x2F;&#x2F;打开定时器</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203312326539.jpg" alt=""></p>
+<p>代码：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204011316926.png" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;**********************************************************************************
+****
+实验名称：定时器 0 实验
+接线说明：
+实验现象：下载程序后，当按下 D1 指示灯间隔 1s 闪烁
+注意事项：
+***********************************************************************************
+****&#x2F;
+# include &quot;reg52.h&quot;
+
+typedef unsigned char u8;
+typedef unsigned int u16;
+
+sbit LED1&#x3D;P2^0; 
+void delay_ms(u16 ms)
+&#123;
+	u16 i,j;
+	for(i&#x3D;ms;i&gt;0;i--)
+	&#123;
+		for(j&#x3D;110;j&gt;0;j--);
+	&#125;
+&#125;
+
+void time0_init(void)
+&#123;
+	TMOD|&#x3D;0x01;&#x2F;&#x2F;选择为定时器0模式，工作方式1
+	TH0&#x3D;0xFC;&#x2F;&#x2F;给定时器赋初值，定时1ms
+	TL0&#x3D;0x63;
+	ET0&#x3D;1;&#x2F;&#x2F;打开定时器0中断允许
+	EA&#x3D;1;&#x2F;&#x2F;打开总中断
+	TR0&#x3D;1;&#x2F;&#x2F;打开定时器
+&#125;
+
+void main()
+&#123;
+	time0_init();
+	while(1)
+	&#123;
+		
+	&#125;
+&#125;
+void time0() interrupt 1&#x2F;&#x2F;定时器0中断函数
+&#123;
+	static u16 i;&#x2F;&#x2F;定义静态变量i
+	TH0&#x3D;0xFC;&#x2F;&#x2F;给定时器赋初值，定时1ms
+	TL0&#x3D;0x63;
+	i++;
+	if(i&#x3D;&#x3D;1000)&#x2F;&#x2F;1000ms&#x3D;1s
+	&#123;
+		i&#x3D;0;&#x2F;&#x2F;溢出然后重新赋0
+		LED1&#x3D;!LED1;
+	&#125;
+&#125;</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验现象</p>
+</div>
+<div class="video-bilibili">
+  <iframe
+    src="https://player.bilibili.com/player.html?aid=425297989&bvid=BV1V3411H79g&cid=564513825&page=1"
+    scrolling="no"
+    border="0"
+    frameborder="no"
+    framespacing="0"
+    high_quality="1"
+    danmaku="1"
+    allowfullscreen="true"
+  ></iframe>
+</div></article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%B8%AD%E6%96%AD/">中断</a></div><div class="post_share"><div class="social-share" data-image="/img/num11.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.</span> <span class="toc-text">中断系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E7%9B%B8%E5%85%B3%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">中断相关寄存器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD"><span class="toc-number">3.</span> <span class="toc-text">定时器中断</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://api2.acozycotage.net/Pweb" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://lib.baomitu.com/KaTeX/latest/katex.min.css"><script src="https://jsd.onmicrosoft.cn/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '可惜你不听王杰，也不懂我...' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>

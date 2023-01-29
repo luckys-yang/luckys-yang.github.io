@@ -1,0 +1,855 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>MySQL-多表操作 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="多表关系 多表关系  MySQL 多表之间的关系可以概括为：一对一，一对多&#x2F;多对一关系，多对多 一对一关系   一个学生只有一张身份证; 一张身份证只能对应一学生。 在任一表中添加唯一外键，指向另一方主键，确保一对一关系。 一般一对一关系很少见，遇到一对一关系的表最好是合并表。  一对多&#x2F;多对一关系  部门和员工 分析：一个部门有多个员工，一个员工只能对应一个部门  多对多关系  学生和课程 分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL-多表操作">
+<meta property="og:url" content="https://mdcm.yang5201314.cn/post/f93574d6.html">
+<meta property="og:site_name" content="Luckys-Yangの小栈">
+<meta property="og:description" content="多表关系 多表关系  MySQL 多表之间的关系可以概括为：一对一，一对多&#x2F;多对一关系，多对多 一对一关系   一个学生只有一张身份证; 一张身份证只能对应一学生。 在任一表中添加唯一外键，指向另一方主键，确保一对一关系。 一般一对一关系很少见，遇到一对一关系的表最好是合并表。  一对多&#x2F;多对一关系  部门和员工 分析：一个部门有多个员工，一个员工只能对应一个部门  多对多关系  学生和课程 分析">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mdcm.yang5201314.cn/img/num43.webp">
+<meta property="article:published_time" content="2022-03-28T07:29:00.000Z">
+<meta property="article:modified_time" content="2022-06-03T13:36:08.000Z">
+<meta property="article:author" content="Luckys-Yang">
+<meta property="article:tag" content="博客,个人博客,技术,学习,Hexo,Blog,STM32,嵌入式,单片机">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mdcm.yang5201314.cn/img/num43.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"><link rel="canonical" href="https://mdcm.yang5201314.cn/post/f93574d6.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'MySQL-多表操作',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-06-03 21:36:08'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">56</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">MySQL-多表操作</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-28T07:29:00.000Z" title="发表于 2022-03-28 15:29:00">2022-03-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-06-03T13:36:08.000Z" title="更新于 2022-06-03 21:36:08">2022-06-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">MySQL学习笔记</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><h2 id="多表关系">多表关系</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>多表关系</p>
+</div>
+<p>MySQL 多表之间的关系可以概括为：<font color='orange'>一对一，一对多/多对一关系，多对多</font></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>一对一关系</p>
+</div>
+<ul>
+<li>一个学生只有一张身份证; 一张身份证只能对应一学生。</li>
+<li>在任一表中添加<font color='orange'>唯一外键</font>，指向<font color='orange'>另一方主键</font>，确保<font color='cornflowerblue'>一对一</font>关系。</li>
+<li>一般<font color='cornflowerblue'>一对一</font>关系很少见，遇到<font color='orange'>一对一关系的表最好是合并表</font>。</li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>一对多/多对一关系</p>
+</div>
+<p>部门和员工</p>
+<p>分析：一个部门有多个员工，一个员工只能对应一个部门</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203281548599.png" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>多对多关系</p>
+</div>
+<p>学生和课程</p>
+<p>分析：一个学生可以选择很多门课程，一个课程也可以被很多学生选择</p>
+<p>原则：多对多关系实现需要借助<font color='orange'>第三张中间表</font>。中间表<font color='orange'>至少包含两个字段</font>，<font color='cornflowerblue'>将多对多的关系，拆成一对多的关系</font>，中间表<font color='orange'>至少要有两个外键</font>，<font color='cornflowerblue'>这两个外键分别指向原来的那两张表的主键</font>。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203281556330.jpg" alt=""></p>
+<h2 id="外键约束简介">外键约束简介</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>介绍</p>
+</div>
+<p>MySQL 外键约束 (<font color='orange'>foreign key</font>) 是表的一个特殊字段，经常与<font color='cornflowerblue'>主键约束</font>一起使用。对于两个具有关联关系的表而言，相关联字段中<font color='orange'>主键所在的表就是主表</font>（<font color='cornflowerblue'>父表</font>)，<font color='orange'>外键所在的表就是从表</font>（<font color='cornflowerblue'>子表</font>)。</p>
+<p>外键用来建立<font color='cornflowerblue'>主表与从表</font>的关联关系，为两个表的数据<font color='cornflowerblue'>建立连接</font>，约束两个表中数据的<font color='cornflowerblue'>一致性和完整性</font>。<font color='green'>比如</font>，一个水果摊，只有苹果、桃子、李子、西瓜等4种水果，那么，你来到水果摊要买水果就只能选择苹果、桃子、李子和西瓜，其它的水果都是不能购买的。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203281605579.png" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>定义一个外键时，需要遵守下列规则</p>
+</div>
+<ul>
+<li><font color='orange'>主表必须已经存在</font>于数据库中，或者是<font color='orange'>当前正在创建的表</font>。</li>
+<li><font color='orange'>必须为主表定义主键。</font></li>
+<li>主键<font color='orange'>不能包含空值</font>，但<font color='orange'>允许在外键中出现空值</font>。也就是说，只要外键的每个非空值出现在指定的主键中，这个外键的内容就是<font color='cornflowerblue'>正确</font>的。</li>
+<li>在主表的表名后面<font color='cornflowerblue'>指定列名或列名的组合</font>。这个列或列的组合必须是主<font color='orange'>表的主键或候选键。</font></li>
+<li>外键中<font color='orange'>列的数目必须和主表的主键中列的数目相同</font>。</li>
+<li>外键中<font color='orange'>列的数据类型必须和主表主键中对应列的数据类型相同</font>。</li>
+</ul>
+<h2 id="创建外键约束">创建外键约束</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>方式一</p>
+</div>
+<p>在创建表时设置外键约束</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203281618770.png" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>操作</p>
+</div>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 创建部门表-- 主表
+create table if not exists dept(
+	detpno varchar(20) primary key,-- 部门号 主键列
+	name varchar(20) -- 部门名字
+);</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203281634341.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 创建员工表，并创建外键约束（方式一）
+create table if not exists emp(
+	eid varchar(20) primary key,-- 员工编号
+	ename varchar(20),-- 员工名字
+	age int,-- 员工年龄
+	dept_id varchar(20), -- 员工所属部门
+	foreign  key(dept_id) references dept(detpno) 
+);
+</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203281634228.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203281639317.png" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>方式二</p>
+</div>
+<p>在创建表后设置外键约束</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203281642087.png" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>操作</p>
+</div>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 创建部门表-- 主表
+create table if not exists dept(
+	detpno varchar(20) primary key,-- 部门号 主键列
+	name varchar(20) -- 部门名字
+);
+
+-- 创建员工表，并创建外键约束（方式二）
+create table if not exists emp(
+	eid varchar(20) primary key,-- 员工编号
+	ename varchar(20),-- 员工名字
+	age int,-- 员工年龄
+	dept_id varchar(20) -- 员工所属部门
+);
+alter table emp add constraint emp_fk foreign key(dept_id) references dept(detpno);
+</code></pre>
+<h2 id="外键约束下的数据操作">外键约束下的数据操作</h2>
+<ul>
+<li>添加数据</li>
+</ul>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 1.添加主表数据
+-- 注意必须先给主表添加数据
+insert into dept values(&#39;1001&#39;,&#39;研发部&#39;);
+insert into dept values(&#39;1002&#39;,&#39;销售部&#39;);
+insert into dept values(&#39;1003&#39;,&#39;财务部&#39;);
+insert into dept values(&#39;1004&#39;,&#39;人事部&#39;);
+
+-- 2.添加从表数据
+-- 注意给从表添加数据时，外键列的值必须依赖主表的主键列
+insert into emp values(&#39;1&#39;,&#39;乔峰&#39;,20,&#39;1001&#39;);
+insert into emp values(&#39;2&#39;,&#39;李白&#39;,21,&#39;1001&#39;);
+insert into emp values(&#39;3&#39;,&#39;貂蝉&#39;,23,&#39;1001&#39;);
+insert into emp values(&#39;4&#39;,&#39;李信&#39;,26,&#39;1002&#39;);
+insert into emp values(&#39;5&#39;,&#39;孙悟空&#39;,34,&#39;1002&#39;);
+insert into emp values(&#39;6&#39;,&#39;猪八戒&#39;,66,&#39;1003&#39;);
+insert into emp values(&#39;7&#39;,&#39;凯&#39;,76,&#39;1003&#39;);
+insert into emp values(&#39;8&#39;,&#39;小乔&#39;,11,&#39;1005&#39;);# 不可以</code></pre>
+<ul>
+<li>删除数据</li>
+</ul>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 3.删除数据
+-- 注意：主表的数据被从表依赖时，不能删除，否则可以删除
+-- 从表的数据可以随便删除
+delete from dept where detpno &#x3D; &#39;1001&#39;;-- 不可以删除
+delete from dept where &#96;detpno&#96; &#x3D; &#39;1004&#39;;-- 可以删除
+delete from emp where eid&#x3D;&#39;7&#39;; -- 可以删除</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203281719460.png" alt=""></p>
+<h2 id="删除外键约束">删除外键约束</h2>
+<p>外键一旦删除，就会解除主表和从表的关联关系</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203281722686.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 4.删除外键约束
+alter table emp drop foreign key emp_fk;# emp_fk是别名</code></pre>
+<p><font color='orange'>这个名字可以这样查看：</font></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203281731298.png" alt=""></p>
+<h2 id="操作-多对多关系">操作-多对多关系</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>操作</p>
+</div>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 学生表和课程表（多对多）
+-- 1.创建学生表student(左侧主表)
+create table student(
+	sid int primary key auto_increment,
+	name varchar(20),
+	age int,
+	gender varchar(20)
+);
+-- 2.创建课程表course(右侧主表)
+create table course(
+	cid int primary key auto_increment,
+	cidname varchar(20)
+);
+-- 3.创建中间表student_course&#x2F;score(从表)
+create table score(
+	sid int,
+	cid int,
+	score double
+);</code></pre>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 4.建立外键约束（2次）
+alter table score add foreign key(sid) references student(sid);
+alter table score add foreign key(cid) references course(cid);</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203281754220.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 5.给学生表添加数据
+insert into student values(1,&#39;小龙女&#39;,18,&#39;女&#39;),(2,&#39;杨过&#39;,28,&#39;男&#39;),(3,&#39;孙悟空&#39;,66,&#39;男&#39;);
+-- 6.给课程表添加数据
+insert into course values(1,&#39;语文&#39;),(2,&#39;数学&#39;),(3,&#39;英语&#39;);
+-- 7.给中间表添加数据
+insert into score values(1,1,55),(1,2,78),(2,1,88),(2,3,97),(3,2,56),(3,3,54);
+-- 修改和删除时，中间表可以随便删除和修改，但是两边的主表受从表依赖的数据不能删除或者修改</code></pre>
+<h2 id="多表联合查询">多表联合查询</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>介绍</p>
+</div>
+<p>多表查询就是同时查询<font color='cornflowerblue'>两个或两个以上</font>的表，因为有的用户在查看数据的时候，需要显示的数据来自多张表。多表查询有以下分类：</p>
+<ul>
+<li><font color='red'>交叉连接查询</font>[产生笛卡尔积，了解]</li>
+</ul>
+<p>语法：</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">select * from A,B;</code></pre>
+<ul>
+<li><font color='red'>内连接查询</font>(使用的关键字 inner join – inner可以省略)</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203281937248.png" alt=""></p>
+<p>语法：</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"># 隐式内连接（SQL92标准）
+select * from A,B where 条件;
+# 显示内连接（SQL99标准）
+select * from A inner join B on 条件;</code></pre>
+<ul>
+<li><font color='red'>外连接查询</font>（使用的关键字 outer join – outer可以省略）</li>
+</ul>
+<p>语法：</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"># 左外连接：left outer join
+select * from A left outer join B on 条件;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203281938149.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"># 右外连接：right outer join
+select * from A right outer join B on 条件;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203281938646.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"># 满外连接：full outer join
+select * from A full outer join B on 条件;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203281938025.png" alt=""></p>
+<ul>
+<li><font color='red'>子查询</font></li>
+</ul>
+<p>select 的嵌套</p>
+<ul>
+<li><font color='red'>表自关联</font></li>
+</ul>
+<p>将一张表当成多张表来用</p>
+<h3 id="7-1-数据准备">7.1  数据准备</h3>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 创建部门表
+create table if not exists dept2(
+	deptno varchar(20) primary key, -- 部门号
+	name varchar(20) -- 部门名字
+);
+-- 创建员工表
+create table if not exists emp2(
+	eid varchar(20) primary key,-- 员工编号
+	ename varchar(20),-- 员工名字
+	age int,-- 员工年龄
+	dept_id varchar(20) -- 员工所属部门
+);
+-- 给dept2添加数据
+insert into dept2 values(&#39;1001&#39;,&#39;研发部&#39;);
+insert into dept2 values(&#39;1002&#39;,&#39;销售部&#39;);
+insert into dept2 values(&#39;1003&#39;,&#39;财务部&#39;);
+insert into dept2 values(&#39;1004&#39;,&#39;人事部&#39;);
+-- 给emp2表添加数据
+insert into emp2 values( &#39;1&#39;,&#39;乔峰&#39;,20,&#39;1001&#39;);
+insert into emp2 values( &#39;2&#39;,&#39;段誉&#39;,21,&#39;1001&#39; );
+insert into emp2 values( &#39;3&#39;,&#39;虚竹&#39;,23,&#39;1001&#39; );
+insert into emp2 values( &#39;4&#39;,&#39;阿紫&#39;,18,&#39;1001&#39; ) ;
+insert into emp2 values( &#39;5&#39;,&#39;扫地僧&#39;,85,&#39;1002 &#39; );
+insert into emp2 values( &#39;6&#39;,&#39;李秋水&#39;,33,&#39;1002&#39; );
+insert into emp2 values( &#39;7&#39;,&#39;鸠摩智&#39;,50,&#39;1002&#39;);
+insert into emp2 values( &#39;8&#39;,&#39;天山童姥&#39;,60,&#39;1003&#39;);
+insert into emp2 values( &#39;9&#39;,&#39;慕容博&#39;,58,&#39;1003&#39; ) ;
+insert into emp2 values( &#39; 10&#39;,&#39;丁春秋&#39;,71,&#39;1005&#39;);</code></pre>
+<h3 id="交叉连接查询">交叉连接查询</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>介绍</p>
+</div>
+<ul>
+<li>交叉连接查询返回被连接的两个表所有数据行的笛卡尔积</li>
+<li>笛卡尔积可以理解为<font color='orange'>一张表的每一行去和另外一张表的任意一行进行匹配</font></li>
+<li>假如 A 表有 <font color='cornflowerblue'>m </font>行数据，B 表有 <font color='cornflowerblue'>n</font> 行数据，则返回 <font color='cornflowerblue'>m*n</font> 行数据</li>
+<li>笛卡尔积会产生很多冗余的数据，后期的其他查询可以在<font color='cornflowerblue'>该集合的基础上进行条件筛选</font></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203282004279.png" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>操作</p>
+</div>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">select * from dept2,emp2;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203282012539.png" alt=""></p>
+<h3 id="内连接查询">内连接查询</h3>
+<ul>
+<li>内连接查询求多张表的<font color='orange'>交集</font>（共同部分）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203282018544.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 1.查询每个部门的所属员工
+# 隐式内连接
+select * from dept2,emp2 where deptno &#x3D; dept_id;
+-- 或前面加表名.列名（这样写比较专业）
+select * from dept2 ,emp2  where dept2.deptno &#x3D; emp2.dept_id;
+# 显示内连接
+select * from dept2 join emp2 on deptno &#x3D; dept_id;
+select * from dept2 inner join emp2 on dept2.deptno &#x3D; emp2.dept_id;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203282031414.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 查询研发部门的所属员工
+# 隐式内连接
+select * from dept2 a,emp2 b where a.deptno&#x3D;b.dept_id and name&#x3D;&#39;研发部&#39;; 
+# 显示内连接
+select * from dept2 a join emp2 b on a.deptno&#x3D;b.dept_id and name&#x3D;&#39;研发部&#39;; </code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203282035057.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 查询研发部和销售部的所属员工
+# 隐式内连接
+select * from dept2 a,emp2 b where a.deptno&#x3D;b.dept_id and (name&#x3D;&#39;研发部&#39; or name&#x3D;&#39;销售部&#39;); 
+# 或
+select * from dept2 a,emp2 b where a.deptno&#x3D;b.dept_id and name in(&#39;研发部&#39;,&#39;销售部&#39;);
+# 显示内连接
+select * from dept2 a join emp2 b on a.deptno&#x3D;b.dept_id and (name&#x3D;&#39;研发部&#39; or name&#x3D;&#39;销售部&#39;); </code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203282040587.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 查询每个部门的员工数，并升序排序
+select a.name,a.deptno,count(1) from dept2 a join emp2 b on a.deptno&#x3D;b.dept_id group by a.deptno,a.name;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203282048762.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 查询人数大于2的部门，并按照人数降序排序
+select 
+	a.&#96;name&#96;,
+	a.deptno,
+	count(1) as total_cnt
+from 
+	dept2 a 
+join 
+	emp2 b 
+on 
+	a.deptno&#x3D;b.dept_id 
+group by 
+	a.deptno,a.&#96;name&#96; 
+having 
+	total_cnt &gt;&#x3D;3 
+order by 
+	total_cnt desc;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203282054777.png" alt=""></p>
+<h3 id="外连接查询">外连接查询</h3>
+<div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>注意</p>
+</div>
+<p><font color='orange'>oracle </font>里面有 <font color='cornflowerblue'>full join</font>，可是在 MySQL 对 <font color='cornflowerblue'>full join</font> 支持不太友好。我们可以使用 <font color='orange'>union </font>来达到目的。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 查询哪些部门有员工，哪些部门没有员工
+select * from dept2 a left outer join emp2 b on a.deptno &#x3D; b.dept_id;
+-- 如果多张表也可以这样
+select * from A
+	left join B on 条件1;
+	left join C on 条件2;
+	left join D on 条件3;
+	...</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203282115521.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 查询哪些员工有对应的部门，哪些没有
+select * from dept2 a right join emp2 b on a.deptno &#x3D; b.dept_id;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203282121591.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 使用 union 关键字实现左连接和右连接的并集
+select * from dept2 a full join emp2 b on a.deptno &#x3D; b.dept_id;-- 不可以，可能别的版本可以
+select * from dept2 a left join emp2 b on a.deptno&#x3D;b.dept_id;
+union -- union all 是将两个查询结果上下拼接，不去重
+select * from dept2 a right join emp2 b on a.deptno&#x3D;b.dept_id;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203282131311.png" alt=""></p>
+<h3 id="子查询">子查询</h3>
+<div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>介绍</p>
+</div>
+<p>子查询就是指的在一个完整的查询语句之中，<font color='cornflowerblue'>嵌套若干个不同功能的小查询</font>，从而一起完成复杂查询的一种编写形式，通俗一点就是包含 <font color='orange'>select </font>嵌套的查询。</p>
+<div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>特点</p>
+</div>
+<p><font color='cornflowerblue'>子查询可以返回的数据类型一共分为四种：</font></p>
+<ul>
+<li><font color='orange'>单行单列</font>：返回的是一个具体列的内容，可以理解为一个单值数据：</li>
+<li><font color='orange'>单行多列</font>：返回一行数据中多个列的内容；</li>
+<li><font color='orange'>多行单列</font>：返回多行记录之中同一列的内容，相当于给出了一个操作范围；</li>
+<li><font color='orange'>多行多列</font>：查询返回的结果是一张临时表</li>
+</ul>
+<div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>操作</p>
+</div>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 查询年龄最大的员工信息，显示信息包含员工号、员工名字，员工年龄
+# 1.查询最大年龄
+select max(age) from emp2;
+# 2.让每个员工的年龄和最大年龄进行比较，相等则满足条件
+select * from emp2 where age&#x3D;(select max(age) from emp2);</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203282145262.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 查询年研发部和销售部的员工信息，包含员工号、员工名字
+# 方式一：关联查询
+select * from dept2 a join emp2 b on a.deptno&#x3D;b.dept_id and (name&#x3D;&#39;研发部&#39; or name&#x3D;&#39;销售部&#39;); 
+# 方式二：子查询
+# 2.1 先查询研发部和销售部的部门号：deptno 1001 和 1002
+select deptno from dept2 where name&#x3D;&#39;研发部&#39; or name&#x3D;&#39;销售部&#39;;
+# 2.2 查询哪个员工的部门号是1001 或者 1002
+select * from emp2 where dept_id in(select deptno from dept2 where name&#x3D;&#39;研发部&#39; or name&#x3D;&#39;销售部&#39;);</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203282156053.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 查询研发部20岁以下的员工信息,包括员工号、员工名字，部门名字
+# 方式一：关联查询
+select * from dept2 a join emp2 b on a.deptno&#x3D;b.dept_id and (name&#x3D;&#39;研发部&#39; and age&lt;20);
+# 方式二：子查询
+# 2.1在部门表中查询研发部信息
+select * from dept2 where name&#x3D;&#39;研发部&#39;;
+# 2.2在员工表中查询年龄小于20岁的员工信息
+select * from emp2 where age&lt;20;
+# 2.3 将以上两个查询结果进行关联查询
+select * from (select * from dept2 where name&#x3D;&#39;研发部&#39;) a join (select * from emp2 where age&lt;20) b on a.deptno&#x3D;b.dept_id;-- 注意要给别名</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203282208882.png" alt=""></p>
+<h3 id="子查询关键字">子查询关键字</h3>
+<ul>
+<li><font color='red'>all </font>关键字</li>
+<li><font color='red'>any </font>关键字</li>
+<li><font color='red'>some </font>关键字</li>
+<li><font color='red'>in </font>关键字</li>
+<li><font color='red'>exists </font>关键字</li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>关键字-all</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203282212989.png" alt=""></p>
+<p><font color='red'>特点：</font></p>
+<ul>
+<li>all：与子查询<font color='orange'>返回</font>的所有值比较为 true 则返回 <font color='orange'>true</font></li>
+<li>all 可以与 <font color='orange'>=、&gt;、&gt;=、&lt;、&lt;=、&lt;&gt;</font> 结合是来使用，分别表示等于、大于、大于等于、小于、小于等于、不等于其中的其中的所有数据。</li>
+<li>all 表示指定列中的值必须要<font color='orange'>大于</font>子查询集的每一个值，<font color='cornflowerblue'>即必须要大于子查询集的最大值</font>；如果是小于号<font color='cornflowerblue'>即小于子查询集的最小值</font>。同理可以推出其它的比较运算符的情况。</li>
+</ul>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 1.查询年龄大于‘1003’部门所有年龄的员工信息
+select * from emp2 where age &gt; all(select age from emp2 where dept_id &#x3D; &#39;1003&#39;);</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203282224162.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 2.查询不属于任何一个部门的员工信息
+select * from emp2 where dept_id !&#x3D; all(select deptno from dept2);</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203282225240.png" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>关键字-any 和 same</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203282226219.png" alt=""></p>
+<p><font color='red'>特点：</font></p>
+<ul>
+<li>any：与子查询返回的任何值比较为 true 则返回 <font color='cornflowerblue'>true</font></li>
+<li>any 可以与<font color='orange'> =、&gt;、&gt;=、&lt;、&lt;=、&lt;&gt;</font> 结合是来使用，分别表示等于、大于、大于等于、小于、小于等于、不等于其中的其中的任何一个数据。</li>
+<li>表示制定列中的值要大于子查询中的任意一个值，即必须要大于子查询集中的最小值。同理可以推出其它的比较运算符的情况。</li>
+<li><font color='cornflowerblue'>some 和 any 的作用一样</font>，some 可以理解为 any 的<font color='cornflowerblue'>别名</font></li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>操作</p>
+</div>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 查询年龄大于&#39;1003&#39; 部门任意一个员工年龄的员工信息
+select * from emp2 where age&gt;any(select age from emp2 where dept_id &#x3D; &#39;1003&#39;) and dept_id !&#x3D; &#39;1003&#39;;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203282237745.png" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>关键字-in</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203282243758.png" alt=""></p>
+<p><font color='red'>特点：</font></p>
+<ul>
+<li>in 关键字，用于<font color='cornflowerblue'>判断某个记录的值,是否在指定的集合中</font></li>
+<li>在 in 关键字前边加上 <font color='orange'>not </font>font&gt;可以将<font color='orange'>条件反过来</font></li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>操作</p>
+</div>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 查询年研发部和销售部的员工信息，包括员工号和员工名字
+select eid,ename from emp2 where dept_id in(select deptno from dept2 where name&#x3D;&#39;研发部&#39; or name &#x3D; &#39;销售部&#39;);</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203282303053.png" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>关键字-exists</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203291055659.png" alt=""></p>
+<p><font color='red'>特点：</font></p>
+<ul>
+<li>该子查询如果 “有数据结果” (<font color='cornflowerblue'>至少返回一行数据</font>)，则该 exists() 的结果为 “true&quot;，外层查询执行</li>
+<li>该子查询如果 “没有数据结果”（没有任何数据返回），则该 exists() 的结果为 “false&quot;，外层查询不执行</li>
+<li>exists 后面的子查询不返回任何实际数据，只返回<font color='cornflowerblue'>真或假</font>，当返回真时 <font color='cornflowerblue'>where</font>条件<font color='cornflowerblue'>成立</font></li>
+<li>注意，<font color='orange'>exists</font> 关键字，比 <font color='orange'>in </font>关键字的运算效率高，因此，在实际开发中，特别是大数据量时<font color='cornflowerblue'>推荐使用 exists 关键字</font></li>
+</ul>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 查询公司是否有大于60岁的员工，有则输出
+select * from emp2 a where exists(select * from emp2 where a.age&gt;60);
+# 或
+select * from emp2 a where eid in(select eid from emp2 where a.age&gt;60);
+-- 查询有所属部门的员工信息
+select * from emp2 a where exists(select * from dept2 b where a.dept_id &#x3D; b.deptno);</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203291643484.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203291643639.png" alt=""></p>
+<h2 id="自关联查询">自关联查询</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>概念</p>
+</div>
+<p>MySQL 有时在信息查询时需要进行对表自身进行关联查询，即一张表自己和自己关联，一张表当成多张表来用。<font color='cornflowerblue'>注意自关联时表必须给表起别名。</font></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203291646813.png" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>操作</p>
+</div>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 创建自关联表
+create table t_sanguo(
+	eid int primary key,
+	ename varchar(20),
+	manger_id int,
+	foreign key(manger_id) references t_sanguo(eid) -- 添加自关联约束
+);
+-- 插入数据
+insert into t_sanguo values (1,&#39;刘协&#39;,NULL);
+insert into t_sanguo values (2,&#39;刘备&#39;,1);
+insert into t_sanguo values ( 3,&#39;关羽&#39;,2);
+insert into t_sanguo values (4,&#39;张飞&#39;,2);
+insert into t_sanguo values (5,&#39;曹操&#39;,1);
+insert into t_sanguo values (6,&#39;许褚&#39;,5);
+insert into t_sanguo values ( 7,&#39;典韦&#39;,5);
+insert into t_sanguo values (8,&#39;孙权&#39;,1);
+insert into t_sanguo values ( 9,&#39;周瑜&#39;,8);
+insert into t_sanguo values (10,&#39;鲁肃&#39;,8);</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203291656719.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203291656734.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">select * from t_sanguo a,t_sanguo b;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203291712107.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 1.查询每个三国人物及他的上级信息，如：关羽，刘备
+select * from t_sanguo a,t_sanguo b where a.manger_id&#x3D;b.eid;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203291708688.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">select a.ename,b.ename from t_sanguo a,t_sanguo b where a.manger_id &#x3D; b.eid;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203291717547.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 2.查询所有人物及上级
+select a.ename,b.ename from t_sanguo a left join t_sanguo b on a.manger_id&#x3D;b.eid;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203291720548.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 3.查询所有人物，上级，上上级 比如：张飞 刘备 刘协
+select a.ename,b.ename,c.ename from t_sanguo a 
+	left join t_sanguo b on a.manger_id&#x3D;b.eid
+	left join t_sanguo c on b.manger_id&#x3D;c.eid; </code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203291725220.png" alt=""></p>
+<h2 id="练习">练习</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>数据准备</p>
+</div>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 创建test1数据库
+create database test1;
+
+-- 选择使用 test1数据库
+use test1;
+
+-- 创建部门表
+create table dept(
+	deptno int primary key, -- 部门编号
+	dname varchar(14), -- 部门名称
+	loc varchar(13) -- 部门地址
+);
+
+-- 插入数据
+insert into dept values ( 10, &#39;accounting&#39;,&#39;new york&#39; );
+insert into dept values ( 20, &#39;research&#39;,&#39;dallas&#39; );
+insert into dept values ( 3o, &#39;sales&#39;,&#39;chicago&#39; );
+insert into dept values (40, &#39;operations&#39;,&#39;boston&#39; );
+
+-- 创建员工表
+create table emp(
+	empno int primary key,-- 员工编号
+	ename varchar(10),-- 员工姓名
+	job varchar(9),-- 员工工作
+	mgr int,-- 员工直属领导编号
+	hiredate date,-- 入职时间
+	sal double,-- 工资
+	comm double,-- 奖金
+	deptno int -- 对应dept表的外键
+);
+
+-- 添加 部门 和 员工 之间的外键关系
+insert into emp values(7369, &#39;smith&#39; ,&#39;clerk&#39;,7902,&#39;1980-12-17&#39;,800,null,20);
+insert into emp values(7499, &#39;allen&#39; , &#39;salesman&#39;,7698,&#39;1981-02-20&#39;,1600,300,30);
+insert into emp values(7521, &#39;ward&#39; , &#39;salesman&#39;,7698,&#39;1981-02-22&#39;,1250,500,30);
+insert into emp values(7566, &#39;jones&#39; , &#39;manager&#39; ,7839,&#39;1981-04-02&#39;,2975,null,20);
+insert into emp values(7654 , &#39;martin&#39; , &#39;salesman&#39;,7698,&#39;1981-09-28&#39;,1250,1400,30);
+insert into emp values(7698,&#39;blake&#39; , &#39;manager &#39;,7839, &#39;1981-05-01&#39;,2850,null,30);
+insert into emp values(7782,&#39;clark &#39; , &#39;manager &#39;,7839,&#39;1981-06-09&#39;,2450,null,10);
+insert into emp values(7788,&#39;scott&#39; , &#39;analyst&#39;,7566, &#39;1987-07-03&#39;,3000,null,20);
+insert into emp values(7839, &#39;king&#39; , &#39;president&#39; ,null, &#39;1981-11-17&#39; ,5000,null,10);
+insert into emp values(7844,&#39;turner&#39; , &#39;salesman&#39;,7698,&#39;1981-09-08&#39;,1500,0,30);
+insert into emp values(7876, &#39;adams &#39; , &#39;clerk&#39; ,7788,&#39;1987-07-13&#39;,1100,null,20);
+insert into emp values(7900,&#39;james&#39; , &#39;clerk&#39; ,7698,&#39;1981-12-03&#39; ,950,null,30);
+insert into emp values(7902, &#39;ford&#39; , &#39;analyst&#39;,7566,&#39;1981-12-03&#39;,3000,null,20);
+insert into emp values(7934, &#39;miller&#39; , &#39;clerk &#39; ,7782,&#39;1981-01-23&#39;,1300,null,10);
+
+-- 创建工资等级表
+create table salgrade(
+	grade int,-- 等级
+	losal double,-- 最低工资
+	hisal double -- 最高工资
+);
+
+-- 插入数据
+insert into salgrade values ( 1,780,1200) ;
+insert into salgrade values (2,1201,1400) ;
+insert into salgrade values ( 3,1401,2000) ;
+insert into salgrade values (4,2001,3000);
+insert into salgrade values (5,3001,9999);</code></pre>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202203292229890.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202203292229248.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202203292229155.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 1、返回拥有员工的部门名、部门号。
+select distinct d.dname,d.deptno from dept d join emp e on d.deptno &#x3D; e.deptno; </code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203292240881.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 2、工资水平多于smith的员工信息。
+select * from emp where sal &gt; (select sal from emp where ename &#x3D;&#39;smith&#39;);</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203292245273.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 3、返回员工和所属经理的姓名。
+select a.ename,b.ename from emp a,emp b where a.mgr &#x3D; b.empno;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203292248283.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 4、返回雇员的雇佣日期早于其经理雇佣日期的员工及其经理姓名。
+select a.ename,a.hiredate,b.ename,b.hiredate from emp a join emp b on a.mgr &#x3D; b.empno and a.hiredate &lt; b.hiredate;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203292253605.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 5、返回员工姓名及其所在的部门名称。
+select a.ename,b.dname from emp a join dept b on a.deptno &#x3D; b.deptno;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203292257613.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 6.返回从事clerk工作的员工姓名和所在部门名称
+select a.ename,b.dname,a.job from emp a join dept b on a.deptno &#x3D; b.deptno and job &#x3D;&#39;clerk&#39;;</code></pre>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 7、返回部门号及其本部门的最低工资。
+select deptno, min(sal) from emp group by deptno;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203292310313.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 8、返回销售部( sales)所有员工的姓名。
+select b.ename from dept a join emp b on a.deptno &#x3D; b.deptno and a.dname &#x3D; &#39;sales&#39;;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203300945229.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 9、返回工资水平多于平均工资的员工。
+select * from emp where sal &gt; (select avg(sal) from emp);</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203292315144.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 10.返回与scott从事相同工作的员工
+select * from emp where job &#x3D; (select job from emp where ename &#x3D; &#39;scott&#39;) and ename !&#x3D; &#39;scott&#39;;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203292321452.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 11.返回与30部门员工工资水平相同的员工姓名和工资
+select * from emp where sal &gt;all(select sal from emp where deptno &#x3D; 30);</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203300906525.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 12.返回员工工作及其从事此工作的最低工资。
+select job,min(sal) from emp group by job;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203300910472.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 13.计算出员工的年薪，并且以年薪排序。
+select ename,(sal * 12 + ifnull(comm,0)) as year_sal from emp order by year_sal desc;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203300919725.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 14.返回工资处于第四级别的员工的姓名。
+select * from emp where sal between (select losal from salgrade where grade &#x3D; 4) and (select hisal from salgrade where grade &#x3D; 4);
+# 或
+select * from emp where sal between (select losal from salgrade where grade &#x3D; 4) and 3000;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203300933706.png" alt=""></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">-- 15.返回工资为二等级的职员名字，部门所在地
+select * from dept a join emp b on a.deptno &#x3D; b.deptno join salgrade c on grade &#x3D; 2 and b.sal &gt;&#x3D; c.losal and b.sal &lt;&#x3D; c.hisal;
+# 或
+select * from dept a,emp b,salgrade c where a.deptno &#x3D; b.deptno and grade &#x3D; 2 and b.sal &gt;&#x3D; c.losal and b.sal &lt;&#x3D; c.hisal;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202203300938364.png" alt=""></p>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num43.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E8%A1%A8%E5%85%B3%E7%B3%BB"><span class="toc-number">1.</span> <span class="toc-text">多表关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E9%94%AE%E7%BA%A6%E6%9D%9F%E7%AE%80%E4%BB%8B"><span class="toc-number">2.</span> <span class="toc-text">外键约束简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%A4%96%E9%94%AE%E7%BA%A6%E6%9D%9F"><span class="toc-number">3.</span> <span class="toc-text">创建外键约束</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E9%94%AE%E7%BA%A6%E6%9D%9F%E4%B8%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C"><span class="toc-number">4.</span> <span class="toc-text">外键约束下的数据操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%A4%96%E9%94%AE%E7%BA%A6%E6%9D%9F"><span class="toc-number">5.</span> <span class="toc-text">删除外键约束</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C-%E5%A4%9A%E5%AF%B9%E5%A4%9A%E5%85%B3%E7%B3%BB"><span class="toc-number">6.</span> <span class="toc-text">操作-多对多关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E8%A1%A8%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2"><span class="toc-number">7.</span> <span class="toc-text">多表联合查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87"><span class="toc-number">7.1.</span> <span class="toc-text">7.1  数据准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E5%8F%89%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="toc-number">7.2.</span> <span class="toc-text">交叉连接查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="toc-number">7.3.</span> <span class="toc-text">内连接查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%96%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="toc-number">7.4.</span> <span class="toc-text">外连接查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="toc-number">7.5.</span> <span class="toc-text">子查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90%E6%9F%A5%E8%AF%A2%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">7.6.</span> <span class="toc-text">子查询关键字</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2"><span class="toc-number">8.</span> <span class="toc-text">自关联查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0"><span class="toc-number">9.</span> <span class="toc-text">练习</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://api2.acozycotage.net/Pweb" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '可惜你不听王杰，也不懂我...' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>

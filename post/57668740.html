@@ -1,0 +1,795 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>51单片机-红外遥控 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="红外遥控 红外线介绍  ​人的眼睛能看到的可见光按波长从长到短排列，依次为 红、橙、黄、绿、青、蓝、紫。其中红光的波长范围为 0.62～0.76μm； 紫光的波长范围为 0.38～0.46μm 。 比紫光波长还短的光叫紫外线，比红光波长还长的光叫红外线。红外线遥控就是利用波长为  0.76～1.5μm 之间的近红外线来传送控制信号的。 红外遥控通信系统一般由 红外发射装置 和 红外接收设备 两大部">
+<meta property="og:type" content="article">
+<meta property="og:title" content="51单片机-红外遥控">
+<meta property="og:url" content="https://mdcm.yang5201314.cn/post/57668740.html">
+<meta property="og:site_name" content="Luckys-Yangの小栈">
+<meta property="og:description" content="红外遥控 红外线介绍  ​人的眼睛能看到的可见光按波长从长到短排列，依次为 红、橙、黄、绿、青、蓝、紫。其中红光的波长范围为 0.62～0.76μm； 紫光的波长范围为 0.38～0.46μm 。 比紫光波长还短的光叫紫外线，比红光波长还长的光叫红外线。红外线遥控就是利用波长为  0.76～1.5μm 之间的近红外线来传送控制信号的。 红外遥控通信系统一般由 红外发射装置 和 红外接收设备 两大部">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mdcm.yang5201314.cn/img/num18.webp">
+<meta property="article:published_time" content="2022-04-05T06:30:00.000Z">
+<meta property="article:modified_time" content="2022-06-03T09:30:32.000Z">
+<meta property="article:author" content="Luckys-Yang">
+<meta property="article:tag" content="红外">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mdcm.yang5201314.cn/img/num18.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"><link rel="canonical" href="https://mdcm.yang5201314.cn/post/57668740.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '51单片机-红外遥控',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-06-03 17:30:32'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">56</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">51单片机-红外遥控</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-05T06:30:00.000Z" title="发表于 2022-04-05 14:30:00">2022-04-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-06-03T09:30:32.000Z" title="更新于 2022-06-03 17:30:32">2022-06-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/51%E7%B3%BB%E5%88%97/">51系列</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><h2 id="红外遥控">红外遥控</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>红外线介绍</p>
+</div>
+<p>​人的眼睛能看到的可见光按波长从长到短排列，依次为 <code>红、橙、黄、绿、青、蓝、紫</code>。其中红光的波长范围为 <code>0.62～0.76μm</code>； 紫光的波长范围为 <code>0.38～0.46μm</code> 。 比紫光波长还短的光叫紫外线，比红光波长还长的光叫红外线。红外线遥控就是利用波长为  <code>0.76～1.5μm</code> 之间的近红外线来传送控制信号的。 红外遥控通信系统一般由 <code>红外发射装置</code> 和 <code>红外接收设备</code> 两大部分组成</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>红外发射装置</p>
+</div>
+<p>​红外发射装置，也就是通常我们说的红外遥控器是由键盘电路、红外编码电路、电源电路和红外发射电路组成。</p>
+<div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202204051725704.jpg" style="width:50%;"/></div></div>
+<ul>
+<li>
+<p>红外遥控为了提高抗干扰性能和降低电源消耗，红外遥控器常用 <code>载波的方式传送二进制编码</code>， <code>常用的载波频率为 38kHz</code>，这是由发射端所使用的 <code>455kHz晶振来决定的</code>。</p>
+</li>
+<li>
+<p>在发射端要对晶振进行整数分频， <code>分频系数一般取 12</code>。</p>
+</li>
+</ul>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><mn>455</mn><mi>k</mi><mi>H</mi><mi>z</mi></mrow><mn>12</mn></mfrac><mo>≈</mo><mn>37.9</mn><mi>k</mi><mi>H</mi><mi>z</mi><mo>≈</mo><mn>38</mn><mi>k</mi><mi>H</mi><mi>z</mi></mrow><annotation encoding="application/x-tex">\frac{455kHz}{12}≈37.9kHz≈38kHz
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.0574em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">12</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">455</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal" style="margin-right:0.04398em;">Hz</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord">37.9</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal" style="margin-right:0.04398em;">Hz</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord">38</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal" style="margin-right:0.04398em;">Hz</span></span></span></span></span></p>
+<p>也有一些遥控系统采用 <code> 36kHz、 40 kHz、 56 kHz等</code>，一般 <code>由发射端晶振的振荡频率来决定</code>。</p>
+<ul>
+<li>二进制脉冲码的形式有多种，我这个是使用的是  <code>NEC 协议</code>：</li>
+</ul>
+<p>①<code>8</code> 位地址和  <code>8</code> 位指令长度；</p>
+<p>②地址和命令  <code>2</code> 次传输（确保可靠性）</p>
+<p>③PWM 脉冲位置调制，以发射红外载波的占空比代表  <code>“0”和“1”</code>；</p>
+<p>④载波频率为  <code>38Khz</code>；</p>
+<p>⑤位时间为  <code>1.125ms 或 2.25ms</code>；</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>NEC 码的位定义</p>
+</div>
+<p>​<code>一个脉冲对应 560us 的连续载波，一个逻辑 1 传输需要2.25ms</code>（560us 脉冲+1680us 低电平）， <code>一个逻辑 0 的传输需要 1.125ms</code>（560us脉冲+560us 低电平）。</p>
+<p>而红外接收头在收到脉冲的时候为 <code>低电平</code>，在没有脉冲的时候为 <code>高电平</code>，这样，我们在接收头端收到的信号为： <code>逻辑 1 应该是 560us 低+1680us 高，逻辑 0 应该是 560us 低+560us 高</code>。所以可以 <code>通过计算高电平时间判断接收到的数据是 0 还是 1</code>。</p>
+<p>NEC 码位定义时序图如下图所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204051737189.png" alt=""></p>
+<p>​<code>NEC 遥控指令的数据格式为</code>： <code>引导码、地址码、地址反码、控制码、控制反码</code>。<code>引导码</code>由一个 9ms 的低电平和一个 4.5ms 的高电平组成，<code>地址码、地址反码、控制码、控制反码 </code> 均是 8 位数据格式。按照<code>低位在前，高位在后</code> 的顺序发送。采用反码是为了增加传输的可靠性（可用于校验）数据格式如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204051737918.png" alt=""></p>
+<p>NEC 码还规定了 <code>连发码</code>(由 9ms 低电平+2.5m 高电平+0.56ms 低电平+97.94ms 高电平组成)， 如果在一帧数据发送完毕之后，红外遥控器按键仍然没有放开，则发射连发码，可以 <code>通过统计连发码的次数来标记按键按下的长短或次数。</code></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>红外接收设备</p>
+</div>
+<p>红外接收设备是由红外接收电路、红外解码、电源和应用电路组成。红外遥控接收器的 <code>主要作用是将遥控发射器发来的红外光信好转换成电信号，再放大、限幅、检波、整形，形成遥控指令脉冲，输出至遥控微处理器</code>。</p>
+<p>红外接收头的封装大致有 两种： 一种采用铁皮屏蔽；一种是塑料封装。均有三只引脚，正对接收头的凸起处看，从左至右即 <code>电源正（ VDD）、电源负（GND）和数据输出（VOUT）</code></p>
+<div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202204051744477.jpg" style="width:50%;"/></div></div>
+<p>红外接收头 <code>在没有脉冲的时候为高电平，当收到脉冲的时候为低电平</code>。通过 <code>外部中断的下降沿触发中断</code>，在中断内 <code>通过计算高电平时间</code>来判断接收到的数据是  <code>0还是1</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204051748601.png" alt=""></p>
+<div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>注意</p>
+</div>
+<p>为了保证红外接收头输出管脚默认为 <code>高电平</code>，需 <code>外接一个 10K 上拉电阻</code>，51单片机 IO 口都默认增加了 10K 上拉电阻。</p>
+<h2 id="软件编写">软件编写</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>流程</p>
+</div>
+<p><code>进入中断函数</code>，表示已来下降沿， 然后判断管脚是否为低电平，如果为低电平则首先判断引导信号，根据前面 NEC 协议可知，引导信号有 <code>9ms</code> 的低电平和 <code>4.5ms</code> 的高电平，因此通过 time_cnt 赋值 1000，然后在 while 循环内判断，time_cnt 每递减一次约 10us，1000 次则为10ms， 在解码时，这个时间要适当放宽一点范围，因为不同传感器性能会有差异，所以此处以 <code>10ms</code> 的低电平为界限，如果超过 10ms 则强制退出，防止系统死机。判断完引导信号的低电平，接着判断高电平，实现方法一样。当引导信号判断完成后进入地址码、地址反码、控制码及控制反码共 4 个字节的数据判断，也就是数据 0 和 1 的判断，实现方法也是和前面判断引导信号一样，这里使用到了嵌套循环，外层循环次数是 4，表示读取 4 个字节，内层循环次数是 8，表示读取每个字节的 8 位。<code>注意，红外遥控解码数据是从低位开始，最后是高位</code>。最后将读取的 4 个字节数据存储在全局变量数组 gired_data 中，外部可直接使用这四个字节。</p>
+<p>main.c</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &quot;smg.h&quot;
+# include &quot;lred.h&quot;
+
+
+void main()
+&#123;
+	u8 Ired_buf[3];
+	ired_init();
+	while(1)
+	&#123;
+		Ired_buf[0]&#x3D;gsmg_code[gired_data[2]&#x2F;16];&#x2F;&#x2F;将控制码高4位转换为数码管段码
+		Ired_buf[1]&#x3D;gsmg_code[gired_data[2]%16];&#x2F;&#x2F;将控制码低4位转换为数码管段码
+		Ired_buf[2]&#x3D;0x76;&#x2F;&#x2F;显示H
+		smg_display(Ired_buf,6);
+	&#125;
+&#125;</code></pre>
+<p>smg.c</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &quot;smg.h&quot;
+# include &quot;lred.h&quot;
+
+u8 gsmg_code[17]&#x3D;&#123;0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,
+				0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71&#125;;
+
+void smg_display(u8 dat[],u8 pos)
+&#123;
+	u8 i&#x3D;0;
+	u8 pos_temp&#x3D;pos-1;
+	
+	for(i&#x3D;pos_temp;i&lt;8;i++)
+	&#123;
+		switch(i)
+		&#123;
+				case 0:A0&#x3D;1;A1&#x3D;1;A2&#x3D;1;break;&#x2F;&#x2F;Y7&#x2F;&#x2F;板子从左边数第一个数码管，下面以此类推
+				case 1:A0&#x3D;0;A1&#x3D;1;A2&#x3D;1;break;&#x2F;&#x2F;Y6
+				case 2:A0&#x3D;1;A1&#x3D;0;A2&#x3D;1;break;&#x2F;&#x2F;Y5
+				case 3:A0&#x3D;0;A1&#x3D;0;A2&#x3D;1;break;&#x2F;&#x2F;Y4
+				case 4:A0&#x3D;1;A1&#x3D;1;A2&#x3D;0;break;&#x2F;&#x2F;Y3
+				case 5:A0&#x3D;0;A1&#x3D;1;A2&#x3D;0;break;&#x2F;&#x2F;Y2
+				case 6:A0&#x3D;1;A1&#x3D;0;A2&#x3D;0;break;&#x2F;&#x2F;Y1
+				case 7:A0&#x3D;0;A1&#x3D;0;A2&#x3D;0;break;&#x2F;&#x2F;Y0
+		&#125;
+			SMG_A0_F_PORT&#x3D;dat[i-pos_temp];&#x2F;&#x2F;传送段选数据
+			delay_10us(100);&#x2F;&#x2F;延时1毫秒左右
+			SMG_A0_F_PORT&#x3D;0x00;&#x2F;&#x2F;消影
+	&#125;
+&#125;</code></pre>
+<p>smg.h</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># ifndef _smg_H
+# define _smg_H
+
+# include &quot;lred.h&quot;
+
+sbit A0&#x3D;P2^2;
+sbit A1&#x3D;P2^3;
+sbit A2&#x3D;P2^4;
+# define SMG_A0_F_PORT P0&#x2F;&#x2F;宏定义数码管P0端口
+extern u8 gsmg_code[17];  &#x2F;&#x2F;注意要加extern 
+void smg_display(u8 dat[],u8 pos);
+# endif</code></pre>
+<p>lred.c（红外）</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &quot;lred.h&quot;
+
+
+u8 gired_data[4];&#x2F;&#x2F;存储4个字节接收码（地址码+地址反码+控制码+控制反码）
+
+void delay_10us(u16 ten_us)&#x2F;&#x2F;当传入 Ten_us&#x3D;1时，大约延时10us
+&#123;
+	while(ten_us--);
+&#125;
+
+void ired_init()
+&#123;
+	IT0&#x3D;1;&#x2F;&#x2F;触发方式   1：下降沿触发  0：低电平触发
+	EX0&#x3D;1;&#x2F;&#x2F;开启外部中断0
+	EA&#x3D;1;&#x2F;&#x2F;开启总中断
+	IRED&#x3D;1;&#x2F;&#x2F;上拉电阻拉高（可以省略）初始化端口
+&#125;
+
+void ired() interrupt 0       &#x2F;&#x2F;外部中断0服务函数
+&#123;
+	u16 time_cnt&#x3D;0;
+	u8 i&#x3D;0,j&#x3D;0;
+	u8 Ired_high_time&#x3D;0;&#x2F;&#x2F;要初始化为0不然按其他键没反应！！！！！踩坑
+	if(IRED&#x3D;&#x3D;0)
+	&#123;
+		time_cnt&#x3D;1000;
+		&#x2F;&#x2F;1.引导码9ms
+		while((!IRED)&amp;&amp;(time_cnt))&#x2F;&#x2F;等待引导信号9ms低电平结束，若超过10ms强制退出
+		&#123;
+			delay_10us(1);&#x2F;&#x2F;10*1000就是10ms(10us进来一次)
+			time_cnt--;
+			if(time_cnt&#x3D;&#x3D;0)
+				return;
+		&#125;
+		
+		
+		if(IRED)&#x2F;&#x2F;引导信号9ms低电平已过，进入4.5ms高电平
+		&#123;
+			time_cnt&#x3D;500;
+			&#x2F;&#x2F;2.高电平4.gms
+			while(IRED&amp;&amp;time_cnt)
+			&#123;
+				delay_10us(1);
+				time_cnt--;
+				if(time_cnt&#x3D;&#x3D;0)
+					return;
+			&#125;
+			
+			&#x2F;&#x2F;3.4个字节的数据
+			for(i&#x3D;0;i&lt;4;i++)
+			&#123;
+				for(j&#x3D;0;j&lt;8;j++)&#x2F;&#x2F;循环8次读取每位数据即一个字节
+				&#123;
+					&#x2F;&#x2F;判断高电平时间和低电平时间
+					time_cnt&#x3D;600;
+					while((IRED&#x3D;&#x3D;0)&amp;&amp;time_cnt)&#x2F;&#x2F;等待数据1或0前面的0.56ms结束，若超过6ms强制退出
+					&#123;
+						delay_10us(1);
+						time_cnt--;
+						if(time_cnt&#x3D;&#x3D;0)
+							return;
+					&#125;
+					time_cnt&#x3D;20;
+					while(IRED)&#x2F;&#x2F;等待数据1或0后面的高电平结束，若超过2ms强制退出
+					&#123;
+						delay_10us(10);
+						Ired_high_time++;
+						if(Ired_high_time&gt;20)&#x2F;&#x2F;当大于2000us(2ms)也就是超过逻辑1的1690us，我们就说这信号是错误的
+							return;&#x2F;&#x2F;正常情况是不会进入return的
+					&#125;
+					gired_data[i]&gt;&gt;&#x3D;1;&#x2F;&#x2F;右移&#x2F;&#x2F;先读取的为低位，然后是高位
+					if(Ired_high_time&gt;&#x3D;8)&#x2F;&#x2F;选一个中间数，大于800us就是高电平，小于800us就是低电平
+						gired_data[i]|&#x3D;0x80;
+					Ired_high_time&#x3D;0;&#x2F;&#x2F;清零
+				&#125;
+			&#125;
+			
+			
+		&#125;
+		if(gired_data[2]!&#x3D;~gired_data[3])&#x2F;&#x2F;如果控制码不等于控制反码，就说接收的数据是错误的就不要这4字节数据
+		&#123;
+			for(i&#x3D;0;i&lt;4;i++)
+				gired_data[i]&#x3D;0;&#x2F;&#x2F;清零
+			return;
+		&#125;
+	&#125;
+&#125;</code></pre>
+<p>lred.h</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># ifndef _lred_H
+# define _lred_H
+
+# include &quot;reg52.h&quot;
+typedef unsigned char u8;
+typedef unsigned int u16;
+sbit IRED&#x3D;P3^2;
+extern u8 gired_data[4];
+
+void delay_10us(u16 ten_us);
+void ired_init();
+# endif</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验现象</p>
+</div>
+<div class="video-bilibili">
+  <iframe
+    src="https://player.bilibili.com/player.html?aid=340409441&bvid=BV1V94y1Z73M&cid=568435584&page=1"
+    scrolling="no"
+    border="0"
+    frameborder="no"
+    framespacing="0"
+    high_quality="1"
+    danmaku="1"
+    allowfullscreen="true"
+  ></iframe>
+</div>
+<h2 id="红外遥控LED亮灭和蜂鸣器">红外遥控LED亮灭和蜂鸣器</h2>
+<p>main.c</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;**************************************************************************************
+实验名称：红外遥控LED和蜂鸣器
+接线说明：	
+实验现象：下载程序后，操作红外遥控器最上面第1个键和第2个键可控制D1和蜂鸣器开关，并且数码管
+			上显示遥控器键值码
+注意事项：红外接收头凸起处要与PCB板接口凸起丝印处对应																				  
+***************************************************************************************&#x2F;
+# include &quot;public.h&quot;
+# include &quot;smg.h&quot;
+# include &quot;ired.h&quot;
+# include &quot;beep.h&quot;
+
+&#x2F;&#x2F;定义端口
+sbit LED1&#x3D;P2^0;
+
+&#x2F;&#x2F;定义宏值
+# define LED_KEY_VALUE		0X45
+# define BEEP_KEY_VALUE		0X46
+
+&#x2F;*******************************************************************************
+* 函 数 名       : main
+* 函数功能		 : 主函数
+* 输    入       : 无
+* 输    出    	 : 无
+*******************************************************************************&#x2F;
+void main()
+&#123;	
+	u8 ired_buf[3];
+	u8 key_cnt_led&#x3D;0;
+	u8 key_cnt_beep&#x3D;0;
+	u8 ired_tempx&#x3D;0;
+	u8 ired_tempy&#x3D;0;
+
+	ired_init();&#x2F;&#x2F;红外初始化
+	
+	while(1)
+	&#123;
+		ired_tempx&#x3D;gired_data[2];&#x2F;&#x2F;保存键值
+		if(ired_tempx!&#x3D;0)ired_tempy&#x3D;ired_tempx;&#x2F;&#x2F;当不为0时则更新数码管显示键值
+		ired_buf[0]&#x3D;gsmg_code[ired_tempy&#x2F;16];&#x2F;&#x2F;将控制码高4位转换为数码管段码
+		ired_buf[1]&#x3D;gsmg_code[ired_tempy%16];&#x2F;&#x2F;将控制码低4位转换为数码管段码
+		ired_buf[2]&#x3D;0X76;&#x2F;&#x2F;显示H的段码
+		smg_display(ired_buf,6);
+
+		if(ired_tempx&#x3D;&#x3D;LED_KEY_VALUE)&#x2F;&#x2F;如果是第一键按下
+		&#123;
+			gired_data[2]&#x3D;0;&#x2F;&#x2F;清零,等待下次按键按下
+			key_cnt_led++;
+			if(key_cnt_led&#x3D;&#x3D;3)key_cnt_led&#x3D;1;
+		&#125;
+		else if(ired_tempx&#x3D;&#x3D;BEEP_KEY_VALUE)&#x2F;&#x2F;如果是第二键按下
+		&#123;
+			gired_data[2]&#x3D;0;&#x2F;&#x2F;清零,等待下次按键按下
+			key_cnt_beep++;
+			if(key_cnt_beep&#x3D;&#x3D;3)key_cnt_beep&#x3D;1;
+		&#125;
+
+		if(key_cnt_led&#x3D;&#x3D;1)LED1&#x3D;0;
+		else LED1&#x3D;1;
+		if(key_cnt_beep&#x3D;&#x3D;1)beep_alarm(100,10);
+	&#125;
+&#125;
+</code></pre>
+<p>beep.h</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &quot;beep.h&quot;
+
+&#x2F;*******************************************************************************
+* 函 数 名       : beep_alarm
+* 函数功能		 : 蜂鸣器报警函数
+* 输    入       : time：报警持续时间
+				   fre：报警频率
+* 输    出    	 : 无
+*******************************************************************************&#x2F;
+void beep_alarm(u16 time,u16 fre)
+&#123;
+	while(time--)
+	&#123;
+		BEEP&#x3D;!BEEP;
+		delay_10us(fre);	
+	&#125;		
+&#125;</code></pre>
+<p>beep.h</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># ifndef _beep_H
+# define _beep_H
+
+# include &quot;public.h&quot;
+
+&#x2F;&#x2F;管脚定义
+sbit BEEP&#x3D;P2^5;
+
+&#x2F;&#x2F;函数声明
+void beep_alarm(u16 time,u16 fre);
+# endif
+</code></pre>
+<p>ired.c（红外）</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &quot;ired.h&quot;
+
+u8 gired_data[4];&#x2F;&#x2F;存储4个字节接收码（地址码+地址反码+控制码+控制反码）
+
+&#x2F;*******************************************************************************
+* 函 数 名         : ired_init
+* 函数功能		   : 红外端口初始化函数，外部中断0配置 
+* 输    入         : 无
+* 输    出         : 无
+*******************************************************************************&#x2F;
+void ired_init(void)
+&#123;
+	IT0&#x3D;1;	&#x2F;&#x2F;下降沿触发
+	EX0&#x3D;1;	&#x2F;&#x2F;打开中断0允许
+	EA&#x3D;1;	&#x2F;&#x2F;打开总中断
+	IRED&#x3D;1;	&#x2F;&#x2F;初始化端口
+&#125;
+
+void ired() interrupt 0	&#x2F;&#x2F;外部中断0服务函数
+&#123;
+	u8 ired_high_time&#x3D;0;
+	u16 time_cnt&#x3D;0;
+	u8 i&#x3D;0,j&#x3D;0;
+
+	if(IRED&#x3D;&#x3D;0)
+	&#123;
+		time_cnt&#x3D;1000;
+		while((!IRED)&amp;&amp;(time_cnt))&#x2F;&#x2F;等待引导信号9ms低电平结束，若超过10ms强制退出
+		&#123;
+			delay_10us(1);&#x2F;&#x2F;延时约10us
+			time_cnt--;
+			if(time_cnt&#x3D;&#x3D;0)return;		
+		&#125;
+		if(IRED)&#x2F;&#x2F;引导信号9ms低电平已过，进入4.5ms高电平
+		&#123;
+			time_cnt&#x3D;500;
+			while(IRED&amp;&amp;time_cnt)&#x2F;&#x2F;等待引导信号4.5ms高电平结束，若超过5ms强制退出
+			&#123;
+				delay_10us(1);
+				time_cnt--;
+				if(time_cnt&#x3D;&#x3D;0)return;	
+			&#125;
+			for(i&#x3D;0;i&lt;4;i++)&#x2F;&#x2F;循环4次，读取4个字节数据
+			&#123;
+				for(j&#x3D;0;j&lt;8;j++)&#x2F;&#x2F;循环8次读取每位数据即一个字节
+				&#123;
+					time_cnt&#x3D;600;
+					while((IRED&#x3D;&#x3D;0)&amp;&amp;time_cnt)&#x2F;&#x2F;等待数据1或0前面的0.56ms结束，若超过6ms强制退出
+					&#123;
+						delay_10us(1);
+						time_cnt--;
+						if(time_cnt&#x3D;&#x3D;0)return;	
+					&#125;
+					time_cnt&#x3D;20;
+					while(IRED)&#x2F;&#x2F;等待数据1或0后面的高电平结束，若超过2ms强制退出
+					&#123;
+						delay_10us(10);&#x2F;&#x2F;约0.1ms
+						ired_high_time++;
+						if(ired_high_time&gt;20)return;	
+					&#125;
+					gired_data[i]&gt;&gt;&#x3D;1;&#x2F;&#x2F;先读取的为低位，然后是高位
+					if(ired_high_time&gt;&#x3D;8)&#x2F;&#x2F;如果高电平时间大于0.8ms，数据则为1，否则为0
+						gired_data[i]|&#x3D;0x80;
+					ired_high_time&#x3D;0;&#x2F;&#x2F;重新清零，等待下一次计算时间
+				&#125;
+			&#125;
+		&#125;
+		if(gired_data[2]!&#x3D;~gired_data[3])&#x2F;&#x2F;校验控制码与反码，错误则返回
+		&#123;
+			for(i&#x3D;0;i&lt;4;i++)
+				gired_data[i]&#x3D;0;
+			return;	
+		&#125;
+	&#125;		
+&#125;
+</code></pre>
+<p>ired.h</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># ifndef _ired_H
+# define _ired_H
+
+# include &quot;public.h&quot;
+
+&#x2F;&#x2F;管脚定义
+sbit IRED&#x3D;P3^2;
+
+&#x2F;&#x2F;声明变量
+extern u8 gired_data[4];
+
+
+&#x2F;&#x2F;函数声明
+void ired_init(void);
+
+# endif</code></pre>
+<p>smg.c</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &quot;smg.h&quot;
+
+&#x2F;&#x2F;共阴极数码管显示0~F的段码数据
+u8 gsmg_code[17]&#x3D;&#123;0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,
+				0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71&#125;;
+
+&#x2F;*******************************************************************************
+* 函 数 名       : smg_display
+* 函数功能		 : 动态数码管显示
+* 输    入       : dat：要显示的数据
+				   pos：从左开始第几个位置开始显示，范围1-8
+* 输    出    	 : 无
+*******************************************************************************&#x2F;
+void smg_display(u8 dat[],u8 pos)
+&#123;
+	u8 i&#x3D;0;
+	u8 pos_temp&#x3D;pos-1;
+
+	for(i&#x3D;pos_temp;i&lt;8;i++)
+	&#123;
+	   	switch(i)&#x2F;&#x2F;位选
+		&#123;
+			case 0: LSC&#x3D;1;LSB&#x3D;1;LSA&#x3D;1;break;
+			case 1: LSC&#x3D;1;LSB&#x3D;1;LSA&#x3D;0;break;
+			case 2: LSC&#x3D;1;LSB&#x3D;0;LSA&#x3D;1;break;
+			case 3: LSC&#x3D;1;LSB&#x3D;0;LSA&#x3D;0;break;
+			case 4: LSC&#x3D;0;LSB&#x3D;1;LSA&#x3D;1;break;
+			case 5: LSC&#x3D;0;LSB&#x3D;1;LSA&#x3D;0;break;
+			case 6: LSC&#x3D;0;LSB&#x3D;0;LSA&#x3D;1;break;
+			case 7: LSC&#x3D;0;LSB&#x3D;0;LSA&#x3D;0;break;
+		&#125;
+		SMG_A_DP_PORT&#x3D;dat[i-pos_temp];&#x2F;&#x2F;传送段选数据
+		delay_10us(100);&#x2F;&#x2F;延时一段时间，等待显示稳定
+		SMG_A_DP_PORT&#x3D;0x00;&#x2F;&#x2F;消音
+	&#125;
+&#125;
+</code></pre>
+<p>smg.h</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># ifndef _smg_H
+# define _smg_H
+
+# include &quot;public.h&quot;
+
+
+# define SMG_A_DP_PORT	P0	&#x2F;&#x2F;使用宏定义数码管段码口
+
+&#x2F;&#x2F;定义数码管位选信号控制脚
+sbit LSA&#x3D;P2^2;
+sbit LSB&#x3D;P2^3;
+sbit LSC&#x3D;P2^4;
+
+extern u8 gsmg_code[17];
+
+void smg_display(u8 dat[],u8 pos);
+
+# endif</code></pre>
+<p>public.c</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &quot;public.h&quot;
+
+&#x2F;*******************************************************************************
+* 函 数 名       : delay_10us
+* 函数功能		 : 延时函数，ten_us&#x3D;1时，大约延时10us
+* 输    入       : ten_us
+* 输    出    	 : 无
+*******************************************************************************&#x2F;
+void delay_10us(u16 ten_us)
+&#123;
+	while(ten_us--);	
+&#125;
+
+&#x2F;*******************************************************************************
+* 函 数 名       : delay_ms
+* 函数功能		 : ms延时函数，ms&#x3D;1时，大约延时1ms
+* 输    入       : ms：ms延时时间
+* 输    出    	 : 无
+*******************************************************************************&#x2F;
+void delay_ms(u16 ms)
+&#123;
+	u16 i,j;
+	for(i&#x3D;ms;i&gt;0;i--)
+		for(j&#x3D;110;j&gt;0;j--);
+&#125;</code></pre>
+<p>public.h</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># ifndef _public_H
+# define _public_H
+
+# include &quot;reg52.h&quot;
+
+typedef unsigned int u16;	&#x2F;&#x2F;对系统默认数据类型进行重定义
+typedef unsigned char u8;
+
+
+void delay_10us(u16 ten_us);
+void delay_ms(u16 ms);
+
+# endif
+</code></pre></article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BA%A2%E5%A4%96/">红外</a></div><div class="post_share"><div class="social-share" data-image="/img/num18.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%A2%E5%A4%96%E9%81%A5%E6%8E%A7"><span class="toc-number">1.</span> <span class="toc-text">红外遥控</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E7%BC%96%E5%86%99"><span class="toc-number">2.</span> <span class="toc-text">软件编写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%A2%E5%A4%96%E9%81%A5%E6%8E%A7LED%E4%BA%AE%E7%81%AD%E5%92%8C%E8%9C%82%E9%B8%A3%E5%99%A8"><span class="toc-number">3.</span> <span class="toc-text">红外遥控LED亮灭和蜂鸣器</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://api2.acozycotage.net/Pweb" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://lib.baomitu.com/KaTeX/latest/katex.min.css"><script src="https://jsd.onmicrosoft.cn/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '可惜你不听王杰，也不懂我...' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
