@@ -44,7 +44,7 @@
       if site.data.link
         - let result = ""
         each i in site.data.link
-          - let className = i.class_name ? markdown(`## ${i.class_name}`) : ""
+          - let className = i.class_name ? markdown(`## ${i.class_name} (${i.link_list.length})`) : "" 
           - let classDesc = i.class_desc ? `<div class="flink-desc">${i.class_desc}</div>` : ""
 
           - let listResult = ""
@@ -53,7 +53,7 @@
             - 
               listResult += `
                 <div class="flink-list-item">
-                  <a href="${j.link}" title="${j.name}" target="_blank">
+                <a href="${j.link}" style="color:${j.theme_color}" title="${j.name}" target="_blank">
                     <div class="flink-item-icon">
                       <img class="no-lightbox" src="${j.avatar}" onerror='this.onerror=null;this.src="${url_for(theme.error_img.flink)}"' alt="${j.name}" />
                     </div>

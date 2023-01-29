@@ -1,8 +1,13 @@
 if theme.aside.card_author.enable
   .card-widget.card-info
     .is-center
-      .avatar-img
-        img(src=url_for(theme.avatar.img) onerror=`this.onerror=null;this.src='` + url_for(theme.error_img.flink) + `'` alt="avatar")
+      div.card-info-avatar
+        .avatar-img
+          img(src=url_for(theme.avatar.img) onerror=`this.onerror=null;this.src='` + url_for(theme.error_img.flink) + `'` alt="avatar")
+        div.author-status-box
+          div.author-status
+            g-emoji.g-emoji(alias="palm_tree" fallback-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/ssaa1324234.png") 🐟
+            span 摸鱼中
       .author-info__name= config.author
       .author-info__description!= theme.aside.card_author.description || config.description
 

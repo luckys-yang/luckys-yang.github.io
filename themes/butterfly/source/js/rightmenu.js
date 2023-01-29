@@ -127,11 +127,11 @@ rmf.copySelect = function () {
 }
 
 //回到顶部
-rmf.scrollToTop = function () {
-    document.getElementsByClassName("menus_items")[1].setAttribute("style","");
-    document.getElementById("name-container").setAttribute("style","display:none");
-    btf.scrollToDest(0, 500);
-}
+// rmf.scrollToTop = function () {
+//     document.getElementsByClassName("menus_items")[1].setAttribute("style","");
+//     document.getElementById("name-container").setAttribute("style","display:none");
+//     btf.scrollToDest(0, 500);
+// }
 rmf.translate = function () {
     document.getElementById("translateLink").click();
 }
@@ -308,6 +308,11 @@ function addLongtabListener(target, callback) {
             clearTimeout(timer)
         }
     }
+}
+// 全屏
+rmf.fullScreen = function () {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else document.documentElement.requestFullscreen();
 }
 
 addLongtabListener(box, popupMenu)

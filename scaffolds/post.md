@@ -1,5 +1,9 @@
 ---
 title: {{ title }}
 date: {{ date }}
-tags:
+cover: /img/x.webp
+tags: x
+categories:
+  - x
+comments: false
 ---

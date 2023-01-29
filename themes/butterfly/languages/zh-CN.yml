@@ -54,6 +54,7 @@ pagination:
 comment: 评论
 
 aside:
+  shuoshuo: 说说
   articles: 文章
   tags: 标签
   categories: 分类
@@ -63,7 +64,7 @@ aside:
   card_archives: 归档
   card_recent_post: 最新文章
   card_webinfo:
-    headline: 网站资讯
+    headline: 小栈资讯
     article_name: 文章数目
     runtime:
       name: 已运行时间
