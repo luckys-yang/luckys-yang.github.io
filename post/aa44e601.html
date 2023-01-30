@@ -1,0 +1,1268 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>eNSP-笔记 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="附1-命令缩写  注1：ip address xxx.xxx.xxx.xxx 子网掩码	缩写 ip add xxx.xxx.xxx.xxx 子网掩码（子网掩码可用24代替） 注2：华为命令文档：https:&#x2F;&#x2F;support.huawei.com&#x2F;enterprise&#x2F;zh&#x2F;doc&#x2F;EDOC1100169982&#x2F;9f807c4 VRP通用路由介绍 本节主要命令  sys	&#x2F;&#x2F;进">
+<meta property="og:type" content="article">
+<meta property="og:title" content="eNSP-笔记">
+<meta property="og:url" content="https://mdcm.yang5201314.cn/post/aa44e601.html">
+<meta property="og:site_name" content="Luckys-Yangの小栈">
+<meta property="og:description" content="附1-命令缩写  注1：ip address xxx.xxx.xxx.xxx 子网掩码	缩写 ip add xxx.xxx.xxx.xxx 子网掩码（子网掩码可用24代替） 注2：华为命令文档：https:&#x2F;&#x2F;support.huawei.com&#x2F;enterprise&#x2F;zh&#x2F;doc&#x2F;EDOC1100169982&#x2F;9f807c4 VRP通用路由介绍 本节主要命令  sys	&#x2F;&#x2F;进">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mdcm.yang5201314.cn/img/num110.webp">
+<meta property="article:published_time" content="2022-06-27T06:14:00.000Z">
+<meta property="article:modified_time" content="2022-07-01T10:45:57.000Z">
+<meta property="article:author" content="Luckys-Yang">
+<meta property="article:tag" content="eNSP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mdcm.yang5201314.cn/img/num110.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"><link rel="canonical" href="https://mdcm.yang5201314.cn/post/aa44e601.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'eNSP-笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-07-01 18:45:57'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">110</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">77</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">22</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">eNSP-笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-06-27T06:14:00.000Z" title="发表于 2022-06-27 14:14:00">2022-06-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-07-01T10:45:57.000Z" title="更新于 2022-07-01 18:45:57">2022-07-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%B8%93%E4%B8%9A%E8%AF%BE%E7%AC%94%E8%AE%B0/">专业课笔记</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><h2 id="附1-命令缩写">附1-命令缩写</h2>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220627152412%20.png" alt=""></p>
+<p><font color='red'>注1</font>：<code>ip address xxx.xxx.xxx.xxx 子网掩码</code>	缩写 <code>ip add xxx.xxx.xxx.xxx 子网掩码（子网掩码可用24代替）</code></p>
+<p><font color='red'>注2</font>：华为命令文档：<a href="https://support.huawei.com/enterprise/zh/doc/EDOC1100169982/9f807c4">https://support.huawei.com/enterprise/zh/doc/EDOC1100169982/9f807c4</a></p>
+<h2 id="VRP通用路由介绍">VRP通用路由介绍</h2>
+<div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>本节主要命令</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">sys	&#x2F;&#x2F;进入系统视图
+sysname SW1	&#x2F;&#x2F;重命名设备为SW1
+q	&#x2F;&#x2F;返回上一级视图    
+Ctrl+z&#x2F;return	&#x2F;&#x2F;直接返回用户视图
+save	&#x2F;&#x2F;保存配置信息，输入y或n表示是否继续，等待几秒后保存成功(必须在用户视图下才可以使用)
+undo 名称&#x2F;命令	&#x2F;&#x2F;删除配置，即取消所配置的信息
+dis 名称&#x2F;命令	&#x2F;&#x2F;即可查看接口或者设备配置信息    
+dis saved-configuration	&#x2F;&#x2F;查询当前设备的所保存的信息
+dis current-configuration	&#x2F;&#x2F;查询当前设备的所有配置情况（简写：dis cur）
+dis version	&#x2F;&#x2F;查看VRP的版本信息
+reboot	&#x2F;&#x2F;重启    
+shutdown	&#x2F;&#x2F;端口状态下，禁用此端口，前面加undo表示开启
+dis this	&#x2F;&#x2F;显示系统当前视图下生效的运行配置参数</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;清空配置命令
+&#x2F;&#x2F;第一步，用户视图下
+reset saved-configuration
+&#x2F;&#x2F;输入命令后会出现叫你 Are you sure?(y&#x2F;n)：这时输入y
+&#x2F;&#x2F;第二步
+reboot
+&#x2F;&#x2F;输入命令后会出现叫你 Contunue?[y&#x2F;n]：这时输入n
+&#x2F;&#x2F;系统会继续提示：System...Continue?[y&#x2F;x]：这时输入y，重启
+&#x2F;&#x2F;以上完成后路由器恢复出厂设置，需要断开路由再启动
+</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;关闭泛洪信息
+undo terminal monitor	&#x2F;&#x2F;可简写 u t m
+&#x2F;&#x2F;开启
+terminal monitor	&#x2F;&#x2F;可简写 t m</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>前言</p>
+</div>
+<p><code>VRP</code> (Versatile Routing Platform)即通用路由平台，是华为在通信领域多年的研究经验结晶，是华为所有基于 <code>IP/ATM</code> 构架的数据通信产品操作系统平台。运行VRP操作系统的华为产品包括 <code>路由器、局域网交换机、ATM交换机、拨号访问服务器、IP电话网关、电信级综合业务接入平台、智能业务选择网关，以及专用硬件防火墙等。</code><font color='cornflowerblue'>核心交换平台基于IP或ATM。</font></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>华为命令结构规律</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220627144802.jpg" alt=""></p>
+<p><code>命令字</code>：规定了系统应该执行的功能，个人理解就是规定主方向，例如：display(查询状态)、undo(撤销命令)、reboot（重启设备）等确认主方向。</p>
+<p><code>关键字</code>：是在命令字的基础上进一步约束命令，是对命令的扩展，更加明确主方向。</p>
+<p><code>参数列表</code>：对命令执行更加的精细化，目的是让指令明确自己要去哪里 去干什莫。</p>
+<p>例如：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">[Huawei]dis ip int GigabitEthernet 0&#x2F;0&#x2F;0   &#x2F;&#x2F;查询g 0&#x2F;0&#x2F;0接口地信息</code></pre>
+<p><code>命令字</code>：dis(display)  ----告诉系统说，我这是我这是查询命令</p>
+<p><code>关键字</code>：ip  ----在查询的基础上再次告诉系统我的查询查询目标是IP</p>
+<p><code>参数名</code>：int----再把接口告诉系统，我要查IP里面的接口（intface的缩写）</p>
+<p><code>参数值</code>：GigabitEthernet 0/0/0  ----最后告诉系统查询那个接口</p>
+<p><font color='red'>注1</font>：</p>
+<p><font color='gree'>①</font> 每条命令里最多有一个命令字，但是可以有多个关键字和参数。</p>
+<p><font color='gree'>②</font> 命令字、关键字、参数名、参数值之间，需要用空格进行分割。</p>
+<p><font color='gree'>③</font> 一条命令命令字是唯一且不可缺少的，例如:reboot、save等。</p>
+<p><font color='gree'>④</font> 命令不一定都是这么完整的格式，但是整体思想都是如此。</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>视图</p>
+</div>
+<ul>
+<li>在VRP通用路由平台有三种视图，分为<code>用户视图、系统视图和接口视图。</code></li>
+<li>打开路由器的 <code>CLI</code>，即打开命令行页面后，会出现 很多<code># </code>，等加载往后会有以下页面显示（<code>用户视图</code>），输入 <code>sys</code> 进入 <code>系统视图</code></li>
+</ul>
+<p><font color='red'>注1</font>：若启动后一直出来 <code># </code> 或启动报错，说明可能配置软件安装有错误等等，首先尝试把 <code>防火墙</code>关闭！（所以我每次用都会把火绒退出）</p>
+<ul>
+<li>例如我们对路由器LSW2的 <code>Ethernet 0/0/0</code> 接口进行配置，只需要在系统视图下输入： <code>int e0/0/0</code>，即可进入该接口下</li>
+</ul>
+<p><font color='red'>注1</font>：命令不分大小写，有的长单词可简写！</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220627144241.jpg" alt=""></p>
+<h2 id="配置IP地址和网关">配置IP地址和网关</h2>
+<div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>本节主要命令</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;路由器
+g+端口号	&#x2F;&#x2F;进入某端口
+ip add ip地址 网关 &#x2F;&#x2F;端口状态下配置路由器ip和网关
+    
+&#x2F;&#x2F;交换机
+vlan xx	&#x2F;&#x2F;划分vlan,如vlan 10,vlan 20
+int vlan xx	&#x2F;&#x2F;进入vlan
+ip add ip地址 网关	&#x2F;&#x2F;vlan状态下配置交换机ip，网关
+dis vlan	&#x2F;&#x2F;查看vlan配置
+port link-type access	&#x2F;&#x2F;指定配置接口类型为 &#96;access&#96; 
+port default vlan xx	&#x2F;&#x2F;将相应的vlan应用到端口上
+    
+&#x2F;&#x2F;PC机
+ping ip地址	&#x2F;&#x2F;查询是否已经通信
+</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>PC的配置</p>
+</div>
+<p><code>双击PC机，打开其基础配置</code>，在<code>IPv4配置选项卡</code>中可设置IP地址、子网掩码、网关。例设置IP地址、子网掩码、网关分别为：<code>192.168.1.122</code> 、<code>255.255.255.0</code>、<code>192.168.1.1</code>，如下图：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220628081142.png" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>路由器的配置</p>
+</div>
+<p>若要对路由器的接口进行配置，在CLI中需转到<code>接口视图</code>，并进入相应的接口，然后输入<code>ip address</code>后跟 <code>ip地址</code> 和 <code>子网掩码</code>，之间空格隔开。例对路由器的 <code>GigabitEthernet0/0/0</code> 接口配置ip地址和子网掩码分别为：<code>192.168.1.12</code>、<code>255.255.255.0</code>。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220628082535.jpg" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>交换机的配置</p>
+</div>
+<ul>
+<li>划分VLAN</li>
+</ul>
+<p>交换机的配置和路由器不一样，它要通过划分一个新的虚拟局域网，也就是<font color='orange'>定义一个vlan进行封装</font>。例在交换机LSW1中定义一个 <code>vlan20</code> 其ip地址和子网掩码分别为：<code>192.168.1.2</code>、<code>24</code>，如下图：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220628083446.jpg" alt=""></p>
+<ul>
+<li>查看VLAN配置</li>
+</ul>
+<p><code>display vlan</code>命令用来查看所有VLAN的相关信息，若不指定任何可选参数，则显示所有VLAN的基本信息，可以看到刚刚划分的vlan20，如下图：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220628083821.png" alt=""></p>
+<ul>
+<li>三层交换机</li>
+</ul>
+<p>注：关于几层交换机可以看型号判断：<code>S5700</code> 是三层交换机，<code>S3700</code>是二层交换机</p>
+<p>这里讲的是三层交换机与PC机的拓扑图，实现三层交换机和PC机的连通，如下图：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220628084919.png" alt=""></p>
+<p><font color='gree'>① </font>打开LSW1的CLI，配置三层交换机的接口<code>g0/0/1</code>，进行 <code>vlan</code> 划分</p>
+<p><font color='gree'>②</font> 配置接口类型：在进入相应接口后，输入命令“<code>port link-type access</code>”，指定配置接口类型为 <code>access</code> 。</p>
+<p><font color='gree'>③</font> 应用端口：然后将相应的vlan应用到该端口上，输入命令“<code>port default vlan</code>”，后跟vlan名称</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220628090153.png" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>网关通信</p>
+</div>
+<p>网关在<code>网络层以上</code>实现网络的互相连接，是复杂的网络互连设备，仅<code>用于两个高层协议不同的网络互连</code>。简单的来说<font color='orange'>网关就相当于从一个房间走向另外一个房间之间需要通过一扇门才能通过。</font></p>
+<ul>
+<li>ping命令</li>
+</ul>
+<p>ping命令是用来检测PC与输入的IP地址是否有数据通讯，以来<code>判断网络是否连通</code>，即在PC机的命令行中输入&quot;<code>ping</code>&quot;后跟ip地址</p>
+<p>例如当我们设置好路由器和PC机的ip地址如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220628091154.png" alt=""></p>
+<p>设置PC机的ip地址、子网掩码、网关为 <code>192.168.1.1</code>、<code>255.255.255.0</code>、<code>192.168.1.254</code>。</p>
+<p>设置路由器端口 <code>g0/0/1</code> 的IP地址和子网掩码。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220628094010.png" alt=""></p>
+<p>然后回到PC机在命令行输入 <code>ping 192.168.1.254</code>，会发现已经ping通，即实现了网关通信；交换机与PC实现网关通信也是一样，只是要划分vlan且网关地址要一致，否则无法ping通。</p>
+<h2 id="配置静态路由、动态路由">配置静态路由、动态路由</h2>
+<div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>本节主要命令</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;静态路由
+ip route-static 目标网段 子网掩码 下一跳	&#x2F;&#x2F;这里的网段是根据看对应ip的子网掩码的，子网掩码中255表示不可变，0可以变；下一跳指的是相邻的路由器接口ip地址
+    
+&#x2F;&#x2F;浮动路由
+ip route-static 目标网段 子网掩码 下一跳preference 70	&#x2F;&#x2F;备用路径，静态路由默认优先级60，设置备选路径优先级要大于60，值越小优先级越高
+
+&#x2F;&#x2F;PC机
+tracert	&#x2F;&#x2F;路由跟踪
+
+&#x2F;&#x2F;动态路由-RIP
+rip	&#x2F;&#x2F;系统视图下开启协议进程，其默认进程号为version 1，即rip-1
+network 网段	&#x2F;&#x2F;这里网段只能是路由相邻，即直连的路由其ip地址
+version 2	&#x2F;&#x2F;改变其运行版本为2，下面也是输入network 网段
+    
+&#x2F;&#x2F;动态路由-OSPF
+ospf	&#x2F;&#x2F;系统视图下开启协议进程，跟rip一样，默认进程号1，即ospf-1
+area 区域ID	&#x2F;&#x2F;配置区域
+network 网段 反子网掩码	&#x2F;&#x2F;与rip差不多，只是后面增加了一个反子网掩码</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>静态路由</p>
+</div>
+<p>静态路由是一种路由的方式，<code>手动配置</code>，而非动态决定。且与动态路由不同，静态路由是<code>固定的</code>，不会改变，即使网络状况已经改变或是重新被组态。一般来说，静态路由是由网络管理员逐项加入路由表。</p>
+<p><font color='red'>注</font>：路由器有阻隔广播功能</p>
+<p><font color='cornflowerblue'>例题</font>：配置路由器R1和R2之间的静态路由</p>
+<p>注：这里路由的接口不能使用 <code>Ethernet</code> 类型，只能用 <code>GE</code> 类型（我也不清楚为什么）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220628122907.jpg" alt=""></p>
+<p><font color='gree'>①</font> 在配置好各个PC机的ip地址、子网掩码、网关后，对路由R1和R2的 <code>G0/0/0</code> 和 <code>G0/0/1</code> 的接口进行配置</p>
+<p><font color='gree'>②</font> 在 <code>系统视图</code> 下，对于R1，由于R1与PC1和R2是相邻的，与PC2是间接相连的，配置R1的静态路由的目标网段为 <code>192.168.2.0</code>，而下一跳为R2的 <code>G0/0/0</code>接口ip为 <code>10.0.0.2</code>]，即配置命令为 <code>ip route-static 192.168.2.0 24 10.0.0.2</code></p>
+<p>也是在 <code>系统视图</code> 下，对于R2，由于R2与PC2和R1是相邻的，与PC1是间接相连的，配置R2的静态路由的目标网段为 <code>192.168.1.0</code>，而下一跳为R1的 <code>G0/0/0</code>接口ip为 <code>10.0.0.1</code>，即配置命令为 <code>ip route-static 192.168.1.0 24 10.0.0.1</code></p>
+<p><font color='gree'>③</font> 测试连通性，发现是连通的</p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20220628110717.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20220628110910.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>浮动路由</p>
+</div>
+<p>浮动路由指的是配置 <code>两条静态路由</code> 默认选取链路质量优（带宽大的）作为 <code>主路径</code>，当主路径出现故障时，由带宽较小的备份路径顶替主路径。<font color='orange'>作用：保持网络不中断</font>；<font color='orange'>浮动路由在同一时刻数据只会有一条链路代为转发</font></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220629004150.jpg" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;R1配置
+int g0&#x2F;0&#x2F;0
+ip add 192.168.3.1 24
+q
+int g0&#x2F;0&#x2F;1
+ip add 192.168.1.254 24
+q
+int g0&#x2F;0&#x2F;2
+ip add 192.168.4.1 24
+q
+    
+&#x2F;&#x2F;R2配置
+int g0&#x2F;0&#x2F;0
+ip add 192.168.3.2 24
+q
+int g0&#x2F;0&#x2F;1
+ip add 192.168.2.254 24
+q
+int g0&#x2F;0&#x2F;2
+ip add 192.168.5.1 24
+q
+
+&#x2F;&#x2F;R3配置
+int g0&#x2F;0&#x2F;0
+ip add 192.168.4.2 24
+q
+int g0&#x2F;0&#x2F;1
+ip add 192.168.5.2 24
+q</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;R1配置
+ip route-static 192.168.2.0 24 192.168.3.2	&#x2F;&#x2F;&#x2F;&#x2F;这里的网段是根据看对应ip的子网掩码的，子网掩码中255表示不可变，0可以变；下一跳指的是相邻的路由器接口ip地址
+ip route-static 192.168.2.0 24 192.168.4.2 preference 70
+    
+&#x2F;&#x2F;R2配置
+ip route-static 192.168.1.0 24 192.168.3.1	&#x2F;&#x2F;默认主路径
+ip route-static 192.168.1.0 24 192.168.5.2 preference 70	&#x2F;&#x2F;备用路径，静态路由默认优先级60，设置备选路径优先级要大于60
+    
+&#x2F;&#x2F;R3配置
+ip route-static 192.168.1.0 24 192.168.4.1
+ip route-static 192.168.2.0 24 192.168.5.1</code></pre>
+<p>最后经过测试可以ping通，还可以通过 <code>tracert</code> ip 看看经过了哪些路由端口，也可以把其中一条线的端口断开测试是否连通</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;端口断开
+int g0&#x2F;0&#x2F;0
+shutdown
+&#x2F;&#x2F;恢复
+int g0&#x2F;0&#x2F;0
+undo shutdown</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220629005649.png" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>动态路由</p>
+</div>
+<p>动态路由是与静态路由相对的一个概念，指路由器能够根据路由器之间的交换的特定路由信息 <code>自动地建立自己的路由表</code>，并且能够根据链路和节点的变化适时地进行 <code>自动调整</code>。下面主要介绍 <code>RIP</code> 和 <code>OSPF</code></p>
+<h3 id="RIP协议">RIP协议</h3>
+<p>路由信息协议（RIP）是一种<code>动态路由选择协议</code>，它是使用最早最广泛的协议，用于自治系统内的路由信息传递，使用这种协议的路由器<code>只与相邻的路由器进行信息交换</code>，适用于 <code>小型网络</code>。</p>
+<p><font color='cornflowerblue'>例题</font>：配置R1和R2之间的动态路由信息协议</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220628122907.jpg" alt="跟静态路由拓扑图一样"></p>
+<p><font color='gree'>①</font> 在配置好各个PC机的ip地址、子网掩码、网关后，对路由R1和R2的 <code>G0/0/0</code> 和 <code>G0/0/1</code> 的接口进行配置</p>
+<p><font color='gree'>②</font> 在系统视图下，对于路由器R1，由于R1与PC1和R2是相邻的，与PC1相连的接口网段 <code>192.168.1.0</code>和与R2相连的接口网段 <code>10.0.0.0</code>，即配置命令为<code>rip</code> 然后输入 <code>network 192.168.1.0</code>  再输入 <code>network 10.0.0.0</code> 。</p>
+<p>对于路由器R2，由于R2与PC2和R1是相邻的，与PC2相连的接口网段 <code>192.168.2.0</code>和与R2相连的接口网段 <code>10.0.0.0</code>，即配置命令为<code>rip</code> 然后输入  <code>network 192.168.2.0</code>  再输入 <code>network 10.0.0.0</code> 。</p>
+<p><font color='gree'>③</font> 测试连通性，发现已经连通</p>
+<h3 id="OSPF协议">OSPF协议</h3>
+<p>开放式最短路径优先即为OSPF协议的优点，它也是一种<code>动态路由选择协议</code>，用于单一自治系统内的决策路由，适用于 <code>大型网络</code></p>
+<p><font color='cornflowerblue'>例题1</font>（单区域）：在 <code>区域0</code> 中，配置路由器R1和R2之间的动态开放式最短路径优先协议</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220628123227.jpg" alt=""></p>
+<p><font color='gree'>①</font> 配置PC和路由步骤这里省略跟静态路由一样</p>
+<p><font color='gree'>②</font> 在系统视图下，对于路由器R1，配置命令为<code>ospf</code> 然后输入 <code>area 0</code> 再输入<code>network 192.168.1.0 0.0.0.255</code> 再输入  <code>network 10.0.0.0 0.0.0.255</code> 。</p>
+<p>对于路由器R2，配置命令为<code>ospf</code> 然后输入 <code>area 0</code> 再输入  <code>network 192.168.2.0 0.0.0.255</code> 再输入  <code>network 10.0.0.0 0.0.0.255</code> 。</p>
+<p><font color='gree'>③</font> 然后ping一下发现已经连通</p>
+<p>例题2（多区域）：配置 <code>区域0，区域1，区域2</code> 中路由器R1和R2之间的动态开放式最短路径优先协议</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220628131241.jpg" alt=""></p>
+<p><font color='gree'>①</font> 配置PC和路由步骤这里省略跟静态路由一样</p>
+<p><font color='gree'>②</font> 对于 R1，需要配置 <code>area 0</code> 和 <code>area 1</code>；对于R2。需要配置 <code>area 1</code> 和 <code>area 2</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220628190531.jpg" alt="R1"></p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20220628190635.jpg","alt":"R2"},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20220628190656.jpg","alt":"R2"}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<p><font color='gree'>③</font> 通过ping ip 发现PC1除了PC2不能ping其他都可以连通，PC2除了PC1不能ping其他都可以连通，相当于一个区域的才能互相连通</p>
+<p><font color='gree'>④</font> 查看全局路由表，输入命令：<code>dis ip routing-table</code>，可以发现下图红框内容是我们定义的 <code>OSPF</code> 动态路由</p>
+<p><font color='red'>注</font>：下图蓝框意思依次为：<code>目的网络 主机地址/掩码长度</code>；<code>学习路由的协议</code>；<code>优先级</code>；<code>开销</code>；<code>路由标记</code>；<code>下一跳</code>；<code>下一跳的接口</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220628194231.jpg" alt=""></p>
+<h2 id="单臂路由">单臂路由</h2>
+<p>简单的来说，单臂路由就是通过在路由器的一个接口上通过配置 <code>子接口</code>（这里的接口并不是物理接口）实现不同虚拟局域网之间的互联互通。</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>Trunk模式</p>
+</div>
+<p>Trunk端口允许 <code>多个VLAN</code> 通过，可以接收和发送多个VLAN报文，一般用于 <code>交换机之间端口</code> ，只允许默认VLAN报文发送时不打标签，带有标签的数据被转发至另一个交换机Trunk端口</p>
+<p>交换机可以使用trunk功能（中继链路），只需要两台交换机之间有一条互连线，将互连线的两个端口设置为trunk模式，这样就可以使交换机上不同VLAN共享这条线路</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;主要命令
+&#x2F;&#x2F;进入端口状态下...
+port l trunk	&#x2F;&#x2F;设置端口工作模式为trunk
+port trunk pvid v ID号	&#x2F;&#x2F;指定端口的PVID值
+port trunk allow-pass v all&#x2F;ID号	&#x2F;&#x2F;允许所有或者部分VLAN通过trunk口</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>VLAN概述与优势</p>
+</div>
+<p>在传统的交换式以太网中，所有的用户都在同一个广播域中，当网络规模较大时，广播包的数量会急剧增加（广播风暴），网络的 <code>传输效率将会明显下降</code>。我们可以使用 <code>分隔广播域</code> 的方法来解决这个，分隔广播域有两种方法。<code>物理分隔</code> 和 <code>逻辑分隔</code></p>
+<p><font color='cornflowerblue'>优势</font>：</p>
+<p><font color='gree'>①</font> <font color='orange'>控制广播</font>：每个VLAN都是一个 <code>独立的广播域</code> ，这样就减少了广播对带宽的占用，提高了网络传输效率。<br>
+<font color='gree'>②</font> <font color='orange'>增强网络安全性</font>：由于只能在同一VLAN内的端口之间交换数据， <code>不同VLAN的端口之间不能直接访问</code> ，因此通过划分VLAN可以限制个别主机访问服务器等资源，提高网络的安全性。<br>
+<font color='gree'>③</font> <font color='orange'>简化网络管理</font>：一个VLAN可以 <code>根据部门职能、对象组或应用将不同地理位置的用户划分为一个逻辑网段</code> ，在不改动网络物理连接的情况下可以任意地将工作站在工作组或子网之间移动。利用VLAN大大减轻了网络管理和维护工作的负担，降低了网络维护的费用。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220628215741.jpg" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;单臂路由配置
+int g0&#x2F;0&#x2F;0.1	&#x2F;&#x2F;进入子接口1
+dot1q termination vid 10	&#x2F;&#x2F;配置子接口dot1q终结的单层VLAN ID，封装数据帧
+ip add 192.168.1.254 24	&#x2F;&#x2F;对子接口配置ip地址和子网掩码
+arp broadcast en	&#x2F;&#x2F;开启子接口1的ARP广播功能
+
+    
+int g0&#x2F;0&#x2F;0.2	&#x2F;&#x2F;进入子接口2
+dot1q termination vid 20
+ip add 192.168.2.254 24
+arp broadcast en
+    
+
+int g0&#x2F;0&#x2F;0.3	&#x2F;&#x2F;进入子接口3
+dot1q termination vid 30
+ip add 192.168.3.254 24
+arp broadcast en</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;交换机配置
+int e0&#x2F;0&#x2F;1	&#x2F;&#x2F;进入接口
+port l trunk	&#x2F;&#x2F;设置端口工作模式为trunk
+port trunk allow-pass vlan all	&#x2F;&#x2F;允许所有VLAN通过trunk口
+    
+    
+vlan batch 10 20 30	&#x2F;&#x2F;一次性创建VLAN 10 20 30
+    
+    
+int e0&#x2F;0&#x2F;2
+port l a	&#x2F;&#x2F;指定配置接口类型为 &#96;access&#96; (port link-type access)
+port d v 10	&#x2F;&#x2F;将相应的vlan应用到端口上(port default vlan 10)
+
+    
+int e0&#x2F;0&#x2F;3
+port l a
+port d v 20	
+    
+    
+int e0&#x2F;0&#x2F;4
+port l a
+port d v 30	</code></pre>
+<p>最后，通过PC机互相ping，会发现已经连通</p>
+<h2 id="AAA模式">AAA模式</h2>
+<p>在进入用户页面后，要对用户进行认证，以下由两种方式对设备进行配置，分别是<code>password模式</code>和<code>AAA模式</code>。两种模式都是在PC2的 <code>串口</code> 里进行操作的，打开PC机后点击 <code>连接</code></p>
+<p>AAA是认证（Authentication）、授权（Authorization）和计费（Accounting）的简称，是网络安全中进行访问控制的一种安全管理机制，提供 <code>认证、授权和计费</code> 三种安全服务。</p>
+<p>AAA模式<code>登录时需输入用户名和密码</code>，当用户输入信息与设备所配置的用户名和密码正确时才能通过。如果对用户采用AAA认证，登录到设备的用户所能访问的命令级别由AAA配置信息中本地用户的级别决定。缺省情况下，AAA本地用户的级别为 <code>0</code></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>用户级别</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220629111409.jpg" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220629105533.png" alt=""></p>
+<p><font color='gree'>①</font> 首先点击PC，到 <code>串口</code> 那点击连接，进入用户视图下，然后输入 <code>sys</code> 进入系统视图</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220629105756.png" alt=""></p>
+<p><font color='gree'>②</font></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;PC
+user-interface console 0	&#x2F;&#x2F;进入Console用户页面
+authentication-mode aaa	&#x2F;&#x2F;设置模式为AAA
+q	&#x2F;&#x2F;返回系统视图
+aaa	&#x2F;&#x2F;进入AAA视图
+local-user adim password cipher 123456	&#x2F;&#x2F;配置用户名和密码
+local-user adim privilege level 3	&#x2F;&#x2F;配置用户级别，当前设置为3
+q	&#x2F;&#x2F;退出退到直到弹出登陆页面</code></pre>
+<p><font color='gree'>③</font> 测试登陆，通过 <code>dis cu</code> 查看配置信息</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220629111123.png" alt=""></p>
+<h2 id="远程终端协议（远程登录）">远程终端协议（远程登录）</h2>
+<p>telnet，即 <code>远程终端协议</code> ，通过两个路由器AR2220之间的远程登陆实验来实现互通，其中 <code>R1</code> 作为telent服务器端，<code>R2</code> 作为客户端</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220629123048.jpg" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;R1
+int g0&#x2F;0&#x2F;0
+ip add 192.168.1.1 24
+    
+&#x2F;&#x2F;R2
+int g0&#x2F;0&#x2F;0
+ip add 192.168.1.2 24</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;R1
+user-interface vty 0 4	&#x2F;&#x2F;进入虚拟类型终端VTY用户界面。VTY是路由器的远程登陆的虚拟端口，0 4表示可以同时打开5个会话，即最多允许5个用户同时登陆。
+authentication-mode password	&#x2F;&#x2F;然后会弹出提示“Please configure the login password (maximum length 16):”，提示输入密码的最大字符限制为16，我这里设置为：123456
+user privilege level 3	&#x2F;&#x2F;配置用户级别为3</code></pre>
+<p>然后在R2上测试telnet连接，在用户视图输入命令<code>telnet ip地址</code>，来测试客户端R2访问R1服务器，成功后会要求输入密码，输入错误系统没有提示成功则通过并按之前设置的用户级别要求来访问服务器R1</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220629124014.jpg" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>查看用户界面的用户登录信息</p>
+</div>
+<p>可通过命令<code>display users （all）</code>，查看用户界面的用户登录信息，下图可以看到R2已经连接上服务器了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220629124216.jpg" alt=""></p>
+<h2 id="动态主机配置协议（DHCP）">动态主机配置协议（DHCP）</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>定义</p>
+</div>
+<p>DHCP（动态主机配置协议）是一个局域网的网络协议。指的是由服务器控制一段IP地址范围，客户机登录服务器时就可以自动获得服务器分配的IP地址和子网掩码。两种方式分别是基于接口地址池的  <code>DHCP（接口模式）</code> 和基于全局地址池的  <code>DHCP （全局模式）</code>。其通常被应用在 <code>大型的局域网络环境中</code>，由管理员手动安装并进行必要的配置，能够提升地址的使用率。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220629133312.jpg" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;R1配置
+int g0&#x2F;0&#x2F;0
+ip add 192.168.1.254 24
+q
+int g0&#x2F;0&#x2F;1
+ip add 192.168.2.254 24
+q
+dhcp en	&#x2F;&#x2F;使能DHCP
+ip pool 1	&#x2F;&#x2F;设置ip地址池1
+network 192.168.1.0 mask 24	&#x2F;&#x2F;配置ip范围及子网掩码
+gatework-list 192.168.1.254	&#x2F;&#x2F;配置网关，注意要和路由器g0&#x2F;0&#x2F;0的ip地址一样
+dns-list 8.8.8.8	&#x2F;&#x2F;配置dns；DNS地址是一个域名服务器地址，它负责把用户的网站地址解析成IP地址，命令：dhcp server dns-list 主DNS 备用DNS
+lease day 0 hour 12	&#x2F;&#x2F;配置租约12小时；超过租期后地址将会重新进行分配
+q
+int g0&#x2F;0&#x2F;0
+dhcp select global	&#x2F;&#x2F;开启该接口的 DHCP 功能；global是指定接口采用全局地址池并对客户端分配ip地址</code></pre>
+<p>输入 <code>dis ip pool name 1</code> 查看地址分配详细信息</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220629135032.jpg" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;R1配置
+int g0&#x2F;0&#x2F;1
+dhcp select int	&#x2F;&#x2F;开启采用接口地址的DHCP Server功能
+dhcp server dns-list 8.8.8.8	&#x2F;&#x2F;网关
+dhcp server lease day 0 hour 12	&#x2F;&#x2F;租约12小时
+dhcp server static ip-address 192.168.2.10 mac-address 5489-9810-7267	&#x2F;&#x2F;绑定静态IP地址给静态mac，如果报错需要到PC释放dhcp分配的ip地址 “ipconfig &#x2F;release”，配置完成然后再“ipconfig &#x2F;renew”</code></pre>
+<p>接下来就是测试，看是否能够由基于全局地址池的DHCP服务器给PC机分配IP地址，我们打开PC机的基础配置，在 <code>IPv4</code> 配置中勾选 <code>DHCP</code>，然后点击 <code>应用</code>。此时就已经给PC机分配IP地址了，我们通过在命令行中输入 <code>ipconfig</code> 命令来测试一下</p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20220629141030.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20220629140935.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20220629140950.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20220629141043.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<p>顺便测试一下连通性，可以发现4台PC已经互相连通</p>
+<h2 id="STP-MSTP">STP/MSTP</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>STP是什么？</p>
+</div>
+<p><code>生成树协议STP</code>（spanning tree protocol）</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>环路会引起的问题</p>
+</div>
+<p><font color='gree'>①</font> <code>环路会引起广播风暴，网络中的主机会收到重复数据帧。</code><br>
+<font color='gree'>②</font> <code>环路会引起MAC地址表震荡。</code><br>
+<font color='cornflowerblue'>场景</font>:为了提高网络可靠性，交换网络中通常会使用冗余链路，然而，冗余链路会交给交换网络带来环路风险，并导致广播风暴以及MAC地址表不稳定等问题，进而会影响到用户的通信质量。生成树协议STP（spanning tree protocol）可以在提高可靠性的同时用能避免环路带来的各种问题。</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>STP的作用</p>
+</div>
+<p>STP通过 <code>阻塞端口</code> 来消除环路，并能够实现链路备份的目的。（防止环路）<br>
+运行该协议的交换机可以自动找出导致环路的链路，并将其临时阻塞，在链路发生故障的时候，再自动恢复阻塞链路，保障网络既有冗余又无环运行。</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>BPDU报文</p>
+</div>
+<p>STP需要网络设备相互交换消息来检测桥接环路，该消息称为 <code>网桥协议数据单元BPDU</code>。STP之所以能够良好的工作并构建一个无环的网络，是依赖于BPDU报文的泛洪，并根据报文中相关字段计算的结果。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/20210410134602449.png" alt=""></p>
+<ul>
+<li>桥ID（Bridge ID）是交换机的STP标识符，一个8个字节，由 <code>2个字节的优先级</code> 和 <code>6个字节的MAC地址</code> 构成</li>
+<li>桥优先级缺省位 <code>32768</code>，可以手工修改。（4069的倍数）</li>
+<li>MAC地址为交换机的背板MAC。</li>
+<li>网络中Bridge ID最小的交换机将成为根桥。</li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>STP的端口状态</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/20210410142425108.png" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>生成树算法的步骤</p>
+</div>
+<ul>
+<li>选择根网桥</li>
+</ul>
+<p><code>依据</code>：网桥ID（BID）<br>
+网桥ID=网桥优先级+网桥的MAC地址<br>
+<code>网桥优先级的取值范围</code>：0-65535（4096倍数）<br>
+<code>默认值</code>：32768<br>
+优先比较优先级，选最小<br>
+当优先级相等的情况下，选MAC地址小的</p>
+<ul>
+<li>每个非根网桥上选择根端口<code>（RP）</code></li>
+</ul>
+<p><font color='gree'>①</font> 到根桥最低的根路径成本<br>
+某个网桥到达根网桥的中间所有线路的路径成本之和<br>
+用来代表一条线路带宽的大小<br>
+<font color='gree'>②</font> 直连的网桥ID最小的<br>
+<font color='gree'>③</font> 对端端口ID（PID）最小的<br>
+端口ID=端口优先级+端口编号<br>
+<code>端口优先级</code>：0-255  <code>默认值</code>：128</p>
+<ul>
+<li>在每条链路上都要选择一个指定端口<code>（DP）</code></li>
+</ul>
+<p>根网桥上的每个端口都是指定端口，都不会被阻塞<br>
+<font color='gree'>①</font> 比较到达根桥的RPC（Root Path Cost），越小越优。<br>
+<font color='gree'>②</font> 比较BPDU包发送者的BID，越小越优。<br>
+<font color='gree'>③</font> 比较BPDU包发送者的PID，越小越优。<br>
+<font color='gree'>④</font> 比较BPDU包接收者的PID，越小越优。</p>
+<p><font color='red'>总结</font>：<code>stp算法的比较都是选小的</code></p>
+<ul>
+<li>阻塞既不是根端口又不是指定端口的端口<code>（AP）</code></li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>MSTP</p>
+</div>
+<p><code>MSTP兼容STP和RSTP</code>，通过多实例能实现对业务流量和用户流量的隔离，同时还提供了数据转发的多个冗余路径，在数据转发过程中实现VLAN数据的负载均衡。<br>
+在MSTP中，你可以将若干个VLAN映射到一个实例(instance)，MSTP将为每个instance运行一棵生成树，可以基于instance设置优先级、端口路径开销等参数。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220629223706.jpg" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW3
+vlan batch 10 20	&#x2F;&#x2F;创建vlan 10 20
+int e0&#x2F;0&#x2F;1
+port hybrid pvid vlan 10	&#x2F;&#x2F;设置Hybrid类型接口的缺省VLAN ID
+port hybrid untagged vlan 10 20	&#x2F;&#x2F;指定相关VLAN的数据发送时添加标签
+
+int e0&#x2F;0&#x2F;2
+port hybrid pvid vlan 20
+port hybrid untagged vlan 10 20
+    
+int e0&#x2F;0&#x2F;3
+port hybrid pvid vlan 10
+port hybrid untagged vlan 10 20
+ 
+int e0&#x2F;0&#x2F;4
+port hybrid pvid vlan 20	
+port hybrid untagged vlan 10 20
+    
+stp region-configuration	&#x2F;&#x2F;进入MST域视图
+region-name test	&#x2F;&#x2F;配置MST域的域名
+instance 1 vlan 10	&#x2F;&#x2F;把vlan10映射到生成树实例1上
+instance 2 vlan 20	&#x2F;&#x2F;把vlan20映射到生成树实例2上
+active region-configuration	&#x2F;&#x2F;激活MST域，使修改后的参数生效
+    
+&#x2F;&#x2F;SW1
+vlan 10 20
+int e0&#x2F;0&#x2F;1
+port hybrid untagged vlan 10 20
+
+int e0&#x2F;0&#x2F;2
+port hybrid pvid vlan 10
+port hybrid untagged vlan 10 20
+    
+int e0&#x2F;0&#x2F;3
+port l trunk
+port trunk allow-pass vlan 2 to 4094	&#x2F;&#x2F;将Trunk类型接口加入这些VLAN
+    
+stp region-configuration	
+region-name test	
+instance 1 vlan 10	
+instance 2 vlan 20	
+active region-configuration
+  
+stp instance 1 root primary	&#x2F;&#x2F;配置交换设备为生成树实例1的根桥
+stp instance 2 root secondary	&#x2F;&#x2F;配置交换设备为生成树实例2的备份根桥
+    
+&#x2F;&#x2F;SW2
+vlan batch 10 20
+int e0&#x2F;0&#x2F;1
+port hybrid untagged vlan 10 20
+
+int e0&#x2F;0&#x2F;2
+port hybrid pvid vlan 20
+port hybrid untagged vlan 10 20
+    
+int e0&#x2F;0&#x2F;3
+port l trunk
+port trunk allow-pass vlan 2 to 4094
+  
+stp instance 1 root secondary	&#x2F;&#x2F;配置交换设备为生成树实例1的备份根桥
+stp instance 2 root primary	&#x2F;&#x2F;配置交换设备为生成树实例2的根桥
+    
+stp region-configuration
+region-name test
+instance 1 vlan 10
+instance 2 vlan 20
+active region-configuration</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;R1
+int g0&#x2F;0&#x2F;0
+ip add 192.168.10.1 24
+
+int g0&#x2F;0&#x2F;1
+ip add 192.168.20.1 24
+    
+int loopback0	&#x2F;&#x2F;取值范围是0～1023
+ip add 1.1.1.1 24	&#x2F;&#x2F;配置loopback的DNS</code></pre>
+<p>验证MSTP，输入命令：<code>dis stp brief</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220629225230.jpg" alt=""></p>
+<p>并且打开PC1和PC2尝试ping <code>1.1.1.1</code>，发现已经连通</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>Hybrid模式</p>
+</div>
+<p>Hybrid端口和Trunk端口一样，不过它 <code>既能用于交换机也能用于计算机</code>，允许多个VLAN报文发送时 <code>不打标签</code></p>
+<h2 id="ACL-NAT">ACL/NAT</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>ACL概述</p>
+</div>
+<ul>
+<li>访问控制列表（Access Control Lists,ACL）是应用在路由器接口的指令列表。这些指令列表用来告诉路由器 <code>哪些数据包可以收、哪些数据包需要拒绝</code>。</li>
+<li>ACL分类</li>
+</ul>
+<p><font color='gree'>①</font> <code>基本ACL</code>：范围2000-2999</p>
+<p><font color='gree'>②</font> <code>高级ACL</code>：范围3000-3999</p>
+<p><font color='gree'>③</font> <code>二层ACL</code>：范围4000-4999</p>
+<p><font color='gree'>④</font> <code>自定义ACL</code>：范围5000-6999</p>
+<ul>
+<li>ACL工作原理</li>
+</ul>
+<p>ACL使用 <code>包过滤技术</code>，在路由器上读取第三层及第四层包头中的信息，如源地址、目的地址、源端口、目的端口等，根据预先定义好的规则，对包进行过滤，从而达到访问控制的目的。<br>
+ACL有两个方向。</p>
+<p><font color='gree'>（1）</font>出：已经过路由器的处理，正离开路由器接口的数据包。</p>
+<p><font color='gree'>（2）</font>入：已到达路由器接口的数据包，将被路由器处理。<br>
+如果对接口应用了ACL，那么路由器将对数据包应用该组规则进行顺序检查</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220630001913.jpg" alt=""></p>
+<ul>
+<li>ACL的应用</li>
+</ul>
+<p><code>匹配IP流量</code>（可基于源、目的IP地址、协议类型、端口号等）</p>
+<p>在 <code>Traffic-filter</code> 中被调用</p>
+<p>在 <code>NAT</code> 中被调用</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>NAT概述</p>
+</div>
+<ul>
+<li>网络地址转换（NAT）随着网络的发展，对公网IP地址的需求与日俱增。为了缓解公网IP地址的不足，并且保护内部服务器的私网地址，可以使用NAT技术 <code>将私网地址转换成公网地址</code>。</li>
+<li>NAT的实现方式</li>
+</ul>
+<p><code>静态NAT</code>：所谓静态NAT是指公网IP和私网IP的对应关系是静态的，由管理员手工指定后就不会改变了。并且静态NAT实现的是一对一的地址转换。<br>
+<code>动态NAT</code>：动态NAT基于地址池来实现私有地址和公网地址的转换，任然是一对一的地址转换，但是私网和公网的对应关系不固定。<br>
+<code>NAPT</code>：网络地址端口转换，NAPT允许多个内部地址映射到一个公有地址的不同端口。<br>
+<code>Easy IP</code>：允许将多个内部地址映射到网关出接口地址上的不同端口。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220630011903.jpg" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>静态NAT设置</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;R1
+int g0&#x2F;0&#x2F;0
+ip add 192.168.1.1 24
+int g0&#x2F;0&#x2F;1
+ip add 202.10.100.1 24
+nat static global 15.0.0.10 inside 192.168.1.10	&#x2F;&#x2F;做nat的地址转换；nat static global 马甲 inside 源地址 
+    
+ip route-static 0.0.0.0 0 202.10.100.2	&#x2F;&#x2F;添加默认路由目的网段0.0.0.0子网掩码长度0下一跳入接口ip202.10.100.2 
+    
+&#x2F;&#x2F;R2
+int g0&#x2F;0&#x2F;0
+ip add 202.10.100.2 24
+
+ip route-static 15.0.0.10 32 202.10.100.1	&#x2F;&#x2F;添加静态路由目的网段15.0.0.10子网掩码长度32下一跳入接口ip202.10.100.1 </code></pre>
+<p>测试：PC1 和 Server1 <code>ping</code> <code>202.10.100.2</code>，会发现PC1不通，Server1通</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>动态NAT-PAT设置</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;R1
+int g0&#x2F;0&#x2F;0
+ip add 192.168.1.1 24
+int g0&#x2F;0&#x2F;1
+ip add 202.10.100.1 24
+
+nat address-group 1 15.0.0.10 15.0.0.11	&#x2F;&#x2F;设置nat地址池
+acl 2000	&#x2F;&#x2F;创建标准ACL访问控制列表
+    
+rule permit source 192.168.1.0 0.0.0.255	&#x2F;&#x2F;&#x2F;&#x2F;规则 许可 源 地址
+int g0&#x2F;0&#x2F;1
+nat outbound 2000 address-group 1	&#x2F;&#x2F;将一个访问控制列表ACL和一个地址池关联起来，nat地址池出接口调用ACL2000
+    
+&#x2F;&#x2F;R2
+int g0&#x2F;0&#x2F;0
+ip add 202.10.100.2 24
+
+ip route-static 15.0.0.0 24 202.10.100.1</code></pre>
+<p>测试：PC1 和 Server1 <code>ping</code> <code>202.10.100.2</code>，会发现PC1通，Server1通</p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20220630013522.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20220630013649.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<h2 id="综合实验1">综合实验1</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>项目需求分析</p>
+</div>
+<p>服务器群交换机使用两条链路连接到核心交换机，两条链路可以配置端口聚合，防止单链路出现故障。财务部和项目管理部处于同一区域，各部门交换机使用一条链路连接到核心交换机，为防止单链路故障，可以在财务部交换机和项目管理部交换机上采用一条链路互联，当上行链路出现故障时可以通过其他部门的交换机到达核心交换机。采用这种方式连接时，三台交换机会形成环路，可以采用 <code>生成树</code> 解决该问题。</p>
+<p>项目管理部为方便员工获取DNS服务器IP地址，可以采用 <code>DHCP</code> 方式为该局域网自动分配IP及DNS地址。核心交换机、服务器群交换机和出口路由器各均采用三层互联，可以配置动态路由协议自动学习路由实现全网互联互通。<br>
+公司有一个公网IP，各部门所有员工都有访问internet的需求，可以在出口路由器上配置网络地址转换。<br>
+为方便网络管理员对设备进行远程管理，需要启用所有设备的 <code>SSH服务</code>。</p>
+<p><font color='red'>注</font>：由于eNSP 的PC机不能运行 <code>ssh</code> 命令，故最后的登陆无法实现</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220630091252.jpg" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>规划表</p>
+</div>
+<p>交换机管理是 <code>vlan 100</code>，每一个交换机都有</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220630135541.jpg" alt=""><br>
+![][2]<br>
+![][3]<br>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220630184413.jpg" alt=""></p>
+<p>本项目分为以下任务：</p>
+<p><font color='gree'>① </font>VLAN配置</p>
+<p><font color='gree'>②</font> 以太网配置</p>
+<p><font color='gree'>③ </font> IP业务配置</p>
+<p><font color='gree'>④</font> 路由配置</p>
+<p><font color='gree'>⑤ </font> 出口配置</p>
+<p><font color='gree'>⑥</font> SSH服务配置</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>vlan和vlanif的区别</p>
+</div>
+<p><code>vlanif</code> 不是物理端口，是 <code>逻辑</code>端口，通常这个接口地址作为 <code>vlan</code> 下面用户的 <code>网关</code>， 应用于 <code>三层交换机</code>。</p>
+<p><code>vlan</code> 是 <code>物理</code> 端口，应用于 <code>二层交换机</code></p>
+<p><font color='orange'>划分VLAN后，同一VLAN内的用户可以互相通信，但是属于不同VLAN的用户不能直接通信</font>。为了实现VLAN间通信，可通过配置 <code>vlanif</code> 来实现</p>
+<ul>
+<li>在进行<font color='cornflowerblue'>任务1</font>之前可以先配好PC的 <code>ip，网关，子网掩码</code>等等</li>
+</ul>
+<p>首先根据 <code>vlanif</code> 的网段进行配置ip：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220630185352.png" alt=""></p>
+<p>根据需求，项目管理部需要使用 <code>DNS自动获取ip</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220630185530.png" alt=""></p>
+<p>根据 <code>IP规划表</code> 配置 <code>DNS服务器</code>，<code>网管计算机</code> 没有规定哪个ip地址，可以根据 <code>192.168.90.0/24</code> 网段自己设计</p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20220630190943.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20220630191349.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<h3 id="任务1-VLAN配置">任务1-VLAN配置</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>任务1描述</p>
+</div>
+<p><font color='gree'>①</font> 在 <code>SW1,SW2,SW3,SW4</code> 上创建VLAN并修改备注（通过查看规划表）</p>
+<p><font color='gree'>②</font> 在 <code>SW1,SW2,SW3,SW4</code> 上将端口划分给VLAN</p>
+<p><font color='gree'>③</font> 输入相对应查看命令进行验证（可做可不做）</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>①命令</p>
+</div>
+<p>主要看PC连接在哪个交换机上那么网关就在哪</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW1
+u t m	&#x2F;&#x2F;关闭泛洪信息
+sys
+sysname SW1
+vlan 10	&#x2F;&#x2F;创建vlan10
+description FA	&#x2F;&#x2F;修改备注为FA
+    
+vlan 20
+description PM
+    
+vlan 100
+description SW-MGMT
+    
+vlan 201
+description SW1-R1</code></pre>
+<ul>
+<li><code>SW2</code> 下面的 <code>服务器群</code>，加上 <code>设备管理</code>，分别是 <code>90 100</code></li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW2
+u t m	&#x2F;&#x2F;关闭泛洪信息
+sys
+sysname SW2
+vlan 90
+description DC
+    
+vlan 100
+description SW-MGMT</code></pre>
+<ul>
+<li>因为 <code>SW3</code> 下面涉及到 <code>财务部</code> 和 <code>项目管理部</code>，然后加上本身 <code>设备管理</code>，分别是 <code>10 20 100</code></li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW3
+u t m	&#x2F;&#x2F;关闭泛洪信息
+sys
+sysname SW3
+vlan 10
+description FA
+
+vlan 20
+description DC
+    
+vlan 100
+description SW-MGMT</code></pre>
+<ul>
+<li><code>SW4</code> 和 <code>SW3</code> 一样，所以可以直接在 <code>SW3</code> 输入命令 <code>dis cur</code> 复制刚刚的命令粘贴即可</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW4
+复制SW1命令即可</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>②命令</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW1
+int g0&#x2F;0&#x2F;24	&#x2F;&#x2F;进入端口
+port l access	&#x2F;&#x2F;配置端口模式为access
+port d vlan 201	&#x2F;&#x2F;配置端口缺省VLAN为vlan 201</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW2
+port-group 1	&#x2F;&#x2F;创建端口组1（当需要多个端口需要vlan时可以创建一个组）
+group-member g0&#x2F;0&#x2F;1 to g0&#x2F;0&#x2F;10	&#x2F;&#x2F;将g0&#x2F;0&#x2F;0~g0&#x2F;0&#x2F;10加入到端口组
+port l access
+port d vlan 90</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW3
+port-group 1	
+group-member e0&#x2F;0&#x2F;1 to e0&#x2F;0&#x2F;20
+port l access
+port d vlan 10</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW4
+port-group 1
+group-member e0&#x2F;0&#x2F;1 to e0&#x2F;0&#x2F;20
+port l access
+port d vlan 20</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>③验证</p>
+</div>
+<ul>
+<li><code>dis vlan</code> 命令进行查看<font color='orange'>VLAN配置是否生效</font>（这里以SW3为例）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220630150710.jpg" alt=""></p>
+<ul>
+<li><code>dis port vlan</code> 命令进行查看<font color='orange'>端口分配状态</font>（这里以SW3为例）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220630151750.jpg" alt=""></p>
+<h3 id="任务2-以太网配置">任务2-以太网配置</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>任务2描述</p>
+</div>
+<p><font color='gree'>①</font> 配置 <code>SW1,SW3,SW4</code> 的互连端口为 <code>trunk</code> 模式，并 <code>放行相应VLAN</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220630153801.jpg" alt=""></p>
+<p><font color='gree'>②</font> 配置 <code>核心交换机</code>(SW1) 与服务器群交换机(SW2)互连线路为 <code>Eth-Trunk</code> ，配置端口模式为 <code>Trunk</code> 并 <code>放行相应VLAN</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220630154003.jpg" alt=""></p>
+<p><font color='gree'>③</font> 交换机启动 <code>STP</code> 功能，指定核心交换机的 <code>STP优先级</code>，配置连接各PC的端口为 <code>生成树边缘端口</code></p>
+<p><font color='gree'>④</font> 输入相对应查看命令进行验证（可做可不做）</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>①命令</p>
+</div>
+<ul>
+<li>因为 <code>SW1</code> 刚刚配置了 <code>vlan 10 20 100 201</code>，由于 <code>vlan 201</code> 待会需要设置成 <code>Eth-trunk</code>(链路聚合)，所以这里就暂时不考虑 <code>201</code></li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW1
+int g0&#x2F;0&#x2F;1
+port l trunk	&#x2F;&#x2F;配置端口模式为Trunk
+port trunk allow-pass vlan 10 20 100	&#x2F;&#x2F;放行vlan
+int g0&#x2F;0&#x2F;2
+port l trunk	&#x2F;&#x2F;配置端口模式为Trunk
+port trunk allow-pass vlan 10 20 100	&#x2F;&#x2F;放行vlan</code></pre>
+<ul>
+<li><code>SW3</code> 和 <code>SW1</code> 配置一样，直接复制即可</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW3
+复制SW1命令即可</code></pre>
+<ul>
+<li><code>SW4</code> 和 <code>SW1</code> 配置也是一样，直接复制</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW4
+复制SW1命令即可</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>②命令</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW1
+int eth-trunk 1	&#x2F;&#x2F;创建 Eth-Trunk 1；数字可以随意起
+port l trunk	&#x2F;&#x2F;配置端口模式为Trunk
+port trunk allow-pass vlan 100	&#x2F;&#x2F;放行vlan 100即可，其他的通过 OSPF
+
+int g0&#x2F;0&#x2F;21
+eth-trunk 1	&#x2F;&#x2F;加入到 Eth-Trunk 1 中
+
+int g0&#x2F;0&#x2F;22
+eth-trunk 1</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW2
+复制SW1即可</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>③命令</p>
+</div>
+<ul>
+<li><code>SW1</code> 配置成 <code>根桥</code>，<code>SW3</code> 和 <code>SW4</code> 配置成边缘端口</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW1
+stp mode rstp	&#x2F;&#x2F;设置模式为rstp
+stp priority 4096	&#x2F;&#x2F;配置优先级</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW3
+stp mode rstp
+port-group 1	&#x2F;&#x2F;进入端口组，如果是单独端口则直接进入那个端口即可
+stp edged-port en	&#x2F;&#x2F;配置成生成树边缘端口</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW4
+复制SW3即可</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>④验证</p>
+</div>
+<ul>
+<li><code>dis port vlan</code> 命令查看端口VLAN配置信息（这里以SW1为例）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220630205548.jpg" alt=""></p>
+<ul>
+<li><code>dis eth-trunk</code> 命令查看 <code>聚合链路</code>端口状态（这里以SW1为例）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220630205833.jpg" alt=""></p>
+<ul>
+<li><code>dis stp</code> 命令查看STP配置状态信息（这里以SW3为例）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220630210103.jpg" alt=""></p>
+<ul>
+<li><code>dis stp brief</code> 命令查看STP实例的端口状态信息（这里以SW3为例）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220630211225.jpg" alt=""></p>
+<h3 id="任务3-IP业务配置">任务3-IP业务配置</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>任务3描述</p>
+</div>
+<p><font color='gree'>①</font> 在 <code>SW 1,2,3,4</code>的  <code>vlanif</code> 接口  和 <code>R1</code> 端口上配置 <code>IP地址 </code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220630233548.png" alt=""></p>
+<p><font color='gree'>②</font> 在 <code>R2</code>（虚拟Internet设备）上配置 <code>IP地址</code></p>
+<p><font color='gree'>③</font> 在 <code>SW1</code> 上对 <code>vlan 20</code> 启用 <code>DHCP</code> 功能配置客户端从IP地址池中获取IP地址</p>
+<p><font color='gree'>④</font> 输入相对应查看命令进行验证（可做可不做）</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>①命令</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW1
+int vlanif 10
+ip add 192.168.10.1 24
+
+int vlanif 20
+ip add 192.168.20.1 24
+    
+int vlanif 100
+ip add 192.168.100.1 24
+    
+int vlanif 201
+ip add 10.1.1.1 30</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW2
+int vlanif 90
+ip add 192.168.90.1 24
+    
+int vlanif 100
+ip add 192.168.100.2 24</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW3
+int vlanif 100
+ip add 192.168.100.3 24</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW4
+int vlanif 100
+ip add 192.168.100.4 24</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;R1
+sys
+sysname R1
+int g0&#x2F;0&#x2F;0
+ip add 16.16.16.1 24
+    
+int g0&#x2F;0&#x2F;1
+ip add 10.1.1.2 30</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>②命令</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;R2
+sys
+sysname R2
+int g0&#x2F;0&#x2F;0
+ip add 16.16.16.16 24</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>③命令</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW1
+dhcp en	&#x2F;&#x2F;开启DHCP功能
+int vlanif 20
+dhcp select int	&#x2F;&#x2F;配置客户端从IP池获取IP地址
+dhcp server dns-list 192.168.90.100	&#x2F;&#x2F;配置客户端从DHCP服务器获取DNS地址</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>④验证</p>
+</div>
+<ul>
+<li><code>dis ip int brief</code> 命令查看IP地址配置是否生效（这里以SW1为例）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220630215642.jpg" alt=""></p>
+<ul>
+<li>在 <code>SW1</code> 上执行 <code>dis ip pool int vlanif20</code> 命令查看 vlanif20 接口的IP地址池信息</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220630215948.jpg" alt=""></p>
+<h3 id="任务4-路由配置">任务4-路由配置</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>任务4描述</p>
+</div>
+<p><font color='gree'>①</font> <code>R1，SW1,SW2</code> 上启动 <code>OSPF</code> 功能，并将对应网段加入 <code>OSPF Area 0</code> 中，路由器R1将默认路由通告到 OSPF 区域</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220630232111.jpg" alt=""></p>
+<p><font color='gree'>②</font> 在 <code>SW3,SW4</code> 上配置默认路由指向 <code>SW1</code></p>
+<p><font color='gree'>③</font> 输入相对应查看命令进行验证（可做可不做）</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>①命令</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;R1
+ospf 10	&#x2F;&#x2F;创建OSPF 进程10
+area 0	&#x2F;&#x2F;区域0
+network 10.1.1.0 0.0.0.3	&#x2F;&#x2F;network 网段 反子网掩码
+    
+default-route-advertise always	&#x2F;&#x2F;将默认路由通告到OSPF区域</code></pre>
+<ul>
+<li>全部改成网段形式</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220701000424.jpg" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW1
+ospf 10	&#x2F;&#x2F;创建OSPF 进程10
+area 0
+network 192.168.10.0 0.0.0.255
+network 192.168.20.0 0.0.0.255
+network 192.168.100.0 0.0.0.255
+network 10.1.1.0 0.0.0.3</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW2
+ospf 10	&#x2F;&#x2F;创建OSPF 进程10
+area 0
+network 192.168.90.0 0.0.0.255
+network 192.168.100.0 0.0.0.255</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>②命令</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW3
+ip route-static 0.0.0.0 0 192.168.100.1	&#x2F;&#x2F;配置默认路由指向192.168.100.1</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW4
+复制SW3即可</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>③验证</p>
+</div>
+<ul>
+<li><code>dis ip routing-table</code> 命令查看路由表信息（这里以SW2为例）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220630234223.jpg" alt=""></p>
+<h3 id="任务5-出口配置">任务5-出口配置</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>任务5描述</p>
+</div>
+<p><font color='gree'>①</font> 在 <code>R1</code> 上配置 <code>NAT</code>，让内网用户可以访问Internet，<code>财务部，项目管理部，服务器群</code> 这3个网段</p>
+<p><font color='gree'>②</font> 输入相对应查看命令进行验证（可做可不做）</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>①命令</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;R1
+acl 2000	&#x2F;&#x2F;创建ACL，编号为2000
+rule permit sourse 192.168.10.0 0.0.0.255	&#x2F;&#x2F;配置规则，允许10.0网段通过
+rule permit sourse 192.168.20.0 0.0.0.255	&#x2F;&#x2F;配置规则，允许20.0网段通过
+rule permit sourse 192.168.90.0 0.0.0.255	&#x2F;&#x2F;配置规则，允许90.0网段通过
+    
+int g0&#x2F;0&#x2F;0
+nat outbound 2000	&#x2F;&#x2F;配置接口启用 Easy IP 方式的NAT</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>②验证</p>
+</div>
+<ul>
+<li><code>dis nat outbound</code> 命令查看NAT配置信息</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220630235254.jpg" alt=""></p>
+<ul>
+<li>到这就已经实现全网互通了，可以去 <code>项目管理部</code> 输入 <code>ipconfig</code> 查看DNS生成的IP等相关信息（需要注意如果生成的DNS server是空白，需要输入 <code>ipconfig /release</code>释放租约，然后输入 <code>ipconfig /renew</code> 重新申请IP地址），然后可以尝试 <code>ping</code> 其他PC机或者路由等等。<br>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220701182227.png" alt=""></li>
+</ul>
+<h3 id="任务6-SSH服务配置">任务6-SSH服务配置</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>任务6描述</p>
+</div>
+<p><font color='gree'>①</font> 所有交换机或者路由器配置SSH服务</p>
+<p><font color='gree'>②</font> 输入相对应查看命令进行验证（可做可不做）</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>①命令</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW1
+rsa local-key-pair create	&#x2F;&#x2F;创建秘钥
+2048	&#x2F;&#x2F;设置秘钥长度为2048
+stelnet server en	&#x2F;&#x2F;使能STelnet服务
+user-interface vty 0 4	&#x2F;&#x2F;进入VTY页面
+authentication-mode aaa	&#x2F;&#x2F;配置认证方式为AAA
+protocol inbound ssh	&#x2F;&#x2F;配置VTY用户界面支持SSH功能
+
+ssh user admin	&#x2F;&#x2F;创建SSH用户
+ssh user admin authentication-type password	&#x2F;&#x2F;配置admin用户认证类型为密码认证
+ssh user admin service-type stelnet	&#x2F;&#x2F;配置admin用户服务方式为STlnet
+aaa	&#x2F;&#x2F;进入AAA视图
+local-user admin password cipher HwEdu12# $	&#x2F;&#x2F;配置本地用户admin,密码为H..$
+local-user admin service-type ssh	&#x2F;&#x2F;配置本地用户admin的服务方式为SSH
+local-user admin privilege level 15	&#x2F;&#x2F;配置本地用户等级为15</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;SW2,SW3,SW4,R1
+复制即可</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>②验证</p>
+</div>
+<ul>
+<li><code>dis ssh server status</code> 命令查看SSH状态信息（这里以SW1为例）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220701002821.jpg" alt=""></p>
+<ul>
+<li><code>dis ssh user-information</code> 命令查看SSH用户信息（这里以SW1为例）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220701003032.jpg" alt=""></p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/eNSP/">eNSP</a></div><div class="post_share"><div class="social-share" data-image="/img/num110.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%841-%E5%91%BD%E4%BB%A4%E7%BC%A9%E5%86%99"><span class="toc-number">1.</span> <span class="toc-text">附1-命令缩写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VRP%E9%80%9A%E7%94%A8%E8%B7%AF%E7%94%B1%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.</span> <span class="toc-text">VRP通用路由介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEIP%E5%9C%B0%E5%9D%80%E5%92%8C%E7%BD%91%E5%85%B3"><span class="toc-number">3.</span> <span class="toc-text">配置IP地址和网关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1%E3%80%81%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1"><span class="toc-number">4.</span> <span class="toc-text">配置静态路由、动态路由</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RIP%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.1.</span> <span class="toc-text">RIP协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OSPF%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.2.</span> <span class="toc-text">OSPF协议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E8%87%82%E8%B7%AF%E7%94%B1"><span class="toc-number">5.</span> <span class="toc-text">单臂路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AAA%E6%A8%A1%E5%BC%8F"><span class="toc-number">6.</span> <span class="toc-text">AAA模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E7%BB%88%E7%AB%AF%E5%8D%8F%E8%AE%AE%EF%BC%88%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95%EF%BC%89"><span class="toc-number">7.</span> <span class="toc-text">远程终端协议（远程登录）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E4%B8%BB%E6%9C%BA%E9%85%8D%E7%BD%AE%E5%8D%8F%E8%AE%AE%EF%BC%88DHCP%EF%BC%89"><span class="toc-number">8.</span> <span class="toc-text">动态主机配置协议（DHCP）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#STP-MSTP"><span class="toc-number">9.</span> <span class="toc-text">STP&#x2F;MSTP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ACL-NAT"><span class="toc-number">10.</span> <span class="toc-text">ACL&#x2F;NAT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C1"><span class="toc-number">11.</span> <span class="toc-text">综合实验1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A11-VLAN%E9%85%8D%E7%BD%AE"><span class="toc-number">11.1.</span> <span class="toc-text">任务1-VLAN配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A12-%E4%BB%A5%E5%A4%AA%E7%BD%91%E9%85%8D%E7%BD%AE"><span class="toc-number">11.2.</span> <span class="toc-text">任务2-以太网配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A13-IP%E4%B8%9A%E5%8A%A1%E9%85%8D%E7%BD%AE"><span class="toc-number">11.3.</span> <span class="toc-text">任务3-IP业务配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A14-%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE"><span class="toc-number">11.4.</span> <span class="toc-text">任务4-路由配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A15-%E5%87%BA%E5%8F%A3%E9%85%8D%E7%BD%AE"><span class="toc-number">11.5.</span> <span class="toc-text">任务5-出口配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A16-SSH%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE"><span class="toc-number">11.6.</span> <span class="toc-text">任务6-SSH服务配置</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://api2.acozycotage.net/Pweb" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '可惜你不听王杰，也不懂我...' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
