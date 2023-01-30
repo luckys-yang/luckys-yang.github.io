@@ -1,0 +1,525 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>模电期末考试习题 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="当电路中电流的参考方向与电流的真实方向相反时，该电流 一定为负值 已知空间有a,b两点，电压Uab &#x3D; 9V，a点电位为Va &#x3D;3V，则b点电位Vb为 -6V    标有额定值为“220V，100W”和“220V，25W”白炽灯两盏，将其串联后接入220V工频交流电源上，其亮度情况是 25W的灯泡比较亮（同一额定电压并且串联时，功率小的比大的亮）  注：串联分压，并联分流    在有n个结点，b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模电期末考试习题">
+<meta property="og:url" content="https://mdcm.yang5201314.cn/post/f225f3c.html">
+<meta property="og:site_name" content="Luckys-Yangの小栈">
+<meta property="og:description" content="当电路中电流的参考方向与电流的真实方向相反时，该电流 一定为负值 已知空间有a,b两点，电压Uab &#x3D; 9V，a点电位为Va &#x3D;3V，则b点电位Vb为 -6V    标有额定值为“220V，100W”和“220V，25W”白炽灯两盏，将其串联后接入220V工频交流电源上，其亮度情况是 25W的灯泡比较亮（同一额定电压并且串联时，功率小的比大的亮）  注：串联分压，并联分流    在有n个结点，b">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mdcm.yang5201314.cn/img/num84.webp">
+<meta property="article:published_time" content="2022-07-02T05:21:00.000Z">
+<meta property="article:modified_time" content="2022-12-12T13:50:20.000Z">
+<meta property="article:author" content="Luckys-Yang">
+<meta property="article:tag" content="博客,个人博客,技术,学习,Hexo,Blog,STM32,嵌入式,单片机">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mdcm.yang5201314.cn/img/num84.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"><link rel="canonical" href="https://mdcm.yang5201314.cn/post/f225f3c.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '模电期末考试习题',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-12-12 21:50:20'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">94</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">75</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">模电期末考试习题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-07-02T05:21:00.000Z" title="发表于 2022-07-02 13:21:00">2022-07-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-12-12T13:50:20.000Z" title="更新于 2022-12-12 21:50:20">2022-12-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%94%B5%E8%B7%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">电路学习笔记</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><ol>
+<li>当电路中电流的参考方向与电流的真实方向相反时，该电流 <code>一定为负值</code></li>
+<li>已知空间有a,b两点，电压U<sub>ab</sub> = 9V，a点电位为V<sub>a</sub> =3V，则b点电位Vb为 <code>-6V</code></li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220701194511.jpg" alt=""></p>
+<ol start="3">
+<li>标有额定值为“220V，100W”和“220V，25W”白炽灯两盏，将其串联后接入220V工频交流电源上，其亮度情况是 <code>25W的灯泡比较亮</code>（同一额定电压并且串联时，功率小的比大的亮）</li>
+</ol>
+<p><font color='red'>注</font>：<code>串联分压，并联分流</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220701200924.jpg" alt=""></p>
+<ol start="4">
+<li>
+<p>在有n个结点，b条支路的连通电路中，可以列出独立KCL方程和独立KVL方程的个数分别为 <code>n-1</code>，<code>b-n+1</code>（不懂可以看这篇文章：<a href="https://mdcm.yang5201314.cn/index.php/archives/304/">基尔霍夫定律</a>）</p>
+</li>
+<li>
+<p>图示单口网络的短路电流 i<sub>sc</sub> 等于 <code>1A</code>（I=U/R，6/(2+4)=1A）</p>
+</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220701211132.jpg" alt=""></p>
+<ol start="6">
+<li>图示电路中电压 U 等于 <code>-4V</code>（首先假设10V为参考方向顺时针绕行一圈，假设回路电流为i，列出公式 10+u-2-2i=0，计算电流为(10-2)/4=2A,代入即可得出等于-4）</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220702002849.jpg" alt=""></p>
+<ol start="7">
+<li>图示单口网络的开路电压U<sub>oc</sub>等于 <code>5V</code></li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220702013620.jpg" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220702112506.jpg" alt=""></p>
+<ol start="8">
+<li>如图所示电路中，若 I=0，则U<sub>s</sub> 为 <code>60V</code></li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220702113725.jpg" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220702131356.jpg" alt=""></p>
+<ol start="9">
+<li>
+<p>电路分析中一个电流得负值，说明它小于零（✘）（因为电流电压的正值与负值只代表方向，并不代表它小于零）</p>
+</li>
+<li>
+<p>网孔都是回路，而回路则不一定是网孔（✔）</p>
+</li>
+<li>
+<p>应用基尔霍夫定律列写方程时，可以不参照参考方向（✘）</p>
+</li>
+<li>
+<p>电压和电流计算结果得负值，说明它们的实际方向与参考方向相反（✔）</p>
+</li>
+<li>
+<p>电路等效变换时，如果一条支路的电流为0，可以按短路处理（✘）（应该是按断路处理）</p>
+</li>
+<li>
+<p>叠加定理不仅适用于线性电路，而且对非线性电路也适用（✘）（叠加定理只能用于线性电路）</p>
+</li>
+<li>
+<p>叠加定理只适用于求线性电路的电压，电流和功率（✘）（叠加原理只适应求解线性电路的电压、电流，对功率不适用）</p>
+</li>
+<li>
+<p>在图示电路中R<sub>L</sub>=2Ω，图a电路中，R<sub>L</sub>消耗的功率为2W，图b电路中，R<sub>L</sub>消耗的功率为8W，则图c电路中，R<sub>L</sub>消耗的功率为 <code>8W</code>（恒流源串联的东西都当不存在处理，恒流源相当于理想电流源，所以与它串联的电压源可以去掉相当于变成图b；恒压源并联的东西都当不存在处理）</p>
+</li>
+</ol>
+<p><font color='red'>注</font>：这里可以用<code>焦耳定律</code>，<font color='orange'>Q=I<sup>2</sup>R</font>（只适用于纯电阻电路，W=Q）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220702141526.jpg" alt=""></p>
+<ol start="17">
+<li>电路如图所示，当U<sub>s1</sub>单独作用时，电阻R消耗的功率为40W；当U<sub>s2</sub>单独作用时，R消耗的功率为90W（图U<sub>s1</sub>和U<sub>s2</sub>均大于0）。则当两电源共同作用时，R消耗的功率为 <code>250W</code></li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220702150443.jpg" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220702160738.jpg" alt=""></p>
+<ol start="18">
+<li>下图中，电阻消耗的功率是 <code>12W</code></li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220702161225.jpg" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220702162403.jpg" alt=""></p>
+<ol start="19">
+<li>一个电热器，接在10V的直流电源上，产生的功率为P。把它改接在正弦交流电源上，使其产生的功率为P/2，则正弦电源电压的最大值为 <code>10V</code></li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220702174756.jpg" alt=""></p>
+<ol start="19">
+<li>已知i<sub>1</sub>=10sin(314t+90°)，i<sub>2</sub>=10sin(628t+30°)，则 <code>相位差无法判断</code>（角频率不同所以不能判断相位差）</li>
+</ol>
+<p><font color='red'>注</font>：i = I<sub>m</sub>sin(ωt+ψ)，<font color='orange'>I<sub>m</sub>表示最大值，ω表示角频率，ψ表示出相</font></p>
+<ol start="19">
+<li>电容元件的正弦交流电路中，电压有效值不变，当频率增大时，电路中电流将 <code>增大</code>（电容是通交流阻直流的，频率越高，导通性越好）</li>
+<li>频率f=1Hz的正弦波是 <code>4cos(2π)</code></li>
+<li>已知电路复阻抗Z=(3-j4)Ω，则该电路一定呈 <code>容性</code></li>
+</ol>
+<p><font color='red'>注</font>：</p>
+<p>已知电路复阻抗<font color='orange'>Z为实数</font>，则该电路一定呈现<font color='orange'>纯阻性</font><br>
+如电路复阻抗<font color='orange'>Z=a+jb</font>，则该电路一定呈现电阻-<font color='orange'>电感性</font><br>
+如电路复阻抗<font color='orange'>Z=a-jb</font>，则该电路一定呈现电阻-<font color='orange'>电容性</font></p>
+<ol start="19">
+<li>在RL串联的交流电路中，R上端电压为3V，L上端电压为4V，则总电压为 <code>5V</code>（阻抗：电阻和电感串联电路对交流电的阻碍）</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220702200058.jpg" alt=""></p>
+<ol start="19">
+<li>电感电容相串联，U<sub>L</sub>=120V，U<sub>c</sub>=80V，则总电压等于200V（✘）（在LC串联电路中，U<sub>L</sub>与U<sub>c</sub>是反相的，总电压是它们的代数和，所以是120-80=40V）</li>
+</ol>
+<p><font color='red'>注1</font>：电感 f 越高，X<sub>L</sub>(感抗)越大，通直流，隔交流，在直流电路视为<font color='orange'>短路</font></p>
+<p><font color='red'>注2</font>：电容 f 越高，X<sub>c</sub>(容抗)越小，通交流，隔直流，在直流电路视为<font color='orange'>断路</font></p>
+<ol start="19">
+<li>电阻电感相并联，I<sub>R</sub>=3A，I<sub>L</sub>=4A，则总电压等于 <code>5A</code>（✔）</li>
+<li>正弦量的三要素是指它的 <code>振幅、角频率、初相位</code>（✔）</li>
+<li>并联电路的总电流超前端电压时，电路应呈感性（✘）（应该呈容性，电流滞后电压才是感性）</li>
+<li>叠加定理中，理想电压源，理想电流源不作用，分别视为 <code>短路，开路</code></li>
+<li>测得应该有源二端网络的开路电压为60V，短路电流3A，则把一个电阻为R=40Ω接到该网络的引出端点，R上的电压为 <code>40V</code></li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220702204929.jpg" alt=""></p>
+<ol start="24">
+<li>如图所示电路中，电压U为 <code>10V</code></li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220702210451.jpg" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220702214143.jpg" alt=""></p>
+<ol start="25">
+<li>如图所示电路，电阻<sub>L</sub>吸收的最大功率P<sub>Lmax</sub>等于 <code>3W</code>（负载R0阻值=戴维南RL等效阻值）</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220702214352.jpg" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220702220804.jpg" alt=""></p>
+<ol start="26">
+<li>某一灯泡上写着额定电压220V，这是指电压的 <code>有效值</code></li>
+<li>在正弦交流电路中，电感元件的瞬时值伏安可表达为 <code>u=Ldi/dt</code></li>
+<li>R,L串联的正弦交流电路中，复阻抗为 <code>Z=R+ωL</code></li>
+<li>电容元件的正弦交流电路中，电压有效值不变，当频率增大时，电路中电流将 <code>增大</code></li>
+<li>如图所示电路，各电压表指示为有效值，电压表V3的读数等于 <code>5</code>（勾股定理）</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220702224530.jpg" alt=""></p>
+<ol start="31">
+<li>如图所示，已知I<sub>1</sub>=3A，I<sub>2</sub>=4A，I<sub>3</sub>=4A 则电流 I等于 <code>3A</code></li>
+</ol>
+<p><font color='red'>注</font>：RLC串联电路中，电感电容电阻的电流相同，电感和电容的电压直接相减的差，电阻电压，总电压三者是勾股定理。即 <font color='orange'>U<sup>2</sup>＝U<sub>r</sub><sup>2</sup>+(UL-Uc)<sup>2</sup></font><br>
+RLC并联电路中，电感电容电阻的电压相同，电感和电容的电流直接相减的差，电阻电流，总电流三者是勾股定理。即<font color='orange'> I<sup>2</sup>＝I<sub>r</sub><sup>2</sup>+(IL-Ic)<sup>2</sup></font></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220702231152.jpg" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220702230822.jpg" alt=""></p>
+<ol start="32">
+<li>两个同频率正弦交流电流i1、i2的有效值分别为40A和30A。当i1+ i2的有效值为70A时，i1与i2的相位差是 <code>0°</code>（因为：I1+I2的有效值为70A=40A+30A，能直接相加，说明I1与I2的相位差是０度）</li>
+<li>若电路中某元件电流 i=5sin(314t+135°) A，两端的电压u=10sin(314t-45°) V，该元件是 <code>电容</code></li>
+<li>本征半导体中参入杂质后，自由电子大于空穴的数目，这样的半导体称为 <code>N型半导体 </code></li>
+<li>在某放大电路中，测的三极管三个电极的静态电位分别为 1.3V，2V，12V，则这只三极管是 <code>NPN型硅管</code>（首先找电压差约为0.7或者0.2V的两个电极,这两级是基极或者发射极,若为0.7则为硅管,0.3则为锗管，然后观察剩下的那个集电极，电压&lt;这两个电极电压的是PNP,反之是NPN）</li>
+<li>稳压二极管是利用其工作在 <code>反向击穿</code> 时电压变化极小的特性</li>
+<li>在集成电路中，采用差动放大电路的主要目的是为了 <code>消除温度漂移</code></li>
+<li>为了稳定放大电路的输出电压，应引入 <code>电压</code> 负反馈</li>
+</ol>
+<p><font color='red'>注</font>：</p>
+<p>凡是<font color='orange'>电压负反馈</font>都稳定输出电压、减小输出电阻。<br>
+凡是<font color='orange'>电流负反馈</font>都稳定输出电流、加大输出电阻。<br>
+凡是<font color='orange'>串联负反馈</font>都增大输入电阻。<br>
+凡是<font color='orange'>并联负反馈</font>都减小输入电阻。</p>
+<ol start="39">
+<li>如图放大电路中， T1、T2分别是 <code>共射-共集</code> 接法</li>
+</ol>
+<p><font color='red'>注</font>：主要看输入，输出的正极接哪个，剩下那个就是共X，<font color='orange'>in输入，out输出</font></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220703121929.jpg" alt=""></p>
+<ol start="40">
+<li>晶体二极管的阳极电位是 -15V，阴极电位是-5V，则该晶体二极管处于 <code>反偏状态</code>（-15V&lt;-5V）</li>
+<li>如下图所示，二极管均为理想元件，则VD1、VD2的导通状态分别为 <code>导通；截止</code>（电压差大的先导通，如果二极管正极接地则截止）</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220703124526.jpg" alt=""></p>
+<ol start="42">
+<li>三极管工作在放大区时，发射结、集电结的偏置情况分别为 <code>正偏，反偏</code></li>
+<li>若差动放大电路两输入端电压分别为 U<sub>i1</sub>=10mv，U<sub>i2</sub>=4mv则差模输入信号u<sub>id</sub>，共模输入信号U<sub>ic</sub>分别为 <code>6；7</code> mv</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220703132549.jpg" alt=""></p>
+<ol start="44">
+<li>如图所示理想运算放大电路中，负载电流I<sub>L</sub>为  <code>1/2mA</code></li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220703134338.jpg" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220703134849.jpg" alt=""></p>
+<ol start="45">
+<li>正常情况下，二极管的正向电阻和反向电阻阻值关系是 <code>正向电阻小于反向电阻</code></li>
+<li>在输入量不变的情况下，若引入反馈后，<code>净输入量减小</code> 则说明引入的反馈是负反馈</li>
+<li>室温下，当硅晶体二极管导通后，在正常使用的电流范围内，管压降一般取 <code>0.7V</code></li>
+<li>为了能使输出电流稳定，输入电阻增大，应引入 <code>电流串联</code>负反馈</li>
+</ol>
+<p><font color='red'>注</font>：</p>
+<p><font color='gree'>①</font> 电压负反馈——<font color='orange'>稳定输出电压</font>，降低输出电阻，带负载能力强。</p>
+<p><font color='gree'>②</font> 电流负反馈——<font color='orange'>稳定输出电流</font>，提高输出电阻。</p>
+<p><font color='gree'>③</font> 串联负反馈——<font color='orange'>提高输入电阻</font>，减少从信号源吸取的电流，信号源内阻越小，反馈作用越明显。</p>
+<p><font color='gree'>④</font> 并联负反馈一一<font color='orange'>降低输入电阻</font>，信号源内阻越大，反馈作用越明显。</p>
+<ol start="49">
+<li>直流负反馈用以稳定静态工作点，交流负反馈用来改善放大电路的动态特性（✔）</li>
+<li>判别电压反馈还是电流反馈的方法是采用瞬时极性法。（✔）</li>
+<li>在基本共射放大电路中，发射极电阻引入的反馈是电流并联负反馈。（✘）（应该是电流串联负反馈）</li>
+<li>在放大电路中，为了稳定静态工作点，可以引入交流正反馈。（✘）（只有在直流才称得上是静态工作点）</li>
+<li>若放大电路的放大倍数为负，则引入的反馈一定是负反馈。（✘）（放大倍数为负，其不一定是负反馈，放大倍数的正负跟接入方向有关）</li>
+<li>虚短就是理想运算放大器的同相输入端的电位与反相输入端的电位相等。（✔）（虚短用来得到电压相等；虚断用来得到电流为0）</li>
+<li>放大电路必须加上合适的直流电源才能正常工作。（✔）</li>
+<li>N型半导体的多数载流子是电子,因此N型半导体带负电。（✘）（多子不带电）</li>
+<li>室温下，当锗晶体二极管导通后，在正常使用的电流范围内，管压降一般取0.7V。（✘）（锗晶体是0.2~0.5V）</li>
+<li>在RLC串联电路中，各元件上的电压都不会大于总电压。（✘）（有可能大于，例如谐振时）</li>
+<li>在晶体三极管放大电路中，当电路出现截止失真时,是因为静态工作点设置得太高了。（✘）（截止失真是因为Q点太低，饱和失真是因为Q点太高）</li>
+<li>画放大器直流通路时，耦合电容和旁路电容应视为短路。（✘）（画直流时，电容开路；画交流时，电容短路）</li>
+<li>基本放大电路中的耦合电容具有隔直通交作用。（✔）</li>
+<li>二极管正向偏置时，PN结的电流主要是多数载流子的扩散运动。（✔）（正向电流是由多数载流子的扩散运动形成的；反向电流是由少数载流子的漂移运动形成的）</li>
+<li>如要求能放大两个信号的差值，又能抑制共模信号，采用反相输入方式的电路。（✘）（应该采取差分放大，因为差分放大电路的特点就是① 电路结构对称；② 抑制零漂； ③ 抑制共模；④ 放大差模）</li>
+<li>反映放大电路带负载能力的等效电阻是输出电阻。（✔）</li>
+<li>虚断就是理想运算放大器的同相输入端与反相输入端输入电流为0。（✔）</li>
+<li>产生零点漂移的原因主要是晶体管参数受温度的影响（✔）</li>
+</ol>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>分析题</p>
+</div>
+<ol>
+<li>电路如图所示，已知u<sub>i</sub>＝8sinωt(v)，试画出u<sub>i</sub>与u<sub>o</sub>的波形。设二极管正向导通电压可忽略不计。</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220703152854.jpg" alt=""></p>
+<p><font color='cornflowerblue'>答</font>：u<sub>i</sub>＝8sinωt(v)是一个幅值为8的正弦函数，经过二极管后，由于二极管的单项导电性所以只有正电压可以通过（理想情况下忽略了正向导通电压）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220703152417.jpg" alt=""></p>
+<ol start="2">
+<li>电路如图所示，设图中二极管为理想二极管，输入电压为 U<sub>i</sub>=5sinωt(V)，E=2V，试画出输出电压 U<sub>o</sub>的波形。</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220703152902.jpg" alt=""></p>
+<p><font color='cornflowerblue'>答</font>：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220703164621.jpg" alt=""></p>
+<ol start="3">
+<li>二极管构成的限幅电路如下，设二级管的导通压降为VD，图中两个直流电压源的大小分别为V1，V2，画出输出电压V<sub>o</sub>随输入电压V<sub>i</sub>的变化曲线。</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220703153127.jpg" alt=""></p>
+<p><font color='cornflowerblue'>答</font>：<br>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220705140155.jpg" alt=""></p>
+<ol start="4">
+<li>分析级间反馈是何种反馈组态</li>
+</ol>
+<p>判断反馈通路与 U<sub>o</sub>或U<sub>o</sub>的“+”之间是否只有导线，是则 <code>电压反馈</code>，否则是 <code>电流反馈</code>；根据反馈通路与最左边元件输入端交点是否与输入信号U<sub>i</sub>同一边，是则 <code>并联</code>，否则 <code>串联</code>；</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220703194737.jpg" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220703194152.jpg" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>计算题</p>
+</div>
+<ol>
+<li>
+<p>求图中电压 U<sub>o</sub>与输入电压 U<sub>i</sub> 的关系式<br>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220705141145.jpg" alt=""><br>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220705144045.jpg" alt=""></p>
+</li>
+<li>
+<p>用支路电流法求解图示电路中的电流 I<sub>1</sub>，I<sub>2</sub>，I<sub>3</sub>，列出方程即可</p>
+</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220703201302.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220703203251.jpg" alt=""></p>
+<ol start="3">
+<li>已知电源电压、各个电阻的值、三极管的电流放大倍数 β 以及 r<sub>bb’</sub></li>
+</ol>
+<p>（1）画出直流通路，计算静态工作点：I<sub>BQ</sub> ，I<sub>CQ</sub>，U<sub>CEQ</sub></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220703210253.jpg" alt=""></p>
+<p><font color='cornflowerblue'>答</font>：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220703210202.jpg" alt=""></p>
+<p>（2）画出交流通路、微变等效电路图，计算输入电阻、输出电阻、电压放大倍数。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220703210334.jpg" alt=""></p>
+<p><font color='cornflowerblue'>答</font>：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220703230729.jpg" alt=""></p>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num84.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="card-info-avatar"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-status-box"><div class="author-status"><g-emoji class="g-emoji" alias="palm_tree" fallback-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/ssaa1324234.png">🐟</g-emoji><span>摸鱼中</span></div></div></div><div class="author-info__name">Luckys-Yang</div><div class="author-info__description">关于嵌入式的个人博客</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">94</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">75</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/luckys-yang?tab=repositories" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=444783764&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="/weixin/" target="_blank" title="微信"><i class="fab fa-weixin"></i></a></div></div><div class="card-widget card-announcement"><div id="welcome-info"></div><div class="item-headline"></div></div><div class="sticky_layout"></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://api2.acozycotage.net/Pweb" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '可惜你不听王杰，也不懂我...' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>

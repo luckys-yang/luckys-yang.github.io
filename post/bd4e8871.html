@@ -1,0 +1,767 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>51-蓝牙接收温度显示 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="实验  下载程序后，插上DS18B20温度传感器，数码管显示检测的温度值，与PZ-HC05蓝牙进行配对，打开手机APP，采集的温度数据上传到手机APP显示。 main.c # include &quot;public.h&quot; # include &quot;bluetooth.h&quot;  &#x2F;******************************************">
+<meta property="og:type" content="article">
+<meta property="og:title" content="51-蓝牙接收温度显示">
+<meta property="og:url" content="https://mdcm.yang5201314.cn/post/bd4e8871.html">
+<meta property="og:site_name" content="Luckys-Yangの小栈">
+<meta property="og:description" content="实验  下载程序后，插上DS18B20温度传感器，数码管显示检测的温度值，与PZ-HC05蓝牙进行配对，打开手机APP，采集的温度数据上传到手机APP显示。 main.c # include &quot;public.h&quot; # include &quot;bluetooth.h&quot;  &#x2F;******************************************">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mdcm.yang5201314.cn/img/num74.webp">
+<meta property="article:published_time" content="2022-04-09T07:17:00.000Z">
+<meta property="article:modified_time" content="2022-06-08T17:10:25.000Z">
+<meta property="article:author" content="Luckys-Yang">
+<meta property="article:tag" content="蓝牙">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mdcm.yang5201314.cn/img/num74.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"><link rel="canonical" href="https://mdcm.yang5201314.cn/post/bd4e8871.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '51-蓝牙接收温度显示',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-06-09 01:10:25'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">94</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">75</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">51-蓝牙接收温度显示</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-09T07:17:00.000Z" title="发表于 2022-04-09 15:17:00">2022-04-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-06-08T17:10:25.000Z" title="更新于 2022-06-09 01:10:25">2022-06-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/51%E7%B3%BB%E5%88%97/">51系列</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验</p>
+</div>
+<p>下载程序后，插上DS18B20温度传感器，数码管显示检测的温度值，与PZ-HC05蓝牙进行配对，打开手机APP，采集的温度数据上传到手机APP显示。</p>
+<p>main.c</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &quot;public.h&quot;
+# include &quot;bluetooth.h&quot;
+
+&#x2F;*******************************************************************************
+* 函 数 名       : main
+* 函数功能		 : 主函数
+* 输    入       : 无
+* 输    出    	 : 无
+*******************************************************************************&#x2F;
+void main()
+&#123;	
+	bluetooth_control_init();
+
+	while(1)
+	&#123;				
+		bluetooth_control();	
+	&#125;		
+&#125;
+</code></pre>
+<p>smg.c（数码管）</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &quot;smg.h&quot;
+
+
+u8 gsmg_code[17]&#x3D;&#123;0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,
+				0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71&#125;;
+void smg_display(u8 dat[],u8 pos)
+&#123;
+	u8 i&#x3D;0;
+	u8 pos_temp&#x3D;pos-1;
+	
+	for(i&#x3D;pos_temp;i&lt;8;i++)
+	&#123;
+		switch(i)
+		&#123;
+				case 0:A0&#x3D;1;A1&#x3D;1;A2&#x3D;1;break;&#x2F;&#x2F;Y7&#x2F;&#x2F;板子从左边数第一个数码管，下面以此类推
+				case 1:A0&#x3D;0;A1&#x3D;1;A2&#x3D;1;break;&#x2F;&#x2F;Y6
+				case 2:A0&#x3D;1;A1&#x3D;0;A2&#x3D;1;break;&#x2F;&#x2F;Y5
+				case 3:A0&#x3D;0;A1&#x3D;0;A2&#x3D;1;break;&#x2F;&#x2F;Y4
+				case 4:A0&#x3D;1;A1&#x3D;1;A2&#x3D;0;break;&#x2F;&#x2F;Y3
+				case 5:A0&#x3D;0;A1&#x3D;1;A2&#x3D;0;break;&#x2F;&#x2F;Y2
+				case 6:A0&#x3D;1;A1&#x3D;0;A2&#x3D;0;break;&#x2F;&#x2F;Y1
+				case 7:A0&#x3D;0;A1&#x3D;0;A2&#x3D;0;break;&#x2F;&#x2F;Y0
+		&#125;
+			SMG_A0_F_PORT&#x3D;dat[i-pos_temp];&#x2F;&#x2F;传送段选数据
+			delay_10us(100);&#x2F;&#x2F;延时1毫秒左右
+			SMG_A0_F_PORT&#x3D;0x00;&#x2F;&#x2F;消影
+	&#125;
+&#125;</code></pre>
+<p>smg.h</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># ifndef _smg_H
+# define _smg_H
+
+# include &quot;public.h&quot;
+
+sbit A0&#x3D;P2^2;
+sbit A1&#x3D;P2^3;
+sbit A2&#x3D;P2^4;
+# define SMG_A0_F_PORT P0&#x2F;&#x2F;宏定义数码管P0端口
+extern u8 gsmg_code[17];  &#x2F;&#x2F;注意要加extern 
+
+void smg_display(u8 dat[],u8 pos);
+# endif</code></pre>
+<p>ds18b20.c（温度传感器）</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &quot;ds18b20.h&quot;
+# include &quot;intrins.h&quot;
+
+&#x2F;*******************************************************************************
+* 函 数 名         : ds18b20_reset
+* 函数功能		   : 复位DS18B20  
+* 输    入         : 无
+* 输    出         : 无
+*******************************************************************************&#x2F;
+void ds18b20_reset(void)
+&#123;
+	DS18B20_PORT&#x3D;0;	&#x2F;&#x2F;拉低DQ
+	delay_10us(75);	&#x2F;&#x2F;拉低750us
+	DS18B20_PORT&#x3D;1;	&#x2F;&#x2F;DQ&#x3D;1
+	delay_10us(2);	&#x2F;&#x2F;20US
+&#125;
+
+&#x2F;*******************************************************************************
+* 函 数 名         : ds18b20_check
+* 函数功能		   : 检测DS18B20是否存在
+* 输    入         : 无
+* 输    出         : 1:未检测到DS18B20的存在，0:存在
+*******************************************************************************&#x2F;
+u8 ds18b20_check(void)
+&#123;
+	u8 time_temp&#x3D;0;
+
+	while(DS18B20_PORT&amp;&amp;time_temp&lt;20)	&#x2F;&#x2F;等待DQ为低电平
+	&#123;
+		time_temp++;
+		delay_10us(1);	
+	&#125;
+	if(time_temp&gt;&#x3D;20)return 1;	&#x2F;&#x2F;如果超时则强制返回1
+	else time_temp&#x3D;0;
+	while((!DS18B20_PORT)&amp;&amp;time_temp&lt;20)	&#x2F;&#x2F;等待DQ为高电平
+	&#123;
+		time_temp++;
+		delay_10us(1);
+	&#125;
+	if(time_temp&gt;&#x3D;20)return 1;	&#x2F;&#x2F;如果超时则强制返回1
+	return 0;
+&#125;
+
+&#x2F;*******************************************************************************
+* 函 数 名         : ds18b20_read_bit
+* 函数功能		   : 从DS18B20读取一个位
+* 输    入         : 无
+* 输    出         : 1&#x2F;0
+*******************************************************************************&#x2F;
+u8 ds18b20_read_bit(void)
+&#123;
+	u8 dat&#x3D;0;
+	
+	DS18B20_PORT&#x3D;0;
+	_nop_();_nop_();
+	DS18B20_PORT&#x3D;1;	
+	_nop_();_nop_(); &#x2F;&#x2F;该段时间不能过长，必须在15us内读取数据
+	if(DS18B20_PORT)dat&#x3D;1;	&#x2F;&#x2F;如果总线上为1则数据dat为1，否则为0
+	else dat&#x3D;0;
+	delay_10us(5);
+	return dat;
+&#125; 
+
+&#x2F;*******************************************************************************
+* 函 数 名         : ds18b20_read_byte
+* 函数功能		   : 从DS18B20读取一个字节
+* 输    入         : 无
+* 输    出         : 一个字节数据
+*******************************************************************************&#x2F;
+u8 ds18b20_read_byte(void)
+&#123;
+	u8 i&#x3D;0;
+	u8 dat&#x3D;0;
+	u8 temp&#x3D;0;
+
+	for(i&#x3D;0;i&lt;8;i++)&#x2F;&#x2F;循环8次，每次读取一位，且先读低位再读高位
+	&#123;
+		temp&#x3D;ds18b20_read_bit();
+		dat&#x3D;(temp&lt;&lt;7)|(dat&gt;&gt;1);
+	&#125;
+	return dat;	
+&#125;
+
+&#x2F;*******************************************************************************
+* 函 数 名         : ds18b20_write_byte
+* 函数功能		   : 写一个字节到DS18B20
+* 输    入         : dat：要写入的字节
+* 输    出         : 无
+*******************************************************************************&#x2F;
+void ds18b20_write_byte(u8 dat)
+&#123;
+	u8 i&#x3D;0;
+	u8 temp&#x3D;0;
+
+	for(i&#x3D;0;i&lt;8;i++)&#x2F;&#x2F;循环8次，每次写一位，且先写低位再写高位
+	&#123;
+		temp&#x3D;dat&amp;0x01;&#x2F;&#x2F;选择低位准备写入
+		dat&gt;&gt;&#x3D;1;&#x2F;&#x2F;将次高位移到低位
+		if(temp)
+		&#123;
+			DS18B20_PORT&#x3D;0;
+			_nop_();_nop_();
+			DS18B20_PORT&#x3D;1;	
+			delay_10us(6);
+		&#125;
+		else
+		&#123;
+			DS18B20_PORT&#x3D;0;
+			delay_10us(6);
+			DS18B20_PORT&#x3D;1;
+			_nop_();_nop_();	
+		&#125;	
+	&#125;	
+&#125;
+
+&#x2F;*******************************************************************************
+* 函 数 名         : ds18b20_start
+* 函数功能		   : 开始温度转换
+* 输    入         : 无
+* 输    出         : 无
+*******************************************************************************&#x2F;
+void ds18b20_start(void)
+&#123;
+	ds18b20_reset();&#x2F;&#x2F;复位
+	ds18b20_check();&#x2F;&#x2F;检查DS18B20
+	ds18b20_write_byte(0xcc);&#x2F;&#x2F;SKIP ROM
+    ds18b20_write_byte(0x44);&#x2F;&#x2F;转换命令	
+&#125;
+
+&#x2F;*******************************************************************************
+* 函 数 名         : ds18b20_init
+* 函数功能		   : 初始化DS18B20的IO口 DQ 同时检测DS的存在
+* 输    入         : 无
+* 输    出         : 1:不存在，0:存在
+*******************************************************************************&#x2F; 
+u8 ds18b20_init(void)
+&#123;
+	ds18b20_reset();
+	return ds18b20_check();	
+&#125;
+
+&#x2F;*******************************************************************************
+* 函 数 名         : ds18b20_read_temperture
+* 函数功能		   : 从ds18b20得到温度值
+* 输    入         : 无
+* 输    出         : 温度数据
+*******************************************************************************&#x2F;
+float ds18b20_read_temperture(void)
+&#123;
+	float temp;
+	u8 dath&#x3D;0;
+	u8 datl&#x3D;0;
+	u16 value&#x3D;0;
+
+	ds18b20_start();&#x2F;&#x2F;开始转换
+	ds18b20_reset();&#x2F;&#x2F;复位
+	ds18b20_check();
+	ds18b20_write_byte(0xcc);&#x2F;&#x2F;SKIP ROM
+    ds18b20_write_byte(0xbe);&#x2F;&#x2F;读存储器
+
+	datl&#x3D;ds18b20_read_byte();&#x2F;&#x2F;低字节
+	dath&#x3D;ds18b20_read_byte();&#x2F;&#x2F;高字节
+	value&#x3D;(dath&lt;&lt;8)+datl;&#x2F;&#x2F;合并为16位数据
+
+	if((value&amp;0xf800)&#x3D;&#x3D;0xf800)&#x2F;&#x2F;判断符号位，负温度
+	&#123;
+		value&#x3D;(~value)+1; &#x2F;&#x2F;数据取反再加1
+		temp&#x3D;value*(-0.0625);&#x2F;&#x2F;乘以精度	
+	&#125;
+	else &#x2F;&#x2F;正温度
+	&#123;
+		temp&#x3D;value*0.0625;	
+	&#125;
+	return temp;
+&#125;
+</code></pre>
+<p>ds18b20.h</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># ifndef _ds18b20_H
+# define _ds18b20_H
+
+# include &quot;public.h&quot;
+
+&#x2F;&#x2F;管脚定义
+sbit DS18B20_PORT&#x3D;P3^7;	&#x2F;&#x2F;DS18B20数据口定义
+
+
+&#x2F;&#x2F;函数声明
+u8 ds18b20_init(void);
+float ds18b20_read_temperture(void);
+
+# endif</code></pre>
+<p>public.c（通用）</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &quot;public.h&quot;
+
+&#x2F;*******************************************************************************
+* 函 数 名       : delay_10us
+* 函数功能		 : 延时函数，ten_us&#x3D;1时，大约延时10us
+* 输    入       : ten_us
+* 输    出    	 : 无
+*******************************************************************************&#x2F;
+void delay_10us(u16 ten_us)
+&#123;
+	while(ten_us--);	
+&#125;
+
+&#x2F;*******************************************************************************
+* 函 数 名       : delay_ms
+* 函数功能		 : ms延时函数，ms&#x3D;1时，大约延时1ms
+* 输    入       : ms：ms延时时间
+* 输    出    	 : 无
+*******************************************************************************&#x2F;
+void delay_ms(u16 ms)
+&#123;
+	u16 i,j;
+	for(i&#x3D;ms;i&gt;0;i--)
+		for(j&#x3D;110;j&gt;0;j--);
+&#125;</code></pre>
+<p>public.h</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># ifndef _public_H
+# define _public_H
+
+# include &quot;reg52.h&quot;
+
+typedef unsigned int u16;	&#x2F;&#x2F;对系统默认数据类型进行重定义
+typedef unsigned char u8;
+
+
+void delay_10us(u16 ten_us);
+void delay_ms(u16 ms);
+
+# endif
+</code></pre>
+<p>uart.c（串口通信）</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &quot;uart.h&quot;
+
+# define RELOAD_COUNT 0xFA &#x2F;&#x2F;宏定义波特率发生器的载入值 9600
+
+void UART_Init(void)
+&#123;
+	SCON|&#x3D;0X50;			&#x2F;&#x2F;设置为工作方式1
+	TMOD|&#x3D;0X20;			&#x2F;&#x2F;设置计数器工作方式2
+	PCON&#x3D;0X80;			&#x2F;&#x2F;波特率加倍
+	TH1&#x3D;RELOAD_COUNT;	&#x2F;&#x2F;计数器初始值设置
+	TL1&#x3D;TH1;
+	ES&#x3D;0;				&#x2F;&#x2F;关闭接收中断
+	EA&#x3D;1;				&#x2F;&#x2F;打开总中断
+	TR1&#x3D;1;				&#x2F;&#x2F;打开计数器
+&#x2F;&#x2F;	TI&#x3D;1;          &#x2F;&#x2F;发送中断标记位，如果使用printf函数的必须设置	
+&#125;
+
+void UART_SendData(u8 dat)
+&#123;
+	ES&#x3D;0; &#x2F;&#x2F;关闭串口中断
+	TI&#x3D;0; &#x2F;&#x2F;清发送完毕中断请求标志位
+	SBUF&#x3D;dat; &#x2F;&#x2F;发送
+	while(TI&#x3D;&#x3D;0); &#x2F;&#x2F;等待发送完毕
+	TI&#x3D;0; &#x2F;&#x2F;清发送完毕中断请求标志位
+	ES&#x3D;1; &#x2F;&#x2F;允许串口中断
+&#125;
+
+void UART_SendString(u8 *pbuf)
+&#123;
+	while(*pbuf!&#x3D;&#39;\0&#39;) &#x2F;&#x2F;遇到空格跳出循环	
+	&#123;
+		UART_SendData(*pbuf);
+		delay_10us(5);
+		pbuf++;	
+	&#125;
+&#125;
+
+u8 UART_RX_BUF[UART_REC_LEN];     &#x2F;&#x2F;接收缓冲,最大UART_REC_LEN个字节.
+&#x2F;&#x2F;接收状态
+&#x2F;&#x2F;bit15，	接收完成标志
+&#x2F;&#x2F;bit14，	接收到0x0d
+&#x2F;&#x2F;bit13~0，	接收到的有效字节数目
+u16 UART_RX_STA&#x3D;0;       &#x2F;&#x2F;接收状态标记	
+
+
+&#x2F;&#x2F;void UART_IRQn() interrupt 4
+&#x2F;&#x2F;&#123;
+&#x2F;&#x2F;	u8 r;
+&#x2F;&#x2F;	static u8 i&#x3D;0;
+&#x2F;&#x2F;	
+&#x2F;&#x2F;	if(RI)
+&#x2F;&#x2F;	&#123;
+&#x2F;&#x2F;		RI&#x3D;0;
+&#x2F;&#x2F;		UART_RX_BUF[i]&#x3D;SBUF;&#x2F;&#x2F;读取接收到的数据
+&#x2F;&#x2F;		if(UART_RX_BUF[0]&#x3D;&#x3D;&#39;+&#39;)i++;
+&#x2F;&#x2F;		else i&#x3D;0;
+&#x2F;&#x2F;		if(i&#x3D;&#x3D;10)
+&#x2F;&#x2F;		&#123;
+&#x2F;&#x2F;			i&#x3D;0;
+&#x2F;&#x2F;		&#125;		  		
+&#x2F;&#x2F;	&#125;	
+&#x2F;&#x2F;&#125;
+
+</code></pre>
+<p>uart.h</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># ifndef _uart_H
+# define _uart_H
+
+# include &quot;public.h&quot;
+# include &quot;stdio.h&quot;
+
+
+# define UART_REC_LEN  			10  	&#x2F;&#x2F;定义最大接收字节数 50
+
+extern u8  UART_RX_BUF[UART_REC_LEN]; &#x2F;&#x2F;接收缓冲,最大USART_REC_LEN个字节.末字节为换行符 
+extern u16 UART_RX_STA;         		&#x2F;&#x2F;接收状态标记	
+
+
+void UART_Init(void);
+void UART_SendData(u8 dat);
+void UART_SendString(u8 *pbuf);
+
+
+# endif
+</code></pre>
+<p>bluetooth.c（蓝牙）</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &quot;bluetooth.h&quot;
+# include &quot;ds18b20.h&quot;
+# include &quot;uart.h&quot;
+# include &quot;smg.h&quot;
+
+
+&#x2F;&#x2F;定义LED1管脚
+sbit LED1&#x3D;P2^0;
+
+&#x2F;&#x2F;定义蓝牙控制命令
+# define LED1_ON_CMD			0X11
+# define LED1_OFF_CMD		0X10
+
+
+&#x2F;&#x2F;蓝牙控制初始化
+void bluetooth_control_init(void)
+&#123;
+	UART_Init();
+	ds18b20_init();&#x2F;&#x2F;初始化DS18B20
+	ES&#x3D;1;&#x2F;&#x2F;允许串口中断	
+&#125;
+
+&#x2F;&#x2F;蓝牙控制
+void bluetooth_control(void)
+&#123;
+	long i&#x3D;0;
+   	int temp_value;
+	u8 temp_buf[5];
+	u8 bluetooth_send_buf[7];
+
+	while(1)
+	&#123;
+		i++;
+		if(i%50&#x3D;&#x3D;0)&#x2F;&#x2F;间隔一段时间读取温度值，间隔时间要大于温度传感器转换温度时间
+			temp_value&#x3D;ds18b20_read_temperture()*10;&#x2F;&#x2F;保留温度值小数后一位
+		if(temp_value&lt;0)&#x2F;&#x2F;负温度
+		&#123;
+			temp_value&#x3D;-temp_value;
+			temp_buf[0]&#x3D;0x40;&#x2F;&#x2F;显示负号
+			bluetooth_send_buf[0]&#x3D;&#39;-&#39;;	
+		&#125;
+		else
+		&#123;
+			temp_buf[0]&#x3D;0x00;&#x2F;&#x2F;不显示
+			bluetooth_send_buf[0]&#x3D;&#39;+&#39;;
+		&#125;		
+		temp_buf[1]&#x3D;gsmg_code[temp_value&#x2F;1000];&#x2F;&#x2F;百位
+		temp_buf[2]&#x3D;gsmg_code[temp_value%1000&#x2F;100];&#x2F;&#x2F;十位
+		temp_buf[3]&#x3D;gsmg_code[temp_value%1000%100&#x2F;10]|0x80;&#x2F;&#x2F;个位+小数点
+		temp_buf[4]&#x3D;gsmg_code[temp_value%1000%100%10];&#x2F;&#x2F;小数点后一位
+		smg_display(temp_buf,4);
+		if(i%100&#x3D;&#x3D;0)
+		&#123;
+			bluetooth_send_buf[1]&#x3D;temp_value&#x2F;1000+0x30;
+			bluetooth_send_buf[2]&#x3D;temp_value%1000&#x2F;100+0x30;
+			bluetooth_send_buf[3]&#x3D;temp_value%1000%100&#x2F;10+0x30;
+			bluetooth_send_buf[4]&#x3D;&#39;.&#39;;
+			bluetooth_send_buf[5]&#x3D;temp_value%1000%100%10+0x30;
+			bluetooth_send_buf[6]&#x3D;&#39;\0&#39;;
+			UART_SendString(bluetooth_send_buf);&#x2F;&#x2F;通过串口发送温度数据到APP	
+		&#125;		
+	&#125;				
+&#125;
+
+&#x2F;&#x2F;串口中断服务函数
+&#x2F;&#x2F;接收手机APP发送的信号后控制板载资源
+void UART_IRQn() interrupt 4
+&#123;
+	if(RI)
+	&#123;
+		RI&#x3D;0;
+		UART_RX_BUF[0]&#x3D;SBUF;&#x2F;&#x2F;读取接收到的数据
+		
+		&#x2F;&#x2F;蓝牙控制
+		if(UART_RX_BUF[0]&#x3D;&#x3D;LED1_ON_CMD)
+			LED1&#x3D;0;
+		else if(UART_RX_BUF[0]&#x3D;&#x3D;LED1_OFF_CMD)
+			LED1&#x3D;1;		
+	&#125;	
+&#125;
+</code></pre>
+<p>bluetooth.h</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># ifndef _bluetooth_H
+# define _bluetooth_H
+
+# include &quot;public.h&quot;
+
+void bluetooth_control_init(void);
+void bluetooth_control(void);
+
+# endif</code></pre>
+<div class="video-bilibili">
+  <iframe
+    src="https://player.bilibili.com/player.html?aid=340508700&bvid=BV1v94y1Z7mX&cid=571396187&page=1"
+    scrolling="no"
+    border="0"
+    frameborder="no"
+    framespacing="0"
+    high_quality="1"
+    danmaku="1"
+    allowfullscreen="true"
+  ></iframe>
+</div></article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%93%9D%E7%89%99/">蓝牙</a></div><div class="post_share"><div class="social-share" data-image="/img/num74.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="card-info-avatar"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-status-box"><div class="author-status"><g-emoji class="g-emoji" alias="palm_tree" fallback-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/ssaa1324234.png">🐟</g-emoji><span>摸鱼中</span></div></div></div><div class="author-info__name">Luckys-Yang</div><div class="author-info__description">关于嵌入式的个人博客</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">94</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">75</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/luckys-yang?tab=repositories" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=444783764&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="/weixin/" target="_blank" title="微信"><i class="fab fa-weixin"></i></a></div></div><div class="card-widget card-announcement"><div id="welcome-info"></div><div class="item-headline"></div></div><div class="sticky_layout"></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://api2.acozycotage.net/Pweb" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '可惜你不听王杰，也不懂我...' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>

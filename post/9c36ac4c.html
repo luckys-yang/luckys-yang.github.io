@@ -1,0 +1,1194 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>数据结构-栈，队列，顺序表，哈希 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="栈结构 FILO 先进后出，后来居上的一种存储方式 栈的基本属性：栈内存 ，栈顶标记，栈的当前元素个数 栈的基本操作：入栈，出栈，获取栈顶元素：栈顶标记的元素（头插法） 万金油操作：判断是否为NULL，当前栈中数据个数 根据实现方式，栈分为两种方式：链式栈，数组栈 队列 FIFO 先进先出，排队的方式（尾插法） 链式栈  main.cpp # include &lt;stdio.h&gt; #">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构-栈，队列，顺序表，哈希">
+<meta property="og:url" content="https://mdcm.yang5201314.cn/post/9c36ac4c.html">
+<meta property="og:site_name" content="Luckys-Yangの小栈">
+<meta property="og:description" content="栈结构 FILO 先进后出，后来居上的一种存储方式 栈的基本属性：栈内存 ，栈顶标记，栈的当前元素个数 栈的基本操作：入栈，出栈，获取栈顶元素：栈顶标记的元素（头插法） 万金油操作：判断是否为NULL，当前栈中数据个数 根据实现方式，栈分为两种方式：链式栈，数组栈 队列 FIFO 先进先出，排队的方式（尾插法） 链式栈  main.cpp # include &lt;stdio.h&gt; #">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mdcm.yang5201314.cn/img/num78.webp">
+<meta property="article:published_time" content="2022-03-06T12:26:00.000Z">
+<meta property="article:modified_time" content="2022-06-09T05:17:53.000Z">
+<meta property="article:author" content="Luckys-Yang">
+<meta property="article:tag" content="博客,个人博客,技术,学习,Hexo,Blog,STM32,嵌入式,单片机">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mdcm.yang5201314.cn/img/num78.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"><link rel="canonical" href="https://mdcm.yang5201314.cn/post/9c36ac4c.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '数据结构-栈，队列，顺序表，哈希',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-06-09 13:17:53'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">94</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">75</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">数据结构-栈，队列，顺序表，哈希</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-06T12:26:00.000Z" title="发表于 2022-03-06 20:26:00">2022-03-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-06-09T05:17:53.000Z" title="更新于 2022-06-09 13:17:53">2022-06-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">数据结构学习笔记</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><p><font color='cornflowerblue'> 栈结构</font></p>
+<p><font color='orange'>FILO 先进后出</font>，后来居上的一种存储方式</p>
+<p>栈的<font color='red'>基本属性</font>：栈内存 ，栈顶标记，栈的当前元素个数</p>
+<p><font color='orange'>栈的基本操作：入栈，出栈，获取栈顶元素：栈顶标记的元素（头插法）</font></p>
+<p>万金油操作：判断是否为NULL，当前栈中数据个数</p>
+<p>根据实现方式，栈分为<font color='orange'>两种</font>方式：<font color='orange'>链式栈</font>，<font color='orange'>数组栈</font></p>
+<p><font color='cornflowerblue'>队列</font></p>
+<p><font color='orange'>FIFO 先进先出</font>，排队的方式（<font color='orange'>尾插法</font>）</p>
+<h2 id="链式栈">链式栈</h2>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbDLGIH.png" alt=""></p>
+<p>main.cpp</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &lt;stdio.h&gt;
+# include &lt;string.h&gt;
+# include &lt;stdlib.h&gt;
+&#x2F;&#x2F;链表结构
+struct Node
+&#123;
+	int data;
+	struct Node* next;
+&#125;;
+ 
+struct Node* creatNode(int data)
+&#123;
+	struct Node* newNode &#x3D; (struct Node*)malloc(sizeof(struct Node));
+	newNode-&gt;next &#x3D; NULL;
+	newNode-&gt;data &#x3D; data;
+	return newNode;
+&#125;
+&#x2F;&#x2F;栈结构
+struct stack
+&#123;
+	int sizeStack;&#x2F;&#x2F;栈当前元素个数
+	struct Node* stackTop;&#x2F;&#x2F;栈顶标记用指针表示
+&#125;;
+&#x2F;&#x2F;创建栈，描述栈的最初状态
+struct stack* createStack()
+&#123;
+	struct stack* pstack &#x3D; (struct stack*)malloc(sizeof(struct stack));
+	pstack-&gt;sizeStack &#x3D; 0;
+	pstack-&gt;stackTop &#x3D; NULL;
+	return pstack;
+&#125;
+&#x2F;&#x2F;万金油函数
+int size(struct stack* pstack)
+&#123;
+	return pstack-&gt;sizeStack;
+&#125;
+int empty(struct stack* pstack)
+&#123;
+	return pstack-&gt;sizeStack!&#x3D;0;
+&#125;
+&#x2F;&#x2F;入栈操作--》链表的头插法，无头链表 栈顶指针永远指向第一个节点
+void push(struct stack* pstack, int data)
+&#123;
+	struct Node* newNode &#x3D; creatNode(data);
+	if (newNode &#x3D;&#x3D; NULL)
+	&#123;
+		return;
+	&#125;
+	else
+	&#123;
+		newNode-&gt;next &#x3D; pstack-&gt;stackTop;
+		pstack-&gt;stackTop &#x3D; newNode;
+		pstack-&gt;sizeStack++;
+	&#125;
+&#125;
+&#x2F;&#x2F;出栈：链表的删除：无头链表的头删法
+void pop(struct stack* pstack)
+&#123;
+	if (pstack-&gt;sizeStack &#x3D;&#x3D; 0)
+	&#123;
+		printf(&quot;栈为空，无法删除&quot;);
+		return;
+	&#125;
+	else
+	&#123;
+		&#x2F;&#x2F;堆内存实现的栈需内存释放
+		struct Node* nextNode &#x3D; pstack-&gt;stackTop-&gt;next;
+		free(pstack-&gt;stackTop);
+		pstack-&gt;stackTop &#x3D; nextNode;
+		pstack-&gt;sizeStack--;
+	&#125;
+&#125;
+&#x2F;&#x2F;获取栈顶元素
+int top(struct stack* pstack)
+&#123;
+	if (pstack-&gt;sizeStack &#x3D;&#x3D; 0)
+	&#123;
+		printf(&quot;栈为空，无法获取栈顶元素&quot;);
+		return 0;
+	&#125;
+	return pstack-&gt;stackTop-&gt;data;
+&#125;
+ 
+int main()
+&#123;
+	struct stack* mystack &#x3D; createStack();
+	int num &#x3D; 1234;
+	while (num !&#x3D; 0)
+	&#123;
+		push(mystack, num % 2);
+		num &#x2F;&#x3D; 2;
+	&#125;
+	
+	while (empty(mystack))
+	&#123;
+		printf(&quot;%d&quot;, top(mystack));&#x2F;&#x2F;栈顶元素先出
+		pop(mystack);
+	&#125;
+ 
+	return 0;
+&#125;
+ </code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbDL3ZD.png" alt=""></p>
+<h2 id="数组栈">数组栈</h2>
+<p>方便，但是数组长度受限制，是自己申请的才要释放，不是自己的系统会自动回收！</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbDLlqO.png" alt=""></p>
+<p>main.cpp</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">int main()
+&#123;
+	&#x2F;&#x2F;struct stack* mystack &#x3D; createStack();
+	int num &#x3D; 1234;
+	&#x2F;&#x2F;通常情况用数组充当栈内存
+	int stack[20];
+	int stackTop &#x3D; -1;&#x2F;&#x2F;下标充当位置
+	while (num !&#x3D; 0)
+	&#123;
+		&#x2F;&#x2F;入栈操作
+		stackTop++;
+		stack[stackTop] &#x3D; num % 2;&#x2F;&#x2F;等同于stack[++stackTop] &#x3D; num % 2;
+		num &#x2F;&#x3D; 2;
+	&#125;
+	&#x2F;&#x2F;因为栈顶标记正好是等于数组下标
+	while (stackTop !&#x3D; -1)
+	&#123;
+		printf(&quot;%d &quot;, stack[stackTop]);&#x2F;&#x2F;获取栈顶元素
+		&#x2F;&#x2F;出栈，伪删除
+		stackTop--;
+	&#125;
+	return 0;
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbDLQsK.png" alt=""></p>
+<h2 id="寻路问题">寻路问题</h2>
+<p>迷宫寻路</p>
+<h3 id="C语言知识回顾">C语言知识回顾</h3>
+<p>main.cpp</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"> 
+# include &lt;stdio.h&gt;
+ 
+&#x2F;&#x2F;指针传参的两种方式
+void print(int arr[],int a)&#123;&#125;
+void print2(int* arr,int a)&#123;&#125;
+ 
+int main()
+&#123;
+	int arr[3] &#x3D; &#123; 1,2,3 &#125;;
+	print(arr, 4);
+	print2(arr, 4);
+	return 0;
+&#125;</code></pre>
+<p>二级指针申请一段内存存放多个一级指针存放整数</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbDL8de.png" alt=""></p>
+<p>main.cpp</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">int** makeArray(int row, int cols)
+&#123;
+	int** array &#x3D; (int**)malloc(sizeof(int) * row);
+	for (int i &#x3D; 0; i &lt; cols; i++)
+	&#123;
+		array[i] &#x3D; (int*)malloc(sizeof(int) * cols);
+	&#125;
+	return array;
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbDLYid.png" alt=""></p>
+<p>走迷宫流程：</p>
+<p>默认从(1,1)开始走，默认方向是往右(0)走，准备往右走时先提前计算出往右走后落点处坐标，也就是(1,2),然后通过判断(1,2)是不是墙(判断是否为0)，如果是墙就换个方向测试直到下一个落脚点不是墙，如果4个方向都是墙那就直接退出外循环，现在当测到往下的方向(1)时可以走那就退出内循环然后把当前位置<font color='orange'>(1,1)</font>入栈，再把下一个落脚点的坐标变成当前位置,也就是新的当前位置是(2,1),然后再把上一个落脚点堵住(置1)，然后把方向改回默认方向(0)，回到判断下一个是否为落脚点的语句里，像之前那样个个方向都判断，直到下一个落脚点不是墙为止，判断过后可以发现下一个落脚点就是(2,2),所以故技重施，把当前位置<font color='orange'>(2,1)</font>入栈，再把下一个落脚点的坐标变成当前位置,也就是新的当前位置是(2,2)，再把上一个落脚点堵住(置1)，然后方向也改回默认方向，重复上面步骤，然后判断过后可以发现下一个落脚点就是(2,3),所以故技重施，把当前位置<font color='orange'>(2,2)</font>入栈，再把下一个落脚点的坐标变成当前位置,也就是新的当前位置是(2,3)，然后继续当到出口时把<font color='orange'>(2,3)</font>入栈，然后此时坐标是(3,3)已经是地图的右下角故不满足循环条件退出循环把<font color='orange'>(3,3)入栈</font>。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbDLtJA.png" alt=""></p>
+<p>main.cpp</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &lt;stdio.h&gt;
+# include &lt;string.h&gt;
+# include &lt;stdlib.h&gt;
+# define R 3&#x2F;&#x2F;出口
+# define C 3
+ 
+&#x2F;&#x2F;数组里面去寻路：位置- -&gt;行和列
+struct position
+&#123;
+	int row;&#x2F;&#x2F;行
+	int cols;&#x2F;&#x2F;列
+&#125;;
+struct position pathStack[100];&#x2F;&#x2F;存放路径--&gt;栈内存
+int stackTop &#x3D; -1;&#x2F;&#x2F;栈顶标记
+int** maze &#x3D; NULL;&#x2F;&#x2F;二维数组去描述地图
+int size &#x3D; 0;&#x2F;&#x2F;迷宫大小
+int** makeArray(int row, int cols)
+&#123;
+	int** array &#x3D; (int**)malloc(sizeof(int) * row);
+	for (int i &#x3D; 0; i &lt; cols; i++)
+	&#123;
+		array[i] &#x3D; (int*)malloc(sizeof(int) * cols);
+	&#125;
+	return array;
+&#125;
+&#x2F;&#x2F;用户输入一个迷宫
+void createMaze()
+&#123;
+	printf(&quot;输入迷宫大小：\n&quot;);
+	scanf(&quot;%d&quot;, &amp;size);
+	maze &#x3D; makeArray(size + 2, size + 2);&#x2F;&#x2F;加2 表示边框
+	printf(&quot;输入迷宫:\n&quot;);
+	for (int i &#x3D; 1; i &lt;&#x3D; size; i++)
+	&#123;
+		for (int j &#x3D; 1; j &lt;&#x3D; size; j++)
+		&#123;
+			scanf(&quot;%d&quot;, &amp;maze[i][j]);
+		&#125;
+	&#125;
+	&#x2F;&#x2F;加边框：1 表示不可以走
+	for (int i &#x3D; 0; i &lt;&#x3D; size; i++)
+	&#123;
+		maze[0][i] &#x3D; maze[size + 1][i] &#x3D; 1;&#x2F;&#x2F;上下两行
+		maze[i][0] &#x3D; maze[i][size + 1];&#x2F;&#x2F;左右两列
+	&#125;
+&#125;
+&#x2F;&#x2F;找路径
+int findPath()
+&#123;
+	&#x2F;&#x2F;偏移属性描述出来
+	struct position offset[4];&#x2F;&#x2F;0-3表示四个方向
+	&#x2F;&#x2F;往右走
+	offset[0].row &#x3D; 0;
+	offset[0].cols &#x3D; 1;
+	&#x2F;&#x2F;往左走
+	offset[2].row &#x3D; 0;
+	offset[2].cols &#x3D; -1;
+	&#x2F;&#x2F;往下走
+	offset[1].row &#x3D; 1;
+	offset[1].cols &#x3D; 0;
+	&#x2F;&#x2F;往上走
+	offset[3].row &#x3D; -1;
+	offset[3].cols &#x3D; 0;
+	&#x2F;&#x2F;选定入口
+	struct position here &#x3D; &#123; 1,1 &#125;;&#x2F;&#x2F;当前位置
+	&#x2F;&#x2F;走迷宫:记录走过的路
+	&#x2F;&#x2F;走过ID路标记为1
+	maze[1][1] &#x3D; 1;
+	int option &#x3D; 0;&#x2F;&#x2F;下一个移动方向
+	int endOption &#x3D; 3;&#x2F;&#x2F;终止方向
+	while (here.row !&#x3D; R || here.cols !&#x3D; C)
+	&#123;
+		&#x2F;&#x2F;相邻的位置做移动
+		int rowNum, colsNum;&#x2F;&#x2F;记录下标变化
+		while (option &lt;&#x3D; endOption)
+		&#123;
+			&#x2F;&#x2F;行的变化&#x3D;原位置+偏移量 ，偏移量由方向决定
+			rowNum &#x3D; here.row + offset[option].row;
+			colsNum &#x3D; here.cols + offset[option].cols;
+			&#x2F;&#x2F;一旦确定一个方向可以走，就需去下一步
+			if (maze[rowNum][colsNum] &#x3D;&#x3D; 0)
+				break;&#x2F;&#x2F;退出循环走另一边
+			&#x2F;&#x2F;不能走就换方向测试
+			option++;
+		&#125;
+		&#x2F;&#x2F;可以走
+		if (option &lt;&#x3D; endOption)
+		&#123;
+			&#x2F;&#x2F;走到下一个
+			pathStack[++stackTop] &#x3D; here;
+			&#x2F;&#x2F;改变当前位置
+			here.row &#x3D; rowNum;
+			here.cols &#x3D; colsNum;
+			&#x2F;&#x2F;走过的路标记---&gt;堵上
+			maze[rowNum][colsNum] &#x3D; 1;
+			option &#x3D; 0;&#x2F;&#x2F;置0 去找下一个位置
+		&#125;
+		else&#x2F;&#x2F;option&#x3D;&#x3D;4;表示没有可走的地方
+		&#123;
+			&#x2F;&#x2F;回到上一步去
+			if (stackTop &#x3D;&#x3D; -1)
+				return 0;&#x2F;&#x2F;无路可走表示没有路径
+			&#x2F;&#x2F;出栈方式去回退到上一步
+			struct position next &#x3D; pathStack[stackTop];
+			stackTop--;
+			&#x2F;&#x2F;方向的处理
+			if (next.row &#x3D;&#x3D; here.row)&#x2F;&#x2F;行没变，左右走的
+			&#123;
+				&#x2F;&#x2F;逆过来偏移公式
+				option &#x3D; 2 + next.cols - here.cols;
+			&#125;
+			else
+			&#123;
+				option &#x3D; 3 + next.row - here.row;
+ 
+			&#125;
+			here &#x3D; next;&#x2F;&#x2F;当前位置变成回退后的位置
+		&#125;
+	&#125;
+	if (here.row &#x3D;&#x3D; R &amp;&amp; here.cols &#x3D;&#x3D; C)
+	&#123;
+		pathStack[++stackTop] &#x3D; here;
+	&#125;
+	&#x2F;&#x2F;打印到出口后的地图
+	printf(&quot;\n&quot;);
+	for (int i &#x3D; 1; i &lt;&#x3D; size; i++)
+	&#123;
+		for (int j &#x3D; 1; j &lt;&#x3D; size; j++)
+		&#123;
+			printf(&quot;%d &quot;, maze[i][j]);
+		&#125;
+		printf(&quot;\n&quot;);
+	&#125;
+	printf(&quot;\n&quot;);
+	return 1;
+ 
+&#125;
+&#x2F;&#x2F;打印路径
+void printPath()
+&#123;
+	printf(&quot;路径方式：\n&quot;);
+	struct position curPos;
+	while (stackTop !&#x3D; -1)
+	&#123;
+		curPos &#x3D; pathStack[stackTop];
+		stackTop--;
+		printf(&quot;(%d ,%d)---&gt;&quot;, curPos.row, curPos.cols);
+	&#125;
+	printf(&quot;\n&quot;);
+&#125;
+ 
+int main()
+&#123;
+	createMaze();
+	if (findPath())
+	&#123;
+		printPath();
+	&#125;
+	else
+	&#123;
+		printf(&quot;没有路径\n&quot;);
+	&#125;
+	
+ 
+	return 0;
+&#125;
+ </code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbDLNRI.png" alt=""></p>
+<h2 id="队列">队列</h2>
+<h3 id="链式队列">链式队列</h3>
+<p>main.cpp</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &lt;stdio.h&gt;
+# include &lt;string.h&gt;
+# include &lt;stdlib.h&gt;
+ 
+struct Node
+&#123;
+	int data;
+	struct Node* next;
+&#125;;
+&#x2F;&#x2F;创建节点过程，为队列做准备
+struct Node* createNode(int data)
+&#123;
+	struct Node* newNode &#x3D; (struct Node*)malloc(sizeof(struct Node));
+	if (!newNode)
+	&#123;
+		return NULL;
+	&#125;
+	else
+	&#123;
+		newNode-&gt;data &#x3D; data;
+		newNode-&gt;next &#x3D; NULL;
+		return newNode;
+	&#125;
+&#125;
+struct queue
+&#123;
+	int sizeQueue;
+	&#x2F;&#x2F;链式结构实现：结构体指针
+	&#x2F;&#x2F;数组实现：数组下标
+	struct Node* frontNode;&#x2F;&#x2F;队头指针指向头节点
+	struct Node* tailNode;&#x2F;&#x2F;队尾指针指向尾节点
+&#125;;
+&#x2F;&#x2F;使用一个东西表示整个队列
+&#x2F;&#x2F;描述最初状态
+struct queue* createQueue()
+&#123;
+	struct queue* myqueue &#x3D; (struct queue*)malloc(sizeof(struct queue));
+	if (!myqueue)
+	&#123;
+		return NULL;
+	&#125;
+	else
+	&#123;
+		myqueue-&gt;sizeQueue &#x3D; 0;
+		myqueue-&gt;frontNode &#x3D; myqueue-&gt;tailNode &#x3D; NULL;
+		return myqueue;
+	&#125;
+&#125;
+&#x2F;&#x2F;万金油函数
+int size(struct queue* myqueue)
+&#123;
+	return myqueue-&gt;sizeQueue;
+&#125;
+&#x2F;&#x2F;返回1表示不为NULL，返回0表示NULL
+int empty(struct queue* myqueue)
+&#123;
+	return myqueue-&gt;sizeQueue !&#x3D; 0;
+&#125;
+&#x2F;&#x2F;入队操作：无头链表再封装方式
+void push(struct queue* myqueue, int data)
+&#123;
+	struct Node* newNode &#x3D; createNode(data);
+	if (empty(myqueue) &#x3D;&#x3D; 0)&#x2F;&#x2F;队列为空
+		myqueue-&gt;frontNode &#x3D; newNode;
+	else
+		myqueue-&gt;tailNode-&gt;next &#x3D; newNode;
+ 
+	myqueue-&gt;tailNode &#x3D; newNode;
+	myqueue-&gt;sizeQueue++;
+&#125;
+&#x2F;&#x2F;出队操作：无头链表的头删法
+void pop(struct queue* myqueue)
+&#123;
+	&#x2F;&#x2F;判断是否为空
+	if (empty(myqueue) &#x3D;&#x3D; 0)
+	&#123;
+		printf(&quot;无法出队！&quot;);
+		return;
+	&#125;
+	&#x2F;&#x2F;先保存下一个节点
+	struct Node* nextNode &#x3D; myqueue-&gt;frontNode-&gt;next;
+	&#x2F;&#x2F;然后删除结点
+	free(myqueue-&gt;frontNode);
+	myqueue-&gt;frontNode &#x3D; NULL;
+	&#x2F;&#x2F;把指向头节点的指针指向新的头节点
+	myqueue-&gt;frontNode &#x3D; nextNode;
+	myqueue-&gt;sizeQueue--;
+&#125;
+&#x2F;&#x2F;获取队头元素
+int front(struct queue* myqueue)
+&#123;
+	if (empty(myqueue) &#x3D;&#x3D; 0)
+	&#123;
+		printf(&quot;无法出队&quot;);
+		exit(0);
+	&#125;
+	else
+		return myqueue-&gt;frontNode-&gt;data;
+&#125;
+int main()
+&#123;
+	struct queue* myqueue &#x3D; createQueue();
+	for (int i &#x3D; 0; i &lt; 1000; i++)
+	&#123;
+		push(myqueue, i);
+	&#125;
+	while (empty(myqueue))
+	&#123;
+		printf(&quot;%d\t&quot;, front(myqueue));
+		pop(myqueue);
+	&#125;
+	return 0;
+&#125;
+ </code></pre>
+<h3 id="数组队列">数组队列</h3>
+<p>main.cpp</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &lt;stdio.h&gt;
+# include &lt;string.h&gt;
+# include &lt;stdlib.h&gt;
+# define MAX 10
+ 
+struct queue
+&#123;
+	int* queueMemory;  &#x2F;&#x2F;队列容量
+	int frontPos;&#x2F;&#x2F;队头元素下标
+	int tailPos;&#x2F;&#x2F;队尾元素下标
+&#125;;
+ 
+struct queue* createQueue()
+&#123;
+	struct queue* myqueue &#x3D; (struct queue*)malloc(sizeof(struct queue));
+	&#x2F;&#x2F;描述最初状态
+	&#x2F;&#x2F;数组当队列
+	&#x2F;&#x2F;一级指针--&gt;一维数组：动态内存申请
+	if (myqueue &#x3D;&#x3D; NULL)
+	&#123;
+		printf(&quot;创建失败&quot;);
+		return NULL;
+	&#125;
+	else
+	&#123;
+		myqueue-&gt;queueMemory &#x3D; (int*)malloc(sizeof(int) * MAX);
+		myqueue-&gt;frontPos &#x3D; myqueue-&gt;tailPos &#x3D; -1;
+		return myqueue;
+	&#125;
+&#125;
+&#x2F;&#x2F;入队
+void push(struct queue* myqueue, int data)
+&#123;
+	&#x2F;&#x2F;用数组时一定要判断是否满了
+	if (myqueue-&gt;tailPos &#x3D;&#x3D; MAX - 1)
+	&#123;
+		printf(&quot;队列已满&quot;);
+		return;
+	&#125;
+	myqueue-&gt;tailPos++;
+	myqueue-&gt;queueMemory[myqueue-&gt;tailPos] &#x3D; data;
+&#125;
+ 
+&#x2F;&#x2F;出队和获取队头元素合一起
+int pop(struct queue* myqueue)
+&#123;
+	if (myqueue-&gt;frontPos &#x3D;&#x3D; myqueue-&gt;tailPos)
+	&#123;
+		printf(&quot;队列为NULL&quot;);
+		return -1;
+	&#125;
+	return myqueue-&gt;queueMemory[++myqueue-&gt;frontPos];
+&#125;
+int empty(struct queue* myqueue)
+&#123;
+	return myqueue-&gt;frontPos !&#x3D;myqueue-&gt;tailPos;
+&#125;
+ 
+int main()
+&#123;
+	struct queue* myqueue &#x3D; createQueue();
+	for (int i &#x3D; 0; i &lt; MAX; i++)
+	&#123;
+		push(myqueue, i);
+	&#125;
+	while (empty(myqueue))
+	&#123;
+		printf(&quot;%d &quot;, pop(myqueue));
+	&#125;
+	return 0;
+&#125;
+ </code></pre>
+<h3 id="数组队列-逆序整数">数组队列~逆序整数</h3>
+<p>main.cpp</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &lt;stdio.h&gt;
+# include &lt;string.h&gt;
+# include &lt;stdlib.h&gt;
+ 
+int main()
+&#123;
+	int arr[10];
+	int front &#x3D; 0;
+	int tail &#x3D; -1;
+	int Num &#x3D; 123456;
+	while (Num)
+	&#123;
+		arr[++tail] &#x3D; Num % 10;
+		Num &#x2F;&#x3D; 10;
+	&#125;
+	printf(&quot;\n逆序后：&quot;);
+	while (front !&#x3D; tail + 1)
+	&#123;
+		printf(&quot;%d &quot;, arr[front++]);
+	&#125;
+ 
+	return 0;
+&#125;
+ </code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbDLUzt.png" alt=""></p>
+<h3 id="优先队列">优先队列</h3>
+<p>main.cpp</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"> 
+# include &lt;stdio.h&gt;
+# include &lt;string.h&gt;
+# include &lt;stdlib.h&gt;
+# define MAX 100
+&#x2F;*
+	优先队列：根据优先权去决定你的出队的元素
+	队列容量
+	优先权---&gt;数字，代表任务量，权重
+	按照特殊值去做打印(选择排序)
+	算法调度
+	短作业优先法
+*&#x2F;
+&#x2F;&#x2F;数据有两部分组成
+&#x2F;&#x2F;数据本身+权值(关键字)
+ 
+struct data
+&#123;
+	int priority;&#x2F;&#x2F;权值
+	int element;&#x2F;&#x2F;数据本身
+&#125;;
+&#x2F;&#x2F;队列
+struct priQueue
+&#123;
+	int sizeQueue;&#x2F;&#x2F;队列当前元素
+	struct data queue[MAX];&#x2F;&#x2F;队列容量
+&#125;;
+struct priQueue* createQueue()
+&#123;
+	struct priQueue* myqueue &#x3D; (struct priQueue*)malloc(sizeof(struct priQueue));
+	myqueue-&gt;sizeQueue &#x3D; 0;
+	&#x2F;&#x2F;数组初始化
+	memset(myqueue-&gt;queue, 0, sizeof(struct data) * MAX);
+	return myqueue;
+&#125;
+&#x2F;&#x2F;万金油
+int empty(struct priQueue* myqueue)
+&#123;
+	return myqueue-&gt;sizeQueue !&#x3D; 0;
+&#125;
+int size(struct priQueue* myqueue)
+&#123;
+	return myqueue-&gt;sizeQueue;
+&#125;
+&#x2F;&#x2F;入队,从文件中读出来，入队
+void push(struct priQueue* myqueue,struct data curData)
+&#123;
+	if (myqueue-&gt;sizeQueue &#x3D;&#x3D; MAX)
+	&#123;
+		printf(&quot;队列满了，无法入队！&quot;);
+		return;
+	&#125;
+	else
+	&#123;
+		myqueue-&gt;queue[myqueue-&gt;sizeQueue] &#x3D; curData;
+		myqueue-&gt;sizeQueue++;
+	&#125;
+&#125;
+&#x2F;&#x2F;出队
+void pop(struct priQueue* myqueue, struct data* popData)
+&#123;
+	if (myqueue-&gt;sizeQueue &#x3D;&#x3D; 0)
+	&#123;
+		printf(&quot;无法出队，队列为NULL\n&quot;);
+		return;
+	&#125;
+	struct data minData;&#x2F;&#x2F;去找最小权值的数据
+	&#x2F;&#x2F;假设第一个是最小的
+	minData &#x3D; myqueue-&gt;queue[0];
+	int minIndex &#x3D; 0;
+	for (int i &#x3D; 1; i &lt; myqueue-&gt;sizeQueue; i++)
+	&#123;
+		&#x2F;&#x2F;比的是权值
+		if (myqueue-&gt;queue[i].priority &lt; minData.priority)
+		&#123;
+			minData &#x3D; myqueue-&gt;queue[i];
+			minIndex &#x3D; i;
+		&#125;
+	&#125;
+	&#x2F;&#x2F;popData:指针        muqueue-&gt;queue[minINdex]:结构体
+	*popData &#x3D; myqueue-&gt;queue[minIndex];
+	&#x2F;&#x2F;调整队列，做一个伪删除
+	for (int i &#x3D; minIndex; i &lt; myqueue-&gt;sizeQueue; i++)
+	&#123;
+		myqueue-&gt;queue[i] &#x3D; myqueue-&gt;queue[i + 1];
+	&#125;
+	myqueue-&gt;sizeQueue--;
+&#125;
+ 
+int main()
+&#123;
+	struct priQueue* myqueue &#x3D; createQueue();
+	struct data readData;
+	FILE* fp &#x3D; fopen(&quot;1.txt&quot;, &quot;r&quot;);
+	if (fp &#x3D;&#x3D; NULL)
+	&#123;
+		printf(&quot;打开文件失败&quot;);
+		return 0;
+	&#125;
+	while(!feof(fp))
+	&#123;
+		fscanf(fp, &quot;%d %d\n&quot;, &amp;readData.element, &amp;readData.priority);
+		push(myqueue, readData);
+	&#125;
+	fclose(fp);
+	int workIndex &#x3D; 1;
+	printf(&quot;\t序号\t编号\t工作量\n&quot;);
+	while (empty(myqueue))
+	&#123;
+		pop(myqueue, &amp;readData);
+		printf(&quot;\t%d\t%d\t%d\n&quot;, workIndex, readData.element, readData.priority);
+		workIndex++;
+	&#125;
+ 
+ 
+	return 0;
+&#125;
+ </code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbDLdQP.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbDLwsf.png" alt=""></p>
+<h2 id="线性结构-顺序表">线性结构~顺序表</h2>
+<p>数组结构</p>
+<p>顺序表：顺序表的内存，顺序表的索引—&gt;数组下标</p>
+<p>main.cpp</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"> 
+# include &lt;stdio.h&gt;
+# include &lt;string.h&gt;
+# include &lt;stdlib.h&gt;
+ 
+struct linerList
+&#123;
+	char* element;&#x2F;&#x2F;以存储char类型的数据
+	int arrayLength;&#x2F;&#x2F;顺序表的最大长度
+	int listSize;&#x2F;&#x2F;顺序表当前元素个数
+&#125;;
+&#x2F;&#x2F;顺序表的创建
+struct linerList* createlist(int capacity)
+&#123;
+	if (capacity &lt; 1)
+	&#123;
+		printf(&quot;创建顺序表失败！\n&quot;);
+		return NULL;
+	&#125;
+	else
+	&#123;
+		struct linerList* list &#x3D; (struct linerList*)malloc(sizeof(struct linerList));
+		list-&gt;listSize &#x3D;0;
+		list-&gt;arrayLength &#x3D; capacity;
+		list-&gt;element &#x3D; (char*)malloc(sizeof(capacity));
+		return list;
+	&#125;
+&#125;
+ 
+&#x2F;&#x2F;二维数组的扩充
+void changeArray(char** array, int oldLength, int newLength)
+&#123;
+	if (newLength &lt; 0)
+	&#123;
+		printf(&quot;数组扩充失败\n&quot;);
+		return;
+	&#125;
+	int length &#x3D; oldLength &gt; newLength ? oldLength : newLength;
+	*array &#x3D;(char*)realloc(*array, length * sizeof(char));
+&#125;
+&#x2F;&#x2F;移动数组元素
+void copyBackward(char* array,int arrayNum,int theIndex)
+&#123;
+	for (int i &#x3D; arrayNum; i &gt; theIndex; i--)
+	&#123;
+		array[i] &#x3D; array[i - 1];
+	&#125;
+&#125;
+&#x2F;&#x2F;插入元素
+void insertElement(struct linerList* list,int theIndex,int theElement)
+&#123;
+	&#x2F;&#x2F;索引无效
+	if (theIndex&lt;0 || theIndex&gt;list-&gt;listSize)
+	&#123;
+		printf(&quot;索引无效&quot;);
+		return;
+	&#125;
+	&#x2F;&#x2F;插入的索引正好等于数组下标
+	if (list-&gt;listSize &#x3D;&#x3D; list-&gt;arrayLength)
+	&#123;
+		&#x2F;&#x2F;扩展数组
+		changeArray(&amp;list-&gt;element, list-&gt;arrayLength, 2 * list-&gt;arrayLength);
+		list-&gt;arrayLength &#x3D; 2 * list-&gt;arrayLength;
+	&#125;
+	&#x2F;&#x2F;储存
+	copyBackward(list-&gt;element, list-&gt;listSize, theIndex);
+	list-&gt;element[theIndex] &#x3D; theElement;&#x2F;&#x2F;在前索引下存储当前元素
+	list-&gt;listSize++;
+ 
+&#125;
+&#x2F;&#x2F;删除需要把后面的元素往前移
+void copyFrontward(char* array, int arrayNum, int theIndex)
+&#123;
+	for (int i &#x3D; theIndex; i &lt; arrayNum; i++)
+	&#123;
+		array[i] &#x3D; array[i + 1];
+	&#125;
+&#125;
+&#x2F;&#x2F;删除
+void deleList(struct linerList* list,int theIndex)
+&#123;
+	if (theIndex &lt; 0 || theIndex &gt;&#x3D; list-&gt;listSize)
+	&#123;
+		printf(&quot;无索引，删除失败&quot;);
+		return;
+	&#125;
+	else
+	&#123;
+		copyFrontward(list-&gt;element, list-&gt;listSize, theIndex);
+		list-&gt;listSize--;
+	&#125;
+&#125;
+void printList(struct linerList* list)
+&#123;
+	for (int i &#x3D; 0; i &lt; list-&gt;listSize; i++)
+	&#123;
+		printf(&quot;%c &quot;, list-&gt;element[i]);
+	&#125;
+	printf(&quot;\n&quot;);
+&#125;
+int main()
+&#123;
+	struct linerList* list &#x3D; createlist(2);
+	insertElement(list,0, &#39;A&#39;);
+	insertElement(list, 1, &#39;b&#39;);
+	insertElement(list, 2, &#39;K&#39;);
+	insertElement(list, 2, &#39;P&#39;);
+	deleList(list, 0);
+	printList(list);
+ 
+ 
+ 
+	return 0;
+&#125;
+ </code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbDL0L8.png" alt=""></p>
+<h2 id="哈希结构">哈希结构</h2>
+<p>哈希：<font color='orange'>数据和地址的一种映射关系</font></p>
+<p>映射关系：数学中的函数关系：哈希构造函数</p>
+<p>y(x)=x;  直接地址法</p>
+<p>哈希地址：不是指真正意义上的地址（指针），抽象的参照地址</p>
+<p>举例：<font color='orange'>数组中数组下标就可以充当哈希地址</font></p>
+<p>数据1 2 19 11 23</p>
+<p>y=x%10;//0~9</p>
+<p>哈希冲突：在哈希地址中已经存在元素</p>
+<p>处理哈希冲突方案：<font color='orange'>1.开放地址法2.数组链表的方式</font><br>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbDLsoQ.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbDLrdg.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbDL6ij.png" alt=""></p>
+<p>main.cpp</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"> 
+# include &lt;stdio.h&gt;
+# include &lt;string.h&gt;
+# include &lt;stdlib.h&gt;
+ 
+&#x2F;&#x2F;数组hash
+struct pair
+&#123;
+	int first;&#x2F;&#x2F;构造一个关键字为构建hash地址做准备
+	char second[20];&#x2F;&#x2F;数据
+&#125;;
+ 
+struct hashTable
+&#123;
+	struct pair **table;&#x2F;&#x2F;为什么初始化二级指针，便于判断为NULL的时候
+	int divisor; &#x2F;&#x2F; y&#x3D;x%dividor
+	int sizeHash;
+&#125;;
+ 
+struct hashTable* createHash(int divisor)
+&#123;
+	struct hashTable* hash &#x3D; (struct hashTable*)malloc(sizeof(struct hashTable));
+	hash-&gt;divisor&#x3D;divisor;
+	hash-&gt;sizeHash &#x3D; 0;
+	hash-&gt;table &#x3D; (struct pair**)malloc(sizeof(struct pair) * hash-&gt;divisor);
+	&#x2F;&#x2F;hash-&gt;table[divisor]:一级指针
+	for (int i &#x3D; 0; i &lt; divisor; i++)
+	&#123;
+		hash-&gt;table[i] &#x3D; NULL;
+	&#125;
+	return hash;
+&#125;
+&#x2F;&#x2F;找到正确的地址去做插入
+int search(struct hashTable* hash, int first)
+&#123;
+	int pos &#x3D; first % (hash-&gt;divisor);&#x2F;&#x2F;value%divisor
+	int curPos &#x3D; pos;
+	do
+	&#123;
+		if (hash-&gt;table[curPos] &#x3D;&#x3D; NULL || hash-&gt;table[curPos]-&gt;first &#x3D;&#x3D; first)
+		&#123;
+			&#x2F;&#x2F;hash地址中没有元素或者相同键值（first）的元素返回
+			return curPos;
+		&#125;
+		curPos &#x3D; (curPos + 1) % (hash-&gt;divisor);&#x2F;&#x2F;每一次往后移一位
+	&#125; while (curPos !&#x3D; pos);
+	return curPos;
+&#125;
+&#x2F;&#x2F;哈希插入
+void insertHash(struct hashTable* hash, struct pair data)
+&#123;
+	int pos &#x3D; search(hash, data.first);
+	if (hash-&gt;table[pos] &#x3D;&#x3D; NULL)
+	&#123;
+		hash-&gt;table[pos] &#x3D; (struct pair*)malloc(sizeof(struct pair));
+		memcpy(hash-&gt;table[pos], &amp;data, sizeof(struct pair));
+	&#125;
+	else&#x2F;&#x2F;冲突处理
+	&#123;
+		if (hash-&gt;table[pos]-&gt;first &#x3D;&#x3D; data.first)
+		&#123;
+			strcpy(hash-&gt;table[pos]-&gt;second, data.second);
+		&#125;
+		else
+		&#123;
+			printf(&quot;表满了，无法插入&quot;);
+			return;
+		&#125;
+	&#125;
+&#125;
+&#x2F;&#x2F;打印
+void printHash(struct hashTable* hash)
+&#123;
+	for (int i &#x3D; 0; i &lt; hash-&gt;divisor; i++)
+	&#123;
+		if (hash-&gt;table[i] &#x3D;&#x3D; NULL)
+			printf(&quot;NULL\n&quot;);
+		else
+			printf(&quot;%d %s\t\n&quot;, hash-&gt;table[i]-&gt;first, hash-&gt;table[i]-&gt;second);
+	&#125;
+&#125;
+int main()
+&#123;
+	struct hashTable* hash &#x3D; createHash(10);
+	struct pair array[5] &#x3D; &#123; 1,&quot;循环&quot;,11,&quot;信息&quot;,9,&quot;上厕所&quot;,19,&quot;bscc&quot;,10,&quot;试试水&quot; &#125;;
+	for (int i &#x3D; 0; i &lt; 5; i++)
+	&#123;
+		insertHash(hash, array[i]);
+	&#125;
+	printHash(hash);
+	return 0;
+&#125;
+ </code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbDLcJs.png" alt=""></p>
+<h2 id="结束语">结束语</h2>
+<p>虽然写了这么多，但是还是有点懵，以后遇到了再回来看看笔记应该可以的，OK，搞下一个</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num78.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%93%BE%E5%BC%8F%E6%A0%88"><span class="toc-number">1.</span> <span class="toc-text">链式栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E6%A0%88"><span class="toc-number">2.</span> <span class="toc-text">数组栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BB%E8%B7%AF%E9%97%AE%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text">寻路问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#C%E8%AF%AD%E8%A8%80%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE"><span class="toc-number">3.1.</span> <span class="toc-text">C语言知识回顾</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%9F%E5%88%97"><span class="toc-number">4.</span> <span class="toc-text">队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E5%BC%8F%E9%98%9F%E5%88%97"><span class="toc-number">4.1.</span> <span class="toc-text">链式队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E9%98%9F%E5%88%97"><span class="toc-number">4.2.</span> <span class="toc-text">数组队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E9%98%9F%E5%88%97-%E9%80%86%E5%BA%8F%E6%95%B4%E6%95%B0"><span class="toc-number">4.3.</span> <span class="toc-text">数组队列~逆序整数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97"><span class="toc-number">4.4.</span> <span class="toc-text">优先队列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E7%BB%93%E6%9E%84-%E9%A1%BA%E5%BA%8F%E8%A1%A8"><span class="toc-number">5.</span> <span class="toc-text">线性结构~顺序表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%88%E5%B8%8C%E7%BB%93%E6%9E%84"><span class="toc-number">6.</span> <span class="toc-text">哈希结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9D%9F%E8%AF%AD"><span class="toc-number">7.</span> <span class="toc-text">结束语</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://api2.acozycotage.net/Pweb" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '可惜你不听王杰，也不懂我...' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>

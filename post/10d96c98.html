@@ -1,0 +1,1467 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>HTML+CSS基础 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言 用到的插件 Live Server Auto Rename Tag HTML常用标签 html文件结构  html结构标签：  &lt;!DOCTYPE&gt; &lt;html&gt; &lt;head&gt; &lt;title&gt; &lt;body&gt; html 的所有标签为 树形 结构，例如： 每一个标签都是一个节点，每一个标签一般来说都会有一个 开始标签 和 结束标签，开始">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML+CSS基础">
+<meta property="og:url" content="https://mdcm.yang5201314.cn/post/10d96c98.html">
+<meta property="og:site_name" content="Luckys-Yangの小栈">
+<meta property="og:description" content="前言 用到的插件 Live Server Auto Rename Tag HTML常用标签 html文件结构  html结构标签：  &lt;!DOCTYPE&gt; &lt;html&gt; &lt;head&gt; &lt;title&gt; &lt;body&gt; html 的所有标签为 树形 结构，例如： 每一个标签都是一个节点，每一个标签一般来说都会有一个 开始标签 和 结束标签，开始">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mdcm.yang5201314.cn/img/num86.webp">
+<meta property="article:published_time" content="2022-09-10T12:20:00.000Z">
+<meta property="article:modified_time" content="2022-10-06T11:53:10.000Z">
+<meta property="article:author" content="Luckys-Yang">
+<meta property="article:tag" content="html">
+<meta property="article:tag" content="css">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mdcm.yang5201314.cn/img/num86.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"><link rel="canonical" href="https://mdcm.yang5201314.cn/post/10d96c98.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'HTML+CSS基础',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-06 19:53:10'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">94</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">75</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">HTML+CSS基础</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-10T12:20:00.000Z" title="发表于 2022-09-10 20:20:00">2022-09-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-06T11:53:10.000Z" title="更新于 2022-10-06 19:53:10">2022-10-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/">前端学习</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><h2 id="前言-用到的插件">前言 用到的插件</h2>
+<p><code>Live Server</code></p>
+<p><code>Auto Rename Tag</code></p>
+<h2 id="HTML常用标签">HTML常用标签</h2>
+<h3 id="html文件结构">html文件结构</h3>
+<ul>
+<li>html结构标签：</li>
+</ul>
+<p><code>&lt;!DOCTYPE&gt;</code></p>
+<p><code>&lt;html&gt;</code></p>
+<p><code>&lt;head&gt;</code></p>
+<p><code>&lt;title&gt;</code></p>
+<p><code>&lt;body&gt;</code></p>
+<p>html 的所有标签为 <code>树形</code> 结构，例如：</p>
+<p>每一个标签都是一个节点，每一个标签一般来说都会有一个 <code>开始标签</code> 和 <code>结束标签</code>，开始标签和结束标签之间的部分就是它的所有子节点，在 <code>同一级</code> 的标签都是兄弟节点，有些特殊标签是没有起始标签和结束标签的，相当于 <code>叶子节点</code> ，<code>body 标签</code> 是承载网站页面所有内容的地方，所有 HTML 文件结构都是一棵树，根节点就是 <code>HTML 标签</code></p>
+<ul>
+<li><code>&lt;html&gt;</code> 与 <code>&lt;/html&gt;</code> 之间的文本描述网页</li>
+<li><code>&lt;body&gt;</code> 与 <code>&lt;/body&gt;</code> 之间的文本是可见的页面内容</li>
+</ul>
+<p>绝大多数标签都可以看成是  <code>&lt;div&gt;</code> 和 <code>&lt;span&gt;</code> 拓展过来的，没有本质的区别，只是它们默认的 CSS 样式不一样</p>
+<p>在写网站的时候，习惯将每个部分放在 <div> 里面，好处：CSS 设置样式可以直接操作某个 <div>，js 也可以直接对 <div> 进行各种操作</p>
+<p><code>块状元素</code>：默认带一个<font color='cornflowerblue'> 回车</font></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220908165340.jpg" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220908171523.png" alt=""></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;!-- HTML文件第一行是文件的类型 所有的网页都需要写这一条 --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;!-- 浏览器语言环境 --&gt;
+&lt;html lang&#x3D;&quot;zh-CN&quot;&gt;
+    &lt;!-- 声明了文档的字符编码 --&gt;
+    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;
+    &lt;!-- 定义的网页标题 --&gt;
+    &lt;title&gt;测试&lt;&#x2F;title&gt;
+    &lt;!-- 页面的 logo --&gt;
+    &lt;link rel&#x3D;&quot;icon&quot; href&#x3D;&quot;https:&#x2F;&#x2F;oss.wwru.cn&#x2F;blog&#x2F;WordPress&#x2F;img&#x2F;favicon.ico&quot;&gt;
+&lt;&#x2F;head&gt;
+
+&lt;!-- head 元素 规定文档相关的配置信息（元数据），包括文档的标题，引用的文档样式 CSS 和脚本等 --&gt;
+&lt;!-- body 元素表示文档的内容(不是放到 head 里面的内容都会放到 body 里面) --&gt;
+&lt;!-- 
+    多行注释
+    111
+    222
+    333
+--&gt;
+&lt;!-- 背景颜色 --&gt;
+&lt;body style&#x3D;&quot;background-color: yellow&quot;&gt;
+&lt;!-- 标题标签1~6级 --&gt;
+&lt;!-- 默认情况下，HTML 会自动地在块级元素前后添加一个额外的空行，比如段落、标题元素前后 --&gt;
+&lt;h1&gt;1222&lt;&#x2F;h1&gt;
+&lt;!-- p标签是文本的一个段落，段与段之间有间距，是块状元素 --&gt;
+&lt;!-- p标签会自动过滤空格和回车，同样，绝大部分的 HTML 标签都会把空格和回车过滤掉 --&gt;
+&lt;p&gt;111&lt;&#x2F;p&gt;
+&lt;!-- span不是块状元素是行内元素，默认不带回车 --&gt;
+&lt;span&gt;侧耳&lt;&#x2F;span&gt;
+&lt;!-- HTML 链接是通过 &lt;a&gt; 标签进行定义的。在 href 属性中指定链接的地址 --&gt;
+&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;www.baidu.com&quot;&gt;百度&lt;&#x2F;a&gt;
+&lt;!-- 没有内容的 HTML 元素被称为空元素，比如换行 --&gt;
+&lt;!-- 在 XHTML、XML 以及未来版本的 HTML 中，所有元素都必须被关闭，所以还是加上&#x2F;比较好 --&gt;
+&lt;br&#x2F;&gt;
+&lt;br&#x2F;&gt;
+&lt;!-- 属性总是以名称&#x2F;值对的形式出现，属性总是在 HTML 元素的开始标签中规定。属性和属性值一般使用小写！ --&gt;
+&lt;!-- 属性值应该始终被包括在引号内。双引号是最常用的，不过使用单引号也没有问题。
+在某些个别的情况下，比如属性值本身就含有双引号，那么您必须使用单引号 
+--&gt;
+&lt;!-- HTML 图像是通过 &lt;img&gt; 标签进行定义的。 图像的名称和尺寸是以属性的形式提供的（默认单位px）--&gt;
+&lt;img src&#x3D;&quot;https:&#x2F;&#x2F;squoosh.app&#x2F;c&#x2F;icon-demo-large-photo-18da387a.jpg&quot; width&#x3D;&quot;104&quot; height&#x3D;&quot;142&quot; &#x2F;&gt;
+&lt;!-- align属性:水平对齐方式已经弃用 --&gt;
+&lt;h1 align&#x3D;&quot;center&quot;&gt;这是弃用居中&lt;&#x2F;h1&gt;
+&lt;h1 style&#x3D;&quot;text-align: center&quot;&gt;这是标准居中&lt;&#x2F;h1&gt;
+&lt;!-- 水平线(&lt;hr &#x2F;&gt;标签)来分隔文章中的小节是一个办法（但并不是唯一的办法） --&gt;
+&lt;hr &#x2F;&gt;
+&lt;!-- 如果您希望在不产生一个新段落的情况下进行换行（新行），请使用 &lt;br &#x2F;&gt; 标签 --&gt;
+&lt;p&gt;这是&lt;br&#x2F;&gt;我爸爸&lt;br&#x2F;&gt;哈哈哈&lt;&#x2F;p&gt;
+&lt;!-- 当显示页面时，浏览器会移除源代码中多余的空格和空行。所有连续的空格或空行都会被算作一个空格 --&gt;
+&lt;!-- style 属性用于改变 HTML 元素的样式 --&gt;
+&lt;p style&#x3D;&quot;font-family: 华文新魏;color:red;font-size: 44px&quot;&gt;STYLE属性&lt;&#x2F;p&gt;
+&lt;!-- pre标签很适合显示计算机代码，保留空格和换行 --&gt;
+&lt;pre&gt;这 是 
+换行
+&lt;&#x2F;pre&gt;
+&lt;!-- 写地址 --&gt;
+&lt;address&gt;
+这是我的 &lt;a href&#x3D;&quot;tencent:&#x2F;&#x2F;AddContact&#x2F;?fromId&#x3D;50&amp;fromSubId&#x3D;1&amp;subcmd&#x3D;all&amp;uin&#x3D;444783764&quot;&gt;QQ&lt;&#x2F;a&gt;  
+&lt;&#x2F;address&gt;
+&lt;!-- 删除文本和下划线文本 --&gt;
+&lt;p&gt;我是&lt;del&gt;傻逼&lt;&#x2F;del&gt;&lt;ins&gt;靓仔&lt;&#x2F;ins&gt;&lt;&#x2F;p&gt;
+
+&lt;&#x2F;body&gt;
+&lt;&#x2F;html&gt;
+</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220910102912.jpg" alt="效果图"></p>
+<h3 id="html块级标签">html块级标签</h3>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html lang&#x3D;&quot;en&quot;&gt;
+    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;
+    &lt;title&gt;测试&lt;&#x2F;title&gt;
+&lt;&#x2F;head&gt;
+
+&lt;!-- 
+h1~h6：定义标题
+p：定义段落
+定义无序列表：ul、li  定义有序列表：ol、li
+    快捷方式：ul&gt;li + 回车
+通常是用来描述一些术语定义：dl，dt，dd
+
+块级标签独占一行
+--&gt;
+&lt;h1&gt;文章标题&lt;&#x2F;h1&gt;
+&lt;P&gt;五十年来，WWF 一直致力于保护自然界的未来。 世界领先的环保组织，WWF 工作于 100 个国家，并得到美国一百二十万会员及全球近五百万会员的支持。&lt;&#x2F;P&gt;
+
+&lt;ul&gt;
+    &lt;li&gt;西瓜&lt;&#x2F;li&gt;
+    &lt;li&gt;苹果&lt;&#x2F;li&gt;
+    &lt;li&gt;香蕉&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+
+&lt;ol&gt;
+    &lt;li&gt;打开冰箱&lt;&#x2F;li&gt;
+    &lt;li&gt;拿出东西&lt;&#x2F;li&gt;
+    &lt;li&gt;关闭冰箱&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+
+&lt;dl&gt;
+    &lt;dt&gt;动物&lt;&#x2F;dt&gt;
+    &lt;dd&gt;猫&lt;&#x2F;dd&gt;
+    &lt;dd&gt;狗&lt;&#x2F;dd&gt;
+    &lt;dd&gt;老虎&lt;&#x2F;dd&gt;
+&lt;&#x2F;dl&gt;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220910111651.jpg" alt=""></p>
+<h3 id="html行内标签">html行内标签</h3>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;!-- 
+a：超链接，用于页面间链接
+img：定义图片
+    alt：当图片失效时可以显示信息或者被设备识别
+    title：当鼠标放上去时会显示图片标题
+span、i：定义少量文本，i常用于图标
+
+行内标签可以和别的标签独占一行，从左至右，从上到下
+--&gt;
+
+&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;t7.baidu.com&#x2F;it&#x2F;u&#x3D;4162611394,4275913936&amp;fm&#x3D;193&amp;f&#x3D;GIF&quot;&gt;百度图片&lt;&#x2F;a&gt;123
+&lt;!-- &lt;img src&#x3D;&quot;https:&#x2F;&#x2F;img0.baidu.com&#x2F;it&#x2F;u&#x3D;1213543375,1345563756&amp;fm&#x3D;253&amp;fmt&#x3D;auto&amp;app&#x3D;138&amp;f&#x3D;JPEG?w&#x3D;889&amp;h&#x3D;500&quot; alt&#x3D;&quot;动漫&quot; title&#x3D;&quot;动漫001&quot;&gt; --&gt;
+&lt;a href&#x3D;&quot;&quot;&gt;
+    &lt;span&gt;3&lt;&#x2F;span&gt;
+    &lt;span&gt;成都新增本土“36+39”，详情公布&lt;&#x2F;span&gt;
+    &lt;span&gt;热&lt;&#x2F;span&gt;
+&lt;&#x2F;a&gt;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220910124417.jpg" alt=""></p>
+<h3 id="特殊功能标签meta">特殊功能标签meta</h3>
+<p><code>作用</code>：它位于 HTML 文档的 <code>&lt;head&gt;</code> 和 <code>&lt;title&gt;</code> 之间（有些也不是在 <code>&lt;head&gt;和&lt;title&gt;</code>之间），它提供的信息用户不可见，标签提供 <code>文档字符集，使用语言，作者等基本信息，关键词和网页等级的设定</code></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html lang&#x3D;&quot;en&quot;&gt;
+    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;
+    &lt;!-- &lt;meta http-equiv&#x3D;&quot;refresh&quot; content&#x3D;&quot;5;url&#x3D;https:&#x2F;&#x2F;y.qq.com&quot;&#x2F;&gt; --&gt;
+    &lt;title&gt;测试&lt;&#x2F;title&gt;
+&lt;&#x2F;head&gt;
+
+&lt;!-- 
+设置页面字符集：&lt;meta charset&#x3D;&quot;uft-8&quot;&gt;
+设置网页的描述：&lt;meta name&#x3D;&quot;description&quot; content&#x3D;&quot;&quot;&gt;
+设置网页的关键字：&lt;meta name&#x3D;&quot;keywords&quot; content&#x3D;&quot;&quot;&gt;
+请求的重定向：&lt;meta http-equiv&#x3D;&quot;refresh&quot; content&#x3D;&quot;5;url&#x3D;地址&quot;&#x2F;&gt;
+    5代表5秒后跳转，refresh是刷新意思
+视口设置(切换到手机端自适应)：&lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width,initial-scale&#x3D;1,maximum-scale&#x3D;1,user-scalable&#x3D;0,viewport-fit&#x3D;cover&quot;&gt;
+--&gt;
+&lt;&#x2F;body&gt;
+&lt;&#x2F;html&gt;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220910130500.jpg" alt=""></p>
+<h3 id="table表格标签">table表格标签</h3>
+<p>简单的 HTML 表格由 table 元素以及一个或多个 <code>tr,th或td</code> 元素组成</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;!-- 
+table(表格)：属性：border(设置边框，数字表示边框大小)，cellspacing(单元格与单元格间隙) cellpadding(单元格内填充)
+tr(行)
+td(列&#x2F;单元格)：属性：colspan&#x3D;&quot;2&quot;(跨2列)，rowspan&#x3D;&quot;2&quot;(跨2行)
+    属性写在你重复数据的第一个，然后第2个开始重复的可以删除
+thead(表头)，th(表头单元格)，tbody(表主体)，tfooter(表尾)
+
+--&gt;
+&lt;table border&#x3D;&quot;0&quot; cellpadding&#x3D;&quot;20&quot; cellspacing&#x3D;&quot;1&quot;&gt;
+&lt;!-- 头部放在表头里 --&gt;
+&lt;thead&gt;
+    &lt;tr&gt;
+        &lt;th&gt;姓名&lt;&#x2F;th&gt;
+        &lt;th&gt;年龄&lt;&#x2F;th&gt;
+        &lt;th&gt;性别&lt;&#x2F;th&gt;
+        &lt;th&gt;成绩&lt;&#x2F;th&gt;
+    &lt;&#x2F;tr&gt;
+&lt;&#x2F;thead&gt;
+&lt;!-- 这是表主体 --&gt;
+&lt;tbody&gt;
+    &lt;tr&gt;
+        &lt;td&gt;李小华&lt;&#x2F;td&gt;
+        &lt;td&gt;18&lt;&#x2F;td&gt;
+        &lt;td&gt;男&lt;&#x2F;td&gt;
+        &lt;td&gt;合格&lt;&#x2F;td&gt;
+    &lt;&#x2F;tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;杨晓东&lt;&#x2F;td&gt;
+        &lt;td&gt;16&lt;&#x2F;td&gt;
+        &lt;td&gt;男&lt;&#x2F;td&gt;
+        &lt;td&gt;优秀&lt;&#x2F;td&gt;
+    &lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;
+&lt;tfooter&gt;
+    &lt;tr&gt;
+        &lt;td&gt;平均&lt;&#x2F;td&gt;
+        &lt;td&gt;&lt;&#x2F;td&gt;
+        &lt;td&gt;&lt;&#x2F;td&gt;
+        &lt;td&gt;良好&lt;&#x2F;td&gt;
+
+    &lt;&#x2F;tr&gt;
+&lt;&#x2F;tfooter&gt;
+
+&lt;&#x2F;table&gt;
+
+&lt;table border&#x3D;&quot;1&quot;&gt;
+    &lt;thead&gt;
+        &lt;th&gt;姓名&lt;&#x2F;th&gt;
+        &lt;th&gt;公司&lt;&#x2F;th&gt;
+        &lt;th&gt;职位&lt;&#x2F;th&gt;
+        &lt;th&gt;住址&lt;&#x2F;th&gt;
+        &lt;th&gt;电话&lt;&#x2F;th&gt;
+    &lt;&#x2F;thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;小名&lt;&#x2F;td&gt;
+            &lt;td rowspan&#x3D;&quot;4&quot;&gt;腾讯&lt;&#x2F;td&gt;
+            &lt;td rowspan&#x3D;&quot;4&quot;&gt;程序员&lt;&#x2F;td&gt;
+            &lt;td&gt;和平街32号&lt;&#x2F;td&gt;
+            &lt;td&gt;123432&lt;&#x2F;td&gt;
+        &lt;&#x2F;tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;小红&lt;&#x2F;td&gt;
+            &lt;td&gt;幸福路45号&lt;&#x2F;td&gt;
+            &lt;td&gt;15345332&lt;&#x2F;td&gt;
+        &lt;&#x2F;tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;小猪&lt;&#x2F;td&gt;
+            &lt;td&gt;荷塘路75号&lt;&#x2F;td&gt;
+            &lt;td&gt;153332&lt;&#x2F;td&gt;
+        &lt;&#x2F;tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;小茹&lt;&#x2F;td&gt;
+            &lt;td&gt;爱子街道44号&lt;&#x2F;td&gt;
+            &lt;td&gt;1945435&lt;&#x2F;td&gt;
+        &lt;&#x2F;tr&gt;
+    &lt;&#x2F;tbody&gt;
+    &lt;tfoot&gt;
+        &lt;tr&gt;
+            &lt;td&gt;总人数&lt;&#x2F;td&gt;
+            &lt;td colspan&#x3D;&quot;3&quot;&gt;&lt;&#x2F;td&gt;
+            &lt;td&gt;4&lt;&#x2F;td&gt;
+        &lt;&#x2F;tr&gt;
+    &lt;&#x2F;tfoot&gt;
+&lt;&#x2F;table&gt;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220911083015.jpg" alt=""></p>
+<h3 id="from标签">from标签</h3>
+<p><code>&lt;from&gt;</code> 标签用于用户输入创建 HTML 表单（表单能够包含 input 元素，比如文本字段，复选框，单选框，提交按钮等等）。表单还可以包含 <code>select option，textarea，checkbox，lable</code> 等等元素。数据关联标签可使用 <code>name</code> 属性，对关联数据做名称标记，便于后端接口获取对应的数据。表单用于向服务器 <code>传输数据</code></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>get请求和post请求区别</p>
+</div>
+<ul>
+<li>get请求一般是去 <code>取获取数据</code>（其实也可以提交，但常见的是获取数据）；<br>
+post请求一般是去 <code>提交数据</code>。</li>
+<li>get因为参数会放在 <code>url</code> 中，所以 <code>隐私性，安全性较差</code>，请求的数据长度是 <code>有限制</code> 的，<br>
+不同的浏览器和服务器不同，一般限制在 2~8K 之间，更加常见的是 1k 以内；<br>
+post请求是 <code>没有的长度限制</code>，请求数据是放在 <code>body</code> 中；</li>
+<li>get请求刷新服务器或者回退 <code>没有影响</code>，post请求回退时会 <code>重新提交数据请求</code>。</li>
+<li>get请求 <code>可以被缓存</code> ，post请求 <code>不会被缓存</code>。</li>
+<li>get请求会 <code>被保存在浏览器历史记录当中</code> ，post不会。get请求可以被收藏为书签，因为参数就是url中，但post不能。它的参数不在url中。</li>
+<li>get请求只能进行url编码（appliacation-x-www-form-urlencoded）,post请求支持多种（multipart/form-data等）。</li>
+<li>对于 GET 方式的请求，浏览器会把 <code>http header</code> 和 <code>data</code> 一并发送出去，服务器响应 <code>200</code><br>
+（返回数据）表示成功；<br>
+而对于 POST，浏览器先发送 <code>header</code>，服务器响应 <code>100</code>， 浏览器再继续发送 <code>data</code>，服<br>
+务器响应 <code>200</code> （返回数据）。</li>
+</ul>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;!-- 
+form(表单)：可用属性：action(提交地址)，method(提交方式 get是默认值，还有post)
+input(输入)：可用属性：
+    type属性：
+        text(单行文本输入框，默认值)
+        password(密码输入框)
+        button(普通按钮)
+        submit(提交按钮 默认值是提交)
+        reset(重置按钮)
+        checkbox(复选框)
+        radio(单选框)
+    value属性：(表单控件传给处理程序的值)
+    name属性：name就是提交到后台的索引（表单必备的不能少）
+        具有相同name属性radio为同一组
+        只有设置了 name 属性的表单元素才能在提交表单时传递它们的值
+button(按钮)：与input【button】区别是具有跳转，自带刷新功能
+    type属性：
+        button(普通按钮)
+        submit(提交按钮，默认值)
+        reset(重置按钮)
+select， option(一起使用的，下拉选择)
+    name属性：对数据标记，一般放在select标签
+textarea(多行文本输入框)
+    cols，rows规定textarea的尺寸，不过更好的办法是使用CSS的height 和 width 属性
+
+1.from标签表示一个表单域&#x2F;项
+2.表单总控一般放最后比如提交，重置
+3.name取名是见名知意
+4.复选框跟单选框如果name值相同但是效果是不一样的还是有区别的
+复选框如果相同name提交到后台系统可能只取最后那个前面的就被覆盖
+可以通过加[]表示是一组数据来提交，但是又出现一个问题就是不知道选了是哪个
+所以还需要value来进行区分
+5.下拉选择的选项自带name但是一般还是加个value给它,不加的话后台取到的值就是选项名
+6.value也可以作为默认值，比如单行输入框和密码输入框那
+7.重置不一定等于清空！！！是回到最初状态
+8. https:&#x2F;&#x2F;mdcm.yang5201314.cn&#x2F;reg.php?username&#x3D;admin&amp;pwd&#x3D;123&amp;fruits%5B%5D&#x3D;001&amp;fruits%5B%5D&#x3D;002&amp;classification&#x3D;01&amp;%E7%AE%80%E4%BB%8B&#x3D;
+这是from表单的数据提交通过F12分析：带有？是get请求，相反的是post请求不带？跟表单数据 只有一个地址
+表单数据在载荷那，一般大量数据时用post请求，简单来说：
+
+--&gt;
+
+&lt;form action&#x3D;&quot;https:&#x2F;&#x2F;mdcm.yang5201314.cn&#x2F;reg.php&quot; method&#x3D;&quot;post&quot;&gt;
+    &lt;span&gt;单行输入框：&lt;&#x2F;span&gt;
+    &lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;username&quot; value&#x3D;&quot;admin&quot;&gt;
+    &lt;br&#x2F;&gt;
+    &lt;span&gt;密码输入框：&lt;&#x2F;span&gt;
+    &lt;input type&#x3D;&quot;password&quot; name&#x3D;&quot;pwd&quot; value&#x3D;&quot;123&quot;&gt;
+    &lt;br&#x2F;&gt;
+    &lt;span&gt;按钮：&lt;&#x2F;span&gt;
+    &lt;input type&#x3D;&quot;button&quot; value&#x3D;&quot;按钮&quot;&gt;
+    &lt;br&#x2F;&gt;
+    &lt;span&gt;提交按钮：&lt;&#x2F;span&gt;
+    &lt;input type&#x3D;&quot;submit&quot;&gt;
+    &lt;br&#x2F;&gt;
+    &lt;span&gt;重置按钮：&lt;&#x2F;span&gt;
+    &lt;input type&#x3D;&quot;reset&quot;&gt;
+    &lt;br&#x2F;&gt;
+    &lt;span&gt;复选框：&lt;&#x2F;span&gt;
+    &lt;input type&#x3D;&quot;checkbox&quot; name&#x3D;&quot;fruits[]&quot; value&#x3D;&quot;001&quot;&gt;苹果
+    &lt;input type&#x3D;&quot;checkbox&quot; name&#x3D;&quot;fruits[]&quot; value&#x3D;&quot;002&quot;&gt;香蕉
+    &lt;input type&#x3D;&quot;checkbox&quot; name&#x3D;&quot;fruits[]&quot; value&#x3D;&quot;003&quot;&gt;草莓
+    &lt;br&#x2F;&gt;
+    &lt;span&gt;单选框：&lt;&#x2F;span&gt;
+    &lt;input type&#x3D;&quot;radio&quot; name&#x3D;&quot;小红&quot; value&#x3D;&quot;001&quot;&gt;男
+    &lt;input type&#x3D;&quot;radio&quot; name&#x3D;&quot;小红&quot; value&#x3D;&quot;002&quot;&gt;女
+    &lt;input type&#x3D;&quot;radio&quot; name&#x3D;&quot;小红&quot; value&#x3D;&quot;003&quot;&gt;保密
+    &lt;br&#x2F;&gt;
+    &lt;span&gt;button标签：&lt;&#x2F;span&gt;
+    &lt;button type&#x3D;&quot;submit&quot;&gt;提交&lt;&#x2F;button&gt;
+    &lt;button type&#x3D;&quot;reset&quot;&gt;重置&lt;&#x2F;button&gt;
+    &lt;button type&#x3D;&quot;button&quot;&gt;普通按钮&lt;&#x2F;button&gt;
+    &lt;br&#x2F;&gt;
+    &lt;span&gt;下拉选择：&lt;&#x2F;span&gt;
+    &lt;select name&#x3D;&quot;classification&quot;&gt;
+        &lt;option value&#x3D;&quot;01&quot;&gt;娱乐新闻&lt;&#x2F;option&gt;
+        &lt;option value&#x3D;&quot;02&quot;&gt;体育新闻&lt;&#x2F;option&gt;
+        &lt;option value&#x3D;&quot;03&quot;&gt;军事新闻&lt;&#x2F;option&gt;
+        &lt;option value&#x3D;&quot;04&quot;&gt;国外新闻&lt;&#x2F;option&gt;
+    &lt;&#x2F;select&gt;
+    &lt;br&#x2F;&gt;
+    &lt;span&gt;多行文本框：&lt;&#x2F;span&gt;
+    &lt;textarea cols&#x3D;&quot;30&quot; rows&#x3D;&quot;5&quot; name&#x3D;&quot;简介&quot;&gt;&lt;&#x2F;textarea&gt;
+
+&lt;&#x2F;form&gt;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220911103243.jpg" alt=""></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;!-- lable:表示用户界面中某个元素的说明,常与input嵌套 --&gt;
+&lt;!-- 
+1.可以点击关联的标签来聚焦或者激活这个输入元素，就像直接点击输入元素一样。
+    这扩大了元素的可点击区域，让包括使用触屏设备在内的用户更容易激活这个元素 
+2.将一个 &lt;label&gt; 和一个 &lt;input&gt; 元素匹配在一起，你需要给 &lt;input&gt; 一个 id 属性。
+    而 &lt;label&gt; 需要一个 for 属性，其值和 &lt;input&gt; 的 id 一样。
+--&gt;
+&lt;input type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;fruit01&quot;&gt;&lt;label for&#x3D;&quot;fruit01&quot;&gt;猪八戒&lt;&#x2F;label&gt;
+&lt;input type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;fruit02&quot;&gt;&lt;label for&#x3D;&quot;fruit02&quot;&gt;沙和尚&lt;&#x2F;label&gt;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;*
+表示任何处于选中状态的radio(&lt;input type&#x3D;&quot;radio&quot;&gt;), checkbox (&lt;input type&#x3D;&quot;checkbox&quot;&gt;) 或 (&quot;select&quot;) 元素中的option HTML 元素  
+ *&#x2F;
+[type&#x3D;&#39;radio&#39;]:checked &#123;
+    &#x2F;* 表示会将元素从 无障碍树 accessibility tree 中移除。
+    这会导致该元素及其所有子代元素不再被屏幕阅读技术 访问 *&#x2F;
+    display: none; 
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220913135441.jpg" alt=""></p>
+<h2 id="CSS层叠样式表的基本特征与引用方式">CSS层叠样式表的基本特征与引用方式</h2>
+<h3 id="CSS层叠样式表的基本特征">CSS层叠样式表的基本特征</h3>
+<p>CSS基本语法结构：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220912073225.jpg" alt=""></p>
+<p><code>;</code>是分割声明（最后一个声明一般不用写;）</p>
+<p>在 HTML 里写样式用 <code>&lt;style&gt;</code> 标签包裹</p>
+<ul>
+<li><code>hover</code> 选择器是当鼠标放上去时向元素添加特殊的样式</li>
+</ul>
+<h3 id="CSS引用方式">CSS引用方式</h3>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;!-- 
+1.行内样式
+    &lt;p style&#x3D;&quot;color:red&quot;&gt;样式使用&lt;&#x2F;p&gt;
+2.内部样式（一般加在head里面，因为浏览器加载是从上到下执行的）
+    &lt;style type&#x3D;&quot;text&#x2F;css&quot;&gt;
+        &#x2F;* 声明样式 *&#x2F;
+        p&#123;
+            color:pink !important;
+        &#125;
+    &lt;&#x2F;style&gt;
+3.外联样式
+&lt;link rel&#x3D;&quot;stylesheet&quot; type&#x3D;&quot;text&#x2F;css&quot; href&#x3D;&quot;css&#x2F;index.css&quot;&gt;
+    
+不过一般现在推荐 “结构 表现分离” ：
+网页设计中，HTML标签只用于搭建网页的基本结构，不使用标签属性设置显示样式，所有的样式交由CSS来设置。
+--&gt;</code></pre>
+<h3 id="常见选择器-1">常见选择器(1)</h3>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220912224003.jpg" alt=""></p>
+<p>判断是不是它的后代只需看是不是被它 <code>包裹</code> 即可</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;h1&gt;通配符1&lt;&#x2F;h1&gt;
+&lt;p&gt;通配符2&lt;&#x2F;p&gt;
+&lt;span&gt;标签选择器&lt;&#x2F;span&gt;
+&lt;span id&#x3D;&quot;num&quot;&gt;id选择器&lt;&#x2F;span&gt;
+&lt;span class&#x3D;&quot;texts&quot;&gt;class类选择器&lt;&#x2F;span&gt;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;* 通配符选择器 *&#x2F;
+*&#123;
+    color: rgb(0, 162, 255);
+    font-size: 80px;
+&#125;
+&#x2F;* 标签选择器 *&#x2F;
+span&#123;
+    color: chartreuse;
+    font-size: 30px;
+&#125;
+&#x2F;* id选择器 *&#x2F;
+&#x2F;* 具有相同id值的标签都会选中 *&#x2F;
+&#x2F;* id尽量不要同名，因为js也有选择器 *&#x2F;
+&#x2F;* 具有唯一性 *&#x2F;
+# num&#123;
+    color: brown;
+    font-family: 华文新魏;
+&#125;
+&#x2F;* class类选择器 *&#x2F;
+.texts&#123; 
+    color: crimson;
+    font-size: 20px;
+    font-family: 楷书;
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220912140434.jpg" alt=""></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;span&gt;2323&lt;&#x2F;span&gt;
+&lt;div class&#x3D;&quot;zuxian&quot;&gt;
+    &lt;span&gt;祖先后代选择器&lt;&#x2F;span&gt;
+    &lt;div&gt;
+        &lt;span&gt;34444&lt;&#x2F;span&gt;
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;div&gt;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;* 层级~祖先后代选择器 *&#x2F;
+.zuxian span&#123;
+    color: coral;
+    font-size: 12px;
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220912141418.jpg" alt=""></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;div class&#x3D;&quot;zuxian&quot;&gt;
+    &lt;span&gt;测试1&lt;&#x2F;span&gt;
+    &lt;div&gt;
+        &lt;span&gt;测试2&lt;&#x2F;span&gt;
+    &lt;&#x2F;div&gt;
+    &lt;span&gt;测试3&lt;&#x2F;span&gt;
+&lt;&#x2F;div&gt;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;* 父子级选择器 *&#x2F;
+.zuxian&gt;span&#123;
+    color: coral; 
+    font-size: 40px;
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220912141855.jpg" alt=""></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;ul&gt;
+    &lt;li class&#x3D;&quot;char&quot;&gt;a&lt;&#x2F;li&gt;
+    &lt;li&gt;b&lt;&#x2F;li&gt;
+    &lt;li&gt;c&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;* 相邻兄弟级选择器 *&#x2F;
+.char+li&#123;
+    color: blueviolet;
+    font-size: 50px;
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220912210506.jpg" alt=""></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;ul&gt;
+    &lt;li&gt;22&lt;&#x2F;li&gt;
+    &lt;li class&#x3D;&quot;char2&quot;&gt;a&lt;&#x2F;li&gt;
+    &lt;li&gt;b&lt;&#x2F;li&gt;
+    &lt;li&gt;c&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;li&gt;11&lt;&#x2F;li&gt;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;* 后续兄弟选择器 *&#x2F;
+.char2~li&#123;
+    color:brown;
+    font-size: 60px;
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220912211240.jpg" alt=""></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;div class&#x3D;&quot;num&quot;&gt;
+    &lt;p&gt;1233&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class&#x3D;&quot;num-char&quot;&gt;
+    &lt;p&gt;2222&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class&#x3D;&quot;kk-num&quot;&gt;
+    &lt;p&gt;333&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;* 匹配class的值等于num的所有元素 *&#x2F;
+[class&#x3D;&#39;num&#39;] &#123;
+    color: aqua;
+    font-size: 40px;
+&#125;
+&#x2F;* 匹配class属性值以num开头的所有元素 *&#x2F;
+[class^&#x3D;&#39;num&#39;] &#123;
+    color: rgb(174, 0, 255);
+    font-size: 40px;
+&#125;
+&#x2F;* 匹配class属性值以num结尾的所有元素 *&#x2F;
+[class$&#x3D;&#39;num&#39;] &#123;
+    color: rgb(255, 0, 0);
+    font-size: 40px;
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220912221210.jpg" alt=""></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;div class&#x3D;&quot;num&quot;&gt;
+    &lt;p&gt;1233&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class&#x3D;&quot;num-char&quot;&gt;
+    &lt;p&gt;2222&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class&#x3D;&quot;kk-num&quot;&gt;
+    &lt;p&gt;333&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class&#x3D;&quot;numm&quot;&gt;
+    &lt;p&gt;333&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;* 匹配class属性值包含num的所有元素 *&#x2F;
+[class*&#x3D;&#39;num&#39;] &#123;
+    color: rgb(255, 0, 128);
+    font-size: 40px;
+&#125;
+&#x2F;* 匹配class属性值等于num&#x2F;以num-开头的所有元素 *&#x2F;
+[class|&#x3D;&#39;num&#39;] &#123;
+    color: rgb(0, 255, 76);
+    font-size: 40px;
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220912222225.jpg" alt=""></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;div class&#x3D;&quot;num&quot;&gt;
+    &lt;p&gt;1233&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class&#x3D;&quot;num char&quot;&gt;
+    &lt;p&gt;2222&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class&#x3D;&quot;kk-num&quot;&gt;
+    &lt;p&gt;333&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class&#x3D;&quot;numm&quot;&gt;
+    &lt;p&gt;333&lt;&#x2F;p&gt;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;* 匹配class属性值里有num的值且有空格分隔(空格可以在单词前面或者后面)的所有元素 *&#x2F;
+[class~&#x3D;&#39;num&#39;] &#123;
+    color: rgb(255, 72, 0);
+    font-size: 40px;
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220912222609.jpg" alt=""></p>
+<h3 id="常见选择器-2">常见选择器(2)</h3>
+<p>判断方法：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220912231500.jpg" alt=""></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;ul&gt;
+    &lt;li&gt;西瓜&lt;&#x2F;li&gt;
+    &lt;li&gt;香蕉&lt;&#x2F;li&gt;
+    &lt;li&gt;梨子&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;div class&#x3D;&quot;box&quot;&gt;
+    &lt;span&gt;123&lt;&#x2F;span&gt;
+    &lt;p&gt;456&lt;&#x2F;p&gt;
+    &lt;span&gt;789&lt;&#x2F;span&gt;
+&lt;&#x2F;div&gt;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;* 结构化伪类选择器 *&#x2F;
+&#x2F;*  .是类   :是伪类 *&#x2F;
+
+&#x2F;* 选择父元素里边的第1个子元素 *&#x2F;
+&#x2F;* ul是body的第一个子元素 *&#x2F;
+&#x2F;* li是ul的第一个子元素 *&#x2F;
+&#x2F;* 系统是从父元素下的所有子元素拿出来排序看是不是第一个，而不是挑一样的出来排序！ *&#x2F;
+ul:first-child&#123;
+    color:bisque;
+&#125;
+&#x2F;* 加&gt;跟不加一样的在这 *&#x2F;
+ul&gt;li:first-child&#123;
+    color: aqua;
+    font-size: 50px;
+&#125;
+.box&gt;span :first-child&#123;
+    color: red;
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220912231624.jpg" alt=""></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;ul&gt;
+    &lt;li&gt;西瓜&lt;&#x2F;li&gt;
+    &lt;li&gt;香蕉&lt;&#x2F;li&gt;
+    &lt;li&gt;梨子&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;div class&#x3D;&quot;box&quot;&gt;
+    &lt;span&gt;123&lt;&#x2F;span&gt;
+    &lt;p&gt;456&lt;&#x2F;p&gt;
+    &lt;span&gt;789&lt;&#x2F;span&gt;
+    &lt;p&gt;666&lt;&#x2F;p&gt;
+    &lt;a href&#x3D;&quot;&quot;&gt;111&lt;&#x2F;a&gt;
+&lt;&#x2F;div&gt;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;* 结构化伪类选择器 *&#x2F;
+&#x2F;*  .是类   :是伪类 *&#x2F;
+
+&#x2F;* 选择父元素里边的最后1个子元素 *&#x2F;
+ul&gt;li:last-child &#123;
+    color: blueviolet;
+&#125;
+
+&#x2F;* 找到 .box所有子元素p中的第一个p *&#x2F;
+.box&gt;p:first-of-type &#123;
+    color:red;
+&#125;
+
+&#x2F;* 找到 .box所有子元素p中的最后一个p *&#x2F;
+.box&gt;p:last-of-type &#123;
+    color: blue;
+&#125;
+
+&#x2F;* 找到 .box所有子元素中唯一的一个p(即不能有另一个p) *&#x2F;
+.box&gt;a:only-of-type &#123;
+    color: chartreuse;
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220912234541.jpg" alt=""></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;ul&gt;
+    &lt;li&gt;西瓜&lt;&#x2F;li&gt;
+    &lt;li&gt;香蕉&lt;&#x2F;li&gt;
+    &lt;li&gt;梨子&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;div class&#x3D;&quot;box&quot;&gt;
+    &lt;span&gt;123&lt;&#x2F;span&gt;
+    &lt;p&gt;456&lt;&#x2F;p&gt;
+    &lt;p&gt;666&lt;&#x2F;p&gt;
+    &lt;span&gt;789&lt;&#x2F;span&gt;
+    &lt;a href&#x3D;&quot;&quot;&gt;111&lt;&#x2F;a&gt;
+    &lt;a href&#x3D;&quot;&quot;&gt;大大&lt;&#x2F;a&gt;
+&lt;&#x2F;div&gt;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;* 选择父元素里边第n个子元素 *&#x2F;
+ul&gt;li:nth-child(1) &#123;
+    color: blue;
+&#125;
+ul&gt;li:nth-child(2) &#123;
+    color: red;
+&#125;
+&#x2F;* 组合 *&#x2F;
+ul&gt;li:nth-child(2) ~ li &#123;
+    color: rgb(255, 0, 149);
+&#125;
+
+&#x2F;* 给box下的奇数且是span加背景颜色 *&#x2F;
+.box&gt;span:nth-child(odd) &#123;
+    background-color: chartreuse;
+&#125;
+
+&#x2F;* 给box下的偶数且是span加背景颜色 *&#x2F;
+.box&gt;span:nth-child(even) &#123;
+    background-color: rgb(202, 11, 59);
+&#125;
+
+&#x2F;* 取反操作 *&#x2F;
+&#x2F;* 除了所有a中第一个a之外都变黄色 *&#x2F;
+.box&gt;:not(a:first-of-type) &#123;
+    color:darkorange;
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220913001324.jpg" alt=""></p>
+<h3 id="常见选择器-3">常见选择器(3)</h3>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;* 伪元素选择器 *&#x2F;
+&#x2F;* 使用::开头 *&#x2F;
+
+&#x2F;* 第一个字母&#x2F;字符&#x2F;文字(并且文字所处的行之前没有其他内容（如图片和内联的表格) *&#x2F;
+&#x2F;* 适用于块级元素，不适用于行内元素如span *&#x2F;
+p::first-letter&#123;
+    color: red;
+&#125;
+&#x2F;*第一行*&#x2F;
+p::first-line&#123;
+    color: red;
+&#125;</code></pre>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;div class&#x3D;&quot;box&quot;&gt;
+    &lt;a&gt;3423&lt;&#x2F;a&gt;
+    &lt;p&gt;456&lt;&#x2F;p&gt;
+    &lt;p&gt;666&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;*  创建一个伪元素，其将成为匹配选中的元素的第一个子元素。
+常通过 content 属性来为一个元素添加修饰性的内容。此元素默认为行内元素 
+content属性一定要有，用不到可以写&#39; &#39;
+*&#x2F;
+.box&gt;p::before&#123;
+    content: &#39;大&#39;;
+    background-color: red;
+&#125;
+&#x2F;* 跟before一样，但是这个放最后 *&#x2F;
+.box&gt;a::after&#123;
+    content: &#39;小&#39;;
+    background-color:blue;
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220913123002.jpg" alt=""></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">    &lt;!-- readonly：只读状态 --&gt;
+&lt;input type&#x3D;&quot;text&quot; value&#x3D;&quot;enabled选择器&quot; readonly&gt;
+&lt;!-- disabled：禁止状态 --&gt;
+&lt;input type&#x3D;&quot;text&quot; value&#x3D;&quot;不可输入&quot; disabled&gt;
+&lt;input type&#x3D;&quot;radio&quot;&gt;西瓜
+&lt;input type&#x3D;&quot;radio&quot;&gt;椰子
+&lt;br&#x2F;&gt;
+&lt;!-- lable:表示用户界面中某个元素的说明,常与input嵌套 --&gt;
+&lt;!-- 
+1.可以点击关联的标签来聚焦或者激活这个输入元素，就像直接点击输入元素一样。
+    这扩大了元素的可点击区域，让包括使用触屏设备在内的用户更容易激活这个元素 
+2.将一个 &lt;label&gt; 和一个 &lt;input&gt; 元素匹配在一起，你需要给 &lt;input&gt; 一个 id 属性。
+    而 &lt;label&gt; 需要一个 for 属性，其值和 &lt;input&gt; 的 id 一样。
+--&gt;
+&lt;input type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;fruit01&quot;&gt;&lt;label for&#x3D;&quot;fruit01&quot;&gt;猪八戒&lt;&#x2F;label&gt;
+&lt;input type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;fruit02&quot;&gt;&lt;label for&#x3D;&quot;fruit02&quot;&gt;沙和尚&lt;&#x2F;label&gt;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;* UI状态伪类选择器 *&#x2F;
+&#x2F;* 
+1.所谓UI选择器：就是只有当元素处于某种状态下时，才起作用，在默认状态下不起作用！
+
+*&#x2F;
+
+&#x2F;* :enabled 表示任何被启用的（enabled）元素。如果一个元素能够被激活（如选择、点击或接受文本输入），或者能够获取焦点，则该元素是启用的。
+元素也有一个禁用的状态（disabled state），在被禁用时，元素不能被激活或获取焦点。 
+*&#x2F;
+input:enabled &#123;
+    color:rgb(218, 14, 99);
+&#125;
+
+&#x2F;* 只读 *&#x2F;
+input:read-only &#123;
+    color:rgba(14, 119, 218, 0.486);
+&#125;
+
+&#x2F;*
+表示任何处于选中状态的radio(&lt;input type&#x3D;&quot;radio&quot;&gt;), checkbox (&lt;input type&#x3D;&quot;checkbox&quot;&gt;) 或 (&quot;select&quot;) 元素中的option HTML 元素  
+ *&#x2F;
+[type&#x3D;&#39;radio&#39;]:checked &#123;
+    &#x2F;* 表示会将元素从 无障碍树 accessibility tree 中移除。
+    这会导致该元素及其所有子代元素不再被屏幕阅读技术 访问 *&#x2F;
+    display: none; 
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220913141717.jpg" alt=""></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;www.baidu.com&quot;&gt;百度&lt;&#x2F;a&gt;
+&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;y.qq.com&quot;&gt;QQ音乐&lt;&#x2F;a&gt;
+&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;weibo.com&quot;&gt;新浪微博&lt;&#x2F;a&gt;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;*
+用来选中元素当中的链接。
+它将会选中所有尚未访问的链接，包括那些已经给定了其他伪类选择器的链接（例如:hover选择器，:active选择器，:visited选择器） 
+ *&#x2F;
+&#x2F;* 用于设置文本的修饰线外观的（下划线、上划线、贯穿线&#x2F;删除线 或 闪烁） *&#x2F;
+a:link &#123;
+    color: rgb(18, 209, 104);
+    background-color: rgba(6, 200, 226, 0.849);
+    font-size: 40px;
+    text-decoration: none;
+&#125;
+&#x2F;* 表示用户已访问过的链接。出于隐私原因，可以使用此选择器修改的样式非常有限。 *&#x2F;
+a:visited &#123;
+    color:white;
+&#125;
+&#x2F;*
+1. 用于用户使用指示设备虚指一个元素（没有激活它）的情况 
+2. :hover 规则需要放在 :link 和 :visited 规则之后，但是在:active 规则之前，按照 LVHA 的顺序声明 :link－:visited－:hover－:active。
+*&#x2F;
+&#x2F;* 鼠标放上去时的效果是红色 *&#x2F;
+a:hover &#123;
+    color: red;
+    text-decoration: underline;
+&#125;
+&#x2F;* 匹配被用户激活的元素。它让页面能在浏览器监测到激活时给出反馈。当用鼠标交互时，它代表的是用户按下按键和松开按键之间的时间。 *&#x2F;
+&#x2F;* 长按时颜色是这个颜色 *&#x2F;
+a:active &#123;
+    color: rgba(60, 26, 180, 0.644);
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220913192906.jpg" alt=""></p>
+<h2 id="CSS文本与布局样式，浮动与定位">CSS文本与布局样式，浮动与定位</h2>
+<h3 id="CSS文本样式">CSS文本样式</h3>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;h1&gt;可可能会被后声被后声明的&lt;&#x2F;h1&gt;
+&lt;ul&gt;
+    &lt;li style&#x3D;&quot;list-style: none&quot;&gt;html&lt;&#x2F;li&gt;
+    &lt;li&gt;css&lt;&#x2F;li&gt;
+    &lt;li&gt;js&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2&gt;析构亚沙成ss&lt;&#x2F;h2&gt;
+&lt;p&gt;在上面的实例中，类名为con的div样式为：宽度100像素，高度100像素，浅红色的背景颜色，字体大小44像素，行高为100像素，且在父级元素中水平居中对齐。
+那么，此时，是否对优先级有所了解了呢？&lt;&#x2F;p&gt;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;* 
+颜色 
+color:red &#x2F; # ff0000 &#x2F; rgb(255,0,0) &#x2F;rgba(255,0,0,.7)
+    英文&#x2F;十六进制&#x2F;rgb&#x2F;rgba(多了一个透明度)
+*&#x2F;
+&#x2F;*
+大小
+font-size:12px &#x2F; 1em &#x2F;1rem
+    1. px是固定的像素，一旦设置了就无法因为适应页面大小而改变
+    2. em和rem相对于px更具有灵活性，他们是相对长度单位，意思是长度不是定死了的，更适用于响应式布局。
+    3. em是相对于其父元素来设置字体大小的，一般都是以&lt;body&gt;的“font-size”为基准
+    4. em相对于父元素，rem相对于根元素
+    5. 任何浏览器默认字体大小都是16px，所有未经调整的浏览器都符合1em&#x3D;16px
+    6. 元素的width&#x2F;height&#x2F;padding&#x2F;margin用em的话是相对于该元素的font-size
+    7. rem是全部的长度都相对于根元素(&lt;html&gt;元素)
+    8. 通常做法是给html元素设置一个字体大小，然后其他元素的长度单位就为rem。
+    9. 不要在多列布局中使用 em 或 rem 改用 %
+    10. 不要使用 em 或 rem，如果缩放会不可避免地导致要打破布局元素
+*&#x2F;
+&#x2F;*
+字重
+font-weight:light &#x2F; normal &#x2F; bold &#x2F; 600 &#x2F;700
+    1. normal一般用于重置恢复正常
+ *&#x2F;
+&#x2F;*
+风格
+font-style:italic(倾斜) &#x2F; normal(正常)
+ *&#x2F;
+&#x2F;*
+字体
+font-family:&#39;Microsoft Yahei&#39;,&#39;宋体&#39;
+ *&#x2F;
+&#x2F;*
+下划线
+text-decoration:none &#x2F; underline &#x2F; overline &#x2F; line-through
+重置 &#x2F; 下划线 &#x2F; 上划线 &#x2F; 删除线
+    比如a标签链接自带有下划线可以使用none重置掉
+ *&#x2F;
+&#x2F;*
+行高
+line-height:16px &#x2F; 32px 
+行与行的高度，是文字的头部到下一行的文字头部的距离
+ *&#x2F;
+h1 &#123;
+    color: 	# d11414;
+    font-size: 70px;
+    font-weight: bold;
+    font-style: italic;
+    font-family: 华文新魏;
+    text-decoration: overline;
+    line-height: 50px;
+&#125;
+&#x2F;*
+ul \ ol 样式
+list-style:none &#x2F; circle ...
+ *&#x2F;
+li &#123;
+    list-style: circle;
+&#125;
+&#x2F;*
+可以设置列表元素的 marker（比如圆点、符号、或者自定义计数器样式） 
+ *&#x2F;
+ul &#123;
+    list-style-type: disc;
+&#125;
+&#x2F;*
+文本水平对齐方式
+text-align:left &#x2F; center &#x2F; right 
+ *&#x2F;
+h2 &#123;
+    text-align: center;
+&#125;
+&#x2F;*
+缩进
+text-indent:px &#x2F; em &#x2F; rem 
+ *&#x2F;
+p &#123;
+    text-indent: 2em;
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220914184741.jpg" alt=""></p>
+<h3 id="CSS布局常用样式">CSS布局常用样式</h3>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;span&gt;123&lt;&#x2F;span&gt;&lt;span&gt;abc&lt;&#x2F;span&gt;
+&lt;div class&#x3D;&quot;box&quot;&gt;你好呀&lt;&#x2F;div&gt;
+&lt;div class&#x3D;&quot;box&quot;&gt;早上好&lt;&#x2F;div&gt;
+&lt;br &#x2F;&gt;
+&lt;a href&#x3D;&quot;&quot;&gt;百度&lt;&#x2F;a&gt;
+&lt;a href&#x3D;&quot;&quot;&gt;QQ音乐&lt;&#x2F;a&gt;
+&lt;p&gt;菜鸟教程&lt;&#x2F;p&gt;
+&lt;p&gt;人才&lt;&#x2F;p&gt;
+&lt;div class&#x3D;&quot;boxer&quot;&gt;
+    &lt;div class&#x3D;&quot;item1&quot;&gt;&lt;&#x2F;div&gt;
+    &lt;div class&#x3D;&quot;item2&quot;&gt;&lt;&#x2F;div&gt;
+    &lt;div class&#x3D;&quot;item3&quot;&gt;&lt;&#x2F;div&gt;
+&lt;&#x2F;div&gt;
+&lt;div class&#x3D;&quot;box2&quot;&gt;&lt;&#x2F;div&gt;
+&lt;div class&#x3D;&quot;box3&quot;&gt;&lt;&#x2F;div&gt;
+&lt;div class&#x3D;&quot;box3&quot;&gt;&lt;&#x2F;div&gt;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;*
+display(元素显示状态)
+    none | inline(行内) | inline-block(行内块) | block(块级元素) | flex(弹性盒子)
+        1. 块元素与行元素是可以转换的，也就是说display的属性值可以由我们来改变。
+
+ *&#x2F;
+&#x2F;* 变成块元素 *&#x2F;
+span &#123;
+    display: block;
+&#125;
+&#x2F;* 变成行内元素 *&#x2F;
+.box &#123;
+    display: inline;
+&#125;
+&#x2F;* 
+1. 即在同一行显示，又可以设置宽高，margin和padding可以设置
+2. 在一行排列的时候盒子与盒子之间会出现空白空隙
+        解决方法：把下面的div挨着写，不留空格，空白就会消失
+ *&#x2F;
+a &#123;
+    display: inline-block;
+    margin: 10px;
+    height: 40px;
+&#125;
+&#x2F;*
+none：将该元素隐藏，不会再文档流中出现，所谓的文档流也就是文档中可显示对象在排列时所占用的位置 
+隐藏相当于完全消失不见了，而visibility:hidden相当于隐身，虽然看不见了，但是还占据一定的位置
+ *&#x2F;
+p &#123;
+    display: none;
+&#125;
+&#x2F;*
+flex：
+    1.它决定一个盒子在其它盒子中的分布，以及如何处理可用的空间。使用该模型，可以轻松的创建&quot;自适应&quot;浏览器窗口的流动布局 
+    2. 将对象作为弹性伸缩盒显示，对其他兄弟元素来说，它依然是一个普通的块级标签，对里面的子元素（弹性项目）来说，这个盒子是它们的弹性容器
+ *&#x2F;
+&#x2F;*
+width(宽):100px | 1em | 1rem
+height(高):100px | 1em | 1rem 
+backbound-color:red | # ff0000 | rgb(255,0,0) | rgba(255,0,0,0.5)
+ *&#x2F;
+.boxer &#123;
+    width: 100px;
+    height: 400px;
+    background-color: red;
+    display: flex;
+&#125;
+.boxer&gt;div &#123;
+    width:30%;
+    height: 400px;
+&#125;
+.item1 &#123;
+    background-color: aqua;
+&#125;
+.item2 &#123;
+    background-color: blue;
+&#125;
+.item3 &#123;
+    background-color: chartreuse;
+&#125;
+&#x2F;*
+边框：
+border:1px(框的粗细) solid(实线) | dashed(虚线) 颜色; 
+ *&#x2F;
+
+.box2 &#123;
+    width:300px;
+    height: 300px;
+    border: 4mm ridge red;
+&#125;
+&#x2F;*
+外边框：margin：margin 属性为给定元素设置所有四个（上下左右）方向的外边距属性
+                                垂直方向 外边距margin塌陷（上下两个元素间），取值取两者较大的相等则取一样的
+                                当设置两个数值时第一个表示上下第二个表示左右
+                                当设置三个数值时第一个表示上第二个表示左右第三个表示下
+                                当设置四个数值时第一个表示上第二个表示右第三个表示下第四个表示左（顺时针方向）
+                                还有单独设置的如：margin-top,margin-left等等
+内边框：padding ：控制元素所有四条边的内边距区域
+                            一个元素的内边距区域指的是其内容与其边框之间的空间
+                            跟margin一样可以有取一个值或者2个3个4个
+ *&#x2F;         
+.box3 &#123;
+    width: 200px;
+    height: 200px;
+    border: 1px solid blue;
+    margin: 20px;
+    padding: 20px;
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220917174248.png" alt=""></p>
+<h3 id="position定位的使用">position定位的使用</h3>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;div class&#x3D;&quot;box&quot;&gt;&lt;&#x2F;div&gt;
+&lt;div class&#x3D;&quot;box&quot; id&#x3D;&quot;element&quot;&gt;&lt;&#x2F;div&gt;
+&lt;div class&#x3D;&quot;box&quot;&gt;&lt;&#x2F;div&gt;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;*
+position：static(静态定位) | relative(相对定位) | absolute(绝对定位) | fixed(固定定位) | 粘性定位
+    1.relative元素先放置在未添加定位时的位置(原本自身的位置)，再在不改变页面布局的前提下调整元素位置
+    （因此会在此元素未添加定位时所在位置留下空白）
+    2.static生效时， top, right, bottom, left 和 z-index 属性无效。
+    3. z-index数值越大越显示在上面，数值低的会被盖住
+ *&#x2F;
+
+.box &#123;
+    width: 60px;
+    height: 60px;
+    background-color: red;
+    border: 3px solid blue;
+    display: inline-block;
+&#125;
+
+# element &#123;
+    background-color: yellow;
+    border: 3px solid green;
+    position: relative;
+    bottom: -20px;
+    left: 40px;
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220917211739.png" alt=""></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;div class&#x3D;&quot;box&quot;&gt;&lt;&#x2F;div&gt;
+&lt;div class&#x3D;&quot;box&quot; id&#x3D;&quot;element&quot;&gt;&lt;&#x2F;div&gt;
+&lt;div class&#x3D;&quot;box&quot;&gt;&lt;&#x2F;div&gt;
+&lt;div style&#x3D;&quot;height: 2000px; width:200px &quot;&gt;&lt;&#x2F;div&gt;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;*
+position：static(静态定位) | relative(相对定位) | absolute(绝对定位) | fixed(固定定位) | 粘性定位
+    1.relative元素先放置在未添加定位时的位置(原本自身的位置)，再在不改变页面布局的前提下调整元素位置
+    （因此会在此元素未添加定位时所在位置留下空白）
+    2.static生效时， top, right, bottom, left 和 z-index 属性无效。
+    3. z-index数值越大越显示在上面，数值低的会被盖住
+    4. z-index只能工作在被明确定义了absolute，fixed或relative 这三个定位属性的元素中
+ *&#x2F;
+
+.box &#123;
+    width: 60px;
+    height: 60px;
+    background-color: red;
+    border: 3px solid blue;
+    display: inline-block;
+&#125;
+
+# element &#123;
+    background-color: yellow;
+    border: 3px solid green;
+    position: fixed;
+    bottom: 1000px;
+    left: 40px;
+&#125;
+
+&#x2F;*
+absolute元素会被移出正常文档流，并不为元素预留空间，
+通过指定元素相对于最近的非 static 定位祖先元素的偏移，来确定元素位置 
+ *&#x2F;
+&#x2F;*
+fixed元素会被移出正常文档流，并不为元素预留空间，而是通过指定元素相对于屏幕视口（viewport）的位置来指定元素位置。
+元素的位置在屏幕滚动时不会改变 
+比如网页的“返回顶部”组件就是
+  *&#x2F;
+
+&#x2F;*
+sticky元素相当于固定一个位置不管滑动相当于文章目录 
+ *&#x2F;
+
+&#x2F;*
+坐标：
+top上边移动的距离
+right
+bottom
+left
+层叠：z-index 
+ *&#x2F;</code></pre>
+<h3 id="float浮动的用法">float浮动的用法</h3>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;div class&#x3D;&quot;artice&quot;&gt;
+&lt;div class&#x3D;&quot;box&quot;&gt;&lt;&#x2F;div&gt;再举一个生活的例子吧，假设你还在上高中，这时候你的班长站在班级讲台上，宣布下午放假半天。
+（是不是会很开心？）可是，这时候你的班主任老师说了一句：放什么放，不放假，继续学习~~~那么，
+你们班又有几个人敢“私自放假”呢？优先级就如同这个——谁说话最“算数”。换到我们的CSS样式上，
+不同的选择器优先级不同
+&lt;&#x2F;div&gt;
+&lt;p&gt;123&lt;&#x2F;p&gt;
+&lt;div class&#x3D;&quot;overflow&quot;&gt; 属性指定一个元素应沿其容器的左侧或右侧放置，允许文本和内联元素环绕它。该元素从网页的正常流动（文档流）中移除&lt;&#x2F;div&gt;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;*
+浮动
+float:left(左浮动) | right(右浮动)
+清除浮动的影响：overflow:hidden; clear:left | right | both
+height:设置父级盒子的固定高度 
+overflow: hidden;把超出的消除(开了浮动如果需要把高度找回来)，auto:自动有滚动条
+开了浮动需要把高度找回来
+ *&#x2F;
+
+&#x2F;*
+由于body默认有属性的可以重置一下 
+ *&#x2F;
+body &#123;
+    margin: 0;
+&#125;
+
+.box &#123;
+    width: 400px;
+    height: 300px;
+    background-color: red;
+    float: left;
+    margin-right: 10px; &#x2F;*右边的外边距*&#x2F;
+&#125;
+
+.artice &#123;
+    background-color:# eee;
+&#125;
+
+.overflow &#123;
+    width: 60px;
+    height: 120px;
+    background-color:# eee;
+    overflow: scroll;
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220918085947.jpg" alt=""></p>
+<h2 id="CSS优先级">CSS优先级</h2>
+<p>优先级关系：</p>
+<p><code>!important声明</code> &gt; <code>行内样式</code> &gt; <code>ID选择器</code> &gt; <code>类选择器=属性选择器=伪类选择器</code> &gt; <code>元素标签选择器=关系选择器=伪元素选择器</code> &gt; <code>通配符选择器</code></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;div class&#x3D;&quot;box-1&quot;&gt;&lt;&#x2F;div&gt;
+&lt;div class&#x3D;&quot;box-1 artice&quot;&gt;&lt;&#x2F;div&gt;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;* 优先级可以叠加，相当于送货地址越精准肯定送到的越快 *&#x2F;
+
+.box-1 &#123;
+    width: 100px;
+    height: 200px;
+    background-color: red;
+&#125;
+
+.artice &#123;
+    background-color: blue;
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220918092821.png" alt=""></p>
+<h2 id="案例-搜索input结构仿制">案例-搜索input结构仿制</h2>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;
+    &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1.0&quot;&gt;
+    &lt;title&gt;搜索输入框&lt;&#x2F;title&gt;
+    &lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;path&#x2F;to&#x2F;font-awesome&#x2F;css&#x2F;font-awesome.min.css&quot;&gt;
+    &lt;style&gt;
+        &#x2F;* 清除浏览器自带属性影响 *&#x2F;
+        * &#123;
+            margin: 0;
+            padding: 0;
+        &#125;
+        .search &#123;
+            padding-left: 15px; &#x2F;*设置一个元素的左填充（空格）*&#x2F;
+            margin-top: 10px;   &#x2F;*设置元素的上部边距(允许为负)*&#x2F;
+        &#125;
+        &#x2F;*模块化精准到一个区域内的哪个元素这样减少冲突  *&#x2F;
+        .search .input &#123;
+            display: inline-block;
+            position: relative;
+            width: 310px;
+            height: 34px;
+            padding: 8 18px;
+            background-color: # f7f7f7;
+            border-radius: 17px;    &#x2F;*圆角化*&#x2F;
+            box-sizing: border-box;&#x2F;*允许你以某种方式定义某些元素，以适应指定区域*&#x2F;
+        &#125;
+        &#x2F;* 图标 *&#x2F;
+        .search .input .icon-search &#123;
+            width: 18px;
+            height: 18px;
+            margin-top: 5px;
+            margin-left: 10px;
+            display: inline-block;
+            background-color: rgb(206, 57, 57);
+        &#125;
+        .search .input input &#123;
+            position: absolute;
+            right: 18px;
+            background: transparent;
+            height: 18px;
+            width: 245px;
+            border: 0;
+            padding-top: 6px;
+            outline: 0;&#x2F;*消除输入时的橙色框*&#x2F;
+        &#125;
+        .search .btn &#123;
+            display: inline-block;
+            width: 50px;
+            height: 34px;
+            text-align: center;
+            line-height: 34px;
+            font-size: 15px;
+            color: green;
+        &#125;
+
+    &lt;&#x2F;style&gt;
+&lt;&#x2F;head&gt;
+&lt;body&gt;
+    &lt;!-- 开发时命名一般是一个区域，比如搜索区，商品区等等 --&gt;
+    &lt;!-- placeholder 是HTML5 中新增的一个属性。placeholder可以用来描述输入字段预期值的简短的提示信息。
+        提示信息会在用户输入值之前显示，一旦用户输入信息该提示就会自动消失 --&gt;
+    &lt;div class&#x3D;&quot;search&quot;&gt;
+        &lt;div class&#x3D;&quot;input&quot;&gt;
+            &lt;i class&#x3D;&quot;icon-search&quot;&gt;&lt;&#x2F;i&gt;
+                &lt;input type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;点击搜索商品&quot;&gt;
+        &lt;&#x2F;div&gt;
+        &lt;!-- 需要把input和btn变成行内块再把字体宽度改小点才能在一行 --&gt;
+        &lt;div class&#x3D;&quot;btn&quot;&gt;搜索&lt;&#x2F;div&gt;
+    &lt;&#x2F;div&gt;   
+&lt;&#x2F;body&gt;
+&lt;&#x2F;html&gt;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220918113245.jpg" alt=""></p>
+<h2 id="css一些属性用法">css一些属性用法</h2>
+<p><code>pointer-events: none;</code> 属性是让鼠标点击效果没了，可在图片链接上使用–见关于我页尾<br>
+div怎么不随浏览器放大或缩小改变大小和位置？<br>
+(1)首先为了让div大小不变，我们给div定义上 <code>Width</code> 和 <code>Height</code> 两个属性，固定宽和高那么div就不会变形<br>
+(2)为了不让DIV随着位移，我们通过在body里定 <code>position:relative;</code> 再在div上定义 <code>position:absolute;</code> 这两个定义第一个是相对定位，后面在div上是绝对定位，这样div就不会随浏览器变化而变化了。</p>
+<h2 id="案例-金刚区结构仿制">案例-金刚区结构仿制</h2>
+<p>暂时停止更新----2022.9.18</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/html/">html</a><a class="post-meta__tags" href="/tags/css/">css</a></div><div class="post_share"><div class="social-share" data-image="/img/num86.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80-%E7%94%A8%E5%88%B0%E7%9A%84%E6%8F%92%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">前言 用到的插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE"><span class="toc-number">2.</span> <span class="toc-text">HTML常用标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#html%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">2.1.</span> <span class="toc-text">html文件结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#html%E5%9D%97%E7%BA%A7%E6%A0%87%E7%AD%BE"><span class="toc-number">2.2.</span> <span class="toc-text">html块级标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#html%E8%A1%8C%E5%86%85%E6%A0%87%E7%AD%BE"><span class="toc-number">2.3.</span> <span class="toc-text">html行内标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E5%8A%9F%E8%83%BD%E6%A0%87%E7%AD%BEmeta"><span class="toc-number">2.4.</span> <span class="toc-text">特殊功能标签meta</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#table%E8%A1%A8%E6%A0%BC%E6%A0%87%E7%AD%BE"><span class="toc-number">2.5.</span> <span class="toc-text">table表格标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#from%E6%A0%87%E7%AD%BE"><span class="toc-number">2.6.</span> <span class="toc-text">from标签</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS%E5%B1%82%E5%8F%A0%E6%A0%B7%E5%BC%8F%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%89%B9%E5%BE%81%E4%B8%8E%E5%BC%95%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">CSS层叠样式表的基本特征与引用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS%E5%B1%82%E5%8F%A0%E6%A0%B7%E5%BC%8F%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%89%B9%E5%BE%81"><span class="toc-number">3.1.</span> <span class="toc-text">CSS层叠样式表的基本特征</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS%E5%BC%95%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">3.2.</span> <span class="toc-text">CSS引用方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%80%89%E6%8B%A9%E5%99%A8-1"><span class="toc-number">3.3.</span> <span class="toc-text">常见选择器(1)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%80%89%E6%8B%A9%E5%99%A8-2"><span class="toc-number">3.4.</span> <span class="toc-text">常见选择器(2)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%80%89%E6%8B%A9%E5%99%A8-3"><span class="toc-number">3.5.</span> <span class="toc-text">常见选择器(3)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS%E6%96%87%E6%9C%AC%E4%B8%8E%E5%B8%83%E5%B1%80%E6%A0%B7%E5%BC%8F%EF%BC%8C%E6%B5%AE%E5%8A%A8%E4%B8%8E%E5%AE%9A%E4%BD%8D"><span class="toc-number">4.</span> <span class="toc-text">CSS文本与布局样式，浮动与定位</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS%E6%96%87%E6%9C%AC%E6%A0%B7%E5%BC%8F"><span class="toc-number">4.1.</span> <span class="toc-text">CSS文本样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS%E5%B8%83%E5%B1%80%E5%B8%B8%E7%94%A8%E6%A0%B7%E5%BC%8F"><span class="toc-number">4.2.</span> <span class="toc-text">CSS布局常用样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#position%E5%AE%9A%E4%BD%8D%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">4.3.</span> <span class="toc-text">position定位的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#float%E6%B5%AE%E5%8A%A8%E7%9A%84%E7%94%A8%E6%B3%95"><span class="toc-number">4.4.</span> <span class="toc-text">float浮动的用法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">5.</span> <span class="toc-text">CSS优先级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-%E6%90%9C%E7%B4%A2input%E7%BB%93%E6%9E%84%E4%BB%BF%E5%88%B6"><span class="toc-number">6.</span> <span class="toc-text">案例-搜索input结构仿制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#css%E4%B8%80%E4%BA%9B%E5%B1%9E%E6%80%A7%E7%94%A8%E6%B3%95"><span class="toc-number">7.</span> <span class="toc-text">css一些属性用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-%E9%87%91%E5%88%9A%E5%8C%BA%E7%BB%93%E6%9E%84%E4%BB%BF%E5%88%B6"><span class="toc-number">8.</span> <span class="toc-text">案例-金刚区结构仿制</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://api2.acozycotage.net/Pweb" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '可惜你不听王杰，也不懂我...' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>

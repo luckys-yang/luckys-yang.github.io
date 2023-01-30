@@ -1,0 +1,628 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>数据结构-树 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="二叉树概念 分类： 1.空的二叉树：就结构体指针 tree&#x3D;NULL 2.只有根节点的二叉树 （只有一个结点） 3.只有左子树或者右子树的二叉树 4.左右子树都存在：完全二叉树，满二叉树（编号是按顺序的） 注：红色的点是父节点，绿色的是孩节点（孩节点&#x2F;2&#x3D;父节点）           [{&quot;url&quot;:&quot;https:&#x2F;&#x2F;image-1309791158.cos.ap-guangzhou.myqclo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构-树">
+<meta property="og:url" content="https://mdcm.yang5201314.cn/post/f30c2ae3.html">
+<meta property="og:site_name" content="Luckys-Yangの小栈">
+<meta property="og:description" content="二叉树概念 分类： 1.空的二叉树：就结构体指针 tree&#x3D;NULL 2.只有根节点的二叉树 （只有一个结点） 3.只有左子树或者右子树的二叉树 4.左右子树都存在：完全二叉树，满二叉树（编号是按顺序的） 注：红色的点是父节点，绿色的是孩节点（孩节点&#x2F;2&#x3D;父节点）           [{&quot;url&quot;:&quot;https:&#x2F;&#x2F;image-1309791158.cos.ap-guangzhou.myqclo">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mdcm.yang5201314.cn/img/num79.webp">
+<meta property="article:published_time" content="2022-03-07T05:11:00.000Z">
+<meta property="article:modified_time" content="2022-06-09T05:23:36.000Z">
+<meta property="article:author" content="Luckys-Yang">
+<meta property="article:tag" content="博客,个人博客,技术,学习,Hexo,Blog,STM32,嵌入式,单片机">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mdcm.yang5201314.cn/img/num79.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"><link rel="canonical" href="https://mdcm.yang5201314.cn/post/f30c2ae3.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '数据结构-树',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-06-09 13:23:36'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">94</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">75</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">数据结构-树</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-07T05:11:00.000Z" title="发表于 2022-03-07 13:11:00">2022-03-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-06-09T05:23:36.000Z" title="更新于 2022-06-09 13:23:36">2022-06-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">数据结构学习笔记</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><h2 id="二叉树概念">二叉树概念</h2>
+<p>分类：</p>
+<p>1.空的二叉树：就结构体指针 <font color='orange'>tree=NULL</font></p>
+<p>2.只有根节点的二叉树 （只有一个结点）</p>
+<p>3.只有左子树或者右子树的二叉树</p>
+<p>4.左右子树都存在：完全二叉树，满二叉树（编号是按顺序的）</p>
+<p><font color='red'>注：红色的点是父节点，绿色的是孩节点（孩节点/2=父节点）</font></p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbsyPbV.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2Fbsy9uq.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbsyCD0.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbsyFET.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<p>别名：<font color='orange'>LPSTR：char* </font>   <font color='orange'>  LPCSTR： const char*  </font>（定义别名用<font color='orange'>LP表示指针</font>）</p>
+<p>main.cpp</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">
+# include &lt;stdio.h&gt;
+# include &lt;string.h&gt;
+# include &lt;stdlib.h&gt;
+ 
+typedef struct treeNode
+&#123;
+	char data;&#x2F;&#x2F;数据域用字符表示
+	struct treeNode* LCHild;
+	struct treeNode* RCHild;
+&#125;TREE,*LPTREE;
+ 
+LPTREE createNode(char data)
+&#123;
+	LPTREE newNode &#x3D; (LPTREE)malloc(sizeof(TREE));
+	if (!newNode)
+	&#123;
+		printf(&quot;创建新节点失败！&quot;);
+		exit(0);
+	&#125;
+	else
+	&#123;
+		newNode-&gt;data &#x3D; data;
+		newNode-&gt;LCHild &#x3D; NULL;
+		newNode-&gt;RCHild &#x3D; NULL;
+		return newNode;
+	&#125;
+&#125;
+&#x2F;&#x2F;没有规律的树
+void insertNode(LPTREE parentNode, LPTREE LCHild, LPTREE RCHild)
+&#123;
+	parentNode-&gt;LCHild &#x3D; LCHild;
+	parentNode-&gt;RCHild &#x3D; RCHild;
+&#125;
+&#x2F;&#x2F;打印当前节点中的元素
+void print(LPTREE curData)
+&#123;
+	printf(&quot;%c   &quot;, curData-&gt;data);
+&#125;
+&#x2F;&#x2F;递归,前序
+void preOrder(LPTREE root)
+&#123;
+	if (root !&#x3D; NULL)
+	&#123;
+		print(root);&#x2F;&#x2F;根
+		preOrder(root-&gt;LCHild);&#x2F;&#x2F;左
+		preOrder(root-&gt;RCHild);&#x2F;&#x2F;右
+	&#125;
+&#125;
+&#x2F;&#x2F;中序
+&#x2F;&#x2F;递归
+void preOrder2(LPTREE root)
+&#123;
+	if (root !&#x3D; NULL)
+	&#123;
+		preOrder2(root-&gt;LCHild);&#x2F;&#x2F;左
+		print(root);&#x2F;&#x2F;根
+		preOrder2(root-&gt;RCHild);&#x2F;&#x2F;右
+ 
+	&#125;
+&#125;
+&#x2F;&#x2F;后序
+&#x2F;&#x2F;递归
+void preOrder3(LPTREE root)
+&#123;
+	if (root !&#x3D; NULL)
+	&#123;
+		preOrder3(root-&gt;LCHild);&#x2F;&#x2F;左
+		preOrder3(root-&gt;RCHild);&#x2F;&#x2F;右
+		print(root);&#x2F;&#x2F;根
+	&#125;
+&#125;
+int main()
+&#123;
+	&#x2F;&#x2F;死板的创建过程，无实际作用
+	LPTREE A &#x3D; createNode(&#39;A&#39;);
+	LPTREE B &#x3D; createNode(&#39;B&#39;);
+	LPTREE C &#x3D; createNode(&#39;C&#39;);
+	LPTREE D &#x3D; createNode(&#39;D&#39;);
+	LPTREE E &#x3D; createNode(&#39;E&#39;);
+	LPTREE F &#x3D; createNode(&#39;F&#39;);
+	LPTREE G &#x3D; createNode(&#39;G&#39;);
+	insertNode(A, B, C);
+	insertNode(B, D, NULL);
+	insertNode(D, NULL, G);
+	insertNode(C, E, F);
+	printf(&quot;先序：&quot;);
+	preOrder(A);
+	printf(&quot;\n中序：&quot;);
+	preOrder2(A);
+	printf(&quot;\n后序：&quot;);
+	preOrder3(A);
+ 
+ 
+ 
+ 
+	return 0;
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbsykUU.png" alt=""></p>
+<h3 id="先序流程">先序流程</h3>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbsyA5F.png" alt=""></p>
+<p>main.cpp</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void preOderBystack(LPTREE root)
+&#123;
+	if (root &#x3D;&#x3D; NULL)
+		return;
+	&#x2F;&#x2F;准备入栈
+	struct treeNode* stack[10];&#x2F;&#x2F;存储每次打印节点的位置
+	int stackTop &#x3D; -1;&#x2F;&#x2F;栈顶标记
+	LPTREE pMove &#x3D; root;&#x2F;&#x2F;从根节点开始打印
+	while (stackTop !&#x3D; -1 || pMove)
+	&#123;
+		while (pMove)
+		&#123;
+			&#x2F;&#x2F;把路径入栈+打印走过的节点
+			printf(&quot;%c &quot;, pMove-&gt;data);
+			stack[++stackTop] &#x3D; pMove;
+			pMove &#x3D; pMove-&gt;LCHild;
+		&#125;
+		&#x2F;&#x2F;无路可走
+		if (stackTop !&#x3D; -1)
+		&#123;
+			pMove &#x3D; stack[stackTop];&#x2F;&#x2F;获取栈顶元素
+			stackTop--;&#x2F;&#x2F;出栈
+			pMove &#x3D; pMove-&gt;RCHild;
+		&#125;	
+	&#125;
+&#125;</code></pre>
+<h3 id="中序流程">中序流程</h3>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbsyVC4.png" alt=""></p>
+<p>main.cpp</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;中序
+void preOderBystack2(LPTREE root)
+&#123;
+	if (root &#x3D;&#x3D; NULL)
+		return;
+	struct treeNode* stack[10];
+	int stackTop &#x3D; -1;
+	LPTREE pMove &#x3D; root;
+	while (stackTop !&#x3D; -1 || pMove)
+	&#123;
+		while (pMove)
+		&#123;
+			stack[++stackTop] &#x3D; pMove;
+			pMove &#x3D; pMove-&gt;LCHild;
+		&#125;
+		&#x2F;&#x2F;出栈
+		if (stackTop !&#x3D; -1)
+		&#123;
+			pMove &#x3D; stack[stackTop--];
+			printf(&quot;%c &quot;, pMove-&gt;data);
+			pMove &#x3D; pMove-&gt;RCHild;
+		&#125;
+	&#125;
+&#125;</code></pre>
+<h3 id="后序流程">后序流程</h3>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbsyZ8J.png" alt=""></p>
+<p>main.cpp</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void preOderBystack3(LPTREE root)
+&#123;
+	if (root &#x3D;&#x3D; NULL)
+		return;
+	struct treeNode* stack[10];
+	int stackTop &#x3D; -1;
+	struct treeNode* pMove &#x3D; root;
+	struct treeNode* plastVisit &#x3D; NULL;&#x2F;&#x2F;访问标记
+	&#x2F;&#x2F;左 右 根
+    &#x2F;&#x2F;pMove一直来到最左下角
+	while (pMove)
+	&#123;
+		stack[++stackTop] &#x3D; pMove;
+		pMove &#x3D; pMove-&gt;LCHild;
+	&#125;
+&#x2F;&#x2F;开始出栈，判断右边是否有节点是否被访问过
+	while (stackTop !&#x3D; -1)
+	&#123;
+		pMove &#x3D; stack[stackTop--];
+		&#x2F;&#x2F;当前节点左右是否被访问
+		if (pMove-&gt;RCHild &#x3D;&#x3D; NULL || pMove-&gt;RCHild &#x3D;&#x3D; plastVisit)
+		&#123;
+			&#x2F;&#x2F;如果被访问就可以打印当前节点数据
+			printf(&quot;%c &quot;, pMove-&gt;data);
+			plastVisit &#x3D; pMove;&#x2F;&#x2F;改变标记位置
+		&#125;
+		else
+		&#123;
+			&#x2F;&#x2F;右边没有被访问
+			stack[++stackTop] &#x3D; pMove;
+			pMove &#x3D; pMove-&gt;RCHild;
+			while (pMove)
+			&#123;
+				stack[++stackTop] &#x3D; pMove;
+				pMove &#x3D; pMove-&gt;LCHild;
+			&#125;
+		&#125;
+	&#125;
+&#125;</code></pre>
+<h3 id="main函数">main函数</h3>
+<p>main.cpp</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">int main()
+&#123;
+	&#x2F;&#x2F;死板的创建过程，无实际作用
+	LPTREE A &#x3D; createNode(&#39;A&#39;);
+	LPTREE B &#x3D; createNode(&#39;B&#39;);
+	LPTREE C &#x3D; createNode(&#39;C&#39;);
+	LPTREE D &#x3D; createNode(&#39;D&#39;);
+	LPTREE E &#x3D; createNode(&#39;E&#39;);
+	LPTREE F &#x3D; createNode(&#39;F&#39;);
+	LPTREE G &#x3D; createNode(&#39;G&#39;);
+	insertNode(A, B, C);
+	insertNode(B, D, E);
+	insertNode(C, F, G);
+	printf(&quot;先序：&quot;);
+	preOderBystack(A);
+	printf(&quot;\n中序：&quot;);
+	preOderBystack2(A);
+	printf(&quot;\n后序：&quot;);
+	preOderBystack3(A);
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2Fbsye29.png" alt=""></p>
+<h3 id="二叉树：节点和边上的数学特性">二叉树：节点和边上的数学特性</h3>
+<p>深度：几层</p>
+<p>1.第i层最多有<font color='orange'>2^(i-1)</font>个节点</p>
+<p>2.二叉树深度是i,最多有多少个节点:<font color='orange'>2^i-1</font></p>
+<p>3.假设二叉树有n个节点，二叉树最小深度是:<font color='orange'>log₂(n+1)</font></p>
+<h2 id="大顶堆">大顶堆</h2>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbsymvR.png" alt=""></p>
+<h3 id="入堆">入堆</h3>
+<p>main.cpp</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"> 
+# include &lt;stdio.h&gt;
+# include &lt;string.h&gt;
+# include &lt;stdlib.h&gt;
+# define MAX 10
+ 
+typedef struct Heap
+&#123;
+	int sizeHeap;
+	int* heapData;
+&#125;HEAP,*LPHEAP;
+&#x2F;&#x2F;创建堆
+LPHEAP createHeap()
+&#123;
+	LPHEAP heap &#x3D; (LPHEAP)malloc(sizeof(HEAP));
+	heap-&gt;sizeHeap &#x3D; 0;
+	heap-&gt;heapData &#x3D; (int*)malloc(sizeof(int) * MAX);
+	return heap;
+&#125;
+&#x2F;&#x2F;万金油
+int size(LPHEAP heap)
+&#123;
+	return heap-&gt;sizeHeap;
+&#125;
+int empty(LPHEAP heap)
+&#123;
+	&#x2F;&#x2F;返回1 表示NULL 返回0 表示不为NULL
+	return heap-&gt;sizeHeap &#x3D;&#x3D; 0;
+&#125;
+void moveTocrrectPos(LPHEAP heap, int curPos)
+&#123;
+	&#x2F;&#x2F;向上渗透
+	while (curPos &gt; 1)&#x2F;&#x2F;渗透到下标是1的位置，表示结束
+	&#123;
+		int Max &#x3D; heap-&gt;heapData[curPos];&#x2F;&#x2F;比较
+		int parentIndex &#x3D; curPos &#x2F; 2;
+		if (Max &gt; heap-&gt;heapData[parentIndex])
+		&#123;
+			&#x2F;&#x2F;交换孩子点和父节点的值
+			heap-&gt;heapData[curPos] &#x3D; heap-&gt;heapData[parentIndex];
+			heap-&gt;heapData[parentIndex] &#x3D; Max;
+			curPos &#x3D; parentIndex;
+		&#125;
+		else
+			break;&#x2F;&#x2F;不需要调整
+	&#125;
+&#125;
+ 
+&#x2F;&#x2F;入堆
+void insertHeap(LPHEAP heap, int data)
+&#123;
+	&#x2F;&#x2F;放到当前堆的最后面
+	++heap-&gt;sizeHeap;
+	heap-&gt;heapData[heap-&gt;sizeHeap] &#x3D; data;
+	&#x2F;&#x2F;大顶堆，调整当前元素的位置
+	moveTocrrectPos(heap, heap-&gt;sizeHeap);
+&#125;
+ 
+int main()
+&#123;
+	LPHEAP heap &#x3D; createHeap();
+	&#x2F;&#x2F;数组下标[0]那段内存不会去用！！！！
+	for (int i &#x3D; 1; i &lt; 11; i++)
+	&#123;
+		insertHeap(heap, i);
+	&#125;
+	for (int i &#x3D; 1; i &lt; 11; i++)
+	&#123;
+		printf(&quot;%d  &quot;, heap-&gt;heapData[i]);
+	&#125;
+	printf(&quot;\n&quot;);
+ 
+	return 0;
+&#125;
+ </code></pre>
+<h3 id="出堆">出堆</h3>
+<p>main.cpp</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">int popHeap(LPHEAP heap)
+&#123;
+	int Max &#x3D; heap-&gt;heapData[1];
+	&#x2F;&#x2F;调整堆，向下渗透，找最后一个适合的位置的下标
+	int curPos &#x3D; 1;
+	int childIndex &#x3D; curPos * 2;
+	while (childIndex &lt;&#x3D; heap-&gt;sizeHeap)
+	&#123;
+		int temp &#x3D; heap-&gt;heapData[childIndex];
+		&#x2F;&#x2F;同一层上面需要左右比较
+		if (childIndex + 1 &lt;&#x3D; heap-&gt;sizeHeap &amp;&amp; temp &lt; heap-&gt;heapData[childIndex + 1])
+		&#123;
+			temp &#x3D; heap-&gt;heapData[++childIndex];&#x2F;&#x2F;等效于childIndex+1
+		&#125;
+		heap-&gt;heapData[curPos] &#x3D; temp;
+		curPos &#x3D; childIndex;
+		childIndex*&#x3D; 2;
+	&#125;
+	heap-&gt;heapData[curPos] &#x3D; heap-&gt;heapData[heap-&gt;sizeHeap];
+	--heap-&gt;sizeHeap;
+	return Max;
+&#125;</code></pre>
+<p>main.cpp(打印)</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">while (!empty(heap))
+	&#123;
+		printf(&quot;%d &quot;, popHeap(heap));
+	&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FbsyuK1.png" alt=""></p>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num79.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">二叉树概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%88%E5%BA%8F%E6%B5%81%E7%A8%8B"><span class="toc-number">1.1.</span> <span class="toc-text">先序流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E5%BA%8F%E6%B5%81%E7%A8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">中序流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8E%E5%BA%8F%E6%B5%81%E7%A8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">后序流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main%E5%87%BD%E6%95%B0"><span class="toc-number">1.4.</span> <span class="toc-text">main函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%9A%E8%8A%82%E7%82%B9%E5%92%8C%E8%BE%B9%E4%B8%8A%E7%9A%84%E6%95%B0%E5%AD%A6%E7%89%B9%E6%80%A7"><span class="toc-number">1.5.</span> <span class="toc-text">二叉树：节点和边上的数学特性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A7%E9%A1%B6%E5%A0%86"><span class="toc-number">2.</span> <span class="toc-text">大顶堆</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A5%E5%A0%86"><span class="toc-number">2.1.</span> <span class="toc-text">入堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BA%E5%A0%86"><span class="toc-number">2.2.</span> <span class="toc-text">出堆</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://api2.acozycotage.net/Pweb" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '可惜你不听王杰，也不懂我...' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>

@@ -1,0 +1,3357 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>蓝桥杯嵌入式模块详解(旧板) | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言 此笔记有参考了各博主文章： https:&#x2F;&#x2F;blog.csdn.net&#x2F;Zach_z&#x2F;article&#x2F;details&#x2F;80548423 STM32应用(六)一阶卡尔曼滤波代码和简单应用 https:&#x2F;&#x2F;blog.csdn.net&#x2F;Zach_z&#x2F;article&#x2F;details&#x2F;80548423 https:&#x2F;&#x2F;recclay.blog.csdn.net&#x2F;article&#x2F;details&#x2F;8659">
+<meta property="og:type" content="article">
+<meta property="og:title" content="蓝桥杯嵌入式模块详解(旧板)">
+<meta property="og:url" content="https://mdcm.yang5201314.cn/post/68fab44c.html">
+<meta property="og:site_name" content="Luckys-Yangの小栈">
+<meta property="og:description" content="前言 此笔记有参考了各博主文章： https:&#x2F;&#x2F;blog.csdn.net&#x2F;Zach_z&#x2F;article&#x2F;details&#x2F;80548423 STM32应用(六)一阶卡尔曼滤波代码和简单应用 https:&#x2F;&#x2F;blog.csdn.net&#x2F;Zach_z&#x2F;article&#x2F;details&#x2F;80548423 https:&#x2F;&#x2F;recclay.blog.csdn.net&#x2F;article&#x2F;details&#x2F;8659">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mdcm.yang5201314.cn/img/num75.webp">
+<meta property="article:published_time" content="2022-05-18T00:10:00.000Z">
+<meta property="article:modified_time" content="2022-12-01T13:18:28.000Z">
+<meta property="article:author" content="Luckys-Yang">
+<meta property="article:tag" content="STM32F1">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mdcm.yang5201314.cn/img/num75.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"><link rel="canonical" href="https://mdcm.yang5201314.cn/post/68fab44c.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '蓝桥杯嵌入式模块详解(旧板)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-12-01 21:18:28'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">94</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">75</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">蓝桥杯嵌入式模块详解(旧板)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-18T00:10:00.000Z" title="发表于 2022-05-18 08:10:00">2022-05-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-12-01T13:18:28.000Z" title="更新于 2022-12-01 21:18:28">2022-12-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/">蓝桥杯</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><p>前言</p>
+<p>此笔记有参考了各博主文章：</p>
+<p><a href="https://blog.csdn.net/Zach_z/article/details/80548423">https://blog.csdn.net/Zach_z/article/details/80548423</a></p>
+<p><a href="https://blog.csdn.net/weixin_45751396/article/details/119595886?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166703623616800186593115%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&amp;request_id=166703623616800186593115&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~times_rank-7-119595886-null-null.nonecase&amp;utm_term=%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2ADC&amp;spm=1018.2226.3001.4450">STM32应用(六)一阶卡尔曼滤波代码和简单应用</a></p>
+<p><a href="https://blog.csdn.net/Zach_z/article/details/80548423">https://blog.csdn.net/Zach_z/article/details/80548423</a></p>
+<p><a href="https://recclay.blog.csdn.net/article/details/86594683">https://recclay.blog.csdn.net/article/details/86594683</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/489165065">https://zhuanlan.zhihu.com/p/489165065</a></p>
+<p><a href="https://blog.csdn.net/qq_51491920/article/details/123418006">关于STM32中的引脚重映射</a></p>
+<p>手册：</p>
+<p>在阿里云盘—我的手册(已凃)</p>
+<p><a href="https://www.aliyundrive.com/s/s2FuvCSAEki">所有模块总例程</a></p>
+<h2 id="板子介绍">板子介绍</h2>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205180900005.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205180902055.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205180904675.jpg","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<p><code>STM32F103RBT6属于中容量,闪存128K,64脚的增强型芯片</code></p>
+<ul>
+<li>查看英文手册 <font color='orange'>3.1章47页</font> 系统架构</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205181819037.jpg" alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">APB2</th>
+<th style="text-align:center">APB1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">ADC1，2，3</td>
+<td style="text-align:center">DAC，PWR，BKP，bxCAN，IWDG，USB，WWDG</td>
+</tr>
+<tr>
+<td style="text-align:center">GPIOA，B，C，D，E，F，G</td>
+<td style="text-align:center">UART4，5(只能异步)</td>
+</tr>
+<tr>
+<td style="text-align:center">USART1(支持同步/异步)</td>
+<td style="text-align:center">USART2，3(支持同步/异步)</td>
+</tr>
+<tr>
+<td style="text-align:center">SPI1</td>
+<td style="text-align:center">RTC</td>
+</tr>
+<tr>
+<td style="text-align:center">TIM1，8</td>
+<td style="text-align:center">TIM2，3，4，5，6，7</td>
+</tr>
+<tr>
+<td style="text-align:center">EXTI</td>
+<td style="text-align:center">I2C1，I2C2</td>
+</tr>
+<tr>
+<td style="text-align:center">AFIO</td>
+<td style="text-align:center">SPI2/I2S，SPI3/I2</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://dasai.lanqiao.cn/pages/dasai/news_detail.html?id=846">蓝桥杯嵌入式组竞赛大纲</a></p>
+<h2 id="配置环境">配置环境</h2>
+<ul>
+<li>首先把板子连接到电脑，然后在左下角搜索栏搜索【设备管理器】，打开找到【其他设备】那栏可以看到一个有感叹号的端口号，这时右键它选择【更新驱动程序】，再选择【浏览我的电脑以查找驱动程序】，然后点击【浏览】，定位到你的FT2232驱动文件中，再点击【下一页】即可安装。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205180929542.jpg" alt=""></p>
+<ul>
+<li>安装成功后会看到【端口】栏有一个“USB Serial Port（COMx）”（x是你当前端口号），然后在下面【通用串行总线控制器】有“USB Serial Converter A”和“USB Serial Converter B”（注意：不要把线插到<code>CN5</code>，要插到<code>CN2</code>）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205180929067.jpg" alt=""></p>
+<ul>
+<li>然后安装 Colink for MDK插件，默认安装路径（不要改），安装完打开 keil 设置</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205180944115.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205180944520.png" alt=""></p>
+<ul>
+<li>然后点击旁边的【Settings】进去添加下面这条（如果找不到下面这条说明得去下载）下载地址：<a href="https://www2.keil.com/mdk5/legacy">MDK v4 传统支持 (keil.com)</a>，安装5.25版本</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205181018904.png" alt=""></p>
+<ul>
+<li>接下来就可以自己创建新项目把蓝桥杯的例程复制进去下载程序到开发板了（注意：<font color='red'>不要直接打开官方LCD例程进行下载，不然会一直卡死</font>）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205181107148.jpg" alt=""></p>
+<ul>
+<li>先在自己盘符创建5个文件夹如下把需要的文件包含进来，创建项目需要注意选芯片时顶部选&quot;Device Database&quot;–&gt;“STM32F103RB”–&gt;“OK”–&gt;“弹窗的话选否”</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">文件名</th>
+<th style="text-align:center">包含 <span style="color:red;">\官方资料…\STM32F10x_StdPeriph_Lib_V3.5.0</span> 下的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">APP</td>
+<td style="text-align:center">自己编写的驱动文件(.c，.h)放这</td>
+</tr>
+<tr>
+<td style="text-align:center">USER</td>
+<td style="text-align:center">自己编写的 main.c<br><span style="color:red;">\Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x </span>下的<br>①stm32f10x.h           ②system_stm32f10x.c/.h<br><span style="color:red;">\Project\STM32F10x_StdPeriph_Template  </span>下的<br>③stm32f10x_conf.h          ④stm32f10x_it.c/.h</td>
+</tr>
+<tr>
+<td style="text-align:center">CORE</td>
+<td style="text-align:center"><span style="color:red;">\Libraries\CMSIS\CM3\CoreSupport </span>下的<br>①core_cm3.c/.h<br><span style="color:red;">\Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\startup\arm </span>下的<br>②startup_stm32f10x_md.s</td>
+</tr>
+<tr>
+<td style="text-align:center">GJK</td>
+<td style="text-align:center"><span style="color:red;">\Libraries\STM32F10x_StdPeriph_Driver </span>下的<br/>《inc》《src》文件夹</td>
+</tr>
+<tr>
+<td style="text-align:center">project</td>
+<td style="text-align:center">创建工程保存在这，生成的啥乱七八糟的也放这</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>点击 <code>三色正方形</code> 创建如上4个文件夹(project不用)，把里面所有 .c文件Add进来即可(CORE需要把md.s也包进来)  ，点击 <code>魔法棒</code>– <code>C/C++</code> – <code>Include Paths</code> – 把4个文件夹的路径包含进来(GJK只需要包含《inc》)</li>
+<li>在 <code>魔法棒</code> – <code>C/C++</code> – <code>Define</code> --填写下面这句即可</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;可在 stm32f10x.h 第95,99行找到
+USE_STDPERIPH_DRIVER,STM32F10X_MD</code></pre>
+<ul>
+<li><code>魔法棒</code> – <code>ARM Compiler</code> – 选择《Use default compiler version 5》(选6可能报错！！！)，如果用到C库可把下面的《Use MicroLIB》也勾了</li>
+<li>如果编译还错误，左侧展开 <code>APP</code> 下任意一个 .c 文件，打开 <code>stm32f10x_conf.h</code>，看看是不是头文件被注释了，如果是则全部取消注释即可</li>
+</ul>
+<h2 id="LED模块">LED模块</h2>
+<ul>
+<li>通过原理图可以知道 <font color='orange'>PC8~PC15</font> 分别对应 <font color='orange'>LED1~LED8</font>，<font color='orange'>PD2</font> 对应 <font color='orange'>LE</font>（锁存器），只要<font color='cornflowerblue'>使能 LE</font>，<font color='cornflowerblue'>并且给 PC8–PC15一个低电平</font>，LED1–LED8 就会产生电压差就会亮。</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205181752632.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205181753428.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">LED</th>
+<th style="text-align:center">STM32</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">(LED1-LED8)M_PC8~M_PC15</td>
+<td style="text-align:center">PC8~PC15</td>
+</tr>
+<tr>
+<td style="text-align:center">(锁存器)M_PD2</td>
+<td style="text-align:center">PD2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="锁存器芯片介绍">锁存器芯片介绍</h3>
+<ul>
+<li>74HC573芯片<font color='orange'>缺口方向 为正</font>，然后左上往下排列，<font color='cornflowerblue'>最后一个是GND</font>，然后 向右，再向右上，<font color='cornflowerblue'>右上角为Vcc</font>（GND 和Vcc成对角线，是为了防止发生短路）</li>
+<li><font color='red'>LE</font>：latch-enable <font color='gree'>锁存使能</font>   <font color='cornflowerblue'> 当LE是高电平，Q（output）与D（data）保持一致</font>；<font color='orange'>当LE是低电平，Q保持住原先状态，不受D的影响</font></li>
+<li><font color='red'>OE</font>：output enable <font color='gree'>输出使能</font>，<font color='cornflowerblue'>其上有一杠，表示低电平有效</font>；<font color='orange'>故OE必须在低电平状态才行</font>。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205181828766.jpg" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205181844069.png" alt=""></p>
+<ul>
+<li><font color='orange'>Z是高阻态的意思</font>，<font color='cornflowerblue'>接在高电平上就是高电平，接在低电平上就是低电平</font>，此时表示芯片不工作。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205181847885.png" alt=""></p>
+<h3 id="编写程序">编写程序</h3>
+<ul>
+<li><font color='red'>注意需要把 stm32f10x_it.c 里第137到140行注释掉，否则会报错</font></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205191249722.jpg" alt=""></p>
+<ul>
+<li>时钟配置函数可以去 <font color='green'>stm32f10x_rcc.c</font> 里<font color='orange'>1095行</font>左右</li>
+<li>我们想配置<font color='gree'> Pin8~Pin15</font>，我们可以直接<font color='orange'>0x0100+0x0200+0x0400+0x0800+0x1000+0x2000+0x4000+0x8000</font>=<font color='cornflowerblue'>0xFF00</font></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205182006305.png" alt=""></p>
+<ul>
+<li>开发板复位后， <code>LED默认是点亮的，所以需要初始化时全部设置为高电平</code></li>
+<li>先开锁存器还是先给IO数据呢？</li>
+</ul>
+<p>只要有一个 <code>从低到高的脉冲，就会直接把输入端的数据给输出端</code>，所以更准确来说 <code>应该在开锁存器前把数据准备好，然后再拉高LE，锁存完毕后再拉低LE为下次锁存做准备</code>，连续拉高和拉低，之间的间隔都是 ns 级别，足够锁存完数据</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************GPIO_init.h*************************&#x2F;
+# define LED1 GPIO_Pin_8	&#x2F;&#x2F;LED1~8(C)
+# define LED2 GPIO_Pin_9
+# define LED3 GPIO_Pin_10
+# define LED4 GPIO_Pin_11
+# define LED5 GPIO_Pin_12
+# define LED6 GPIO_Pin_13
+# define LED7 GPIO_Pin_14
+# define LED8 GPIO_Pin_15
+# define LEDALL GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_10|GPIO_Pin_11|GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15	&#x2F;&#x2F;所有LED
+# define LE GPIO_Pin_2	&#x2F;&#x2F;LE锁存器(D)
+
+&#x2F;*************************GPIO_init.c*************************&#x2F;
+void LEDInit(void)
+&#123;
+	GPIO_InitTypeDef GPIO_InitStructure;	&#x2F;&#x2F;定义结构体
+	
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC|RCC_APB2Periph_GPIOD,ENABLE);	&#x2F;&#x2F;使能C,D组外设时钟
+	GPIO_InitStructure.GPIO_Pin &#x3D; 0xFF00;	&#x2F;&#x2F;PC8~PC15
+	GPIO_InitStructure.GPIO_Mode &#x3D; GPIO_Mode_Out_PP;	&#x2F;&#x2F;推挽输出
+	GPIO_InitStructure.GPIO_Speed &#x3D; GPIO_Speed_50MHz;
+	GPIO_Init(GPIOC,&amp;GPIO_InitStructure);
+	
+	GPIO_InitStructure.GPIO_Pin &#x3D; LE;
+	GPIO_InitStructure.GPIO_Mode &#x3D; GPIO_Mode_Out_PP;	&#x2F;&#x2F;推挽输出
+	GPIO_InitStructure.GPIO_Speed &#x3D; GPIO_Speed_50MHz;
+	GPIO_Init(GPIOD,&amp;GPIO_InitStructure);
+	
+	&#x2F;&#x2F;初始化LED为灭的状态
+	GPIO_SetBits(GPIOD,LE);	&#x2F;&#x2F;开锁
+	GPIO_SetBits(GPIOC,0xFF00);	&#x2F;&#x2F;置1(灭)
+	GPIO_ResetBits(GPIOD,LE);	&#x2F;&#x2F;关锁
+&#125;
+
+&#x2F;*************************led.h*************************&#x2F;
+# define LE GPIO_Pin_2	&#x2F;&#x2F;LE锁存器(D)
+
+void LEDInit(void);
+
+&#x2F;*************************led.c*************************&#x2F;
+void delay_us(unsigned int us);
+extern void delay_ms(unsigned int ms);
+
+&#x2F;&#x2F;点亮任意个LED	参数：点亮哪几个(十六进制)
+void LED_display_1(unsigned char LED)
+&#123;
+    GPIO_ResetBits(GPIOC, LED &lt;&lt; 8);
+    GPIO_SetBits(GPIOD, LE);
+    GPIO_ResetBits(GPIOD, LE);
+&#125;
+&#x2F;&#x2F;灭掉任意个LED	参数：灭哪几个(十六进制)
+void LED_undisplay_1(unsigned char LED)
+&#123;
+    GPIO_SetBits(GPIOC, LED &lt;&lt; 8);
+    GPIO_SetBits(GPIOD, LE);
+    GPIO_ResetBits(GPIOD, LE);
+&#125;
+
+&#x2F;&#x2F;左右流水	参数：方向(0-左边 1-右边)
+void LED_display_2(unsigned char dir)
+&#123;
+    char i &#x3D; 0;
+    if(dir &#x3D;&#x3D; 0)
+    &#123;
+        for(i &#x3D; 0; i &lt; 8; i++)
+        &#123;
+            LED_display_1(0x01 &lt;&lt; i);
+            delay_ms(1000);
+            LED_undisplay_1(0x01 &lt;&lt; i);
+        &#125;
+    &#125;
+    else if(dir &#x3D;&#x3D; 1)
+    &#123;
+        for(i &#x3D; 0; i &lt; 8; i++)
+        &#123;
+            LED_display_1(0x80 &gt;&gt; i);
+            delay_ms(1000);
+            LED_undisplay_1(0x80 &gt;&gt; i);
+        &#125;
+    &#125;
+&#125;
+
+&#x2F;*************************main.c*************************&#x2F;
+&#x2F;&#x2F;略(直接调用即可)</code></pre>
+<h2 id="KEY">KEY</h2>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205201248925.jpg" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205201248221.png" alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">按键</th>
+<th style="text-align:center">STM32</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">(B1)N_K1</td>
+<td style="text-align:center">PA0</td>
+</tr>
+<tr>
+<td style="text-align:center">(B2)N_K2</td>
+<td style="text-align:center">PA8</td>
+</tr>
+<tr>
+<td style="text-align:center">(B3)N_K3</td>
+<td style="text-align:center">PB1</td>
+</tr>
+<tr>
+<td style="text-align:center">(B4)N_K4</td>
+<td style="text-align:center">PB2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="方式1-使用延时方式">方式1(使用延时方式)</h3>
+<p>key.h</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># ifndef __KEY_H
+# define __KEY_H
+# include &quot;stm32f10x.h&quot;
+
+&#x2F;&#x2F;注意是读取输入状态不是输出状态！！！
+# define KEY1 GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_0)
+# define KEY2 GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_8)
+# define KEY3 GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_1)
+# define KEY4 GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_2)
+
+void KEY_Init(void);&#x2F;&#x2F;初始化
+u8 KEY_scan(void);&#x2F;&#x2F;判断是否按下
+void KEY_show1(void);&#x2F;&#x2F;单次按没锁存
+void KEY_show2(void);&#x2F;&#x2F;单次按有锁存
+void KEY_long(void);&#x2F;&#x2F;长按
+
+
+# endif</code></pre>
+<ul>
+<li>关于内部上下拉电阻的设置：如果外部的按键另一头<font color='orange'>接地</font>，那么需要设置成<font color='orange'>上拉电阻</font>。（理由是<font color='cornflowerblue'>当没有按下按键时，由于上拉，输入为高电平</font>；<font color='orange'>按下时，由于外部接地，输入为低电平</font>），同理，如果外部的按键另一头接高电平，那么需要设置成下拉电阻。</li>
+</ul>
+<p>key.c</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &quot;key.h&quot;
+# include &quot;delay.h&quot;
+# include &quot;led.h&quot;
+
+void KEY_Init(void)
+&#123;
+    GPIO_InitTypeDef GPIO_InitStructure;
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB, ENABLE); &#x2F;&#x2F;开启时钟
+    GPIO_InitStructure.GPIO_Pin &#x3D; GPIO_Pin_0 | GPIO_Pin_8; &#x2F;&#x2F;k1,k2
+    GPIO_InitStructure.GPIO_Mode &#x3D; GPIO_Mode_IPU; &#x2F;&#x2F;上拉输入
+    GPIO_Init(GPIOA, &amp;GPIO_InitStructure);
+
+    GPIO_InitStructure.GPIO_Pin &#x3D; GPIO_Pin_1 | GPIO_Pin_2; &#x2F;&#x2F;k3,k4
+    GPIO_InitStructure.GPIO_Mode &#x3D; GPIO_Mode_IPU; &#x2F;&#x2F;上拉输入
+    GPIO_Init(GPIOB, &amp;GPIO_InitStructure);
+&#125;
+
+&#x2F;&#x2F;返回对应键值
+u8 KEY_scan(void)
+&#123;
+
+
+    if(KEY1 &#x3D;&#x3D; 0 || KEY2 &#x3D;&#x3D; 0 || KEY3 &#x3D;&#x3D; 0 || KEY4 &#x3D;&#x3D; 0) &#x2F;&#x2F;读按键接口的电平
+    &#123;
+        delay_ms(20);&#x2F;&#x2F;延时消抖
+
+        if(KEY1 &#x3D;&#x3D; 0 || KEY2 &#x3D;&#x3D; 0 || KEY3 &#x3D;&#x3D; 0 || KEY4 &#x3D;&#x3D; 0)
+        &#123;
+
+            if(KEY1 &#x3D;&#x3D; 0)
+                return 1;
+            if(KEY2 &#x3D;&#x3D; 0)
+                return 2;
+            if(KEY3 &#x3D;&#x3D; 0)
+                return 3;
+            if(KEY4 &#x3D;&#x3D; 0)
+                return 4;
+        &#125;
+    &#125;
+    return 0;
+&#125;
+
+&#x2F;&#x2F;单次按没锁存
+void KEY_show1(void)
+&#123;
+    if(!KEY1)  &#x2F;&#x2F;读按键接口的电平
+    &#123;
+        GPIO_ResetBits(LEDPORT, LED1); &#x2F;&#x2F;LED灯都为低电平（0）
+    &#125;
+    else
+    &#123;
+        GPIO_SetBits(LEDPORT, LED1); &#x2F;&#x2F;LED灯都为高电平（1）
+    &#125;
+&#125;
+
+&#x2F;&#x2F;单次按有锁存
+void KEY_show2(void)
+&#123;
+    if(KEY_scan() &#x3D;&#x3D; 1)
+    &#123;
+        GPIO_WriteBit(LEDPORT, LED1, (BitAction)(1 - GPIO_ReadOutputDataBit(LEDPORT, LED1))); &#x2F;&#x2F;通过读取LED当前输出状态实现取反
+        while(!KEY1);&#x2F;&#x2F;等待按键松开
+    &#125;
+	&#x2F;&#x2F;其他按键类似
+&#125;
+
+&#x2F;&#x2F;长按有锁存
+void KEY_long(void)
+&#123;
+    static u8 key_flag &#x3D; 0;
+    if((KEY1 &#x3D;&#x3D; 0 || KEY2 &#x3D;&#x3D; 0 || KEY3 &#x3D;&#x3D; 0 || KEY4 &#x3D;&#x3D; 0))
+    &#123;
+        delay_ms(20);
+        if(KEY1 &#x3D;&#x3D; 0)
+        &#123;
+            key_flag++;
+            if(key_flag &#x3D;&#x3D; 1)
+            &#123;
+
+            &#125;
+            if(key_flag &#x3D;&#x3D; 50) &#x2F;&#x2F;20*50&#x3D;1000ms&#x3D;1s
+            &#123;
+                GPIO_WriteBit(LEDPORT, LED1, (BitAction)(1 - GPIO_ReadOutputDataBit(LEDPORT, LED1)));
+
+            &#125;
+        &#125;
+		&#x2F;&#x2F;其他按键类似
+    &#125;
+    else
+        key_flag &#x3D; 0;
+&#125;</code></pre>
+<h3 id="方式2-使用定时器扫描方式-长按短按">方式2(使用定时器扫描方式,长按短按)</h3>
+<p>按键部分</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************GPIO_init.h*************************&#x2F;
+# define KEY1 GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_0)	&#x2F;&#x2F;按键B1(A)
+# define KEY2 GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_8)	&#x2F;&#x2F;按键B2(A)
+# define KEY3 GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_1)	&#x2F;&#x2F;按键B3(B)
+# define KEY4 GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_2)	&#x2F;&#x2F;按键B4(B)
+
+&#x2F;*************************GPIO_init.c*************************&#x2F;
+void KEYInit()
+&#123;
+	GPIO_InitTypeDef GPIO_InitStructure;	&#x2F;&#x2F;定义结构体
+	
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA|RCC_APB2Periph_GPIOB,ENABLE);	&#x2F;&#x2F;使能A,B组外设时钟
+	GPIO_InitStructure.GPIO_Pin &#x3D; GPIO_Pin_0|GPIO_Pin_8;
+	GPIO_InitStructure.GPIO_Mode &#x3D; GPIO_Mode_IPU;	&#x2F;&#x2F;上拉输入
+	GPIO_InitStructure.GPIO_Speed &#x3D; GPIO_Speed_50MHz;
+	GPIO_Init(GPIOA,&amp;GPIO_InitStructure);
+	
+	GPIO_InitStructure.GPIO_Pin &#x3D; GPIO_Pin_1|GPIO_Pin_2;
+	GPIO_InitStructure.GPIO_Mode &#x3D; GPIO_Mode_IPU;	&#x2F;&#x2F;上拉输入
+	GPIO_InitStructure.GPIO_Speed &#x3D; GPIO_Speed_50MHz;
+	GPIO_Init(GPIOB,&amp;GPIO_InitStructure);
+&#125;
+&#x2F;*|||||||||TIMI初始化区|||||||||||*&#x2F;
+void TIM4Init(unsigned int arr,unsigned int psc)
+&#123;
+	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;	&#x2F;&#x2F;定义结构体
+	NVIC_InitTypeDef NVIC_InitStructure;	&#x2F;&#x2F;定义结构体
+	
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4,ENABLE);	&#x2F;&#x2F;使能TIM4外设时钟
+	
+	TIM_TimeBaseInitStructure.TIM_ClockDivision &#x3D; 0;	&#x2F;&#x2F;分频因子
+	TIM_TimeBaseInitStructure.TIM_CounterMode &#x3D; 0;	&#x2F;&#x2F;计数模式，0表示向上计数
+	TIM_TimeBaseInitStructure.TIM_Period &#x3D; arr-1;	&#x2F;&#x2F;自动重装载值（溢出值）
+	TIM_TimeBaseInitStructure.TIM_Prescaler &#x3D; psc-1;	&#x2F;&#x2F;预分频系数
+	TIM_TimeBaseInit(TIM4,&amp;TIM_TimeBaseInitStructure);
+	
+	NVIC_InitStructure.NVIC_IRQChannel &#x3D; TIM4_IRQn;	&#x2F;&#x2F;选择TIM4中断通道
+	NVIC_InitStructure.NVIC_IRQChannelCmd &#x3D; ENABLE;	&#x2F;&#x2F;使能中断通道
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority &#x3D; 2;	&#x2F;&#x2F;设定抢占优先级为2
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority &#x3D; 1;	&#x2F;&#x2F;设定响应优先级为1
+	NVIC_Init(&amp;NVIC_InitStructure);
+	
+	TIM_ITConfig(TIM4,TIM_IT_Update,ENABLE);	&#x2F;&#x2F;使能TIM3中断
+	TIM_Cmd(TIM4,ENABLE);	&#x2F;&#x2F;使能TIM4
+&#125;
+&#x2F;*|||||||||中断服务函数区|||||||||||*&#x2F;
+void TIM4_IRQHandler(void)
+&#123;
+	if(TIM_GetITStatus(TIM4,TIM_IT_Update)&#x3D;&#x3D;SET)	&#x2F;&#x2F;判断是否发生中断
+	&#123;
+		TIM_ClearITPendingBit(TIM4,TIM_IT_Update);	&#x2F;&#x2F;清除中断标志位
+		KeyScan();
+	&#125;
+&#125;
+
+&#x2F;*************************KEY.h*************************&#x2F;
+void KeyDriver(void);
+void KeyScan(void);
+
+&#x2F;*************************KEY.c*************************&#x2F;
+# include &quot;stm32f10x.h&quot;
+# include &quot;GPIO_init.h&quot;
+# include &quot;LED.h&quot;
+
+unsigned char longkeyFlag &#x3D; 0;	&#x2F;&#x2F;长按标志
+unsigned int key_count&#x3D;0;	&#x2F;&#x2F;计数
+unsigned char KeySta[4]&#x3D;&#123;1,1,1,1&#125;;	&#x2F;&#x2F;按键当前状态
+unsigned int KeyDownTime[4]&#x3D;&#123;0,0,0,0&#125;;	&#x2F;&#x2F;保存每个按键按下的时间累加
+
+extern void KeyAction(unsigned char keycode,unsigned char keymode);
+
+void KeyDriver(void)
+&#123;
+	unsigned char i;
+	
+	static unsigned char backup[4]&#x3D;&#123;1,1,1,1&#125;;	&#x2F;&#x2F;上一次按键的状态
+	static unsigned int TimeThr[4]&#x3D;&#123;4000,4000,4000,4000&#125;;	&#x2F;&#x2F;初始值表示按键第一次按下之前等待的时间
+	for(i&#x3D;0;i&lt;4;i++)
+	&#123;
+		if(KeySta[i]!&#x3D;backup[i])	&#x2F;&#x2F;说明按键状态发生改变
+		&#123;
+			if(longkeyFlag)	&#x2F;&#x2F;如果执行了长按则恢复原样否则会触发短按
+			&#123;
+				longkeyFlag &#x3D; 0;
+				backup[i]&#x3D;1;
+				KeySta[i]&#x3D;1;
+			&#125;
+			if(backup[i]&#x3D;&#x3D;0)	&#x2F;&#x2F;表示按下执行短按
+			&#123;
+				key_count &#x3D; 0;	&#x2F;&#x2F;需要清0不然有BUG:经调试按十多次会触发到长按!
+				KeyAction(i+1,0);
+			&#125;
+			backup[i] &#x3D; KeySta[i];	&#x2F;&#x2F;把当前状态值存起来
+		&#125;
+		&#x2F;&#x2F;长按
+&#x2F;&#x2F;		if(KeyDownTime[i]&gt;0)	&#x2F;&#x2F;说明按下
+&#x2F;&#x2F;		&#123;
+&#x2F;&#x2F;			if(KeyDownTime[i]&gt;TimeThr[i])
+&#x2F;&#x2F;			&#123;
+&#x2F;&#x2F;				KeyAction(i+1,longkey);
+&#x2F;&#x2F;				TimeThr[i] &#x3D; TimeThr[i]+200;	&#x2F;&#x2F;表示按键按住不放，按键状态翻转需要等待的时间
+&#x2F;&#x2F;			&#125;
+&#x2F;&#x2F;		&#125;
+		else	&#x2F;&#x2F;说明按键弹起
+		&#123;
+			TimeThr[i] &#x3D; 1000;
+		&#125;
+	&#125;
+&#125;
+
+&#x2F;&#x2F;按键扫描,利用定时器2ms扫描一次，8*2&#x3D;16ms
+void KeyScan(void)
+&#123;
+
+	unsigned char i;
+	static unsigned char keybuf[4]&#x3D;&#123;0xFF,0xFF,0xFF,0xFF&#125;;
+	keybuf[0] &#x3D; (keybuf[0]&lt;&lt;1)|KEY1;
+	keybuf[1] &#x3D; (keybuf[1]&lt;&lt;1)|KEY2;
+	keybuf[2] &#x3D; (keybuf[2]&lt;&lt;1)|KEY3;
+	keybuf[3] &#x3D; (keybuf[3]&lt;&lt;1)|KEY4;
+	
+	for(i&#x3D;0;i&lt;4;i++)
+	&#123;
+		if(keybuf[i]&#x3D;&#x3D;0xFF)	&#x2F;&#x2F;表示弹起
+		&#123;
+			KeySta[i] &#x3D; 1;
+			KeyDownTime[i] &#x3D; 0;
+		&#125;
+		else if(keybuf[i]&#x3D;&#x3D;0x00)	&#x2F;&#x2F;表示按下
+		&#123;
+			KeySta[i] &#x3D; 0;
+&#x2F;&#x2F;			KeyDownTime[i] &#x3D; KeyDownTime[i]+4;
+			key_count++;
+			if(key_count&gt;&#x3D;2000)	&#x2F;&#x2F;表示按下执行长按
+			&#123;
+				KeyAction(i+1,1);
+				key_count &#x3D; 0;
+				longkeyFlag&#x3D;1;
+			&#125;
+		&#125;
+		else
+		&#123;
+			&#x2F;&#x2F;空语句消抖
+		&#125;
+	&#125;
+&#125;
+
+&#x2F;*************************main.c*************************&#x2F;
+void KeyAction(unsigned char keycode, unsigned char keymode);
+
+int main(void)
+&#123;
+	KEYInit();	&#x2F;&#x2F;初始化
+	TIM4Init(1000, 72);	&#x2F;&#x2F;定时1ms	如果是2ms:2000&#x2F;(72000000&#x2F;72)&#x3D;0.002s 
+    while(1)
+	&#123;
+    	KeyDriver();
+	&#125;
+&#125;
+
+&#x2F;&#x2F;按键执行内容 参数1:哪个按键	参数2:短按:0长按:1
+void KeyAction(unsigned char keycode, unsigned char keymode)
+&#123;
+    static unsigned char LEDflag &#x3D; 0;
+    if(keycode &#x3D;&#x3D; 1)	&#x2F;&#x2F;按键1
+    &#123;
+        if(keymode &#x3D;&#x3D; 0)
+        &#123;
+			&#x2F;&#x2F;执行对应操作
+        &#125;
+    &#125;
+    else if(keycode &#x3D;&#x3D; 2)	&#x2F;&#x2F;按键2
+    &#123;
+        if(keymode &#x3D;&#x3D; 0)
+        &#123;
+            &#x2F;&#x2F;执行对应操作
+        &#125;
+    &#125;
+    else if(keycode &#x3D;&#x3D; 3)	&#x2F;&#x2F;按键3
+    &#123;
+        if(keymode &#x3D;&#x3D; 0)
+        &#123;
+            &#x2F;&#x2F;执行对应操作
+        &#125;
+        if(keymode&#x3D;&#x3D;1)
+        &#123;
+			&#x2F;&#x2F;执行对应操作
+        &#125;
+    &#125;
+    else if(keycode &#x3D;&#x3D; 4)	&#x2F;&#x2F;按键4
+    &#123;
+        if(keymode &#x3D;&#x3D; 0)
+        &#123;
+			&#x2F;&#x2F;执行对应操作
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h2 id="USART">USART</h2>
+<ul>
+<li>开发板上有<font color='orange'>两个串口</font>，一个串口1，一个串口2，比赛一般使用串口2</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205202241378.jpg" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205202246446.jpg" alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">串口</th>
+<th style="text-align:center">USART1</th>
+<th style="text-align:center">USART2</th>
+<th style="text-align:center">USART3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">发送/接收(Tx/Rx)</td>
+<td style="text-align:center">PA9/PA10</td>
+<td style="text-align:center">PA2/PA3</td>
+<td style="text-align:center">PB10/PB11</td>
+</tr>
+<tr>
+<td style="text-align:center">所在总线</td>
+<td style="text-align:center">APB2</td>
+<td style="text-align:center">APB1</td>
+<td style="text-align:center">APB1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Lib 文件添加 <font color='green'>stm32f10x_usart.c ，misc.c</font>（NVIC的），否则编译会错误</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205210637045.png" alt=""></p>
+<ul>
+<li>需要重定向 <font color='pink'>fputc</font> 函数才能使用 <font color='pink'>printf</font> 函数发送数据（添加头文件 “stdio.h” 并且在设置把选项打钩）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205210648407.png" alt=""></p>
+<ul>
+<li>中文数据手册第<font color='orange'>489</font>页</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205210656747.png" alt=""></p>
+<ul>
+<li>波特率一般是 <code>9600</code></li>
+</ul>
+<h3 id="程序编写">程序编写</h3>
+<ul>
+<li><code>RxBuffer[Usart_Index-1] = 0;</code> 当接收到 <code>\n</code> 后，前一个就是 <code>\r</code>，所以直接把前一个数据赋值为 <code>0</code>，覆盖掉即可(如果不是根据判断是否接到’\n’为结束可不加)</li>
+<li>一帧数据处理完毕后，别忘了<font color='orange'>清空缓冲区</font>（memset）</li>
+<li>当勾选串口助手的回车换行后，我们判断最后一个字符要写成 <code>if('\n' == temp)</code>而加入我们是人为写入 <code>\n</code>  的话，我们要写成 <code>if('n' == temp)</code></li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************GPIO_init.h*************************&#x2F;
+# define USART2_TX GPIO_Pin_2	&#x2F;&#x2F;发送(A)
+# define USART2_RX GPIO_Pin_3	&#x2F;&#x2F;接收(A)
+
+extern u8 RxBuffer[20];	&#x2F;&#x2F;USART接收数组
+extern u8 Receive_Flag;	&#x2F;&#x2F;接收完成标志位(1:完成0:未完成)
+
+&#x2F;*************************GPIO_init.c*************************&#x2F;
+u8 RxBuffer[20] &#x3D; &#123;0&#125;;
+u8 Receive_Flag &#x3D; 1;
+u8 Usart_Index &#x3D; 0;	&#x2F;&#x2F;接收数组下标
+
+&#x2F;&#x2F;USART2初始化
+void USARTInit(void)
+&#123;
+    GPIO_InitTypeDef GPIO_InitStructure;	&#x2F;&#x2F;定义结构体
+    USART_InitTypeDef USART_InitStructure;	&#x2F;&#x2F;定义结构体
+    NVIC_InitTypeDef NVIC_InitStructure;	&#x2F;&#x2F;定义结构体
+
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);	&#x2F;&#x2F;使能A组时钟
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2,ENABLE);	&#x2F;&#x2F;使能USART2时钟
+
+    GPIO_InitStructure.GPIO_Pin &#x3D; USART2_RX;	&#x2F;&#x2F;接收
+    GPIO_InitStructure.GPIO_Speed &#x3D; GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode &#x3D; GPIO_Mode_IN_FLOATING;	&#x2F;&#x2F;浮空输入
+    GPIO_Init(GPIOA, &amp;GPIO_InitStructure);
+
+    GPIO_InitStructure.GPIO_Pin &#x3D; USART2_TX;	&#x2F;&#x2F;发送
+    GPIO_InitStructure.GPIO_Speed &#x3D; GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode &#x3D; GPIO_Mode_AF_PP;	&#x2F;&#x2F;复用推挽输出
+    GPIO_Init(GPIOA, &amp;GPIO_InitStructure);
+
+    USART_InitStructure.USART_BaudRate &#x3D; 9600;	&#x2F;&#x2F;波特率
+    USART_InitStructure.USART_WordLength &#x3D; USART_WordLength_8b;	&#x2F;&#x2F;数据位
+    USART_InitStructure.USART_StopBits &#x3D; USART_StopBits_1;	&#x2F;&#x2F;停止位
+    USART_InitStructure.USART_Parity &#x3D; USART_Parity_No;	&#x2F;&#x2F;无奇偶校验
+    USART_InitStructure.USART_HardwareFlowControl &#x3D; USART_HardwareFlowControl_None;	&#x2F;&#x2F;禁止硬件流控制
+    USART_InitStructure.USART_Mode &#x3D; USART_Mode_Rx | USART_Mode_Tx;	&#x2F;&#x2F;收发模式
+    USART_Init(USART2, &amp;USART_InitStructure);	&#x2F;&#x2F;初始化
+    USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);	&#x2F;&#x2F;接收中断开启
+    USART_Cmd(USART2, ENABLE);	&#x2F;&#x2F;开启USART2
+
+    NVIC_InitStructure.NVIC_IRQChannel &#x3D; USART2_IRQn;	&#x2F;&#x2F;USART2通道
+    NVIC_InitStructure.NVIC_IRQChannelCmd &#x3D; ENABLE;	&#x2F;&#x2F;使能通道
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority &#x3D; 0;	&#x2F;&#x2F;抢占优先级为0
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority &#x3D; 0;	&#x2F;&#x2F;响应优先级为1
+    NVIC_Init(&amp;NVIC_InitStructure);
+&#125;
+
+&#x2F;&#x2F;USART2中断
+void USART2_IRQHandler(void)
+&#123;
+    u8 temp;
+    if(USART_GetITStatus(USART2, USART_IT_RXNE) &#x3D;&#x3D; SET)	&#x2F;&#x2F;判断是否发生中断
+    &#123;
+        USART_ClearITPendingBit(USART2,USART_IT_RXNE);	&#x2F;&#x2F;清除中断标志位
+        temp &#x3D; USART_ReceiveData(USART2);	&#x2F;&#x2F;接收数据
+        if((&#39;\n&#39;&#x3D;&#x3D;temp) || (20&#x3D;&#x3D;Usart_Index))	&#x2F;&#x2F;接收到\n或者超过数组大小则完成接收
+        &#123;
+            Receive_Flag &#x3D; 1;
+            RxBuffer[Usart_Index-1] &#x3D; 0;
+            Usart_Index &#x3D; 0;
+            USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);	&#x2F;&#x2F;接收完毕关闭中断
+        &#125;
+        else
+        &#123;
+            RxBuffer[Usart_Index++] &#x3D; temp;
+        &#125;
+    &#125;
+&#125;
+
+&#x2F;*************************USART.h*************************&#x2F;
+# include &lt;stdio.h&gt;
+
+int fputc(int ch, FILE *f);
+
+&#x2F;*************************USART.c*************************&#x2F;
+&#x2F;&#x2F;返回值:	成功：返回被写入的字符 错误：返回 EOF
+&#x2F;&#x2F;重定向printf函数
+int fputc(int ch, FILE *f)
+&#123;
+    USART_SendData(USART2, (uint8_t)ch); &#x2F;&#x2F;发送一个字节数到串口
+    while(USART_GetFlagStatus(USART2, USART_FLAG_TXE) &#x3D;&#x3D; RESET); &#x2F;&#x2F;等待发送完成，1：完成，0：还没完成
+    return ch;
+&#125;
+&#x2F;*************************main.c*************************&#x2F;
+int main(void)
+&#123;
+	USARTInit();
+    while(1)
+    &#123;
+        window((const char *)arr);	&#x2F;&#x2F;LCD显示
+        KeyDriver();
+    &#125; 
+&#125;
+
+&#x2F;&#x2F;在window函数里面调用即可
+    if(1 &#x3D;&#x3D; Receive_Flag)	&#x2F;&#x2F;发送串口中断
+    &#123;
+        Receive_Flag &#x3D; 0;
+        LCD_ClearLine(Line1);
+        sprintf((char *)str1, &quot;USART2:%s&quot;, RxBuffer);
+        LCD_DisplayStringLine(Line1, str1);
+        memset(RxBuffer, 0, sizeof(RxBuffer));	&#x2F;&#x2F;清空
+        USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);	&#x2F;&#x2F;打开接收中断
+    &#125;</code></pre>
+<h2 id="LCD屏">LCD屏</h2>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205211310149.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20221024185950.png" alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">LCD</th>
+<th style="text-align:center">STM32</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">LCD_CS#</td>
+<td style="text-align:center">PB9</td>
+</tr>
+<tr>
+<td style="text-align:center">LCD_RS</td>
+<td style="text-align:center">PB8</td>
+</tr>
+<tr>
+<td style="text-align:center">LCD_WR#</td>
+<td style="text-align:center">PB5</td>
+</tr>
+<tr>
+<td style="text-align:center">LCD_RD#</td>
+<td style="text-align:center">PB10</td>
+</tr>
+<tr>
+<td style="text-align:center">H_D0~H_D7</td>
+<td style="text-align:center">PC8~PC15</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>比赛会给LCD的例程的，不需要我们自己写，但是还是要修改几处地方，因为LCD 和 LED 之间互相会影响所以要用到锁存器（LED的初始化最好放在LCD后面），修改下面3个函数</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*找到这3个函数
+LCD_WriteReg()
+LCD_WriteRAM_Prepare()
+LCD_WriteRAM()
+*&#x2F;
+
+&#x2F;&#x2F;函数第一行加上
+unsigned short PCOUT&#x3D;GPIOC-&gt;ODR;
+&#x2F;&#x2F;在最后一行加上,用于锁存，否则导致操作LCD时LED不受控制
+GPIOC-&gt;ODR&#x3D;PCOUT;</code></pre>
+<ul>
+<li>LCD 大概内容</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205211426576.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205211426659.png" alt=""></p>
+<ul>
+<li>
+<p>显示变量需要用到 “stdio.h” 里面的 <code>sprintf</code> 函数</p>
+</li>
+<li>
+<p>对液晶每一行来说，液晶像素序号 <code>从右向左编号</code>， <code>依次为（左）319,318,317......0（右）</code>，指定列像素光标位置后，从当前像素位置开始向右写入字符，然后光标向右移动到一个下一像素位置（<font color='red'>注意的是，如果指定的是0，写完0后，移动的下一位是319；如果指定大于319，比如330，依然会从319开始向右写</font>）</p>
+</li>
+<li>
+<p>液晶显示屏 <code>长320，宽240</code>，共划分为 <code>10</code> 行，编号1–10（Line0~Line9），每行大小 <code>320*24</code> 像素</p>
+</li>
+<li>
+<p>每个ASCII字符占用 <code>16*24</code> 个像素位置，一行最多显示 <code>20</code>个字符(即20列)， <code>LCD_DisplayChar</code> 函数可以指定某列显示一个字符</p>
+</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;在第i列显示单个字符计算公式：319-16*(i-1)
+u8 str[20];
+u16 n &#x3D; 1024;
+float p &#x3D; 3.1415;
+STM3210B_LCD_Init();
+LCD_Clear(Yellow);&#x2F;&#x2F;别忘了这一句总体清除
+LCD_SetBackColor(Blue);
+sprintf((char *)str, &quot;num:%d pi:%.2f&quot;, n, p);
+LCD_DisplayStringLine(Line1, str);
+LCD_SetBackColor(Red);
+LCD_DisplayChar(Line1, 319 - 16 * 19, &#39;X&#39;);</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205211500971.jpg" alt=""></p>
+<ul>
+<li><code>LCD_DrawRect(x,y,h,w);</code> 函数是画一个矩形</li>
+<li><del>x 是控制上下，数值越大越往上；y是控制左右，数值越大越往左（<font color='cornflowerblue'>上大下小左大右小</font>）</del>暂时没深入这个</li>
+<li><code>LCD_DrawRect(70,210,100,100); </code> —矩形显示中间</li>
+</ul>
+<h3 id="按键控制num值递增">按键控制num值递增</h3>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205211707293.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205211707984.png" alt=""></p>
+<h3 id="LCD高亮单个字符">LCD高亮单个字符</h3>
+<ul>
+<li>第一个参数是 <code>需要显示的字符串</code></li>
+<li>第二个参数是 <code>需要高亮的字符坐标（0~19，只有20列），左到右</code></li>
+</ul>
+<p>main.c</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">char str2[20]&#x3D;&quot;0123456789abcdefghij&quot;;&#x2F;&#x2F;注意用char类型
+
+void highlight(char *str,uint8_t pos)
+&#123;
+	int i &#x3D; 0;
+	u8 num&#x3D;0;
+	num&#x3D;strlen(str);&#x2F;&#x2F;计算有多少个
+	for(i &#x3D; 0; i &lt;num; i++)&#x2F;&#x2F;最后一个字符是乱码所以去掉
+	&#123;
+		if(i !&#x3D; pos)
+			LCD_DisplayChar(Line4,(320 - (16 * i)),str[i]);
+	&#125;
+	LCD_SetBackColor(Yellow);&#x2F;&#x2F;需要高亮的背景颜色
+	LCD_DisplayChar(Line4,(320 - (16 * pos)),str[pos]);&#x2F;&#x2F;需要高亮的地方
+	LCD_SetBackColor(White);	&#x2F;&#x2F;这句要加上否则全部都变成高亮
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205242244110.jpg" alt=""></p>
+<ul>
+<li><code>字体颜色</code>（跟上面一样只把 back 改成 Text 即可）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205242244138.jpg" alt=""></p>
+<h3 id="LCD字串符右对齐显示">LCD字串符右对齐显示</h3>
+<p>main.c</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">u8 lcd_str[20];
+u8 lcd_temp[20];
+
+memset(lcd_str, 0, sizeof(lcd_str));&#x2F;&#x2F;清空数组
+sprintf((char *)lcd_temp, &quot;Total(km):%d&quot;, 12345678);
+sprintf((char *)lcd_str, &quot;%20s&quot;, lcd_temp); &#x2F;&#x2F;左减右加，20列所以这里是20
+LCD_DisplayStringLine(Line9 , lcd_str);</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205242310180.jpg" alt=""></p>
+<h3 id="LCD补空格">LCD补空格</h3>
+<ul>
+<li><code>LCD_DisplayStringLine</code> 函数在打印一段char数组时，全部打完或者超过20个(一行最多20个字符)时，就会停下来，比如打了15个下次再在这行后面则第一次打印的后3个字符就不会刷新，所以一般选择空格去盖，所以最好补齐20个字符，新建一个函数把自带的函数内容复制过来修改即可</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void LCD_DisplayStringLine2(u8 Line, u8 *ptr)
+&#123;
+    unsigned long i &#x3D; 0;
+    unsigned int refcolumn &#x3D; 319;
+    char a &#x3D; &#39; &#39;;
+    while(i&lt;20)
+    &#123;
+        if(0&#x3D;&#x3D;*ptr)
+        &#123;
+            LCD_DisplayChar(Line,refcolumn,a);
+        &#125;
+        else
+        &#123;
+            LCD_DisplayChar(Line,refcolumn,*ptr);
+            ptr++;
+        &#125;
+        refcolumn -&#x3D; 16;
+        i++;
+    &#125;
+&#125;</code></pre>
+<h3 id="程序编写-2">程序编写</h3>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************main.c*************************&#x2F;
+unsigned char arr[20]&#x3D;&quot;\0&quot;;	&#x2F;&#x2F;数据存放的数组
+unsigned char HightLight &#x3D; 0;	&#x2F;&#x2F;选择是否高亮(0:不高亮1:高亮)
+
+int main(void)
+&#123;
+    STM3210B_LCD_Init();
+	delay_ms(50);	&#x2F;&#x2F;延时50ms
+	LCD_Clear(White);
+	LCD_SetTextColor(Black);
+	LCD_SetBackColor(White);
+    
+    while(1)
+    &#123;
+        window((const char *)arr);	&#x2F;&#x2F;需要强制类型转换
+        KeyDriver();
+    &#125;
+&#125;
+
+&#x2F;&#x2F;按键执行内容 参数1:哪个按键	参数2:短按:0长按:1
+void KeyAction(unsigned char keycode, unsigned char keymode)
+&#123;
+    if(keycode &#x3D;&#x3D; 1)
+    &#123;
+        if(keymode &#x3D;&#x3D; 0)
+        &#123;
+            strcpy((char*)arr,&quot;HELLO&quot;);
+			LED_display_choose(LEDALL,0);	&#x2F;&#x2F;灭所有灯
+			LED_display_choose(LED1,1);	&#x2F;&#x2F;点亮LED1
+        &#125;
+    &#125;
+    else if(keycode &#x3D;&#x3D; 2)
+    &#123;
+        if(keymode &#x3D;&#x3D; 0)
+        &#123;
+			strcpy((char*)arr,&quot;NO&quot;);
+			LED_display_choose(LEDALL,0);	&#x2F;&#x2F;灭所有灯
+            LED_display_choose(0xFFFF^LED1,1);	&#x2F;&#x2F;点亮除了LED1以外的所有LED
+        &#125;
+    &#125;
+    else if(keycode &#x3D;&#x3D; 3)
+    &#123;
+        if(keymode &#x3D;&#x3D; 0)
+        &#123;
+		   	strcpy((char*)arr,&quot;YES&quot;);
+			LED_display_choose(LEDALL,0);	&#x2F;&#x2F;灭所有灯
+        &#125;
+        if(keymode&#x3D;&#x3D;1)
+        &#123;
+			Buzz_display();	&#x2F;&#x2F;蜂鸣器响一下
+        &#125;
+    &#125;
+    else if(keycode &#x3D;&#x3D; 4)
+    &#123;
+        if(keymode &#x3D;&#x3D; 0)
+        &#123;
+		   HightLight&#x3D;!HightLight;	&#x2F;&#x2F;是否高亮	  
+        &#125;
+    &#125;
+&#125;
+
+&#x2F;&#x2F;LCD显示
+void window(const char* arr)	&#x2F;&#x2F;注意数据类型
+&#123;
+	unsigned char str[20];
+	static unsigned char LastLen &#x3D; 0;	&#x2F;&#x2F;保存上一次的数组长度
+	unsigned char i;
+	unsigned char StaLen &#x3D; strlen(arr);	&#x2F;&#x2F;计算当前数组长度
+	if(StaLen&lt;LastLen)	&#x2F;&#x2F;当当前长度小于上一次则需要空格盖住
+	&#123;
+		for(i&#x3D;StaLen;i&lt;&#x3D;LastLen;i++)
+		&#123;
+			str[i]&#x3D;&#39; &#39;;
+			LCD_DisplayChar(Line0,320-(StaLen*16),str[i]);
+			StaLen+&#x3D;1;
+		&#125;
+	&#125;
+	if(1&#x3D;&#x3D;HightLight)
+	&#123;
+		LCD_SetBackColor(Red);
+	&#125;
+	else if(0&#x3D;&#x3D;HightLight)
+	&#123;
+		LCD_SetBackColor(White);
+	&#125;
+	LastLen&#x3D;sprintf((char*)str,&quot;%s&quot;,arr);
+	LCD_DisplayStringLine(Line0,str);
+	LCD_SetBackColor(White);
+&#125;</code></pre>
+<h2 id="ADC">ADC</h2>
+<h3 id="ADC相关通道">ADC相关通道</h3>
+<ul>
+<li>不同ADC应用不同通道时，可以同时进行采样和转换， <code>但不可以对相同通道同时采样</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">通道</th>
+<th style="text-align:center">ADC1</th>
+<th style="text-align:center">ADC2</th>
+<th style="text-align:center">ADC3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">通道0</td>
+<td style="text-align:center">PA0</td>
+<td style="text-align:center">PA0</td>
+<td style="text-align:center">PA0</td>
+</tr>
+<tr>
+<td style="text-align:center">通道1</td>
+<td style="text-align:center">PA1</td>
+<td style="text-align:center">PA1</td>
+<td style="text-align:center">PA1</td>
+</tr>
+<tr>
+<td style="text-align:center">通道2</td>
+<td style="text-align:center">PA2</td>
+<td style="text-align:center">PA2</td>
+<td style="text-align:center">PA2</td>
+</tr>
+<tr>
+<td style="text-align:center">通道3</td>
+<td style="text-align:center">PA3</td>
+<td style="text-align:center">PA3</td>
+<td style="text-align:center">PA3</td>
+</tr>
+<tr>
+<td style="text-align:center">通道4</td>
+<td style="text-align:center">PA4</td>
+<td style="text-align:center">PA4</td>
+<td style="text-align:center">PF6</td>
+</tr>
+<tr>
+<td style="text-align:center">通道5</td>
+<td style="text-align:center">PA5</td>
+<td style="text-align:center">PA5</td>
+<td style="text-align:center">PF7</td>
+</tr>
+<tr>
+<td style="text-align:center">通道6</td>
+<td style="text-align:center">PA6</td>
+<td style="text-align:center">PA6</td>
+<td style="text-align:center">PF8</td>
+</tr>
+<tr>
+<td style="text-align:center">通道7</td>
+<td style="text-align:center">PA7</td>
+<td style="text-align:center">PA7</td>
+<td style="text-align:center">PF9</td>
+</tr>
+<tr>
+<td style="text-align:center">通道8</td>
+<td style="text-align:center">PB0</td>
+<td style="text-align:center">PB0</td>
+<td style="text-align:center">PF10</td>
+</tr>
+<tr>
+<td style="text-align:center">通道9</td>
+<td style="text-align:center">PB1</td>
+<td style="text-align:center">PB1</td>
+<td style="text-align:center">连接内部VSS</td>
+</tr>
+<tr>
+<td style="text-align:center">通道10</td>
+<td style="text-align:center">PC0</td>
+<td style="text-align:center">PC0</td>
+<td style="text-align:center">PC0</td>
+</tr>
+<tr>
+<td style="text-align:center">通道11</td>
+<td style="text-align:center">PC1</td>
+<td style="text-align:center">PC1</td>
+<td style="text-align:center">PC1</td>
+</tr>
+<tr>
+<td style="text-align:center">通道12</td>
+<td style="text-align:center">PC2</td>
+<td style="text-align:center">PC2</td>
+<td style="text-align:center">PC2</td>
+</tr>
+<tr>
+<td style="text-align:center">通道13</td>
+<td style="text-align:center">PC3</td>
+<td style="text-align:center">PC3</td>
+<td style="text-align:center">PC3</td>
+</tr>
+<tr>
+<td style="text-align:center">通道14</td>
+<td style="text-align:center">PC4</td>
+<td style="text-align:center">PC4</td>
+<td style="text-align:center">连接内部VSS</td>
+</tr>
+<tr>
+<td style="text-align:center">通道15</td>
+<td style="text-align:center">PC5</td>
+<td style="text-align:center">PC5</td>
+<td style="text-align:center">连接内部VSS</td>
+</tr>
+<tr>
+<td style="text-align:center">通道16</td>
+<td style="text-align:center">连接内部温度传感器</td>
+<td style="text-align:center">连接内部VSS</td>
+<td style="text-align:center">连接内部VSS</td>
+</tr>
+<tr>
+<td style="text-align:center">通道17</td>
+<td style="text-align:center">连接内部Vrefint</td>
+<td style="text-align:center">连接内部VSS</td>
+<td style="text-align:center">连接内部VSS</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>​       在使用ADC 外部通道时，可以设定为<font color='orange'>规则组和注入组</font>。<font color='cornflowerblue'>规则组就是设定好转换顺序后，按照规则正常转换</font>；<font color='cornflowerblue'>注入组类似于中断，可以插队</font>，当触发信号触发注入组通道时，优先转换注入组，转换完后再继续转换规则组；如果正在转换规则通道期间，注入通道被触发，当前规则组转换<font color='orange'>被复位</font>，注入通道序列被以单次扫描方式转换，完成转换后恢复上次被中断的规则通道转换。(蓝桥板子也没有用到多么复杂，我们就直接使用规则组就好了。)</li>
+<li>当“转换组”只有一个通道转换时称之为 <code>单通道模式</code>，当有多个通道按顺序转换时称之为 <code>多通道模式或者扫描模式</code>(蓝桥杯使用单通道即可)</li>
+<li>当规则组或注入组的通道按照设定顺序执行一次采转换后即停止工作，这种模式称之为 <code>单次转换模式</code>；如果执行完一次转换后，ADC 没有停止，而是立即启动新一轮转换，这种模式称之为 <code>连续转换模式</code>(蓝桥板子，使用单次转换即可)</li>
+<li><code>触发启动转换</code>：触发启动转换分为两种方式，分别是 <code>软件触发和外部事件触发</code>（外部是相对于 ADC 外设来讲），其中外部事件触发又分为 <code>定时器触发和外部触发</code>（这里的外部指的是芯片外部信号）(蓝桥板子，使用软件触发即可)</li>
+<li><code>双ADC 模式</code> 是 ADC1 和 ADC2 同时采集某些参数，比如要获取瞬时功率需要同时采集电压和电流参数才能准确计算结果，这种场合就必须使用双ADC模式</li>
+<li>当使用多通道转换时， <code>必须在后一个通道转换完毕之前就把数据取走</code>(一般使用DMA 传输模式)</li>
+<li>建议在每次上电时执行一次 ADC 校准， <code>启动校准前，必须先使能ADC</code>，至少超过两个 ADC 时钟周期</li>
+<li>切记获取到的ADC值，进行 <code>* 3.3 / 4096</code> 进行量化， 并且最后的值存入一个 <code>float</code> 类型中</li>
+</ul>
+<h3 id="板子上的ADC">板子上的ADC</h3>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205211716023.png" alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">ADC</th>
+<th style="text-align:center">STM32</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">M_PB0</td>
+<td style="text-align:center">PB0</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>手册19页可以知道PB0引脚复用</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">默认</th>
+<th style="text-align:center">复用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PB0</td>
+<td style="text-align:center">ADC_IN8，TIM3_CH3</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>STM32F103RBT6的ADC时钟及转换时间</li>
+</ul>
+<p>蓝桥板载STM32F103RBT6拥有 <code>2路12位</code> (0~4096)ADC，ADC挂载在 <code>APB2总线</code> 上，且ADC <code>最大时钟不超过14MHz</code>。所以当APB2总线设置为72M，有必要对 <code>其分频再用于ADC</code></p>
+<p><code>ADC的转换时间 = 采样时间 + 12.5周期</code>(采样时间和实际电路有着莫大的关系，但是对于蓝桥的板子而言，对于转换速度没有太大要求我们一般设置为：<code>ADC_SampleTime_239Cycles5</code>239.5个周期即可。)</p>
+<ul>
+<li><code>DMA初始化在前,ADC初始化在后</code>（这个不能调乱！！！）</li>
+<li>可以用平均值滤波，也可以用卡尔曼滤波(推荐这个!)</li>
+<li>关于测量结果误差，一般控制在5%以内即可(考虑到硬件稳定问题)</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************ADC.h*************************&#x2F;
+# define D_num 2	&#x2F;&#x2F;通道数
+
+void KalmanFilter(void);
+
+&#x2F;*************************ADC.c*************************&#x2F;
+# include &quot;GPIO_init.h&quot;
+
+&#x2F;&#x2F;卡尔曼滤波(采集2个通道，如果单通道可把数组改成单个变量)
+void KalmanFilter(void)
+&#123;
+    u8 i,j;
+    float vdata[D_num];
+    &#x2F;&#x2F;测试时通过q从大往小调,r从小往大调，寻找合适的参数
+    static float LastData[D_num] &#x3D; &#123;0,0&#125;; &#x2F;&#x2F;上一个数据
+    static float Reckon[D_num] &#x3D; &#123;2.50,2.50&#125;;	&#x2F;&#x2F;当前估算值
+    static float Q &#x3D; 0.0033,R &#x3D; 0.2;	&#x2F;&#x2F;Q控制误差 R控制响应速度(越大响应速度越慢)
+    static float kGain[D_num] &#x3D; &#123;0,0&#125;; &#x2F;&#x2F;kGain增益
+
+    for(j&#x3D;0; j&lt;D_num; j++)
+    &#123;
+        vdata[j] &#x3D; padc.ADC_DMA_Data[j];
+    &#125;
+    for(i&#x3D;0; i&lt;D_num; i++)
+    &#123;
+        Reckon[i] +&#x3D; Q;
+        kGain[i] &#x3D; Reckon[i] &#x2F; ( Reckon[i] + R ); &#x2F;&#x2F;计算卡尔曼增益
+        vdata[i] &#x3D; LastData[i] + ( kGain[i] * ( vdata[i] - LastData[i] ) ); &#x2F;&#x2F;计算本次滤波估计值
+        Reckon[i] &#x3D; ( 1 - kGain[i] ) * Reckon[i]; &#x2F;&#x2F;更新测量方差
+        LastData[i] &#x3D; vdata[i];
+    &#125;
+    padc.v1 &#x3D; vdata[0];
+    padc.v2 &#x3D; vdata[1];
+&#125;
+
+&#x2F;*************************GPIO_init.h*************************&#x2F;
+# define ADC_1 GPIO_Pin_0	&#x2F;&#x2F;通道8(B)
+# define ADC_2 GPIO_Pin_4	&#x2F;&#x2F;通道4(A)
+
+typedef struct ADC_class
+&#123;
+    u16 ADC_DMA_Data[2];	&#x2F;&#x2F;采集2个通道
+    float v1;	&#x2F;&#x2F;转换后电压1
+    float v2;	&#x2F;&#x2F;转换后电压2
+&#125; AD1;
+extern AD1 padc;
+
+&#x2F;*************************GPIO_init.c*************************&#x2F;
+AD1 padc;
+
+&#x2F;&#x2F;DMA初始化
+void DMA1Init(void)
+&#123;
+    DMA_InitTypeDef DMA_InitStructure;	&#x2F;&#x2F;定义结构体
+
+    DMA_DeInit(DMA1_Channel1);	&#x2F;&#x2F;复位DMA通道1
+    DMA_InitStructure.DMA_PeripheralBaseAddr &#x3D; (u32)&amp;ADC1-&gt;DR;	&#x2F;&#x2F;ADC1外设基地址
+    DMA_InitStructure.DMA_MemoryBaseAddr &#x3D; (u32)&amp;padc.ADC_DMA_Data;	&#x2F;&#x2F;DMA通道数据存储器
+    DMA_InitStructure.DMA_DIR &#x3D; DMA_DIR_PeripheralSRC;	&#x2F;&#x2F;外设为数据来源
+    DMA_InitStructure.DMA_BufferSize &#x3D; 2;	&#x2F;&#x2F;数据大小
+    DMA_InitStructure.DMA_PeripheralInc &#x3D; DMA_PeripheralInc_Disable;	&#x2F;&#x2F;外设地址不递增
+    DMA_InitStructure.DMA_MemoryInc &#x3D; DMA_MemoryInc_Enable;	&#x2F;&#x2F;内存地址递增
+    DMA_InitStructure.DMA_PeripheralDataSize &#x3D; DMA_PeripheralDataSize_HalfWord;	&#x2F;&#x2F;半字
+    DMA_InitStructure.DMA_MemoryDataSize &#x3D; DMA_MemoryDataSize_HalfWord;	&#x2F;&#x2F;半字
+    DMA_InitStructure.DMA_Mode &#x3D; DMA_Mode_Circular;	&#x2F;&#x2F;循环模式
+    DMA_InitStructure.DMA_Priority &#x3D; DMA_Priority_High;	&#x2F;&#x2F;优先级高
+    DMA_InitStructure.DMA_M2M &#x3D; DMA_M2M_Disable;	&#x2F;&#x2F;禁用内存--&gt;内存
+    DMA_Init(DMA1_Channel1, &amp;DMA_InitStructure);
+    DMA_Cmd(DMA1_Channel1, ENABLE);	&#x2F;&#x2F;使能通道1
+&#125;
+
+&#x2F;&#x2F;ADC初始化
+void ADC1Init(void)
+&#123;
+    GPIO_InitTypeDef GPIO_InitStructure;	&#x2F;&#x2F;定义结构体
+    ADC_InitTypeDef ADC_InitStructure;	&#x2F;&#x2F;定义结构体
+
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1|RCC_APB2Periph_GPIOB|RCC_APB2Periph_GPIOA,ENABLE);	&#x2F;&#x2F;开启ADC1，B组外设时钟
+    RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1,ENABLE);	&#x2F;&#x2F;使能DMA1
+
+
+    GPIO_InitStructure.GPIO_Mode &#x3D; GPIO_Mode_AIN;	&#x2F;&#x2F;模拟输入
+    GPIO_InitStructure.GPIO_Pin &#x3D; ADC_1;	&#x2F;&#x2F;PB^0
+    GPIO_InitStructure.GPIO_Speed &#x3D; GPIO_Speed_50MHz;
+    GPIO_Init(GPIOB,&amp;GPIO_InitStructure);
+
+    GPIO_InitStructure.GPIO_Mode &#x3D; GPIO_Mode_AIN;	&#x2F;&#x2F;模拟输入
+    GPIO_InitStructure.GPIO_Pin &#x3D; ADC_2;	&#x2F;&#x2F;PA^5
+    GPIO_InitStructure.GPIO_Speed &#x3D; GPIO_Speed_50MHz;
+    GPIO_Init(GPIOA,&amp;GPIO_InitStructure);
+
+    DMA1Init();	&#x2F;&#x2F;DMA初始化在前
+
+    ADC_InitStructure.ADC_Mode &#x3D; ADC_Mode_Independent;	&#x2F;&#x2F;独立模式
+    ADC_InitStructure.ADC_ScanConvMode &#x3D; ENABLE;	&#x2F;&#x2F;使能多通道
+    ADC_InitStructure.ADC_ContinuousConvMode &#x3D; ENABLE;	&#x2F;&#x2F;使能连续模式
+    ADC_InitStructure.ADC_ExternalTrigConv &#x3D; ADC_ExternalTrigConv_None;	&#x2F;&#x2F;软件控制转换
+    ADC_InitStructure.ADC_DataAlign &#x3D; ADC_DataAlign_Right;	&#x2F;&#x2F;右对齐
+    ADC_InitStructure.ADC_NbrOfChannel &#x3D; 2;	&#x2F;&#x2F;通道数
+    ADC_Init(ADC1, &amp;ADC_InitStructure);
+
+    ADC_RegularChannelConfig(ADC1, ADC_Channel_8, 1, ADC_SampleTime_239Cycles5);	&#x2F;&#x2F;通道8,239.5周期
+    ADC_RegularChannelConfig(ADC1, ADC_Channel_5, 2, ADC_SampleTime_239Cycles5);
+    ADC_DMACmd(ADC1, ENABLE);	&#x2F;&#x2F;开启ADC的DMA支持
+    ADC_Cmd(ADC1, ENABLE);	&#x2F;&#x2F;使能ADC1
+    ADC_ResetCalibration(ADC1);	&#x2F;&#x2F;重置指定的ADC的校准寄存器
+    while(ADC_GetResetCalibrationStatus(ADC1));	&#x2F;&#x2F;获取ADC重置校准寄存器的状态
+    ADC_StartCalibration(ADC1);	&#x2F;&#x2F;开始指定ADC的校准状态
+    while(ADC_GetCalibrationStatus(ADC1));	&#x2F;&#x2F;获取ADC重置校准寄存器的状态
+    ADC_SoftwareStartConvCmd(ADC1, ENABLE);	&#x2F;&#x2F;使能ADC1软件开始转换
+&#125;
+
+&#x2F;*************************main.c*************************&#x2F;
+int main(void)
+&#123;
+    ADC1Init();
+&#125;
+
+&#x2F;&#x2F;在window函数调用即可
+void window(const char *arr)
+&#123;
+    u8 str4[20];	&#x2F;&#x2F;Line4
+&#x2F;&#x2F;   省略中间无关紧要部分....
+
+    KalmanFilter();	&#x2F;&#x2F;调用卡尔曼滤波
+    sprintf((char *)str4, &quot;C8:%.2fV C4:%.2fV&quot;,padc.v1* 3.3 &#x2F; 4095,padc.v2* 3.3 &#x2F; 4095);
+    LCD_DisplayStringLine(Line4, str4);
+&#125;</code></pre>
+<h2 id="RTC实时时钟">RTC实时时钟</h2>
+<ul>
+<li>RTC 的时钟源—— <code>RTCCLK</code></li>
+</ul>
+<p>​       <font color='red'>当系统主电源关闭时，HSE 无法工作</font>，而如果采用LSI 作为RTC 时钟源，一方面精度相对较低，另外一方面会有相对大的功率消耗， <code>所以大多数情况下RTC 的时钟源是采用LSE</code>，LSE 的晶振的负载电容要求为 <code>6pF</code></p>
+<ul>
+<li>
+<p>RTC 核心部分是一个 <code>32 位</code> 可编程、<code>向上计数</code> 的计数器</p>
+</li>
+<li>
+<p><font color='red'>需要注意的是</font>，对 RTC 任何寄存器的 <code>写</code> 操作， <code>都必须在前一次写操作结束后才能继续进行。</code></p>
+</li>
+<li>
+<p>首先先确保 Lib 文件下有这些文件，没有就添加进来</p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205221453794.png" alt=""></p>
+<ul>
+<li>
+<p>蓝桥杯嵌入式板子，<span style="color:red;">只能使用 LSI 时钟源</span>，据官方说明是用不了其他时钟源的，所以这点是非常重要的！</p>
+</li>
+<li>
+<p><code>设置初始时间</code>（这个时间是按照BCD码来存储的，可以简单的理解成，是按秒数来储存的，因此小时，分，都得化为秒，相加在一起）</p>
+</li>
+<li>
+<p><code>设置RTC分频系数</code> ，为什么要选择40000，因为我们的 RTC 选择的是 LSI 作为时钟源，我们首先得看一下 LSI 的时钟频率</p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205221608590.png" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************GPIO_init.h*************************&#x2F;
+extern u8 RTC_Flag;	&#x2F;&#x2F;RTC中断标志
+
+&#x2F;*************************GPIO_init.c*************************&#x2F;
+u8 RTC_Flag &#x3D; 1;
+&#x2F;&#x2F;RTC初始化
+void RTCInit(u32 Time)
+&#123;
+    NVIC_InitTypeDef NVIC_InitStructure;	&#x2F;&#x2F;定义结构体
+
+    NVIC_InitStructure.NVIC_IRQChannel &#x3D; RTC_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority &#x3D; 0;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority &#x3D; 2;
+    NVIC_InitStructure.NVIC_IRQChannelCmd &#x3D; ENABLE;
+    NVIC_Init(&amp;NVIC_InitStructure);
+
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR | RCC_APB1Periph_BKP, ENABLE);	&#x2F;&#x2F;使能PWR,BKP外设时钟
+    PWR_BackupAccessCmd(ENABLE);	&#x2F;&#x2F;后备域解锁
+    BKP_DeInit();	&#x2F;&#x2F;后备域复位
+    RCC_LSICmd(ENABLE);	&#x2F;&#x2F;使能LSI时钟
+    while(RCC_GetFlagStatus(RCC_FLAG_LSIRDY) &#x3D;&#x3D; RESET);	&#x2F;&#x2F;等待变1
+    RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI);	&#x2F;&#x2F;RTC时钟源配置成LSI
+    RCC_RTCCLKCmd(ENABLE);	&#x2F;&#x2F;开启RTC
+    RTC_WaitForSynchro();	&#x2F;&#x2F;等待时钟同步
+    RTC_WaitForLastTask();	&#x2F;&#x2F;等待对RTC寄存器操作完成
+    RTC_ITConfig(RTC_IT_SEC, ENABLE);	&#x2F;&#x2F;使能秒中断
+    RTC_WaitForLastTask();	&#x2F;&#x2F;等待对RTC寄存器操作完成
+    RTC_SetPrescaler(40000);	&#x2F;&#x2F;设置RTC周期为1秒
+    RTC_WaitForLastTask();	&#x2F;&#x2F;等待对RTC寄存器操作完成
+    RTC_SetCounter(Time);	&#x2F;&#x2F;写入时间
+    RTC_WaitForLastTask();	&#x2F;&#x2F;等待对RTC寄存器操作完成
+&#125;
+
+&#x2F;&#x2F;RTC中断
+void RTC_IRQHandler(void)
+&#123;
+    u32 Times;
+    if(RTC_GetITStatus(RTC_IT_SEC) &#x3D;&#x3D; SET)
+    &#123;
+        RTC_ClearITPendingBit(RTC_IT_SEC);&#x2F;&#x2F;清除标志位
+        RTC_Flag &#x3D; 1;
+
+        Times &#x3D; RTC_GetCounter(); &#x2F;&#x2F;获取时间
+        RTC_WaitForLastTask();
+        if(Times &#x3D;&#x3D; (24 * 3600-1)) &#x2F;&#x2F;这样就不会导致00:00:00后卡顿2s
+        &#123;
+            RTC_SetCounter(0);&#x2F;&#x2F;写入0
+        &#125;
+    &#125;
+&#125;
+
+&#x2F;*************************main.c*************************&#x2F;
+int main(void)
+&#123;
+    RTCInit(23*3600+59*60+50);
+&#125;
+
+&#x2F;&#x2F;在window函数调用
+void window(const char *arr)
+&#123;
+    u8 str3[20];	&#x2F;&#x2F;Line3
+
+    u8 hour,min,sec;	&#x2F;&#x2F;小时，分，秒
+    u32 TimeVal;	&#x2F;&#x2F;存储获取的时间
+    
+    if(1 &#x3D;&#x3D; RTC_Flag)	&#x2F;&#x2F;发生RTC中断
+    &#123;
+        RTC_Flag &#x3D; 0;
+        TimeVal &#x3D; RTC_GetCounter();	&#x2F;&#x2F;获取时间(获取的是总秒数)
+        hour &#x3D; TimeVal &#x2F; 3600;
+        min &#x3D; TimeVal % 3600 &#x2F; 60;
+        sec &#x3D; TimeVal % 3600 % 60;
+        sprintf((char *)str3, &quot;Time:%.2d:%.2d:%.2d  &quot;, hour, min, sec);
+        LCD_DisplayStringLine(Line3, str3);
+    &#125;
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205221639409.jpg" alt=""></p>
+<h2 id="PWM-超级重点">PWM(超级重点)</h2>
+<ul>
+<li>蓝桥杯主要考的定时器也就三个 <font color='orange'>TIM1，TIM2，TIM3</font>（TIM1为高级定时器用来产生互补PWM波，TIM2,TIM3是普通定时器拿来捕获/比较通道、输入捕获、PWM模式）</li>
+<li>每个通用定时器有4路捕获/比较通道，可产生四路PWM波</li>
+<li>CT117E开发板按键旁有一串引出来的IO口，分别是<font color='orange'>PA1~PA7</font>，它们是可以复用为定时器通道的</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">TIM通道</th>
+<th style="text-align:center">STM32</th>
+<th style="text-align:center">扩展板说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">TIM2_CH2</td>
+<td style="text-align:center">PA1</td>
+<td style="text-align:center">可以调节输入PWM的频率</td>
+</tr>
+<tr>
+<td style="text-align:center">TIM2_CH3</td>
+<td style="text-align:center">PA2</td>
+<td style="text-align:center">可以调节输入PWM的频率</td>
+</tr>
+<tr>
+<td style="text-align:center">TIM2_CH4</td>
+<td style="text-align:center">PA3</td>
+<td style="text-align:center">/</td>
+</tr>
+<tr>
+<td style="text-align:center">TIM3_CH1</td>
+<td style="text-align:center">PA6</td>
+<td style="text-align:center">可以调节输入PWM的占空比</td>
+</tr>
+<tr>
+<td style="text-align:center">TIM3_CH2</td>
+<td style="text-align:center">PA7</td>
+<td style="text-align:center">可以调节输入PWM的占空比</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>一般会考这些</li>
+</ul>
+<p>1、一路或两路 <code>特定频率特定占空比</code>或 <code>占空比可调</code> PWM（PWM输出即可）<br>
+2、同一定时器输出 <code>两路频率不同</code>或 <code>单独可调</code>， <code>占空比恒定</code> 或 <code>可调</code>（PWM输出比较）<br>
+3、 <code>一路PWM捕获</code>（PWM捕获即可）<br>
+4、 <code>两路PWM捕获</code>（输入捕获）</p>
+<p>5、PWM产生互补波形/死区（可能国赛有）</p>
+<h3 id="PWM模式">PWM模式</h3>
+<p>PWM模式： <code>同一定时器中，不同的通道下，输出的频率固定，占空比可变</code>(即假如我们通道1输出1KHz方波，那么通道2同样也是1KHz方波)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204231230763.jpg" alt=""></p>
+<ul>
+<li>开始编写代码，利用 <font color='orange'>TIM2 </font>两个通道产生 PWM</li>
+<li>需要注意 TIM2 的通道CH3 会影响 USART2_TX引脚，共用同个管脚而且这款芯片没有重映射功能（如果两个同时使用的话，USART发送会变乱码）</li>
+<li>高级定时器必须有这一句，而通用就不必了 <code>TIM_CtrlPWMOutputs(TIM3, ENABLE);//使能PWM输出</code></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20221031181628.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20221031194355.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20221031223854.png" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************GPIO_init.c*************************&#x2F;
+&#x2F;&#x2F;PWM模式(频率固定，占空比可调)定时器2
+void PWM_1Init(u16 arr,u16 psc)
+&#123;
+	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;	&#x2F;&#x2F;定义结构体
+	TIM_OCInitTypeDef  TIM_OCInitStructure;	&#x2F;&#x2F;定义结构体
+	GPIO_InitTypeDef GPIO_InitStructure;	&#x2F;&#x2F;定义结构体
+	
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA|RCC_APB2Periph_AFIO,ENABLE);
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2,ENABLE);
+	
+	GPIO_InitStructure.GPIO_Mode &#x3D; GPIO_Mode_AF_PP;	&#x2F;&#x2F;复用推挽输出
+	GPIO_InitStructure.GPIO_Pin &#x3D; GPIO_Pin_1|GPIO_Pin_2;	&#x2F;&#x2F;PA1,PA2(通道2,3)
+	GPIO_InitStructure.GPIO_Speed &#x3D; GPIO_Speed_50MHz;
+	GPIO_Init(GPIOA,&amp;GPIO_InitStructure);
+	
+	TIM_TimeBaseStructure.TIM_Period &#x3D; arr - 1;	&#x2F;&#x2F;溢出值
+	TIM_TimeBaseStructure.TIM_Prescaler &#x3D; psc - 1;	&#x2F;&#x2F;预分频
+	TIM_TimeBaseStructure.TIM_ClockDivision &#x3D; 0;
+	TIM_TimeBaseStructure.TIM_CounterMode &#x3D; 0;
+	TIM_TimeBaseInit(TIM2, &amp;TIM_TimeBaseStructure);
+	&#x2F;&#x2F;通道2
+	TIM_OCInitStructure.TIM_OCMode &#x3D; TIM_OCMode_PWM1;	&#x2F;&#x2F;PWM模式1
+	TIM_OCInitStructure.TIM_OutputState &#x3D; TIM_OutputState_Enable;	&#x2F;&#x2F;比较输出使能
+	TIM_OCInitStructure.TIM_Pulse &#x3D; 0;	&#x2F;&#x2F;CRR值
+	TIM_OCInitStructure.TIM_OCPolarity &#x3D; TIM_OCPolarity_High;	&#x2F;&#x2F;极性：高
+	TIM_OC2Init(TIM2, &amp;TIM_OCInitStructure);
+	TIM_OC2PreloadConfig(TIM2, TIM_OCPreload_Enable);	&#x2F;&#x2F;使能TIM2在CCR上的预装载寄存器
+	&#x2F;&#x2F;通道3
+	TIM_OCInitStructure.TIM_OCMode &#x3D; TIM_OCMode_PWM1;	&#x2F;&#x2F;PWM模式1
+	TIM_OCInitStructure.TIM_OutputState &#x3D; TIM_OutputState_Enable;
+	TIM_OCInitStructure.TIM_Pulse &#x3D; 0;	&#x2F;&#x2F;设0即可
+	TIM_OCInitStructure.TIM_OCPolarity &#x3D; TIM_OCPolarity_High;	&#x2F;&#x2F;极性：高
+	TIM_OC3Init(TIM2, &amp;TIM_OCInitStructure);
+	TIM_OC3PreloadConfig(TIM2, TIM_OCPreload_Enable);
+	
+	TIM_ARRPreloadConfig(TIM2, ENABLE);
+	TIM_Cmd(TIM2, ENABLE);	&#x2F;&#x2F;使能TIM2
+&#125;
+
+&#x2F;*************************GPIO_init.c*************************&#x2F;
+u16 pad1 &#x3D; 200,pad2 &#x3D; 100;	&#x2F;&#x2F;初值20%占空比，10%占空比
+
+int main(void)
+&#123;
+    PWM_1Init(1000,72);	&#x2F;&#x2F;频率&#x3D;72Mhz&#x2F;(72*1000)&#x3D;1Khz&#x3D;1ms
+	TIM_SetCompare2(TIM2,pad1);&#x2F;&#x2F;通道2，初始值占空比为20%
+	TIM_SetCompare3(TIM2,pad2);&#x2F;&#x2F;通道3，初始值占空比为10% 与USART发送管脚一起用会冲突
+&#125;
+
+&#x2F;&#x2F;通过按键可以控制占空比
+void KeyAction(u8 keycode, u8 keymode)
+&#123;
+    if(keycode &#x3D;&#x3D; 1)
+    &#123;
+        if(keymode &#x3D;&#x3D; 0)
+        &#123;
+            if(pad1 &gt;&#x3D; 200 &amp;&amp; pad1 &lt; 900)
+			&#123;
+				pad1+&#x3D;100;	&#x2F;&#x2F;按一下加10%，最大到90%
+				TIM_SetCompare2(TIM2,pad1);	&#x2F;&#x2F;不能只修改pad1,还需要重新写入才生效！
+			&#125;
+			else &#x2F;&#x2F;加到90%后再加变回20%
+			&#123;
+				pad1 &#x3D; 200;
+				TIM_SetCompare2(TIM2,pad1);
+			&#125; 
+        &#125;
+    &#125;
+&#125;
+
+&#x2F;&#x2F;window函数显示
+void window(const char *arr)
+&#123;
+    u8 str5[20];	&#x2F;&#x2F;Line5
+
+    sprintf((char*)str5,&quot;Duty1:%d%% Duty2:%d%%&quot;,pad1&#x2F;10,pad2&#x2F;10);	&#x2F;&#x2F;%需要转义
+    LCD_DisplayStringLine2(Line5, str5);
+&#125;</code></pre>
+<h3 id="PWM输出比较">PWM输出比较</h3>
+<p>PWM比较模式： <code>同一定时器下，不同通道能够产生频率不同，占空比不同，甚至相位也不同的方波</code></p>
+<p><code>输出比较</code>：定时器的计数值一直向上计数的同时，他要不断的跟我们设定的 <code>pulse</code>和 <code>Duty</code>做比较</p>
+<p>​       什么是 <code>PWM_OCTOGGLE模式</code>？在定时器相关即寄存器中，有<font color='cornflowerblue'>两个捕获/比较模式寄存器</font>(TIMx_CCMR1、TIMx_CCMR2)，设置成 <code>PWM_OCTOGGLE</code> 模式后(也叫翻转模式)，当 <code>TIMx_CCRx=TIMx_CNT时，翻转OC1REF的电平</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20221101203725.png" alt=""></p>
+<h4 id="程序编写-3">程序编写</h4>
+<ul>
+<li>
+<p>注意CH2_Duty的定义范围是 <code>u32</code>类型(值是占空比所计数的值，不是占空比值)</p>
+</li>
+<li>
+<p>计数值初始化设置成  <code>65535</code></p>
+</li>
+<li>
+<p>引脚产生PWM波，因此我们要配置为 <code>复用推挽输出模式</code></p>
+</li>
+<li>
+<p>因为是 <code>71</code> 分频，所以pulse的值就等于 <code>1000000 / 输入的频率值</code></p>
+</li>
+<li>
+<p>通过设定的占空比数，算出 <code>Duty</code> 的位置</p>
+</li>
+<li>
+<p><code>pulse</code> 就相当于我们设定的周期值，在一个pulse内，<code>小于Duty为高电平，大于Duty为低电平</code></p>
+</li>
+<li>
+<p>​        在每次进入比较中断时，我们都把通道当前的比较值获取到 <code>capture</code> 里，当我们设定的 <code>Flag为真 </code> 时，代表将进入 <code>Duty以下</code> 的位置，<code>Flag为假</code> 则代表将进入 <code>Duty以上</code> 的位置。 <code>当我们每次得到一个中断，引脚都会自动的把电平翻转</code>，我们在中断处理函数中 <code>只需要设定好比较值</code></p>
+</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************GPIO_init.h*************************&#x2F;
+typedef struct PWM_2
+&#123;
+	u32 CH1_Val;	&#x2F;&#x2F;周期对应计数值
+	u32 CH2_Val;	
+	u32 CH1_Duty;	&#x2F;&#x2F;占空比对应的计数量
+	u32 CH2_Duty;	
+	u32 fre1;	&#x2F;&#x2F;频率
+	u32 fre2;
+	u8 duty1;	&#x2F;&#x2F;占空比
+	u8 duty2;
+	
+&#125;PWM_compare;
+extern PWM_compare P1;
+
+&#x2F;*************************GPIO_init.c*************************&#x2F;
+PWM_compare P1;
+
+&#x2F;&#x2F;PWM比较(频率可调，占空比可调)定时器3
+void PWM_2Init(u16 fre1,u8 duty1,u16 fre2,u8 duty2)
+&#123;
+    GPIO_InitTypeDef GPIO_InitStructure;
+    TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+    NVIC_InitTypeDef NVIC_InitStructure;
+    TIM_OCInitTypeDef TIM_OCInitStructure;	&#x2F;&#x2F;定义结构体
+
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA|RCC_APB2Periph_AFIO,ENABLE);	&#x2F;&#x2F;使能A组，复用时钟
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3,ENABLE);
+
+    GPIO_InitStructure.GPIO_Mode &#x3D; GPIO_Mode_AF_PP;	&#x2F;&#x2F;复用推挽输出
+    GPIO_InitStructure.GPIO_Pin &#x3D; GPIO_Pin_6 | GPIO_Pin_7;	&#x2F;&#x2F;PA6,PA7
+    GPIO_InitStructure.GPIO_Speed &#x3D; GPIO_Speed_50MHz;
+    GPIO_Init(GPIOA,&amp;GPIO_InitStructure);
+
+    TIM_TimeBaseStructure.TIM_ClockDivision &#x3D; 0;	&#x2F;&#x2F;分频因子
+    TIM_TimeBaseStructure.TIM_CounterMode &#x3D; 0;	&#x2F;&#x2F;向上计数
+    TIM_TimeBaseStructure.TIM_Period &#x3D; 65535;	&#x2F;&#x2F;溢出值
+    TIM_TimeBaseStructure.TIM_Prescaler &#x3D; 71;	&#x2F;&#x2F;预分频
+    TIM_TimeBaseInit(TIM3,&amp;TIM_TimeBaseStructure);
+
+    NVIC_InitStructure.NVIC_IRQChannel &#x3D; TIM3_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority &#x3D; 0;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority &#x3D; 3;
+    NVIC_InitStructure.NVIC_IRQChannelCmd &#x3D; ENABLE;
+    NVIC_Init(&amp;NVIC_InitStructure);
+	
+	P1.fre1 &#x3D; fre1;
+	P1.fre2 &#x3D; fre2;
+	P1.duty1 &#x3D; duty1;
+	P1.duty2 &#x3D; duty2;
+    P1.CH1_Val &#x3D; 1000000&#x2F;P1.fre1;	&#x2F;&#x2F;CCR1值
+    P1.CH2_Val &#x3D; 1000000&#x2F;P1.fre2;	&#x2F;&#x2F;CCR2值
+    P1.CH1_Duty &#x3D; P1.CH1_Val*P1.duty1&#x2F;100;	&#x2F;&#x2F;占空比所占计数值
+    P1.CH2_Duty &#x3D; P1.CH2_Val*P1.duty2&#x2F;100;	&#x2F;&#x2F;占空比所占计数值
+
+    &#x2F;&#x2F;通道1
+    TIM_OCInitStructure.TIM_OCMode &#x3D; TIM_OCMode_Toggle;	&#x2F;&#x2F;比较模式
+    TIM_OCInitStructure.TIM_OutputState &#x3D; TIM_OutputState_Enable;	&#x2F;&#x2F;输出比较使能
+    TIM_OCInitStructure.TIM_Pulse &#x3D; P1.CH1_Val;	&#x2F;&#x2F;比较值(决定占空比)
+    TIM_OCInitStructure.TIM_OCPolarity &#x3D; TIM_OCPolarity_Low;	&#x2F;&#x2F;低电平有效
+    TIM_OC1Init(TIM3, &amp;TIM_OCInitStructure);
+
+    &#x2F;&#x2F;通道2
+    TIM_OCInitStructure.TIM_OCMode &#x3D; TIM_OCMode_Toggle;	&#x2F;&#x2F;比较模式
+    TIM_OCInitStructure.TIM_OutputState &#x3D; TIM_OutputState_Enable;
+    TIM_OCInitStructure.TIM_Pulse &#x3D; P1.CH2_Val;
+    TIM_OCInitStructure.TIM_OCPolarity &#x3D; TIM_OCPolarity_Low;	&#x2F;&#x2F;低电平有效
+    TIM_OC2Init(TIM3, &amp;TIM_OCInitStructure);
+
+	&#x2F;&#x2F;不清0第一次波形会有错误
+    TIM_SetCounter(TIM3, 0);&#x2F;&#x2F;定时器计数值清0
+    TIM_SetCompare1(TIM3, 0);&#x2F;&#x2F;定时器捕获比较1寄存器值清0
+    TIM_SetCompare2(TIM3, 0);&#x2F;&#x2F;定时器捕获比较2寄存器值清0
+
+    TIM_Cmd(TIM3, ENABLE);
+    TIM_ITConfig(TIM3, TIM_IT_CC1 | TIM_IT_CC2, ENABLE);
+&#125;
+
+&#x2F;&#x2F;TIM3中断
+void TIM3_IRQHandler(void)
+&#123;
+    u16 capture &#x3D; 0;	&#x2F;&#x2F;当前比较值
+    static u8 flag1,flag2 &#x3D; 0;
+    if (TIM_GetITStatus(TIM3, TIM_IT_CC1) !&#x3D; RESET)
+    &#123;
+        TIM_ClearITPendingBit(TIM3, TIM_IT_CC1 );
+        capture &#x3D; TIM_GetCapture1(TIM3);	&#x2F;&#x2F;获取通道1的当前的比较值
+        if(flag1)
+        &#123;
+            TIM_SetCompare1(TIM3, capture + (1000000&#x2F;P1.fre1*P1.duty1&#x2F;100) );	&#x2F;&#x2F;设置通道1的值为：当前比较值+高电平
+            &#x2F;&#x2F;printf(&quot;1:%d -- %d\r\n&quot;,capture,P1.CH1_Val*P1.duty1&#x2F;100);
+        &#125;
+        else
+        &#123;
+            TIM_SetCompare1(TIM3, capture + (1000000&#x2F;P1.fre1) - (1000000&#x2F;P1.fre1*P1.duty1&#x2F;100) );	&#x2F;&#x2F;设置通道1的值为：当前比较值+低电平
+            &#x2F;&#x2F;printf(&quot;0:%d -- %d\r\n&quot;,capture,P1.CH1_Val - (P1.CH1_Val*P1.duty1&#x2F;100));
+        &#125;
+        flag1 ^&#x3D; 1;
+    &#125;
+
+    if (TIM_GetITStatus(TIM3, TIM_IT_CC2) !&#x3D; RESET)
+    &#123;
+        TIM_ClearITPendingBit(TIM3, TIM_IT_CC2);
+        capture &#x3D; TIM_GetCapture2(TIM3);	&#x2F;&#x2F;获取通道2的当前的比较值
+        if(flag2)
+        &#123;
+            TIM_SetCompare2(TIM3, capture + (1000000&#x2F;P1.fre2*P1.duty2&#x2F;100));	&#x2F;&#x2F;设置通道2的值为：当前比较值+高电平
+        &#125;
+        else
+        &#123;
+            TIM_SetCompare2(TIM3,capture + (1000000&#x2F;P1.fre2) - (1000000&#x2F;P1.fre2*P1.duty2&#x2F;100));	&#x2F;&#x2F;设置通道2的值为：当前比较值+低电平
+        &#125;
+        flag2 ^&#x3D; 1;
+    &#125;
+&#125;
+
+&#x2F;*************************main.c*************************&#x2F;
+int main(void)
+&#123;
+  PWM_2Init(2000, 50, 4000, 90);	&#x2F;&#x2F;通道1：0.5ms 50%占空比；通道2：0.25ms 90%占空比  
+&#125;
+ 
+&#x2F;&#x2F;按键里调整占空比&#x2F;频率
+&#x2F;&#x2F;如果需要修改频率，可修改P1.fre1&#x2F;P1.fre2的值；修改占空比可修改P1.duty1&#x2F;P1.duty2的值
+void KeyAction(u8 keycode, u8 keymode)
+&#123;
+    if(keycode &#x3D;&#x3D; 1)
+    &#123;
+        if(keymode &#x3D;&#x3D; 0)
+        &#123;
+			P1.duty1 +&#x3D; 1;	&#x2F;&#x2F;通道1：每次加1%占空比
+            P1.fre2 +&#x3D; 100;	&#x2F;&#x2F;通道2：每次加100Hz频率
+        &#125;
+    &#125;    
+&#125;</code></pre>
+<h3 id="PWM捕获">PWM捕获</h3>
+<p>本次实验由于输出比较使用了 <code>TIM3</code> 定时器所以这里用 <code>TIM2</code> 定时器，方便获得捕获的数据(把TIM3通道管脚用杜邦线连接TIM2管脚即可捕获)</p>
+<p><code>PWM捕获</code>：上一个实验是比较输出不同频率或者占空比，这个是捕获就是反过来已知波形图而去计算对应占空比和频率</p>
+<h4 id="PWM硬件捕获频率-只适用于CH1-CH2">PWM硬件捕获频率(只适用于CH1/CH2)</h4>
+<ul>
+<li>频率公式：<code>Frequence = 1000000 / (float)(Fre_VAL + 1);</code></li>
+<li>数据手册 13.2 图（直连/非直连）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20221103143306.jpg" alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">连接方式</th>
+<th style="text-align:center">捕获到</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">TIM_GetCapture2（）</td>
+<td style="text-align:center">直连</td>
+<td style="text-align:center">周期</td>
+</tr>
+<tr>
+<td style="text-align:center">TIM_GetCapture1（）</td>
+<td style="text-align:center">直连</td>
+<td style="text-align:center">占空比</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">TIM_GetCapture2（）</td>
+<td style="text-align:center">非直连</td>
+<td style="text-align:center">占空比</td>
+</tr>
+<tr>
+<td style="text-align:center">TIM_GetCapture1（）</td>
+<td style="text-align:center">非直连</td>
+<td style="text-align:center">周期</td>
+</tr>
+</tbody>
+</table>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************GPIO_init.c*************************&#x2F;
+&#x2F;&#x2F;初始化，使用TIM3
+void PWM_1Init()
+&#123;
+	GPIO_InitTypeDef GPIO_InitStructure;
+	NVIC_InitTypeDef NVIC_InitStructure;
+	TIM_ICInitTypeDef  TIM_ICInitStructure;
+	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
+
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+
+	GPIO_InitStructure.GPIO_Pin &#x3D; GPIO_Pin_7;	&#x2F;&#x2F;CH2-&gt;PA7
+    GPIO_InitStructure.GPIO_Mode &#x3D; GPIO_Mode_IPU;	&#x2F;&#x2F;上拉输入
+    GPIO_InitStructure.GPIO_Speed &#x3D; GPIO_Speed_50MHz;
+    GPIO_Init(GPIOA, &amp;GPIO_InitStructure);
+
+	NVIC_InitStructure.NVIC_IRQChannel &#x3D; TIM3_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority &#x3D; 0;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority &#x3D; 4;
+    NVIC_InitStructure.NVIC_IRQChannelCmd &#x3D; ENABLE;
+    NVIC_Init(&amp;NVIC_InitStructure);
+
+	TIM_TimeBaseStructure.TIM_Period &#x3D; 65535;
+    TIM_TimeBaseStructure.TIM_Prescaler &#x3D; 71;
+    TIM_TimeBaseStructure.TIM_ClockDivision &#x3D; 0;
+    TIM_TimeBaseStructure.TIM_CounterMode &#x3D; TIM_CounterMode_Up;
+    TIM_TimeBaseInit(TIM3, &amp;TIM_TimeBaseStructure);
+
+	TIM_ICInitStructure.TIM_Channel &#x3D; TIM_Channel_2;
+    TIM_ICInitStructure.TIM_ICPolarity &#x3D; TIM_ICPolarity_Rising;	&#x2F;&#x2F;上升沿
+    TIM_ICInitStructure.TIM_ICSelection &#x3D; TIM_ICSelection_DirectTI;&#x2F;&#x2F;通道二直连
+    TIM_ICInitStructure.TIM_ICPrescaler &#x3D; TIM_ICPSC_DIV1;	&#x2F;&#x2F;不分频
+    TIM_ICInitStructure.TIM_ICFilter &#x3D; 0x0;	&#x2F;&#x2F;不滤波
+	TIM_PWMIConfig(TIM3, &amp;TIM_ICInitStructure);	&#x2F;&#x2F;注意是这个！
+	&#x2F;&#x2F;下面3个不能漏
+	TIM_SelectInputTrigger(TIM3, TIM_TS_TI2FP2);
+    TIM_SelectSlaveMode(TIM3, TIM_SlaveMode_Reset);
+    TIM_SelectMasterSlaveMode(TIM3, TIM_MasterSlaveMode_Enable);
+
+	TIM_Cmd(TIM3, ENABLE);
+	TIM_ITConfig(TIM3, TIM_IT_CC2, ENABLE);
+&#125;
+
+&#x2F;&#x2F;中断服务
+u32 Capture1_value&#x3D;0;
+u32 Frequence&#x3D;0;
+void TIM3_IRQHandler(void)
+&#123; 
+	if(TIM_GetITStatus(TIM3, TIM_IT_CC2) &#x3D;&#x3D; SET) 
+	&#123;
+    TIM_ClearITPendingBit(TIM3, TIM_IT_CC2);
+    Capture1_value&#x3D;TIM_GetCapture2(TIM3);&#x2F;&#x2F;周期
+	if(Capture2_value!&#x3D;0)
+	&#123;
+		 Frequence&#x3D;1000000&#x2F;(float)(Capture1_value+1);
+	&#125;
+	else
+	&#123;
+		 Frequence&#x3D;0;
+	&#125;
+  &#125;	 
+&#125;
+
+&#x2F;*************************main.c*************************&#x2F;
+int main(void)
+&#123;
+    PWM_1Init();
+&#125;
+&#x2F;&#x2F;window函数里显示即可</code></pre>
+<h4 id="PWM软件捕获-频率-占空比">PWM软件捕获(频率/占空比)</h4>
+<ul>
+<li>有点小bug(两个通道捕获的话有一个通道频率会多1，占空比少1，不知道是不是硬件影响)</li>
+<li>下面程序捕获PA6,PA7的PWM，用杜邦线把PA1–&gt;PA6，PA2–&gt;PA7 连接(PA1PA2可以设置成PWM模式产生PWM波形即可)</li>
+<li><code>两个通道不能同时进行捕获</code>，首先两者同时捕获，同时记录这个无所谓，关键是它们还都涉及计算。计算最怕被中断打断，这样可能导致结果不正确。这里目前有两种解决方案，一种是分时复用(当前例程)，另一种是关总中断(待实现)</li>
+<li>捕获的流程图如下：</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20221104002223.jpg" alt=""></p>
+<ul>
+<li>定时器中断函数思想</li>
+</ul>
+<p>① 当 <code>TIM3_CH1_CAPTURE_MODE=0</code> 时，如果发生了中断，那么就代表我们捕获到了上升沿，当前在上面简图的A点，我们把定时器计数值清0，让定时器重新计数，同时还要把触发方式设置为下降沿触发。</p>
+<p>② 当 <code>TIM3_CH1_CAPTURE_MODE=1</code> 时候，发生了中断，那么就代表我们捕获到了下降沿，当前的位置在上面简图的B点，我们获取一次定时器的计数值，同时还得把我们触发方式设置为上升沿触发。</p>
+<p>③ 当 <code>TIM3_CH1_CAPTURE_MODE=2</code> 时候，发生中断，那么就代表我们一个周期已经捕获完毕了，当前位置在上面简图的C点，我们再获取一次定时器的计数值，随后就可以根据我们两次获取的计数值，算出我们方波的频率和周期。</p>
+<p>④ 当 <code>TIM3_CH1_CAPTURE_MODE=3</code> 时，就意味着我们可以开始计算周期和频率，当我们处理好数据后，我们就可以把TIM3_CH1_CAPTURE_MODE清0，准备开始下一次捕获。</p>
+<p>⑤ 然后在主函数中，进行TIM3_CH1_CAPTURE_MODE状态判断，进而计算出占空比和频率的值，然后显示到LCD上，随后再开启下一次捕获。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">公式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">周期  = 1000000 / 第二次捕获值</td>
+</tr>
+<tr>
+<td style="text-align:center">占空比 = 第一次捕获值 *100/ 第二次捕获值</td>
+</tr>
+</tbody>
+</table>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************GPIO_init.c*************************&#x2F;
+u8 CAPTURE_MODE &#x3D; 0;	&#x2F;&#x2F;分时执行，多通道时需要
+
+&#x2F;&#x2F;初始化
+void PWM_3Init(void)
+&#123;
+    GPIO_InitTypeDef GPIO_InitStructure;	&#x2F;&#x2F;对应结构体
+    NVIC_InitTypeDef NVIC_InitStructure;
+    TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+    TIM_ICInitTypeDef TIM_ICInitStructure;
+
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);	&#x2F;&#x2F;使能A组时钟
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3,ENABLE);	&#x2F;&#x2F;使能TIM3
+
+    GPIO_InitStructure.GPIO_Mode &#x3D; GPIO_Mode_IPU;	&#x2F;&#x2F;浮空输入或者上拉输入都行
+    GPIO_InitStructure.GPIO_Pin &#x3D; GPIO_Pin_6|GPIO_Pin_7;	&#x2F;&#x2F;CH1-&gt;PA6  CH2-&gt;PA7
+    GPIO_InitStructure.GPIO_Speed &#x3D; GPIO_Speed_50MHz;
+    GPIO_Init(GPIOA,&amp;GPIO_InitStructure);
+
+    NVIC_InitStructure.NVIC_IRQChannel &#x3D; TIM3_IRQn;	&#x2F;&#x2F;TIM3中断
+    NVIC_InitStructure.NVIC_IRQChannelCmd &#x3D; ENABLE;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority &#x3D; 0;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority &#x3D; 4;
+    NVIC_Init(&amp;NVIC_InitStructure);
+
+    TIM_TimeBaseStructure.TIM_Period &#x3D; 65535;
+    TIM_TimeBaseStructure.TIM_Prescaler &#x3D; 71;
+    TIM_TimeBaseStructure.TIM_ClockDivision &#x3D; 0;
+    TIM_TimeBaseStructure.TIM_CounterMode &#x3D; TIM_CounterMode_Up;
+    TIM_TimeBaseInit(TIM3, &amp;TIM_TimeBaseStructure);
+
+    TIM_ICInitStructure.TIM_Channel &#x3D; TIM_Channel_1;	&#x2F;&#x2F;通道1
+    TIM_ICInitStructure.TIM_ICPolarity &#x3D; TIM_ICPolarity_Rising;	&#x2F;&#x2F;上升沿
+    TIM_ICInitStructure.TIM_ICSelection &#x3D; TIM_ICSelection_DirectTI;	&#x2F;&#x2F;直连
+    TIM_ICInitStructure.TIM_ICPrescaler &#x3D; TIM_ICPSC_DIV1;
+    TIM_ICInitStructure.TIM_ICFilter &#x3D; 0x0;
+    TIM_ICInit(TIM3, &amp;TIM_ICInitStructure);
+
+    TIM_ICInitStructure.TIM_Channel &#x3D; TIM_Channel_2;	&#x2F;&#x2F;通道2
+	TIM_ICInitStructure.TIM_ICPolarity &#x3D; TIM_ICPolarity_Rising;	&#x2F;&#x2F;上升沿
+    TIM_ICInitStructure.TIM_ICSelection &#x3D; TIM_ICSelection_DirectTI;	&#x2F;&#x2F;直连
+    TIM_ICInitStructure.TIM_ICPrescaler &#x3D; TIM_ICPSC_DIV1;
+    TIM_ICInitStructure.TIM_ICFilter &#x3D; 0x0;
+    TIM_ICInit(TIM3, &amp;TIM_ICInitStructure);
+
+
+    TIM_Cmd(TIM3, ENABLE);
+    TIM_ITConfig(TIM3,TIM_IT_CC1|TIM_IT_CC2, ENABLE);
+&#125;
+
+&#x2F;*通道1*&#x2F;
+u8 TIM3_CH1_CAPTURE_MODE &#x3D; 0;	&#x2F;&#x2F;当前在哪个位置(一共3个位置：0表示第一个上升沿 1：下降沿 2：第二个上升沿)
+u32 TIM3_CH1_CAPTURE_H &#x3D; 0;	&#x2F;&#x2F;用来记录第一次捕获的时间
+u32 TIM3_CH1_CAPTURE_HL &#x3D; 0;	&#x2F;&#x2F;用来记录第二次捕获的时间
+
+&#x2F;*通道2*&#x2F;
+u8 TIM3_CH2_CAPTURE_MODE &#x3D; 0;
+u32 TIM3_CH2_CAPTURE_H &#x3D; 0;
+u32 TIM3_CH2_CAPTURE_HL &#x3D; 0;
+
+
+&#x2F;&#x2F;TIM3中断(PWM硬件2路捕获)
+void TIM3_IRQHandler(void)
+&#123;
+    if(TIM_GetITStatus(TIM3, TIM_IT_CC1) &#x3D;&#x3D; 1)	&#x2F;&#x2F;如果发生中断
+    &#123;
+        TIM_ClearITPendingBit(TIM3, TIM_IT_CC1);	&#x2F;&#x2F;清除中断标记
+        if(CAPTURE_MODE)	&#x2F;&#x2F;分时运行500ms切换一次
+        &#123;
+            switch(TIM3_CH1_CAPTURE_MODE)	&#x2F;&#x2F;默认是0(即表示来到第一个上升沿)
+            &#123;
+            case 0:	&#x2F;&#x2F;来到第一次上升沿
+                TIM3_CH1_CAPTURE_H &#x3D; 0;	
+                TIM3_CH1_CAPTURE_HL &#x3D; 0;
+                TIM3_CH1_CAPTURE_MODE &#x3D; 1;
+                TIM_SetCounter(TIM3, 0);&#x2F;&#x2F;计数值清0开始计数
+                TIM_OC1PolarityConfig(TIM3, TIM_OCPolarity_Low);&#x2F;&#x2F;设置为下降沿触发
+                break;
+            case 1:	&#x2F;&#x2F;来到下降沿
+                TIM3_CH1_CAPTURE_H &#x3D; TIM_GetCounter(TIM3);&#x2F;&#x2F;第一次获取计数值
+                TIM3_CH1_CAPTURE_MODE &#x3D; 2;
+                TIM_OC1PolarityConfig(TIM3, TIM_OCPolarity_High);&#x2F;&#x2F;设置为上升沿触发
+                break;
+            case 2:&#x2F;&#x2F;来到第二次上升沿
+                TIM3_CH1_CAPTURE_HL &#x3D; TIM_GetCounter(TIM3);&#x2F;&#x2F;第二次获取计数值
+                TIM3_CH1_CAPTURE_MODE &#x3D; 3;
+                TIM_OC1PolarityConfig( TIM3,TIM_OCPolarity_High);&#x2F;&#x2F;设置为上升沿触发
+                break;
+            default:
+                break;
+            &#125;
+        &#125;
+        else
+        &#123;
+            TIM3_CH1_CAPTURE_MODE &#x3D; 0;	&#x2F;&#x2F;清0然后切换到另一个通道捕获
+        &#125;
+    &#125;
+
+    if(TIM_GetITStatus(TIM3, TIM_IT_CC2) &#x3D;&#x3D; 1)
+    &#123;
+        TIM_ClearITPendingBit(TIM3, TIM_IT_CC2);
+        if(!CAPTURE_MODE)
+        &#123;
+            switch(TIM3_CH2_CAPTURE_MODE)
+            &#123;
+            case 0:
+                TIM3_CH2_CAPTURE_H &#x3D; 0;
+                TIM3_CH2_CAPTURE_HL &#x3D; 0;
+                TIM3_CH2_CAPTURE_MODE &#x3D; 1;
+                TIM_SetCounter(TIM3, 0);
+                TIM_OC2PolarityConfig( TIM3,TIM_OCPolarity_Low);
+                break;
+            case 1:
+                TIM3_CH2_CAPTURE_H &#x3D; TIM_GetCounter(TIM3);
+                TIM3_CH2_CAPTURE_MODE &#x3D; 2;
+                TIM_OC2PolarityConfig( TIM3,TIM_OCPolarity_High);
+                break;
+            case 2:
+                TIM3_CH2_CAPTURE_HL &#x3D; TIM_GetCounter(TIM3);
+                TIM3_CH2_CAPTURE_MODE &#x3D; 3;
+                TIM_OC2PolarityConfig( TIM3,TIM_OCPolarity_High);
+                break;
+            default:
+                break;
+            &#125;
+			
+        &#125;
+        else
+        &#123;
+            TIM3_CH2_CAPTURE_MODE &#x3D; 0;
+        &#125;
+    &#125;
+
+&#125;
+
+&#x2F;&#x2F;定时器扫描分时执行通道的捕获
+&#x2F;&#x2F;定时器4中断
+void TIM4_IRQHandler(void)
+&#123;
+	static u16 flag500ms &#x3D; 0;
+	
+    if(TIM_GetITStatus(TIM4,TIM_IT_Update) &#x3D;&#x3D; SET)	&#x2F;&#x2F;判断是否发生中断
+    &#123;
+        TIM_ClearITPendingBit(TIM4,TIM_IT_Update);	&#x2F;&#x2F;清除中断标志位
+        KeyScan();
+		flag500ms++;
+		if(flag500ms &gt;&#x3D; 500)
+		&#123;
+			flag500ms &#x3D; 0;
+			CAPTURE_MODE ^&#x3D; 1;
+		&#125;
+    &#125;
+&#125;
+
+&#x2F;*************************main.c*************************&#x2F;
+extern u8 TIM3_CH1_CAPTURE_MODE;
+extern u32 TIM3_CH1_CAPTURE_H;
+extern u32 TIM3_CH1_CAPTURE_HL;
+
+extern u8 TIM3_CH2_CAPTURE_MODE;
+extern u32 TIM3_CH2_CAPTURE_H;
+extern u32 TIM3_CH2_CAPTURE_HL;
+int main(void)
+&#123;
+    TIM4Init(1000, 72);	&#x2F;&#x2F;定时1ms	1000&#x2F;(72000000&#x2F;72)&#x3D;0.001s&#x3D;1ms&#x3D;1000Hz
+    PWM_3Init();
+&#125;
+
+&#x2F;&#x2F;window函数里显示
+void window(const char *arr)
+&#123;
+    u8 str7[20];	&#x2F;&#x2F;Line7
+    u8 str8[20];	&#x2F;&#x2F;Line8  
+    if(TIM3_CH1_CAPTURE_MODE &#x3D;&#x3D; 3)	&#x2F;&#x2F;3表示已经捕获到一个周期了
+    &#123;
+        sprintf((char*)str7,&quot;fre1:%d duty1:%d&quot;,1000000 &#x2F; TIM3_CH1_CAPTURE_HL,TIM3_CH1_CAPTURE_H * 100&#x2F;TIM3_CH1_CAPTURE_HL);
+        LCD_DisplayStringLine(Line7, str7);
+        TIM3_CH1_CAPTURE_MODE &#x3D; 0;	&#x2F;&#x2F;清0留给下次捕获准备
+    &#125;
+
+    if(TIM3_CH2_CAPTURE_MODE &#x3D;&#x3D; 3)
+    &#123;
+        sprintf((char*)str8,&quot;fre2:%d duty2:%d&quot;,1000000 &#x2F; TIM3_CH2_CAPTURE_HL,TIM3_CH2_CAPTURE_H * 100&#x2F;TIM3_CH2_CAPTURE_HL);
+        LCD_DisplayStringLine(Line8, str8);
+        TIM3_CH2_CAPTURE_MODE &#x3D; 0;
+    &#125;    
+&#125;</code></pre>
+<h4 id="互补PWM输出">互补PWM输出</h4>
+<ul>
+<li>互补PWM输出模式配置和普通PWM输出配置相似，只是在其基础上增加对互补通道的配置。</li>
+<li>只有高级定时器才能产生互补(TIM1和TIM8)，蓝桥杯板子只有TIM1</li>
+<li><code>N</code>表示是互补通道，下面意思是TIM1_CH2N是TIM1_CH2的互补通道</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">通道</th>
+<th style="text-align:center">STM32</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">TIM1_CH2N</td>
+<td style="text-align:center">PB14</td>
+</tr>
+<tr>
+<td style="text-align:center">TIM1_CH2</td>
+<td style="text-align:center">PA9</td>
+</tr>
+</tbody>
+</table>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20221104151001.png" alt=""></p>
+<ul>
+<li>sta:避免再次开启时重新配置IO</li>
+<li>en:题目要求当关闭PWM输出时，两通道必须为低电平。（注意并不是占空比赋值为0就可以的）</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************GPIO_init.c*************************&#x2F;
+&#x2F;&#x2F;PWM互补，定时器1
+void PWM_4Init(u16 arr,u16 psc,u8 sta,u8 en)
+&#123;
+    TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;	&#x2F;&#x2F;定义结构体
+    TIM_OCInitTypeDef  TIM_OCInitStructure;	&#x2F;&#x2F;定义结构体
+    GPIO_InitTypeDef GPIO_InitStructure;	&#x2F;&#x2F;定义结构体
+
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA|RCC_APB2Periph_GPIOA|RCC_APB2Periph_TIM1,ENABLE);	&#x2F;&#x2F;使能A，B组，TIM1时钟
+
+    if(sta)
+    &#123;
+    GPIO_InitStructure.GPIO_Mode &#x3D; GPIO_Mode_AF_PP;	&#x2F;&#x2F;复用推挽输出
+    GPIO_InitStructure.GPIO_Pin &#x3D; GPIO_Pin_9;	&#x2F;&#x2F;PA9--CH2
+    GPIO_InitStructure.GPIO_Speed &#x3D; GPIO_Speed_50MHz;
+    GPIO_Init(GPIOA,&amp;GPIO_InitStructure);
+	
+	GPIO_InitStructure.GPIO_Mode &#x3D; GPIO_Mode_AF_PP;	&#x2F;&#x2F;复用推挽输出
+    GPIO_InitStructure.GPIO_Pin &#x3D; GPIO_Pin_14;	&#x2F;&#x2F;PB14--CH2N
+    GPIO_InitStructure.GPIO_Speed &#x3D; GPIO_Speed_50MHz;
+    GPIO_Init(GPIOB,&amp;GPIO_InitStructure);
+    &#125;
+    TIM_TimeBaseStructure.TIM_Period &#x3D; arr - 1;	&#x2F;&#x2F;溢出值
+    TIM_TimeBaseStructure.TIM_Prescaler &#x3D; psc - 1;	&#x2F;&#x2F;预分频
+    TIM_TimeBaseStructure.TIM_ClockDivision &#x3D; 0;
+    TIM_TimeBaseStructure.TIM_CounterMode &#x3D; 0;
+    TIM_TimeBaseInit(TIM1, &amp;TIM_TimeBaseStructure);
+    &#x2F;&#x2F;通道2
+	TIM_OCInitStructure.TIM_OCMode &#x3D; TIM_OCMode_PWM2;	&#x2F;&#x2F;PWM2模式
+    if(en)
+    &#123;
+    TIM_OCInitStructure.TIM_OutputState &#x3D; TIM_OutputState_Enable;	&#x2F;&#x2F;开启OC输出到对应引脚
+    TIM_OCInitStructure.TIM_OutputNState &#x3D; TIM_OutputNState_Enable;	&#x2F;&#x2F;互补输出使能。开启OCN输出到对应的管脚   
+    &#125;
+    TIM_OCInitStructure.TIM_Pulse &#x3D; 0;
+    TIM_OCInitStructure.TIM_OCPolarity &#x3D; TIM_OCPolarity_Low;	&#x2F;&#x2F;主通道的输出极性
+    TIM_OCInitStructure.TIM_OCNPolarity &#x3D; TIM_OCNPolarity_Low;	&#x2F;&#x2F;互补通道的输出极性
+    TIM_OCInitStructure.TIM_OCIdleState &#x3D; TIM_OCIdleState_Set;	&#x2F;&#x2F;空闲状态 时输出高电平
+    TIM_OCInitStructure.TIM_OCNIdleState &#x3D; TIM_OCIdleState_Reset;	&#x2F;&#x2F;互补通道的空闲 时输出低电平
+	
+	TIM_OC2Init(TIM1,&amp;TIM_OCInitStructure);	&#x2F;&#x2F;使能
+	TIM_Cmd(TIM1, ENABLE);
+	TIM_CtrlPWMOutputs(TIM1, ENABLE);	&#x2F;&#x2F;高级定时器才有  必须打开
+&#125;
+
+&#x2F;*************************main.c*************************&#x2F;
+int main(void)
+&#123;
+    PWM_4Init(1000,72,1,1);	&#x2F;&#x2F;1ms&#x3D;1000Hz
+    TIM_SetCompare2(TIM1,400);	&#x2F;&#x2F;设置占空比40% 因为是PWM2+低电平，所以有效电平是60%
+&#125;
+
+</code></pre>
+<h2 id="蜂鸣器">蜂鸣器</h2>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20221022213116.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20221022213818.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20221022213855.jpg","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<p><span style="color:red;">需要注意</span>:CT117E开发板的蜂鸣器接的引脚是PB4，这个引脚同时也是连接在 <code>JTAG接口</code> 的RST引脚； 当我们stm32复位后， <code>PB4引脚默认是作为JTAG接口的RST引脚</code>，因此我们再使用蜂鸣器之前要先把PB4复用回我们的普通IO口(CT117E嵌入式竞赛板使用说明-V1.1里面最后一行也有标明!)</p>
+<ul>
+<li>低电平响，高电平不响</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Buzzer</th>
+<th style="text-align:center">STM32</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">N_Buz</td>
+<td style="text-align:center">PB4</td>
+</tr>
+</tbody>
+</table>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************GPIO_init.h*************************&#x2F;
+# define BUZZER	GPIO_Pin_4
+# define BeepOff() GPIO_SetBits(GPIOB, GPIO_Pin_4)	&#x2F;&#x2F;关闭蜂鸣器
+# define BeepOn() GPIO_ResetBits(GPIOB, GPIO_Pin_4)	&#x2F;&#x2F;打开蜂鸣器
+
+&#x2F;*************************GPIO_init.c*************************&#x2F;
+&#x2F;&#x2F;蜂鸣器初始化
+void BUZZInit(void)
+&#123;
+    GPIO_InitTypeDef GPIO_InitStructure;	&#x2F;&#x2F;定义结构体
+
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO|RCC_APB2Periph_GPIOB,ENABLE);	&#x2F;&#x2F;使能复用功能,B组外设时钟
+
+    GPIO_PinRemapConfig(GPIO_Remap_SWJ_NoJTRST,ENABLE);	&#x2F;&#x2F;除JTRST外SWJ完全使能（JTAG+SW-DP）用于嵌入式使用蜂鸣器时需要加
+    GPIO_InitStructure.GPIO_Pin &#x3D; BUZZER;	&#x2F;&#x2F;PB^4
+    GPIO_InitStructure.GPIO_Mode &#x3D; GPIO_Mode_Out_PP;	&#x2F;&#x2F;推挽输出
+    GPIO_InitStructure.GPIO_Speed &#x3D; GPIO_Speed_50MHz;
+    GPIO_Init(GPIOB,&amp;GPIO_InitStructure);
+
+    BeepOff();	&#x2F;&#x2F;关闭蜂鸣器
+&#125;
+
+&#x2F;*************************BEEP.h*************************&#x2F;
+void Buzz_display(void);
+
+&#x2F;*************************BEEP.c*************************&#x2F;
+# include &quot;BUZZ.h&quot;
+# include &quot;DELAY.h&quot;
+
+void Buzz_display(void)
+&#123;
+    GPIO_ResetBits(GPIOB,GPIO_Pin_4);	&#x2F;&#x2F;开启
+    delay_ms(200);
+    GPIO_SetBits(GPIOB,GPIO_Pin_4);	&#x2F;&#x2F;关闭
+&#125;
+
+&#x2F;*************************main.c*************************&#x2F;
+&#x2F;&#x2F;略直接调用即可</code></pre>
+<h2 id="EEPORM">EEPORM</h2>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20221027135817.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20221027135927.png" alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">EEPROM</th>
+<th style="text-align:center">STM32</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">SCL</td>
+<td style="text-align:center">PB6</td>
+</tr>
+<tr>
+<td style="text-align:center">SDA</td>
+<td style="text-align:center">PB7</td>
+</tr>
+<tr>
+<td style="text-align:center">E0~E2</td>
+<td style="text-align:center">GND</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>比赛已经给了 <code>i2c.c</code> 和 <code>i2c.h</code> 文件了，直接复制到自己工程下，然后在 .h 文件里包含 <code>stm32f10x.h</code> 在 .c 文件包含 <code>i2c.h</code> 即可(以后哪个文件需要调用到I2C函数可以在头文件处包含 <code>i2c.h</code>)</li>
+</ul>
+<h3 id="24C02芯片">24C02芯片</h3>
+<ul>
+<li>24C02是 <code>2Kbits</code>，一共 <code>256</code> 字节，<code>8</code> 个字节一个页，所以可寻址范围是 <code>0x00~0xFF</code>(1kbits=1024bits=(1024/8)Bytes=128Bytes（字节）)</li>
+</ul>
+<p>可参考另一篇文章：</p>
+<p>[post cid=“101” cover=“<a href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20221003140600.webp">https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20221003140600.webp</a>” /]</p>
+<ul>
+<li><code>E0~E2</code> 接 GND(即0)</li>
+<li>I2C传输是 <code>高位在前，低位在后</code>!!!</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">器件地址</th>
+<th style="text-align:center">&quot;写&quot;地址</th>
+<th style="text-align:center">&quot;读&quot;地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0101 0000 (0x50)</td>
+<td style="text-align:center">1010 0000 (0xA0)</td>
+<td style="text-align:center">1010 0001 (0xA1)</td>
+</tr>
+</tbody>
+</table>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;EEPROM写一个字节 步骤
+开始信号
+写操作
+等待应答
+发送存储地址
+等待应答
+发送数据
+等待应答
+结束信号  
+&#x2F;&#x2F;EEPROM读一个字节 步骤
+定义一个临时变量    
+开始信号
+写操作
+等待应答
+发送存储地址
+等待应答
+开始信号
+读操作
+等待应答
+接收数据存到临时变量
+等待应答
+返回临时变量    </code></pre>
+<p>部分代码：</p>
+<p>《功能是实现第一次上电显示1234，然后+1保存回去，之后每次上电再从内存读取出来显示在LCD》</p>
+<ul>
+<li>注意写是先低再高，读也是</li>
+</ul>
+<p>eeprom.c</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************EEPROM.h*************************&#x2F;
+void eeprom_write_byte(u8 add,u8 data);
+u8 eeprom_read_byte(u8 add);
+void eeprom_write_u16(u8 add,u16 data);
+u16 eeprom_read_u16(u8 add);
+
+&#x2F;*************************EEPROM.c*************************&#x2F;
+# include &quot;EEPROM.h&quot;
+# include &quot;i2c.h&quot;
+# include &quot;DELAY.h&quot;
+
+&#x2F;* -------------------------------- begin  ------------------------------ *&#x2F;
+&#x2F;**
+  * @函数名:  eeprom_write_byte
+  * @参数1 : 待写入的数据存放地址
+  * @参数2 : 待写入的数据
+  * @返回值: 无
+  * @时  间:  2022-10-27
+  * @描  述: 往EEPROM里写入一个字节数据
+ **&#x2F;
+&#x2F;* -------------------------------- end -------------------------------- *&#x2F;
+void eeprom_write_byte(u8 add,u8 data)
+&#123;
+    I2CStart();	&#x2F;&#x2F;开始信号
+    I2CSendByte(0xA0);	&#x2F;&#x2F;写操作
+    I2CWaitAck();	&#x2F;&#x2F;等待应答
+
+    I2CSendByte(add);	&#x2F;&#x2F;发送地址
+    I2CWaitAck();	&#x2F;&#x2F;等待应答
+
+    I2CSendByte(data);	&#x2F;&#x2F;发送数据
+    I2CWaitAck();	&#x2F;&#x2F;等待应答
+    I2CStop();	&#x2F;&#x2F;结束信号
+&#125;
+
+&#x2F;* -------------------------------- begin  ------------------------------ *&#x2F;
+&#x2F;**
+  * @函数名:  eeprom_read_byte
+  * @参数1 : 待读出的数据存放地址
+  * @返回值: 读到的数据(u8类型)
+  * @时  间:  2022-10-27
+  * @描  述: 从EEPROM里读出一个字节数据
+ **&#x2F;
+&#x2F;* -------------------------------- end -------------------------------- *&#x2F;
+u8 eeprom_read_byte(u8 add)
+&#123;
+    u8 data;
+
+    I2CStart();	&#x2F;&#x2F;开始信号
+
+    I2CSendByte(0xA0);	&#x2F;&#x2F;写操作
+    I2CWaitAck();	&#x2F;&#x2F;等待应答
+
+    I2CSendByte(add);	&#x2F;&#x2F;发送数据所在地址
+    I2CWaitAck();	&#x2F;&#x2F;等待应答
+
+    I2CStart();	&#x2F;&#x2F;开始信号
+    I2CSendByte(0xA1);	&#x2F;&#x2F;读操作
+    I2CWaitAck();	&#x2F;&#x2F;等待应答
+
+    data &#x3D; I2CReceiveByte();	&#x2F;&#x2F;接收数据
+    I2CSendAck();	&#x2F;&#x2F;等待应答
+
+    return data;	&#x2F;&#x2F;返回数据
+&#125;
+
+&#x2F;* -------------------------------- begin  ------------------------------ *&#x2F;
+&#x2F;**
+  * @函数名:  eeprom_write_u16
+  * @参数1 : 待写入的数据存放地址
+  * @参数2 : 待写入的数据(u16类型)
+  * @返回值: 无
+  * @时  间:  2022-10-27
+  * @描  述: 往EEPROM里写入2个字节数据
+ **&#x2F;
+&#x2F;* -------------------------------- end -------------------------------- *&#x2F;
+void eeprom_write_u16(u8 add,u16 data)
+&#123;
+    u8 Hn,Ln;
+    Hn &#x3D; (data&gt;&gt;8)&amp;0xFF;	&#x2F;&#x2F;获取高位
+    Ln &#x3D; data&amp;0xFF;	&#x2F;&#x2F;获取低8位
+    eeprom_write_byte(add,Ln);	&#x2F;&#x2F;发送低位
+    delay_ms(5);
+    eeprom_write_byte(add+1,Hn);	&#x2F;&#x2F;发送高位
+    delay_ms(5);
+&#125;
+
+&#x2F;* -------------------------------- begin  ------------------------------ *&#x2F;
+&#x2F;**
+  * @函数名:  eeprom_read_u16
+  * @参数1 : 待读出的数据存放地址
+  * @返回值: 读到的数据(u16类型)
+  * @时  间:  2022-10-27
+  * @描  述: 从EEPROM里读出2个字节数据
+ **&#x2F;
+&#x2F;* -------------------------------- end -------------------------------- *&#x2F;
+u16 eeprom_read_u16(u8 add)
+&#123;
+    u16 tmp;
+    tmp &#x3D; (u16)eeprom_read_byte(add);
+    delay_ms(5);
+    tmp +&#x3D; (u16)(eeprom_read_byte(add+1)&lt;&lt;8);
+    delay_ms(5);
+
+    return tmp;
+&#125;
+
+&#x2F;*************************main.c*************************&#x2F;
+u16 num;	&#x2F;&#x2F;EEPROM显示
+int main(void)
+&#123;
+    i2c_init();
+    
+    if(eeprom_read_byte(0x00)!&#x3D;0x50)	&#x2F;&#x2F;选择任意一处内存作为标志位判断是不是第一次上电
+	&#123;
+		eeprom_write_u16(0x01,1233);	&#x2F;&#x2F;写入初值
+		delay_ms(5);
+		eeprom_write_byte(0x00,0x50);	&#x2F;&#x2F;写入标志位
+		delay_ms(5);
+	&#125;
+	num &#x3D; eeprom_read_u16(0x01);
+	num++;
+	eeprom_write_byte(0x01,num);
+&#125;
+
+&#x2F;&#x2F;window函数里显示
+void window(const char* arr)
+&#123;
+    u8 str2[20];	&#x2F;&#x2F;Line2
+    
+    sprintf((char*)str2,&quot;%d&quot;,num);
+	LCD_DisplayStringLine(Line2,str2);
+&#125;</code></pre>
+<h2 id="客观题">客观题</h2>
+<p>待更新–2022.11.7</p>
+<h2 id="附1：中断问题">附1：中断问题</h2>
+<ul>
+<li><font color='pink'>NVIC_PriorityGroupConfig() </font>函数在每个工程中<font color='orange'>只需要配置一次</font>。如果整个工程均没有配置，那么默认配置为 <font color='cornflowerblue'>VIC_PriorityGroup_0</font>；<font color='orange'>0组&gt;1组&gt;2组&gt;3组&gt;4组</font></li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205221359625.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205221406319.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20221025175408.jpg","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>
+<p>关于抢占和响应，必须清楚：抢占优先级相同的中断(即同一组)，<font color='orange'>高响应优先级不可以</font>打断低响应优先级的中断。当抢占优先级相同，两个中断同时发生的情况下，响应优先级高的先执行。<font color='cornflowerblue'>还有值越小，优先级越高。</font></p>
+</li>
+<li>
+<p>每个中断服务函数可以在 stm32f10x_md.s 里找</p>
+</li>
+<li>
+<p><font color='red'>配置步骤：</font></p>
+</li>
+</ul>
+<p><font color='orange'>① 确定中断分组（一个工程只设置一次）</font></p>
+<p><font color='orange'>② 调用 NVIC_init() 配置中断函数</font></p>
+<p><font color='orange'>③ 写中断服务函数</font></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205221800093.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205221800194.png" alt=""></p>
+<h2 id="附2：定时器问题">附2：定时器问题</h2>
+<ul>
+<li>高配有包括 <code>2 个高级控制定时器</code>、<code>4 个通用定时器</code>、<code>2个基本定时器</code>（TIM6/TIM7），以及 <code>2 个看门狗定时器</code>和 <code>1 个系统定时器（SysTick）</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">芯片型号</th>
+<th style="text-align:center">高级定时器</th>
+<th style="text-align:center">通用定时器</th>
+<th style="text-align:center">基本定时器</th>
+<th style="text-align:center">滴答定时器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">STM32F103RBT6</td>
+<td style="text-align:center">TIM1</td>
+<td style="text-align:center">TIM2，3，4</td>
+<td style="text-align:center">无</td>
+<td style="text-align:center">SysTick</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>由<code>计数器寄存器(TIMx_CNT)</code>（和<code>51</code>的<code>TH/TL</code>一样的）、<code>预分频寄存器(TIMx_PSC)</code>、<code>自动重装载寄存器(TIMx_ARR)</code>三部分构成。</li>
+<li>时钟源有三个，<code>HSI、HSE 和 PLL</code></li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">HSI - 由 内部 RC 振荡器产生8MHz，精度较差，对时钟精度不敏感的情况下使用；
+
+HSE - 由 外部时钟源产生8MHz信号；
+
+PLL - 是将 HSI 或者 HSE 的时钟倍频后提供的时钟频率</code></pre>
+<ul>
+<li><code>AHB</code> 域和 <code>APB2</code>最大时钟频率为 <code>72MHz</code>，而 <code>APB1</code> 域允许的最大时钟频率为 <code>36MHz</code></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205221818064.png" alt=""></p>
+<ul>
+<li>基本定时器</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205231303689.png" alt=""></p>
+<p><font color='orange'>TIM_Prescaler</font> 和<font color='orange'> TIM_Period</font> 基本定时器配置使用 TIM6 和 TIM7 的时候只需初始化这两个成员即可</p>
+<ul>
+<li>
+<p>计数模式<br>
+<font color='orange'>向上计数模式</font>：从0开始，计到arr预设值，产生溢出事件，返回重新计时<br>
+<font color='orange'>向下计数模式</font>：从arr预设值开始，计到0，产生溢出事件，返回重新计时<br>
+<font color='orange'>中央对齐模式</font>：从0开始向上计数，计到arr产生溢出事件，然后向下计数，计数到1以后，又产生溢出，然后再从0开始向上计数。（此种技术方法也可叫向上/向下计数）</p>
+</li>
+<li>
+<p><font color='cornflowerblue'>高级定时器引脚</font></p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205221824971.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205221824966.png" alt=""></p>
+<ul>
+<li><font color='cornflowerblue'>通用定时器引脚</font></li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205221821611.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205221821557.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205221821442.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205221821374.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>配置</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205081443287.jpg" alt=""></p>
+<p><font color='red'>注意</font>：重装载值和时钟预分频数计算公式：定时器时间计算公式为<code>(arr+1)*(psc+1)/72MHz</code>(单位:S)，将参数<font color='orange'> 9、71 </font>带入公式后，计算出定时器的定时周期值为<font color='orange'>10us</font></p>
+<p>​       根据定时器时钟的频率，比如时钟的频率是 <font color='orange'>72MHz</font>，可以理解为一秒钟STM32会自己数 <font color='gree'>72M </font>次，预分频系数就是将频率分割，比如分频系数是 72，则该时钟的频率会变成<font color='cornflowerblue'>72MHz/72=1MHz</font>，但是在设置的时候要注意，数值应该是72-1。假定分频系数是72-1，那么频率变成 <font color='orange'>1MHz</font>，也就意味着STM32在一秒钟会数 <font color='gree'>1M</font> 次，即1us数一次。好了，接下来就是确定预装载值，比如需要定时1ms，由于<font color='cornflowerblue'>1ms=1us*1000</font>,那么预装载值就是1000-1；如此类推，在预分频系数确定的情况下，定时的时长就由预装载值确定了。至于要把值减一的原因，估计是计数是从0开始，所以要减一。（搭配有很多种，看个人需求）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20221025183754.jpg" alt=""></p>
+<p><span style="color:red;">理解</span>：当AHB一分频(即不分频)时，HCLK就是最大频率72MHz，APB1预分频则为二分频，下面则2倍频，最终定时器频率为最大值72MHz!</p>
+<p><span style="color:red;"> 注意</span>：为什么是72MHz,因为系统时钟默认是这个，可以在 <code>system_stm32f10x.c</code> 里 <code>115行</code> 找到，如果想换成别的可以把别的注释打开即可(当AHB提供的时钟源是72时APB1预分频最小需要配置成二分频)</p>
+<h3 id="滴答定时器">滴答定时器</h3>
+<p>参考：STM32F10xxx Cortex-M3 programming manual手册4.5</p>
+<p>CTRL(状态和控制寄存器 ，32位，复位值：0x0000 0004)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20221023002852.jpg" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;位分析
+31~17位: 保留，必须保持 0
+16位：计数标志位，如果定时器自上次读取后计数为0，则返回1 
+15~3位： 保留，必须保持 0
+2位：时钟源选择， 0: AHB&#x2F;8	1: 处理器时钟(AHB)   
+1位：异常请求启用，0: 倒数到零不会断言SysTick异常请求	1：倒数到零时发出SysTick异常请求。    
+0位：计数器启用，0：计数器禁用 1: 计数器启用(当ENABLE被设置为1时，计数器从LOAD寄存器中加载RELOAD值，然后向下计数。寄存器中加载RELOAD值，然后向下计数。当达到0时，它将COUNTFLAG设置为1，并可选择将SysTalk中断。并根据TICKINT的值选择性地断言SysTick。然后，它再次加载RELOAD )</code></pre>
+<p>LOAD(重装载值寄存器)</p>
+<p><code>时钟频率*us</code>(一般是72)</p>
+<p>VAL(当前值寄存器，复位值：0x00)</p>
+<p>[collapse status=“false” title=“delay.h”]</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># ifndef __DELAY_H
+# define __DELAY_H
+# include &quot;stm32f10x.h&quot;
+
+
+void delay_us(u32 us);
+void delay_ms(u32 ms);
+void delay_s(u16 s);
+
+# endif</code></pre>
+<ul>
+<li>延时延时使用系统滴答定时器，具体可观看博客：<a href="http://www.136.la/tech/show-334287.html">STM32 的系统滴答定时器( Systick) 彻底研究解读</a></li>
+<li><font color='orange'>延时前计数器值清0</font>，解决连续用us延时的BUG问题</li>
+<li>当计数到零，<font color='orange'>SysTick-&gt;CTRL</font>变成 <font color='cornflowerblue'>0x10000</font>,也就是它的第十六位置一，然后<font color='orange'> &amp;</font> 上<font color='cornflowerblue'>0x10000</font>就为真，取非，变成假，跳出while循环</li>
+</ul>
+<p>delay.c</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &quot;delay.h&quot;
+
+# define AHB_INPUT  72  &#x2F;&#x2F;请按RCC中设置的AHB时钟频率填写到这里（单位MHz）
+
+void delay_us(u32 us)&#x2F;&#x2F;uS微秒级延时程序
+&#123;
+	SysTick-&gt;LOAD&#x3D;AHB_INPUT*us;&#x2F;&#x2F;重装计数初值（当主频是72MHz，72次为1微秒）
+	SysTick-&gt;VAL&#x3D;0x00;&#x2F;&#x2F;清空定时器的计数器
+	SysTick-&gt;CTRL&#x3D;0x00000005;&#x2F;&#x2F;时钟源HCLK，打开定时器
+	while(!(SysTick-&gt;CTRL&amp;0x00010000));&#x2F;&#x2F;等待计数到0
+	SysTick-&gt;CTRL&#x3D;0x00000004;&#x2F;&#x2F;关闭定时器
+&#125;
+
+void delay_ms(u32 ms)&#x2F;&#x2F;mS毫秒级延时程序
+&#123;
+	while(ms--!&#x3D;0)
+	&#123;
+		delay_us(1000);
+	&#125;
+&#125;
+
+void delay_s(u16 s)&#x2F;&#x2F;S秒级延时程序
+&#123;
+	while(s--!&#x3D;0)
+	&#123;
+		delay_ms(1000);
+	&#125;
+&#125;</code></pre>
+<h3 id="定时器初始化踩坑">定时器初始化踩坑</h3>
+<p>固件库定时器初始化函数 <code>默认会产生更新事件并触发更新事件中断标志位</code>，如果此时中断使能，程序会立即执行中断函数。</p>
+<p>如果使用标准库，先用 <code>TIM_ClearITPendingBit(TIM1, TIM_IT_Update)</code> 清除中断标记，然后使能定时器中断，最后启动定时器</p>
+<p>如果使用HAL库，在<code>MX_TIMx_Init</code>函数后紧跟着<code>__HAL_TIM_CLEAR_IT(&amp;htimX, TIM_IT_UPDATE)</code>以此来清除中断标识位</p>
+<h2 id="附3：开发板对应复用引脚">附3：开发板对应复用引脚</h2>
+<ul>
+<li>开发板对应 CON10排针引出引脚复用表</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">管脚</th>
+<th style="text-align:center">复用功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PA1</td>
+<td style="text-align:center">TIM2_CH2，ADC_IN1</td>
+</tr>
+<tr>
+<td style="text-align:center">PA2</td>
+<td style="text-align:center">TIM2_CH3，ADC_IN2，USART2_TX</td>
+</tr>
+<tr>
+<td style="text-align:center">PA3</td>
+<td style="text-align:center">TIM2_CH4，ADC_IN3，USART2_RX</td>
+</tr>
+<tr>
+<td style="text-align:center">PA4</td>
+<td style="text-align:center">ADC_IN4</td>
+</tr>
+<tr>
+<td style="text-align:center">PA5</td>
+<td style="text-align:center">ADC_In5</td>
+</tr>
+<tr>
+<td style="text-align:center">PA6</td>
+<td style="text-align:center">TIM3_CH1，ADC_IN6</td>
+</tr>
+<tr>
+<td style="text-align:center">PA7</td>
+<td style="text-align:center">TIM3_CH2，ADC_IN7</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">管脚</th>
+<th style="text-align:center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PB6</td>
+<td style="text-align:center">PB6/I<sup>2</sup>C1_SCL/TIM4_CH1</td>
+</tr>
+<tr>
+<td style="text-align:center">PB7</td>
+<td style="text-align:center">PB7/I<sup>2</sup>C1_SDA/TIM4_CH2</td>
+</tr>
+<tr>
+<td style="text-align:center">PB8</td>
+<td style="text-align:center">PB8/TIM4_CH3</td>
+</tr>
+<tr>
+<td style="text-align:center">PB9</td>
+<td style="text-align:center">PB9/TIM4_CH4</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>对应功能的IO模式选择</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">所处功能</th>
+<th style="text-align:center">对应模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PWM输出</td>
+<td style="text-align:center">GPIO_Mode_AF_PP(复用推挽输出)</td>
+</tr>
+<tr>
+<td style="text-align:center">PWM输入捕获</td>
+<td style="text-align:center">GPIO_Mode_IN_FLOATING(浮空输入)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>TIM2_CH1_ETR</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205221841297.jpg" alt=""></p>
+<ul>
+<li>TIM1_CH2N 引脚是<font color='orange'>定时器1通道2</font>的<font color='cornflowerblue'>互补输出引脚</font></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/20200919124525429.jpg" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>什么时候用到打开AFIO呢？</p>
+</div>
+<p>① 首先要有管脚复用功能AFIO；<br>
+② 其次被复用的管脚一定是挂载在APB2上的，因为AFIO就是在APB2上；<br>
+③ 最后就是内置外设一定是APB2表中没有的，因为APB2有的话，直接打开就好了，也用不到打开AFIO；<br>
+④ 根据以上条件，打开AFIO的只有一种情况，那就是： <code>挂载在APB1下的内置外设，经过重映射功能，把管脚映射到APB2上！其实，一旦使用重映射功能，只能映射到APB2上，因为APB2表中第二个框子里面包括了GPIOA~E，几乎所有的管脚了</code></p>
+<h2 id="附：PWM问题">附：PWM问题</h2>
+<p>首先需要了解几个知识：</p>
+<p><code>PWM</code>：脉宽调制信号；</p>
+<p><code>占空比</code>：占空比是指 <code>有效电平</code> 在一个周期之内所占的时间比率。如果方波的占空比为60%，占空比为0.6，即信号在60%时间内是导通的，但在40%的时间内处于断态</p>
+<p><code>方波</code>：跟占空比差不多，一般用百分数表示，占空比0.5就是方波50%</p>
+<p><code>pwm的频率</code>：是指每秒钟信号从高电平到低电平再回到高电平的次数</p>
+<p><code>那定时器在这的作用是什么？</code>答：利用定时器的溢出可设定总周期，高低电平则另一个功能去完成实现</p>
+<p><font color='cornflowerblue'>实际输出的电平是由输出极性和电平是否有效共同决定的</font></p>
+<p>什么时候是有效电平？什么时候是无效电平呢？这个其实是和实际的配置模式有关，常用的PWM模式有  <code>PWM模式1和PWM模式2</code></p>
+<p>惯用的搭配是 <code>TIM_OCMode_PWM1</code> 和 <code>TIM_OCPolarity_High</code> 一对， <code>TIM_OCMode_PWM2</code> 和 <code>TIM_OCPolarity_Low</code> 一对，这样搭配是<span style="color:red;">正逻辑 </span>，否则为<span style="color:red;">反逻辑</span></p>
+<p>需要注意输出100%和0%的占空比会有不准确</p>
+<p>下面表以通道1为例：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">计数方式</th>
+<th style="text-align:center">PWM1（模式1）</th>
+<th style="text-align:center">PWM2（模式2）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">向上/向下</td>
+<td style="text-align:center">CNT &lt; CCR1 —&gt; 通道1为<span style="color:red;">有效电平</span><br>CNT &gt; CCR1 —&gt; 通道1为无效电平</td>
+<td style="text-align:center">CNT &lt; CCR1—&gt; 通道1为无效电平<br>CNT &gt; CCR1—&gt; 通道1为<span style="color:red;">有效电平</span></td>
+</tr>
+</tbody>
+</table>
+<p>名词解释：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名词</th>
+<th style="text-align:center">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">CNT</td>
+<td style="text-align:center">计数器寄存器</td>
+</tr>
+<tr>
+<td style="text-align:center">CCRx</td>
+<td style="text-align:center">即TIM_Pulse (决定了占空比)</td>
+</tr>
+<tr>
+<td style="text-align:center">极性</td>
+<td style="text-align:center">高电平/低电平 (决定了PWM有效电平)</td>
+</tr>
+<tr>
+<td style="text-align:center">ARR</td>
+<td style="text-align:center">溢出值 (决定了PWM频率)</td>
+</tr>
+</tbody>
+</table>
+<p>单位换算：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Hz（赫兹）,KHz（千赫兹）,MHz（兆赫兹），GHz（G赫兹）</th>
+<th style="text-align:center">s（秒），ms（毫秒），us（微秒），ns（纳秒）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><span style="color:red;"> 1GHz = 1000MHz</span><br><span style="color:red;"> 1MHz = 1000KHz</span><br><span style="color:red;"> 1KHz = 1000Hz</span></td>
+<td style="text-align:center"><span style="color:red;"> 1s = 1000ms </span><br><span style="color:red;"> 1ms = 1000us </span><br><span style="color:red;"> 1us = 1000ns </span></td>
+</tr>
+<tr>
+<td style="text-align:center">1 Hz — 1s<br>1KHz — 1ms<br>1 MHz — 1us<br>1GHz — 1ns <br>左边越大，对应时间越小(左边除以2则右边乘以2)</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">值</th>
+<th style="text-align:center">计算公式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">TIM_Period (arr)</td>
+<td style="text-align:center">(arr+1)/(72000000/(psc+1) = xxxS(根据实际定时多少秒)，这个结果也等于PWM频率</td>
+</tr>
+<tr>
+<td style="text-align:center">TIM_Prescaler (psc)</td>
+<td style="text-align:center">同上</td>
+</tr>
+<tr>
+<td style="text-align:center">占空比(%)</td>
+<td style="text-align:center">Duty = CCRx/(arr+1) x 100%</td>
+</tr>
+<tr>
+<td style="text-align:center">CCRx</td>
+<td style="text-align:center">1000000/频率(Hz)</td>
+</tr>
+<tr>
+<td style="text-align:center">占空比所占计数值</td>
+<td style="text-align:center">CCRx * 占空比(1~99)/100</td>
+</tr>
+</tbody>
+</table>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204231230571.jpg" alt=""></p>
+<p>假设此时配置为 <font color='orange'>PWM模式2</font>， <code>输出高极性</code> ，如图所示，当 <code>TIMx_CNT &lt; TIMx_CCRx</code> 的时候，是<code>无效电平，那么输出为0(即低电平)</code>；当 <code>TIMx_CNT &gt; TIMx_CCRx</code> 的时候，是 <code>有效电平，那么输出为1(即高电平)</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205222221377.png" alt=""></p>
+<ul>
+<li>6种模式</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204231321632.jpg" alt=""></p>
+<ul>
+<li>关于<code>TIM_OC1PreloadConfig</code> 是否使能（PWM模式无所谓，但是比较输出一定要禁用或不写）</li>
+</ul>
+<p>如果 <code>使能</code> 了该位，写入到TIMx_CCRx寄存器的比较值将在更新事件到来时才会传入到 <code>当前捕获/比较寄存器</code>，否则 <code>未使能</code>，比较值将 <code>立即写入当前捕获比较寄存器</code>(输出比较模式一般disable或不写)</p>
+<div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>高级定时器(TIM1)使用注意</p>
+</div>
+<ul>
+<li>根据TIM的四个捕获比较通道位置： <code>PA8/PA9/PA10/PA11</code>。再结合实际电路，确定了选择 <code>CH2-PA9</code>和 <code>CH3-PA10</code> 作为PWM输出，但是此时要注意，<code>拔掉对应的跳线帽</code>。</li>
+<li>高级定时器必须加这一句<code>TIM_CtrlPWMOutputs(TIM1, ENABLE);//使能PWM输出</code></li>
+</ul>
+<h2 id="附5：DMA知识">附5：DMA知识</h2>
+<ul>
+<li><font color='orange'>每个外设都有对应的DMA 传输通道</font>，这两张表的内容即用即查。(手册10.3.7)</li>
+</ul>
+<p>DMA1通道映射表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">外设</th>
+<th style="text-align:center">通道1</th>
+<th style="text-align:center">通道2</th>
+<th style="text-align:center">通道3</th>
+<th style="text-align:center">通道4</th>
+<th style="text-align:center">通道5</th>
+<th style="text-align:center">通道6</th>
+<th style="text-align:center">通道7</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">ADC1</td>
+<td style="text-align:center"><span style="color:red;">ADC1</span></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">SPI/I<sup>2</sup>S</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">SPI1_RX</td>
+<td style="text-align:center">SPI1_TX</td>
+<td style="text-align:center">SPI/I<sup>2</sup>S2_RX</td>
+<td style="text-align:center">SPI/I<sup>2</sup>S2_TX</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">USART</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">USART3_TX</td>
+<td style="text-align:center">USART3_RX</td>
+<td style="text-align:center">USART1_TX</td>
+<td style="text-align:center">USART1_RX</td>
+<td style="text-align:center">USART2_RX</td>
+<td style="text-align:center">USART2_TX</td>
+</tr>
+<tr>
+<td style="text-align:center">I<sup>2</sup>C</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">I<sup>2</sup>C2_TX</td>
+<td style="text-align:center">I<sup>2</sup>C2_RX</td>
+<td style="text-align:center">I<sup>2</sup>C1_TX</td>
+<td style="text-align:center">I<sup>2</sup>C1_RX</td>
+</tr>
+<tr>
+<td style="text-align:center">TIM1</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">TIM1_CH1</td>
+<td style="text-align:center">TIM1_CH2</td>
+<td style="text-align:center">TIM1_TX4<br>TIM1_TRIG<br>TIM1_COM</td>
+<td style="text-align:center">TIM1_UP</td>
+<td style="text-align:center">TIM1_CH3</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">TIM2</td>
+<td style="text-align:center">TIM2_CH3</td>
+<td style="text-align:center">TIM2_UP</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">TIM2_CH1</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">TIM2_CH2<br>TIM2_CH4</td>
+</tr>
+<tr>
+<td style="text-align:center">TIM3</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">TIM3_CH3</td>
+<td style="text-align:center">TIM3_CH4<br>TIM3_UP</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">TIM3_CH1<br>TIM3_TRIG</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">TIM4</td>
+<td style="text-align:center">TIM4_CH1</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">TIM4_CH2</td>
+<td style="text-align:center">TIM4_CH3</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">TIM4_UP</td>
+</tr>
+</tbody>
+</table>
+<p>DMA2通道映射表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">外设</th>
+<th style="text-align:center">通道1</th>
+<th style="text-align:center">通道2</th>
+<th style="text-align:center">通道3</th>
+<th style="text-align:center">通道4</th>
+<th style="text-align:center">通道5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">ADC3</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">ADC3</td>
+</tr>
+<tr>
+<td style="text-align:center">SPI/I<sup>2</sup>S3</td>
+<td style="text-align:center">SPI/I<sup>2</sup>S3_RX</td>
+<td style="text-align:center">SPI/I<sup>2</sup>S3_TX</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">USART4</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">USART4_RX</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">USART4_TX</td>
+</tr>
+<tr>
+<td style="text-align:center">SDIO</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">SDIO</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">TIM5</td>
+<td style="text-align:center">TIM5_CH4<br>TIM5_TRIG</td>
+<td style="text-align:center">TIM5_CH3<br>TIM5_UP</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">TIM5_CH2</td>
+<td style="text-align:center">TIM5_CH1</td>
+</tr>
+<tr>
+<td style="text-align:center">TIM6<br>DAC通道1</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">TIM6_UP<br>DAC通道1</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">TIM7<br>DAC通道2</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">TIM7_UP<br/>DAC通道2</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">TIM8</td>
+<td style="text-align:center">TIM8_CH3<br>TIM8_UP</td>
+<td style="text-align:center">TIM8_CH4<br>TIM8_TRIG<br>TIM8_COM</td>
+<td style="text-align:center">TIM8_CH1</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">TIM8_CH2</td>
+</tr>
+</tbody>
+</table>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>如何理解DMA？</p>
+</div>
+<p>对于DMA，打个比方就很好理解：<br>
+角色预设：</p>
+<p><code>淘宝店主</code> —- STM32 MCU<br>
+<code>快递员</code> —- 外设（如UART,SPI）<br>
+<code>发货室</code> —- DMA<br>
+1、首先你是一个淘宝店主，如果每次发货收货都要跟快递沟通交涉会很浪费时间和精力。<br>
+2、然后你就自己建了一个发货室，发货室里有好多个货柜箱子，每个箱子上都写着快递名字(如果申通快递，顺丰快递等)。<br>
+3、每次发什么快递，你就找到对应的货柜箱子，把货物放进去即可，然后跟快递通知一声。<br>
+4、快递取走快件。<br>
+5、如果是收货，快递直接把快件放到对应的柜子，然后通知你一下。<br>
+6、你过来提取货物。</p>
+<p>通过上面的方式，你可以不需要直接跟快递打交道，就可以轻松发货成功，DMA处理方式跟上面例子是一样的。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">DMA_InitTypeDef<br>结构体成员</th>
+<th style="text-align:center">描述</th>
+<th style="text-align:center">取值范围</th>
+<th style="text-align:center">理解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">DMA_PeripheralBaseAddr</td>
+<td style="text-align:center">DMA传输的外设基地址,一般为外设<br>的数据寄存器地址，如果使用存储器到存储器传输，<br>则为其中一个存储器的基地址</td>
+<td style="text-align:center">(u32)<br>一般是外设起始地址+DR寄存器偏移量</td>
+<td style="text-align:center">相当于“哪家快递”</td>
+</tr>
+<tr>
+<td style="text-align:center">DMA_MemoryBaseAddr</td>
+<td style="text-align:center">DMA传输的存储器基地址,通常是<br>程序开辟的一段内存的起始地址。</td>
+<td style="text-align:center">(u32)&amp;数组名</td>
+<td style="text-align:center">相当于几号柜</td>
+</tr>
+<tr>
+<td style="text-align:center">DMA_DIR</td>
+<td style="text-align:center">外设是作为数据传输的目的地还是来源</td>
+<td style="text-align:center">DMA_DIR_PeripheralDST<br>DMA_DIR_PeripheralDST</td>
+<td style="text-align:center">作为数据来源，即为收快递;作为目的地即为发快递</td>
+</tr>
+<tr>
+<td style="text-align:center">DMA_BufferSize</td>
+<td style="text-align:center">可以理解为数组的大小</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">缓存容量，即柜子大小</td>
+</tr>
+<tr>
+<td style="text-align:center">DMA_PeripheralInc</td>
+<td style="text-align:center">外设地址寄存器是否递增</td>
+<td style="text-align:center">DMA_PeripheralInc_Enable<br>DMA_PeripheralInc_Disable</td>
+<td style="text-align:center">不递增，即柜子对应的快递不变</td>
+</tr>
+<tr>
+<td style="text-align:center">DMA_MemoryInc</td>
+<td style="text-align:center">内存地址是否递增</td>
+<td style="text-align:center">DMA_PeripheralInc_Enable<br>DMA_PeripheralInc_Disable</td>
+<td style="text-align:center">不递增，即一直把快递放同一个柜子</td>
+</tr>
+<tr>
+<td style="text-align:center">DMA_PeripheralDataSize</td>
+<td style="text-align:center">外设数据宽度(8,16,32位数据宽度)</td>
+<td style="text-align:center">DMA_MemoryDataSize_Byte<br>DMA_MemoryDataSize_HalfWord<br> DMA_MemoryDataSize_Word</td>
+<td style="text-align:center">即快递运输快件大小度量</td>
+</tr>
+<tr>
+<td style="text-align:center">DMA_MemoryDataSize</td>
+<td style="text-align:center">定义的数组大小(8,16,32位数据宽度)</td>
+<td style="text-align:center">同上</td>
+<td style="text-align:center">即店主封装快递的度量</td>
+</tr>
+<tr>
+<td style="text-align:center">DMA_Mode</td>
+<td style="text-align:center">DMA工作模式(循环/非循环模式)</td>
+<td style="text-align:center">DMA_Mode_Circular<br>DMA_Mode_Normal</td>
+<td style="text-align:center">正常模式，即满了就不再接收了，而不是循环存储</td>
+</tr>
+<tr>
+<td style="text-align:center">DMA_Priority</td>
+<td style="text-align:center">通道x的软件优先级(非常高,高,中,低优先级)</td>
+<td style="text-align:center">DMA_Priority_VeryHigh<br>DMA_Priority_High<br>DMA_Priority_Medium<br>DMA_Priority_Low</td>
+<td style="text-align:center">相当于快递的加急，很急，急，一般；快递员优先拿加急的</td>
+</tr>
+<tr>
+<td style="text-align:center">DMA_M2M</td>
+<td style="text-align:center">是否使能DMA通道的内存到内存传输</td>
+<td style="text-align:center">DMA_M2M_Enable<br>DMA_M2M_Disable</td>
+<td style="text-align:center">/</td>
+</tr>
+</tbody>
+</table>
+<h2 id="附6：Keil调试查看PWM波形">附6：Keil调试查看PWM波形</h2>
+<ul>
+<li>打开 <code>魔法棒</code> – <code>debug</code> – 选择《Use Simulator》,打勾《Run to main()》；-- <code>Target</code> – 晶振那写“8.0”</li>
+<li>在你需要测试的PWM函数前设断点，再点击右上角那个 <code>带d字放大镜</code> – <code>Setup</code> – <code>创建图标</code> – 输入 “PORTX.Y” (即你PWM通道对应管脚，X对应端口组，Y对应哪个管脚1~13) – <code>Display Type</code>选 “Bit” – 颜色的话随便就行 – <code>close</code></li>
+<li>点击左边 <code>RST</code>(重置)，然后点击旁边的 <code>run</code>(运行)，它会运行到你断点处，此时再点击第二个括号，直到出现波形图即可，勾《Signal Info》然后把鼠标放在某一处会出现对应信息(时间,Hz等)，勾《Cursor》，这个可以测某处到另一处之间的时间(看d:)，先点开始处在移动蓝线即可</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20221105104951.jpg" alt=""></p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/STM32F1/">STM32F1</a></div><div class="post_share"><div class="social-share" data-image="/img/num75.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%BF%E5%AD%90%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">板子介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83"><span class="toc-number">2.</span> <span class="toc-text">配置环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LED%E6%A8%A1%E5%9D%97"><span class="toc-number">3.</span> <span class="toc-text">LED模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%81%E5%AD%98%E5%99%A8%E8%8A%AF%E7%89%87%E4%BB%8B%E7%BB%8D"><span class="toc-number">3.1.</span> <span class="toc-text">锁存器芯片介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E7%A8%8B%E5%BA%8F"><span class="toc-number">3.2.</span> <span class="toc-text">编写程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KEY"><span class="toc-number">4.</span> <span class="toc-text">KEY</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F1-%E4%BD%BF%E7%94%A8%E5%BB%B6%E6%97%B6%E6%96%B9%E5%BC%8F"><span class="toc-number">4.1.</span> <span class="toc-text">方式1(使用延时方式)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F2-%E4%BD%BF%E7%94%A8%E5%AE%9A%E6%97%B6%E5%99%A8%E6%89%AB%E6%8F%8F%E6%96%B9%E5%BC%8F-%E9%95%BF%E6%8C%89%E7%9F%AD%E6%8C%89"><span class="toc-number">4.2.</span> <span class="toc-text">方式2(使用定时器扫描方式,长按短按)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#USART"><span class="toc-number">5.</span> <span class="toc-text">USART</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E5%86%99"><span class="toc-number">5.1.</span> <span class="toc-text">程序编写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LCD%E5%B1%8F"><span class="toc-number">6.</span> <span class="toc-text">LCD屏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E9%94%AE%E6%8E%A7%E5%88%B6num%E5%80%BC%E9%80%92%E5%A2%9E"><span class="toc-number">6.1.</span> <span class="toc-text">按键控制num值递增</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LCD%E9%AB%98%E4%BA%AE%E5%8D%95%E4%B8%AA%E5%AD%97%E7%AC%A6"><span class="toc-number">6.2.</span> <span class="toc-text">LCD高亮单个字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LCD%E5%AD%97%E4%B8%B2%E7%AC%A6%E5%8F%B3%E5%AF%B9%E9%BD%90%E6%98%BE%E7%A4%BA"><span class="toc-number">6.3.</span> <span class="toc-text">LCD字串符右对齐显示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LCD%E8%A1%A5%E7%A9%BA%E6%A0%BC"><span class="toc-number">6.4.</span> <span class="toc-text">LCD补空格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E5%86%99-2"><span class="toc-number">6.5.</span> <span class="toc-text">程序编写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ADC"><span class="toc-number">7.</span> <span class="toc-text">ADC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ADC%E7%9B%B8%E5%85%B3%E9%80%9A%E9%81%93"><span class="toc-number">7.1.</span> <span class="toc-text">ADC相关通道</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%BF%E5%AD%90%E4%B8%8A%E7%9A%84ADC"><span class="toc-number">7.2.</span> <span class="toc-text">板子上的ADC</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTC%E5%AE%9E%E6%97%B6%E6%97%B6%E9%92%9F"><span class="toc-number">8.</span> <span class="toc-text">RTC实时时钟</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PWM-%E8%B6%85%E7%BA%A7%E9%87%8D%E7%82%B9"><span class="toc-number">9.</span> <span class="toc-text">PWM(超级重点)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PWM%E6%A8%A1%E5%BC%8F"><span class="toc-number">9.1.</span> <span class="toc-text">PWM模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PWM%E8%BE%93%E5%87%BA%E6%AF%94%E8%BE%83"><span class="toc-number">9.2.</span> <span class="toc-text">PWM输出比较</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E5%86%99-3"><span class="toc-number">9.2.1.</span> <span class="toc-text">程序编写</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PWM%E6%8D%95%E8%8E%B7"><span class="toc-number">9.3.</span> <span class="toc-text">PWM捕获</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#PWM%E7%A1%AC%E4%BB%B6%E6%8D%95%E8%8E%B7%E9%A2%91%E7%8E%87-%E5%8F%AA%E9%80%82%E7%94%A8%E4%BA%8ECH1-CH2"><span class="toc-number">9.3.1.</span> <span class="toc-text">PWM硬件捕获频率(只适用于CH1&#x2F;CH2)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PWM%E8%BD%AF%E4%BB%B6%E6%8D%95%E8%8E%B7-%E9%A2%91%E7%8E%87-%E5%8D%A0%E7%A9%BA%E6%AF%94"><span class="toc-number">9.3.2.</span> <span class="toc-text">PWM软件捕获(频率&#x2F;占空比)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%92%E8%A1%A5PWM%E8%BE%93%E5%87%BA"><span class="toc-number">9.3.3.</span> <span class="toc-text">互补PWM输出</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%9C%82%E9%B8%A3%E5%99%A8"><span class="toc-number">10.</span> <span class="toc-text">蜂鸣器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EEPORM"><span class="toc-number">11.</span> <span class="toc-text">EEPORM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#24C02%E8%8A%AF%E7%89%87"><span class="toc-number">11.1.</span> <span class="toc-text">24C02芯片</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A2%E8%A7%82%E9%A2%98"><span class="toc-number">12.</span> <span class="toc-text">客观题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%841%EF%BC%9A%E4%B8%AD%E6%96%AD%E9%97%AE%E9%A2%98"><span class="toc-number">13.</span> <span class="toc-text">附1：中断问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%842%EF%BC%9A%E5%AE%9A%E6%97%B6%E5%99%A8%E9%97%AE%E9%A2%98"><span class="toc-number">14.</span> <span class="toc-text">附2：定时器问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">14.1.</span> <span class="toc-text">滴答定时器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E8%B8%A9%E5%9D%91"><span class="toc-number">14.2.</span> <span class="toc-text">定时器初始化踩坑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%843%EF%BC%9A%E5%BC%80%E5%8F%91%E6%9D%BF%E5%AF%B9%E5%BA%94%E5%A4%8D%E7%94%A8%E5%BC%95%E8%84%9A"><span class="toc-number">15.</span> <span class="toc-text">附3：开发板对应复用引脚</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%84%EF%BC%9APWM%E9%97%AE%E9%A2%98"><span class="toc-number">16.</span> <span class="toc-text">附：PWM问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%845%EF%BC%9ADMA%E7%9F%A5%E8%AF%86"><span class="toc-number">17.</span> <span class="toc-text">附5：DMA知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%846%EF%BC%9AKeil%E8%B0%83%E8%AF%95%E6%9F%A5%E7%9C%8BPWM%E6%B3%A2%E5%BD%A2"><span class="toc-number">18.</span> <span class="toc-text">附6：Keil调试查看PWM波形</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://api2.acozycotage.net/Pweb" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '可惜你不听王杰，也不懂我...' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>

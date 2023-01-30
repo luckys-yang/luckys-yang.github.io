@@ -1,0 +1,1488 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>51单片机期末复习题 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="程序设计题  请写出延时函数void delay(unsigned char),要求:在晶体振荡器为12Hz时，延时x毫秒  解析： 假设晶振是 11.0592M 时钟周期为： 111059200\frac{1}{11059200} 110592001​ 机器周期为(因为一个机器周期等于 12*时钟周期)： 1211059200\frac{12}{11059200} 1105920012​ 时钟频">
+<meta property="og:type" content="article">
+<meta property="og:title" content="51单片机期末复习题">
+<meta property="og:url" content="https://mdcm.yang5201314.cn/post/4eae844c.html">
+<meta property="og:site_name" content="Luckys-Yangの小栈">
+<meta property="og:description" content="程序设计题  请写出延时函数void delay(unsigned char),要求:在晶体振荡器为12Hz时，延时x毫秒  解析： 假设晶振是 11.0592M 时钟周期为： 111059200\frac{1}{11059200} 110592001​ 机器周期为(因为一个机器周期等于 12*时钟周期)： 1211059200\frac{12}{11059200} 1105920012​ 时钟频">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mdcm.yang5201314.cn/img/num94.webp">
+<meta property="article:published_time" content="2022-12-29T10:55:00.000Z">
+<meta property="article:modified_time" content="2023-01-04T13:32:28.000Z">
+<meta property="article:author" content="Luckys-Yang">
+<meta property="article:tag" content="博客,个人博客,技术,学习,Hexo,Blog,STM32,嵌入式,单片机">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mdcm.yang5201314.cn/img/num94.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"><link rel="canonical" href="https://mdcm.yang5201314.cn/post/4eae844c.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '51单片机期末复习题',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-01-04 21:32:28'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">94</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">75</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">51单片机期末复习题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-29T10:55:00.000Z" title="发表于 2022-12-29 18:55:00">2022-12-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-04T13:32:28.000Z" title="更新于 2023-01-04 21:32:28">2023-01-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%B8%93%E4%B8%9A%E8%AF%BE%E7%AC%94%E8%AE%B0/">专业课笔记</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><h2 id="程序设计题">程序设计题</h2>
+<ul>
+<li>请写出延时函数void delay(unsigned char),要求:在晶体振荡器为12Hz时，延时x毫秒</li>
+</ul>
+<p><span style="color:red;">解析：</span></p>
+<p>假设晶振是 <code>11.0592M</code></p>
+<p>时钟周期为：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>1</mn><mn>11059200</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{1}{11059200}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">11059200</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>机器周期为(因为一个机器周期等于 <code>12*时钟周期</code>)：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>12</mn><mn>11059200</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{12}{11059200}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">11059200</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">12</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>时钟频率为(时钟频率是设备或系统每秒运行的时钟周期数。 它通常以赫兹 (Hz) 为单位进行测量)：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>1</mn><mtext>时钟周期</mtext></mfrac><mo>=</mo><mfrac><mn>1</mn><mfrac><mn>12</mn><mn>11059200</mn></mfrac></mfrac><mo>=</mo><mfrac><mn>11059200</mn><mn>12</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{1}{\text{时钟周期}}=\frac{1}{\frac{12}{11059200}}=\frac{11059200}{12}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord cjk_fallback">时钟周期</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.4015em;vertical-align:-1.0801em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.2649em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">11059200</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">12</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.0801em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">12</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">11059200</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>定时器 0 的计数器最大值为 65536，意味着当计数器的值从 0 加到 65536 时，计数器就会溢出，并自动清零。因此， <code>当计数器的值加到 65536 时，就相当于它加了 1</code></p>
+<p>宏定义末尾的 <code>L</code> 告诉编译器将其视为长整数而不是其他类型的整数(可省略，编译器将根据其值自动确定常量的适当类型)</p>
+<p>计算每次加1的式子里除以1000是因为要转换为毫秒，它原本单位默认是秒</p>
+<p>还有就是TH0，TL0的计算是最后计算结果再类型转换</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># define FOSC 12000000L  &#x2F;&#x2F; 晶体振荡器频率视情况而定
+
+
+void delay(unsigned char x) &#123;
+    &#x2F;&#x2F; 计算计数器每次加 1 所需要的时间，单位为毫秒
+    float timer_interval &#x3D; 1000.0 &#x2F; (FOSC &#x2F; 12 &#x2F; 65536);
+
+    &#x2F;&#x2F; 计算计数器加载值
+    unsigned int timer_load &#x3D; (unsigned int)(x &#x2F; timer_interval);
+
+    &#x2F;&#x2F; 设置定时器 0 的工作模式为模式 1
+    TMOD &amp;&#x3D; 0xF0;
+    TMOD |&#x3D; 0x01;
+
+    &#x2F;&#x2F; 该值可以在 TH0 和 TL0 的计数值溢出时更新 TF0 标志位
+    TH0 &#x3D; (unsigned char)(timer_load &#x2F; 256);
+    TL0 &#x3D; (unsigned char)(timer_load % 256);
+
+    &#x2F;&#x2F; 启动定时器 0
+    TR0 &#x3D; 1;
+
+    &#x2F;&#x2F; 等待定时器 0 计数值溢出
+    while (!TF0);
+
+    &#x2F;&#x2F; 关闭定时器 0
+    TR0 &#x3D; 0;
+
+    &#x2F;&#x2F; 清除定时器 0 计数值溢出标志位
+    TF0 &#x3D; 0;
+&#125;</code></pre>
+<ul>
+<li>请将下列程序补充完整，根据下图设计一个数码管从0到9的顺序显示（共阳数码管）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230104110438.jpg" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include  &lt;reg51.h&gt;
+
+# define  uchar  unsigned  char
+# define  uint  unsigned  int
+
+uchar code LedCode[ ]&#x3D;&#123;0Xc0,0Xf9,0XA4,0xB0,0x99,0x92,0x82,0Xf8,0x80,0x90&#125;; 
+
+&#x2F;*****根据程序定义变量*****&#x2F;
+uchar i;
+&#x2F;*********结束*********&#x2F;
+                                   
+
+void  delay(uchar  x)     
+&#123;  uchar k;
+   while(x--)         
+   for(k&#x3D;0;k&lt;125;k++)&#123;&#125;
+&#125;
+
+void  main(void)
+&#123; 
+   P0&#x3D; LedCode[0];
+   while(1)
+        &#123;  
+&#x2F;***填写开始***&#x2F;                                 
+    		for(i&#x3D;0;i&lt;10;i++)
+            &#123;
+                P0 &#x3D; Ledcode[i];
+                delay(250);
+                delay(250);
+            &#125;
+&#x2F;***填写结束***&#x2F;                                    
+        &#125;
+&#125;</code></pre>
+<ul>
+<li>请写出一段完整的跑马灯程序，要求：依次第4，5灯；3,6灯；2,7灯；1,8灯亮</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230104112153.jpg" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include  &lt;reg51.h&gt;
+
+# define LED_PORT P0	&#x2F;&#x2F;宏定义P0端口
+
+&#x2F;&#x2F;简单毫秒延时(参数范围0~255)
+void  delay(uchar  x)     
+&#123;  uchar k;
+   while(x--)         
+   for(k&#x3D;0;k&lt;125;k++)&#123;&#125;
+&#125;
+
+void main()
+&#123;
+    while(1)
+    &#123;
+		LED_PORT &#x3D; 0xE7;
+        delay(250);
+        delay(250);
+        LED_PORT &#x3D; 0xDB;
+        delay(250);
+        delay(250);
+        LED_PORT &#x3D; 0xBD;
+        delay(250);
+        delay(250);
+        LED_PORT &#x3D; 0x7E;
+        delay(250);
+        delay(250);        
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>实现流水灯模块右边四个LED灯闪烁的功能，时间间隔为1秒</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include  &lt;reg51.h&gt;
+
+# define LED_PORT P0	&#x2F;&#x2F;宏定义P0端口组
+sbit ADDR0 &#x3D; P1^0;    &#x2F;&#x2F;A0
+sbit ADDR1 &#x3D; P1^1;    &#x2F;&#x2F;A1
+sbit ADDR2 &#x3D; P1^2;    &#x2F;&#x2F;A2
+sbit ADDR3 &#x3D; P1^3;    &#x2F;&#x2F;E3
+sbit ENLED &#x3D; P1^4;
+
+bit flag1s &#x3D; 0;	&#x2F;&#x2F;1s中断标志位
+bit mode &#x3D; 0;	&#x2F;&#x2F;亮灭标志位
+
+void main()
+&#123;
+    ENLED &#x3D; 0;
+    ADDR0 &#x3D; 0;
+    ADDR1 &#x3D; 1;
+    ADDR2 &#x3D; 1;
+    ADDR3 &#x3D; 1;
+    EA &#x3D; 1;	&#x2F;&#x2F;开启总中断
+    TMOD &amp;&#x3D; 0xF0;
+    TMOD |&#x3D; 0x01;
+    TH0 &#x3D; 0xFC;	&#x2F;&#x2F;定时1ms
+    TL0 &#x3D; 0x67;
+    ET0 &#x3D; 1;	&#x2F;&#x2F;使能中断
+    TR0 &#x3D; 1;	&#x2F;&#x2F;启动
+    LED_PORT &#x3D; 0xFF;	&#x2F;&#x2F;初始化LED全灭状态
+    while(1)
+    &#123;
+        if(flag1s)
+        &#123;
+            flag1s &#x3D; 0;
+            if(1 &#x3D;&#x3D; mode)
+            &#123;
+            	LED_PORT &#x3D; 0xF0;	&#x2F;&#x2F;右边4个亮                
+            &#125;
+            else if(0 &#x3D;&#x3D; mode)
+            &#123;
+                LED_PORT &#x3D; 0xFF;	&#x2F;&#x2F;全灭
+            &#125;
+
+        &#125;  
+    &#125;
+&#125;
+
+void InterruptTimer0() interrupt 1
+&#123;
+    static unsigned int count &#x3D; 0;
+    
+    TH0 &#x3D; 0xFC;  &#x2F;&#x2F;重新加载初值
+    TL0 &#x3D; 0x67;
+    if(count &gt;&#x3D; 1000)	&#x2F;&#x2F;1s
+    &#123;
+        count &#x3D; 0;
+        flag1s &#x3D; 1;
+        mode &#x3D; ~mode;	&#x2F;&#x2F;取反
+    &#125;
+&#125;</code></pre>
+<h2 id="填空题">填空题</h2>
+<ol>
+<li>AT89S51单片机是（ <code>8</code> ）位的单片机</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<p>AT89S51 是 Atmel（现为 Microchip Technology）生产的 8 位微控制器（MCU）。它有一个 8 位中央处理器 (CPU)，旨在执行嵌入式系统中的各种任务。AT89S51 是 8051 微控制器系列的一部分，该系列以其多功能性和在各种应用中的广泛使用而闻名。</p>
+<ol start="2">
+<li>AT89S51单片机有（  <code>5</code>  ）个中断源，（  <code>2</code>  ）级优先级中断</li>
+<li>串行口方式3发送的第9位数据要事先写入（ <code>SCON</code> ）寄存器的（ <code>TB8</code> ）位</li>
+<li>串行口的方式0的波特率为 ( <code>fOSC/12</code> )</li>
+<li>利用81C55可以扩展（ <code>3</code> ）个并行口，（ <code>256</code> ）个RAM单元</li>
+<li>当单片机复位时PSW＝ （ <code>00</code> ）H，SP=（ <code>07H</code> ），P0~P3口均为（ <code>高 </code>）电平</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<p>在单片机复位后，PSW寄存器（程序状态寄存器）通常会被设置为0x00。这意味着所有的位都被清零，即所有的标志位都被清零。SP寄存器（堆栈指针）通常也会被设置为0x07。这意味着堆栈将从地址0x07开始使用。P0~P3被拉高</p>
+<ol start="7">
+<li>若A中的内容为88H，那么，P标志位为（ <code>0</code> ）</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<p>P 标志位是指在处理器中用于表示奇偶性的一位标志。当 P 标志位被设置为 0 时，表示当前数字为偶数；当 P 标志位被设置为 1 时，表示当前数字为奇数，这里88H转换成10进制数就是136是偶数</p>
+<ol start="8">
+<li>AT89S51访问片外存储器时，利用（ <code>ALE</code> ）信号锁存来自（ <code>P0口</code>  ）发出的低8位地址信号</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<p>ALE 信号是一个由单片机控制的外部脉冲，在单片机发出地址时产生。它可以用来将地址信号转发到外部存储器或其他外部设备。在访问外部存储器时, CPU 首先发出一个地址, 然后通过 ALE 信号将这个地址锁存下来. 然后 CPU 就可以通过这个地址来访问外部存储器了。</p>
+<ol start="9">
+<li>已知fosc=12MHz， T0作为定时器使用时，其定时时间间隔为（ <code>1us</code>  ）</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>时钟周期</mtext><mo>=</mo><mfrac><mn>1</mn><mn>12000000</mn></mfrac></mrow><annotation encoding="application/x-tex">\text{时钟周期}=\frac{1}{12000000}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">时钟周期</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">12000000</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>机器周期</mtext><mo>=</mo><mfrac><mn>12</mn><mn>12000000</mn></mfrac><mo>=</mo><mn>0.000001</mn><mi>s</mi><mo>=</mo><mn>1</mn><mi>u</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">\text{机器周期}=\frac{12}{12000000}=0.000001s=1us
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">机器周期</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">12000000</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">12</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.000001</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mord mathnormal">u</span><span class="mord mathnormal">s</span></span></span></span></span></p>
+<ol start="10">
+<li>串行口方式2接收到的第9位数据送（ <code>SCON</code> ）寄存器的（ <code>RB8</code>）位中保存</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<p>在串口模式2下，串口通信是异步的，即数据的发送和接收不需要时钟信号。数据的第 9 位用作奇偶校验位，它是与数据一起传输的额外位，用于帮助检测传输中的错误。奇偶校验位可以设置为偶数、奇数或无</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">SCON的8个bit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>SM0</code>串行端口模式位0，在串口模式 2 下，该位应设置为 1</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>SM1</code>串行端口模式位 1，在串口模式 2 下，该位应设置为 0</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>SM2</code>串行端口模式位 2，该位启用多处理器通信模式，允许微控制器使用串行端口与其他微控制器通信。在串口模式 2 下，该位不用，应设置为 0</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>REN</code>接收启用位，当设置为 1 时，串口接收器使能，单片机可以通过串口接收数据。设置为 0 时，串行接收器被禁用，微控制器无法接收数据</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>TB8</code>该位是串口传输数据的第9位。它用作奇偶校验位以帮助检测传输中的错误<br> <code>RB8</code>该位是串口接收数据的第9位。它用作奇偶校验位以帮助检测传输中的错误</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>TI</code>发送标志位，当通过串行端口的数据传输完成时，该位设置为 1。它必须由软件使用命令“CLR TI”清除，以允许进一步传输</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>RI</code>接收标志位，当通过串行端口接收到数据时，该位设置为 1。它必须由软件使用命令“CLR RI”清除，以允许进一步接收</td>
+</tr>
+</tbody>
+</table>
+<ol start="11">
+<li>当单片机复位时PSW＝（ <code>00</code> ）H，这时当前的工作寄存器区是（ <code>0</code> ）区，R6所对应的存储单元地址为（ <code>06</code> ）H</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<p>微控制器具有三个工作寄存器区域（0、1 和 2），可使用 PSW 寄存器中的 RS0 和 RS1 位来选择，0区其他寄存器的存储单元地址分别为00H（R0）、01H（R1）、02H（R2）、03H（R3）、04H（R4）、05H（R5）、06H（R6）</p>
+<ol start="12">
+<li>利用82C55可以扩展（ <code>3</code> ）个并行口，其中（ <code>8</code> ）条口线具有位操作功能</li>
+<li>若AT89S51外扩32KB 数据存储器的首地址若为4000H，则末地址为（ <code>BFFF</code> ）H</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<p>在 AT89S51 微控制器中，数据存储器分为两个 16KB 的块（Block 0 和 Block 1），数据存储器的首地址 (4000H) 对应于块 0 中的第一个存储器位置。数据存储器的末地址 (BFFFH) 对应于块 1 中的最后一个存储器位置</p>
+<ol start="14">
+<li>当AT89S51执行MOVC A，@A+PC指令时，伴随着（ <code>PSEN*</code> ）控制信号有效</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<p>当执行 <code>MOVC A，@A+PC</code>指令时，单片机将累加器的内容与PC中的值相加，并使用结果地址访问外部程序存储器中的数据。 <code>PSEN*</code>（程序存储启用）控制信号是一个 <code>低电平有效信号</code> ，微控制器使用它来访问外部程序存储器。 当微控制器需要从外部程序存储器中获取指令时，它会将 <code>PSEN*</code> 信号置为低电平，并在地址总线上提供指令的地址。 外部程序存储器将指令放在数据总线上作出响应，微控制器将指令读入指令寄存器</p>
+<ol start="15">
+<li>若A中的内容为67H，那么，P标志位为（ <code>1</code> ）</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<p>67H十进制数是103是奇数，所以P标志位为1，偶数才为0</p>
+<ol start="16">
+<li>AT89S51单片机的通讯接口有（ <code>串行</code> ）和（ <code>并行</code> ）两种形式。在串行通讯中，发送时要把（ <code>并行</code> ）数据转换成（ <code>串行</code> ）数据。接收时又需把（ <code>串行</code> ）数据转换成（ <code>并行</code> ）数据。</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<p>在串行通信中，数据通过单线或通信通道一次一位地传输和接收。 这与并行通信相反，在并行通信中，数据通过多条线路或通信通道一次传输和接收多个位</p>
+<ol start="17">
+<li>AT89S51单片机指令系统的寻址方式有（ <code>寄存器寻址方式</code> ）、（ <code>直接寻址方式</code> ）、（ <code>立即寻址方式</code> ）、（ <code>寄存器间接寻址方式</code> ）、（ <code>位寻址方式</code> ）、（ <code>基址寄存器加变址寄存器寻址方式</code> ）、（ <code>相对寻址方式</code> ）。</li>
+<li>AT89S51内部提供（ <code>2</code> ）个可编程的（ <code>16</code> ）位定时/计数器，定时器有（ <code>4</code> ）种工作方式</li>
+<li>AT89S51单片机芯片共有 （ 40 ） 个引脚，MCS-51系列单片机为（ <code>8</code> ）位单片机</li>
+<li>AT89S51的异步通信口为（ 全双工 ）（单工/半双工/全双工），若传送速率为每秒120帧，每帧10位，则波特率为（ <code>1200 bit/s</code> ）</li>
+<li>单片机也可称为（ <code>微控制器</code>） 或 （ <code>嵌入式控制器</code>）</li>
+<li>当单片机复位时PSW＝ （ <code>00</code> ） H，这时当前的工作寄存器区是（ <code>0</code> ）区，R4所对应的存储单元地址为 （ <code>04</code> ） H</li>
+<li>51系列单片机的典型芯片分别为 （ <code>AT89S51</code>） 、（ <code>8031</code>）  、（ <code>AT89C51</code> ）</li>
+<li>AT89S51的（ <code>P3</code> ）口为双功能口</li>
+<li>由AT89S51组成的单片机系统在工作时，EA*引脚应该接（ <code>地（或0）</code>）；</li>
+<li>AT89S51的中断源有 （ <code>外部中断0， T0 ，外部中断1， T1，串行口中断</code> ），有 （<code>2</code>） 个中断优先级</li>
+<li>AT89S51唯一的一条16位数据传送指令为  （ <code>MOV DPTR，data16</code>  ）</li>
+<li>当MCS-51执行MOVX A，@R1指令时，伴随着  （<code>RD</code>）  控制信号有效</li>
+<li>AT89S51的（ <code>P0</code> ）口为高8位地址总线口</li>
+<li>单片机外部三大总线分别为  （ <code>数据总线、地址总线和控制总线</code>）。</li>
+<li>74LS138是具有3个输入的译码器芯片，用其输出作片选信号，最多可在 （ <code>8</code> ） 块芯片中选中其中任一块</li>
+<li>特殊功能寄存器中，单元地址低位为 （<code>0或8</code> ） 的特殊功能寄存器，可以位寻址</li>
+<li>关于定时器，若振荡频率为12MHz，在方式0下最大定时时间为（<code>8.192ms</code>）</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<p>方式0的计数值最大是8192，先算出机器周期为</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>12</mn><mn>12000000</mn></mfrac><mo>=</mo><mn>0.000001</mn><mi>s</mi><mo>=</mo><mn>1</mn><mi>u</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">\frac{12}{12000000}=0.000001s=1us
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">12000000</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">12</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.000001</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mord mathnormal">u</span><span class="mord mathnormal">s</span></span></span></span></span></p>
+<p>定时最大为</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>0.000001</mn><mo>×</mo><mn>8192</mn><mo>=</mo><mn>0.008192</mn><mi>s</mi><mo>=</mo><mn>8.192</mn><mi>m</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">0.000001\times8192=0.008192s=8.192ms
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">0.000001</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">8192</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.008192</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">8.192</span><span class="mord mathnormal">m</span><span class="mord mathnormal">s</span></span></span></span></span></p>
+<ol start="34">
+<li>当AT89S51单片机响应中断后，必须用软件清除的中断请求标志是（<code>串行中断</code> ）。</li>
+<li>TMOD中的GATEx=1时，表示由两个信号TRx和（<code>INTx</code>）控制定时器的启停。</li>
+<li>在AT89S51单片机的RESET端出现（<code>大于2个机器周期</code>）的高电平后，便可以可靠复位，复位后的PC中的内容为（<code>0000</code>）H</li>
+<li>当AT89S51单片机与慢速外设进行数据传输时，最佳的传输方式是（<code>串行数据传输</code>）</li>
+<li>DA转换器的两个最重要的技术指标为（<code>分辨率</code>）和（<code>建立时间</code>）</li>
+<li>在存储器扩展中，无论是线选法还是译码法，最终都是为扩展芯片的(<code>CE</code>)端提供（<code>片选</code>）信号、</li>
+<li>波特率定义为 (<code>每秒发送或接收的位数</code>)。串行通信对波特率的基本要求是互相通信的甲乙双方必须具有 (<code>相同</code>) 的波特率</li>
+<li>若串行通信按方式1传送，每分钟传送3000个字符（8位/每字符），其波特率是（<code>400bit/s</code>）</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<p>波特率=传输速率*每个字符的位数</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>8</mn><mi>b</mi><mi>i</mi><mi>t</mi><mi mathvariant="normal">/</mi><mi>s</mi><mo>×</mo><mn>3000</mn><mo>=</mo><mn>24000</mn><mi>b</mi><mi>i</mi><mi>t</mi><mi mathvariant="normal">/</mi><mi>m</mi><mi>i</mi><mi>n</mi><mo>=</mo><mn>400</mn><mi>b</mi><mi>i</mi><mi>t</mi><mi mathvariant="normal">/</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">8bit/s\times3000=24000bit/min=400bit/s
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">8</span><span class="mord mathnormal">bi</span><span class="mord mathnormal">t</span><span class="mord">/</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">3000</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">24000</span><span class="mord mathnormal">bi</span><span class="mord mathnormal">t</span><span class="mord">/</span><span class="mord mathnormal">min</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">400</span><span class="mord mathnormal">bi</span><span class="mord mathnormal">t</span><span class="mord">/</span><span class="mord mathnormal">s</span></span></span></span></span></p>
+<ol start="42">
+<li>AT89S51片内（<code>20H~2FH</code>）地址范围内的数据存储器，既可以字节寻址又可以位寻址</li>
+<li>8KB RAM存储器的首地址若为1000H，则末地址为（<code>2FFF</code>）H</li>
+<li>AT89S51单片机控制TPµP-40A/16A微型打印机打印英文或数字时，要把打印字符的（<code>ASCII</code>）码送给微型打印机</li>
+<li>已知8段共阴极LED显示器显示字符“H”的段码为76H，则8段共阳极LED显示器显示字符“H”的段码为（<code>89H</code>）</li>
+<li>当键盘的按键数目少于8个时，应采用（<code>独立</code>）式键盘。当键盘的按键数目为64个时，应采用（<code>矩阵</code>）式键盘</li>
+<li>当BCD码拨盘的A端接地时，当BCD码拨盘拨到 “6” 时，此时拨盘的8、4、2、1接点的输出为（<code>0、1、1、0</code>）</li>
+<li>使用双缓冲方式的D/A转换器，可实现多路模拟信号的（<code>同步</code>）输出。</li>
+<li>AT89S51单片机扩展并行I/O口时，对扩展的I/O口芯片的基本要求是：输出应具有（<code>数据锁存</code>）功能；输入应具有（<code>数据三态缓冲/锁存选通</code>）功能；</li>
+<li>请写出五种中断类型（<code>外部中断0，定时/计数器0，外部中断1，定时/计数器1，串行口中断</code>）</li>
+<li>如图1所示，单片机AT89C52的P0口上接了8个LED灯，若要第一、三个灯亮，请写出P0的值（采用十六进制方式）   （<code>0xFA</code>）</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230103221816.jpg" alt=""></p>
+<ol start="52">
+<li>请用KEILC语言对引脚P1.0、P1.1、P1.2、P1.3定义成LED0、LED1、LED2、LED3，提示：采用特殊位进行定义。</li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">sbit LED0 &#x3D; P1^0;
+sbit LED1 &#x3D; P1^1;
+sbit LED2 &#x3D; P1^2;
+sbit LED3 &#x3D; P1^3;</code></pre>
+<ol start="53">
+<li>在中断函数中，请将外部中断1函数格式补充完整：void external1（<code>interrupt 2</code>）</li>
+<li>若A=0XFE，请写出A循环左移的特殊函数表达式：A=（<code>(A &lt;&lt; 1) | (A &gt;&gt; 7)</code>）</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<p>算术左移是左移1位，最低位填0。循环左移是左移一位，最高位移到最低位</p>
+<ol start="55">
+<li>十进制数14对应的二进制数表示为（ <code>1110B</code> ），十六进制数表示为（ <code>0EB</code> ）。十进制数－100的补码为（ <code>10011100</code> ），＋100的补码为（ <code>01100100</code>）</li>
+<li>通过堆栈操作实现子程序调用，首先要把（<code>PC</code>）的内容入栈，以进行断点保护。调用返回时再进行出栈操作，把保护的断点送回（<code>PC</code>）</li>
+<li>80C51单片机的时钟电路包括两部分内容，即芯片内的（<code>高增益反相放大器</code>）和芯片外的（<code>石英晶体振荡器</code>）与（<code>两个微调电容</code>）。若提高单片机的晶振频率，则单片机的机器周期会变（<code>短</code>）</li>
+<li>通常单片机有两种复位操作，即（ <code>上电复位</code>）和（ <code>手动复位</code> ）。复位后，PC值为（ <code>0000H</code> ），SP值为（ <code>07H</code> ），通用寄存器的当前寄存器组为（ <code>0</code> ）组，该组寄存器的地址范围是从（ <code>00H</code> ）到（ <code>07H</code> ）</li>
+<li>80C51单片机中，一个机器周期包含（ <code>6</code> ）个状态周期，一个状态周期又可划分（ <code>2</code> ）个拍节，一个拍节为（ <code>1</code> ）个振荡脉冲周期。因此，一个机器周期应包含（ <code>12</code> ）个振荡脉冲周期</li>
+<li>80C51中唯一可供用户使用的16位寄存器是（ <code>DPTR</code> ），它可拆分为两个8位寄存器使用，名称分别为（ <code>DPH</code> ）和（ <code>DPL</code> ）</li>
+<li>单片机程序存储器的寻址范围由PC的位数决定。80C51的PC为16位，因此程序存储器地址空间是（<code>64KB</code>）</li>
+<li>累加器A中存放着一个其值小于或等于127的8位无符号数，CY清0后执行指令“RLC A”，则A中的数变为原来的（ <code>2</code> ）倍</li>
+<li>上电复位后，各中断优先级从高到低次序为（ <code>INT0</code> ）、（ <code>T0</code> ）、（ <code>INT1</code> ）、（ <code>T1</code> ）和（ <code>串行口</code>）</li>
+<li>响应中断后，产生长调用指令LCALL，执行该指令的过程包括：首先把（ <code>PC</code> ）的内容压入堆栈，以进行断点保护，然后把长调用指令的16位地址送（ <code>PC</code> ），使程序执行转向（ <code>中断向量</code> ）中的中断地址区</li>
+<li>当计数器产生计数溢出时，把定时器控制寄存器的TF0( <code>TF1</code> )位置1。对计数溢出的处理，在中断方式时，该位作为（ <code>中断请求标志位</code> ）使用；在查询方式时，该位作（<code>查询状态位</code>）使用</li>
+<li>定时器0工作于方式2的计数方式，预置的计数初值为156，若通过引脚T0输入周期为1ms的脉冲，则定时器0的定时时间为（<code>100ms</code>）</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>计数值</mtext><mo>=</mo><msup><mn>2</mn><mn>8</mn></msup><mo>−</mo><mtext>初值</mtext><mo>=</mo><mn>256</mn><mo>−</mo><mn>156</mn><mo>=</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">\text{计数值} =2^8 -\text{初值} =256 -156 =100
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">计数值</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9474em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">初值</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">256</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">156</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">100</span></span></span></span></span></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>定时时间</mtext><mo>=</mo><mtext>计数值</mtext><mo>×</mo><mtext>输入脉冲周期</mtext><mo>=</mo><mn>100</mn><mo>×</mo><mn>1</mn><mi>m</mi><mi>s</mi><mo>=</mo><mn>100</mn><mi>m</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">\text{定时时间} =\text{计数值}\times\text{输入脉冲周期} =100\times1ms =100ms
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">定时时间</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord text"><span class="mord cjk_fallback">计数值</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">输入脉冲周期</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">100</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mord mathnormal">m</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">100</span><span class="mord mathnormal">m</span><span class="mord mathnormal">s</span></span></span></span></span></p>
+<ol start="55">
+<li>定时测试压力和温度的单片机应用系统，以定时器0实现定时。压力超限的报警信号分别由 和 输入，中断优先顺序为：压力超限→温度超限→定时检测。为此，中断允许控制寄存器IE最低3位的状态应是（<code>111</code>），中断优先级控制寄存器IP最低3位的状态应是（<code>101</code>）</li>
+<li>使用8KB×8的RAM芯片，用译码法扩展64KB×8的外部，需要( <code>8</code> )片存储芯片，共需使用( <code>16</code> )条地址线。其中( <code>13</code> )条用于存储单元选择，( <code>3</code> )条用于芯片选择</li>
+<li>三态缓冲器的三态分别是(<code>高电平</code>)、(<code>低电平</code>)和(<code>高阻态</code>)</li>
+<li>80C51单片机系统整个存储空间由4部分组成，分别为( <code>256</code> )个地址单元的内部( <code>数据</code> )存储器，( <code>4KB</code> )个地址单元的内部( <code>程序</code> )存储器，( <code>60KB</code> )个地址单元的外部( <code>程序</code> )存储器，( <code>64KB</code> )个地址单元的外部( <code>数据</code> )存储器</li>
+<li>在80C51单片机系统中，为外扩展存储器准备了( <code>16</code> )条地址线，其中低位地址线由( <code>P0口</code> )提供，高位地址线由( <code>P2口</code> )提供</li>
+<li>起止地址为0000H~3FFFH的外扩展存储器芯片的容量是( <code>16</code> )KB。若外扩展存储器芯片的容量为2 KB，起始地址为3000H，则终止地址应为( <code>37FFH</code> )</li>
+<li>在存储器扩展中，无论是线选法还是译码法，最终都是为扩展芯片的(<code>片选</code>)引脚端提供信号。</li>
+<li>向8255写入的工作方式命令为0A5H，所定义的工作方式为：A口为(<code>输出</code>)，B口为(<code>输出</code>)，C口高位部分为(<code>输出</code>)，C口低位部分为(<code>输入</code>)</li>
+<li>通过8255口B输入8个按键的状态，然后通过口A输出送LED显示器，按键状态输入由PC2位控制。则8255的工作方式命令为( <code>A7H</code> )</li>
+<li>若某异步通信接口每帧信息格式为10位，接口每秒传送1000个字符，则波特率为( <code>100bit/s</code> )</li>
+<li>串行通信有(<code>单工</code>) 、(<code>全双工</code>)化和(<code>半双工</code>)化3种数据通路形式</li>
+<li>常用的A/D转换原理有( <code>逐次逼近</code> )式、( <code>双积分</code> )式和( <code>固频变换</code>)式</li>
+</ol>
+<h2 id="判断题">判断题</h2>
+<p>1．8031与8751的区别在于内部是否有程序存储器。（ <code>√</code> ）</p>
+<p><span style="color:red;">解析:</span></p>
+<p>如果要在 8751 单片机上运行程序，则必须将程序存储在外部存储器中，然后通过串行端口将程序下载到 8751 单片机的内部 RAM 中执行</p>
+<p>3．当向堆栈压入一个字节的数据后，SP中的内容减1。（<code>×</code>）</p>
+<p><span style="color:red;">解析:</span></p>
+<p>对于51单片机数据进栈和出栈,遵循“先加后压,先弹后减”操作原则，先进后出（FIFO）的数据结构</p>
+<p>4．程序计数器PC中装的内容是当前正在执行指令的地址。（<code>×</code>）</p>
+<p><span style="color:red;">解析:</span></p>
+<p>PC是CPU中的一个寄存器，用于存储下一条要执行的指令的地址。当CPU执行一条指令时，会从PC中读取指令的地址，将指令从存储器（如内存）中取出，并执行该指令。执行完毕后，CPU会将PC的值加1，以指向下一条要执行的指令</p>
+<p>5．某特殊功能寄存器的字节地址为80H，它既能字节寻址，也能位寻址。（<code>√</code>）</p>
+<p>6．AT89S51单片机中的PC是不可寻址的。（<code>√</code>）</p>
+<p><span style="color:red;">解析:</span></p>
+<p>PC本身是一个寄存器，不能直接寻址。可以使用指令来操作PC的值，但不能直接将PC当成一个普通的寄存器来进行读写操作，在汇编中可以使用LJMP指令来跳转到指定的地址执行指令，但是不能直接将PC的值赋值为指定的地址</p>
+<p>8．AT89S51的定时器/计数器对外部脉冲进行计数时，要求输入的计数脉冲的高电平或低电平的持续时间不小于1个机器周期。（<code>×</code>）</p>
+<p>9．区分外部程序存储器和数据存储器的最可靠的方法是看其是被 <code>WR*</code>还是被 <code>PSEN*</code>信号连接。（<code>√</code>）</p>
+<p><span style="color:red;">解析:</span></p>
+<p><code>WR*</code>信号通常用于外部存储器，表示将数据写入存储器。 <code>PSEN*</code>信号通常用于数据存储器，表示启用存储器</p>
+<p>10．各中断源发出的中断请求信号，都会标记在AT89S51的TCON寄存器中。（<code>×</code>）</p>
+<p><span style="color:red;">解析:</span></p>
+<p>在 AT89S51 芯片中，各中断源发出的中断请求信号都会标记在 INTCON 寄存器中</p>
+<ol start="11">
+<li>定时器T0中断可以被外部中断0中断。（<code>√</code>）</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">中断优先级（高-&gt;低排序）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">INT0</td>
+</tr>
+<tr>
+<td style="text-align:center">T0</td>
+</tr>
+<tr>
+<td style="text-align:center">INT1</td>
+</tr>
+<tr>
+<td style="text-align:center">T1</td>
+</tr>
+<tr>
+<td style="text-align:center">串口中断</td>
+</tr>
+</tbody>
+</table>
+<ol start="12">
+<li>指令中直接给出的操作数称为直接寻址。（<code>×</code>）</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<p>直接寻址是指令中直接给出操作数的单元地址，该单元地址中的内容就是操作数</p>
+<ol start="13">
+<li>内部RAM的位寻址区，既能位寻址，又可字节寻址。（<code>√</code>）</li>
+<li>特殊功能寄存器SCON与定时器/计数器的控制无关。（<code>√</code>）</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<p>SCON是串口控制寄存器，TCON寄存器才是定时器相关的</p>
+<ol start="15">
+<li>
+<p>当AT89S51执行MOVX A，@R1指令时，伴随着WR*信号有效。（<code>×</code>）</p>
+</li>
+<li>
+<p>串行口工作方式1的波特率是固定的，为fosc/32。（<code>×</code>）</p>
+</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<p>不是固定的，是可变的</p>
+<ol start="17">
+<li>区分外部程序存储器和数据存储器的最可靠的方法是看其是被  RD* 还是被 PSEN* 信号连接。（<code>×</code>）</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<p>区分外部程序存储器和数据存储器的最可靠的方法是看其是被 <code>WR*</code>还是被 <code>PSEN*</code>信号连接</p>
+<ol start="18">
+<li>逐次比较型A/D转换器与双积分A/D转换器比较，转换速度比较慢。（<code>×</code>）</li>
+<li>当EA脚接高电平时，对ROM的读操作只访问片外程序存储器。（<code>×</code> ）</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<p>EA脚接高电平时，在进行ROM的读操作时，单片机将从内部的ROM中读取数据。如果EA脚接低电平，则单片机将从外部存储器中读取数据</p>
+<ol start="20">
+<li>必须有中断源发出中断请求，并且CPU开中断，CPU才可能响应中断。（<code>×</code> ）</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<p>●有中断源发出中断请求；</p>
+<p>●中断总允许位EA=1，即CPU开中断；</p>
+<p>●申请中断的中断源的中断允许位为1，即中断没有屏蔽；</p>
+<p>●无同级或更高级中断正在被服务；</p>
+<p>●当前的指令周期已经结束；</p>
+<p>●若现在指令为RETI 或者是访问IE或IP 指令，则该指令以及紧接着的另一条指令已执行完</p>
+<ol start="21">
+<li>8155是一种8位单片机。（<code>×</code> ）</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<p>8155不是单片机，是一种与单片机配套使用的接口芯片</p>
+<ol start="22">
+<li>51单片机只能做控制用，不能完成算术运算。（<code>×</code> ）</li>
+<li>单片机内部RAM和外部RAM是统一编址的，它们的访问指令相同。（<code>×</code> ）</li>
+<li>指令AJMP的跳转范围是2KB。（<code>√</code>）</li>
+<li>扩展I/O口占用片外数据存储器的地址资源。（<code>√</code>）</li>
+<li>8051单片机，程序存储器数和数据存储器扩展的最大范围都是一样的。（<code>√</code>）</li>
+<li>单片机系统扩展时使用的锁存器，是用于锁存低8位地址。（<code>√</code>）</li>
+<li>在A/D变换时，转换频率越高越好。（<code>×</code> ）</li>
+<li>如果AT89S51单片机的某一高优先级中断请求正在被响应，此时不会再发生中断嵌套。（<code>√</code>）</li>
+<li>当EA’=1时，AT89S51单片机片外可扩展的程序存储器空间和数据存储器空间是一样的（<code>×</code> ）</li>
+<li>指令字节数越多，执行时间越长（<code>×</code> ）</li>
+<li>访问单片机内部RAM或外部扩展的RAM的低128字节，指令是不同的（<code>√</code>）</li>
+<li>并行接口芯片82C55的方式0是无条件的输入输出方式（<code>√</code>）</li>
+<li>逐次比较型ADC的转换速度要比双积分型ADC的转换速度快（<code>√</code>）</li>
+<li>串行口方式0的波特率仅与单片机的晶体振荡器有关，与定时器无关（<code>√</code>）</li>
+<li>扩展的I/O接口芯片中的寄存器，要占用片外程序存储器的地址单元（<code>√</code>）</li>
+<li>AT89S51单片机进行串行通信时，要占用一个定时器作为波特率发生器（<code>√</code>）</li>
+<li>AT89S51单片机访问片外I/O设备中的寄存器，要使用MOVX类指令（<code>√</code>）</li>
+<li>“转换速度”仅适用于A/D转换器，D/A转换器不用考虑“转换速度”这一问题。（<code>×</code>）</li>
+<li>对于周期性的干扰电压，可使用双积分的A/D转换器，并选择合适的积分元件，可以将该周期性的干扰电压带来的转换误差消除（<code>√</code>）</li>
+<li>串行口的发送缓冲器和接收缓冲器只有1个单元地址（<code>√</code>）</li>
+<li>AT89S51的定时器/计数器对外部脉冲进行计数时，要求输入的计数脉冲的高电平和低电平的持续时间均不小于1个机器周期（<code>×</code>）</li>
+</ol>
+<h2 id="简答题">简答题</h2>
+<ul>
+<li>AT89S51采用6MHz的晶振，定时2ms，如用定时器方式1时的初值（16进制数）应为多少？（写出计算过程）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230101194021.jpg" alt=""></p>
+<ul>
+<li>说明AT89S51的外部引脚 <code>EA*</code> 的作用？</li>
+</ul>
+<p>当 <code>EA*</code>为高电平时，AT89S51访问 <code>内部程序存储器</code>,但当地址大于0FFF时,自动转到外部程序存储器；当 <code>EA*</code>为低电平时，AT89S51 <code>只读取外部程序存储器</code>，读取的地址范围为0000H～FFFFH，片内的4 KB Flash程序存储器不起作用</p>
+<ul>
+<li>写出AT89S51的所有中断源，并说明说明哪些中断源在响应中断时，由硬件自动清除，哪些中断源必须用软件清除，为什么？</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">答</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">外部中断INT0</td>
+</tr>
+<tr>
+<td style="text-align:center">外部中断INT1</td>
+</tr>
+<tr>
+<td style="text-align:center">定时器/计数器中断T0</td>
+</tr>
+<tr>
+<td style="text-align:center">定时器/计数器中断T1</td>
+</tr>
+<tr>
+<td style="text-align:center">串行口中断</td>
+</tr>
+</tbody>
+</table>
+<p>其中，串行口中断才 <code>TI</code> 和 <code>RI</code> 需要软件清0，其他的硬件自动清0，因为串口中断的输出中断为TI,输入中断为RI,故用软件清0</p>
+<ul>
+<li>AT89S51采用12MHz的晶振，定时1ms，如用定时器方式1时的初值（16进制数）应为多少？（写出计算过程）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230101221904.jpg" alt=""></p>
+<ul>
+<li>中断服务子程序返回指令RETI和普通子程序返回指令RET有什么区别？</li>
+</ul>
+<p>RETI除了将压栈的内容出栈外（即现场恢复），还清除在中断响应时被置1的AT89S51内部中断优先级寄存器的优先级状态。</p>
+<ul>
+<li>AT89S51外扩的程序存储器和数据存储器可以有相同的地址空间，但不会发生数据冲突，为什么？</li>
+</ul>
+<p>AT89S51外扩的程序存储器和数据存储器可以有相同的地址空间，但不会发生数据冲突。这是因为它们的控制信号不同：</p>
+<p>(1) 外扩程序存储器是 <code>PSEN*</code>信号为其控制信号；外扩数据存储器是 <code>RD*</code> 与 <code>WR*</code> 信号为其控制信号</p>
+<p>(2) 指令不同,程序存储器用MOVC读取，数据存储器用MOVX存取</p>
+<ul>
+<li>LED的静态显示方式与动态显示方式有何区别？各有什么优缺点？</li>
+</ul>
+<p>LED的静态显示方式与动态显示方式有何区别？各有什么优缺点？</p>
+<p>静态：显示期间，锁存器输出的段码不变;亮度大,各位LED的段选分别控制；位数多硬件电路复杂</p>
+<p>动态：所有位段码线并连一起，各位的亮灭靠片选控制端控制，亮度较低，多位控制电路简单</p>
+<ul>
+<li>简述行列式扫描键盘的工作原理</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230101223709.jpg" alt=""></p>
+<p>①首先判断有无键按下：</p>
+<p>将列线全部置0，读行线状态，若P1.0~P1.3全为1，则表明无键按下，若出现低电平即0，则有键按下，记录下行号 i ;</p>
+<p>②其次，如有键按下，判断具体键号</p>
+<p>方法如下：逐列为低，其它为高，再读行线状态，如出现哪一行为低，记录此时的列号j ， 则证明第i行第j列的按键被按下，至此完成键盘的行列式扫描。</p>
+<ul>
+<li>图为8段共阴数码管，请写出如下数值的段码</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230101224213.jpg" alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字符</th>
+<th style="text-align:center">段码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">3FH</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">06H</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">5BH</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">4FH</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">66H</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">6DH</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">7DH</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">07H</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">7FH</td>
+</tr>
+<tr>
+<td style="text-align:center">9</td>
+<td style="text-align:center">6FH</td>
+</tr>
+<tr>
+<td style="text-align:center">A</td>
+<td style="text-align:center">77H</td>
+</tr>
+<tr>
+<td style="text-align:center">B</td>
+<td style="text-align:center">7CH</td>
+</tr>
+<tr>
+<td style="text-align:center">C</td>
+<td style="text-align:center">39H</td>
+</tr>
+<tr>
+<td style="text-align:center">D</td>
+<td style="text-align:center">5EH</td>
+</tr>
+<tr>
+<td style="text-align:center">E</td>
+<td style="text-align:center">79H</td>
+</tr>
+<tr>
+<td style="text-align:center">F</td>
+<td style="text-align:center">71H</td>
+</tr>
+<tr>
+<td style="text-align:center">无显示</td>
+<td style="text-align:center">00H</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>采用6MHz的晶振，定时5ms，用定时器方式1时的初值应为多少？（请给出计算过程）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230102215750.jpg" alt=""></p>
+<ul>
+<li>请用语言表述AT89C52单片机P3引脚的第二功能</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230104135955.jpg" alt=""></p>
+<ul>
+<li>在内部中断0中，T0采用工作方式1，晶振频率为12MHz，要求定时时间为10毫秒，请写出T0的初值（要求有计算公式和最后的十六进制值）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230104105828.jpg" alt=""></p>
+<ul>
+<li>请画出单片机时钟电路，并连接至单片机引脚上</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230104140012.jpg" alt=""></p>
+<ul>
+<li>
+<p>在8051的存储器结构中，内部数据存储器可分为几个区域？各有什么特点？</p>
+<p>片内数据存储器按功能可以分成以下几个部分:工作寄存器组区、位寻址区、<br>
+一般RAM区和特殊功能寄存器区，其中还包含堆栈区。工作寄存器组区， <code>00H~ 1FH</code>单元，可用 <code>R0~R7等8个寄存器访问</code>;位寻址区， <code>20H~2FH</code> 单元，可按位<br>
+方式访问;一般RAM 区， <code>30H~7FH</code> 单元;堆栈区，可从 <code>08~7F</code>单元;特殊功<br>
+能寄存器区位于 <code>80H~FFH</code> 单元。</p>
+</li>
+<li>
+<p>80C51单片机存储器的基本结构是什么？ 其存储器的地址空间如何划分？</p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230104135611.jpg" alt=""></p>
+<ul>
+<li>80C51单片机外RAM和ROM使用相同的地址，是否会在总线上出现竞争?为什么?</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230104141247.jpg" alt=""></p>
+<ul>
+<li>什么叫外部中断？有几个外部中断源？请求信号由什么引脚引入？</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230104151034.jpg" alt=""></p>
+<ul>
+<li>中断优先级的顺序？5个中断源的入口地址？</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230104151045.jpg" alt=""></p>
+<ul>
+<li>什么叫中断？中断的作用是什么？</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230104151021.jpg" alt=""></p>
+<ul>
+<li>80C51单片机执行指令所用的时间与机器周期之间的关系是什么？</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230104155421.jpg" alt=""></p>
+<ul>
+<li>什么叫通信？有几种通信方式？其方式特点是什么？</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230104160254.jpg" alt=""></p>
+<ul>
+<li>什么是串行通信，什么是并行通信，各有何特点？</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230104160925.jpg" alt=""></p>
+<ul>
+<li>微处理器、微计算机、微处理机、CPU、单片机它们之间有何区别？</li>
+</ul>
+<p>微处理器、微处理机和CPU都是中央处理器的不同称谓；而微计算机、单片机都是一个完整的计算机系统，单片机特指集成在一个芯片上的用于测控目的的单片微计算机。</p>
+<ul>
+<li>为什么不应当把51系列单片机称为MCS-51系列单片机？</li>
+</ul>
+<p>因为MCS-51系列单片机中的“MCS”是Intel公司生产的单片机的系列符号，而51系列单片机是指世界各个厂家生产的所有与8051的内核结构、指令系统兼容的单片机</p>
+<ul>
+<li>64KB程序存储器空间有5个单元地址对应AT89C51单片机5个中断源的中断入口地址，请写出这些单元的入口地址及对应的中断源</li>
+</ul>
+<p>64KB程序存储器空间中有5个特殊单元分别对应于5个中断源的中断服务程序的入口地址：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">入口地址</th>
+<th style="text-align:center">中断源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0003H</td>
+<td style="text-align:center">外部中断0</td>
+</tr>
+<tr>
+<td style="text-align:center">000BH</td>
+<td style="text-align:center">定时器0</td>
+</tr>
+<tr>
+<td style="text-align:center">0013H</td>
+<td style="text-align:center">外部中断1</td>
+</tr>
+<tr>
+<td style="text-align:center">001BH</td>
+<td style="text-align:center">定时器1</td>
+</tr>
+<tr>
+<td style="text-align:center">0023H</td>
+<td style="text-align:center">串行口</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>解释手工汇编、机器汇编、交叉汇编、反汇编术语概念</li>
+</ul>
+<p>（1）手工汇编：手工编程，首先把程序用助记符指令写出，然后通过查指令的机器代码表，逐个把助记符指令“翻译”成机器代码，这种人工查表“翻译”指令的方法称为手工汇编。</p>
+<p>（2）机器汇编：是借助于微型计算机上的软件（汇编程序）来代替手工汇编，完成把助记符指令“翻译”成机器代码的工作。</p>
+<p>（3）交叉汇编：使用微型计算机来完成汇编，而汇编后得到的机器代码却是在另一台计算机（这里是单片机）上运行，称这种机器汇编为交叉汇编。</p>
+<p>（4）反汇编：将二进制的机器代码语言程序翻译成汇编语言源程序的过程</p>
+<ul>
+<li>设计子程序时应注意哪些问题？</li>
+</ul>
+<p>（1）子程序的第一条指令前必须有标号。（2）使用子程序调用指令时，有两条调用指令可供使用。</p>
+<p>①使用绝对调用指令（ACALL addr11）要注意，被调用的子程序的首地址与本绝对调用指令的下一条指令的高5位地址相同，即只能在同一2KB程序存储区内。</p>
+<p>②使用长调用指令（LCALL addr16）时，addr16为直接调用的子程序的目标地址，也就是说，被调用的子程序可放置在64KB程序存储器区的任意位置。</p>
+<p>（3）子程序结构中必须用到堆栈，堆栈通常用来保护断点和现场保护。</p>
+<p>（4）子程序返回主程序时，最后一条指令必须是RET指令。</p>
+<p>（5）子程序可以嵌套，即主程序可以调用子程序，子程序又可以调用另外的子程序</p>
+<ul>
+<li>中断服务子程序与普通子程序有哪些相同和不同之处？</li>
+</ul>
+<p>RETI指令在返回时，同时清除中断系统中相应的优先级触发器，以允许下次中断，而RET指令则没有这个操作。除了这一点两条指令不同外，其他操作都相同</p>
+<ul>
+<li>中断响应的条件是什么？</li>
+</ul>
+<p>总中断允许开关接通EA=1；该中断源发出中断请求；该中断源的中断允许位=1；无同级或更高级中断正在被服务</p>
+<ul>
+<li>AT89C51单片机响应外部中断的典型时间是多少？在哪些情况下，CPU将推迟对外部中断请求的响应？</li>
+</ul>
+<p>最短为是3个周期，最长为8个周期，当遇到才开始执行RETI或访问IE或IP的指令则需把当前指令执行完再继续执行一条指令后才能响应中断</p>
+<ul>
+<li>定时器/计数器用作定时器模式时，其计数脉冲由谁提供？定时时间与哪些因素有关？</li>
+</ul>
+<p>定时器/计数器用作定时器时，其计数脉冲由系统振荡器产生的内部时钟信号12分频后提供。定时时间与时钟频率和定时初值有关</p>
+<ul>
+<li>定时器/计数器用作计数器模式时，对外界计数频率有何限制？</li>
+</ul>
+<p>由于确认1次负跳变要花2个机器周期，即24个振荡周期，因此外部输入的计数脉冲的最高频率为系统振荡器频率的1/24</p>
+<ul>
+<li>定时器/计数器的工作方式2有什么特点？适用于哪些应用场合？</li>
+</ul>
+<p>定时器/计数器的工作方式2具有自动恢复初值的特点，适用于精确定时，如波特率的产生</p>
+<ul>
+<li>一个定时器的定时时间有限，如何用两个定时器的串行定时来实现较长时间的定时？</li>
+</ul>
+<p>方法1，在第一个定时器的中断程序里关闭本定时器的中断程序，设置和打开另一个定时器；在另一个定时器的中断程序中关闭本定时中断，设置和打开另一个定时器。这种方式的定时时间为两个定时器定时时间的和</p>
+<ul>
+<li>THx与TLx（x = 0，1）是普通寄存器还是计数器？其内容可以随时用指令更改吗？更改后的新值是立即刷新还是等当前计数器计满后才能刷新？</li>
+</ul>
+<p>THx与TLx（x=0，1）是由特殊功能寄存器构成的计数器，其内容可以随时用指令更改，更改后的新值立即刷新。但在读THx、TLx值时，应该先读THx值，后读TLx，再读THx值。若两次读得THx值相同，则可确定读得的内容正确。若前后两次读得的THx值有变化，再重复上述过程</p>
+<ul>
+<li>在异步串行通信中，接收方是如何知道发送方开始发送数据的？</li>
+</ul>
+<p>当接收方检测到RXD引脚上的有效的负跳变时，即可知道发送方开始发送数据</p>
+<ul>
+<li>串行口有几种工作方式？有几种帧格式？各种工作方式的波特率如何确定？</li>
+</ul>
+<p>串行口有4种工作方式：方式0、方式1、方式2、方式3。有3种帧格式，方式2和3具有相同的帧格式。</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>方式0的发送和接收都以</mtext><mfrac><mrow><mi>f</mi><mi>o</mi><mi>s</mi><mi>c</mi></mrow><mn>12</mn></mfrac><mtext>为固定波特率</mtext></mrow><annotation encoding="application/x-tex">\text{方式0的发送和接收都以}\frac{fosc}{12}\text{为固定波特率}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.0574em;vertical-align:-0.686em;"></span><span class="mord text"><span class="mord cjk_fallback">方式</span><span class="mord">0</span><span class="mord cjk_fallback">的发送和接收都以</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">12</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">osc</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord text"><span class="mord cjk_fallback">为固定波特率</span></span></span></span></span></span></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>方式1的波特率</mtext><mo>=</mo><mfrac><mrow><mn>2</mn><mi>S</mi><mi>M</mi><mi>O</mi><mi>D</mi></mrow><mn>32</mn></mfrac><mo>×</mo><mtext>定时器T1的溢出率</mtext></mrow><annotation encoding="application/x-tex">\text{方式1的波特率}=\frac{2SMOD}{32}\times \text{定时器T1的溢出率}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">方式</span><span class="mord">1</span><span class="mord cjk_fallback">的波特率</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0463em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">32</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.02778em;">SMO</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">定时器</span><span class="mord">T1</span><span class="mord cjk_fallback">的溢出率</span></span></span></span></span></span></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>方式2的波特率</mtext><mo>=</mo><mfrac><mrow><mn>2</mn><mi>S</mi><mi>M</mi><mi>O</mi><mi>D</mi></mrow><mn>64</mn></mfrac><mo>×</mo><mi>f</mi><mi>o</mi><mi>s</mi><mi>c</mi></mrow><annotation encoding="application/x-tex">\text{方式2的波特率}=\frac{2SMOD}{64}\times fosc
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">方式</span><span class="mord">2</span><span class="mord cjk_fallback">的波特率</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0463em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">64</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.02778em;">SMO</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">osc</span></span></span></span></span></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>方式3的波特率</mtext><mo>=</mo><mfrac><mrow><mn>2</mn><mi>S</mi><mi>M</mi><mi>O</mi><mi>D</mi></mrow><mn>32</mn></mfrac><mo>×</mo><mtext>定时器T1的溢出率</mtext></mrow><annotation encoding="application/x-tex">\text{方式3的波特率}=\frac{2SMOD}{32}\times \text{定时器T1的溢出率}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">方式</span><span class="mord">3</span><span class="mord cjk_fallback">的波特率</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0463em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">32</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.02778em;">SMO</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">定时器</span><span class="mord">T1</span><span class="mord cjk_fallback">的溢出率</span></span></span></span></span></span></p>
+<ul>
+<li>为什么定时器/计数器T1用作串行口波特率发生器时，常采用方式2？若已知时钟频率、通信波特率，如何计算其初值？</li>
+</ul>
+<p>因为定时器/计数器在方式2下，初值可以自动重装，这样在进行串口波特率发生器设置时，就避免了重装参数的操作,且减少了重装参数的误差。</p>
+<p>已知时钟频率，通信波特率，根据公式：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>波特率</mtext><mo>=</mo><mfrac><mrow><mn>2</mn><mi>S</mi><mi>M</mi><mi>O</mi><mi>D</mi></mrow><mn>32</mn></mfrac><mo>×</mo><mfrac><mrow><mi>f</mi><mi>o</mi><mi>s</mi><mi>c</mi></mrow><mrow><mn>12</mn><mo>×</mo><mo stretchy="false">(</mo><mn>256</mn><mo>−</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\text{波特率}=\frac{2SMOD}{32}\times \frac{fosc}{12\times(256-x)}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">波特率</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0463em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">32</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.02778em;">SMO</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:2.3074em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">12</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mopen">(</span><span class="mord">256</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">osc</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<ul>
+<li>简述利用串行口进行多机通信的原理</li>
+</ul>
+<p>以方式1为例。发送过程：数据位由TXD端输出，发送1帧信息为10位，当CPU执行1条数据写发送缓冲器SBUF的指令，就启动发送。发送开始时，内部发送控制信号SEND变为有效，将起始位向TXD输出，此后，每经过1个TX时钟周期，便产生1个移位脉冲，并由TXD输出1个数据位。8位数据位全部输出完毕后，置1中断标志位TI，然后SEND信号失效。</p>
+<p>接收过程：当检测到起始位的负跳变时，则开始接收。接收时，定时控制信号有2种。其中一种是位检测器采样脉冲，它的频率是RX时钟的16倍。也就是在1位数据期间，有16个采样脉冲，以波特率的16倍速率采样RXD引脚状态，当采样到RXD端从1到0的跳变时就启动检测器，接收的值是3次连续采样，取其中2次相同的值，以确认是否是真正的起始位的开始，这样能较好地消除干扰引起的影响，以保证可靠无误地开始接收数据</p>
+<ul>
+<li>为什么AT89C51单片机串行口的方式0帧格式没有起始位（0）和停止位（1）?</li>
+</ul>
+<p>串行口的方式0为同步移位寄存器输入/输出方式，常用于外接移位寄存器，以扩展并行I/O口，一般不用于两个89C51之间的串行通信。该方式以fosc/12的固定波特率从低位到高位发送或接收数据</p>
+<ul>
+<li>直接以TTL电平串行传输数据的方式有什么缺点？</li>
+</ul>
+<p>优点是连线简单，缺点是抗干扰性能差，传输距离短</p>
+<ul>
+<li>在AT89C51单片机系统中，外接程序存储器和数据存储器共16位地址线和8位数据线，为何不会发生冲突？</li>
+</ul>
+<p>因为控制信号线的不同。 外扩的RAM芯片既能读出又能写入，所以通常都有读、写控制引脚，记为和，它们分别与89C51的和引脚相连。</p>
+<p>外扩的EPROM在正常使用中只能读出，不能写入，故EPROM芯片没有写入控制引脚，只有读出引脚，记为，该引脚与89C51单片机的相连</p>
+<ul>
+<li>I/O接口和I/O端口有什么区别？I/O接口的功能是什么？</li>
+</ul>
+<p>I/O端口简称I/O口，常指I/O接口电路中具有端口地址的寄存器或缓冲器。I/O接口是指单片机与外设间的I/O接口芯片。</p>
+<p>I/O接口的功能：（1）实现和不同外设的速度匹配；（2）输出数据缓存；（3）输入数据三态缓冲</p>
+<ul>
+<li>82C55的“方式控制字”和“PC口按位置位/复位控制字”都可以写入82C55的同一控制寄存器，82C55是如何来区分这两个控制字的？</li>
+</ul>
+<p>82C55通过写入控制字寄存器的控制字最高位来判断，最高位为1时，为方式控制字；最高位为0时，为PC口按位置位/复位控制字</p>
+<ul>
+<li>为什么要消除按键的机械抖动？软件消除按键机械抖动的原理是什么？</li>
+</ul>
+<p>在按键的闭合和断开过程中，由于开关的机械特性，导致了按键抖动的产生。如果不消除按键的机械抖动，按键的状态读取将有可能出现错误。消除按键抖动一般是采用软件或硬件去抖。软件去抖的原理是，在第一次检测到有键按下时，该键所对应的行线为低电平，执行一段延时10ms的子程序后，确认该行线电平是否仍然为低电平，如果仍为低电平，则确认该行确实有键按下</p>
+<ul>
+<li>LED的静态显示方式与动态显示方式有何区别？各有什么优缺点？</li>
+</ul>
+<p>静态显示时，数据是分开送到每一位LED上的。而动态显示时，则数据是同时送到每一个LED上，再根据位选线来确定是哪一位LED被显示。静态显示亮度很高，但口线占用较多。动态显示口线占用较少，适合用在显示位数较多的场合</p>
+<ul>
+<li>说明矩阵式键盘按键按下的识别原理</li>
+</ul>
+<p>按键设置在行、列线交点上，行、列线分别连接到按键开关的两端。行线通过上拉电阻接到+5V上，无按键按下时，行线处于高电平状态，而当有按键按下时，行线电平状态将由与此行线相连的列线的电平决定。列线的电平如果为低，则行线电平为低；列线的电平如果为高，则行线的电平亦为高。将行、列线信号配合起来并做适当的处理，才能确定闭合键的位置</p>
+<ul>
+<li>键盘有哪3种工作方式，它们各自的工作原理及特点是什么？</li>
+</ul>
+<p>（1）编程扫描方式。当单片机空闲时，才调用键盘扫描子程序，反复扫描键盘，等待用户从键盘上输入命令或数据，响应键盘的输入请求。</p>
+<p>（2）定时扫描方式。单片机每隔一定的时间对键盘扫描一次。</p>
+<p>（3）中断扫描方式。只有在键盘有键按下时，才执行键盘扫描程序并执行该按键功能程序，如果无键按下，单片机将不理睬键盘</p>
+<ul>
+<li>如图所示，STC89C52RC采用晶振频率11.0592MHz，利用P1口控制LED灯的亮灭，写一段流水灯程序， 利用T0工作方式1进行定时，采用定时器中断的方式(可参考:一次定时的时间为1ms,其定时值初始值为0xFC67),每1秒钟仅有2个灯亮，顺序依次是(D1,D8) - (D2，D7)一(D3,D6) - (D4，D5) - (D3,D6) (D2，D7)，如此循环，也就是两边向中间流水、再从中间向两边流水。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230104143225.jpg" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># include &lt;reg52.h&gt;
+
+# define LED_PORT P1	&#x2F;&#x2F;宏定义LEDP1端口
+
+bit flag1s &#x3D; 0;	&#x2F;&#x2F;1s中断标志位
+unsigned char LEDMode &#x3D; 1;	&#x2F;&#x2F;模式12345678
+
+void main()
+&#123;
+    EA &#x3D; 1;	&#x2F;&#x2F;开启总中断
+    TMOD &amp;&#x3D; 0xF0;
+    TMOD |&#x3D; 0x01;
+    TH0 &#x3D; 0xFC;	&#x2F;&#x2F;定时1ms
+    TL0 &#x3D; 0x67;
+    ET0 &#x3D; 1;	&#x2F;&#x2F;使能中断
+    TR0 &#x3D; 1;	&#x2F;&#x2F;启动
+    
+    while(1)
+    &#123;
+        if(flag1s)
+        &#123;
+            flag1s &#x3D; 0;
+            switch(LEDMode)
+        	&#123;
+           		case 1:LED_PORT &#x3D; 0x7E;LEDMode &#x3D; 2;break;	&#x2F;&#x2F;1,8亮
+            	case 2:LED_PORT &#x3D; 0xBD;LEDMode &#x3D; 3;break;	&#x2F;&#x2F;2,7亮
+            	case 3:LED_PORT &#x3D; 0xDB;LEDMode &#x3D; 4;break;	&#x2F;&#x2F;3,6亮
+            	case 4:LED_PORT &#x3D; 0xE7;LEDMode &#x3D; 5;break;	&#x2F;&#x2F;4,5亮
+            	case 5:LED_PORT &#x3D; 0xDB;LEDMode &#x3D; 6;break;	&#x2F;&#x2F;3,6亮
+            	case 6:LED_PORT &#x3D; 0xBD;LEDMode &#x3D; 1;break;	&#x2F;&#x2F;2,7亮
+            	default:break;
+        	&#125;
+        &#125;
+    &#125;
+&#125;
+
+void InterruptTimer0() interrupt 1
+&#123;
+    static unsigned int count &#x3D; 0;
+    
+    TH0 &#x3D; 0xFC;  &#x2F;&#x2F;重新加载初值
+    TL0 &#x3D; 0x67;
+    if(count &gt;&#x3D; 1000)	&#x2F;&#x2F;1s
+    &#123;
+        count &#x3D; 0;
+        flag1s &#x3D; 1;
+    &#125;
+&#125;</code></pre>
+<h2 id="选择题">选择题</h2>
+<ol>
+<li>
+<p>在CPU内部，反映程序运行状态或反映运算结果的特征寄存器是（  <code>B</code>  ）</p>
+<p>A．PC     B．PSW   C．A     D．SP</p>
+</li>
+<li>
+<p>外中断初始化的内容不包括（<code>A</code>）：</p>
+<p>A．设置中断响应方式   B．设置外中断允许 C．设置中断总允许   D．设置中断触发方式</p>
+</li>
+<li>
+<p>定时器T0工作在方式3时，定时器T1有（<code>C</code>）种工作方式。</p>
+<p>A．1种    B．2种  C．3种     D．4种</p>
+<p><span style="color:red;">解析:</span></p>
+<p>T0可以工作在方式3，T1不可以，T1工作在方式3相当于TR1=0,停止计数</p>
+</li>
+<li>
+<p>用AT89S51的串行口扩展并行I/O口时，串行接口工作方式选择（<code>A</code>）。</p>
+<p>A. 方式0   B.方式1  C. 方式2    D.方式3</p>
+</li>
+<li>
+<p>AT89S51的并行I/O口信息有两种读取方法：一种是读引脚，还有一种是（<code>A</code>）。</p>
+<p>A. 读锁存器  B. 读数据库 C. 读A累加器 D.读CPU</p>
+</li>
+<li>
+<p>以下不是构成控制器部件的是（<code>D</code>）：</p>
+<p>A. 程序计数器  B.指令寄存器  C.指令译码器  D.存储器</p>
+</li>
+<li>
+<p>P1口作输入用途之前必须（<code>B</code>）</p>
+<p>A. 外接上拉电阻  B.相应端口先置1   C. 相应端口先置0   D.外接高电平</p>
+</li>
+<li>
+<p>在家用电器中使用单片机应属于微计算机的（<code>B</code>）</p>
+<p>A．辅助设计应用 B．测量、控制应用 C．数值计算应用  D．数据处理应用</p>
+</li>
+<li>
+<p>执行子程序返回或中断子程序返回指令时，返回的断点是(<code>C</code>)</p>
+<p>A．调用指令的首地址       B．调用指令的末地址</p>
+<p>C．调用指令下一条指令的首地址  D．返回指令的末地址</p>
+</li>
+<li>
+<p>下列哪种文件后缀名是可以烧结至单片机中 （<code>A</code>）</p>
+<p>A . uv2      B . c     C. HEX   D .  inc</p>
+</li>
+<li>
+<p>AT89C52单片机（双列直插封装）有多少引脚 （<code>C</code>）</p>
+<p>A.20   B. 28   C. 40   D. 44</p>
+</li>
+<li>
+<p>AT89C52单片机的地址总线有多少位 （<code>C</code>）</p>
+<p>A.2   B. 8   C. 16   D. 32</p>
+</li>
+</ol>
+<p><span style="color:red;">解析:</span></p>
+<p>at89s52单片机的数据总线的宽度是8位，地址总路线宽度是16位，但地址线的低8位和数据线是分时复用的</p>
+<ol start="13">
+<li>
+<p>下面哪个引脚单片机的串行接受引脚（<code>B</code>）</p>
+<p>A.XTAL1   B. RXD   C. REST   D. ALE</p>
+</li>
+<li>
+<p>若采用的时钟晶体的频率是12MHz，那么单片机的机器周期是多少（<code>C</code>）</p>
+<p>A. 1/2微秒    B. 1/6微秒   C. 1微秒   D. 1-4微秒</p>
+</li>
+<li>
+<p>十六进制0xe5转换成二进制应该为（<code>C</code>）</p>
+<p>A. 1111 1101    B. 1110 0011   C. 1110 0101   D. 1111 1010</p>
+</li>
+<li>
+<p>在下列寄存器中，与定时 / 计数控制无关的是 （<code>C</code>）</p>
+<p>A .  TCON （定时控制寄存器）   B.  TMOD （工作方式控制寄存器）</p>
+<p>C. SCON （串行控制寄存器）    D.  IE （中断允许控制寄存器）</p>
+</li>
+<li>
+<p>MCS-51单片机的外部中断1的中断请求标志是 （<code>B</code>）</p>
+<p>A. TR1      B. IE1</p>
+<p>C. IT1       D. TF1</p>
+</li>
+<li>
+<p>定时器/计数器工作方式1是（<code>D</code>）</p>
+<p>A. 8位计数器结构         B. 2个8位计数器结构</p>
+<p>C. 13位计数结构         D. 16位计数结构</p>
+</li>
+<li>
+<p>已知1只共阳极LED显示器，其中a笔段为字形代码的最低位，若需显示数字E，则它的字形代码应为（<code>C</code>）</p>
+<p>A. 06H     B. F9H     C. 86H      D. 79H</p>
+</li>
+<li>
+<p>对程序计数器 PC 的操作 （<code>A</code>）</p>
+<p>A. 是自动进行的         B. 是通过传送进行的</p>
+<p>C . 是通过加 1 指令进行的  D. 是通过减 1 指令进行的</p>
+</li>
+<li>
+<p>下列计算机语言中，CPU能直接识别的是 （<code>D</code>）</p>
+<p>A. 自然语言   B. 高级语言   C. 汇编语言   D. 机器语言</p>
+</li>
+<li>
+<p>T89C52单片机的数据总线有多少位 （<code>B</code>）</p>
+<p>A.2   B. 8   C. 16   D. 32</p>
+</li>
+<li>
+<p>面哪个引脚单片机的地址锁存引脚 （<code>D</code>）</p>
+<p>A.XTAL1   B. RXD   C. REST   D. ALE</p>
+</li>
+<li>
+<p>当外部中断请求的信号方式为脉冲方式时，要求中断请求信号的高电平状态和低电平状态都应至少维持  （<code>A</code>）</p>
+<p>A. 1个机器周期  B. 2个机器周期  C. 4个机器周期 D. 8个机器周期</p>
+</li>
+<li>
+<p>二进制0110 1101转换成十六进制应该为  （<code>D</code>）</p>
+<p>A. 0xe5    B. 0x6E   C. 0x7E   D. 0x6D</p>
+</li>
+<li>
+<p>已知1只共阴极LED显示器，其中a笔段为字形代码的最低位，若需显示数字E，则它的字形代码应为（<code>D</code>）</p>
+<p>A. 06H     B. F9H     C. 86H      D. 79H</p>
+</li>
+<li>
+<p>8位二进制数所能表示的最大无符号数是 （<code>B</code>）</p>
+<p>A．256   B．255    C．128   D．127</p>
+</li>
+<li>
+<p>有一个数152，它与十六进制数6A相等，那么该数是 （<code>B</code>）</p>
+<p>A．二进制数   B．八进制数   C．十进制数   D．十六进制数</p>
+</li>
+<li>
+<p>十进制数向二进制数进行转换时,十进制数91相当于二进制数（<code>A</code>）</p>
+<p>A．1001 0001    B．0110 1111    C．0111 0001    D．0101 1011</p>
+</li>
+<li>
+<p>取值操作后，PC的值是 （<code>C</code>）</p>
+<p>A．当前指令前一条指令的地址   B．当前正在执行指令的地址</p>
+<p>C．下一条指令的地址       D．控制器中指令寄存器的地址</p>
+</li>
+<li>
+<p>80C51单片机中，设置堆栈指针SP为37H后就发生子程序调用，这时SP的值变为 （<code>C</code>）</p>
+<p>A．37H       B．38H       C．39H       D．3AH</p>
+</li>
+<li>
+<p>设置堆栈指针SP=30H后，进行一系列的堆栈操作。当进栈数据全部弹出后，SP应指向（<code>A</code>）</p>
+<p>A. 30H单元   B. 07H单元   C. 31H单元   D.2FH单元</p>
+</li>
+<li>
+<p>程序计数器PC是（<code>A</code>）位的计数器，能寻址64KB的程序存储器范围。</p>
+<p>A．16          B．8　　         C．4 　         D．32</p>
+</li>
+<li>
+<p>单片机程序存储器的寻址范围是由程序计数器PC的位数决定的，MCS-51的PC为16位，因此其寻址范围是 （<code>C</code>）</p>
+<p>A．4KB     B．8KB     C．64KB     D．128KB</p>
+</li>
+<li>
+<p>80C51单片机地址总线（AB）总线宽度为 （<code>B</code>）位。</p>
+<p>A．8          B．16          C．15          D．32</p>
+</li>
+<li>
+<p>8051单片机复位信号应从 （<code>B</code>）脚接入。</p>
+<p>A．P3．2  　  B．RST　        C．8脚          D．T1</p>
+</li>
+<li>
+<p>8051复位后PC和SP中的内容各为 （<code>C</code>）</p>
+<p>A．PC=0000H,SP=60H B．PC=0040H,SP=07H C．PC=0000H,SP=07H D．PC=1000H,SP=07H</p>
+</li>
+<li>
+<p>一个机器周期含有（<code>D</code>）个时钟周期</p>
+<p>A．1 　              B．2             C．6                D．12</p>
+</li>
+<li>
+<p>一个机器周期含有 ① 个时钟周期，当单片机时钟频率为12MHZ时，一个机器周期为 ②μs （<code>C</code>）</p>
+<p>A．①6 ②2      B．①12 ②2      C．①12 ②1      D．①6 ②1</p>
+</li>
+<li>
+<p>在寄存器间接寻址方式中，指定寄存器中存放的是 （<code>B</code>）</p>
+<p>A．操作数    B．操作数地址    C．转移地址   D．地址偏移量</p>
+</li>
+<li>
+<p>下列指令或指令序列中，不能实现PSW内容送A的是 （<code>C</code>）</p>
+<p>A. MOV A , PSW       B. MOV A , 0D0H</p>
+<p>C. MOV R0 , # 0D0H     D. PUSH PSW</p>
+<p>MOV     A , @R0                 POP   ACC</p>
+</li>
+<li>
+<p>在相对寻址方式中，“相对”两字是指相对于（<code>A</code>）</p>
+<p>A. 地址偏移量rel  B. 当前指令的首地址 C. 下一条指令的首地址 D. DPTR值</p>
+</li>
+<li>
+<p>下列指令或指令序列中，能将外部数据存储器3355H单元内容传送给A的是 （<code>B</code>）</p>
+<p>A. MOVX A , 3355H    B. MOV  DPTR , # 3355H</p>
+<p>MOVX  A , @DPTR</p>
+<p>C. MOV  P0 , # 33H     D. MOV  P2 , # 33H</p>
+<p>MOV  R0 , # 55H       MOV   R2 , # 55H</p>
+<p>MOVX A , R0        MOVX A , @R2</p>
+</li>
+<li>
+<p>对程序存储器的读操作，只能使用（<code>D</code>）</p>
+<p>A．MOV指令    B．PUSH指令   C．MOVX指令     D．MOVC指令</p>
+</li>
+<li>
+<p>执行返回指令后，返回的断点是 （<code>C</code>）</p>
+<p>A.调用指令的首地址         B.调用指令的末地址</p>
+<p>C.调用指令的下一条指令的首地址   D.返回指令的末地址</p>
+</li>
+<li>
+<p>以下各项中不能用来对内部数据存储器进行访问的是 （<code>B</code>）</p>
+<p>A.数据指针DPTR           B. 按存储器单元地址或名称</p>
+<p>C.堆栈指针SP            D.由R0或R1作间址寄存器</p>
+</li>
+<li>
+<p>指令MOV寻址空间是 （<code>C</code>）</p>
+<p>A．片外ROM  B．片外RAM    C．片内RAM    D．片内ROM</p>
+</li>
+<li>
+<p>指令MOVX寻址空间是（<code>B</code>）</p>
+<p>A．片外ROM B．片外RAM C．片内RAM D．片内ROM</p>
+</li>
+<li>
+<p>“MUL AB”指令执行后，16位乘积的高位在（<code>D</code>）中。</p>
+<p>A．A     B．C    C．AB    D．B</p>
+</li>
+<li>
+<p>8051单片机外部中断0、1在（<code>D</code>）</p>
+<p>A．P0 口 　 B．P1 口　 C．P2 口  D．P3 口</p>
+</li>
+<li>
+<p>8051内部有①个定时/计数器，对外部事件脉冲计数是②；对片内机周脉冲计数是③。（<code>A</code>）</p>
+<p>A．①2 ②计数器 ③定时器     B．①4 ②定时器 ③计数器</p>
+<p>C．①2 ②定时器 ③计数器　    D．①1 ②计数器 ③定时器</p>
+</li>
+<li>
+<p>下列有关80C51中断优先级控制的叙述中，错误的是（<code>D</code>）</p>
+<p>A. 低优先级不能中断高优先级，但高优先级能中断低优先级</p>
+<p>B. 同级中断不能嵌套     C. 同级中断请求按时间的先后顺序响应</p>
+<p>D. 同一时刻，同级的多中断请求，将形成阻塞，系统无法响应</p>
+</li>
+<li>
+<p>在工作方式0下，计数器由TH的全部8位和TL的低5位组成，因此，其计数范围是（<code>A</code>）</p>
+<p>A. 1～8192      B. 0～8191    C. 0～8192      D.1～4096</p>
+</li>
+<li>
+<p>下列有关单片机程序存储器的论述中，错误的是（<code>A</code>）</p>
+<p>A.用户程序保存在程序存储器中      B.断电后程序存储器仍能保存程序</p>
+<p>C.对于程序存储器只使用MOVC一种指令</p>
+<p>D.执行程序需要使用MOVC指令从程序存储器中逐条读出指令</p>
+</li>
+<li>
+<p>下列有关单片机数据存储器的论述中，错误的是（<code>A</code>）</p>
+<p>A.数据存储器只使用MOV指令进行读/写   B.堆栈在数据存储器中开辟</p>
+<p>C.数据存储器只用于保存临时数据       D.专用寄存器也是数据存储器的一部分</p>
+</li>
+<li>
+<p>若在系统中只扩展一片Inter2732（4K×8），除应使用P0口的8条口线外，至少还应使用P2口的口线（<code>A</code>）</p>
+<p>A.4条      B.5条     C.6条      D.7条</p>
+</li>
+<li>
+<p>下列叙述中，不属于单片机存储器系统特点的是（<code>D</code>）</p>
+<p>A.程序和数据两种类型的存储器同时存在      B.芯片内外存储器同时存在</p>
+<p>C.扩展数据存储器与片内数据存储器存储空间重叠</p>
+<p>D.扩展程序存储器与片内程序存储器存储空间重叠</p>
+</li>
+<li>
+<p>下列有关8255并行接口芯片的叙述中，错误的是 （<code>C</code>）</p>
+<p>A.8255的可编程性表现在它的工作方式命令和位置位/复位命令上</p>
+<p>B.8255由于采用标志位状态区分命令，所以命令的写入次序不受限制</p>
+<p>C.在8255工作方式0下，3个口可构成16种I/O组合</p>
+<p>D.在8255工作方式1下，只能使用中断方法而不能使用查询方法进行I/O操作</p>
+</li>
+<li>
+<p>下列有关串行通信的说明中，错误的是（<code>A</code>）</p>
+<p>A.80C51串行口只有异步方式而无同步方式，因此，只能进行串行异步通信</p>
+<p>B.80C51串行口发送和接收使用同一个数据缓冲寄存器SBUF</p>
+<p>C.双机通信时要求两机的波特率相同</p>
+<p>D.偶校验时只给校验位写入一个0或1，以使得数据位和校验位中的1的个数为偶数</p>
+</li>
+<li>
+<p>下列特点中，不是串行数据传送所具有的是（<code>A</code>）</p>
+<p>A.速度快      B.成本低     C.传送线路简单      D.适用于长距离通信</p>
+</li>
+<li>
+<p>在下列有关串行同步通信与异步通信的比较中错误的是 （<code>C</code>）</p>
+<p>A.它们采用相同的数据传输方式，但采用不同的数据传输格式</p>
+<p>B.它们采用相同的数据传输格式，但采用不同的数据传输格式</p>
+<p>C.同步方式适用于大批量数据传输，而异步方式则适用于小批量数据传输</p>
+<p>D.同步方式对通信双方同步的要求高，实现难度大。而异步方式的要求则相对较低</p>
+</li>
+<li>
+<p>A/D转换芯片中所需要编址的是（<code>D</code>）</p>
+<p>A.用于转换数据输出的三态锁存器   B. A/D转换电路</p>
+<p>C.模拟信号输入通道         D.地址锁存器</p>
+</li>
+<li>
+<p>数据缓冲（锁存）器在 （<code>C</code>）</p>
+<p>A. D/A转换器接口时需要       B. A/D转换器接口时需要</p>
+<p>C. D/A和A/D转换器接口时都需要   D. D/A和A/D转换器接口时都不需要</p>
+</li>
+<li>
+<p>三态缓冲器在 （<code>C</code>）</p>
+<p>A. D/A转换器接口时需要      B. A/D转换器接口时需要</p>
+<p>C. D/A和A/D转换器接口时都需要  D. D/A和A/D转换器接口时都不需要</p>
+</li>
+</ol>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num94.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">程序设计题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A1%AB%E7%A9%BA%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">填空题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text">判断题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E7%AD%94%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">简答题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E9%A2%98"><span class="toc-number">5.</span> <span class="toc-text">选择题</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://api2.acozycotage.net/Pweb" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://lib.baomitu.com/KaTeX/latest/katex.min.css"><script src="https://jsd.onmicrosoft.cn/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '可惜你不听王杰，也不懂我...' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
