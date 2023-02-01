@@ -230,7 +230,6 @@ void main(void)
     printf( &quot;Output:\n%s\ncharacter count &#x3D; %d\n&quot;, buffer, j );
 &#125;</code></pre>
 <h2 id="常见硬件电路原理图缩写">常见硬件电路原理图缩写</h2>
-<p>[collapse status=“false” title=“英文缩写”]</p>
 <ul>
 <li>EN：Enable，使能。使芯片能够工作。要用的时候，就打开EN脚，不用的时候就关闭。有些芯片是高使能，有些是低使能，要看规格书才知道</li>
 <li>CS：Chip Select，片选。芯片的选择。通常用于发数据的时候选择哪个芯片接收。例如一根SPI总线可以挂载多个设备，DDR总线上也会挂载多颗DDR内存芯片，此时就需要CS来控制把数据发给哪个设备</li>
@@ -593,7 +592,7 @@ printf(&quot;p3&#x3D;%d\n&quot;,*p3);  &#x2F;&#x2F;输出5
 <p>在MDK里:<br>
 u8(一个字节) — unsigned char (0~255)<br>
 u16(二个字节) — unsigned short (0~65535)<br>
-u32(四个字节) — unsigned int (0～21,4748,3647)<br>
+u32(四个字节) — unsigned int (0～4294967295)<br>
 这里有一个编程宗旨，就是 <code>能用小不用大</code>。就是说定义能用 1 个字节 char 解决问题的，就不定义成 int，一方面节省 RAM 空间可以让其他变量或者中间运算过程使用，另外一方面，占空间小程序运算速度也快一些。</p>
 <h2 id="code-关键字用法">code 关键字用法</h2>
 <p>unsigned char 或者 unsigned int 这两个关键字，这样定义的变量都是放在我们的单片机的 RAM中，我们在程序中可以随意去改变这些变量的值。但是还有一种数据，我们在程序中要使用，但是却不会改变它的值，定义这种数据时可以加一个 code 关键字修饰一下，这个数据就会存储到我们的程序空间 Flash 中，这样可以大大节省单片机的 RAM 的使用量，毕竟我们的单片机 RAM 空间比较小，而程序空间则大的多。那么现在要使用的数码管真值表，我们只会使用它们的值，而不需要改变它们，就可以用 code 关键字把它放入 Flash 中了</p>
