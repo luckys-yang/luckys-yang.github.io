@@ -207,7 +207,7 @@ function showWelcome() {
     else timeChange = "夜深了，早点休息，少熬夜";
 
     /*自定义文本需要放的位置*/
-    document.getElementById("welcome-info").innerHTML = `<center style="color: #d7d7d77d;">🎉 欢迎信息 🎉</center>&emsp;&emsp;欢迎来自<span>${pos}</span>的小伙伴，${timeChange}您现在距离博主约有<span>${dist}</span>公里<br><div class="my_hr"></div><center style="color: #d7d7d77d;">✨ 博主の留言 ✨</center>过年了肯定得卷啊!`;
+    document.getElementById("welcome-info").innerHTML = `<center style="color: #d7d7d77d;">🎉 欢迎信息 🎉</center>&emsp;&emsp;欢迎来自<span>${pos}</span>的小伙伴，${timeChange}您现在距离博主约有<span>${dist}</span>公里<br><div class="my_hr"></div><center style="color: #d7d7d77d;">✨ 博主の留言 ✨</center>如果博客存在图片显示异常或其他的问题的可在留言处留言,蟹蟹!`;
 }
 
 window.onload = showWelcome;

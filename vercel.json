@@ -1,0 +1,49 @@
+﻿{
+    "version": 2,
+    "headers": [
+        {
+            "source": "/(.*).(ttf|otf|woff|woff2)",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=2592000, immutable"
+                }
+            ]
+        },
+        {
+            "source": "/(.*).(js|css|xml)",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "max-age=86400"
+                }
+            ]
+        },
+        {
+            "source": "/(.*).(jpe?g|png|webp|gif|cur|bmp|swf)",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "max-age=2592000"
+                }
+            ]
+        },
+        {
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "X-Frame-Options",
+                    "value": "SAMEORIGIN"
+                },
+                {
+                    "key": "X-XSS-Protection",
+                    "value": "0"
+                },
+                {
+                    "key": "Access-Control-Allow-Origin",
+                    "value": "https://mdcm.yang5201314.cn"
+                }
+            ]
+        }
+    ]
+}
