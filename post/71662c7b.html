@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>蓝桥杯嵌入式模块详解(新板) | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言 网站  Keil MDK 官网 芯片包-暂选1.2版本的 ChatGPT 参考文章\手册  【STM32G4】嵌入式—蓝桥杯 薛定谔的猫咪死了 ORI2333 贾saisai 蓝桥杯嵌入式STM32G431RBT6的学习（总大纲）（HAL库学习）板子介绍 STM32-蓝桥杯嵌入式LCD字符颜色、高亮显示 【蓝桥杯单片机最全备考资料】真题、代码、原理图、指导手册、资源包(不是嵌入式的是单片机组">
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>蓝桥杯嵌入式模块详解(新板) | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言 网站  Keil MDK 官网 芯片包-暂选1.2版本的 ChatGPT 参考文章  STM32-蓝桥杯嵌入式LCD字符颜色、高亮显示 【蓝桥杯单片机最全备考资料】真题、代码、原理图、指导手册、资源包(不是嵌入式的是单片机组) 蓝桥杯嵌入式STM32G431RBT6程序-github 按键三行核心代码解决按键按下、松开、长按-代码高效移植快-百度文库 2022年参加蓝桥杯嵌入式比赛——历年赛">
 <meta property="og:type" content="article">
 <meta property="og:title" content="蓝桥杯嵌入式模块详解(新板)">
 <meta property="og:url" content="https://mdcm.yang5201314.cn/post/71662c7b.html">
 <meta property="og:site_name" content="Luckys-Yangの小栈">
-<meta property="og:description" content="前言 网站  Keil MDK 官网 芯片包-暂选1.2版本的 ChatGPT 参考文章\手册  【STM32G4】嵌入式—蓝桥杯 薛定谔的猫咪死了 ORI2333 贾saisai 蓝桥杯嵌入式STM32G431RBT6的学习（总大纲）（HAL库学习）板子介绍 STM32-蓝桥杯嵌入式LCD字符颜色、高亮显示 【蓝桥杯单片机最全备考资料】真题、代码、原理图、指导手册、资源包(不是嵌入式的是单片机组">
+<meta property="og:description" content="前言 网站  Keil MDK 官网 芯片包-暂选1.2版本的 ChatGPT 参考文章  STM32-蓝桥杯嵌入式LCD字符颜色、高亮显示 【蓝桥杯单片机最全备考资料】真题、代码、原理图、指导手册、资源包(不是嵌入式的是单片机组) 蓝桥杯嵌入式STM32G431RBT6程序-github 按键三行核心代码解决按键按下、松开、长按-代码高效移植快-百度文库 2022年参加蓝桥杯嵌入式比赛——历年赛">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://mdcm.yang5201314.cn/img/num9.webp">
 <meta property="article:published_time" content="2022-11-17T10:59:00.000Z">
-<meta property="article:modified_time" content="2023-02-03T13:42:06.274Z">
+<meta property="article:modified_time" content="2023-02-10T09:03:44.022Z">
 <meta property="article:author" content="Luckys-Yang">
 <meta property="article:tag" content="STM32G4">
 <meta name="twitter:card" content="summary">
@@ -57,7 +57,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-02-03 21:42:06'
+  postUpdate: '2023-02-10 17:03:44'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -174,27 +174,45 @@ window.addEventListener('load',()=> { preloader.endLoading() })
 if (true) {
   document.addEventListener('pjax:send', () => { preloader.initLoading() })
   document.addEventListener('pjax:complete', () => { preloader.endLoading() })
-}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">115</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">77</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">22</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">蓝桥杯嵌入式模块详解(新板)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-11-17T10:59:00.000Z" title="发表于 2022-11-17 18:59:00">2022-11-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-03T13:42:06.274Z" title="更新于 2023-02-03 21:42:06">2023-02-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/">蓝桥杯</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">115</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">78</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">22</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">蓝桥杯嵌入式模块详解(新板)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-11-17T10:59:00.000Z" title="发表于 2022-11-17 18:59:00">2022-11-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-10T09:03:44.022Z" title="更新于 2023-02-10 17:03:44">2023-02-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/">蓝桥杯</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
 <div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>网站</p>
 </div>
 <p><a href="https://www.keil.com/download/product/">Keil MDK 官网</a></p>
 <p><a href="https://www.keil.com/dd2/Pack/#">芯片包-暂选1.2版本的</a></p>
 <p><a href="https://chat.openai.com/chat">ChatGPT</a></p>
-<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>参考文章\手册</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>参考文章</p>
 </div>
-<p><a href="https://blog.csdn.net/qq_47877230/article/details/115245318">【STM32G4】嵌入式—蓝桥杯</a></p>
-<p><a href="https://blog.csdn.net/m0_58832575/category_11499824.html">薛定谔的猫咪死了</a></p>
-<p><a href="https://blog.csdn.net/qq_45628620/category_10645661.html?spm=1001.2014.3001.5482">ORI2333</a></p>
-<p><a href="https://blog.csdn.net/zerokingwang/category_11689336.html">贾saisai</a></p>
-<p><a href="https://blog.csdn.net/m0_58832575/article/details/126722282?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166873540016782414972681%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=166873540016782414972681&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-126722282-null-null.142%5Ev65%5Eopensearch_v2,201%5Ev3%5Econtrol,213%5Ev2%5Et3_esquery_v3&amp;utm_term=stm32g431rbt6%E4%B8%AD%E6%96%87%E6%89%8B%E5%86%8C&amp;spm=1018.2226.3001.4187">蓝桥杯嵌入式STM32G431RBT6的学习（总大纲）（HAL库学习）板子介绍</a></p>
 <p><a href="https://blog.csdn.net/qq_43715171/article/details/115238360?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166940192316782425664178%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=166940192316782425664178&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~times_rank-13-115238360-null-null.142%5Ev66%5Epc_rank_34_queryrelevant25,201%5Ev3%5Econtrol,213%5Ev2%5Et3_esquery_v3&amp;utm_term=%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%B5%8C%E5%85%A5%E5%BC%8Flcd&amp;spm=1018.2226.3001.4187">STM32-蓝桥杯嵌入式LCD字符颜色、高亮显示</a></p>
 <p><a href="https://blog.csdn.net/weixin_52757493/article/details/123792920">【蓝桥杯单片机最全备考资料】真题、代码、原理图、指导手册、资源包(不是嵌入式的是单片机组)</a></p>
 <p><a href="https://github.com/MR-wolves/Lanqiaobei_stm32g431">蓝桥杯嵌入式STM32G431RBT6程序-github</a></p>
-<p><a href="https://blog.csdn.net/qq_52542756/category_11605034.html">lzya</a></p>
 <p><a href="https://wenku.baidu.com/view/062465025bfb770bf78a6529647d27284b7337c0.html?_wkts_=1669445642095">按键三行核心代码解决按键按下、松开、长按-代码高效移植快-百度文库</a></p>
 <p><a href="https://github.com/lgziyan/laoqiaobei">2022年参加蓝桥杯嵌入式比赛——历年赛题训练-github</a></p>
 <p><a href="https://pan.baidu.com/s/17Dtsyn8B3XppNAUuJh7q1Q?pwd=AK47">蓝桥杯嵌入式备赛-指导手册(编写自常州信职学生翟宇涵)</a></p>
 <p><a href="https://blog.csdn.net/qq_43935020/article/details/114108489">三行代码按键消抖 独立按键 矩阵按键 长按 短按 双击</a></p>
+<p><a href="https://blog.csdn.net/wei348144881/article/details/109336231">STM32-DAC生成1Hz三角波【DAC触发方式深入理解】</a></p>
+<p><a href="https://blog.csdn.net/my_id_kt/article/details/122486101">STM32-实现us延时</a></p>
+<p><a href="https://blog.csdn.net/wuyiyu_/category_12161969.html">蓝桥杯 stm32 MCP4017</a></p>
+<p><a href="https://blog.csdn.net/little_grapes/article/details/121240294">【STM32+cubemx】0009 HAL库开发：RTC实时时钟的使用、掉电时间保持</a></p>
+<p><a href="https://blog.csdn.net/qq_27350133/article/details/114783756">stm32HAL库 RTC配置并设置闹钟间隔响铃(思路+具体方法)</a></p>
+<p><a href="https://blog.csdn.net/weixin_55758216/article/details/126155395?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=HAL_TIM_PWM_Start_DMA&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~sobaiduweb~default-0-126155395.blog_rank_default&amp;spm=1018.2226.3001.4450">STM32CubeMX配置PWM+DMA以及实现代码</a></p>
+<p><a href="https://blog.csdn.net/ArthasHowie/article/details/126284737?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167592107816782429749390%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=167592107816782429749390&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~sobaiduend~default-1-126284737-null-null.blog_rank_default&amp;utm_term=HAL_TIM_PWM_Start_DMA&amp;spm=1018.2226.3001.4450">STM32HAL库输出精确数量PWM波遇到的问题</a></p>
+<p><a href="https://blog.csdn.net/kouxi1/article/details/123960307?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167594278316782425117944%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&amp;request_id=167594278316782425117944&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~times_rank-6-123960307-null-null.blog_rank_default&amp;utm_term=PWM%E8%BE%93%E5%87%BA%E6%AF%94%E8%BE%83%E6%A8%A1%E5%BC%8F&amp;spm=1018.2226.3001.4450">利用定时器输出比较模式的翻转功能实现不同占空比和频率的PWM输出</a></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>订阅栏汇总</p>
+</div>
+<div class="note simple"><p><a href="https://blog.csdn.net/qq_60183616">别人家的孩子</a></p>
+<p><a href="https://blog.csdn.net/wuyiyu_/category_12161969.html">专业嵌入式</a></p>
+<p><a href="https://blog.csdn.net/weixin_51651698/category_12091541.html">孙启尧</a></p>
+<p><a href="https://blog.csdn.net/zerokingwang/category_11689336.html">贾saisai</a></p>
+<p><a href="https://blog.csdn.net/qq_66792436?type=blog">火花页</a></p>
+<p><a href="https://blog.csdn.net/little_grapes/category_11324240.html">小白白学电子</a></p>
+<p><a href="https://blog.csdn.net/weixin_44098974/category_12161648.html">彭某。</a></p>
+<p><a href="https://blog.csdn.net/qq_52542756/category_11605034.html">lzya.</a></p>
+<p><a href="https://blog.csdn.net/m0_52399461/category_11779531.html">追西西</a></p>
+<p><a href="https://blog.csdn.net/m0_58832575/category_11499824.html">薛定谔的猫咪死了</a></p>
+<p><a href="https://blog.csdn.net/qq_47877230/article/details/115245318">旺旺^淞</a></p>
+<p><a href="https://blog.csdn.net/qq_45628620/category_10645661.html?spm=1001.2014.3001.5482">ORI2333</a></p>
+<p><a href="https://blog.csdn.net/as480133937/category_9188655.html">Z小旋</a></p>
+</div>
 <div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>历年题目</p>
 </div>
 <p><a href="https://blog.csdn.net/qq_47877230/article/details/113522173">第七届嵌入式模拟赛—“电压测量监控设备</a></p>
@@ -228,7 +246,7 @@ if (true) {
 <tbody>
 <tr>
 <td style="text-align:center">1</td>
-<td style="text-align:left">Type-C USB 转串口/调试接口</td>
+<td style="text-align:left">Type-C USB 转串口/调试接口<code>比赛板是Type-B</code></td>
 <td>1路</td>
 </tr>
 <tr>
@@ -243,7 +261,7 @@ if (true) {
 </tr>
 <tr>
 <td style="text-align:center">4</td>
-<td style="text-align:left">TFT-LCD</td>
+<td style="text-align:left">TFF-LCD</td>
 <td>2.4寸</td>
 </tr>
 <tr>
@@ -258,7 +276,7 @@ if (true) {
 </tr>
 <tr>
 <td style="text-align:center">7</td>
-<td style="text-align:left">分压滑动变阻器</td>
+<td style="text-align:left">分压电位器</td>
 <td>2个</td>
 </tr>
 <tr>
@@ -268,7 +286,7 @@ if (true) {
 </tr>
 <tr>
 <td style="text-align:center">11</td>
-<td style="text-align:left">蜂鸣器</td>
+<td style="text-align:left">蜂鸣器<code>已取消</code></td>
 <td>1个</td>
 </tr>
 <tr>
@@ -278,7 +296,7 @@ if (true) {
 </tr>
 <tr>
 <td style="text-align:center">13</td>
-<td style="text-align:left">可编程数字电位器</td>
+<td style="text-align:left">可编程电阻</td>
 <td>1个(100K)</td>
 </tr>
 <tr>
@@ -909,7 +927,7 @@ key_old &#x3D; key_value;</code></pre>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************KEY.c***************&#x2F;
 uint8_t KEY_Time_Count;	&#x2F;&#x2F;长短按计数
 uint8_t key_value,key_up,key_down;
-static uint8_t key_old;
+
 
 unsigned char KEY_Scan(void)  &#x2F;&#x2F;带有返回值的按键扫描函数
 &#123;
@@ -934,6 +952,8 @@ unsigned char KEY_Scan(void)  &#x2F;&#x2F;带有返回值的按键扫描函数
 &#125;	
 void KEY_Proc(void)
 &#123;
+    static uint8_t key_old;
+    
 	key_value &#x3D; KEY_Scan();&#x2F;&#x2F;读取按键的键值
 	key_up &#x3D; ~key_value &amp; (key_old ^ key_value);	&#x2F;&#x2F;按键的上升沿检测 只在按键抬起的瞬间有效 其他时刻都为零无效
 	
@@ -1264,7 +1284,7 @@ void hight_string(uint8_t* str,uint8_t Line,const uint8_t* pos,uint8_t pos_len,u
 &#x2F;&#x2F;显示变量
 void MY_LCD_DisNum(uint32_t num)
 &#123;
-	uint8_t DisNum_arr[20] &#x3D; &quot;\0&quot;;	&#x2F;&#x2F;要初始化为0不然补齐空格函数可能补不干净
+	uint8_t DisNum_arr[20] &#x3D; &quot;&quot;;	&#x2F;&#x2F;要初始化为0不然补齐空格函数可能补不干净
 	uint8_t DisNum_pos[20] &#x3D; &#123;13,14,15,16,17&#125;;	&#x2F;&#x2F;需要高亮的索引
 	uint32_t dis_num &#x3D; num;
 	sprintf((char*)DisNum_arr,&quot;TIM_NVIC_num:%d &quot;,dis_num); &#x2F;&#x2F;需要在%d后面加一个空格否则有阴影
@@ -1382,6 +1402,13 @@ LCD_WriteReg(R96 , 0x2700);&#x2F;&#x2F;从左往右
 LCD_WriteReg(R96 , 0xA700);	&#x2F;&#x2F;从右往左</code></pre>
 <p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20221126141024.jpg" alt=" "></p>
 <h2 id="定时器">定时器</h2>
+<p>查看手册可以看到定时器挂载在哪个时钟上</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230208130909.webp" alt=""></p>
+<p>定时器的时钟看 <code>APB1</code> 或者 <code>APB2</code>，还要看是否有分频</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230208132757.webp" alt=""></p>
+<div class="note simple"><p>公式：</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>定时器定时时间(单位:s)</mtext><mo>=</mo><mfrac><mrow><mo stretchy="false">(</mo><mi>a</mi><mi>r</mi><mi>r</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>p</mi><mi>s</mi><mi>c</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mtext>时钟频率</mtext></mfrac><mo>=</mo><mfrac><mrow><mo stretchy="false">(</mo><mi>a</mi><mi>r</mi><mi>r</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>p</mi><mi>s</mi><mi>c</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mrow><mn>80000000</mn><mi>H</mi><mi>z</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\text{定时器定时时间(单位:s)}=\frac{(arr+1)(psc+1)}{\text{时钟频率}}=\frac{(arr+1)(psc+1)}{80000000Hz}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord cjk_fallback">定时器定时时间</span><span class="mord">(</span><span class="mord cjk_fallback">单位</span><span class="mord">:s)</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.355em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord cjk_fallback mtight">时钟频率</span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">rr</span><span class="mbin mtight">+</span><span class="mord mtight">1</span><span class="mclose mtight">)</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight">p</span><span class="mord mathnormal mtight">sc</span><span class="mbin mtight">+</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.355em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">80000000</span><span class="mord mathnormal mtight" style="margin-right:0.04398em;">Hz</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">rr</span><span class="mbin mtight">+</span><span class="mord mtight">1</span><span class="mclose mtight">)</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight">p</span><span class="mord mathnormal mtight">sc</span><span class="mbin mtight">+</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
+</div>
 <ul>
 <li>定时器在CubeMX配置完后需要在main函数里开启</li>
 </ul>
@@ -1405,6 +1432,10 @@ HAL_TIM_Base_Start_IT(&amp;htimx);	</code></pre>
 <li>关于配置时是否使能 <code>auto-reload preload </code>(自动重装载)</li>
 </ul>
 <p>这里的自动重装载跟学51的不一样(51的自动重装载定时器的值是为了保证下一次计数值溢出时重新装载计数值产生定时器中断)，这里自动重装载寄存器是 <code>影子</code>寄存器，如果不使能自动重装载，这次修改的值，立马会被执行。而使能自动重装载，这次修改值会等到这次执行完后，才去执行(目的是为了保证自动重装载寄存器在合适的时候被修改，不允许其随便被修改，否则可能导致在切换的时候发生事与愿违的结果)； <code>所以如果对通道时序同步不严谨或者不需要改计数值则可以不使能，如果是多通道或者频繁改计数值建议使能</code></p>
+<p>简单来说就是两句话：</p>
+<div class="note simple"><p><code>auto-reload precload=Disable</code>:自动重装载寄存器写入新值后，计数器立即产生计数溢出，然后开始新的计数周期</p>
+<p><code>auto-reload precload=Enable</code>:自动重装载寄存器写入新值后，计数器完成当前旧的计数后，再开始新的计数周期</p>
+</div>
 <h3 id="滴答定时器">滴答定时器</h3>
 <p>SysTick系统滴答定时器位于 <code>Cortex M4内核</code> 中。 <code>HAL_Delay()</code> 函数，此函数利用的就是SysTick系统滴答定时器，Systick是一个 <code>24位</code> 的定时器，一次最多可以计数 2^24^(即16777216) 个时钟脉冲，这个脉冲计数值保存在当前计数值寄存器 STK_VAL， <code>只能向下计数</code>，每接收到一个时钟脉冲，STK_VAL 的值就会向下减1，当减到0时，硬件会自动把重装载寄存器 STK_LOAD 中保存的数据加载到 STK_VAL，重新开始向下计数。如果 <code>STK_VAL 的值被减至0时，会触发异常产生中断</code></p>
 <div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>寄存器</p>
@@ -1540,7 +1571,7 @@ int fputc(int ch, FILE *f)
 </div>
 <ul>
 <li>注意中文占 <code>2个字节</code></li>
-<li>发送一般不需要中断，所以使用 <code>HAL_UART_Transmit</code>(轮询模式发送) 或 <code>HAL_UART_Transmit_IT</code>(中断模式发送) 都行</li>
+<li>发送一般不需要中断，所以使用 <code>HAL_UART_Transmit</code>(轮询模式发送) 或 <code>HAL_UART_Transmit_IT</code>(中断模式发送) 或 <code>HAL_UART_Transmit_DMA</code>(DMA发送)都行</li>
 <li>数据长度通常使用 <code>strlen</code> 获取，也可以直接写数值</li>
 </ul>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************USART1.c*************************&#x2F;
@@ -1559,6 +1590,15 @@ void TXTest(void)
 &#125;
 
 &#x2F;&#x2F;然后在按键执行函数里调用即可，实现按下按键发送一次数据</code></pre>
+<ul>
+<li>DMA发送需要配置一下：</li>
+</ul>
+<p><code>注意</code>：DMA初始化必须要在串口的上面【否则发送失败】</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230207142409.webp" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;使用发送函数
+uint8_t tx_buff[20]&#x3D;&quot;I Love You,diu ni ma&quot;;
+
+HAL_UART_Transmit_DMA(&amp;huart1,tx_buff,20);</code></pre>
 <div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>串口接收</p>
 </div>
 <ul>
@@ -1690,6 +1730,45 @@ void MY_LCD_DisNum(uint32_t num)
 <li>G4板载了 <code>四个电位器</code>，其中左边两个是电压采集用的</li>
 <li><code>HAL_ADC_STATE_REG_EOC</code> 表示转换完成标志位，转换数据可用</li>
 </ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名词</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">量程</td>
+<td style="text-align:center">指ADC所能输入模拟信号的类型和电压范围，即参考电压。信号类型包括单极性和双极性，蓝桥杯嵌入式G431开发板的输入电压范围是 <code>0~3.3V</code></td>
+</tr>
+<tr>
+<td style="text-align:center">转换位数</td>
+<td style="text-align:center">量化过程中的量化位数n。蓝桥杯嵌入式G431开发板我习惯使用的位数是 <code>12位</code></td>
+</tr>
+<tr>
+<td style="text-align:center">分辨率</td>
+<td style="text-align:center">ADC能够分辨的模拟信号最小变化量</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>ADC电压值计算公式：</li>
+</ul>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>分辨率</mtext><mo>=</mo><mfrac><mtext>量程</mtext><msup><mn>2</mn><mi>n</mi></msup></mfrac></mrow><annotation encoding="application/x-tex">\text{分辨率} = \frac{\text{量程}}{2^n}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">分辨率</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0463em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5904em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord cjk_fallback">量程</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>最终显示电压值</mtext><mo>=</mo><mtext>分辨率</mtext><mo>×</mo><mtext>ADC采集值</mtext></mrow><annotation encoding="application/x-tex">\text{最终显示电压值} = \text{分辨率} \times \text{ADC采集值}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">最终显示电压值</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord text"><span class="mord cjk_fallback">分辨率</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord">ADC</span><span class="mord cjk_fallback">采集值</span></span></span></span></span></span></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>V</mi><mo stretchy="false">(</mo><mi>A</mi><mi>D</mi><mi>C</mi><mo stretchy="false">)</mo><mo>=</mo><mi>V</mi><mi>a</mi><mi>l</mi><mi>u</mi><mi>e</mi><mo stretchy="false">(</mo><mi>A</mi><mi>D</mi><mi>C</mi><mo stretchy="false">)</mo><mo>×</mo><mfrac><mrow><mi>V</mi><mo stretchy="false">(</mo><mi>r</mi><mi>e</mi><mi>f</mi><mo stretchy="false">)</mo></mrow><mn>4096</mn></mfrac></mrow><annotation encoding="application/x-tex">V(ADC) = Value(ADC) \times \frac{V(ref)}{4096}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">Va</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">u</span><span class="mord mathnormal">e</span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:2.113em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">4096</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mopen">(</span><span class="mord mathnormal">re</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<div class="note simple"><p>其中，stm32的ADC是 <code>12位</code> 的，所以AD值的最大值是 <code>4096</code></p>
+<p><code>V(ADC)</code>为算出的电压值;</p>
+<p><code> Value(ADC)</code>为ADC采集值;</p>
+<p><code> V(ref)</code>为参考电压，一般为3.3V。</p>
+<p>比如你STM32的参考电压为3.3v，采集的AD值为1024，那么转换为电压：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>V</mi><mo stretchy="false">(</mo><mi>A</mi><mi>D</mi><mi>C</mi><mo stretchy="false">)</mo><mo>=</mo><mn>1024</mn><mo>×</mo><mn>3.3</mn><mi mathvariant="normal">/</mi><mn>4096</mn><mo>=</mo><mn>0.825</mn><mi>V</mi></mrow><annotation encoding="application/x-tex">V(ADC)=1024 \times 3.3/4096 =0.825V
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1024</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">3.3/4096</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">0.825</span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span></span></span></span></span></p>
+</div>
 <div class="note green icon-padding flat"><i class="note-icon fas fa-fan"></i><p>硬件连接</p>
 </div>
 <p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230202164541.webp" alt=""></p>
@@ -1718,7 +1797,7 @@ void MY_LCD_DisNum(uint32_t num)
 <p>选择对应的通道</p>
 <p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230202181945.webp" alt=""></p>
 <p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230202182001.webp" alt=""></p>
-<p>ADC默认设置为 <code>12位精度数据右对齐</code>，转换时间可以看个人设置，<code>转换时间越长精度越高</code></p>
+<p>ADC默认设置为 <code>12位精度数据右对齐</code>，转换时间可以看个人设置，<code>转换时间越长精度越高</code>， <code>rank</code>表示通道的转换顺序，从小到大采集</p>
 <p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230203092048.webp" alt=""></p>
 <h3 id="程序编写-6">程序编写</h3>
 <div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>注意</p>
@@ -1749,8 +1828,8 @@ double getADC(ADC_HandleTypeDef *hadc)
 &#x2F;&#x2F;显示变量
 void MY_LCD_DisNum(uint32_t num)
 &#123;
-	uint8_t ADC1_Num[20] &#x3D; &quot;\0&quot;;	&#x2F;&#x2F;ADC1
-	uint8_t ADC2_Num[20] &#x3D; &quot;\0&quot;;	&#x2F;&#x2F;ADC2
+	uint8_t ADC1_Num[20] &#x3D; &quot;&quot;;	&#x2F;&#x2F;ADC1
+	uint8_t ADC2_Num[20] &#x3D; &quot;&quot;;	&#x2F;&#x2F;ADC2
 
 	sprintf((char*)ADC1_Num,&quot;V1:%.2f&quot;,getADC(&amp;hadc1));
 	MY_LCD_Arr_Completion((uint8_t*)ADC1_Num);
@@ -1917,13 +1996,13 @@ float Adc_Proc(uint32_t _buf[])
 &#x2F;&#x2F;显示变量
 void MY_LCD_DisNum(uint32_t num)
 &#123;
-    uint8_t ADC1_Num[20] &#x3D; &quot;\0&quot;;	&#x2F;&#x2F;ADC1
-    uint8_t ADC2_Num[20] &#x3D; &quot;\0&quot;;	&#x2F;&#x2F;ADC2
+    uint8_t ADC1_Num[20] &#x3D; &quot;&quot;;	&#x2F;&#x2F;ADC1
+    uint8_t ADC2_Num[20] &#x3D; &quot;&quot;;	&#x2F;&#x2F;ADC2
 
 	if(ADC_flag)
 	&#123;
 		ADC_flag &#x3D; 0;
-		ADC_DMA_Test();
+		ADC_DMA_Test();	&#x2F;&#x2F;平均值滤波
         sprintf((char *)ADC1_Num, &quot;V1:%.2f&quot;, (double)ADC_1&#x2F;30*3.3&#x2F;4096);
         MY_LCD_Arr_Completion((uint8_t *)ADC1_Num);
         LCD_DisplayStringLine(Line5, (uint8_t *)ADC1_Num);
@@ -1950,7 +2029,1338 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		&#125;
 	&#125;
 &#125;</code></pre>
-<p>1</p>
+<div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>注意</p>
+</div>
+<ul>
+<li>如果是同1个ADC的不同通道同时采集则需要配置DMA和勾选对应通道，打开 <code>扫描模式，连续模式，DMA请求，改通道数为2</code> ，然后程序上定义一个大小为2的数组即可</li>
+<li>如果出现显示0，检查一下是否有采集到数据，如果有则检查一下是否显示时没在前面加 <code>(double)</code> 类型转换</li>
+</ul>
+<h2 id="DAC">DAC</h2>
+<ul>
+<li>
+<p>板子扩展接口部分找到DAC的两个管脚</p>
+</li>
+<li>
+<p><code>4</code> 个12位DAC通道(2个外部缓冲和2个内部非缓冲)可以用于 <code>将数字信号转换为模拟电压信号输出</code></p>
+</li>
+<li>
+<p>噪声波的产生，三角波产生，锯齿波产生</p>
+</li>
+<li>
+<p>DAC输出电压计算公式，可以发现公式跟ADC是相反的(结果是<code>uint16_t类型</code>)：</p>
+</li>
+</ul>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>V</mi><mo stretchy="false">(</mo><mi>D</mi><mi>A</mi><mi>C</mi><mo stretchy="false">)</mo><mo>=</mo><mi>V</mi><mi>o</mi><mi>l</mi><mo>×</mo><mn>4096</mn><mi mathvariant="normal">/</mi><mn>3.3</mn><mi>f</mi></mrow><annotation encoding="application/x-tex">V(DAC) = Vol \times 4096/3.3f
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">4096/3.3</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span></span></span></span></span></p>
+<p>然后再通过 <code>ADC</code> 公式就可以算出来具体的电压值</p>
+<div class="note green icon-padding flat"><i class="note-icon fas fa-fan"></i><p>硬件连接</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230203230757.webp" alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">管脚</th>
+<th style="text-align:center">对应通道</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PA4</td>
+<td style="text-align:center">DAC1_OUT1</td>
+</tr>
+<tr>
+<td style="text-align:center">PA5</td>
+<td style="text-align:center">DAC1_OUT2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CubeMX配置-5">CubeMX配置</h3>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230203225907.webp" alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名词</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Connected to external pin only</td>
+<td style="text-align:center">只连接到外部引脚</td>
+</tr>
+<tr>
+<td style="text-align:center">Connected to external pin and to on chip-peripherals</td>
+<td style="text-align:center">连接到外部引脚和片上外设</td>
+</tr>
+<tr>
+<td style="text-align:center">oUT1 Connected to on chip-peripherals only</td>
+<td style="text-align:center">仅连接到片上外设</td>
+</tr>
+</tbody>
+</table>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230203230400.webp" alt=""></p>
+<h3 id="程序编写-7">程序编写</h3>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************main.c*************************&#x2F;
+
+int main()
+&#123;
+  HAL_DAC_Start(&amp;hdac1,DAC_CHANNEL_1);	&#x2F;&#x2F;开启DAC通道1
+  HAL_DAC_Start(&amp;hdac1,DAC_CHANNEL_2);  &#x2F;&#x2F;开启DAC通道2
+  set_DAC_value(&amp;hdac1,DAC_CHANNEL_1,2.2);	&#x2F;&#x2F;设置模数转换后的值为2.2v ---2.2*4096&#x2F;3.3 &#x3D; 2730
+  set_DAC_value(&amp;hdac1,DAC_CHANNEL_2,3.1);  &#x2F;&#x2F;设置模数转换后的值为3.1v
+    
+    while(1)
+    &#123;
+        ...
+    &#125;
+&#125;</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************my_adc.c*************************&#x2F;
+
+&#x2F;&#x2F;设置DAC值
+void set_DAC_value(DAC_HandleTypeDef *hdac,uint32_t Channel,float Vol)
+&#123;
+	uint16_t temp;
+	temp &#x3D; Vol*4096&#x2F;3.3f;
+	HAL_DAC_SetValue(hdac,Channel,DAC_ALIGN_12B_R,temp);	&#x2F;&#x2F;设置DAC输出值
+&#125;</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************MY_LCD.c*************************&#x2F;
+
+&#x2F;&#x2F;显示变量
+void MY_LCD_DisNum(uint32_t num)
+&#123;
+	uint8_t DAC_Num[20] &#x3D; &quot;&quot;;	&#x2F;&#x2F;DAC通道1
+
+	if(ADC_flag)
+	&#123;
+		ADC_flag &#x3D; 0;
+
+	sprintf((char*)DAC_Num,&quot;DAC_value:%d&quot;,HAL_DAC_GetValue(&amp;hdac1,DAC_CHANNEL_1));&#x2F;&#x2F;获取DAC的值
+		MY_LCD_Arr_Completion((uint8_t *)DAC_Num);
+		LCD_DisplayStringLine(Line7,(uint8_t *)DAC_Num);
+	&#125;
+&#125;</code></pre>
+<p>烧录程序进开发板后可用电压表测量PA4/PA5管脚电压，也可以使用杜邦线把PA4和PA5短接，一个使用DAC功能，另一个使用ADC功能去读取然后显示</p>
+<h3 id="DAC输出锯齿波">DAC输出锯齿波</h3>
+<p>CubeMX配置跟上面一样</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************main.c*************************&#x2F;
+
+int dacvalue;
+
+int main()
+&#123;
+    wwhile(1)
+    &#123;
+        for(dacvalue &#x3D; 0;dacvalue &lt;&#x3D; 20;dacvalue++)&#x2F;&#x2F;循环次数和波的阶梯化相关，循环次数越多波越光滑
+        &#123;
+            HAL_DAC_SetValue(&amp;hdac,DAC_CHANNEL_1,DAC_ALIGN_12_R,124*dacValue);&#x2F;&#x2F;最高2480&#x2F;4096*3.3&#x3D;1V
+            if(HAL_DAC_Start(&amp;hdac,DAC_CHANNEL_1)!&#x3D;HAL_OK)	&#x2F;&#x2F;开启DAC通道1
+            &#123;
+                Error_Handler();
+            &#125;
+            HAL_Delay(1);	&#x2F;&#x2F;频率和延时时间以及阶梯数有关
+        &#125;
+    &#125;
+&#125;</code></pre>
+<div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>注意：实验现象需要示波器查看</p>
+</div>
+<h3 id="DAC输出三角波">DAC输出三角波</h3>
+<p>三角波的数据生成是由一个单独的计数器往复加减生成的， <code>每次触发之后该计数器会加1/减1</code>。在每个周期过峰值之前，每次触发条件之后 <code>加1</code> ；过峰值之后，每次触发条件之后 <code>减1</code>；要先想生成三角波必须以 <code>固定的周期加减其输出幅度(配合定时器)</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230204144147.webp" alt=""></p>
+<p>三角波的幅度可以设定为 <code>1~4095</code>(即0~3.3v)，也就是三角波计数器峰值的大小</p>
+<div class="note simple"><p>比如现在三角波幅度设定为4095，需要生成一个 <code>1Hz 的三角波</code>，则周期就等于 1s，半个周期就是500ms，则</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>触发周期</mtext><mo>=</mo><mfrac><mrow><mn>500</mn><mi>m</mi><mi>s</mi></mrow><mn>4096</mn></mfrac><mo>≈</mo><mn>0.12207</mn><mi>m</mi><mi>s</mi><mo>≈</mo><mn>122</mn><mi>u</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">\text{触发周期} = \frac{500ms}{4096} \approx 0.12207ms \approx 122us
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">触发周期</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">4096</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">500</span><span class="mord mathnormal">m</span><span class="mord mathnormal">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.12207</span><span class="mord mathnormal">m</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">122</span><span class="mord mathnormal">u</span><span class="mord mathnormal">s</span></span></span></span></span></p>
+<p>故定时器的频率就是设置成 122us，则 <code>arr</code> 和 <code>psc</code> 值可以通过计算：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>T</mi><mi>o</mi><mi>u</mi><mi>t</mi><mtext>(溢出时间)</mtext><mo>=</mo><mfrac><mrow><mo stretchy="false">(</mo><mi>A</mi><mi>r</mi><mi>r</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>P</mi><mi>S</mi><mi>C</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mrow><mi>T</mi><mi>c</mi><mi>l</mi><mi>k</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">Tout\text{(溢出时间)} = \frac{(Arr+1)(PSC+1)}{Tclk}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal">o</span><span class="mord mathnormal">u</span><span class="mord mathnormal">t</span><span class="mord text"><span class="mord">(</span><span class="mord cjk_fallback">溢出时间</span><span class="mord">)</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.113em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal">c</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.02778em;">rr</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07153em;">PSC</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>0.000122</mn><mi>s</mi><mo>=</mo><mfrac><mi>x</mi><mn>80000000</mn></mfrac><mtext>得出</mtext><mi>x</mi><mo>=</mo><mn>9760</mn><mtext>当PSC取(80-1)时,Arr=(122-1)</mtext></mrow><annotation encoding="application/x-tex">0.000122s = \frac{x}{80000000} \text{得出}x= 9760 \text{当PSC取(80-1)时,Arr=(122-1)}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.000122</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.7936em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1076em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">80000000</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord text"><span class="mord cjk_fallback">得出</span></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">9760</span><span class="mord text"><span class="mord cjk_fallback">当</span><span class="mord">PSC</span><span class="mord cjk_fallback">取</span><span class="mord">(80-1)</span><span class="mord cjk_fallback">时</span><span class="mord">,Arr=(122-1)</span></span></span></span></span></span></p>
+</div>
+<p>CubeMX配置：</p>
+<p>以DAC通道1为例，定时器也可以用其他的(选项上有的定时器)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230204134212.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230204135059.webp" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************main.c*************************&#x2F;
+
+int main()
+&#123;
+    HAL_TIM_Base_Start(&amp;htim6);	&#x2F;&#x2F;开启定时器6
+    HAL_DAC_Start(&amp;hdac1,DAC_CHANNEL_1);	&#x2F;&#x2F;开启DAC通道1
+    
+    while(1)
+    &#123;
+        ...
+    &#125;
+    
+&#125;</code></pre>
+<div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>注意：实验现象需要示波器查看</p>
+</div>
+<h2 id="蜂鸣器-已取消">蜂鸣器(已取消)</h2>
+<div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>注意：蓝桥杯官方在新板G4上已经取消了蜂鸣器这个外设【大科电子的板还有可以玩玩】，可能原因是赛场上太吵了吧</p>
+</div>
+<div class="note green icon-padding flat"><i class="note-icon fas fa-fan"></i><p>硬件连接</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230204155055.webp" alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">管脚</th>
+<th style="text-align:center">对应</th>
+<th style="text-align:center">注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PB3</td>
+<td style="text-align:center">BUZZER</td>
+<td style="text-align:center">低电平有效【PNP】</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CubeMX配置-6">CubeMX配置</h3>
+<p>默认设为 <code>高电平</code>，表示蜂鸣器上电时处于关闭状态</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230204161643.webp" alt=""></p>
+<h3 id="程序编写-8">程序编写</h3>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************LED.c*************************&#x2F;
+
+&#x2F;&#x2F;蜂鸣器【参数：1表示打开蜂鸣器 0表示关闭】
+void Buzzer_test(uint8_t swch)
+&#123;
+	if(SET &#x3D;&#x3D; swch)
+	&#123;
+		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_3,GPIO_PIN_RESET);	&#x2F;&#x2F;打开蜂鸣器
+	&#125;
+	else if(RESET &#x3D;&#x3D; swch)
+	&#123;
+		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_3,GPIO_PIN_SET);	&#x2F;&#x2F;关闭蜂鸣器		
+	&#125;
+&#125;</code></pre>
+<p>使用时直接调用即可，蜂鸣器响了会一直在响除非你关闭它才关闭</p>
+<h2 id="I2C之EEPROM">I2C之EEPROM</h2>
+<div class="note simple"><p>需要把 <code>ii2.hal.c</code> 里的 <code>I2CWaitAck()</code> 函数里的 <code>SDA_Output_Mode();</code> 放到 <code>return</code> 前</p>
+<p><code>I2CInit()</code> 函数中没有时钟使能，因为 <code>MX_GPIO_Init()</code> 中有，所以记得放在它的下面才能初始化成功</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230205090444.webp" alt=""></p>
+<p>24C02是 <code>2Kbits</code>，一共 <code>256</code> 字节，<code>8</code> 个字节一个页，<code>32</code>页，所以可寻址范围是 <code>0x00~0xFF</code></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>1</mn><mtext>kbits</mtext><mo>=</mo><mn>1024</mn><mtext>bits</mtext><mo>=</mo><mfrac><mn>1024</mn><mn>8</mn></mfrac><mtext>Bytes</mtext><mo>=</mo><mn>128</mn><mtext>Bytes(字节)</mtext></mrow><annotation encoding="application/x-tex">1\text{kbits} = 1024\text{bits} = \frac{1024}{8}\text{Bytes} = 128\text{Bytes(字节)}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord">1</span><span class="mord text"><span class="mord">kbits</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord">1024</span><span class="mord text"><span class="mord">bits</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">8</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1024</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord text"><span class="mord">Bytes</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">128</span><span class="mord text"><span class="mord">Bytes(</span><span class="mord cjk_fallback">字节</span><span class="mord">)</span></span></span></span></span></span></p>
+<p>I2C传输是 <code>高位在前，低位在后</code>【只需了解即可这里不需要操作这个】</p>
+<p>EEPROM默认存储的是 <code>0xFF</code></p>
+<p>EEPROM 写入和读取字节的顺序是 <code>先低位再高位</code></p>
+<p><code>AT24C02</code> 每次写完内容后会自动指向下一个内存空间</p>
+<p>设备地址如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230205090743.webp" alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">器件地址</th>
+<th style="text-align:center">&quot;写&quot;地址</th>
+<th style="text-align:center">&quot;读&quot;地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0101 0000 (0x50)</td>
+<td style="text-align:center">1010 0000 (0xA0)</td>
+<td style="text-align:center">1010 0001 (0xA1)</td>
+</tr>
+</tbody>
+</table>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230205152616.webp" alt=""></p>
+<p>需要注意读写之间需要至少延时 <code>5ms</code> 避免太快导致失败【个人推荐<code>10ms</code>】</p>
+</div>
+<div class="note green icon-padding flat"><i class="note-icon fas fa-fan"></i><p>硬件连接</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230204234134.webp" alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">管脚</th>
+<th style="text-align:center">对应</th>
+<th style="text-align:center">模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PB6</td>
+<td style="text-align:center">SCL</td>
+<td style="text-align:center">输出</td>
+</tr>
+<tr>
+<td style="text-align:center">PB7</td>
+<td style="text-align:center">SDA</td>
+<td style="text-align:center">输出</td>
+</tr>
+<tr>
+<td style="text-align:center">E0~E2</td>
+<td style="text-align:center">设备地址某3位</td>
+<td style="text-align:center">默认GND</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CubeMX配置-7">CubeMX配置</h3>
+<p>只需要配置成 <code>输出模式</code> ，其他不需要改</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230205083752.webp" alt=""></p>
+<h3 id="程序编写-9">程序编写</h3>
+<p>读写方式一共有 <code>5</code> 种，对照时序写就行了</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>当前地址读取</p>
+</div>
+<p><code>当前地址读</code>：内部地址计数器保存着上次访问时最后一个地址加1的值。只要芯片有电，该地址就一直保存</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230205123930.webp" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************EEPROM.c*************************&#x2F;
+
+
+&#x2F;&#x2F;当前地址读取 参数：存储接收的数据
+void eeprom_read_current(uint8_t *dat)
+&#123;
+	I2CStart();
+	I2CSendByte(0xA1);	&#x2F;&#x2F;发送器件地址(读操作)
+	I2CWaitAck();
+	*dat &#x3D; I2CReceiveByte();	&#x2F;&#x2F;读取数据
+	I2CSendNotAck();
+	I2CStop();
+&#125;</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>随机地址读取</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230205134752.webp" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************EEPROM.c*************************&#x2F;
+
+&#x2F;&#x2F;随机地址读取 参数：需要读取的地址
+uint8_t eeprom_read_random(uint8_t addr)
+&#123;
+	uint8_t temp;	&#x2F;&#x2F;保存数据的临时变量
+	
+	I2CStart();
+	I2CSendByte(0xA0);	&#x2F;&#x2F;发送器件地址(写操作)
+	I2CWaitAck();
+	
+	I2CSendByte(addr);	&#x2F;&#x2F;写入需要读取数据所在的地址
+	I2CWaitAck();
+	
+	I2CStart();
+	I2CSendByte(0xA1);	&#x2F;&#x2F;发送器件地址(读操作)
+	I2CWaitAck();
+	
+	temp &#x3D; I2CReceiveByte();	&#x2F;&#x2F;读取数据
+	I2CSendNotAck();
+	I2CStop();
+	
+	return temp;	&#x2F;&#x2F;返回数据
+&#125;</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>顺序读取</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230205141841.webp" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************EEPROM.c*************************&#x2F;
+
+&#x2F;&#x2F;顺序地址读取 &#x2F;&#x2F;参数1：想读取的数据地址 参数2：需要保存数据的数组 参数3：要读多少个数据(一个地址一个数据)
+void eeprom_read_sequential(uint8_t addr,uint8_t *dat,uint8_t len)
+&#123;
+	I2CStart();
+	I2CSendByte(0xA0);	&#x2F;&#x2F;发送器件地址(写操作)
+	I2CWaitAck();
+	
+	I2CSendByte(addr);	&#x2F;&#x2F;写入需要读取数据所在的地址
+	I2CWaitAck();
+	
+	I2CStart();
+	I2CSendByte(0xA1);
+	I2CWaitAck();
+	
+	while(len--)
+	&#123;
+		*dat++ &#x3D; I2CReceiveByte();	&#x2F;&#x2F;读取数据到数组
+		
+		if(len)
+		&#123;
+			I2CSendAck();
+		&#125;
+		else
+		&#123;
+			I2CSendNotAck();
+		&#125;
+	&#125;
+	I2CStop();
+&#125;</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>字节写入</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230205150723.webp" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************EEPROM.c*************************&#x2F;
+
+&#x2F;&#x2F;字节写入 参数1：需要写的数据(字符需要用&#39;&#39;)  参数2：需要写入的地址
+void eeprom_write_byte(uint8_t dat,uint8_t addr)
+&#123;
+	I2CStart();
+	I2CSendByte(0xA0);	&#x2F;&#x2F;发送器件地址(写操作)
+	I2CWaitAck();
+	
+	I2CSendByte(addr);	&#x2F;&#x2F;发送写入的地址
+	I2CWaitAck();
+	I2CSendByte(dat);	&#x2F;&#x2F;发送数据
+	I2CWaitAck();
+	I2CStop();
+&#125;</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>页写入</p>
+</div>
+<ul>
+<li>可以写入字符串</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230205150738.webp" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************EEPROM.c*************************&#x2F;
+
+&#x2F;&#x2F;页写入 参数1：需要写入的地址 参数2：需要写入的数据(数组) 参数3：数据的长度
+void eeprom_write_page(uint8_t addr,uint8_t *dat,uint8_t len)
+&#123;
+	I2CStart();
+	I2CSendByte(0xA0);	&#x2F;&#x2F;发送器件地址(写操作)
+	I2CWaitAck();
+	
+	I2CSendByte(addr);	&#x2F;&#x2F;发送写入的地址
+	I2CWaitAck();
+	while(len--)
+	&#123;
+		I2CSendByte(*dat++);	&#x2F;&#x2F;发送数据
+		I2CWaitAck();
+		addr ++;                    &#x2F;&#x2F;E2PROM地址递增
+		if((addr &amp; 0x07) &#x3D;&#x3D; 0)	&#x2F;&#x2F;检查地址是否到达页边界，24C02每页8字节
+		&#123;
+			break;	&#x2F;&#x2F;到达页边界时，跳出循环，结束本次写操作
+		&#125;
+					
+	&#125;
+	I2CStop();
+&#125;</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************main.c*************************&#x2F;
+
+int main()
+&#123;
+    uint8_t arr1[5] &#x3D; &quot;Fuck&quot;;
+    uint8_t arr2[5];
+    
+    eeprom_write_page(0x08,arr1,5);
+    HAL_Delay(10);
+    eeprom_read_sequential(0x08,arr2,5);
+    printf(&quot;%s\r\n&quot;,arr2);
+&#125;</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>写入/读取16位字节</p>
+</div>
+<ul>
+<li>这样就可以直接调用函数存储 <code>0~65535</code> 范围的值了，读取也方便</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************EEPROM.c*************************&#x2F;
+
+
+&#x2F;&#x2F;写入uint16类型 参数1：数据要写入的地址 参数2：数值0~65535
+void eeprom_write_u16(uint8_t addr,uint16_t dat)
+&#123;
+    uint8_t Hn,Ln;	&#x2F;&#x2F;高位，低位
+    Hn &#x3D; (dat&gt;&gt;8)&amp;0xFF;	&#x2F;&#x2F;获取高位
+    Ln &#x3D; dat&amp;0xFF;	&#x2F;&#x2F;获取低8位
+    eeprom_write_byte(Ln,addr);	&#x2F;&#x2F;发送低位
+    HAL_Delay(10);
+    eeprom_write_byte(Hn,addr+1);	&#x2F;&#x2F;发送高位
+    HAL_Delay(10);
+&#125;
+
+&#x2F;&#x2F;读取uint16类型 参数：数据的地址
+uint16_t eeprom_read_u16(uint8_t addr)
+&#123;
+    uint16_t tmp;
+    tmp &#x3D; (uint16_t)eeprom_read_random(addr);	&#x2F;&#x2F;先读取低位
+    HAL_Delay(10);
+    tmp |&#x3D; (uint16_t)(eeprom_read_random(addr+1)&lt;&lt;8);	&#x2F;&#x2F;再读取高位，|就是合并也可以用+
+    HAL_Delay(10);
+
+    return tmp;
+&#125;</code></pre>
+<h2 id="I2C之MCP4017">I2C之MCP4017</h2>
+<div class="note simple"><p><code>MCP4017</code> 是一款可编程的电阻，其内置了 <code>7</code> 位寄存器(<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>7</mn></msup><mtext>也就是范围是0-127</mtext></mrow><annotation encoding="application/x-tex">2^7\text{也就是范围是0-127}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">7</span></span></span></span></span></span></span></span><span class="mord text"><span class="mord cjk_fallback">也就是范围是</span><span class="mord">0-127</span></span></span></span></span>)，共计 <code>127</code> 个档位的分辨率， <code>注意写入的只能是整数(0~127)不能是其他数值，读出来的也是整数！！！</code></p>
+<p>通信也是用 <code>I2C</code></p>
+<p>蓝桥杯采用的是 <code>MCP4017T-104ELT</code>，也就是说它的 <code>最大电阻达到了100K(十万欧姆)</code>，相当于每增加一个数，电阻增加 <code>787.402Ω</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230206155024.webp" alt=""></p>
+<p>向MCP中输入的数越大，它对应的电阻也就越大，当我们传入 <code>0x7F</code> 时，对应的电阻就是 <code>100K</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230206160525.webp" alt=""></p>
+<p><code>电阻的计算</code>：Rs的阻值为 <code>AB之间的总电阻除以127</code>，其中Rw的阻值 <code>几乎为零，可以忽略不计</code>。N为我们写入的数据；RAB为常量。</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>电阻的公式：电阻</mtext><mi>R</mi><mo>=</mo><mn>787.4</mn><mo>×</mo><mtext>读取的数值</mtext></mrow><annotation encoding="application/x-tex">\text{电阻的公式：电阻}R=787.4\times \text{读取的数值}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">电阻的公式：电阻</span></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">787.4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">读取的数值</span></span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>电压的公式：电压</mtext><mi>V</mi><mo>=</mo><mn>3.3</mn><mo>×</mo><mfrac><mi>R</mi><mrow><mi>R</mi><mo>+</mo><mn>10</mn><mi>k</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\text{电压的公式：电压}V=3.3\times\frac{R}{R+10k}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">电压的公式：电压</span></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">3.3</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.2757em;vertical-align:-0.4033em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8723em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.00773em;">R</span><span class="mbin mtight">+</span><span class="mord mtight">10</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.00773em;">R</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4033em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
+</div>
+<div class="note green icon-padding flat"><i class="note-icon fas fa-fan"></i><p>硬件连接</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230206153333.webp" alt=""></p>
+<p>将其 6 引脚，5 引脚 的内部电路图 简化为：</p>
+<p>相当于一个 <code>滑动变阻器</code> ，RAB 是一个大电阻，通过滑动划片 W ，可改变 RWB 的阻值</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230206164901.webp" alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">管脚</th>
+<th style="text-align:center">对应</th>
+<th style="text-align:center">模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PB6</td>
+<td style="text-align:center">SCL</td>
+<td style="text-align:center">输出</td>
+</tr>
+<tr>
+<td style="text-align:center">PB7</td>
+<td style="text-align:center">SDA</td>
+<td style="text-align:center">输出</td>
+</tr>
+<tr>
+<td style="text-align:center">PB14</td>
+<td style="text-align:center">w</td>
+<td style="text-align:center">读取电压管脚(ADC)</td>
+</tr>
+</tbody>
+</table>
+<p>从机地址：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230206202429.webp" alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">“写”地址</th>
+<th style="text-align:center">&quot;读&quot;地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0x5E</td>
+<td style="text-align:center">0x5F</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CubeMX配置-8">CubeMX配置</h3>
+<p>只需要配置成 <code>输出模式</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230205083752.webp" alt=""></p>
+<p>配置 <code>PB14</code> 为ADC通道，完成相关配置【因为我在用ADC1_11通道故这里我直接配置两个通道，看实际需求配置】</p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230206214147.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230206214112.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230203145331.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230203145431.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<h3 id="程序编写-10">程序编写</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>写操作</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230206202917.webp" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************EEPROM.c*************************&#x2F;
+
+
+&#x2F;&#x2F;MCP4017写操作
+void mcp_write_byte(uint8_t value)
+&#123;
+	I2CStart();
+	I2CSendByte(0x5E);	&#x2F;&#x2F;写操作
+	I2CWaitAck();
+	
+	I2CSendByte(value);	&#x2F;&#x2F;发送数据
+	I2CWaitAck();
+	I2CStop();
+&#125;</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>读操作</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230206203217.webp" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************EEPROM.c*************************&#x2F;
+
+
+&#x2F;&#x2F;MCP4017读操作
+uint8_t mcp_read_byte(void)
+&#123;
+	uint8_t temp;
+	
+	I2CStart();
+	I2CSendByte(0x5F);	&#x2F;&#x2F;读操作
+	I2CWaitAck();
+	
+	temp &#x3D; I2CReceiveByte();	&#x2F;&#x2F;读取数据
+	I2CSendNotAck();
+	I2CStop();
+	
+	return temp;	
+&#125;</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************MY_LCD.c*************************&#x2F;
+
+
+&#x2F;&#x2F;显示变量
+void MY_LCD_DisNum(uint32_t num)
+&#123;
+    uint8_t ADC5_Num[20] &#x3D; &quot;&quot;;	&#x2F;&#x2F;ADC1通道5
+
+    if(ADC_flag)
+    &#123;
+        ADC_flag &#x3D; 0;
+
+        sprintf((char *)ADC5_Num, &quot;adc1-5:%.2f&quot;, (double)ADC1_Value[1] &#x2F; 4096 * 3.3f);
+        MY_LCD_Arr_Completion((uint8_t *)ADC5_Num);
+        LCD_DisplayStringLine(Line8, (uint8_t *)ADC5_Num);
+    &#125;
+&#125;</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************main.c*************************&#x2F;
+
+uint32_t ADC1_Value[2];	&#x2F;&#x2F;ADC1
+
+int main()
+&#123;
+    HAL_ADCEx_Calibration_Start(&amp;hadc1,ADC_SINGLE_ENDED);    &#x2F;&#x2F;ADC1校准
+    HAL_ADC_Start_DMA(&amp;hadc1,(uint32_t*)&amp;ADC1_Value,2);
+    mcp_write_byte(64);	&#x2F;&#x2F;设置阻值
+&#125;</code></pre>
+<ul>
+<li>结果是有点误差的，计算过程是：</li>
+</ul>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><mn>787.4</mn><mo>×</mo><mn>64</mn><mo>=</mo><mn>50393.6</mn><mi mathvariant="normal">Ω</mi></mrow><annotation encoding="application/x-tex">R = 787.4\times64 = 50393.6Ω</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">787.4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">64</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">50393.6Ω</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo>=</mo><mn>3.3</mn><mi>v</mi><mo>×</mo><mfrac><mi>R</mi><mrow><mi>R</mi><mo>+</mo><mn>10</mn><mi>K</mi></mrow></mfrac><mo>=</mo><mn>3.3</mn><mo>×</mo><mfrac><mn>50393.6</mn><mrow><mn>50393.6</mn><mo>+</mo><mn>10000</mn></mrow></mfrac><mo>≈</mo><mn>2.753</mn><mi>v</mi></mrow><annotation encoding="application/x-tex">V = 3.3v\times\frac{R}{R+10K} = 3.3 \times \frac{50393.6}{50393.6+10000} \approx 2.753v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">3.3</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.2757em;vertical-align:-0.4033em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8723em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.00773em;">R</span><span class="mbin mtight">+</span><span class="mord mtight">10</span><span class="mord mathnormal mtight" style="margin-right:0.07153em;">K</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.00773em;">R</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4033em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">3.3</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.2484em;vertical-align:-0.4033em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">50393.6</span><span class="mbin mtight">+</span><span class="mord mtight">10000</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">50393.6</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4033em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2.753</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span></span></span></span></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230206215237.webp" alt=""></p>
+<h2 id="RTC">RTC</h2>
+<div class="note simple"><p><code>32</code>位的可编程，向上计数计数器，可用于较长时间段的测量</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>若最小单位为秒：</mtext><msup><mn>2</mn><mn>32</mn></msup><mo>=</mo><mn>4294967295</mn><mtext>秒</mtext><mo>=</mo><mn>49710</mn><mtext>天</mtext><mo>≈</mo><mn>136</mn><mtext>年</mtext></mrow><annotation encoding="application/x-tex">\text{若最小单位为秒：}2^{32} = 4294967295\text{秒}=49710\text{天}\approx136\text{年}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord text"><span class="mord cjk_fallback">若最小单位为秒：</span></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">32</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">4294967295</span><span class="mord text"><span class="mord cjk_fallback">秒</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">49710</span><span class="mord text"><span class="mord cjk_fallback">天</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">136</span><span class="mord text"><span class="mord cjk_fallback">年</span></span></span></span></span></p>
+<p>可以选择以下 <code>3</code> 种RTC的时钟源：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">时钟源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">HSE时钟/128【 <code>外部高速</code> 】</td>
+</tr>
+<tr>
+<td style="text-align:center">LSE振荡器时钟（稳定精准，重要的是VDD掉电后可有后备供电区域给它供电）【 <code>外部低速</code> 典型频率为32 kHz】</td>
+</tr>
+<tr>
+<td style="text-align:center">LSI振荡器时钟【 <code>内部低速</code> 32.768 kHz(更精确)】</td>
+</tr>
+</tbody>
+</table>
+<p>使用HSE分频时钟或者LSI的时候,在主电源VDD掉电的情况下,这两个时钟来源都会受到影响,因此没法保证RTC正常工作.所以RTC一般都时钟低速外部时钟LSE</p>
+<p><code>3</code> 个专门的可屏蔽中断：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">中断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">闹钟中断，用来产生一个软件可编程的闹钟中断</td>
+</tr>
+<tr>
+<td style="text-align:center">秒中断，用来产生一个可编程的周期性中断信号(最长可达1秒)</td>
+</tr>
+<tr>
+<td style="text-align:center">溢出中断，指示内部可编程计数器溢出并回转为0的状态</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="CubeMX配置-9">CubeMX配置</h3>
+<p>由于板子的 <code>LSE时钟</code> 连接了LCD的引脚所以我们不能使用它(在RCC配置那可以看到有红色)</p>
+<div class="note simple"><p>注意，一定要选择好两次分频的系数，使经过两次分频后的时钟频率为1Hz(1秒)</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>32000</mn><mrow><mo stretchy="false">(</mo><mn>31</mn><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo>×</mo><mo stretchy="false">(</mo><mn>999</mn><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mfrac><mo>=</mo><mn>1</mn><mi>H</mi><mi>Z</mi></mrow><annotation encoding="application/x-tex">\frac{32000}{(31+1)\times(999+1)}=1HZ</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.3651em;vertical-align:-0.52em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight">31</span><span class="mbin mtight">+</span><span class="mord mtight">1</span><span class="mclose mtight">)</span><span class="mbin mtight">×</span><span class="mopen mtight">(</span><span class="mord mtight">999</span><span class="mbin mtight">+</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">32000</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.52em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">1</span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span></span></span></p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230207094214.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230207094054.webp" alt=""></p>
+<h3 id="程序编写-11">程序编写</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>读取时间日期</p>
+</div>
+<ul>
+<li>RTC获取必须 <code>先获取时间再获取日期</code>，而且时间和日期调用的时候不能单独调用， <code>必须两个同时调用</code>，不然下次获取的时间和日期会出错</li>
+<li>因为我获取时间是在定时器里1s获取一次，所以刚上电会显示 <code>00:00:00</code> 然后再显示获取的时间日期，所以需要在mian函数里先获取一次时间日期才能保证刚上电是设定的时间日期</li>
+<li>由于蓝桥杯板子没有带掉电保护功能所以想要保存只能保存到EEPROM里</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************main.c*************************&#x2F;
+
+RTC_TimeTypeDef rtc_time;
+RTC_DateTypeDef rtc_date;
+
+int main()
+&#123;
+  	HAL_RTC_GetTime(&amp;hrtc,&amp;rtc_time,RTC_FORMAT_BIN);	&#x2F;&#x2F;获取时间，二进制格式
+  	HAL_RTC_GetDate(&amp;hrtc,&amp;rtc_date,RTC_FORMAT_BIN);	&#x2F;&#x2F;获取日期，二进制格式
+    
+    while(1)
+    &#123;
+        ...
+    &#125;
+&#125;</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************main.h*************************&#x2F;
+
+extern RTC_TimeTypeDef rtc_time;	&#x2F;&#x2F;获取时间的结构体
+extern RTC_DateTypeDef rtc_date;	&#x2F;&#x2F;获取日期的结构体</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************TIMER.c*************************&#x2F;
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+&#123;
+	static uint16_t count_1s &#x3D; 0;	
+	
+	if(htim &#x3D;&#x3D; &amp;htim2)	&#x2F;&#x2F;如果是TIM2产生中断
+	&#123;	
+		count_1s++;
+
+		if(1000 &#x3D;&#x3D; count_1s)	&#x2F;&#x2F;1s获取一次日期时间
+		&#123;
+			count_1s &#x3D; 0;
+			HAL_RTC_GetTime(&amp;hrtc,&amp;rtc_time,RTC_FORMAT_BIN);	&#x2F;&#x2F;获取时间，二进制格式
+		    HAL_RTC_GetDate(&amp;hrtc,&amp;rtc_date,RTC_FORMAT_BIN);	&#x2F;&#x2F;获取日期，二进制格式
+		&#125;
+	&#125;
+&#125;</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************MY_LCD.c*************************&#x2F;
+
+&#x2F;&#x2F;显示变量
+void MY_LCD_DisNum(uint32_t num)
+&#123;
+	uint8_t RTC_Timer[20] &#x3D; &quot;&quot;;	&#x2F;&#x2F;RTC时间
+	uint8_t RTC_Date[20] &#x3D; &quot;&quot;;	&#x2F;&#x2F;RTC日期
+
+	sprintf((char *)RTC_Timer, &quot;time:%02d:%02d:%02d&quot;,rtc_time.Hours,rtc_time.Minutes,rtc_time.Seconds);
+    MY_LCD_Arr_Completion((uint8_t *)RTC_Timer);
+    LCD_DisplayStringLine(Line8, (uint8_t *)RTC_Timer);
+	
+    sprintf((char *)RTC_Date, &quot;date:%02d-%02d-%02d week:%d&quot;,rtc_date.Year,rtc_date.Month,rtc_date.Date,rtc_date.WeekDay);
+    MY_LCD_Arr_Completion((uint8_t *)RTC_Date);
+    LCD_DisplayStringLine(Line9, (uint8_t *)RTC_Date);	
+    &#125;
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230207105146.webp" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>修改时间日期</p>
+</div>
+<ul>
+<li>想修改哪个值就直接赋值哪个结构体成员，然后调用设置时间日期函数写入即可【修改日期则星期几页要一起修改不然对不上】</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">rtc_time.Minutes &#x3D; 59;
+rtc_date.Year &#x3D; 24;
+HAL_RTC_SetTime(&amp;hrtc, &amp;rtc_time, RTC_FORMAT_BIN);
+HAL_RTC_SetDate(&amp;hrtc, &amp;rtc_date, RTC_FORMAT_BIN);</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>暂停时间日期</p>
+</div>
+<ul>
+<li>通过这两个函数来进行时间日期的暂停和开始【暂停和开始都不会重新清零的】</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;暂停
+__HAL_RCC_RTC_DISABLE();
+&#x2F;&#x2F;开始
+__HAL_RCC_RTC_ENABLE();</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>RTC闹钟功能</p>
+</div>
+<p>CubeMX配置：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230207152903.webp" alt=""></p>
+<p>开启闹钟中断 <strong>【RTC外设没有独立的中断，但是ST巧妙的将RTC外设都连接到了外部中断EXTI】</strong>，通过触发EXTI来产生RTC外设中断</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230207153027.webp" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*************************main.c*************************&#x2F;
+
+#define alarm_hour 0
+#define alarm_min 0
+#define alarm_sec 10
+
+void Alarm_configuration(uint8_t hour,uint8_t min,uint8_t sec);
+void Alarm_compute(uint8_t hour,uint8_t min,uint8_t sec);
+
+int main()
+&#123;
+    while(1)
+    &#123;
+	  	if(alarm_clock_flag)
+	  	&#123;
+			  alarm_clock_flag &#x3D; 0;
+			  HAL_UART_Transmit_DMA(&amp;huart1,(uint8_t*)&quot;闹钟响了\r\n&quot;,12);
+	  	&#125;        
+    &#125;
+&#125;
+
+&#x2F;&#x2F;闹钟配置函数 参数：时 分 秒
+void Alarm_configuration(uint8_t hour, uint8_t min, uint8_t sec)
+&#123;
+    &#x2F;&#x2F;直接复制 rtc.c 然后把 RTC_FORMAT_BCD 改成 RTC_FORMAT_BIN
+    RTC_AlarmTypeDef sAlarm &#x3D; &#123;0&#125;;
+
+    sAlarm.AlarmTime.Hours &#x3D; hour;
+    sAlarm.AlarmTime.Minutes &#x3D; min;
+    sAlarm.AlarmTime.Seconds &#x3D; sec;
+    sAlarm.AlarmTime.SubSeconds &#x3D; 0x0;
+    sAlarm.AlarmMask &#x3D; RTC_ALARMMASK_DATEWEEKDAY;
+    sAlarm.AlarmSubSecondMask &#x3D; RTC_ALARMSUBSECONDMASK_ALL;
+    sAlarm.AlarmDateWeekDaySel &#x3D; RTC_ALARMDATEWEEKDAYSEL_DATE;
+    sAlarm.AlarmDateWeekDay &#x3D; 0x1;
+    sAlarm.Alarm &#x3D; RTC_ALARM_A;
+    if (HAL_RTC_SetAlarm_IT(&amp;hrtc, &amp;sAlarm, RTC_FORMAT_BIN) !&#x3D; HAL_OK)
+    &#123;
+        Error_Handler();
+    &#125;
+&#125;
+void Alarm_compute(uint8_t hour, uint8_t min, uint8_t sec)
+&#123;
+    uint8_t h &#x3D; 0, m &#x3D; 0, s &#x3D; 0;
+    RTC_TimeTypeDef gtime &#x3D; &#123;0&#125;;
+    RTC_DateTypeDef gdate &#x3D; &#123;0&#125;;
+
+    HAL_RTC_GetTime(&amp;hrtc, &amp;gtime, RTC_FORMAT_BIN);
+    HAL_RTC_GetDate(&amp;hrtc, &amp;gdate, RTC_FORMAT_BIN);
+
+    if((s &#x3D; (sec + gtime.Seconds)) &gt; 59)	&#x2F;&#x2F;如果设定值+获取值&gt;59
+    &#123;
+        s &#x3D; s % 60;	&#x2F;&#x2F;取余
+        ++gtime.Minutes;	&#x2F;&#x2F;分+1
+    &#125;
+    if((m &#x3D; (min + gtime.Minutes)) &gt; 59)	&#x2F;&#x2F;如果设定值+获取值&gt;59
+    &#123;
+        m &#x3D; m % 60;	&#x2F;&#x2F;取余
+        ++gtime.Hours;	&#x2F;&#x2F;时+1
+    &#125;
+    if((h &#x3D; (hour + gtime.Hours)) &gt; 23)	&#x2F;&#x2F;如果设定值+获取值&gt;23
+    &#123;
+        h &#x3D; h % 23;	&#x2F;&#x2F;取余
+    &#125;
+
+    Alarm_configuration(h, m, s);
+&#125;
+
+
+&#x2F;&#x2F;闹钟中断回调函数
+void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc)
+&#123;
+    alarm_clock_flag &#x3D; 1;	&#x2F;&#x2F;闹钟标志位
+    Alarm_compute(alarm_hour, alarm_min, alarm_sec);
+&#125;</code></pre>
+<p>实现隔10s触发一次闹钟</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230207200839.webp" alt=""></p>
+<h3 id="低功耗-了解">低功耗(了解)</h3>
+<p>stm32有三种低功耗模式，功耗依次降低：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">模式</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">睡眠模式</td>
+<td style="text-align:center">只有内核时钟关闭，外设仍在运行；可以通过任意一个中断或唤醒事件唤醒； <code>唤醒后回到睡眠的位置向后执行</code></td>
+</tr>
+<tr>
+<td style="text-align:center">停止模式</td>
+<td style="text-align:center">关闭内核时钟、外设时钟，保留内核1.8V供电，寄存器和RAM中的数据可以保持，IO口状态也可保持；可以通过任意一个外部中断唤醒； <code>唤醒后可回到停止的代码处向后执行，但要重新初始化时钟和外设</code></td>
+</tr>
+<tr>
+<td style="text-align:center">待机模式</td>
+<td style="text-align:center">关闭所有时钟，关闭内核1.8V供电，寄存器和RAM数据不能保持（除了电源控制/状态寄存器(PWR_CSR)、备份寄存器，其他数据都丢失）；可通过唤醒引脚（PA0）上升沿、RTC闹钟中断，或者复位唤醒； <code>唤醒后相当于复位，从复位地址开始执行</code></td>
+</tr>
+</tbody>
+</table>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/0fd12147588c42498d5568dcec86650a.webp" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;进入待机模式函数
+void enter_standby_mode(void)
+&#123;
+	HAL_PWR_DisableWakeUpPin(PWR_WAKEUP_PIN1);	&#x2F;&#x2F;失能PA0
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);&#x2F;&#x2F;PA0端口变成低电平，准备好唤醒键初始电平
+	__HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);	&#x2F;&#x2F;清除唤醒标志位
+	HAL_PWR_EnableWakeUpPin(PWR_WAKEUP_PIN1);	&#x2F;&#x2F;&#x2F;&#x2F;使能WKUP引脚的唤醒功能
+	HAL_PWR_EnterSTANDBYMode();	&#x2F;&#x2F;进入待机模式
+&#125;</code></pre>
+<h2 id="PWM">PWM</h2>
+<h3 id="预备知识">预备知识</h3>
+<div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>比赛题目会给定哪个引脚的，如果没有则自己挑【注意不要和别的外设功能冲突就行】</p>
+<p>还有题目会给误差范围(一般是<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>±</mo><mn>5</mn><mi mathvariant="normal">%</mi></mrow><annotation encoding="application/x-tex">\pm5\%</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.0833em;"></span><span class="mord">±</span><span class="mord">5%</span></span></span></span>)，你需要保证你的频率或者占空比在它误差范围内就行</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">一般考点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><s>单个定时器单个通道输出特定频率，特定/不同占空比的PWM波</s>【PWM模式】</td>
+</tr>
+<tr>
+<td style="text-align:center">单个定时器多个通道输出特定频率，特定/不同占空比的PWM波【PWM模式】</td>
+</tr>
+<tr>
+<td style="text-align:center">单个定时器单个通道输出不同频率，不同占空比的PWM波【PWM模式】</td>
+</tr>
+<tr>
+<td style="text-align:center">单个定时器多个通道输出不同频率，不同占空比的PWM波【PWM输出比较模式】</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">PWM3种模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>PWM模式</code>： 同一定时器中，不同的通道下，输出的频率固定，占空比可变</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>PWM输出比较模式</code>： 同一定时器下，不同通道能够产生频率不同，占空比不同，甚至相位也不同的方波</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>PWM捕获模式</code>： PWM比较模式是输出不同频率或者占空比，这个是捕获就是反过来已知波形图而去计算对应占空比和频率</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">寄存器</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>CNT</code></td>
+<td style="text-align:center">计数器寄存器(从0开始计数到ARR则重新计数)</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>CCRx</code></td>
+<td style="text-align:center">即Pulse (决定了占空比)</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>极性</code></td>
+<td style="text-align:center">高电平/低电平 (决定了PWM有效电平)</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>ARR</code></td>
+<td style="text-align:center">重装载值 (决定了PWM频率)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名词</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>PWM</code></td>
+<td style="text-align:center">脉宽调制信号</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>占空比</code></td>
+<td style="text-align:center">占空比是指有效电平在一个周期之内所占的时间比率。如果方波的占空比为60%，占空比为0.6，即信号在60%时间内是导通的，但在40%的时间内处于断态</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>方波</code></td>
+<td style="text-align:center">跟占空比差不多，一般用百分数表示，占空比0.5就是方波50%</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>pwm频率</code></td>
+<td style="text-align:center">是指每秒钟信号从高电平到低电平再回到高电平的次数</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">定时器</th>
+<th style="text-align:center">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">TIM1,TIM8</td>
+<td style="text-align:center">产生输出波形(输出比较，PWM，带死区插入的互补PWM)</td>
+</tr>
+<tr>
+<td style="text-align:center">TIM6,TIM7</td>
+<td style="text-align:center">DAC</td>
+</tr>
+<tr>
+<td style="text-align:center">其余</td>
+<td style="text-align:center">输出比较</td>
+</tr>
+</tbody>
+</table>
+<div class="note simple"><p>Hz（赫兹）,KHz（千赫兹）,MHz（兆赫兹），GHz（G赫兹）</p>
+<p>单位换算：</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>H</mi><mi>z</mi><mo>=</mo><mn>1</mn><mi>s</mi></mrow><annotation encoding="application/x-tex">1Hz = 1s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">1</span><span class="mord mathnormal" style="margin-right:0.04398em;">Hz</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mord mathnormal">s</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>K</mi><mi>H</mi><mi>z</mi><mo>=</mo><mn>1</mn><mi>m</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">1KHz = 1ms</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">1</span><span class="mord mathnormal" style="margin-right:0.04398em;">KHz</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mord mathnormal">m</span><span class="mord mathnormal">s</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>M</mi><mi>H</mi><mi>z</mi><mo>=</mo><mn>1</mn><mi>u</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">1MHz = 1us</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">1</span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mord mathnormal" style="margin-right:0.04398em;">Hz</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mord mathnormal">u</span><span class="mord mathnormal">s</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>G</mi><mi>H</mi><mi>z</mi><mo>=</mo><mn>1</mn><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">1GHz = 1ns</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">1</span><span class="mord mathnormal">G</span><span class="mord mathnormal" style="margin-right:0.04398em;">Hz</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mord mathnormal">n</span><span class="mord mathnormal">s</span></span></span></span></p>
+<p>左边越大，对应时间越小(左边除以2则右边乘以2)</p>
+</div>
+<div class="note simple"><p>除了基本定时器（TIM6、7）外，其他所有定时器均能进行PWM信号输出，具体哪个管脚通道可以直接去点击CubeMX查看或者查看手册(板子看LQFP64那列)</p>
+</div>
+<div class="note simple"><p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>频率公式(单位:Hz)</mtext><mo>=</mo><mtext>定时器时钟(单位:Hz)</mtext><mi mathvariant="normal">/</mi><mo stretchy="false">(</mo><mtext>psc预分频值</mtext><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mi mathvariant="normal">/</mi><mo stretchy="false">(</mo><mtext>arr计数值</mtext><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{频率公式(单位:Hz)}=\text{定时器时钟(单位:Hz)}/(\text{psc预分频值}+1)/(\text{arr计数值}+1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord cjk_fallback">频率公式</span><span class="mord">(</span><span class="mord cjk_fallback">单位</span><span class="mord">:Hz)</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord cjk_fallback">定时器时钟</span><span class="mord">(</span><span class="mord cjk_fallback">单位</span><span class="mord">:Hz)</span></span><span class="mord">/</span><span class="mopen">(</span><span class="mord text"><span class="mord">psc</span><span class="mord cjk_fallback">预分频值</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mord">/</span><span class="mopen">(</span><span class="mord text"><span class="mord">arr</span><span class="mord cjk_fallback">计数值</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>周期(单位:s)</mtext><mo>=</mo><mn>1</mn><mo>÷</mo><mtext>频率(单位:Hz)</mtext></mrow><annotation encoding="application/x-tex">\text{周期(单位:s)}=1 \div \text{频率(单位:Hz)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord cjk_fallback">周期</span><span class="mord">(</span><span class="mord cjk_fallback">单位</span><span class="mord">:s)</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">÷</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord cjk_fallback">频率</span><span class="mord">(</span><span class="mord cjk_fallback">单位</span><span class="mord">:Hz)</span></span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>占空比(单位:无)</mtext><mo>=</mo><mfrac><mtext>Pulse对比值</mtext><mtext>arr计数值+1</mtext></mfrac><mo>×</mo><mn>100</mn><mi mathvariant="normal">%</mi></mrow><annotation encoding="application/x-tex">\text{占空比(单位:无)}=\frac{\text{Pulse对比值}}{\text{arr计数值+1}}\times100\%</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord cjk_fallback">占空比</span><span class="mord">(</span><span class="mord cjk_fallback">单位</span><span class="mord">:</span><span class="mord cjk_fallback">无</span><span class="mord">)</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2834em;vertical-align:-0.4033em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">arr</span><span class="mord cjk_fallback mtight">计数值</span><span class="mord mtight">+1</span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">Pulse</span><span class="mord cjk_fallback mtight">对比值</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4033em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8056em;vertical-align:-0.0556em;"></span><span class="mord">100%</span></span></span></span></p>
+</div>
+<h3 id="TIM-PWM">TIM-PWM</h3>
+<div class="note success simple"><p>PWM模式下，ARR决定输出频率，CCRx决定输出占空比</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">计数方式</th>
+<th style="text-align:center">PWM1（模式1）</th>
+<th style="text-align:center">PWM2（模式2）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">向上/向下</td>
+<td style="text-align:center"><code>CNT &lt; CCRx</code>  —&gt;  有效电平</td>
+<td style="text-align:center"><code>CNT &gt; CCRx</code>  —&gt;  有效电平</td>
+</tr>
+</tbody>
+</table>
+<p>PWM模式1和PWM模式2，为 <code>互补</code> 的波形， <code>PWM模式1+极性低 == PWM模式2+极性高</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230208220025.webp" alt=""></p>
+<p>假设当前设置为：PWM模式2，输出高极性，如图则CNT&lt;CCRx的部分为无效电平(低电平)，大于CCRx的部分为有效电平(高电平)</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>单个定时器多个通道输出特定频率，特定/不同占空比的PWM波</p>
+</div>
+<div class="note simple"><table>
+<thead>
+<tr>
+<th style="text-align:center">实验管脚</th>
+<th style="text-align:center">对应通道</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PA6</td>
+<td style="text-align:center">TIM3_CH1</td>
+</tr>
+<tr>
+<td style="text-align:center">PA7</td>
+<td style="text-align:center">TIM3_CH2</td>
+</tr>
+</tbody>
+</table>
+<p><code>要求</code>：频率设定为 2500Hz，占空比范围为10%~90%，通过按键每次增加10%，加到最大范围后再按一次回到10%；初始时CH1占空比为0.1，CH2占空比为0.5</p>
+</div>
+<div class="note simple"><p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>周期</mtext><mo>=</mo><mfrac><mn>1</mn><mn>2500</mn></mfrac><mo>=</mo><mn>0.0004</mn><mi>s</mi><mo>=</mo><mn>0.4</mn><mi>m</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">\text{周期}=\frac{1}{2500} = 0.0004s=0.4ms</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">周期</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1901em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2500</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.0004</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.4</span><span class="mord mathnormal">m</span><span class="mord mathnormal">s</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>频率计算：</mtext><mn>2500</mn><mo>=</mo><mn>80000000</mn><mi mathvariant="normal">/</mi><mi>x</mi><mspace width="1em"/><mstyle mathcolor="red"><mo>−</mo><mo>&gt;</mo></mstyle><mi>x</mi><mo>=</mo><mn>32000</mn><mspace width="1em"/><mtext>即：</mtext><mi>p</mi><mi>s</mi><mi>c</mi><mo>=</mo><mn>32</mn><mo>−</mo><mn>1</mn><mspace width="1em"/><mi>a</mi><mi>r</mi><mi>r</mi><mo>=</mo><mn>1000</mn><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\text{频率计算：}2500=80000000/x \quad \textcolor{red}{-&gt;} x=32000 \quad \text{即：}psc=32-1 \quad arr=1000-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">频率计算：</span></span><span class="mord">2500</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">80000000/</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:1em;"></span><span class="mord" style="color:red;">−</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel" style="color:red;">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord">32000</span><span class="mspace" style="margin-right:1em;"></span><span class="mord text"><span class="mord cjk_fallback">即：</span></span><span class="mord mathnormal">p</span><span class="mord mathnormal">sc</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">32</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">rr</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1000</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>占空比计算：通道一：</mtext><mn>0.1</mn><mo>=</mo><mfrac><mi>x</mi><mn>1000</mn></mfrac><mspace width="1em"/><mi>x</mi><mo>=</mo><mn>100</mn><mspace width="1em"/><mtext>通道二：</mtext><mn>0.5</mn><mo>=</mo><mfrac><mi>x</mi><mn>1000</mn></mfrac><mspace width="1em"/><mi>x</mi><mo>=</mo><mn>500</mn></mrow><annotation encoding="application/x-tex">\text{占空比计算：} \text{通道一：}0.1 = \frac{x}{1000} \quad x=100\quad\text{通道二：}0.5 = \frac{x}{1000} \quad x=500</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">占空比计算：</span></span><span class="mord text"><span class="mord cjk_fallback">通道一：</span></span><span class="mord">0.1</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0404em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6954em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1000</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">100</span><span class="mspace" style="margin-right:1em;"></span><span class="mord text"><span class="mord cjk_fallback">通道二：</span></span><span class="mord">0.5</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0404em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6954em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1000</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">500</span></span></span></span></p>
+</div>
+<p>CubeMX配置：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230208205619.webp" alt=""></p>
+<ul>
+<li>通过初始化函数里找，可以发现最后设置的占空比会被赋给 <code>CCRx</code>，</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230208190119.webp" alt=""></p>
+<p>而在设置占空比函数<code>__HAL_TIM_SET_COMPARE()</code>最后也是赋给了CCR这个寄存器(不同通道对应不同的CCRx)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230208190423.webp" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;********************main.c***********************&#x2F;
+
+int main()
+&#123;
+    HAL_TIM_PWM_Start(&amp;htim3, TIM_CHANNEL_1);	&#x2F;&#x2F;开启定时器3通道1
+    HAL_TIM_PWM_Start(&amp;htim3, TIM_CHANNEL_2);	&#x2F;&#x2F;开启定时器3通道2
+
+    while(1)
+    &#123;
+        if(PWM1_Flag)	&#x2F;&#x2F;PWM标志位
+        &#123;
+            PWM1_Flag &#x3D; 0;
+            pA6_SetDuty(100);
+        &#125;
+        if(PWM2_Flag)	&#x2F;&#x2F;PWM标志位
+        &#123;
+            PWM2_Flag &#x3D; 0;
+            pA7_SetDuty(100);
+        &#125;
+    &#125;
+
+&#125;</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*********************PWM.c*************************&#x2F;
+
+uint16_t pa6_duty &#x3D; 100;	&#x2F;&#x2F;PA6通道1初始占空比10%
+uint16_t pa7_duty &#x3D; 500;	&#x2F;&#x2F;PA7通道1初始占空比50%
+
+&#x2F;&#x2F;PA6设置占空比函数 参数：占空比值：100~900
+void pA6_SetDuty(uint16_t d)
+&#123;
+    pa6_duty +&#x3D; d;
+
+    if(pa6_duty &gt; 900)
+    &#123;
+        pa6_duty &#x3D; 100;
+    &#125;
+    __HAL_TIM_SetCompare(&amp;htim3, TIM_CHANNEL_1, pa6_duty);	&#x2F;&#x2F;设置通道2占空比
+&#125;
+
+&#x2F;&#x2F;PA7设置占空比函数 参数：占空比值：100~900
+void pA7_SetDuty(uint16_t d)
+&#123;
+	pa7_duty+&#x3D;d;
+	
+	if(pa7_duty &gt; 900)
+	&#123;
+		pa7_duty &#x3D; 100;
+	&#125;
+	__HAL_TIM_SetCompare(&amp;htim3,TIM_CHANNEL_2,pa7_duty);	&#x2F;&#x2F;设置通道2占空比
+&#125;</code></pre>
+<ul>
+<li><code>htimx.Instance-&gt;CCRx</code> 就是获取通道x占空比寄存器的值</li>
+<li><code>htimx.Instance-&gt;ARR + 1</code>就是获取定时器x的重装载值(记得+1)</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;************************MY_LCD.c**************************&#x2F;
+
+&#x2F;&#x2F; 界面2显示pwm相关
+void pwm_display(void)
+&#123;
+    uint8_t pwm_A6_1[20] &#x3D; &quot;&quot;;
+    uint8_t pwm_A7_1[20] &#x3D; &quot;&quot;;
+    sprintf((char *)pwm_A6_1, &quot;A6:Fre-%d%% CCR1-%d&quot;, pa6_duty &#x2F; 10, htim3.Instance-&gt;CCR1);
+    MY_LCD_Arr_Completion(pwm_A6_1);
+    LCD_DisplayStringLine(Line0, (uint8_t *)pwm_A6_1);
+    sprintf((char *)pwm_A7_1, &quot;A7:Fre-%d%% CCR2-%d&quot;, pa7_duty &#x2F; 10, htim3.Instance-&gt;CCR2);
+    MY_LCD_Arr_Completion(pwm_A7_1);
+    LCD_DisplayStringLine(Line1, (uint8_t *)pwm_A7_1);
+&#125;</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>单个定时器单个通道输出不同频率，不同占空比的PWM波</p>
+</div>
+<p><code>要求</code>：跟上面一样，在其基础上增加按键按下频率加10%，加到大于等于 初始频率的0.9倍 则回到初值</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*******************PWM.c***************************&#x2F;
+
+
+&#x2F;&#x2F;定时器3设置频率函数 参数：每次增加多少 单位 %
+void p_SetFre(uint16_t f)
+&#123;
+    uint16_t p_arr;
+    uint32_t p_fre &#x3D; 80000000 &#x2F; (31 + 1) &#x2F; (htim3.Instance-&gt;ARR + 1);    &#x2F;&#x2F;计算频率
+    float p_temp1 &#x3D; (float)f &#x2F; 100; &#x2F;&#x2F;百分数转小数形式【不加类型转换则变成0】
+    float temp2 &#x3D; p_fre * p_temp1; &#x2F;&#x2F;算出需要加多少
+    p_fre +&#x3D; temp2;&#x2F;&#x2F;在原有基础上相加
+    p_arr &#x3D; (80000000 &#x2F; (31 + 1)) &#x2F; p_fre; &#x2F;&#x2F;算出需要的ARR
+    if(p_fre &gt; (2500 + (2500 * 0.9)))	&#x2F;&#x2F;超过初值的0.9倍则回到初值频率，即ARR回到初值即可
+    &#123;
+        p_arr &#x3D; 1000;
+    &#125;
+    __HAL_TIM_SetAutoreload(&amp;htim3, p_arr - 1); &#x2F;&#x2F;设置ARR
+&#125;</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;**********************main.c************************&#x2F;
+
+int main()
+&#123;
+    HAL_TIM_PWM_Start(&amp;htim3, TIM_CHANNEL_1);&#x2F;&#x2F;开启定时器3通道1
+
+    while(1)
+    &#123;
+        if(PWM1_Flag)	&#x2F;&#x2F;PWM 【按键3】
+        &#123;
+            PWM1_Flag &#x3D; 0;
+            p_SetFre(10);&#x2F;&#x2F;每次加10%
+        &#125;
+    &#125;
+&#125;</code></pre>
+<p>LCD显示与上面一样</p>
+<div class="video-bilibili">
+  <iframe
+    src="https://player.bilibili.com/player.html?aid=394041210&bvid=BV1Zd4y1E7FD&cid=999767329&page=1"
+    scrolling="no"
+    border="0"
+    frameborder="no"
+    framespacing="0"
+    high_quality="1"
+    danmaku="1"
+    allowfullscreen="true"
+  ></iframe>
+</div>
+<p>这个是手持示波器，测量范围在0~80KHz，低于20Hz的测不了</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20230210123810.webp" style="zoom:50%;" />
+<p>还有PWM驱动LED实现呼吸灯，我的工程没效果，新建的另一个工程正常显示【原因暂时不清楚】</p>
+<h3 id="TIM-OC输出">TIM-OC输出</h3>
+<div class="note success simple"><p>输出比较模式下，pulse决定输出频率，duty决定每个通道的占空比初始相位</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">输出比较模式下的8种模式</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>冻结</code> Frozen (used for Timing base)</td>
+<td style="text-align:center">理解为CNT和CCR无效，REF保持为原状态，假设你正在输出PWM波，暂停一段时间输出，则可以设置这个模式，一旦切换为冻结模式后，输出就可以暂停了，并且高低电平也维持为暂停时刻的状态保持不变</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>匹配输出高电平</code> Active Level on match</td>
+<td style="text-align:center">/</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>匹配输出低电平</code>  lnactive Level on match</td>
+<td style="text-align:center">/</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>匹配翻转电平</code>  Toggle on match</td>
+<td style="text-align:center">可以方便地输出一个频率可调，占空比始终为50%的 PWM波形</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>强制输出高电平</code>  Forced Active</td>
+<td style="text-align:center">如果想暂停波形输出，并且在暂停时期保持高电平</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>强制输出低电平</code>  Forced lnactive</td>
+<td style="text-align:center">如果想暂停波形输出，并且在暂停时期保持低电平</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>可重触发单脉冲模式 (OPM1)</code>  Retriggerable OPM1</td>
+<td style="text-align:center">启用选项后，可以重新触发定时器以在前一个脉冲完成之前生成一个新脉冲，从而使其能够生成一系列具有相同持续时间的脉冲【在定时器的第1个通道上可用】</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>可重触发单脉冲模式 (OPM2)</code>  Retriggerable OPM2</td>
+<td style="text-align:center">同上【在定时器的第2个通道上可用】</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">输出比较原理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">输出比较模式在CNT与CCRx不断做比较的过程中，<code>CNT &lt; CCRx时输出有效电平，若CCRx（捕获/比较寄存器）== CNT（计数值）</code>，产生的则是翻转输出电平，并且会产生中断，通过对中断回调函数的编写，就能够实现多路不同频率信号的输出</td>
+</tr>
+</tbody>
+</table>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>单个定时器多个通道输出不同频率，不同占空比的PWM波</p>
+</div>
+<div class="note simple"><table>
+<thead>
+<tr>
+<th style="text-align:center">实验管脚</th>
+<th style="text-align:center">对应通道</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PA11</td>
+<td style="text-align:center">TIM4_CH1</td>
+</tr>
+<tr>
+<td style="text-align:center">PA12</td>
+<td style="text-align:center">TIM4_CH2</td>
+</tr>
+</tbody>
+</table>
+<p><code>要求</code>：PA11初始频率为9KHz，初始占空比为70%；PA12初始频率为600Hz，初始占空比为50%；按键1按下PA11频率增加10%，PA12频率增加20%，增加到80%则回到初值；显示：频率(单位:Hz)   占空比(保留2位小数 单位:%)</p>
+</div>
+<p>CubeMX配置：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230209220227.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230209220518.webp" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***********************PWM.c**************************&#x2F;
+
+uint32_t ch1_pulse_val, ch2_pulse_val;	&#x2F;&#x2F;通道1的CRRx值   通道2的CRRx值
+uint32_t ch1_duty_val, ch2_duty_val;	&#x2F;&#x2F;通道1有效电平占空比所需值   通道2有效电平占空比所需值
+
+
+&#x2F;&#x2F;设置通道1频率，占空比 参数1：频率Hz  参数2：占空比%
+void pwm_oc_setCH1(uint32_t freq, uint8_t duty)
+&#123;
+    ch1_pulse_val &#x3D; 1000000 &#x2F; freq;	&#x2F;&#x2F;算出频率所需的CRRx值
+    ch1_duty_val &#x3D; ch1_pulse_val * duty &#x2F; 100;	&#x2F;&#x2F;算出有效电平所需值
+    htim4.Instance-&gt;CCR1 &#x3D; ch1_pulse_val;
+&#125;
+
+&#x2F;&#x2F;设置通道2频率，占空比 参数1：频率Hz  参数2：占空比%
+void pwm_oc_setCH2(uint32_t freq, uint8_t duty)
+&#123;
+    ch2_pulse_val &#x3D; 1000000 &#x2F; freq;	&#x2F;&#x2F;算出总频率所需的CRRx值
+    ch2_duty_val &#x3D; ch2_pulse_val * duty &#x2F; 100;	&#x2F;&#x2F;算出有效电平所需值
+    htim4.Instance-&gt;CCR2 &#x3D; ch2_pulse_val;
+&#125;
+
+
+&#x2F;&#x2F;PWM比较模式回调函数
+void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
+&#123;
+    static uint8_t pwm1_flag &#x3D; 1;	&#x2F;&#x2F;定义翻转标志位
+    static uint8_t pwm2_flag &#x3D; 1;	&#x2F;&#x2F;定义翻转标志位
+
+    if(htim &#x3D;&#x3D; &amp;htim4)	&#x2F;&#x2F;如果是定时器4
+    &#123;
+        if(htim-&gt;Channel &#x3D;&#x3D; HAL_TIM_ACTIVE_CHANNEL_1)	&#x2F;&#x2F;如果是通道1
+        &#123;
+            if(pwm1_flag)
+            &#123;
+                htim4.Instance-&gt;CCR1 +&#x3D; ch1_duty_val;	&#x2F;&#x2F;写入有效电平所需的CRRx值
+            &#125;
+            else
+            &#123;
+                htim4.Instance-&gt;CCR1 +&#x3D; ch1_pulse_val - ch1_duty_val;	&#x2F;&#x2F;写入无效电平所需的CRRx值(总频率值-高电平值&#x3D;低电平值)
+            &#125;
+            pwm1_flag &#x3D; !pwm1_flag;	&#x2F;&#x2F;取反
+        &#125;
+
+        if(htim-&gt;Channel &#x3D;&#x3D; HAL_TIM_ACTIVE_CHANNEL_2)	&#x2F;&#x2F;如果是通道2
+        &#123;
+            if(pwm2_flag)
+            &#123;
+                htim4.Instance-&gt;CCR2 +&#x3D; ch2_duty_val;	&#x2F;&#x2F;写入有效电平所需的CRRx值
+            &#125;
+            else
+            &#123;
+                htim4.Instance-&gt;CCR2 +&#x3D; ch2_pulse_val - ch2_duty_val;	&#x2F;&#x2F;写入无效电平所需的CRRx值
+            &#125;
+            pwm2_flag &#x3D; !pwm2_flag;	&#x2F;&#x2F;取反
+        &#125;
+    &#125;
+&#125;</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;************************KEY.c****************************&#x2F;
+
+
+static uint8_t pwm1_count,pwm2_count;
+
+case 1:
+&#123;
+    pwm1_count++;
+    pwm2_count++;
+    if(pwm1_count &gt; 8)	&#x2F;&#x2F;8次X10%&#x3D;80%
+    &#123;
+        pwm1_count &#x3D; 0;
+    &#125;
+    if(pwm2_count &gt; 4)	&#x2F;&#x2F;4次X20%&#x3D;80%
+    &#123;
+        pwm2_count &#x3D; 0;
+    &#125;
+    pwm_oc_setCH1(9000 + (9000 * (0.1 * pwm1_count)), 70);
+    pwm_oc_setCH2(600 + (600 * (0.2 * pwm2_count)), 50);
+    break;
+&#125;</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*******************************MY_LCD.c***************&#x2F;
+
+
+&#x2F;&#x2F;界面2显示pwm相关
+void pwm_display(void)
+&#123;
+    uint8_t pwm_oc_scan[20] &#x3D; &quot;&quot;;
+
+    &#x2F;&#x2F;TIM4比较模式
+    sprintf((char *)pwm_oc_scan, &quot;1F:%dHz D:%.2f%%&quot;, 1000000 &#x2F; ch1_pulse_val, (double)ch1_duty_val &#x2F; ch1_pulse_val * 100);
+    MY_LCD_Arr_Completion(pwm_oc_scan);
+    LCD_DisplayStringLine(Line3, (uint8_t *)pwm_oc_scan);
+    memset(pwm_oc_scan, 0, sizeof(pwm_oc_scan));
+
+    sprintf((char *)pwm_oc_scan, &quot;2F:%dHz D:%.2f%%&quot;, 1000000 &#x2F; ch2_pulse_val, (double)ch2_duty_val &#x2F; ch2_pulse_val * 100);
+    MY_LCD_Arr_Completion(pwm_oc_scan);
+    LCD_DisplayStringLine(Line4, (uint8_t *)pwm_oc_scan);
+    memset(pwm_oc_scan, 0, sizeof(pwm_oc_scan));
+&#125;</code></pre>
+<div class="video-bilibili">
+  <iframe
+    src="https://player.bilibili.com/player.html?aid=266693067&bvid=BV1PY411i7MZ&cid=1001682675&page=1"
+    scrolling="no"
+    border="0"
+    frameborder="no"
+    framespacing="0"
+    high_quality="1"
+    danmaku="1"
+    allowfullscreen="true"
+  ></iframe>
+</div>
+<h3 id="TIM-IC捕获">TIM-IC捕获</h3>
 <h2 id="附1：关于打开别人的例程报错问题">附1：关于打开别人的例程报错问题</h2>
 <p>打开别人工程显示 <code>cannot read project file</code> 解决方法是看看工程路径有没有空格等东西，一般最外层文件名可能会有空格需要把空格删了再重新下载例程到这个文件下(一旦改了最外层会导致该路径下的文件全部报废打不开所以需要提前把文件备份)</p>
 <p>还有一个问题就是编译成功但是下载到单片机时显示 <code>Error: Flash Download failed - &quot;Cortex-M4&quot;</code> 原因是虽然安装了G4芯片包，而且在 <code>Debug</code> — <code>Settings</code> — <code>Flash Download</code> 有显示128k的芯片包，但是当点击下面的 Add 进去发现并没有G4的Flash，所以需要把之前安装的 Flash路径下( <code>C:...\AppData\Local\Arm\Packs\Keil\STM32G4xx_DFP\1.2.0\CMSIS\Flash\</code>)的 <code>.FLM</code> 文件和3个文件夹复制到 <code>C:\Keil_v5\ARM\Flash\</code> 下即可</p>
@@ -2086,6 +3496,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 <td style="text-align:center">串口发送函数(不会触发中断，同时具备超时参数)</td>
 </tr>
 <tr>
+<td style="text-align:center">HAL_StatusTypeDef HAL_UART_Transmit_DMA(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size)</td>
+<td style="text-align:center">串口DMA发送</td>
+</tr>
+<tr>
 <td style="text-align:center">HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout)</td>
 <td style="text-align:center">串口接收函数(不会触发中断，同时具备超时参数)</td>
 </tr>
@@ -2126,8 +3540,88 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 <td style="text-align:center">等待转换完成，第二个参数表示超时时间，单位ms</td>
 </tr>
 <tr>
-<td style="text-align:center">#define HAL_IS_BIT_SET(REG, BIT)         (((REG) &amp; (BIT)) == (BIT))</td>
+<td style="text-align:center"><code>#define HAL_IS_BIT_SET(REG, BIT)         (((REG) &amp; (BIT)) == (BIT))</code></td>
 <td style="text-align:center">判断转换完成标志位是否设置</td>
+</tr>
+<tr>
+<td style="text-align:center">HAL_StatusTypeDef HAL_DAC_Start(DAC_HandleTypeDef *hdac, uint32_t Channel)</td>
+<td style="text-align:center">开启DAC通道</td>
+</tr>
+<tr>
+<td style="text-align:center">HAL_StatusTypeDef HAL_DAC_SetValue(DAC_HandleTypeDef *hdac, uint32_t Channel, uint32_t Alignment, uint32_t Data)</td>
+<td style="text-align:center">设置DAC输出值</td>
+</tr>
+<tr>
+<td style="text-align:center">uint32_t HAL_DAC_GetValue(DAC_HandleTypeDef *hdac, uint32_t Channel)</td>
+<td style="text-align:center">获取DAC输出值</td>
+</tr>
+<tr>
+<td style="text-align:center">HAL_StatusTypeDef HAL_RTC_GetTime(RTC_HandleTypeDef *hrtc, RTC_TimeTypeDef *sTime, uint32_t Format)</td>
+<td style="text-align:center">获取RTC时间</td>
+</tr>
+<tr>
+<td style="text-align:center">HAL_StatusTypeDef HAL_RTC_GetDate(RTC_HandleTypeDef *hrtc, RTC_DateTypeDef *sDate, uint32_t Format)</td>
+<td style="text-align:center">获取RTC日期</td>
+</tr>
+<tr>
+<td style="text-align:center">HAL_StatusTypeDef HAL_RTC_SetTime(RTC_HandleTypeDef *hrtc, RTC_TimeTypeDef *sTime, uint32_t Format)</td>
+<td style="text-align:center">设置RTC时间</td>
+</tr>
+<tr>
+<td style="text-align:center">HAL_StatusTypeDef HAL_RTC_SetDate(RTC_HandleTypeDef *hrtc, RTC_DateTypeDef *sDate, uint32_t Format)</td>
+<td style="text-align:center">设置RTC日期</td>
+</tr>
+<tr>
+<td style="text-align:center">void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc)</td>
+<td style="text-align:center">闹钟中断回调函数</td>
+</tr>
+<tr>
+<td style="text-align:center">HAL_StatusTypeDef HAL_RTC_SetAlarm_IT(RTC_HandleTypeDef *hrtc, RTC_AlarmTypeDef *sAlarm, uint32_t Format)</td>
+<td style="text-align:center">启动闹钟+中断</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>#define __HAL_TIM_SetCompare            __HAL_TIM_SET_COMPARE</code></td>
+<td style="text-align:center">设置PWM占空比</td>
+</tr>
+<tr>
+<td style="text-align:center">HAL_StatusTypeDef HAL_TIM_PWM_Start(TIM_HandleTypeDef *htim, uint32_t Channel)</td>
+<td style="text-align:center">开启定时器PWM输出</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>#define __HAL_TIM_SetAutoreload         __HAL_TIM_SET_AUTORELOAD</code></td>
+<td style="text-align:center">设置PWM ARR值（频率）</td>
+</tr>
+<tr>
+<td style="text-align:center">HAL_StatusTypeDef HAL_TIM_PWM_Stop(TIM_HandleTypeDef *htim, uint32_t Channel)</td>
+<td style="text-align:center">暂停定时器PWM输出</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>#define __HAL_TIM_GetCounter            __HAL_TIM_GET_COUNTER</code></td>
+<td style="text-align:center">获取CNT计数值</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>#define __HAL_TIM_GetCompare            __HAL_TIM_GET_COMPARE</code></td>
+<td style="text-align:center">获取CCRx寄存器值</td>
+</tr>
+<tr>
+<td style="text-align:center">__weak void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)</td>
+<td style="text-align:center">输出比较中断回调函数</td>
+</tr>
+<tr>
+<td style="text-align:center">__weak void HAL_TIM_PeriodElapsedHalfCpltCallback(TIM_HandleTypeDef *htim)</td>
+<td style="text-align:center">非阻塞模式下周期已过半完成回调</td>
+</tr>
+<tr>
+<td style="text-align:center">uint32_t HAL_TIM_ReadCapturedValue(TIM_HandleTypeDef *htim, uint32_t Channel)</td>
+<td style="text-align:center">从Capture Compare单元读取捕获值</td>
+</tr>
+<tr>
+<td style="text-align:center">HAL_StatusTypeDef HAL_TIM_OC_Start_IT(TIM_HandleTypeDef *htim, uint32_t Channel)</td>
+<td style="text-align:center">启动输出比较+中断模式</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td style="text-align:center"></td>
@@ -2160,10 +3654,27 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 </tbody>
 </table>
 <h2 id="附5：其他问题">附5：其他问题</h2>
-<ul>
-<li>在你自己创建的文件里使用HAL库的结构体需要包含生成的外设的 <code>.h</code> 文件，否则用不了</li>
-</ul>
-</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/STM32G4/">STM32G4</a></div><div class="post_share"><div class="social-share" data-image="/img/num9.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%BF%E5%AD%90%E8%B5%84%E6%BA%90%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.</span> <span class="toc-text">板子资源介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%9D%BF%E5%8A%9F%E8%83%BD"><span class="toc-number">2.1.</span> <span class="toc-text">核心板功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80CubeMX%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">基础CubeMX配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LED"><span class="toc-number">4.</span> <span class="toc-text">LED</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CubeMX%E9%85%8D%E7%BD%AE"><span class="toc-number">4.1.</span> <span class="toc-text">CubeMX配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E5%86%99"><span class="toc-number">4.2.</span> <span class="toc-text">程序编写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%89%E9%94%AE"><span class="toc-number">5.</span> <span class="toc-text">按键</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CubeMX%E9%85%8D%E7%BD%AE-2"><span class="toc-number">5.1.</span> <span class="toc-text">CubeMX配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E5%86%99-2"><span class="toc-number">5.2.</span> <span class="toc-text">程序编写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LCD"><span class="toc-number">6.</span> <span class="toc-text">LCD</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E5%86%99-3"><span class="toc-number">6.1.</span> <span class="toc-text">程序编写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LCD%E7%BF%BB%E8%BD%AC"><span class="toc-number">6.2.</span> <span class="toc-text">LCD翻转</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">7.</span> <span class="toc-text">定时器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">7.1.</span> <span class="toc-text">滴答定时器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E5%86%99-4"><span class="toc-number">7.1.1.</span> <span class="toc-text">程序编写</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#USART"><span class="toc-number">8.</span> <span class="toc-text">USART</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CubeMX%E9%85%8D%E7%BD%AE-3"><span class="toc-number">8.1.</span> <span class="toc-text">CubeMX配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E5%86%99-5"><span class="toc-number">8.2.</span> <span class="toc-text">程序编写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ADC"><span class="toc-number">9.</span> <span class="toc-text">ADC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CubeMX%E9%85%8D%E7%BD%AE-4"><span class="toc-number">9.1.</span> <span class="toc-text">CubeMX配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E5%86%99-6"><span class="toc-number">9.2.</span> <span class="toc-text">程序编写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%841%EF%BC%9A%E5%85%B3%E4%BA%8E%E6%89%93%E5%BC%80%E5%88%AB%E4%BA%BA%E7%9A%84%E4%BE%8B%E7%A8%8B%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98"><span class="toc-number">10.</span> <span class="toc-text">附1：关于打开别人的例程报错问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%842-Keil%E4%BB%BF%E7%9C%9F%E9%97%AE%E9%A2%98"><span class="toc-number">11.</span> <span class="toc-text">附2: Keil仿真问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%843%EF%BC%9A%E5%85%B3%E4%BA%8EKeil%E7%BC%96%E8%AF%91%E5%90%8E%E6%95%B0%E6%8D%AE%E5%8D%A0%E5%AE%B9%E9%87%8F%E8%A7%A3%E6%9E%90"><span class="toc-number">12.</span> <span class="toc-text">附3：关于Keil编译后数据占容量解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%844%EF%BC%9AHAL%E5%87%BD%E6%95%B0"><span class="toc-number">13.</span> <span class="toc-text">附4：HAL函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%845%EF%BC%9A%E5%85%B6%E4%BB%96%E9%97%AE%E9%A2%98"><span class="toc-number">14.</span> <span class="toc-text">附5：其他问题</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://api2.acozycotage.net/Pweb" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://lib.baomitu.com/KaTeX/latest/katex.min.css"><script src="https://jsd.onmicrosoft.cn/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+<div class="note simple"><p>在你自己创建的文件里使用HAL库的结构体需要包含生成的外设的 <code>.h</code> 文件，否则用不了</p>
+</div>
+<div class="note simple"><p>在ADC,DAC等地方出现数据 <code>左对齐 右对齐</code> 的地方，它们区别是：</p>
+<p>12位二进制最大值为 0x0FFF <code>左对齐操作后的结果是 0xFFF0，右对齐后还是0x0FFF</code>。反过来看 ，若寄存器里左对齐的数据值X (相当于实际数据*16，<strong>所以左对齐转换的值要/16才是实际的值</strong>)，则 X&gt;&gt;4 才是实际的数据。而 <code>右对齐，则是数据保持不变，采集到多少就多少</code></p>
+</div>
+<div class="note simple"><p><code>注意</code>：中断原则是快进快出,不要在中断里执行操作,防止重入等问题导致卡死，RTC闹钟中断回调函数就是例子，可以通过设定标志位来执行对应功能</p>
+</div>
+<div class="note simple"><p>不用的IO口设置为模拟输入态最省电</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230207202611.webp" alt=""></p>
+</div>
+<div class="note simple"><p>程序起始时建议延时几秒再进入低功耗模式，否则一进入就不能使用下载口了</p>
+</div>
+<div class="note simple"><p>DMA那里传输位宽和定义的缓冲区位宽要一致，word–&gt;u32，half word–&gt;u16，byte–&gt;u8</p>
+</div>
+<div class="note simple"><p>在PWM输出比较时，最好使能 <code>auto-reload preload(自动重装载功能)</code></p>
+<p>PWM输出比较时，在中断回调函数里用<code>__HAL_TIM_GetCounter()</code>函数的话获取的是CNT值，这样算出的频率误差差几百Hz，直接操作寄存器CCRx的话误差不大，所以推荐要么操作寄存器方式要么使用 <code>__HAL_TIM_GetCompare()</code>函数获取CCRx值</p>
+<p>还有输出比较的回调函数有2个都可以用，一个是 <code>HAL_TIM_PeriodElapsedHalfCpltCallback</code>，一个是<code>HAL_TIM_OC_DelayElapsedCallback</code>，在<code>HAL_TIM_IRQHandler</code>函数里有写</p>
+</div>
+<div class="note simple"><p>当某定时器通道配置为输入捕获时，该通道的CCRx寄存器变为只读，不能去写它，只能在发生捕获时硬件装载修改</p>
+</div>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/STM32G4/">STM32G4</a></div><div class="post_share"><div class="social-share" data-image="/img/num9.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%BF%E5%AD%90%E8%B5%84%E6%BA%90%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.</span> <span class="toc-text">板子资源介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%9D%BF%E5%8A%9F%E8%83%BD"><span class="toc-number">2.1.</span> <span class="toc-text">核心板功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80CubeMX%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">基础CubeMX配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LED"><span class="toc-number">4.</span> <span class="toc-text">LED</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CubeMX%E9%85%8D%E7%BD%AE"><span class="toc-number">4.1.</span> <span class="toc-text">CubeMX配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E5%86%99"><span class="toc-number">4.2.</span> <span class="toc-text">程序编写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%89%E9%94%AE"><span class="toc-number">5.</span> <span class="toc-text">按键</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CubeMX%E9%85%8D%E7%BD%AE-2"><span class="toc-number">5.1.</span> <span class="toc-text">CubeMX配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E5%86%99-2"><span class="toc-number">5.2.</span> <span class="toc-text">程序编写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LCD"><span class="toc-number">6.</span> <span class="toc-text">LCD</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E5%86%99-3"><span class="toc-number">6.1.</span> <span class="toc-text">程序编写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LCD%E7%BF%BB%E8%BD%AC"><span class="toc-number">6.2.</span> <span class="toc-text">LCD翻转</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">7.</span> <span class="toc-text">定时器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">7.1.</span> <span class="toc-text">滴答定时器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E5%86%99-4"><span class="toc-number">7.1.1.</span> <span class="toc-text">程序编写</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#USART"><span class="toc-number">8.</span> <span class="toc-text">USART</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CubeMX%E9%85%8D%E7%BD%AE-3"><span class="toc-number">8.1.</span> <span class="toc-text">CubeMX配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E5%86%99-5"><span class="toc-number">8.2.</span> <span class="toc-text">程序编写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ADC"><span class="toc-number">9.</span> <span class="toc-text">ADC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CubeMX%E9%85%8D%E7%BD%AE-4"><span class="toc-number">9.1.</span> <span class="toc-text">CubeMX配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E5%86%99-6"><span class="toc-number">9.2.</span> <span class="toc-text">程序编写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DAC"><span class="toc-number">10.</span> <span class="toc-text">DAC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CubeMX%E9%85%8D%E7%BD%AE-5"><span class="toc-number">10.1.</span> <span class="toc-text">CubeMX配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E5%86%99-7"><span class="toc-number">10.2.</span> <span class="toc-text">程序编写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DAC%E8%BE%93%E5%87%BA%E9%94%AF%E9%BD%BF%E6%B3%A2"><span class="toc-number">10.3.</span> <span class="toc-text">DAC输出锯齿波</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DAC%E8%BE%93%E5%87%BA%E4%B8%89%E8%A7%92%E6%B3%A2"><span class="toc-number">10.4.</span> <span class="toc-text">DAC输出三角波</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%9C%82%E9%B8%A3%E5%99%A8-%E5%B7%B2%E5%8F%96%E6%B6%88"><span class="toc-number">11.</span> <span class="toc-text">蜂鸣器(已取消)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CubeMX%E9%85%8D%E7%BD%AE-6"><span class="toc-number">11.1.</span> <span class="toc-text">CubeMX配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E5%86%99-8"><span class="toc-number">11.2.</span> <span class="toc-text">程序编写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I2C%E4%B9%8BEEPROM"><span class="toc-number">12.</span> <span class="toc-text">I2C之EEPROM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CubeMX%E9%85%8D%E7%BD%AE-7"><span class="toc-number">12.1.</span> <span class="toc-text">CubeMX配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E5%86%99-9"><span class="toc-number">12.2.</span> <span class="toc-text">程序编写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I2C%E4%B9%8BMCP4017"><span class="toc-number">13.</span> <span class="toc-text">I2C之MCP4017</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CubeMX%E9%85%8D%E7%BD%AE-8"><span class="toc-number">13.1.</span> <span class="toc-text">CubeMX配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E5%86%99-10"><span class="toc-number">13.2.</span> <span class="toc-text">程序编写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTC"><span class="toc-number">14.</span> <span class="toc-text">RTC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CubeMX%E9%85%8D%E7%BD%AE-9"><span class="toc-number">14.1.</span> <span class="toc-text">CubeMX配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E5%86%99-11"><span class="toc-number">14.2.</span> <span class="toc-text">程序编写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%8E%E5%8A%9F%E8%80%97-%E4%BA%86%E8%A7%A3"><span class="toc-number">14.3.</span> <span class="toc-text">低功耗(了解)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PWM"><span class="toc-number">15.</span> <span class="toc-text">PWM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86"><span class="toc-number">15.1.</span> <span class="toc-text">预备知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TIM-PWM"><span class="toc-number">15.2.</span> <span class="toc-text">TIM-PWM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TIM-OC%E8%BE%93%E5%87%BA"><span class="toc-number">15.3.</span> <span class="toc-text">TIM-OC输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TIM-IC%E6%8D%95%E8%8E%B7"><span class="toc-number">15.4.</span> <span class="toc-text">TIM-IC捕获</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%841%EF%BC%9A%E5%85%B3%E4%BA%8E%E6%89%93%E5%BC%80%E5%88%AB%E4%BA%BA%E7%9A%84%E4%BE%8B%E7%A8%8B%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98"><span class="toc-number">16.</span> <span class="toc-text">附1：关于打开别人的例程报错问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%842-Keil%E4%BB%BF%E7%9C%9F%E9%97%AE%E9%A2%98"><span class="toc-number">17.</span> <span class="toc-text">附2: Keil仿真问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%843%EF%BC%9A%E5%85%B3%E4%BA%8EKeil%E7%BC%96%E8%AF%91%E5%90%8E%E6%95%B0%E6%8D%AE%E5%8D%A0%E5%AE%B9%E9%87%8F%E8%A7%A3%E6%9E%90"><span class="toc-number">18.</span> <span class="toc-text">附3：关于Keil编译后数据占容量解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%844%EF%BC%9AHAL%E5%87%BD%E6%95%B0"><span class="toc-number">19.</span> <span class="toc-text">附4：HAL函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%845%EF%BC%9A%E5%85%B6%E4%BB%96%E9%97%AE%E9%A2%98"><span class="toc-number">20.</span> <span class="toc-text">附5：其他问题</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://api2.acozycotage.net/Pweb" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://lib.baomitu.com/KaTeX/latest/katex.min.css"><script src="https://jsd.onmicrosoft.cn/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
   document.querySelectorAll('#article-container span.katex-display').forEach(item => {
     btf.wrap(item, 'div', { class: 'katex-wrap'})
   })

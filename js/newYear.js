@@ -1,4 +1,4 @@
-let newYearTimer = null;
+newYearTimer = null;
 var newYear = () => {
     clearTimeout(newYearTimer);
     if (!document.querySelector('#newYear')) return;

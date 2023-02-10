@@ -1142,6 +1142,7 @@ div#newYear {
 #aside-content .card-categories ul.card-category-list>.card-category-list-item a:hover {
     padding: 3px 17px;
     background-color: #8d8a8bbf;
+    border-radius: 8px;
 }
 
 /* 友链页css微调begin */
