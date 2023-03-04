@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>FreeRTOS学习笔记 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言 网站： FreeRTOS官网 参考文章： 从0到1学习FreeRTOS：FreeRTOS 内核应用开发：（四）FreeRTOS 的启动流程 FreeRTOS介绍 FreeRTOS(读作&quot;free-arr-toss&quot;)是一个嵌入式系统使用的开源实时操作系统。它的主要工作是 执行任务，大部分FreeRTOS的代码都涉及优先权，调度以及执行用户自定义任务。 以前在使用 51,S">
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>FreeRTOS学习笔记 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言 网站： FreeRTOS官网 参考文章： 从0到1学习FreeRTOS：FreeRTOS 内核应用开发：（四）FreeRTOS 的启动流程 FreeRTOS 入门-极客笔记 FreeRTOS基础篇教程目录汇总 FreeRTOS基础篇_研究是为了理解的博客-CSDN博客  FreeRTOS+CubeMX系列第一篇——初识FreeRTOS_cubemx freertos 飞起的小田博客 教学大纲">
 <meta property="og:type" content="article">
 <meta property="og:title" content="FreeRTOS学习笔记">
 <meta property="og:url" content="https://mdcm.yang5201314.cn/post/a98edcdb.html">
 <meta property="og:site_name" content="Luckys-Yangの小栈">
-<meta property="og:description" content="前言 网站： FreeRTOS官网 参考文章： 从0到1学习FreeRTOS：FreeRTOS 内核应用开发：（四）FreeRTOS 的启动流程 FreeRTOS介绍 FreeRTOS(读作&quot;free-arr-toss&quot;)是一个嵌入式系统使用的开源实时操作系统。它的主要工作是 执行任务，大部分FreeRTOS的代码都涉及优先权，调度以及执行用户自定义任务。 以前在使用 51,S">
+<meta property="og:description" content="前言 网站： FreeRTOS官网 参考文章： 从0到1学习FreeRTOS：FreeRTOS 内核应用开发：（四）FreeRTOS 的启动流程 FreeRTOS 入门-极客笔记 FreeRTOS基础篇教程目录汇总 FreeRTOS基础篇_研究是为了理解的博客-CSDN博客  FreeRTOS+CubeMX系列第一篇——初识FreeRTOS_cubemx freertos 飞起的小田博客 教学大纲">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://mdcm.yang5201314.cn/img/num104.webp">
 <meta property="article:published_time" content="2022-11-16T09:34:48.000Z">
-<meta property="article:modified_time" content="2022-11-16T09:34:48.000Z">
+<meta property="article:modified_time" content="2023-03-04T09:23:42.243Z">
 <meta property="article:author" content="Luckys-Yang">
 <meta property="article:tag" content="博客,个人博客,技术,学习,Hexo,Blog,STM32,嵌入式,单片机">
 <meta name="twitter:card" content="summary">
@@ -57,7 +57,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2022-11-16 17:34:48'
+  postUpdate: '2023-03-04 17:23:42'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -174,11 +174,18 @@ window.addEventListener('load',()=> { preloader.endLoading() })
 if (true) {
   document.addEventListener('pjax:send', () => { preloader.initLoading() })
   document.addEventListener('pjax:complete', () => { preloader.endLoading() })
-}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">118</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">78</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">23</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">FreeRTOS学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-11-16T09:34:48.000Z" title="发表于 2022-11-16 17:34:48">2022-11-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-11-16T09:34:48.000Z" title="更新于 2022-11-16 17:34:48">2022-11-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">实时操作系统</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">119</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">78</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">23</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">FreeRTOS学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-11-16T09:34:48.000Z" title="发表于 2022-11-16 17:34:48">2022-11-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-04T09:23:42.243Z" title="更新于 2023-03-04 17:23:42">2023-03-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">实时操作系统</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
 <p>网站：</p>
 <p><a href="https://www.freertos.org/">FreeRTOS官网</a></p>
 <p>参考文章：</p>
-<p><a href="https://blog.csdn.net/qq_38351824/article/details/100997810?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166858827716782427483868%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=166858827716782427483868&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-6-100997810-null-null.142%5Ev63%5Econtrol,201%5Ev3%5Eadd_ask,213%5Ev2%5Et3_esquery_v3&amp;utm_term=freertos%20main%E5%87%BD%E6%95%B0&amp;spm=1018.2226.3001.4187">从0到1学习FreeRTOS：FreeRTOS 内核应用开发：（四）FreeRTOS 的启动流程</a></p>
+<p><a href="https://blog.csdn.net/qq_38351824/article/details/100997810?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166858827716782427483868%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=166858827716782427483868&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-6-100997810-null-null.142%5Ev63%5Econtrol,201%5Ev3%5Eadd_ask,213%5Ev2%5Et3_esquery_v3&amp;utm_term=freertos%20main%E5%87%BD%E6%95%B0&amp;spm=1018.2226.3001.4187">从0到1学习FreeRTOS：FreeRTOS 内核应用开发：（四）FreeRTOS 的启动流程</a><br>
+<a href="https://deepinout.com/freertos-tutorials/freertos-intro/freertos-tutorials.html">FreeRTOS 入门-极客笔记</a><br>
+<a href="https://www.cnblogs.com/yangguang-it/p/7233591.html">FreeRTOS基础篇教程目录汇总</a></p>
+<p><a href="https://blog.csdn.net/zhzht19861011/category_9265276.html">FreeRTOS基础篇_研究是为了理解的博客-CSDN博客</a></p>
+<p><a href="https://blog.csdn.net/weixin_44793491/article/details/107577711"> FreeRTOS+CubeMX系列第一篇——初识FreeRTOS_cubemx freertos</a></p>
+<p><a href="https://www.cnblogs.com/tianxxl/tag/STM32CubeIDE/">飞起的小田博客</a></p>
+<h2 id="教学大纲">教学大纲</h2>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230304153839.webp" alt=" "></p>
 <h2 id="FreeRTOS介绍">FreeRTOS介绍</h2>
 <p>FreeRTOS(读作&quot;free-arr-toss&quot;)是一个嵌入式系统使用的开源实时操作系统。它的主要工作是 <code>执行任务</code>，大部分FreeRTOS的代码都涉及优先权，调度以及执行用户自定义任务。</p>
 <p>以前在使用 51,STM32单片机裸机(未使用操作系统)的时候一般都是在 main函数 里面用 while(1) 做一个大循环来完成所有的处理，即 <code>应用程序</code> 是一个 <code>无限的循环</code> ，循环中调用相应的函数完成所需的处理。有时候我们也需要中断中完成一些处理。相对多任务系统而言，这个就是 <code>单任务系统</code>(也称为前后台系统)。中断服务函数就是 <code>前台程序</code>，大循环while(1) 就是 <code>后台程序</code>。</p>
@@ -217,47 +224,92 @@ if (true) {
     				| -- FreeRTOS-Plus-UDP	UDP组件    
     				| -- FreeRTOS-Plus-Trace	可视化跟踪   </code></pre>
 <ul>
-<li>只是为了把系统跑起来，所以只移植了核心组件，至少需要包含以下文件(STM32F103C8T6测试)：</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">路径</th>
-<th style="text-align:left">文件</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">FreeRTOS\Source\</td>
-<td style="text-align:left">tasks.c<br>queue.c<br>list.c</td>
-</tr>
-<tr>
-<td style="text-align:center">FreeRTOS\Source\portable\RVDS\ARM_CM3\</td>
-<td style="text-align:left">port.c<br>portmacro.h</td>
-</tr>
-<tr>
-<td style="text-align:center">FreeRTOS\Source\portable\MemMang\</td>
-<td style="text-align:left">heap_4.c(内存管理，5选1即可)</td>
-</tr>
-<tr>
-<td style="text-align:center">FreeRTOS\Source\include\</td>
-<td style="text-align:left">所有头文件(API接口)</td>
-</tr>
-<tr>
-<td style="text-align:center">FreeRTOS\Demo\CORTEX_STM32F103_Keil\</td>
-<td style="text-align:left">FreeRTOSConfig.h</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>修改main 为 task 格式(跟以前裸机开发的主函数一区别)</li>
-<li>修改堆栈大小(看板子多大RAM)，修改宏定义 <code>configTOTAL_HEAP_SIZE</code></li>
 <li>修改中断函数名，把 stm32f10x_it.c 里面的 <code>SVC_Handler</code>，<code>PendSV_Handler</code>，<code>SysTick_Handler</code> 注释掉，然后在 FreeRTOSConfig.h 里面定义：</li>
 </ul>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"># define vPortSVCHandler SVC_Handler
 # define xPortPendSVHandler PendSV_Handler
 # define xPortSysTickHandler SysTick_Handler</code></pre>
 <h2 id="FreeRTOS的启动流程">FreeRTOS的启动流程</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>FreeRTOS启动流程</p>
+</div>
+<p>FreeRTOS主要有两种比较流行的启动方式：</p>
+<ol>
+<li>在main函数中将硬件初始化 ，RTOS系统初始化，同时创建所有任务，再启动RTOS调度器</li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;伪代码
+
+#include &quot;xxx.h&quot;
+
+int main(void)
+&#123;
+    Hardware_init();	&#x2F;&#x2F;硬件初始化
+    RTOS_init();	&#x2F;&#x2F;RTOS初始化
+    RTOS_TaskCreate(Task_n);	&#x2F;&#x2F;创建任务1
+    RTOS_TaskCreate(Task_n);	&#x2F;&#x2F;创建任务n
+    RTOS_Start();	&#x2F;&#x2F;RTOS启动，开始任务调度
+&#125;
+
+&#x2F;&#x2F;任务1函数
+void Task_1()
+&#123;
+    for(;;)
+    &#123;
+        ...
+    &#125;
+&#125;
+
+&#x2F;&#x2F;任务n函数
+void Task_n()
+&#123;
+    for(;;)
+    &#123;
+        ...
+    &#125;
+&#125;</code></pre>
+<ol>
+<li>在main函数中将硬件初始化 ，RTOS系统初始化，只创建一个启动任务，再启动RTOS调度器。之后，在启动任务中创建各种应用任务，当所有任务创建完成，启动任务把自己删除。</li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;伪代码
+
+#include &quot;xxx.h&quot;
+
+int main(void)
+&#123;
+    Hardware_init();	&#x2F;&#x2F;硬件初始化
+    RTOS_init();	&#x2F;&#x2F;RTOS初始化
+    RTOS_TaskCreate(AppTaskCreate);	&#x2F;&#x2F;创建总任务
+    RTOS_Start();	&#x2F;&#x2F;RTOS启动，开始任务调度
+&#125;
+
+void AppTaskCreate()
+&#123;
+    &#x2F;&#x2F;创建任务1
+    RTOS_TaskCreate(Task_1);
+    &#x2F;&#x2F;创建任务n
+    RTOS_TaskCreate(Task_n);
+    &#x2F;&#x2F;创建完应用任务删除自身释放内存
+    RTOS_TaskDelate(AppTaskCreate);
+&#125;
+
+&#x2F;&#x2F;任务1函数
+void Task_1()
+&#123;
+    for(;;)
+    &#123;
+        ...
+    &#125;
+&#125;
+
+&#x2F;&#x2F;任务n函数
+void Task_n()
+&#123;
+    for(;;)
+    &#123;
+        ...
+    &#125;
+&#125;</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>FreeRTOS执行大概过程</p>
+</div>
 <ul>
 <li>未到主函数之前</li>
 </ul>
@@ -271,9 +323,6 @@ if (true) {
 <li>vTaskStartScheduler( ) 函数</li>
 </ul>
 <p>创建完任务需要开启 <code>调度器</code>，<span style="color:red">因为创建仅仅把任务添加到系统中</span>，还没真正调度，<span style="color:red">并且空闲任务也没实现，定时器任务也没实现，这些都是在开启调度函数中实现</span></p>
-<div class="note simple"><p>为什么要空闲任务？</p>
-</div>
-<p>因为FreeRTOS一旦启动，就必须要保证系统中 <code>每时每刻都有一个任务处于运行状态(Runing)</code>，并且空闲任务不可以被 <code>挂起与删除</code>，空闲任务的 <code>优先级最低的</code>，以便系统中其他任务能随时抢占空闲任务的CPU使用权。(这些都是系统必要的东西，无需用户自己实现，处理完这些系统才真正启动)</p>
 <ul>
 <li>使用到的Cortex-M3 架构中3个异常
 <ul>
@@ -283,7 +332,1074 @@ if (true) {
 </ul>
 </li>
 </ul>
-</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num104.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeRTOS%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.</span> <span class="toc-text">FreeRTOS介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeRTOS%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">3.</span> <span class="toc-text">FreeRTOS文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeRTOS%E7%9A%84%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B"><span class="toc-number">4.</span> <span class="toc-text">FreeRTOS的启动流程</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+<h2 id="FreeRTOS编程风格">FreeRTOS编程风格</h2>
+<ul>
+<li>FreeRTOS使用的数据类型虽然都是标准C的数据类型，但都进行了重定义，取了个新名字</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230304172108.webp" alt=""></p>
+<p>需要注意的是， <code>char</code>数据类型可以通过keil指定了有符号或者无符号， <code>默认为无符号</code>。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230304172250.webp" alt=""></p>
+<ul>
+<li>对于现在的x64电脑，都是属于32位架构，x86的老电脑是16位架构</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">数据类型(主要是4种)</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">TickType_t</td>
+<td>如果用户使能了宏定义 <code>configUSE_16_BIT_TICKS</code>，那么 TickType_t 定义的就是 16 位无符号数<br>如果没有使能，那么 TickType_t 定义的就是 32 位无符号数。 对于 32 位架构的处理器，一定要禁止此宏定义，即设置此宏定义数值为 0 即可【CubeMX配置里默认禁止了】</td>
+</tr>
+<tr>
+<td style="text-align:center">BaseType_t</td>
+<td>对于 32 位架构，BaseType_t 定义的是 32 位有符号数<br>对于 16 位架构，BaseType_t 定义的是 16 位有符号数。 如果 BaseType_t 被定义成了 char 型，要特别注意将其设置为有符号数，因为部分函数的返回值是用负数来表示错误类型。</td>
+</tr>
+<tr>
+<td style="text-align:center">UBaseType_t</td>
+<td>这个数据类型是 BaseType_t 类型的无符号版本</td>
+</tr>
+<tr>
+<td style="text-align:center">StackType_t</td>
+<td>栈变量数据类型定义，这个数量类型由系统架构决定，对于 16 位系统架构，StackType_t 定义的是16 位变量，对于 32 位系统架构，StackType_t 定义的是 32 位变量。</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>FreeRTOS里的变量的命名</li>
+</ul>
+<p><code>uint32_t</code>  定义的变量都加上前缀  <code>ul</code>【 u 代表 unsigned 无符号，l 代表 long 长整型】<br>
+<code>uint16_t</code>  定义的变量都加上前缀  <code>us</code>【 u 代表 unsigned 无符号，s 代表 short 短整型】<br>
+<code>uint8_t</code>  定义的变量都加上前缀  <code>uc</code>。【u 代表 unsigned 无符号，c 代表 char 字符型】</p>
+<p>指针变量会加上前缀  <code>p</code> ，比如 uint16_t 定义的指针变量会加上前缀 pus</p>
+<p><code>char</code>  定义的变量只能用于 ASCII 字符，前缀使用 c</p>
+<p><code>char *</code> 定义的指针变量只能用于 ASCII 字符串，前缀使用 pc</p>
+<p>在定义变量时需要加上前缀 <code>x</code> ，比如 BaseType_t 和 TickType_t 定义的变量， UBaseType_t 定义<br>
+的变量要加上前缀 <code>ux</code></p>
+<ul>
+<li>函数</li>
+</ul>
+<p>加上了  <code>static</code>  声明的函数，定义时要加上前缀  <code>prv</code> ，这个是单词 private(私人) 的缩写</p>
+<p>带有返回值的函数，根据返回值的数据类型，加上相应的前缀，如果没有返回值，即 void 类型<br>
+，函数的前缀加上字母  <code>v</code></p>
+<p>根据文件名，文件中相应的函数定义时也将文件名加到函数命名中，比如 tasks.c 文件中函数<br>
+vTaskDelete，函数中的 task 就是文件名中的 task</p>
+<ul>
+<li>宏定义</li>
+</ul>
+<p>根据宏定义所在的文件，文件中的宏定义声明时也将文件名加到宏定义中，比如宏定义<br>
+configUSE_PREEMPTION 是定义在文件  <code>FreeRTOSConfig.h</code>  里面。 宏定义中的 config 就是文<br>
+件名中的 config。 另外注意，前缀要小写</p>
+<p>除了前缀，其余部分全部大写，同时用下划线分开</p>
+<h2 id="MX里FreeRTOS参数解释">MX里FreeRTOS参数解释</h2>
+<ul>
+<li>根据文档可以知道哪些型号单片机支持跑FreeRTOS的：<a href="https://www.freertos.org/zh-cn-cmn-s/RTOS_ports.html">微控制器和编译器工具链支持 FreeRTOS</a>；我们这次测试的是蓝桥杯嵌入式开发比赛的板子 <code>STM32G431RBT6</code>，它基于 <code>ARM Cortex-M4F</code> 架构，支持FreeRTOS【原本打算用标准库去学习FreeRTOS但是官方从F4系列开始就不更新标准库了所以只能使用HAL库学习】</li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>CubeMX参数详解</p>
+</div>
+<p><code>lnterface</code>：选择CMSIS_v1【版本1】</p>
+<div class="note simple"><p>【Config parameters 选项详解】</p>
+<ul>
+<li>
+<p><code>API，Versions</code>：都是一些版本信息</p>
+</li>
+<li>
+<p><code>MPU/FPU</code>：STM32处理器中的两种特殊处理单元，MPU是内存保护单元，用于保护系统内存；而FPU则是浮点运算单元，用于处理浮点数运算的指令【使不使能无所谓】</p>
+</li>
+<li>
+<p><code>Kernel settings</code>：内核设置</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">选项</th>
+<th style="text-align:left">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">USE_PREEMPTION</td>
+<td style="text-align:left">设置为 1 以使用 <code>抢占式</code>  rtos 调度程序<br>设置为 0 以使用 <code>协作式</code>  rtos 调度程序(即时间片)</td>
+</tr>
+<tr>
+<td style="text-align:center">CPU_CLOCK_HZ</td>
+<td style="text-align:left">这必须设置为驱动用于生成内核周期性滴答中断的外设的时钟频率，这通常但不总是等于主系统时钟频率【CPU 时钟频率】</td>
+</tr>
+<tr>
+<td style="text-align:center">TICK_RATE_HZ</td>
+<td style="text-align:left">设置滴答中断频率，值以 <code>HZ</code>  为单位指定，直接影响到计时的分辨率，精度越高，占用CPU时间越多，范围 <code>1~1000</code>；多个任务可以共享一个优先级，RTOS调度器为相同优先级的任务分享CPU时间，在每一个RTOS 系统节拍中断到来时进行任务切换。高的系统节拍中断频率会降低分配给每一个任务的“时间片”持续时间。【一般默认为1000也就是1ms】</td>
+</tr>
+<tr>
+<td style="text-align:center">MAX_PRIORITIES</td>
+<td style="text-align:left">能够分配给任务的最大优先级，范围 <code>4~32</code>，比如设置为4，那么你可以使用的优先级号是0–1–2–3，如果程序里超出的话则强制为 <code>MAX-1</code></td>
+</tr>
+<tr>
+<td style="text-align:center">MINIMAL_STACK_SIZE</td>
+<td style="text-align:left">设置分配给空闲任务的堆栈大小值在这里以 <code>uint32 为单位(字)</code>；应该考虑线程的数量、总堆大小和系统栈大小， <code>栈的大小不能超过总堆的空间</code>，当动态分配时， <code>最大值 = configTOTAL_HEAP_SIZE/4</code>；当静态分配时， <code>最大值 = MCU ram size/4</code>；空闲任务 <code>优先级最低</code>，通常用来执行一些系统维护任务，比如检查任务堆栈使用情况，定期释放不再使用的内存，管理硬件等等</td>
+</tr>
+<tr>
+<td style="text-align:center">MAX_TASK_NAME_LEN</td>
+<td style="text-align:left">任务名的最大（ASCII）字符数，包括字符串结束符NULL(’\0’)，范围 <code>12–255</code></td>
+</tr>
+<tr>
+<td style="text-align:center">USE_16_BIT_TICKS</td>
+<td style="text-align:left">tick 计数值保存在一个 portTickType 型的变量中。STM32 只能 0<br>1-则 portTickType 为 <code>无符号 16bit</code><br>0-则 portTickType 为 <code>无符号32bit</code></td>
+</tr>
+<tr>
+<td style="text-align:center">IDLE_SHOULD_YIELD</td>
+<td style="text-align:left">当任务具有空闲优先级且内核系统使用了抢占式调度器，则：<br>0-阻止空闲任务为其它具有空闲优先级的任务让出CPU，只有当空闲任务离开运行状态才能被抢占。<br>1-如果有另外一个空闲优先级的任务在准备状态，则空闲任务立刻让出CPU，让该任务运行【一般默认0】</td>
+</tr>
+<tr>
+<td style="text-align:center">USE_MUTEXES</td>
+<td style="text-align:left">1–使用互斥量<br>0–忽略互斥量<br>未使用 <code>cmsis rtos v2</code> 时允许使用这两个值【一般默认1】<br>临界区机制</td>
+</tr>
+<tr>
+<td style="text-align:center">USE_RECURSIVE_MUTEXES</td>
+<td style="text-align:left">当USE_MUTEXES=1才有意义。<br>1–使用递归互斥量<br>0–忽略递归互斥量</td>
+</tr>
+<tr>
+<td style="text-align:center">USE_COUNTING_SEMAPHORES</td>
+<td style="text-align:left">1–使用计数信号量<br>0–忽略计数信号量</td>
+</tr>
+<tr>
+<td style="text-align:center">QUEUE_REGISTRY_SIZE</td>
+<td style="text-align:left">通过此宏定义来设置可以注册的信号量和消息队列个数<br>队列注册有2个目的，都与操作系统内核的调试器有关：<br>1、注册队列的时候，可以给队列起一个名字当使用调试组件时通过名字可以很容易区分不同队列。<br>2、它包含调试器所需的信息来定位每个已注册的队列和信号量。<br>如果想使用内核调试器查看队列和信号量信息，必须先将这些队列和信号量进行注册。参见 <code>vQueueAddToRegistry()</code>和 <code>vQueueUnregisterQueue()</code>，如果用户没有使用内核方面的调试器这个宏定义是没有意义的</td>
+</tr>
+<tr>
+<td style="text-align:center">USE_APPLICATION_TASK_TAG</td>
+<td style="text-align:left">1–vTaskSetApplicationTaskTag 函数有效<br>仅用于高级用户<br>可以为每个任务分配一个“tag”值。 此值仅用于应用程序，RTOS 内核本身并不以任何方式使用它。</td>
+</tr>
+<tr>
+<td style="text-align:center">ENABLE_BACKWARD_COMPATIBILITY</td>
+<td style="text-align:left">头文件 FreeRTOS.h 包含一系列 #define 宏定义，这些宏将 FreeRTOS 8.0.0 版本之前使用的数据类型的名称映射到版本 8.0.0 中使用的名称。<br>这些宏可以确保RTOS内核升级到V8.0.0版本时，之前的应用代码不用做任何修改。<br>0–会去掉这些宏定义，需要用户确认应用代码没有用到8.0.0版本之前的（原本需要映射的）名字<br>相当于兼容旧版本的一个功能【一般默认1】</td>
+</tr>
+<tr>
+<td style="text-align:center">USE_PORT_OPTIMISED_TASK_SELECTION</td>
+<td style="text-align:left">可以根据不同型号的单片机优化任务调度的选择，从而有效地提高系统的效率，用于优化优先级列表中要执行的最高优先级任务的算法【由于Freertos v9 支持，强制启用 1】</td>
+</tr>
+<tr>
+<td style="text-align:center">USE_TICKLESS_IDLE</td>
+<td style="text-align:left">1-使能tickless低功耗<br>0-禁用tickless低功耗<br>它可以通过在系统处于空闲状态时关闭定时器中断来实现，从而减少系统的能耗</td>
+</tr>
+<tr>
+<td style="text-align:center">USE_TASK_NOTIFICATIONS</td>
+<td style="text-align:left">1-使能任务间直接的消息传递，包括信号量，事件标志组和消息邮箱<br>0-禁用此功能，每个任务节省8字节<br>每个RTOS任务都有 <code>32位的通知值</code>。RTOS任务通知是直接发送到任务的事件，它可以解除对接收任务的阻塞，并且可以更新接收任务的通知值</td>
+</tr>
+<tr>
+<td style="text-align:center">RECORD_STACK_HIGH_ADDRESS</td>
+<td style="text-align:left">1-启用时，假设堆栈向下增长，堆栈起始地址将保存到每个任务 tcb 中</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>Memory management settings</code>：内存管理设置</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">选项</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Memory Allocation</td>
+<td>Dynamic(动态)<br>static(静态)<br>Dynamic/static(动态或者静态)【一般选择动态】</td>
+</tr>
+<tr>
+<td style="text-align:center">TOTAL_HEAP_SIZE</td>
+<td>rtos 内核可用的 ram 总量，范围 <code>512字节~32000字节</code></td>
+</tr>
+<tr>
+<td style="text-align:center">Memory Management scheme</td>
+<td>内存管理方案，会管理你的动态内存分配后剩余的零碎【一般选择heap_4】</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>Hook function related definitions</code>：钩子函数相关定义</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">选项</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">USE_IDLE_HOOK</td>
+<td><code>当FreeRTOS空闲时</code> ，Idle Hook选项允许用户定义一个函数来完成一些特定的工作，比如进行资源释放、状态检查等。使用该选项可以有效地利用空闲时间，而不必浪费系统资源</td>
+</tr>
+<tr>
+<td style="text-align:center">USE_TICK_HOOK</td>
+<td>tick hook 函数是一个钩子或回调函数， <code>它可以在每次FreeRTOS计时器溢出时被调用</code>，以实现一些特定的功能。例如，用户可以使用它来检查任务的执行情况，监控任务的堆栈使用情况，以及进行资源释放等。</td>
+</tr>
+<tr>
+<td style="text-align:center">USE_MALLOC_FAILED_HOOK</td>
+<td>它可以 <code>在系统申请内存失败时被调用</code>，以实现一些特定的功能。例如，用户可以使用它来报告内存分配错误，以帮助调试程序，或者可以采取恢复措施，比如释放空闲的资源等。</td>
+</tr>
+<tr>
+<td style="text-align:center">USE_DAEMON_TASK_STARTUP_HOOK</td>
+<td>它可以在 <code>后台任务启动时被调用</code>，以实现一些特定的功能。例如，用户可以使用它来报告任务的启动状态，或者可以初始化一些系统资源，以便后台任务可以正常运行。</td>
+</tr>
+<tr>
+<td style="text-align:center">CHECK_FOR_STACK_OVERFLOW</td>
+<td>它可以 <code>检查任务的堆栈</code> 使用情况，以判断是否发生堆栈溢出。如果发生堆栈溢出，FreeRTOS就会调用一个钩子函数，以便用户可以采取恢复措施，例如重新启动任务或系统等。</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>Run time and task stats gathering related definitions</code>：任务运行信息获取配置</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">选项</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">GENERATE_RUN_TIME_STATS</td>
+<td>1-使能任务运行状态参数统计<br>0-禁用此功能<br>它可以收集有关系统运行情况的统计信息，如 <code>系统的运行时间、任务的CPU占用情况等</code>。这些信息可以帮助用户调试程序，或者可以帮助用户优化系统的性能。</td>
+</tr>
+<tr>
+<td style="text-align:center">USE_TRACE_FACILITY</td>
+<td>1-使能此配置将添加额外的结构体成员和函数，以此来协助可视化和跟踪，在使用LAR中的FreeRTOS<br>0-禁用此功能<br>插件时需要使能这个配置，否则无法显示任务栈的使用情况<br>它可以跟踪系统中任务的执行情况，可以帮助用户更好地调试系统。它可以 <code>跟踪系统中所有任务的运行状态，例如挂起状态、就绪状态、正在运行状态等</code>，以便用户可以更好地了解系统的运行情况。</td>
+</tr>
+<tr>
+<td style="text-align:center">USE_STATS_FORMATTlNG_FUNCTIONS</td>
+<td>当 <code>USE_TRACE_FACILITY</code> 和 此函数都为1时将使能 <code>vTaskList()</code>函数和 <code>vTaskGetRunTimeStats()</code>函数；只要其中一个为0那这两个函数无效。<br>它可以 <code>将系统的运行状态信息格式化为文本</code>。使用这个选项，可以 <code>方便地将系统的运行状态信息打印到控制台或文件中，以便进行调试和分析</code>。</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>Co-routine related definitions</code>：合作式任务配置(一般资源不够的单片机才用)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">选项</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">USE_CO_ROUTINES</td>
+<td>1-使能合作式调度相关函数<br>0-禁用合作式相关函数<br>协程是一种更灵活的任务模型，它可以更轻松地实现一些复杂的任务。使用这个选项，可以方便地将一些复杂的任务实现在FreeRTOS上，使系统更加灵活。</td>
+</tr>
+<tr>
+<td style="text-align:center">MAX_CO_ROUTINE_PRIORITIES</td>
+<td>它用于指定协程的最大优先级数量。使用这个选项，可以指定系统中最多可以有多少个不同优先级的协程。这将有助于更好地调度任务，提高系统的性能。</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>Software timer definitions</code>：软件定时器配置</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">选项</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">USE_TIMERS</td>
+<td>它允许用户在FreeRTOS中使用定时器。使用定时器，可以方便地在系统中设定指定时间段内执行任务，从而更好地调度任务，提高系统的性能。就是当单片机定时器不够时再打开</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>lnterrupt nesting behaviour configuration</code>：中断嵌套行为配置</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">选项</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">LIBRARY_LOWEST_INTERRUPT_PRIORITY</td>
+<td>此宏定义是用来配置FreeRTOS用到的SysTick中断和PendSV中断的优先级。在NVIC分组设置为4的情况下，此宏定义的范围就是0~15，即SysTick和PendSV都配置为了最低优先级， <code>实际项目也推荐配置成最低优先级</code>。</td>
+</tr>
+<tr>
+<td style="text-align:center">LIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY</td>
+<td>定义了受FreeRTOS管理的最高优先级中断。简单的说就是允许用户在这个中断服务程序里调用FreeRTOS的API的最高优先级。设置NVIC为4的情况下，配置LIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY为0x01表示用户可以在抢占式优先级为1~15的中断里调用FreeRTOS的API函数，抢占式优先级为0的中断里面不允许调用</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Added with 10.2.1 support(这个没什么用)</li>
+</ul>
+</div>
+<div class="note simple"><p>【lnclude parameters 选项详解】</p>
+<p>可参考文章：<a href="https://blog.csdn.net/zhzht19861011/article/details/50498173">FreeRTOS系列第12篇—FreeRTOS任务应用函数</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数</th>
+<th>描述</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">vTaskPrioritySet</td>
+<td>改变一个任务的优先级</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">ux TaskPriorityGet</td>
+<td>查询员工任务的优先级</td>
+<td>查询任务的优先级参数是任务句柄，返回值是UBaseType_t类型</td>
+</tr>
+<tr>
+<td style="text-align:left">vTaskDelete</td>
+<td>删除任务</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">vTas1kCleanUpResources</td>
+<td>回收删除任务后的资源(RAM等)</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">vTaskSuspend</td>
+<td>时任务进入挂起状态</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">vTaskDelayUntil</td>
+<td>使任务进入阻塞状态(绝对时间)</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">vTaskDelay</td>
+<td>时任务进入阻塞状态(相对时间)</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">xTaskGetSchedulerState</td>
+<td>查询调度器状态</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">xTaskResumeFromlSR</td>
+<td>将挂起态任务切换成就绪态(中断中)</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">xQueueGetMutexHolder</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">xSemaphoreGetMutexHolder</td>
+<td>返回获取函数参数中互斥量的任务句柄</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">pcTaskGetTaskName</td>
+<td>获取任务的名字</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">uxTaskGetStackHighWaterMark</td>
+<td>返回任务启动后的最小剩余堆栈空间</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">xTaskGetCurrentTaskHandle</td>
+<td>返回运行态任务的句柄</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">eTaskGetState</td>
+<td>返回任务状态值</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">xEventGroupSetBitFromISR</td>
+<td>设置指定的事件组标志位为1(中断中)</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">xTimerPendFunctionCall</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">xTaskAbortDelay</td>
+<td>任务切出阻塞态进入就绪态</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">xTaskGetHandle</td>
+<td>通过函数名字获取函数句柄</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">uxTaskGetStackHighWaterMark2</td>
+<td>用于获取任务堆栈的高水位标记</td>
+<td>当任务开始执行时，它的堆栈被填充了一些特定的值，如0xa5、0x5a等。当任务运行时，它的堆栈指针会向下移动，堆栈空间被使用。通过获取堆栈高水位标记，可以知道任务堆栈的最高使用位置，即任务堆栈的剩余空间， <code>返回的数值越大，表示任务堆栈的剩余空间越大</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="note simple"><p>【Advanced settings(高级设置) 选项详解】</p>
+</div>
+<div class="note simple"><p>【User Constants(用户常量) 选项详解】</p>
+</div>
+<div class="note simple"><p>【Tasks and Queues(任务和队列) 选项详解】</p>
+</div>
+<div class="note simple"><p>【Timers and Semaphores(定时器和信号量) 选项详解】</p>
+</div>
+<div class="note simple"><p>【FreeRTOS Heap Usage(FreeRTOS堆使用) 选项详解】</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">选项</th>
+<th>解释(单位Bytes)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">HEAP STILL AVAILABLE</td>
+<td>剩余字节数</td>
+</tr>
+<tr>
+<td style="text-align:center">TOTAL HEAP USED</td>
+<td>已使用字节数</td>
+</tr>
+<tr>
+<td style="text-align:center">Total amount for tasks</td>
+<td>任务总占用字节数</td>
+</tr>
+<tr>
+<td style="text-align:center">Total amount for queues</td>
+<td>队列所占字节数</td>
+</tr>
+<tr>
+<td style="text-align:center">Total amount for timers</td>
+<td>定时器所占字节数</td>
+</tr>
+<tr>
+<td style="text-align:center">Total amount for mutexes and semaphores</td>
+<td>信号量与互斥量所占字节数</td>
+</tr>
+<tr>
+<td style="text-align:center">Total amount for events</td>
+<td>FreeRTOS事件数量</td>
+</tr>
+<tr>
+<td style="text-align:center">FreeRTOS tasks</td>
+<td>各任务字节数分配情况</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="note simple"><p>【Mutexes(互斥锁) 选项详解】</p>
+</div>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>CubeMX配置</p>
+</div>
+<p>如果直接生成代码会弹出：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230301213918.webp" alt=" "></p>
+<p>只是因为FreeRTOS使用了滴答定时器，所以我们需要在SYS那换成别的不冲突的定时器【一般使用TIM7，因为TIM6包括了DAC相关的所以没选，然后中断优先级可以改高点4左右，因为低的话可能造成系统的HALDelay函数被打断】</p>
+<h2 id="FreeRTOS调试方法">FreeRTOS调试方法</h2>
+<p><code>处理器利用率</code>：处理器利用率其实就是系统运行的程序占用的CPU资源，表示机器在某段时间程序运行的情况，如果这段时间中，程序一直在占用CPU的使用权，那么可以认为CPU的利用率是100%；CPU的利用率越高，说明机器在这个时间上运行了很多程序，反之较少。利用率的高低与CPU强弱有直接关系。</p>
+<p>需要了解任务的执行状态，任务栈的使用情况以及各个任务的 CPU 使用率，这时就需要用到官方提供的两个函数 <code>vTaskList</code>  和  <code>vTaskGetRunTimeStats</code>【另外有一点要特别注意，这种调试方式仅限测试目的，实际项目中不要使用，这种测试方式比较影响系统实时性】</p>
+<p>为了获取 FreeRTOS 的任务信息，需要创建一个定时器， <code>这个定时器的时间基准精度要高于系统时钟节拍</code>，这样得到的任务信息才准确。这里提供的函数仅用于测试目的，切不可将其用于实际项目，原因有两点：</p>
+<ol>
+<li>FreeRTOS 的系统内核没有对总的计数时间做溢出保护。</li>
+<li>定时器中断是 50us 进入一次，比较影响系统性能。</li>
+</ol>
+<p>这里使用的是 32 位变量来保存 50us 一次的计数值，最大支持计数时间(运行时间超过了 59.6 分钟将不准确)：</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>32</mn></msup><mo>×</mo><mn>50</mn><mi>u</mi><mi>s</mi><mi mathvariant="normal">/</mi><mn>3600</mn><mi>s</mi><mo>=</mo><mn>59.6</mn><mtext>分钟</mtext></mrow><annotation encoding="application/x-tex">2^{32} \times 50us / 3600s = 59.6 \text{分钟}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">32</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">50</span><span class="mord mathnormal">u</span><span class="mord mathnormal">s</span><span class="mord">/3600</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">59.6</span><span class="mord text"><span class="mord cjk_fallback">分钟</span></span></span></span></span></p>
+ <div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>CubeMX配置</p>
+</div>
+<ul>
+<li>第一个宏用来使能 <code>运行时间统计功能</code>，第二个宏用来使能 <code>可视化追踪功能</code></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230303161450.webp" alt=" "></p>
+<ul>
+<li>如果第二个宏设置为1，则下面两个宏必须被定义：</li>
+</ul>
+<ol>
+<li><code>portCONFIGURE_TIMER_FOR_RUN_TIME_STATS()</code></li>
+</ol>
+<p>用户程序需要 <code>提供一个基准时钟函数</code>，函数完成初始化基准时钟功能，这个函数要被define到宏portCONFIGURE_TIMER_FOR_RUN_TIME_STATS()上。这是因为 <code>运行时间统计需要一个比系统节拍中断频率还要高分辨率的基准定时器</code>，否则，统计可能不精确。基准定时器中断频率要比系统节拍中断 <code>快10~100倍</code>。基准定时器中断 <code>频率越快，统计越精准，但能统计的运行时间也越短</code>（比如，基准定时器10ms中断一次，8位无符号整形变量可以计到2.55秒，但如果是1秒中断一次，8位无符号整形变量可以统计到255秒）。</p>
+<ol start="2">
+<li><code>portGET_RUN_TIME_COUNTER_VALUE()</code></li>
+</ol>
+<p>用户程序需要 <code>提供一个返回基准时钟当前“时间”的函数</code>，这个函数要被define到宏portGET_RUN_TIME_COUNTER_VALUE()上。</p>
+<ul>
+<li>定时500us，溢出是需要24.8天所以是足够的</li>
+</ul>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mi>z</mi><mo>=</mo><mfrac><mn>1</mn><mrow><mo stretchy="false">(</mo><mn>500</mn><mi mathvariant="normal">/</mi><mn>1000000</mn><mo stretchy="false">)</mo><mi>s</mi></mrow></mfrac><mo>=</mo><mn>2000</mn></mrow><annotation encoding="application/x-tex">Hz = \frac{1}{(500/1000000)s} = 2000</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">Hz</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.3651em;vertical-align:-0.52em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight">500/1000000</span><span class="mclose mtight">)</span><span class="mord mathnormal mtight">s</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.52em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2000</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>r</mi><mi>r</mi><mo>=</mo><mfrac><mn>1000000</mn><mn>2000</mn></mfrac><mo>=</mo><mn>500</mn></mrow><annotation encoding="application/x-tex">Arr = \frac{1000000}{2000} = 500</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.02778em;">rr</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1901em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2000</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1000000</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">500</span></span></span></span></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230303164401.webp" alt=" "></p>
+<h2 id="任务">任务</h2>
+<h3 id="任务的介绍">任务的介绍</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>任务的状态</p>
+</div>
+<p><code>就绪状态 (Ready)</code>：任务已经创建，并且可以被调度器运行。当任务被创建时，它处于就绪状态。但是因为有一个同优先级或者更高优先级的任务处于运行状态而还没有真正执行</p>
+<p><code>运行状态 (Running)</code>：当前在 CPU 上运行的任务。只有一个任务能处于运行状态。</p>
+<p><code>阻塞状态 (Blocked)</code>：任务被阻塞了，不能被调度器运行。当任务执行阻塞操作时，如等待信号量、邮箱、消息队列，外部中断，等待时间等，它将进入阻塞状态。</p>
+<p><code>挂起状态 (Suspended)</code>：任务被挂起了，不能被调度器运行。当任务被调用 vTaskSuspend() 挂起时，它将进入挂起状态。(不可以通过设定超时事件而退出挂起状态)</p>
+<p><code>删除状态 (Deleted)</code>：任务已被删除，不能被调度器运行。当任务调用 vTaskDelete() 或者调度器自动删除任务时，它将进入删除状态。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/20151215111938789.webp" alt=" "></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>空闲任务</p>
+</div>
+<p>FreeRTOS 中有一个特殊的任务叫做空闲任务 (Idle task)。这个任务是由 FreeRTOS 自动创建的，它的优先级是最低的，并且当所有其它任务都处于阻塞状态时，调度器会自动切换到这个任务上运行。</p>
+<p>空闲任务的主要目的是在系统空闲时执行后台操作，如调整 CPU 的频率，执行计数器或收集统计信息等。</p>
+<p>可以通过实现 <code>xApplicationIdleHook() </code>函数来指定空闲任务的具体行为，以实现自己的空闲处理逻辑。此函数在空闲任务调用时运行。此函数的默认实现为空函数，如果没有被重定义，空闲任务就不会执行其他任何操作。</p>
+<p>在应用中使用 <code>vTaskDelete()</code> 函数后确保空闲任务能获得处理器时间就很重要了</p>
+<p>当系统删除一个任务或一个动态任务运行结束时， <code>在执行删除任务的时候，并不会释放任务的内存空间，只会将任务添加到回收列表中</code>，真正的系统资源回收工作在空闲任务完成， <code>空闲任务是唯一一个不允许出现阻塞情况的任务</code>。</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>空闲任务钩子</p>
+</div>
+<p>空闲任务钩子是一个函数，每一个空闲任务周期被调用一次。如果你想将任务程序功能运行在空闲优先级上，可以有两种选择：</p>
+<ol>
+<li>在一个空闲任务钩子中实现这个功能：因为FreeRTOS必须至少有一个任务处于就绪或运行状态，因此钩子函数 <code>不可以调用可能引起空闲任务阻塞的API函数</code>（比如vTaskDelay()或者带有超时事件的队列或信号量函数）。</li>
+<li>创建一个具有空闲优先级的任务去实现这个功能：这是个更灵活的解决方案，但是会带来更多RAM开销。</li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;创建一个空闲钩子步骤如下：
+1.在CubeMX【config parameters】里使能&quot;USE_IDLE_HOOK&quot;选项
+2.定义一个函数，函数和参数原型如下：
+void vApplicationIdleHook(void);</code></pre>
+<p>通常， <code>使用这个空闲钩子函数设置CPU进入低功耗模式</code>。</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>任务函数</p>
+</div>
+<p>任务是由 C 语言函数实现的。唯一特别的只是任务的函数原型， <code>其必须返回 void</code> ，而且 <code>带有一个 void 指针参数</code></p>
+<p>每个任务都是在自己权限范围内的一个小程序。其具有程序入口， <code>通常会运行在一个死循环中，也不会退出</code></p>
+<p>FreeRTOS 任务不允许以任何方式从实现函数中返回—— <code>它们绝不能有一条”return”语句，也不能执行到函数末尾</code>。如果一个任务不再需要，可以显式地将其删除。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;例如
+void ATaskFunction(void *pvParameters)
+&#123;
+    &#x2F;&#x2F;可以像普通函数一样定义变量，用这个函数创建的每一个任务实例都有一个属于自己的count变量。但是如果count被定义成static,这一点则不成立--这种情况下只存在一个变量，所有的任务实例将共享这个变量
+    int count &#x3D; 0;
+    static int a;
+    &#x2F;&#x2F;任务通常实现在一个死循环中
+    for(;;)
+    &#123;
+        &#x2F;&#x2F;完成任务功能的代码放这
+        count++;
+        a++;
+    &#125;
+    &#x2F;&#x2F;如果任务的具体实现会跳出上面的死循环，则任务必须在函数运行完前删除。传入NULL参数表示删除的是当前任务【安全起见，如果程序由于异常执行到这，则删除当前任务】
+    vTaskDelete(NULL);
+&#125;</code></pre>
+<p>当一个任务 <code>处于非运行态时，该任务进行休眠</code>，它的所有状态都被妥善保存，以便在下一次调试器决定让它进入运行态时可以恢复执行。当任务恢复执行时， <code>其将精确地从离开运行态时正准备执行的那一条指令开始执行</code>。</p>
+<p>任务从非运行态转移到运行态被称为 <code>切换入或切入(switched in)</code> 或  <code>交换入(swapped in)</code> 。相反，任务从运行态转移到非运行态被称为 <code>切换出或切出(switched out)</code> 或 <code>交换出(swapped out)</code> 。FreeRTOS 的调度器是能让任务切入切出的唯一实体。</p>
+<p>特别的，FreeRTOS支持相同优先级任务， <code>相同优先级任务之间的调度，采用的是轮询机制</code>，每个任务分配一定的执行时间。 <code>不同优先级任务之间的调度，执行的是抢占式调度</code>。</p>
+<p>在任何时刻，只有 <code>一个任务</code> 得到运行，RTOS调度器决定运行哪个任务，在任务切入切出时 <code>保存上下文环境（寄存器值、堆栈内容）</code>是调度器主要的职责</p>
+<div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>注意</p>
+</div>
+<p>FreeRTOS默认使能了时间片轮询不需要用户去使能但是抢占式需要用户去使能</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230303101737.webp" alt=" "></p>
+<h3 id="任务的设计要点">任务的设计要点</h3>
+<ol>
+<li>中断服务函数是一种需要特别注意的上下文环境，它运行在非任务的执行环境下（一般为芯片的一种特殊运行模式（也被称作特权模式）），在这个上下文环境中不能使用挂起当前任务的操作， 不允许调用任何会阻塞运行的 API 函数接口。另外需要注意的是， 中断服务程序最好保持精简短小，快进快出，一般在中断服务函数中只做标记事件的发生，然后通知任务，让对应任务去执行相关处理，因为中断服务函数的优先级高于任何优先级的任务，如果中断处理时间过长，将会导致整个系统的任务无法正常运行。所以在设计的时候 必须考虑中断的频率、中断的处理时间 等重要因素，以便配合对应中断处理任务的工作。</li>
+<li>做为一个优先级明确的实时系统，如果一个任务中的程序出现了死循环操作（ 此处的死循环是指没有阻塞机制的任务循环体比如while(1)或者其他的），那么比这个任务优先级低的任务都将无法执行。【注意的是任务函数本身是一个死循环没错但是不能在里面再搞死循环这个是需要避免的】</li>
+<li>任务设计时，就应该保证任务在不活跃的时候，任务可以进入阻塞态以交出CPU使用权，这就需要我们自己 明确知道什么情况下让任务进入阻塞态，保证低优先级任务可以正常运行。在实际设计中，一般会将紧急的处理事件的任务优先级设置得高一些。</li>
+<li>空闲任务（idle任务）是 FreeRTOS系统中没有其他工作进行时自动进入的系统任务 。因为处理器总是需要代码来执行—— 所以至少要有一个任务处于运行态。</li>
+<li>除此之外，还需要注意任务的执行时间。任务的执行时间一般是指两个方面， <code>一是任务从开始到结束的时间</code>， <code>二是任务的周期</code>。</li>
+</ol>
+<h3 id="任务的创建">任务的创建</h3>
+<div class="note simple"><p>两种任务创建的方式，一种是在 <code>CubeMX中创建任务</code>；另一种是在 <code>工程中调用FreeRTOS源码来创建任务</code></p>
+</div>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>CubeMX中创建任务</p>
+</div>
+<p>CubeMX默认会生成一个函数名为 <code>StartDefaultTask</code> 的默认任务</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230302093121.webp" alt=" "></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">优先级从低到高排序</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">osPriorityIdle(空闲)</td>
+</tr>
+<tr>
+<td style="text-align:center">osPriorityLow (低)</td>
+</tr>
+<tr>
+<td style="text-align:center">osPriorityBelowNormal(低于正常)</td>
+</tr>
+<tr>
+<td style="text-align:center">osPriorityNormal(正常)</td>
+</tr>
+<tr>
+<td style="text-align:center">osPriorityAboveNormal(高于正常)</td>
+</tr>
+<tr>
+<td style="text-align:center">osPriorityHigh(高)</td>
+</tr>
+<tr>
+<td style="text-align:center">osPriorityRealtime(优先实时)</td>
+</tr>
+</tbody>
+</table>
+<p>在 <code>main.c</code> 里自动先初始化任务，然后调用内核启动函数启动你的任务</p>
+<div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>个人习惯</p>
+</div>
+<ul>
+<li>一般任务设置成 <code>weak</code> 方式，这样不修改源代码，在另一个文件里实现它</li>
+<li>任务函数名和字符串名称，习惯是设置成 <code>相同的字符串</code>， <code>函数名首字母大写</code>， <code>字符串名称小写</code></li>
+<li>创建一个 <code>My_Task</code>文件夹，创建 <code>AllTask.c</code> 和 <code>AllTask.h</code> ，这里写你创建的任务实现代码</li>
+<li>创建一个 <code>App</code> 文件夹，里面存放你写的外设驱动代码</li>
+<li><code>MINIMAL_STACK_SIZE</code> 大小一般给大点10240以上，任务看情况调试，默认128字</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;在CubeMX中创建任务本质上和在工程内创建没有什么不同，都是都调用FreeRTOS源码，只不过CubeMX会对FreeRTOS源码进行二次封装
+
+osThreadId testTaskHandle;	&#x2F;&#x2F;任务句柄
+
+&#x2F;&#x2F;任务函数
+void TestTASK(void const * argument)
+&#123;
+    for(;;)
+    &#123;
+        ...
+    &#125;
+&#125;
+&#x2F;&#x2F;参数分别是：字符串，函数名，优先级，传入的参数，栈大小
+&#x2F;&#x2F;osThreadDef也不是函数是宏定义，就是把参数赋给结构体成员
+&#x2F;&#x2F;osThread不是函数是宏定义，它使用#拼接字符串变成&quot;os_thread_def_testTask&quot;然后把这个结构体取址赋给创建任务的函数osThreadId osThreadCreate (const osThreadDef_t *thread_def, void *argument)的第一个参数，它是结构体指针类型，创建完后返回值是一个句柄，然后把句柄赋给你定义的句柄testTaskHandle
+
+osThreadDef(testTask, TestTASK, osPriorityNormal, 0, 500);	&#x2F;&#x2F;参数写到一个结构体
+testTaskHandle &#x3D; osThreadCreate(osThread(testTask), NULL);	&#x2F;&#x2F;调用封装好的xTaskCreate函数</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>调用FreeRTOS源码来创建任务</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;任务创建函数原型
+BaseType_t xTaskCreate(	TaskFunction_t pxTaskCode,	&#x2F;&#x2F;函数指针
+                        const char *const pcName,	&#x2F;&#x2F;任务描述
+                        const configSTACK_DEPTH_TYPE usStackDepth,	&#x2F;&#x2F;堆栈大小
+                        void *const pvParameters,	&#x2F;&#x2F;参数指针
+                        UBaseType_t uxPriority,	&#x2F;&#x2F;任务优先级
+                        TaskHandle_t *const pxCreatedTask 	&#x2F;&#x2F;回传句柄
+                      );</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">变量</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">pxTaskCode</td>
+<td>函数指针，指向任务函数的入口。任务永远不会返回(死循环)；该参数类型为 <code>TaskFunction_t</code> 定义在文件 <code>projdefs.h</code> 中，参数类型为空指针类型并返回空类型【任务函数的形参只能是pvParameters】</td>
+</tr>
+<tr>
+<td style="text-align:center">pcName</td>
+<td>任务描述，字符串形式；字符串的最大长度由 <code>configMAX_TASK_NAME_LEN</code> 决定默认16(包含’\0’)，该宏位于 <code>FreeRTOSConfig.h</code> 中</td>
+</tr>
+<tr>
+<td style="text-align:center">usStackDepth</td>
+<td>创建任务时，FreeRTOS内核会为每个任务分配固定的栈空间，栈空间的字数（word），而不是字节数（byte），没有什么方法可以直接计算出一个合适的栈大小。一般情况下，都会根据经验，先简单的设置一个值，然后利用FreeRTOS提供的方法来验证分配的栈大小是否满足要求，并根据结果来调整栈空间的大小</td>
+</tr>
+<tr>
+<td style="text-align:center">pvParameters</td>
+<td>void* 指针，当任务创建时，作为一个参数传递给任务，没有的话一般是写 <code>NULL</code></td>
+</tr>
+<tr>
+<td style="text-align:center">uxPriority</td>
+<td>任务的优先级，优先级的取值范围为[ <code>0, configMAX_PRIORITIES - 1</code>]， <code>任务优先级越高，其优先级值越大</code></td>
+</tr>
+<tr>
+<td style="text-align:center">pxCreatedTask</td>
+<td>用于传出任务的句柄(ID)。这个句柄可以用来操作已经创建的任务，如改变任务优先级、删除任务等。如果不需要任务句柄，可以将pvCreatedTask置为NULL</td>
+</tr>
+<tr>
+<td style="text-align:center">返回值</td>
+<td>如果任务创建成功，则返回 <code>pdPASS</code> ；如果任务创建失败，则返回相应的错误码(-1/-4/-5)。大部分创建失败的原因，都是因为FreeRTOS无法为任务分配足够的空间导致的，在实际程序中，应该判断该返回值，失败时记录错误码，便于查找问题原因。</td>
+</tr>
+</tbody>
+</table>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;错误码
+
+&#x2F;&#x2F;错误无法分配所需的内存
+errCOULD_NOT_ALLOCATE_REQUIRED_MEMORY	( -1 )
+&#x2F;&#x2F;错误队列阻塞    
+errQUEUE_BLOCKED						( -4 )
+&#x2F;&#x2F;错误队列产量    
+errQUEUE_YIELD							( -5 )</code></pre>
+<h3 id="例1">例1</h3>
+<ul>
+<li>创建两个任务</li>
+</ul>
+<details ><summary> AllTask.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;AllTask.h&quot;
+
+
+#define TASK1_PRIORITY 5	&#x2F;&#x2F;任务1优先级
+#define TASK1_STACK_SIZE 512	&#x2F;&#x2F;任务1堆栈大小
+TaskHandle_t TASK1_Handle;	&#x2F;&#x2F;定义任务1句柄
+void Usart1Tx_function(void *pvParameters);	&#x2F;&#x2F;任务函数
+
+#define TASK2_PRIORITY 6	&#x2F;&#x2F;任务2优先级
+#define TASK2_STACK_SIZE 128	&#x2F;&#x2F;任务2堆栈大小
+TaskHandle_t TASK2_Handle;	&#x2F;&#x2F;定义任务2句柄
+void Led1_function(void *pvParameters);	&#x2F;&#x2F;任务函数
+
+
+
+&#x2F;&#x2F;管理任务
+void AppTaskCreate(void)
+&#123;
+	BaseType_t xReturn &#x3D; pdPASS;	&#x2F;&#x2F;定义一个信息返回值，默认pdPASS
+	taskENTER_CRITICAL();
+	&#x2F;&#x2F;任务1创建
+	xReturn &#x3D; xTaskCreate(Usart1Tx_function,&quot;usart1TX_function&quot;,TASK1_STACK_SIZE,NULL,TASK1_PRIORITY,&amp;TASK1_Handle);
+	if(xReturn !&#x3D; pdPASS)
+	&#123;
+		printf(&quot;Error:%ld\r\n&quot;,xReturn);
+	&#125;
+	&#x2F;&#x2F;任务2创建
+	xReturn &#x3D; xTaskCreate(Led1_function,&quot;led1_function&quot;,TASK2_STACK_SIZE,NULL,TASK2_PRIORITY,&amp;TASK2_Handle);
+	if(xReturn !&#x3D; pdPASS)
+	&#123;
+		printf(&quot;Error:%ld\r\n&quot;,xReturn);
+	&#125;
+	taskEXIT_CRITICAL();
+&#125;
+
+
+&#x2F;&#x2F;任务1
+void Usart1Tx_function(void *pvParameters)
+&#123;
+	static uint16_t count;
+	
+	for(;;)
+	&#123;
+		count++;
+		printf(&quot;COUNT:%d\r\n&quot;,count);
+		vTaskDelay(1000);	&#x2F;&#x2F;阻塞1s	
+	&#125;
+	vTaskDelete(NULL);
+&#125;
+
+&#x2F;&#x2F;任务2
+void Led1_function(void *pvParameters)
+&#123;
+	
+	for(;;)
+	&#123;
+		LED_Dis(0x01,SET);
+		vTaskDelay(500);
+		LED_Dis(0x01,RESET);
+		vTaskDelay(500);
+	&#125;
+	vTaskDelete(NULL);
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> main.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">int main(void)
+&#123;
+    AppTaskCreate();	&#x2F;&#x2F;在生成的MX代码上面任务创建
+    &#x2F;&#x2F;MX生成的
+    MX_FREERTOS_Init();	&#x2F;&#x2F;默认任务的创建
+    osKernelStart();	&#x2F;&#x2F;启动调度
+    
+    while(1)
+    &#123;
+        
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<h2 id="内存管理">内存管理</h2>
+<p>FreeRTOS 操作系统将内核与内存管理分开实现，操作系统内核仅规定了必要的内存管理函数原型，而不关心这些内存管理函数是如何实现的，所以在 FreeRTOS 中提供了多种内存分配算法（分配策略），但是上层接口（ API）却是统一的。这样做可以增加系统的灵活性： 用户可以选择对自己更有利的内存管理策略，在不同的应用场合使用不同的内存分配策略。</p>
+<p>FreeRTOS 的内存管理模块 <code>通过对内存的申请、释放操作，来管理用户和系统对内存的使用，使内存的利用率和使用效率达到最优，同时最大限度地解决系统可能产生的内存碎片问题</code>。</p>
+<p>统一的上层接口(API)</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void *pvPortMalloc( size_t xSize ); &#x2F;&#x2F;内存申请函数
+void vPortFree( void *pv ); &#x2F;&#x2F;内存释放函数
+void vPortInitialiseBlocks( void ); &#x2F;&#x2F;初始化内存堆函数
+size_t xPortGetFreeHeapSize( void ); &#x2F;&#x2F;获取当前未分配的内存堆大小
+size_t xPortGetMinimumEverFreeHeapSize( void ); &#x2F;&#x2F;获取未分配的内存堆历史最小值</code></pre>
+<p>FreeRTOS 提供的内存管理都是从<strong>内存堆中分配内存</strong>的。 创建任务、消息队列、事件等操作都使用到分配内存的函数，这是系统中默认使用内存管理函数从内存堆中分配内存给系统核心组件使用。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">内存管理方案</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">heap_1.c</td>
+<td>它 <code>只能申请内存而不能进行内存释放</code>，并且申请内存的时间是一个常量，这样子对于要求安全的嵌入式设备来说是最好的，因为不允许内存释放，就不会产生内存碎片而导致系统崩溃，但是也有缺点，那就是 <code>内存利用率不高</code>， 某段内存只能用于内存申请的地方，即使该内存只使用一次，也无法让系统回收重新利用。<br>① 用于从不删除任务、队列、信号量、互斥量等的应用程序（实际上大多数使用FreeRTOS 的应用程序都符合这个条件） 。<br>② 函数的执行时间是确定的并且不会产生内存碎片。</td>
+</tr>
+<tr>
+<td style="text-align:center">heap_2.c</td>
+<td>采用一种 最佳匹配算法，支持释放申请的内存， 但是它不能把相邻的两个小的内存块合成一个大的内存块， 对于每次申请内存大小都比较固定的，这个方式是没有问题的， <code>而对于每次申请并不是固定内存大小的则会造成内存碎片</code><br>① 可以用在那些反复的删除任务、队列、信号量、等内核对象且不担心内存碎片的应用程序。<br>② 如果我们的应用程序中的队列、任务、信号量、 等工作在一个不可预料的顺序，这样子也有可能会导致内存碎片。<br>③ 具有不确定性，但是效率比标准 C 库中的 malloc 函数高得多<br>④ 不能用于那些内存分配和释放是随机大小的应用程序。</td>
+</tr>
+<tr>
+<td style="text-align:center">heap_3.c</td>
+<td>简单的封装了标准 C 库中的  <code>malloc()</code> 和  <code>free()</code> 函数， 并且能满足常用的编译器。 重新封装后的 malloc()和 free()函数具有 <code>保护功能</code>，采用的封装方式是操作内存前挂起调度器、完成后再恢复调度器。<br>① 需要链接器设置一个堆， malloc()和 free()函数由编译器提供<br>② 具有不确定性<br>③ 很可能增大 RTOS 内核的代码大小<br>注意：<strong>configTOTAL_HEAP_SIZE</strong> 宏定义不起作用</td>
+</tr>
+<tr>
+<td style="text-align:center">heap_4.c</td>
+<td>采用 <code>最佳匹配</code> 算法以及 <code>合并</code> 算法<br>① 可用于重复删除任务，队列，信号量，互斥量等的应用程序<br>② 可用于分配和释放随机字节内存的应用程序，不会产生严重的内存碎片<br>③ 具有不确定性，但是效率比标准c库的malloc函数高得多</td>
+</tr>
+<tr>
+<td style="text-align:center">heap_5.c</td>
+<td>采用 <code>最佳匹配</code> 算法和 <code>合并</code> 算法，并且 <code>允许内存堆跨越多个非连续的内存区</code>，也就是允许在不连续的内存堆中实现内存分配</td>
+</tr>
+</tbody>
+</table>
+<h2 id="系统节拍和时间管理">系统节拍和时间管理</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>FreeRTOS 的时钟节拍</p>
+</div>
+<p>任何操作系统都需要提供一个时钟节拍，以供系统处理诸如延时、 超时等与时间相关的事件。<br>
+时钟节拍是特定的周期性中断，这个中断可以看做是系统心跳。 中断之间的时间间隔取决于不同的应<br>
+用，一般是 <code>1ms – 100ms</code>。时钟的节拍中断使得内核可以将任务延迟若干个时钟节拍，以及当任务等待<br>
+事件发生时，提供等待超时等依据。 <code>时钟节拍率越快，系统的额外开销就越大</code>。一般来说 <code>都是用滴答定时器来实现系统时钟节拍的</code>。</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>滴答定时器 Systick</p>
+</div>
+<p>SysTick 定时器被捆绑在 NVIC 中，用于产生 SysTick 异常（异常号： 15）， 滴答定时器是一个 24 位<br>
+的递减计数器，支持中断。 使用比较简单， 专门用于给操作系统提供时钟节拍。<br>
+FreeRTOS 的系统时钟节拍可以在配置文件 <code>FreeRTOSConfig.h</code> 里面设置：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#define configTICK_RATE_HZ                       ((TickType_t)1000)</code></pre>
+<p>如上所示的宏定义配置表示系统时钟节拍是 <code>1KHz(即1ms)</code></p>
+<p>FreeRTOS 中的时间延迟函数主要有以下两个作用：</p>
+<ol>
+<li>为周期性执行的任务提供延迟。</li>
+<li>对于抢占式调度器，让高优先级任务可以通过时间延迟函数释放 CPU 使用权，从而让低优先级任务可以得到执行。</li>
+</ol>
+<p>FreeRTOS 的时间相关函数主要是4个：</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>vTaskDelay函数</p>
+</div>
+<p>相对延时，vTaskDelay()指定的延时时间是从调用vTaskDelay()后开始计算的相对时间，单位是 <code>系统节拍时钟周期</code>， <code>portTICK_PERIOD_MS</code> 宏定义是用来辅助计算真实时间，此值是系统节拍时钟中断的周期，单位是毫秒【在portmacro.h有定义】</p>
+<p>不适用与周期性执行任务的场合其它任务和中断活动，会影响到vTaskDelay()的调用（比如调用前高优先级任务抢占了当前任务），因此会影响任务下一次执行的时间</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230303135143.webp" alt=" "></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;configTICK_RATE_HZ是在cubeMX里填写的频率，可在FreeRTOSconfig.h查看
+#define configTICK_RATE_HZ                       ((TickType_t)1000)
+
+&#x2F;&#x2F;portmacro.h
+#define portTICK_PERIOD_MS			( ( TickType_t ) 1000 &#x2F; configTICK_RATE_HZ )</code></pre>
+<p>所以vTaskDelay的计算公式：</p>
+<p>\text{实际vTaskDelay参数值 = 你想要延时的时间(ms) / portTICK_PERIOD_MS}</p>
+<p>比如延时500ms，则通过计算得出vTaskDelay参数应该写500</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">TickType_t TicksToDelay;	&#x2F;&#x2F;定义变量(注意类型要跟函数一致)
+TicksToDelay &#x3D; 500 &#x2F; portTICK_PERIOD_MS;	&#x2F;&#x2F;转换为节拍
+vTaskDelay(TicksToDelay);	&#x2F;&#x2F;阻塞500ms</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>vTaskDelayUntil函数</p>
+</div>
+<p>绝对延时，周期性任务可以使用此函数，以确保一个恒定的频率执行，当调用 <code>vTaskSuspendAll()</code> 函数挂起RTOS调度器时，不可以使用此函数。</p>
+<p>即使任务在执行过程中发生中断，那么也不会影响这个任务的运行周期，仅仅是缩短了阻塞的时间而已，到了要唤醒的时间依旧会将任务唤醒。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230303135205.webp" alt=" "></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;函数原型
+&#x2F;&#x2F;使用前需要在MX使能或者在FreeRTOSConfig.h把宏定义使能：#define INCLUDE_vTaskDelayUntil 1
+
+&#x2F;&#x2F;参数1：存储任务上次处于非阻塞状态时刻的变量地址
+&#x2F;&#x2F;参数2：周期性延迟时间(当时间等于(*pxPreviousWakeTime + xTimeIncrement)时，任务解除阻塞)
+void vTaskDelayUntil( TickType_t * const pxPreviousWakeTime, const TickType_t xTimeIncrement )</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;用法
+&#x2F;&#x2F;可以使用portTickType定义因为在 FreeRTOS.h里宏定义了它等于TickType_t (938行左右)
+
+void Usart1Tx_function(void *pvParameters)
+&#123;
+	static TickType_t PreviousWakeTime;	&#x2F;&#x2F;保存上一次时间
+	TickType_t TimeIncrement;	&#x2F;&#x2F;需要多少节拍
+	
+	TimeIncrement &#x3D; 1000 &#x2F; portTICK_PERIOD_MS;	&#x2F;&#x2F;把ms转换成节拍(如果设置的系统节拍是1ms则不需要转换直接给参数即可)
+	PreviousWakeTime &#x3D; xTaskGetTickCount();	&#x2F;&#x2F;获取当前系统时间
+	
+	for(;;)
+	&#123;
+		vTaskDelayUntil(&amp;PreviousWakeTime,TimeIncrement);	&#x2F;&#x2F;绝对延时，1000ms
+	&#125;
+	vTaskDelete(NULL);
+&#125;</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>xTaskGetTickCount函数</p>
+</div>
+<p>用于获取系统当前运行的时钟节拍数，此函数用于在 <code>任务代码</code> 里面调用，如果在中断服务程序里面调用的话，需要使用另一个函数【不可混淆用】</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;用法
+printf(&quot;当前系统节拍是：%d\n&quot;,xTaskGetCount());</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>xTaskGetTickCountFromISR函数</p>
+</div>
+<p>用于获取系统当前运行的时钟节拍数，此函数用于在 <code>中断服务程序</code> 里面调用，如果在任务里面调用的话，需要使用另一个函数【不可混淆用】</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;用法与上面一样</code></pre>
+<h2 id="FreeRTOS的疑问">FreeRTOS的疑问</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>vPrintString函数的使用</p>
+</div>
+<p>如果需要这个函数可以在CubeMX里把 <code>USE_TRACE_FACILITY</code> 和 <code>USE_STATS_FORMATTING_FUNCTIONS</code> 使能，然后在应用程序中包含  <code>FreeRTOS/Source/debug/printf-stdarg.c</code> 文件</p>
+<p><code>vPrintString</code> 是一个RTOS内核中的输出函数，用于将一个字符串输出到控制台或者其他设备上。它的优点是可以在RTOS内核中使用，输出的字符串可以和RTOS其他任务的输出混合在一起，方便调试和监控。【默认没有换行，需要换行可以使用 <code>vPrintStringAndNewLine</code> 函数】</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>相对延时和绝对延时区别？</p>
+</div>
+<p>举例：</p>
+<p>运行条件：</p>
+<ol>
+<li>有一个 bsp_KeyScan 函数，这个函数处理时间大概耗时 2ms。</li>
+<li>有两个任务，一个任务 Task1 是用的 vTaskDelay 延迟，延迟 10ms，另一个任务 Task2 是用的<br>
+vTaskDelayUntil 延迟，延迟 10ms。</li>
+<li>不考虑任务被抢占而造成的影响</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/1100576-20170715091935025-618582010.webp" alt=" "></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>osDelay和vTaskDelay区别？</p>
+</div>
+<p><code>osDelay</code> 函数是在 ARM Cortex-M 处理器上运行的嵌入式实时操作系统（RTOS）中使用的延时函数。这个函数的作用是暂停当前任务的执行，直到指定的时间过去。在这段时间内，其他任务可以继续执行。【没有阻塞功能，它只是暂停当前任务的执行。如果当前任务是高优先级的任务，其他低优先级的任务可能会被阻塞，直到高优先级任务完成】而且 <code>函数的延时时间是不准确的</code>。因为在 FreeRTOS 中，任务的延时是由 FreeRTOS 的调度程序来管理的，而调度程序是基于时间片轮转算法实现的。因此，任务的延时时间可能会受到其他任务的影响，导致延时时间不准确； <code>会消耗处理器资源</code>。因为 <code>osDelay</code> 函数会不断地检查延时时间是否已经结束，这会占用处理器的大量时间，导致处理器性能下降【所以不推荐在FreeRTOS里使用】</p>
+<p><code>vTaskDelay</code> 函数是在 FreeRTOS 中使用的延时函数。它的作用与 <code>osDelay</code> 类似，都是暂停当前任务的执行，直到指定的时间过去。但是，它可以在任务挂起之前执行 FreeRTOS 的调度程序，以便其他任务可以在这段时间内运行。【具有阻塞功能，调用该函数后，任务将进入阻塞状态，进入阻塞态的任务将让出 CPU资源，在我们任务中用得非常之多】</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>SysTick 的优先级配置为最低，那延迟的话系统时间会不会有偏差？</p>
+</div>
+<p>答案是不会的，因为 SysTick 只是当次响应中断被延迟了，而 SysTick 是硬件定时器，它一直在计时，这一次的溢出产生中断与下一次的溢出产生中断的时间间隔是一样的，至于系统是否响应还是延迟响应， 这个与 SysTick 无关，它照样在计时。</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>在CubeMX里把MAX_PRIORITIES选项写了7为什么程序里使用8也能正常运行</p>
+</div>
+<p>在FreeRTOS中，<code>MAX_PRIORITIES</code>选项定义了任务优先级的最大值。根据FreeRTOS文档的说明，<code>MAX_PRIORITIES</code>的默认值是5，最大值是256。在Cubemx里将其设置为7，实际上就是将其设置为了7。 如果在程序中使用了大于7的优先级，程序仍然可以正常运行，因为FreeRTOS并不会检查任务优先级的范围。如果超出了范围，FreeRTOS会将其限制在<code>MAX_PRIORITIES-1</code>的范围内，因此在你的例子中，使用了8的优先级实际上被限制在了7。 因此，你在程序中使用8的优先级并不会有任何问题，但仍然建议使用符合规范的优先级范围，以避免潜在的问题。，可以使用 <code>uxTaskPriorityGet()</code> 函数查询任务优先级</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>绝对不可以在优先级为0的中断服务例程中调用RTOSAPI函数</p>
+</div>
+<p>在FreeRTOS中，优先级为0的中断服务例程通常是用于处理紧急事件的，例如硬件故障、系统崩溃等。在这种情况下，RTOS内部的一些操作可能已经被中断打断，因此在中断服务例程中调用RTOSAPI函数可能会导致意想不到的行为，例如死锁、资源争用等问题。此外，优先级为0的中断服务例程的执行时间应该尽量短，以保证系统的实时性和稳定性。因此，为了避免不必要的风险和影响，最好避免在优先级为0的中断服务例程中调用RTOSAPI函数。</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>FreeRTOS任务栈大小计算</p>
+</div>
+<p>任务的栈大小公式：</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>number of bytes</mtext><mo>=</mo><mtext>TCB size</mtext><mo>+</mo><mo stretchy="false">(</mo><mn>4</mn><mo>×</mo><mtext>task stack size</mtext><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{number of bytes} = \text{TCB size} + (4 \times \text{task stack size})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">number of bytes</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord text"><span class="mord">TCB size</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">task stack size</span></span><span class="mclose">)</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>TCB size 默认是112</mtext></mrow><annotation encoding="application/x-tex">\text{TCB size 默认是112}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord">TCB size </span><span class="mord cjk_fallback">默认是</span><span class="mord">112</span></span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>task stack size 就是你创建任务设置的word数 单位：字</mtext></mrow><annotation encoding="application/x-tex">\text{task stack size 就是你创建任务设置的word数 单位：字}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord text"><span class="mord">task stack size </span><span class="mord cjk_fallback">就是你创建任务设置的</span><span class="mord">word</span><span class="mord cjk_fallback">数</span><span class="mord"> </span><span class="mord cjk_fallback">单位：字</span></span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>一般默认是128字也就是</mtext><mn>128</mn><mo>×</mo><mn>4</mn><mo>=</mo><mn>512</mn><mtext>字节</mtext></mrow><annotation encoding="application/x-tex">\text{一般默认是128字也就是}128\times4 = 512\text{字节}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord text"><span class="mord cjk_fallback">一般默认是</span><span class="mord">128</span><span class="mord cjk_fallback">字也就是</span></span><span class="mord">128</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">512</span><span class="mord text"><span class="mord cjk_fallback">字节</span></span></span></span></span></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">栈空间来自</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">局部变量</td>
+</tr>
+<tr>
+<td style="text-align:center">函数形参(针对函数嵌套)</td>
+</tr>
+<tr>
+<td style="text-align:center">函数返回地址(针对函数嵌套)<br>一般函数的返回地址是专门保存到LR（ Link Register）寄存器里面的，LR是需要入栈的</td>
+</tr>
+<tr>
+<td style="text-align:center">函数内部的状态保存</td>
+</tr>
+<tr>
+<td style="text-align:center">任务切换</td>
+</tr>
+<tr>
+<td style="text-align:center">发生中断</td>
+</tr>
+<tr>
+<td style="text-align:center">…</td>
+</tr>
+</tbody>
+</table>
+<p>FreeRTOS任务栈的大小实际上是由 <code>TCB大小和任务堆栈大小</code> 共同决定的。TCB大小决定了任务创建时需要分配的空间大小，而每个任务堆栈在创建时需要分配4个字节的空间，因此任务栈的总大小就是TCB大小加上(4 * 任务堆栈大小)。</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>FreeRTOS执行任务过程</p>
+</div>
+<p>FreeRTOS 使用一种称为 <code>调度器</code> 的算法，它可以在任务之间自动切换，以确保系统资源合理分配。它会检查正在运行的任务，如果发现任务函数是一个死循环，它会把CPU时间分配给其他任务，以便它们也能够正常运行。比如，假设系统中有3个任务，A，B 和 C，A的优先级最高，B的优先级次之，C的优先级最低。如果A中的任务函数是一个死循环，则调度器会把CPU时间分配给B和C，以便它们也能够正常运行。</p>
+<p>首先执行的最高优先级的任务Task1，Task1 会一直运行 <code>直到遇到系统阻塞式的 API 函数，比如延迟，事件标志等待，信号量等待</code>， Task1 任务会被挂起，也就是释放CPU的执行权，让低优先级的任务得到执行。</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>裸机开发跟FreeRTOS死循环</p>
+</div>
+<p>在裸机开发中，死循环会一直占用CPU时间，从而阻止其他功能得以执行。然而，在FreeRTOS中，死循环不会阻塞其他任务，因为FreeRTOS中的调度器会根据任务的优先级和时间片来决定任务的运行时间，从而实现多任务的同时运行。</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>为什么要空闲任务？</p>
+</div>
+<p>因为FreeRTOS一旦启动，就必须要保证系统中 <code>每时每刻都有一个任务处于运行状态(Runing)</code>，并且空闲任务不可以被 <code>挂起与删除</code>，空闲任务的 <code>优先级最低的</code>，以便系统中其他任务能随时抢占空闲任务的CPU使用权。(这些都是系统必要的东西，无需用户自己实现，处理完这些系统才真正启动)</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>FreeRTOS里抢占式rtos调度程序与协作式rtos调度程序区别</p>
+</div>
+<p>抢占式RTOS调度程序是指调度器会把任务 <code>按照优先级排序</code> ，并自动从优先级最高的任务开始执行，当优先级高的任务结束后自动切换到优先级次高的任务执行；而协作式RTOS调度程序是指 <code>调度器不会自动切换任务</code>，而是由被调度的任务自行切换，任务可以选择是否执行其他任务。</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>FreeRTOS里互斥量，递归互斥量，计数信号量什么意思</p>
+</div>
+<p>互斥量（Mutex）是FreeRTOS中提供的一种互斥机制，它可以帮助多个任务访问共享资源时保持互斥， <code>即一次只有一个任务可以访问该资源，以防止两个任务同时访问同一资源</code>；从而避免了任务之间的竞争，保证了系统的稳定性。<br>
+递归互斥量（Recursive Mutex）是FreeRTOS中提供的一种特殊的互斥量，它 <code>可以被同一个任务多次加锁</code>，而不会出现死锁的情况，从而可以帮助任务在访问共享资源时保持互斥性。</p>
+<p>计数信号量（Counting Semaphore）是FreeRTOS中提供的一种特殊的计数器，它可以用来控制多个任务同时访问共享资源的数量，从而可以有效地提高系统的效率。</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>FreeRTOS里钩子函数什么意思</p>
+</div>
+<p>钩子函数是FreeRTOS中的一种特殊函数，它可以被任务和调度器调用，以实现在任务切换、调度器启动和关闭等特定情况下执行特定操作的功能。它可以被用户用于实现一些自定义的功能，比如跟踪任务的运行情况、监控任务的堆栈使用情况等。</p>
+<p>钩子函数之所以被称为钩子函数，是因为它们可以像钩子一样，钩住任务的执行流程，从而实现特定的功能。</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>FreeRTOS里抢占优先级为什么是1~15</p>
+</div>
+<p>因为0是单片机最高的优先级，一般系统保留给内部使用，以便系统可以在重要情况下响应中断，而用户则应尽量从优先级1开始，这样可以保证系统的稳定性和正常运行。</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>换算</p>
+</div>
+<p><code>1 word</code> = <code>0.002 kb</code></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>FreeRTOS里临界区什么意思</p>
+</div>
+<p>FreeRTOS临界区可以理解为一个特殊的区域， <code>只有当一个任务进入临界区，其他任务才能进入，而在一个任务在临界区内完成操作之前，其他任务都无法进入这个区域</code>。例如当你去银行取钱时，你必须进入取款机区域，而在你取完钱之前，其他人都不能进这个区域。【也就是互斥量功能】</p>
+<p>创建任务时并不需要写进入临界区退出临界区，但是在使用临界区机制时，必须显式地进入临界区和退出临界区。</p>
+<h2 id="FreeRTOS函数">FreeRTOS函数</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数/宏定义</th>
+<th style="text-align:center">HAL代码(封装)</th>
+<th style="text-align:left">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">void <code>vTaskDelete</code>( TaskHandle_t xTaskToDelete )</td>
+<td style="text-align:center">/</td>
+<td style="text-align:left">参数类型为任务句柄，一般参数写 NULL，表示删除调用者任务而不是删除指定任务</td>
+</tr>
+<tr>
+<td style="text-align:center">BaseType_t xTaskCreate(	TaskFunction_t pxTaskCode, const char *const pcName,	 const configSTACK_DEPTH_TYPE usStackDepth, void *const pvParameters, UBaseType_t uxPriority, TaskHandle_t *const pxCreatedTask )</td>
+<td style="text-align:center">osThreadId osThreadCreate (const osThreadDef_t *thread_def, void *argument)</td>
+<td style="text-align:left">创建任务函数，经常用</td>
+</tr>
+<tr>
+<td style="text-align:center">void vTaskStartScheduler( void )</td>
+<td style="text-align:center">osStatus osKernelStart (void)</td>
+<td style="text-align:left">启动调度器，在创建完任务后必须执行的操作不然任务不能运行</td>
+</tr>
+<tr>
+<td style="text-align:center">void vTaskDelay( const TickType_t xTicksToDelay )</td>
+<td style="text-align:center">/</td>
+<td style="text-align:left">相对延时，任务会进入阻塞状态，单位是系统节拍时钟周期(不是ms或者s)，此函数不适用与周期性执行任务的场合。此外，其它任务和中断活动，会影响 vTaskDelay()的调用（比如调用前高优先级任务抢占了当前任务），因此会影响任务下一次执行的时间</td>
+</tr>
+<tr>
+<td style="text-align:center">void vTaskDelayUntil( TickType_t * const pxPreviousWakeTime, const TickType_t xTimeIncrement )</td>
+<td style="text-align:center">/</td>
+<td style="text-align:left">绝对延时</td>
+</tr>
+<tr>
+<td style="text-align:center">TickType_t xTaskGetTickCount( void )</td>
+<td style="text-align:center">/</td>
+<td style="text-align:left">获取系统当前运行的时钟节拍数(任务函数中使用)</td>
+</tr>
+<tr>
+<td style="text-align:center">TickType_t xTaskGetTickCountFromISR( void )</td>
+<td style="text-align:center">/</td>
+<td style="text-align:left">获取系统当前运行的时钟节拍数(中断服务函数中使用)</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:left"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="FreeRTOS坑">FreeRTOS坑</h2>
+<div class="note simple"><p>今天创建了两个任务一个是串口打印一个是LED闪烁，但是一直是高优先级的在运行另一个不允许，查了原因原来是CubeMX默认生成的任务导致，把默认的任务函数去掉不实现它即可(它是weak的)</p>
+</div>
+<div class="note simple"><p>使用 <code>printf</code> 造成挂死，原因是任务分配的栈大小太小了，默认是 <code>128</code>，改成 <code>512</code> 即可</p>
+<p>还有打印都是框框问号原因是重定向函数里 <code>HAL_UART_Transmit</code> 函数写错，里面参数 <code>ch</code>必须是 <code>&amp;ch</code></p>
+</div></article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num104.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%99%E5%AD%A6%E5%A4%A7%E7%BA%B2"><span class="toc-number">2.</span> <span class="toc-text">教学大纲</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeRTOS%E4%BB%8B%E7%BB%8D"><span class="toc-number">3.</span> <span class="toc-text">FreeRTOS介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeRTOS%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">4.</span> <span class="toc-text">FreeRTOS文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeRTOS%E7%9A%84%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">FreeRTOS的启动流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeRTOS%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC"><span class="toc-number">6.</span> <span class="toc-text">FreeRTOS编程风格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MX%E9%87%8CFreeRTOS%E5%8F%82%E6%95%B0%E8%A7%A3%E9%87%8A"><span class="toc-number">7.</span> <span class="toc-text">MX里FreeRTOS参数解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeRTOS%E8%B0%83%E8%AF%95%E6%96%B9%E6%B3%95"><span class="toc-number">8.</span> <span class="toc-text">FreeRTOS调试方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1"><span class="toc-number">9.</span> <span class="toc-text">任务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E7%9A%84%E4%BB%8B%E7%BB%8D"><span class="toc-number">9.1.</span> <span class="toc-text">任务的介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E7%9A%84%E8%AE%BE%E8%AE%A1%E8%A6%81%E7%82%B9"><span class="toc-number">9.2.</span> <span class="toc-text">任务的设计要点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="toc-number">9.3.</span> <span class="toc-text">任务的创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B1"><span class="toc-number">9.4.</span> <span class="toc-text">例1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="toc-number">10.</span> <span class="toc-text">内存管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E8%8A%82%E6%8B%8D%E5%92%8C%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86"><span class="toc-number">11.</span> <span class="toc-text">系统节拍和时间管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeRTOS%E7%9A%84%E7%96%91%E9%97%AE"><span class="toc-number">12.</span> <span class="toc-text">FreeRTOS的疑问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeRTOS%E5%87%BD%E6%95%B0"><span class="toc-number">13.</span> <span class="toc-text">FreeRTOS函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeRTOS%E5%9D%91"><span class="toc-number">14.</span> <span class="toc-text">FreeRTOS坑</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://lib.baomitu.com/KaTeX/latest/katex.min.css"><script src="https://jsd.onmicrosoft.cn/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
     document.body.oncopy = function () {
         iziToast.info({
             timeout: 4000, // 关闭弹窗的时间
