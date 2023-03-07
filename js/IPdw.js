@@ -11,29 +11,27 @@ $.ajax({
         ipLoacation = res;
     }
 })
-
+//Vincenty 公式来计算距离
 /*根据经纬度计算两点距离(点1经度,点1纬度,点2经度,点2纬度)*/
-function getDistance(e1, n1, e2, n2) {
-    const R = 6371
-    const { sin, cos, asin, PI, hypot } = Math
-
-    let getPoint = (e, n) => {
-        e *= PI / 180
-        n *= PI / 180
-        return { x: cos(n) * cos(e), y: cos(n) * sin(e), z: sin(n) }
-    }
-
-    let a = getPoint(e1, n1)
-    let b = getPoint(e2, n2)
-    let c = hypot(a.x - b.x, a.y - b.y, a.z - b.z)
-    let r = asin(c / 2) * 2 * R
+function getDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; // 地球半径，单位千米
+    const { sin, cos, atan2, sqrt, pow } = Math;
+    // 将角度转为弧度
+    const rad = (deg) => deg * Math.PI / 180;
+    // 计算两点间的距离
+    const dLat = rad(lat2 - lat1);
+    const dLon = rad(lon2 - lon1);
+    const a = pow(sin(dLat / 2), 2) + cos(rad(lat1)) * cos(rad(lat2)) * pow(sin(dLon / 2), 2);
+    const c = 2 * atan2(sqrt(a), sqrt(1 - a));
+    const r = R * c;
     return Math.round(r);
 }
-/*根据自己的需求定制*/
 function showWelcome() {
-    if (!document.getElementById("welcome-info")) return
+    if (!document.getElementById("welcome-info")) return;
+    /*这里记录你自己的经纬度【去这个网站查询当前位置然后复制过来 http://jingweidu.757dy.com/】【或者使用手机指南针获取经纬度然后去网站 https://www.tiantianditu.com/tool/convert.html 转换也行】*/
+    let dist = getDistance(113.387621, 22.431503, ipLoacation.result.location.lng, ipLoacation.result.location.lat);
+    console.log(dist);
 
-    let dist = getDistance(113.046111, 22.346944, ipLoacation.result.location.lng, ipLoacation.result.location.lat); /*这里记录你自己的经纬度【去这个网站查询当前位置然后复制过来 http://jingweidu.757dy.com/】【或者使用手机指南针获取经纬度然后去网站 https://www.tiantianditu.com/tool/convert.html 转换也行】*/
 
     let pos = ipLoacation.result.ad_info.nation;
     /*let posdesc;*/
@@ -198,8 +196,8 @@ function showWelcome() {
     /*判断时间*/
     let timeChange;
     let date = new Date();
-    if (date.getHours()>= 5 && date.getHours() < 11) timeChange = "<span>上午好</span>，一日之计在于晨。";
-    else if (date.getHours()>= 11 && date.getHours() < 13) timeChange = "<span>中午好</span>，该摸鱼吃午饭了。";
+    if (date.getHours() >= 5 && date.getHours() < 11) timeChange = "<span>上午好</span>，一日之计在于晨。";
+    else if (date.getHours() >= 11 && date.getHours() < 13) timeChange = "<span>中午好</span>，该摸鱼吃午饭了。";
     else if (date.getHours() >= 13 && date.getHours() < 15) timeChange = "<span>下午好</span>，懒懒地睡个午觉吧！";
     else if (date.getHours() >= 15 && date.getHours() < 16) timeChange = "<span>三点几啦</span>，饮茶先啦！";
     else if (date.getHours() >= 16 && date.getHours() < 19) timeChange = "<span>夕阳无限好！</span>";
