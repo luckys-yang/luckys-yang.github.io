@@ -1618,4 +1618,15 @@ div.btns a[href]:hover {
     content: "🎭";
 }
 
+#page .category-lists .category-list li.category-list-item:nth-child(25) {
+    background: -webkit-linear-gradient(left, #364f6b, #3fc1c9);
+    background: -moz-linear-gradient(left, #364f6b, #3fc1c9);
+    background: -o-linear-gradient(left, #364f6b, #3fc1c9);
+    background: -ms-linear-gradient(left, #364f6b, #3fc1c9);
+    background: linear-gradient(to right, #364f6b, #3fc1c9);
+}
+
+#page .category-lists .category-list li.category-list-item:nth-child(25) a.category-list-link::before {
+    content: "🖥️";
+}
 /* 分类美化end */
