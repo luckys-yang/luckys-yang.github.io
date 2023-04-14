@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://mdcm.yang5201314.cn/img/num104.webp">
 <meta property="article:published_time" content="2022-11-16T09:34:48.000Z">
-<meta property="article:modified_time" content="2023-04-11T03:44:49.167Z">
+<meta property="article:modified_time" content="2023-04-14T08:55:10.728Z">
 <meta property="article:author" content="Luckys-Yang">
 <meta property="article:tag" content="博客,个人博客,技术,学习,Hexo,Blog,STM32,嵌入式,单片机">
 <meta name="twitter:card" content="summary">
@@ -57,7 +57,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-04-11 11:44:49'
+  postUpdate: '2023-04-14 16:55:10'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -174,7 +174,7 @@ window.addEventListener('load',()=> { preloader.endLoading() })
 if (true) {
   document.addEventListener('pjax:send', () => { preloader.initLoading() })
   document.addEventListener('pjax:complete', () => { preloader.endLoading() })
-}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">123</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">77</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">FreeRTOS学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-11-16T09:34:48.000Z" title="发表于 2022-11-16 17:34:48">2022-11-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-11T03:44:49.167Z" title="更新于 2023-04-11 11:44:49">2023-04-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">实时操作系统</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">40k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>133分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">124</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">77</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">FreeRTOS学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-11-16T09:34:48.000Z" title="发表于 2022-11-16 17:34:48">2022-11-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-14T08:55:10.728Z" title="更新于 2023-04-14 16:55:10">2023-04-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">实时操作系统</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">57.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>197分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
 <p>网站：</p>
 <p><a href="https://www.freertos.org/">FreeRTOS官网</a></p>
 <p>参考文章：</p>
@@ -3647,49 +3647,1980 @@ void Binarysem_Function(void const * argument)
 <p><code>取值大于1的信号量称之为计数信号量</code></p>
 <blockquote>
 <p>计数信号量的取值也可以为1，但通常大于1，如果取值为1，相当于只有0与1两种状态，用二值信号量即可。<br>
-创建计数信号量时，系统会为创建的计数信号量分配内存，计数信号量创建完成后的示意图如下:</p>
+创建计数信号量时，系统会为创建的计数信号量分配内存</p>
+<p>因为这个队列的消息大小为0，因此在运用时，只需要知道队列中是否有消息即可，而无需关注消息是什么。</p>
 </blockquote>
-<h2 id="内存管理">内存管理</h2>
-<p>FreeRTOS 操作系统将内核与内存管理分开实现，操作系统内核仅规定了必要的内存管理函数原型，而不关心这些内存管理函数是如何实现的，所以在 FreeRTOS 中提供了多种内存分配算法（分配策略），但是上层接口（ API）却是统一的。这样做可以增加系统的灵活性： 用户可以选择对自己更有利的内存管理策略，在不同的应用场合使用不同的内存分配策略。</p>
-<p>FreeRTOS 的内存管理模块 <code>通过对内存的申请、释放操作，来管理用户和系统对内存的使用，使内存的利用率和使用效率达到最优，同时最大限度地解决系统可能产生的内存碎片问题</code>。</p>
-<p>统一的上层接口(API)</p>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void *pvPortMalloc( size_t xSize ); &#x2F;&#x2F;内存申请函数
-void vPortFree( void *pv ); &#x2F;&#x2F;内存释放函数
-void vPortInitialiseBlocks( void ); &#x2F;&#x2F;初始化内存堆函数
-size_t xPortGetFreeHeapSize( void ); &#x2F;&#x2F;获取当前未分配的内存堆大小
-size_t xPortGetMinimumEverFreeHeapSize( void ); &#x2F;&#x2F;获取未分配的内存堆历史最小值</code></pre>
-<p>FreeRTOS 提供的内存管理都是从<strong>内存堆中分配内存</strong>的。 创建任务、消息队列、事件等操作都使用到分配内存的函数，这是系统中默认使用内存管理函数从内存堆中分配内存给系统核心组件使用。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">内存管理方案</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">heap_1.c</td>
-<td>它 <code>只能申请内存而不能进行内存释放</code>，并且申请内存的时间是一个常量，这样子对于要求安全的嵌入式设备来说是最好的，因为不允许内存释放，就不会产生内存碎片而导致系统崩溃，但是也有缺点，那就是 <code>内存利用率不高</code>， 某段内存只能用于内存申请的地方，即使该内存只使用一次，也无法让系统回收重新利用。<br>① 用于从不删除任务、队列、信号量、互斥量等的应用程序（实际上大多数使用FreeRTOS 的应用程序都符合这个条件） 。<br>② 函数的执行时间是确定的并且不会产生内存碎片。</td>
-</tr>
-<tr>
-<td style="text-align:center">heap_2.c</td>
-<td>采用一种 最佳匹配算法，支持释放申请的内存， 但是它不能把相邻的两个小的内存块合成一个大的内存块， 对于每次申请内存大小都比较固定的，这个方式是没有问题的， <code>而对于每次申请并不是固定内存大小的则会造成内存碎片</code><br>① 可以用在那些反复的删除任务、队列、信号量、等内核对象且不担心内存碎片的应用程序。<br>② 如果我们的应用程序中的队列、任务、信号量、 等工作在一个不可预料的顺序，这样子也有可能会导致内存碎片。<br>③ 具有不确定性，但是效率比标准 C 库中的 malloc 函数高得多<br>④ 不能用于那些内存分配和释放是随机大小的应用程序。</td>
-</tr>
-<tr>
-<td style="text-align:center">heap_3.c</td>
-<td>简单的封装了标准 C 库中的  <code>malloc()</code> 和  <code>free()</code> 函数， 并且能满足常用的编译器。 重新封装后的 malloc()和 free()函数具有 <code>保护功能</code>，采用的封装方式是操作内存前挂起调度器、完成后再恢复调度器。<br>① 需要链接器设置一个堆， malloc()和 free()函数由编译器提供<br>② 具有不确定性<br>③ 很可能增大 RTOS 内核的代码大小<br>注意：<strong>configTOTAL_HEAP_SIZE</strong> 宏定义不起作用</td>
-</tr>
-<tr>
-<td style="text-align:center">heap_4.c</td>
-<td>采用 <code>最佳匹配</code> 算法以及 <code>合并</code> 算法<br>① 可用于重复删除任务，队列，信号量，互斥量等的应用程序<br>② 可用于分配和释放随机字节内存的应用程序，不会产生严重的内存碎片<br>③ 具有不确定性，但是效率比标准c库的malloc函数高得多</td>
-</tr>
-<tr>
-<td style="text-align:center">heap_5.c</td>
-<td>采用 <code>最佳匹配</code> 算法和 <code>合并</code> 算法，并且 <code>允许内存堆跨越多个非连续的内存区</code>，也就是允许在不连续的内存堆中实现内存分配</td>
-</tr>
-</tbody>
-</table>
+<div class="note simple"><p>应用场景：</p>
+<p>计数信号量允许多个任务对其进行操作，但限制了任务的数量。比如有一个停车场，里面只有50个车位，那么只能停50辆车，相当于我们的信号量有50个。假如一开始停车场的车位还有50个，那么每进去一辆车就要消耗一个停车位，车位的数量就要减1，相应地，我们的信号量在使用之后也需要减1。当停车场停满了50辆车时，此时的停车位数量为0，再来的车就不能停进去了，否则将没法停车了，也相当于我们的信号量为0，后面的任务对这个停车场资源的访问也无法进行。当有车从停车场离开时，车位又空余出来了，那么后面的车就能停进去了。信号量操作也是一样的，当我们释放了这个资源，后面的任务才能对这个资源进行访问。</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230411140902.webp" alt=""></p>
+<p>◆ 任务Task1运行过程中调用函数 <code>xSemaphoreTake</code> 获取信号量资源，如果信号量大于0，Task1将直接获取资源。如果信号量为0，任务Task1将由运行态转到阻塞状态，等待资源可用。一旦获取了资源并使用完毕后会通过函数 <code>xSemaphoreGive</code> 释放掉资源</p>
+<p>◆ 任务Task2至N运行过程中调用函数 <code>xSemaphoreTake</code> 获取信号量资源，如果信号量大于0，Task2至N将直接获取资源。如果信号量为0，任务Task2至N将由运行态转到阻塞状态，等待资源可用。一旦获取了资源并使用完毕后会通过函数 <code>xSemaphoreGive</code> 释放掉资源</p>
+<h3 id="常用的API函数-2">常用的API函数</h3>
+<p>使用计数信号量的典型流程如下(除了创建不一样其他的跟二值一样):</p>
+<ol>
+<li>创建计数信号量</li>
+<li>释放计数信号量</li>
+<li>获取计数信号量</li>
+<li>删除计数信号量</li>
+</ol>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>计数信号量创建与删除</p>
+</div>
+<p>二值信号量的句柄为消息队列的句柄，因为二值信号量是一种长度大于1，消息大小为0的特殊消息队列； 变量<code>myCountingSem01Handle</code> 是一个指向 <code>osSemaphoreId</code> 类型的指针，用于保存信号量的句柄或者标识符</p>
+<ul>
+<li>计数信号量的创建</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;参数1--支持的最大计数值
+&#x2F;&#x2F;参数2--初始计数值不能超过最大值
+&#x2F;&#x2F;返回值--如果创建成功会返回消息队列的句柄，如果由于FreeRTOSConfig.h文件中heap大小不足，无法为此消息队列提供所需的空间会返回NULL
+SemaphoreHandle_t xSemaphoreCreateCounting(UBaseType_t uxMAXCount,UBaseType_t uxInitialCount);</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">osSemaphoreDef(myCountingSem01);
+myCountingSem01Handle &#x3D; osSemaphoreCreate(osSemaphore(myCountingSem01), 20);</code></pre>
+<p><code>注意</code>:需要把宏定义设为1才能使用计数信号量(在MX里使能 <code>USE_COUNTING_SEMAPHORES</code>即可)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230411150210.webp" alt=""></p>
+<h3 id="任务与任务">任务与任务</h3>
+<div class="note simple"><p>创建3个任务：LED，按键，LCD显示计数信号量</p>
+<p>创建二值信号量，计数信号量</p>
+</div>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>MX配置</p>
+</div>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230411151721.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230411151940.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230411152538.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230411160529.webp" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>程序编写</p>
+</div>
+<details ><summary> app_freertos.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void MX_FREERTOS_Init(void)
+&#123;
+    ...
+    if(NULL &#x3D;&#x3D; myBinarySem01Handle)
+    &#123;
+        printf(&quot;创建二值信号量失败\r\n&quot;);
+    &#125;
+    else
+    &#123;
+        printf(&quot;创建二值信号量成功\r\n&quot;);
+    &#125;
+    if(NULL &#x3D;&#x3D; myCountingSem01Handle)
+    &#123;
+        printf(&quot;创建计数信号量失败\r\n&quot;);
+    &#125;
+    else
+    &#123;
+        printf(&quot;创建计数信号量成功\r\n&quot;);
+    &#125;
+    &#x2F;&#x2F;xSemaphoreTake(myBinarySem01Handle,0);	&#x2F;&#x2F;MX生成的创建二值信号量时默认为1	（注释掉即默认更新一次LCD）
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> AllTask.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">extern osThreadId vled1_taskfunctionHandle;
+extern osThreadId vkey_taskfunctionHandle;
+extern osThreadId vlcd_functionHandle;
+
+extern osSemaphoreId myBinarySem01Handle;
+extern osSemaphoreId myCountingSem01Handle;
+
+uint8_t myCountingSem_ucMessageWaiting &#x3D; 20;	&#x2F;&#x2F;最大值
+
+&#x2F;&#x2F;同步任务
+void Lcd_Function(void const *argument)
+&#123;
+    BaseType_t xResult;
+    uint16_t TakeCnt &#x3D; 0;	&#x2F;&#x2F;获取计数
+    char Display_Str[20] &#x3D; &quot; &quot;;
+
+    for(;;)
+    &#123;
+        printf(&quot;无限等待同步信号更新显示，第%u次等待，等待中\r\n&quot;, ++TakeCnt);
+        xResult &#x3D; xSemaphoreTake(myBinarySem01Handle, portMAX_DELAY);
+        LED.Led_State ^&#x3D; 2;
+        LED.vLed_write_all(LED.Led_State);
+        if(pdTRUE &#x3D;&#x3D; xResult)
+        &#123;
+            printf(&quot;更新显示\r\n&quot;);
+            snprintf(Display_Str, sizeof(Display_Str), &quot; NOW CAR NUMBER:%d &quot;, myCountingSem_ucMessageWaiting);
+            LCD_DisplayStringLine(Line1, (uint8_t *)Display_Str);
+        &#125;
+    &#125;
+&#125;
+
+&#x2F;&#x2F;按键任务
+void vKey_TaskFunction(void const *argument)
+&#123;
+    for(;;)
+    &#123;
+        KEY.vKey_scan_function();
+        KEY.vKey_run_flag_function();
+        osDelay(20);
+    &#125;
+&#125;
+
+&#x2F;&#x2F;LED任务
+void vLED1_TaskFunction(void const *argument)
+&#123;
+    for(;;)
+    &#123;
+        LED.Led_State ^&#x3D; 1;
+        LED.vLed_write_all(LED.Led_State);
+        osDelay(1000);
+    &#125;
+&#125;
+
+
+
+&#x2F;&#x2F;初始化
+void HardWare_init(void)
+&#123;
+    LCD_Init();
+    LCD_Clear(Blue);
+    LCD_SetBackColor(Blue);
+    LCD_SetTextColor(Black);
+    LCD_DisplayStringLine(Line0, (uint8_t *)&quot;      FreeRTOS      &quot;);
+    LED_Dis(0xFF, RESET);
+    printf(&quot;----FreeRTOS----\r\n&quot;);
+    printf(&quot;----计数信号量--模拟车库----\r\n&quot;);
+    printf(&quot;默认车库可以停放20辆车，LCD显示车位数量\r\n&quot;);
+    printf(&quot;按键功能如下：\r\n&quot;);
+    printf(&quot;KEY1:打印任务执行情况\r\n&quot;);
+    printf(&quot;KEY2:获取信号量，模拟车辆入库，同时通过二值信号量发同步信号给LCD显示&quot;);
+    printf(&quot;KEY3:释放信号量，模拟车辆出库，同时通过二值信号量发同步信号给LCD显示&quot;);
+    HAL_TIM_Base_Start_IT(&amp;htim6);	&#x2F;&#x2F;开启定时器6
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> KEY.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">extern uint8_t myCountingSem_ucMessageWaiting;
+extern osSemaphoreId myBinarySem01Handle;
+extern osSemaphoreId myCountingSem01Handle;
+
+&#x2F;&#x2F;按键执行功能
+void vKey_run_flag_function(void)
+&#123;
+    BaseType_t xResult;
+
+    if(KEY.Key_Down_Buff[1])
+    &#123;
+        KEY.Key_Down_Buff[1] &#x3D; 0;
+        printf(&quot;获取计数信号量，模拟车辆入库，申请停车位&quot;);
+        xResult &#x3D; xSemaphoreTake(myCountingSem01Handle, 0);
+        if(pdTRUE &#x3D;&#x3D; xResult)
+        &#123;
+            printf(&quot;获取成功，成功申请停车位，发送同步显示信号\r\n&quot;);
+            myCountingSem_ucMessageWaiting--;	&#x2F;&#x2F;把这个放前面而不放下面是因为一旦释放了二值会立马唤醒LCD显示但是变量还没减，另一种方案就是把按键的优先级提高
+            xSemaphoreGive(myBinarySem01Handle);
+        &#125;
+        else
+        &#123;
+            printf(&quot;获取失败，停车位已满\r\n&quot;);
+        &#125;
+    &#125;
+    if(KEY.Key_Down_Buff[2])
+    &#123;
+        KEY.Key_Down_Buff[2] &#x3D; 0;
+        printf(&quot;释放计数信号量，模拟车库出库，让出停车位\r\n&quot;);
+        xResult &#x3D; xSemaphoreGive(myCountingSem01Handle);
+        if(pdTRUE &#x3D;&#x3D; xResult)
+        &#123;
+            printf(&quot;释放成功，成功让出停车位，发送同步显示信号\r\n&quot;);
+            myCountingSem_ucMessageWaiting++;
+            xSemaphoreGive(myBinarySem01Handle);
+        &#125;
+        else
+        &#123;
+            printf(&quot;释放失败，停车位已空\r\n&quot;);
+        &#125;
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验现象</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230411175312.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230411175520.webp" alt=""></p>
+<h2 id="第13讲">第13讲</h2>
+<h3 id="互斥信号量的定义与应用">互斥信号量的定义与应用</h3>
+<p>取值只有0与1两种状态的信号量称之为二值信号量。</p>
+<p>而互斥信号量是一种 <code>特殊的二值信号量</code>，具有 <code>防止优先级翻转</code> 的特性</p>
+<p>互斥信号量是一种 <code>长度为1，消息大小为0</code> 的特殊消息队列。在嵌入式操作系统中， <code>互斥信号量用于临界资源的独占式访问</code>， <code>只能用于任务与任务间</code>，因为其特有的优先级继承机制只能在任务中起作用， <code>在中断的上下文环境毫无意义</code>。</p>
+<div class="note simple"><p>比如有两个任务需要通过同一串口发送数据，其硬件资源只有一个，那么两个任务不能同时发送，否则会导致数据错误。此时就可以用互斥信号量对串口资源进行保护，当任务1正在使用串口发送数据时，互斥信号量变为无效，任务2无法使用串口，任务2必须等待互斥信号量有效(任务1释放信号量)，才能获得串口使用权，进而发送数据。</p>
+</div>
+<h3 id="优先级翻转问题">优先级翻转问题</h3>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230411183627.webp" alt=""></p>
+<blockquote>
+<ul>
+<li>
+<p>创建3个任务Task1，Task2和Task3，优先级分别为3，2，1。也就是Task1的优先级最高</p>
+</li>
+<li>
+<p>任务Task1和Task3互斥访问串口打印printf，采用二值信号实现互斥访问</p>
+</li>
+<li>
+<p>起初Task3通过二值信号量正在调用printf，被任务Task1抢占，开始执行任务Task1，也就是上图的起始位置</p>
+</li>
+<li>
+<p>任务Task1运行的过程需要调用函数printf，发现任务Task3正在调用，任务Task1会被挂起，等待Task3释放函数printf</p>
+</li>
+<li>
+<p>在调度器的作用下，任务Task3得到运行，Task3运行的过程中，由于任务Task2就绪，抢占了Task3的运行优先级翻转问题就出在这里了，从任务执行的现象上看，任务Task1需要等待Task2执行完毕才有机会得到执行，这个与抢占式调度正好反了， <code>正常情况下应该是高优先级任务抢占低优先级任务的执行，这里成了高优先级任务Task1等待低优先级任务Task2完成。这种情况被称之为优先级翻转问题</code></p>
+</li>
+<li>
+<p>任务Task2执行完毕后，任务Task3恢复执行，Task3释放互斥资源后，任务Task1得到互斥资源，从而可以继续执行</p>
+</li>
+<li>
+<p>那为什么互斥信号量就可以解决这个问题？</p>
+</li>
+</ul>
+<p>当Task3执行的时候会临时提高Task3的优先级为高优先级，然后其他的Task2任务就不会打断到它，等Task3执行完后就恢复回原优先级，然后Task1就会执行(Task1就只需要等Task3执行完就行了)</p>
+<p><code>互斥信号量的优先级继承是继承要获取该信号量的任务的优先级。当一个高优先级任务请求获取一个被低优先级任务持有的互斥信号量时，系统会自动提升持有该信号量的低优先级任务的优先级到等于高优先级任务的优先级。这样可以确保在高优先级任务执行期间，不会有其他低优先级任务干扰其运行。当高优先级任务释放该互斥信号量时，持有该信号量的任务的优先级将恢复到原来的低优先级</code></p>
+</blockquote>
+<h3 id="优先级翻转编程验证">优先级翻转编程验证</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>MX配置</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230411204746.webp" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>程序编写</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">extern osThreadId vhigh_priorityHandle;
+extern osThreadId vmid_priorityHandle;
+extern osThreadId vlow_priorityHandle;
+
+&#x2F;&#x2F;高优先级
+void vHigh_Priority(void const * argument)
+&#123;
+	BaseType_t xResult;
+	
+	for(;;)
+	&#123;
+		printf(&quot;Hight 获取二值信号量\r\n&quot;);
+		xResult &#x3D; xSemaphoreTake(myBinarySem01Handle,portMAX_DELAY);	&#x2F;&#x2F;获取无限等待
+		if(xResult &#x3D;&#x3D; pdTRUE)
+		&#123;
+			printf(&quot;Hight Running\r\n&quot;);
+		&#125;
+		printf(&quot;Hight 释放二值信号量\r\n&quot;);
+		xResult &#x3D; xSemaphoreGive(myBinarySem01Handle);
+		osDelay(500);
+	&#125;
+&#125;
+&#x2F;&#x2F;中优先级
+void vMid_Priority(void const * argument)
+&#123;
+	for(;;)
+	&#123;
+		printf(&quot;Mid Running\r\n&quot;);
+		osDelay(500);
+	&#125;	
+&#125;
+&#x2F;&#x2F;低优先级
+void vLow_Priority(void const * argument)
+&#123;
+	BaseType_t xResult;
+	
+	for(;;)
+	&#123;
+		printf(&quot;low 获取二值信号量\r\n&quot;);
+		xResult &#x3D; xSemaphoreTake(myBinarySem01Handle,portMAX_DELAY);
+		if(xResult &#x3D;&#x3D; pdTRUE)
+		&#123;
+			printf(&quot;low Running\r\n&quot;);
+		&#125;
+		HAL_Delay(3000);	&#x2F;&#x2F;延时3s 模拟低优先级长时间占用信号量
+		printf(&quot;low 释放二值信号量\r\n&quot;);
+		xResult &#x3D; xSemaphoreGive(myBinarySem01Handle);
+		osDelay(500);
+	&#125;	
+&#125;</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验现象</p>
+</div>
+<p>在低优先级 <code>HAL_Delay</code> 期间被中优先级抢占了,需要注意的是要把其他除这3个任务外的所有任务都屏蔽才看到效果(不实现weak即可)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230411204545.webp" alt=""></p>
+<h3 id="常用的API函数-3">常用的API函数</h3>
+<p>使用互斥信号量的典型流程如下(只能在任务中使用不能在中断中使用，只是创建不一样其他跟前面一样):</p>
+<ol>
+<li>创建互斥信号量</li>
+<li>释放互斥信号量</li>
+<li>获取互斥信号量</li>
+<li>删除互斥信号量</li>
+</ol>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>互斥信号量控制块(句柄)</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">typedef SemaphoreHandle_t osMutexId;
+typedef QueueHandle_t SemaphoreHandle_t;
+
+&#x2F;&#x2F;定义互斥信号量
+osMutexId myMutex01Handle;</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>互斥信号量的创建</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;创建互斥信号量
+&#x2F;&#x2F;返回值：创建成功返回互斥信号量的句柄，如果由于FreeRTOSConfig.h文件中heap大小不足，无法为此互斥信号量提供所需的空间会返回NULL
+SemaphoreHandle_t xSemaphoreCreateMutex(void);</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">osMutexDef(myMutex01);
+myMutex01Handle &#x3D; osMutexCreate(osMutex(myMutex01));</code></pre>
+<p>使用这个函数要注意以下问题：</p>
+<ol>
+<li>使用此函数要在FreeRTOSConfig.h 文件中使能宏定义:  <code>#define configUSE_MUTEXES 1</code></li>
+</ol>
+<h3 id="互斥信号量应用编程">互斥信号量应用编程</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>MX配置</p>
+</div>
+<p>需要在MX使能 <code>USE_MUTEXES</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230411212629.webp" alt=""></p>
+<p>任务的话跟上面优先级翻转编程一样配置</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>程序编写</p>
+</div>
+<details ><summary> app_freertos.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void MX_FREERTOS_Init(void)
+&#123;
+    ...
+    if(NULL &#x3D;&#x3D; myMutex01Handle)
+    &#123;
+        printf(&quot;创建互斥信号量成功\r\n&quot;);
+    &#125;
+    else
+    &#123;
+        printf(&quot;创建互斥信号量失败\r\n&quot;);
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> AllTask.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">extern osMutexId myMutex01Handle;
+
+extern osThreadId vhigh_priorityHandle;
+extern osThreadId vmid_priorityHandle;
+extern osThreadId vlow_priorityHandle;
+
+
+void vHigh_Priority(void const * argument)
+&#123;
+	BaseType_t xResult;
+	
+	for(;;)
+	&#123;
+		printf(&quot;Hight 获取互斥信号量\r\n&quot;);
+		&#x2F;&#x2F;在这里去获取一个被低优先级持有的互斥信号量时会临时提高低优先级的优先级为高优先级！！！
+		xResult &#x3D; xSemaphoreTake(myMutex01Handle,portMAX_DELAY);	&#x2F;&#x2F;获取互斥信号量 无限等待
+		if(xResult &#x3D;&#x3D; pdTRUE)
+		&#123;
+			printf(&quot;Hight Running\r\n&quot;);
+		&#125;
+		printf(&quot;Hight 释放互斥信号量\r\n&quot;);
+		xResult &#x3D; xSemaphoreGive(myMutex01Handle);
+		osDelay(500);
+	&#125;
+&#125;
+void vMid_Priority(void const * argument)
+&#123;
+	for(;;)
+	&#123;
+		printf(&quot;Mid Running\r\n&quot;);
+		osDelay(500);
+	&#125;	
+&#125;
+void vLow_Priority(void const * argument)
+&#123;
+	BaseType_t xResult;
+	
+	for(;;)
+	&#123;
+		printf(&quot;low 获取互斥信号量\r\n&quot;);
+		xResult &#x3D; xSemaphoreTake(myMutex01Handle,portMAX_DELAY);
+		if(xResult &#x3D;&#x3D; pdTRUE)
+		&#123;
+			printf(&quot;low Running\r\n&quot;);
+		&#125;
+		HAL_Delay(3000);	&#x2F;&#x2F;延时3s 模拟低优先级长时间占用信号量
+		printf(&quot;low 释放互斥信号量\r\n&quot;);
+		&#x2F;&#x2F;一旦释放互斥信号量则马上还原抬高的优先级回到默认优先级！！！
+		xResult &#x3D; xSemaphoreGive(myMutex01Handle);
+		osDelay(500);
+	&#125;	
+&#125;</code></pre>
+              </div>
+            </details>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验现象</p>
+</div>
+<p>可以看到中优先级任务没有去抢占低优先级任务</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230411214930.webp" alt=""></p>
+<h3 id="递归互斥信号量">递归互斥信号量</h3>
+<p>递归互斥信号量是一种特殊的互斥信号量， <code>支持拥有该信号量使用权的任务重复多次获取，而不会死锁</code>。任务成功获取几次递归互斥信号量，就要返还几次，在此之前，递归互斥信号量都处于无效状态。递归互斥信号量应用很少，简要了解即可。</p>
+<h2 id="第14讲">第14讲</h2>
+<h3 id="事件的概念与应用">事件的概念与应用</h3>
+<p>事件是实现 <code>任务与任务</code> 或 <code>任务与中断</code> 间通信的机制，用于 <code>同步，无数据传输</code>。</p>
+<p>与信号量不同的是，事件可以实现 <code>一对多、多对多</code> 的同步，即一个任务可以等待多个事件的发生:可以是任意一个事件发生时唤醒任务进行事件处理;也可以是几个事件都发生后才唤醒任务进行事件处理。同样，也可以是多个任务同步多个事件。</p>
+<p>FreeRTOS提供的事件具有如下特点:</p>
+<ol>
+<li>
+<p>事件相互独立，一个32位的事件集合( <code>EventBitst类型的变量，实际可用于表示事件的只有低24位</code> )用于标识该任务发生的事件类型,其中每一位表示一种事件类型( <code>0表示该事件类型未发生，1表示该事件类型已经发生</code> )，一共有24种事件类型</p>
+</li>
+<li>
+<p>事件仅用于同步，不提供数据传输功能</p>
+</li>
+<li>
+<p>事件无排队性，即多次向任务设置同一事件(如果任务还未来得及读取)，等效于只设置一次</p>
+</li>
+<li>
+<p>允许多个任务对同一事件进行读写操作</p>
+</li>
+<li>
+<p>支持事件等待超时机制</p>
+</li>
+</ol>
+<p>在FreeRTOS事件中，获取每个事件时，用户可以选择感兴趣的事件，并且选择读取事件信息标记。 <code>它有3个属性，分别是逻辑与逻辑或以及是否清除标记</code> 。当任务等待事件同步时，可以通过任务感兴趣的事件位和事件信息标记来判断当前接收的事件是否满足要求，如果满足，则说明任务等到对应的事件，系统将唤醒等待的任务;否则，任务会根据用户指定的阻塞超时时间继续等待下去</p>
+<ul>
+<li>FrecRTOS的事件用于任务与任务或任务与中断间的同步。为什么不直接用变量呢?那样岂不是更有效率?</li>
+</ul>
+<p>若是在裸机编程中，用全局变量是最有效的方法，但是在操作系统中，使用全局变量就要考虑以下问题了:</p>
+<ol>
+<li>使用事件标志组可以让 RTOS 内核有效地管理任务，而全局变量是无法做到的，任务的超时等机制需要用户自己去实现</li>
+<li>使用了全局变量就要防止多任务的访问冲突，而使用事件标志组则处理好了这个问题，用户无需担心</li>
+<li>使用事件标志组可以有效地解决中断服务程序和任务之间的同步问题</li>
+</ol>
+<h3 id="事件的运作关系">事件的运作关系</h3>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">EventBits_t 通过跳转可以看到是：typedef TickType_t EventBits_t; 通过 TickType_t 跳转看到 typedef uint32_t TickType_t; 它是32位的
+&#x2F;&#x2F;它是32位的，但是只有低24位才用于事件标志，高8位用于事件组编号
+&#x2F;&#x2F;事件标志位低24位用于指定要等待和处理的具体事件，而事件组编号则用于将这些事件组织成一组    </code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>任务与任务</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230412084900.webp" alt=""></p>
+<p>创建2个任务: Task1和Task2</p>
+<ol>
+<li>任务Task1运行过程中调用函数 <code>xEventGroupWaitBits</code>，等待事件标志位被设置，任务Task1由运行态进入到阻塞态</li>
+<li>任务Task2设置Task1等待的事件标志，任务Task1由阻塞态进入到就绪态，在调度器的作用下由就绪态又进入到运行态</li>
+</ol>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>中断与任务</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230412085601.webp" alt=""></p>
+<p>创建一个任务和一个串口接收中断</p>
+<ol>
+<li>任务Task1运行过程中调用函数 <code>×EventGroupWaitBits</code>，等待事件标志位被设置，任务Task1由运行态进入到阻塞态。</li>
+<li>Task1阻塞的情况下，串口接收到数据进入到了串口中断服务程序，在串口中断服务程序中设置Task1等待的事件标志，任务Task1由阻塞态进入到就绪态，在调度器的作用下由就绪态又进入到运行态。</li>
+</ol>
+<blockquote>
+<p>实际应用中，中断方式的消息机制要注意以下三个问题:</p>
+<ol>
+<li>中断函数的执行时间越短越好，防止其它低于这个中断优先级的异常不能得到及时响应。</li>
+<li>实际应用中，建议不要在中断中实现消息处理，用户可以在中断服务程序里面发送消息通知任务,在任务中实现消息处理，这样可以有效地保证中断服务程序的实时响应。同时此任务也需要设置为高优先级，以便退出中断函数后任务可以得到及时执行。</li>
+<li>中断服务程序中一定要调用专用于中断的事件标志设置函数，即以 <code>FromISR</code> 结尾的函数。</li>
+<li>如果 FreeRTOS 工程的中断函数中没有调用 FreeRTOS 的事件标志组 API 函数，与裸机编程是一样的；如果 FreeRTOS 工程的中断函数中调用了 FreeRTOS 的事件标志组的 API 函数，退出的时候要检测是否有高优先级任务就绪，如果有就绪的，需要在退出中断后进行任务切换</li>
+</ol>
+</blockquote>
+<h3 id="常用的API函数-4">常用的API函数</h3>
+<p>使用事件的典型流程如下:</p>
+<ol>
+<li>创建事件组</li>
+<li>置位事件组</li>
+<li>等待事件组</li>
+<li>删除事件组</li>
+</ol>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>事件组的创建与删除</p>
+</div>
+<blockquote>
+<p>任务控制块(句柄)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230412090947.webp" alt=""></p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;创建事件组 函数原型
+&#x2F;&#x2F;返回值：创建成功返回事件标志组句柄，如果FreeRTOSConfig.h文件定义的heap空间不足会返回NULL
+EventGroupHandle_t xEventGroupCreate( void )</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;删除事件组 函数原型
+&#x2F;&#x2F;参数：事件组句柄
+void vEventGroupDelete( EventGroupHandle_t xEventGroup )</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>事件组的置位</p>
+</div>
+<p>将指定的事件设置为1</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;任务中置位事件组 函数原型
+&#x2F;&#x2F;参数1：事件标志组句柄
+&#x2F;&#x2F;参数2：表示24个可设置的事件标志位，EventBits_t 是定义的32位变量，低24位用于事件标志设置。变量uxBitsToSet的低24位的某个位设置为1，那么被设置的事件标志组的相应位就设置为1。变量uxBitsToSet设置为0的位对事件标志相应位没有影响。比如设置变量uxBitsToSet &#x3D; 0x0003就表示将事件标志的位0和位1设置为1，其余位没有变化。
+&#x2F;&#x2F;返回值：返回当前的事件标志组数值
+EventBits_t xEventGroupSetBits( EventGroupHandle_t xEventGroup, const EventBits_t uxBitsToSet )</code></pre>
+<p>使用这个函数要注意以下问题:</p>
+<ol>
+<li>使用前一定要保证事件标志组已经通过函数 <code>xEventGroupCreate</code> 创建了</li>
+<li>此函数是用于任务代码中调用的，故不可以在中断服务程序中调用此函数，中断服务程序中使用的是 <code>xEventGroupSetBitsFromISR</code></li>
+<li>用户通过参数 <code>uxBitsToSet</code> 设置的标志位并不一定会保留到此函数的返回值中，下面举两种情况:<br>
+a. 调用此函数的过程中，其它高优先级的任务就绪了，并且也修改了事件标志，此函数返回的事件标志位会发生变化<br>
+b. 调用此函数的任务是一个低优先级任务，通过此函数设置了事件标志后，让一个等待此事件标志的高优先级任务就绪了，会立即切换到高优先级任务去执行，相应的事件标志位会被函数 <code>xEventGroupWaitBits</code> 清除掉，等从高优先级任务返回到低优先级任务后，函数 <code>xEventGroupSetBits</code> 的返回值已经被修改</li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;中断中置位事件组 函数原型
+&#x2F;&#x2F;参数1：事件标志组句柄
+&#x2F;&#x2F;参数2：表示24个可设置的事件标志位，EventBits_t 是定义的32位变量，低24位用于事件标志设置。变量uxBitsToSet的低24位的某个位设置为1，那么被设置的事件标志组的相应位就设置为1。变量uxBitsToSet设置为0的位对事件标志相应位没有影响。比如设置变量uxBitsToSet &#x3D; 0x0003就表示将事件标志的位0和位1设置为1，其余位没有变化。
+&#x2F;&#x2F;参数3：用于保存是否有高优先级任务准备就绪。如果函数执行完毕后，此参数的数值是pdTRUE,说明有高优先级任务要执行，否则没有
+&#x2F;&#x2F;返回值：如果消息成功发送给守护任务(就是FreeRTOS 的定时器服务任务）返回pdPASS，否则返回pdFAIL，另外守护任务中的消息队列满了也会返回pdFAIL
+BaseType_t xEventGroupSetBitsFromISR( EventGroupHandle_t xEventGroup, const EventBits_t uxBitsToSet, BaseType_t *pxHigherPriorityTaskWoken )</code></pre>
+<p>使用这个函数要注意以下问题：</p>
+<ol>
+<li>使用前一定要保证事件标志已经通过函数 <code>xEventGroupCreate</code> 创建了。同时要在 FreeRTOSConfig.h 文件中使能如下三个宏定义：</li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#define INCLUDE_xEventGroupSetBitFromISR 1
+#define configUSE_TIMERS 1
+#define INCLUDE_xTimerPendFunctionCall 1</code></pre>
+<ol start="2">
+<li>函数 <code>xEventGroupSetBitsFromISR</code> 是用于中断服务程序中调用的，故不可以在任务代码中调用此函数，任务代码中使用的是  <code>xEventGroupSetBits</code></li>
+<li>函数 <code>xEventGroupSetBitsFromISR</code> 对事件标志组的操作是不确定性操作，因为不知道当前有多少个任务在等待此事件标志。而 FreeRTOS 不允许在中断服务程序和临界段中执行不确定性操作。 为了不在中断服务程序中执行，就通过此函数给 FreeRTOS 的 daemon 任务（就是 FreeRTOS 的定时器任务）发送消息，在 daemon 任务中执行事件标志的置位操作。 同时也为了不在临界段中执行此不确定操作，将临界段改成由调度锁来完成。这样不确定性操作在中断服务程序和临界段中执行的问题就都得到解决了。</li>
+<li>由于函数 <code>xEventGroupSetBitsFromISR</code> 对事件标志的置位操作是在 daemon 任务里面执行的， <code>如果想让置位操作立即生效，即让等此事件标志的任务能够得到及时执行，需要设置 daemon 任务的优先级高于使用此事件标志组的所有其它任务</code>。</li>
+</ol>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>等待事件组</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;等待事件组 函数原型
+&#x2F;&#x2F;参数1：事件组句柄
+&#x2F;&#x2F;参数2：表示等待24个事件标志位中的指定标志，EventBits_t 是定义的32位变量，低24位用于事件标志设置。比如设置变量uxBitsToWaitFor &#x3D; Ox0003就表示等待事件标志的位О和位1设置为1。此参数切不可设置为0 
+&#x2F;&#x2F;参数3：第3个参数选择是否清除已经被置位的事件标志，如果这个参数设置为pdTRUE，且函数 xEventGroupWaitBits 在参数 xTicksToWait设置的溢出时间内返回或等到满足任务唤醒的事件时，相应被设置的事件标志位会被清零。如果这个参数设置为pdFALSE，对已经被设置的事件标志位没有影响。
+&#x2F;&#x2F;参数4：选择是否等待所有的标志位都被设置，如果这个参数设置为pdTRUE，要等待第2个参数uxBitsToWaitFor所指定的标志位全部被置1，函数才可以返回。当然，超出了在参数xTicksToWait 设置的溢出时间也是会返回的。如果这个参数设置为pdFALSE，第2个参数uxBitsToWaitFor所指定的任何标志位被置1，函数都会返回，超出溢出时间也会返回
+&#x2F;&#x2F;参数5：设置等待时间，单位时钟节拍周期。如果设置为portMAX_DELAY，表示永久等待。
+&#x2F;&#x2F;返回值：由于设置的时间超时或者指定的事件标志位被置1，导致函数退出时返回的事件标志组数值。
+EventBits_t xEventGroupWaitBits( EventGroupHandle_t xEventGroup, const EventBits_t uxBitsToWaitFor, const BaseType_t xClearOnExit, const BaseType_t xWaitForAllBits, TickType_t xTicksToWait )</code></pre>
+<p>使用这个函数要注意以下问题:</p>
+<ol>
+<li>此函数切不可在中断服务程序中调用。</li>
+<li>着重说明下这个函数的返回值，通过返回值用户可以检测是哪个事件标志位被置1了，如果由于设置的等待时间超时，函数的返回值可会有部分事件标志位被置1。如果由于指定的事件标志位被置1而返回，并且设置了这个函数的参数 <code>xClearOnExit</code> 为pdTRUE 那么此函数的返回值是清零前的事件标志组数值。</li>
+<li>另外，调用此函数的任务在离开阻塞状态到退出函数 <code>xEventGroupWaitBits</code> 之间这段时间，如果一个高优先级的任务抢占执行了，并且修改了事件标志位，那么此函数的返回值会跟当前的事件标志组数值不同。</li>
+</ol>
+<h3 id="任务与任务-2">任务与任务</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>MX配置</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230412113623.webp" alt=""></p>
+<p>事件组只能在代码里创建，MX里不能创建</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>程序编写</p>
+</div>
+<details ><summary> app_freertos.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">EventGroupHandle_t myEvent01Handle &#x3D; NULL;	&#x2F;&#x2F;定义事件组
+
+void MX_FREERTOS_Init(void)
+&#123;
+    myEvent01Handle &#x3D; xEventGroupCreate();
+    if(NULL &#x3D;&#x3D; myEvent01Handle)
+    &#123;
+        printf(&quot;创建事件组失败\r\n&quot;);
+    &#125;
+    else
+    &#123;
+        printf(&quot;创建事件组成功\r\n&quot;);
+    &#125;
+    ...
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> KEY.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#define KEY2_EVENT (EventBits_t)(0x0001 &lt;&lt; 0)	&#x2F;&#x2F;设置事件组掩码位0
+#define KEY3_EVENT (EventBits_t)(0x0001 &lt;&lt; 1)	&#x2F;&#x2F;设置事件组掩码位1
+#define KEY4_EVENT (EventBits_t)(0x0001 &lt;&lt; 2)	&#x2F;&#x2F;设置事件组掩码位2</code></pre>
+              </div>
+            </details>
+<details ><summary> KEY.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">if(KEY.Key_Down_Buff[1])
+&#123;
+    KEY.Key_Down_Buff[1] &#x3D; 0;
+    xEventGroupSetBits(myEvent01Handle, KEY2_EVENT);	&#x2F;&#x2F;按键2事件置1
+&#125;
+if(KEY.Key_Down_Buff[2])
+&#123;
+    KEY.Key_Down_Buff[2] &#x3D; 0;
+    xEventGroupSetBits(myEvent01Handle, KEY3_EVENT);	&#x2F;&#x2F;按键3事件置1
+&#125;
+if(KEY.Key_Down_Buff[3])
+&#123;
+    KEY.Key_Down_Buff[3] &#x3D; 0;
+    xEventGroupSetBits(myEvent01Handle, KEY4_EVENT);	&#x2F;&#x2F;按键4事件置1
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> AllTask.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">extern osThreadId vevent_functionHandle;
+extern EventGroupHandle_t myEvent01Handle;
+&#x2F;&#x2F;#define Event_WaitAllBits	&#x2F;&#x2F;预编译(是否等待所有标志位)
+
+void vEvent_function(void const * argument)
+&#123;
+	EventBits_t xEvent;	&#x2F;&#x2F;接收
+	uint16_t count &#x3D; 0;	&#x2F;&#x2F;同步计数
+
+	#ifdef Event_WaitAllBits
+	for(;;)
+	&#123;
+		printf(&quot;等待事件同步信号，无限等待\r\n&quot;);
+		xEvent &#x3D; xEventGroupWaitBits(
+										myEvent01Handle,	&#x2F;&#x2F;事件句柄
+										KEY2_EVENT|KEY3_EVENT|KEY4_EVENT,	&#x2F;&#x2F;事件：按键2,3,4
+										pdTRUE,	&#x2F;&#x2F;退出时清除标志位
+										pdTRUE,	&#x2F;&#x2F;逻辑与--满足所有事件
+										portMAX_DELAY	&#x2F;&#x2F;无限等待
+									);
+		if((xEvent&amp;(KEY2_EVENT|KEY3_EVENT|KEY4_EVENT)) &#x3D;&#x3D; (KEY2_EVENT|KEY3_EVENT|KEY4_EVENT))
+		&#123;
+			printf(&quot;成功接收到同步信号，次数%u\r\n&quot;,++count);
+			LED.Led_State ^&#x3D; 2;
+			LED.vLed_write_all(LED.Led_State);
+		&#125;
+	&#125;
+	#else
+	for(;;)
+	&#123;
+		printf(&quot;等待事件同步信号，无限等待\r\n&quot;);
+		xEvent &#x3D; xEventGroupWaitBits(
+										myEvent01Handle,	&#x2F;&#x2F;事件句柄
+										KEY2_EVENT|KEY3_EVENT|KEY4_EVENT,	&#x2F;&#x2F;事件：按键2,3,4
+										pdTRUE,	&#x2F;&#x2F;退出时清除标志位
+										pdFALSE,	&#x2F;&#x2F;逻辑或--满足其中一个事件
+										portMAX_DELAY	&#x2F;&#x2F;无限等待
+									);
+		if(((xEvent&amp;KEY2_EVENT) &#x3D;&#x3D; KEY2_EVENT) || ((xEvent&amp;KEY3_EVENT) &#x3D;&#x3D; KEY3_EVENT) || ((xEvent&amp;KEY4_EVENT) &#x3D;&#x3D; KEY4_EVENT))
+		&#123;
+			printf(&quot;成功接收到同步信号，次数%u\r\n&quot;,++count);
+			LED.Led_State ^&#x3D; 2;
+			LED.vLed_write_all(LED.Led_State);			
+		&#125;
+	&#125;
+	#endif
+&#125;</code></pre>
+              </div>
+            </details>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验现象</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230412125831.webp" alt=""></p>
+<h3 id="中断与任务">中断与任务</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>MX配置</p>
+</div>
+<p>中断则需要使能软件定时器</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230412133455.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230412134901.webp" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>程序编写</p>
+</div>
+<details ><summary> my_usart1.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#define RX_MAX_LEN 12
+#define UART1_ReceEVENT (EventBits_t)(0x0001 &lt;&lt; 3)	&#x2F;&#x2F;设置事件掩码位3
+
+extern uint8_t ucUSART1_RX_BUFF[RX_MAX_LEN];
+extern uint8_t ucRx_Len;
+extern bool Rx_Over_Flag;</code></pre>
+              </div>
+            </details>
+<details ><summary> my_usart1.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">uint8_t ucUSART1_RX_BUFF[RX_MAX_LEN] &#x3D; &#123;0&#125;;
+uint8_t ucRx_Len &#x3D; 0;
+bool Rx_Over_Flag &#x3D; 0;
+
+extern EventGroupHandle_t myEvent01Handle;
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+&#123;
+	BaseType_t xHigherPriorityTaskWoken &#x3D; pdFALSE;
+	
+	if(&amp;huart1 &#x3D;&#x3D; huart)
+	&#123;
+		&#x2F;&#x2F;触发串口接收事件
+		xEventGroupSetBitsFromISR(myEvent01Handle,UART1_ReceEVENT,&amp;xHigherPriorityTaskWoken);
+		&#x2F;&#x2F;如果有高优先级任务则进行一次切换
+		portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+	&#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> AllTask.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">extern EventGroupHandle_t myEvent01Handle;
+extern osThreadId vevent_functionHandle;
+
+void vEvent_function(void const * argument)
+&#123;
+	EventBits_t xEvent;	&#x2F;&#x2F;接收
+
+	for(;;)
+	&#123;
+		printf(&quot;等待串口发送12个字符\r\n&quot;);
+		HAL_UART_Receive_IT(&amp;huart1,(uint8_t*)ucUSART1_RX_BUFF,12);
+		printf(&quot;等待事件同步信号，无限等待\r\n&quot;);
+
+		xEvent &#x3D; xEventGroupWaitBits(
+										myEvent01Handle,	&#x2F;&#x2F;事件句柄
+										UART1_ReceEVENT,	&#x2F;&#x2F;事件：串口1接收
+										pdTRUE,	&#x2F;&#x2F;退出时清除标志位
+										pdTRUE,	&#x2F;&#x2F;逻辑与--满足所有事件
+										portMAX_DELAY	&#x2F;&#x2F;无限等待
+									);
+        &#x2F;&#x2F;这个判断也可以不要，因为它是在上面无限等待所以等到了才执行下面
+		if((xEvent&amp;UART1_ReceEVENT) &#x3D;&#x3D; UART1_ReceEVENT)
+		&#123;
+			printf(&quot;接收到串口数据：%s\r\n&quot;,ucUSART1_RX_BUFF);
+			LED.Led_State ^&#x3D; 2;
+			LED.vLed_write_all(LED.Led_State);
+		&#125;
+	&#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验现象</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230412143004.webp" alt=""></p>
+<h2 id="第15讲">第15讲</h2>
+<h3 id="软件定时器的概念与应用">软件定时器的概念与应用</h3>
+<p>FreeRTOS软件定时器的时基是 <code>基于系统时钟节拍</code> 实现的，之所以叫软件定时器 <code>是因为它的实现不需要额外使用硬件定时器，而且可以创建很多个</code>，综合这些因素，这个功能就被称之为软件定时器组。既然是定时器，那么它实现的功能与硬件定时器也是类似的。在硬件定时器中，我们是在定时器中断中实现需要的功能，而使用软件定时器时，我们是在创建软件定时器时指定软件定时器的回调函数，在回调函数中实现相应的功能。</p>
+<blockquote>
+<p>定时器可以说是每个MCU都有的外设,有的MCU其定时器功能异常强大,比如提供PWM、输入捕获等功能。但是最常用的还是定时器最基础的功能一一定时，通过定时器来完成需要周期性处理的事务。MCU自带的定时器属于硬件定时器，不同的MCU其硬件定时器数量不同，因为要考虑成本的问题。FreeRTOS也提供了定时器功能，不过是软件定时器，软件定时器的精度肯定没有硬件定时器那么高，但是对于普通的精度要求不高的周期性处理的任务来说够了。</p>
+</blockquote>
+<p>FreeRTOS提供的软件定时器支持如下功能(软件定时器的使用相当于扩展了定时器的数量，允许创建更多的定时任务):</p>
+<ol>
+<li>裁剪，可通过宏关闭软件定时器功能</li>
+<li>软件定时器创建</li>
+<li>软件定时器启动</li>
+<li>软件定时器停止</li>
+<li>软件定时器复位</li>
+<li>软件定时器删除</li>
+</ol>
+<blockquote>
+<p><code>单次模式与周期模式</code><br>
+FreeRTOS提供的软件定时器支持单次模式和周期性模式，单次模式就是用户创建了定时器并启动了定时器后，定时时间到将不再重新执行，这就是单次模式软件定时器的含义。周期模式就是此定时器会按照设置的时间周期重复去执行，这就是周期模式软件定时器的含义。另外就是单次模式或者周期模式的定时时间到后会调用定时器的回调函数，用户可以回调函数中加入需要执行的工程代码。</p>
+</blockquote>
+<blockquote>
+<p><code>定时器守护任务</code><br>
+FreeRTOS通过一个 <code>prvTimerTask</code> 任务(也叫作 <code>守护任务(Daemon)</code> )管理软件定时器，它是在启动调度器时自动创建的，以满足用户定时需求。pryTimerTask任务会在其执行期间检查用户启动的时间周期溢出的定时器，并调用其回调函数。只有设置FreeRTOSConfig.h中的宏定义 <code>configUSE_TIMERS</code> 为1，将相关代码编译进来，才能正常使用软件定时器相关功能。</p>
+</blockquote>
+<p>FreeRTOS定时器组的大部分API函数都是通过消息队列给定时器任务发消息，在定时器任务里面执行实际的操作。为了更好的说明这个问题，将官方在线版手册中的这个截图贴出来进行说明:</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230412175949.webp" alt=""></p>
+<p>左侧图是用户应用程序，右侧是定时器任务。在用户应用程序里面调用了定时器组API函数 <code>xTimerReset</code>，这个函数会通过消息队列给定时器任务发消息，在定时器任务里面执行实际操作。消息队列在此处的作用有一个专门的名字: <code>Timer command queue</code>，即专门发送定时器组命令的队列。</p>
+<blockquote>
+<p>应用场景<br>
+在很多应用中，我们需要用到一些定时器任务，硬件定时器受硬件的限制，数量上不足以满足用户的实际需求，无法提供更多的定时器，那么可以采用软件定时器来完成，由软件定时器任务代替硬件定时器任务。但需要注意的是，软件定时器的精度是无法和硬件定时器相比的，因为在软件定时器的定时过程中极有可能被其他中断所打断，这是由于软件定时器的执行上下文环境是任务( <code>prvTimerTask任务</code> )。所以，软件定时器更适用于对时间精度要求不高的任务，或一些辅助型的任务。</p>
+</blockquote>
+<blockquote>
+<p>软件定时器的精度<br>
+在操作系统中，通常软件定时器以系统节拍周期为计时单位。系统节拍是系统的心跳节拍，表示系统时钟的频率，类似人的心跳1s 能跳动多少下。系统节拍配置为 <code>configTICK_RATE HZ</code>，该宏在 FreeRTOSConfig.h 中有定义，默认是1000。那么系统的时钟节拍周期就为 <code>1ms</code> (1s跳动1000下，每一下时长就为1ms)。软件定时器的所定时数值必须是这个节拍周期的整数倍，例如节拍周期是10ms，那么上层软件定时器定时数值只能是10ms、20ms、100ms等，而不能取值为15ms。由于节拍定义了系统中定时器能够分辨的精确度，系统可以根据实际CPU的处理能力和实时性需求设置合适的数值， <code>系统节拍周期的值越小，精度越高，但是系统开销也将越大</code>，因为这代表在1s中系统进入时钟中断的次数也就越多。</p>
+</blockquote>
+<blockquote>
+<p>回调函数<br>
+在 <code>prvTimerTask</code> 任务中检测软件定时器，一旦定时时间到，将执行 <code>回调函数</code> (被作为参数传递的函数，间接调用)，以完成任务</p>
+</blockquote>
+<blockquote>
+<p>prvTimerTask 任务的优先级设置高些以便及时处理软件定时器的相关指令;即设置 <code>TIMER_TASK_PRIORITY</code> ，但是范围是不能超过 <code>MAX_PRIORITES</code></p>
+</blockquote>
+<blockquote>
+<p><code>定时器回调函数是在定时器任务中执行的，实际应用中不可在定时器回调函数中调用任何将定时器任务挂起的函数，比如vTaskDelay(), vTaskDelayUntil()以及非零延迟的消息队列和信号量相关的函数。将定时器任务挂起，会导致定时器任务负责的相关功能都不能正确执行了。</code></p>
+</blockquote>
+<h3 id="常用的API函数-5">常用的API函数</h3>
+<p>使用软件定时器的典型流程如下:</p>
+<ol>
+<li>创建软件定时器</li>
+<li>启动软件定时器</li>
+<li>停止软件定时器</li>
+<li>删除软件定时器</li>
+<li>获取软件定时器ID</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230413082505.webp" alt=""></p>
+<p>结构体成员变量说明:</p>
+<ol>
+<li>软件定时器的名字，一般用于调试，因为控制定时器是通过句柄</li>
+<li>软件定时器的列表项，用于插入定时器链表</li>
+<li>软件定时器的周期，单位为 <code>系统节拍(tick)</code>，表示定时器每隔多少个tick会触发一次，从而执行对应的回调函数</li>
+<li>软件定时器的数字ID，典型用法是多个定时器共用一个回调函数时，通过 <code>ID</code> 辨别</li>
+<li>软件定时器的回调函数，当定时时间到就会调用这个函数，可以是任何类型的函数，但需要满足特定的函数原型要求</li>
+<li>如果系统支持跟踪功能，xTIMER结构体可以用于在FreeRTOS+Trace中跟踪定时器。<code>uxTimerNumber</code>是一个给定的数字，可以用于标识跟踪数据</li>
+<li>定时器的状态位，用于记录定时器是否被静态分配、是否激活等信息。包括以下位定义：
+<ul>
+<li>Bit 0: 定时器是否处于已经激活状态。</li>
+<li>Bit 1: 定时器是否为静态分配，即是否在定义时已经确定了使用哪个变量或内存地址来存储定时器控制块。</li>
+</ul>
+</li>
+</ol>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>创建软件定时器</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;创建软件定时器 函数原型
+&#x2F;&#x2F;参数1：定时器名字
+&#x2F;&#x2F;参数2：定时器周期，单位系统时钟节拍
+&#x2F;&#x2F;参数3：选择单次模式或者周期模式------pdFALSE-&gt;单次模式; pdTRUE-&gt;周期模式
+&#x2F;&#x2F;参数4：定时器ID
+&#x2F;&#x2F;参数5：定时器回调函数
+&#x2F;&#x2F;返回值：创建成功返回定时器的句柄，由于FreeRTOSCongfig.h 文件中 heap空间不足，或者定时器周期设置为0，会返回NULL
+TimerHandle_t xTimerCreate(	const char *const pcTimerName,
+                            const TickType_t xTimerPeriodInTicks,
+                            const UBaseType_t uxAutoReload,
+                            void *const pvTimerID,
+                            TimerCallbackFunction_t pxCallbackFunction )</code></pre>
+<p>使用这个函数要注意以下问题:</p>
+<ol>
+<li>在 FreeRTOSConfig.h 文件中使能宏定义</li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#define configUSE_TIMERS 1</code></pre>
+<p>这个回调函数格式可以点击创建函数进行跳转查看</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">TimerCallbackFunction_t pxCallbackFunction
+↓    
+typedef void (*TimerCallbackFunction_t)( TimerHandle_t xTimer );    </code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>删除软件定时器</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;函数原型
+&#x2F;&#x2F;参数1：定时器句柄
+&#x2F;&#x2F;参数2：定时器队列消息发送超时间，定时器组的大部分API函数不是直接运行的，而是通过消息队列给定时器任务发消息来实现的，此参数设置的等待时间就是当消息队列已经满的情况下，等待消息队列有空间时的最大等待时间。
+&#x2F;&#x2F;返回值：返回pdFAIL表示此函数向消息队列发送消息失败，返回pdPASS表示此函数向消息队列发送消息成功。定时器任务实际执行消息队列发来的命令依赖于定时器任务的优先级，如果定时器任务是高优先级会及时得到执行，如果是低优先级，就要等待其余高优先级任务释放CPU权才可以得到执行。
+BaseType_t xTimerDelete(TimerHandle_t xTimer,const TickType_t xTicksToWait )</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>启动软件定时器</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;函数原型
+&#x2F;&#x2F;参数1：定时器句柄
+&#x2F;&#x2F;参数2：定时器队列消息发送超时间，定时器组的大部分API函数不是直接运行的，而是通过消息队列给定时器任务发消息来实现的，此参数设置的等待时间就是当消息队列已经满的情况下，等待消息队列有空间时的最大等待时间。
+&#x2F;&#x2F;返回值：返回pdFAIL表示此函数向消息队列发送消息失败，返回pdPASS表示此函数向消息队列发送消息成功。定时器任务实际执行消息队列发来的命令依赖于定时器任务的优先级，如果定时器任务是高优先级会及时得到执行，如果是低优先级，就要等待其余高优先级任务释放CPU权才可以得到执行。
+BaseType_t xTimerStart(TimerHandle_t xTimer,const TickType_t xTicksToWait )</code></pre>
+<p>使用这个函数要注意以下问题:</p>
+<ol>
+<li>使用前一定要保证定时器组已经通过函数 <code>xTimerCreate</code> 创建了</li>
+<li>对于已经被激活的定时器，即调用过函数 <code>xTimerStart</code> 进行启动，再次调用此函数相当于调用了函数 <code>xTimerReset</code> 对定时器时间进行了复位</li>
+<li>如果在启动FreeRTOS调度器前调用了此函数，定时器是不会立即执行的，需要等到启动了FreeRTOS调度器才会得到执行，即从此刻开始计时，达到 <code>xTimerCreate</code> 中设置的单次或者周期性延迟时间才会执行相应的回调函数</li>
+</ol>
+<ul>
+<li>疑问？</li>
+</ul>
+<p>那我们没有创建队列那它是怎么进行插入初始化的，可以点击 Start函数进行跳转看看(嗯…没看到有那看另一个函数)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230413094847.webp" alt=""></p>
+<p>点击create函数跳转看看，可以发现是在create函数里面创建的定时器队列</p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230413095106.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230413095146.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230413095202.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>停止软件定时器</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;函数原型
+&#x2F;&#x2F;参数1：定时器句柄
+&#x2F;&#x2F;参数2：定时器队列消息发送超时间，定时器组的大部分API函数不是直接运行的，而是通过消息队列给定时器任务发消息来实现的，此参数设置的等待时间就是当消息队列已经满的情况下，等待消息队列有空间时的最大等待时间。
+&#x2F;&#x2F;返回值：返回pdFAIL表示此函数向消息队列发送消息失败，返回pdPASS表示此函数向消息队列发送消息成功。定时器任务实际执行消息队列发来的命令依赖于定时器任务的优先级，如果定时器任务是高优先级会及时得到执行，如果是低优先级，就要等待其余高优先级任务释放CPU权才可以得到执行。
+BaseType_t xTimerStop(TimerHandle_t xTimer,const TickType_t xTicksToWait )</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>获取软件定时器ID</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;函数原型
+&#x2F;&#x2F;参数：是定时器句柄
+&#x2F;&#x2F;返回值：返回定时器ID
+void *pvTimerGetTimerID(const TimerHandle_t xTimer)</code></pre>
+<p>使用这个函数要注意以下问题:</p>
+<ol>
+<li>使用前一定要保证定时器组已经通过函数 <code>xTimerCreate</code> 创建了</li>
+<li>创建不同的定时器时，可以对定时器使用相同的回调函数，在回调函数中通过此函数获取是哪个定时器的时间到了，这个功能就是此函数的主要作用</li>
+</ol>
+<h3 id="应用编程">应用编程</h3>
+<p>也可以在MX里进行软件定时器的配置：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230414085736.webp" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;默认生成的代码
+osTimerDef(MyTimer01, vMyTimerCallback);
+MyTimer01Handle &#x3D; osTimerCreate(osTimer(MyTimer01), osTimerPeriodic, (void*) 1);</code></pre>
+<p>但是它不能在MX里面进行时间的设置，所以点击 <code>osTimerCreate</code> 看看源码：</p>
+<p>可以发现它默认全部都是1，而且注释也说明了当你使用 <code>osTimerStart</code> 启动定时器时应填写这个覆盖</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230414092857.webp" alt=""></p>
+<p>即在创建软件定时器函数下面添加(具体多少ms看需要)：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">if(MyTimer01Handle !&#x3D; NULL)
+&#123;
+ printf(&quot;软件定时器1创建成功\r\n&quot;);
+ printf(&quot;软件定时器1的周期调整为1000ms\r\n&quot;);
+ 
+ xTimerChangePeriod(MyTimer01Handle,1000,0);	&#x2F;&#x2F;修改周期为1000ms
+ if(pdPASS &#x3D;&#x3D; xTimerStart(MyTimer01Handle,0))	&#x2F;&#x2F;启动
+ &#123;
+  printf(&quot;启动软件定时器1成功\r\n&quot;);
+ &#125;
+&#125;</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>MX配置</p>
+</div>
+<p><code>TIMER_TASK_STACK_DEPTH</code> 是设置的堆栈大小，可以设置小点可以通过打印查看消耗多少</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230413090946.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230412134901.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230413091458.webp" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>程序编写</p>
+</div>
+<blockquote>
+<p><code>Timer_ID = *((uint8_t*)pvTimerGetTimerID(pxTimer));</code> 这个代码的执行解释：</p>
+<ol>
+<li><code>pxTimer</code>是指向<code>TimerHandle_t</code>类型的指针，它指向当前正在处理的定时器</li>
+<li><code>pvTimerGetTimerID()</code>函数用于获取与定时器关联的应用程序定义的ID值，需要传递一个<code>TimerHandle_t</code>类型的参数</li>
+<li><code>*((uint8_t*)pvTimerGetTimerID())</code>将返回的ID值强制转换为一个<code>uint8_t</code>类型的指针，并解引用该指针来获取ID值</li>
+<li>最后，将ID值存储在<code>Timer_ID</code>变量中</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>configASSERT(pxTimer);</p>
+<p>这个相当于 <code>断言机制</code>，判断这个参数是否为NULL,如果 <code>pxTimer</code> 为 NULL，则会抛出一个 ASSERT 异常，并停止后续代码的执行</p>
+</blockquote>
+<details ><summary> app_freertos.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;定义定时器ID
+uint8_t Timer01_ID &#x3D; 1;
+uint8_t Timer02_ID &#x3D; 2;
+&#x2F;&#x2F;定义软件定时器
+TimerHandle_t myTimer01Handle &#x3D; NULL;
+TimerHandle_t myTimer02Handle &#x3D; NULL;
+
+
+void MX_FREERTOS_Init(void)
+&#123;
+    &#x2F;* USER CODE BEGIN Init *&#x2F;
+    myTimer01Handle &#x3D; xTimerCreate(
+                          &quot;Timer01&quot;,	&#x2F;&#x2F;名字
+                          100,	&#x2F;&#x2F;定时周期
+                          pdTRUE,	&#x2F;&#x2F;周期模式
+                          (void *)&amp;Timer01_ID,	&#x2F;&#x2F;ID
+                          (TimerCallbackFunction_t)vMyTimerCallback	&#x2F;&#x2F;中断回调函数
+                      );
+    if(myTimer01Handle !&#x3D; NULL)
+    &#123;
+        printf(&quot;创建软件定时器1成功\r\n&quot;);
+
+        if(pdPASS &#x3D;&#x3D; xTimerStart(myTimer01Handle, 0))
+        &#123;
+            printf(&quot;启动软件定时器1cg\r\n&quot;);
+        &#125;
+    &#125;
+    myTimer02Handle &#x3D; xTimerCreate(
+                          &quot;Timer02&quot;,
+                          500,	&#x2F;&#x2F;500ms
+                          pdTRUE,	&#x2F;&#x2F;周期模式
+                          (void *)&amp;Timer02_ID,	&#x2F;&#x2F;ID
+                          (TimerCallbackFunction_t)vMyTimerCallback	&#x2F;&#x2F;中断回调函数
+                      );
+    if(myTimer02Handle !&#x3D; NULL)
+    &#123;
+        printf(&quot;创建软件定时器2成功\r\n&quot;);
+
+        if(pdPASS &#x3D;&#x3D; xTimerStart(myTimer02Handle, 0))
+        &#123;
+            printf(&quot;启动软件定时器2cg\r\n&quot;);
+        &#125;
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> AllTask.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">extern uint8_t Timer01_ID;
+extern uint8_t Timer02_ID;
+extern TimerHandle_t myTimer01Handle;
+extern TimerHandle_t myTimer02Handle;
+
+&#x2F;&#x2F;按键任务
+void vKey_TaskFunction(void const* argument)
+&#123;
+	for(;;)
+	&#123;
+		KEY.vKey_scan_function();
+		KEY.vKey_run_flag_function();
+		osDelay(20);
+	&#125;
+&#125;
+
+&#x2F;&#x2F;LED任务
+void vLED1_TaskFunction(void const * argument)
+&#123;
+	for(;;)
+	&#123;
+		LED.Led_State ^&#x3D; 1;
+		LED.vLed_write_all(LED.Led_State);
+		osDelay(1000);
+	&#125;
+&#125;
+
+&#x2F;&#x2F;软件定时器回调函数
+void vMyTimerCallback(xTimerHandle pxTimer)
+&#123;
+	uint8_t Timer_ID &#x3D; 0;	&#x2F;&#x2F;软件定时器ID
+	static uint16_t Timer01CallbackCnt &#x3D; 0;	&#x2F;&#x2F;计数
+	static uint16_t Timer02CallbackCnt &#x3D; 0;
+	
+	&#x2F;&#x2F;形参校验(相当于断言机制)
+	configASSERT(pxTimer);
+	&#x2F;&#x2F;获取软件定时器ID
+	Timer_ID &#x3D; *((uint8_t*)pvTimerGetTimerID(pxTimer));
+	&#x2F;&#x2F;执行软件定时器1任务
+	if(Timer01_ID &#x3D;&#x3D; Timer_ID)
+	&#123;
+		LED.Led_State ^&#x3D; 2;
+		LED.vLed_write_all(LED.Led_State);
+		printf(&quot;软件定时器1回调函数次数&#x3D;%u\r\n&quot;,++Timer01CallbackCnt);
+	&#125;
+	&#x2F;&#x2F;执行软件定时器2任务
+	if(Timer02_ID &#x3D;&#x3D; Timer_ID)
+	&#123;
+		LED.Led_State ^&#x3D; 4;
+		LED.vLed_write_all(LED.Led_State);
+		printf(&quot;软件定时器2回调函数次数&#x3D;%u\r\n&quot;,++Timer02CallbackCnt);
+	&#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> KEY.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">extern TimerHandle_t myTimer01Handle;
+extern TimerHandle_t myTimer02Handle;
+
+	if(KEY.Key_Down_Buff[1])	
+	&#123;
+		KEY.Key_Down_Buff[1] &#x3D; 0;
+		&#x2F;&#x2F;关闭软件定时器2		
+		if(pdPASS &#x3D;&#x3D; xTimerStop(myTimer01Handle,100))
+		&#123;
+			printf(&quot;关闭软件定时器1成功\r\n&quot;);
+		&#125;
+		else
+		&#123;
+			printf(&quot;关闭软件定时器1失败\r\n&quot;);
+		&#125;
+		&#x2F;&#x2F;关闭软件定时器2
+		if(pdPASS &#x3D;&#x3D; xTimerStop(myTimer02Handle,100))
+		&#123;
+			printf(&quot;关闭软件定时器2成功\r\n&quot;);
+		&#125;
+		else
+		&#123;
+			printf(&quot;关闭软件定时器2失败\r\n&quot;);
+		&#125;		
+	&#125;
+	if(KEY.Key_Down_Buff[2])	&#x2F;&#x2F;重新打开软件定时器1
+	&#123;
+		KEY.Key_Down_Buff[2] &#x3D; 0;
+		if(pdPASS &#x3D;&#x3D; xTimerStart(myTimer01Handle,100))
+		&#123;
+			printf(&quot;重新打开软件定时器1成功\r\n&quot;);
+		&#125;
+		else
+		&#123;
+			printf(&quot;重新打开软件定时器1失败\r\n&quot;);
+		&#125;
+	&#125;
+	if(KEY.Key_Down_Buff[3])	&#x2F;&#x2F;重新打开软件定时器2
+	&#123;
+		KEY.Key_Down_Buff[3] &#x3D; 0;
+		if(pdPASS &#x3D;&#x3D; xTimerStart(myTimer02Handle,100))
+		&#123;
+			printf(&quot;重新打开软件定时器2成功\r\n&quot;);
+		&#125;
+		else
+		&#123;
+			printf(&quot;重新打开软件定时器2失败\r\n&quot;);
+		&#125;		
+	&#125;	</code></pre>
+              </div>
+            </details>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验现象</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230413105523.webp" alt=""></p>
+<h2 id="第16讲">第16讲</h2>
+<h3 id="任务通知的概念">任务通知的概念</h3>
+<p>FreeRTOS 从v8.2.0 版本开始提供任务通知功能， <code>每个任务都有一个32位的通知值</code>，在多数情况下，任务通知 <code>可以替代二值信号量、计数信号量、事件组，也可以替代长度为1的队列</code>(可以保存一个32位整数或指针值)。</p>
+<blockquote>
+<p>相对于以前使用FreeRTOS内核通信的资源时必须创建队列、二进制信号量、计数信号量或事件组的情况，使用任务通知显然更灵活。按照FreeRTOS官方的说法， <code>使用任务通知比通过信号量等ICP通信方式解除阻塞的任务速度快45%，并且更加省RAM内存空间</code>，任务通知的使用无需创建队列。要想使用任务通知，必须将FreeRTOSConfig.h中的宏定义 <code>configUSE_TASK_NOTIFICATIONS</code> 设置为1。 <code>其实FreeRTOS默认是为1的，所以任务通知是默认可用的</code>。</p>
+</blockquote>
+<p>FreeRTOS提供以下几种方式发送通知给任务:</p>
+<ol>
+<li>发送通知给任务，如果有通知未读，则不覆盖通知值</li>
+<li>发送通知给任务，直接覆盖通知值</li>
+<li>发送通知给任务，设置通知值的一个或者多个位，可以当作事件组来使用</li>
+<li>发送通知给任务，递增通知值，可以当作信号量使用</li>
+</ol>
+<p>但是这种方式也有缺点：</p>
+<ol>
+<li>只能有一个任务接收通知消息，因为必须指定接收通知的任务</li>
+<li>只有等待通知的任务可以被阻塞，发送通知的任务在任何情况下都不会因为发送失败而进入阻塞态。</li>
+</ol>
+<h3 id="任务通知的运行机制">任务通知的运行机制</h3>
+<p>任务通知属于任务附带的资源，所以在任务被创建时，任务通知也被初始化，我们知道在使用队列、信号量前，必须先创建队列和信号量，目的是创建队列数据结构，比如使用 <code>xQueueCreate()</code> 函数创建队列，用 <code>xSemaphoreCreateBinary()</code> 函数创建二值信号量等。再来看任务通知，由于任务通知的数据结构包含在任务控制块中，只要任务存在，任务通知数据结构就已经创建完毕，可以直接使用，所以使用时很方便</p>
+<p>任务通知 <code>可以在任务中向指定任务发送通知</code>， <code>也可以在中断中向指定任务发送通知</code>。FreeRTOS的每个任务都有一个 <code>32位的通知值</code>，任务控制块中的成员变量 <code>ulNotifiedValue</code> 就是这个通知值。 <code>只有在任务中可以等待通知，而不允许在中断中等待通知</code>。如果任务在等待的通知暂时无效，任务会根据用户指定的阻塞超时时间进入阻塞状态， 我们可以将等待通知的任务看作消费者；其他任务和中断可以向等待通知的任务发送通知，发送通知的任务和中断服务函数可以看作生产者，当其他任务或者中断向这个任务发送任务通知，且任务获得通知以后，该任务就会从阻塞态中解除，这与FreeRTOS中内核的其他通信机制一致。</p>
+<h3 id="常用的API函数-6">常用的API函数</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>任务通知的数据结构</p>
+</div>
+<p>任务通知是任务控制块的资源，属于任务控制块中的成员变量，如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230413113339.webp" alt=""></p>
+<p><code>ulNotifiedValue</code>: 任务通知值，用于保存一个32位整数或指针值</p>
+<p><code>ucNotifyState</code>: 任务通知状态，用于标识任务的通知状态</p>
+<p>状态取值：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230413113612.webp" alt=""></p>
+<blockquote>
+<p><code>taskNOT_WAITING_NOTIFICATION</code>：任务当前状态为未等待通知。这个状态表示当前任务没有在等待通知，或者上次等待通知已经结束</p>
+<p><code>taskWAITING_NOTIFICATION</code>：任务当前状态为等待通知。这个状态表示当前任务正在等待通知，即任务已经通过调用 ulTaskNotifyTake() 函数来阻塞自己，等待接收通知</p>
+<p><code>taskNOTIFICATION_RECEIVED</code>：任务当前状态为已接收通知。这个状态表示当前任务已经接收到通知，即任务已经通过调用 ulTaskNotifyTake() 函数被唤醒，可以继续执行自己的任务了。如果进行了多项通知，则该状态表示接收到任意一项通知。</p>
+</blockquote>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>常用API函数</p>
+</div>
+<blockquote>
+<p><code>替代二值信号量与计数信号量</code></p>
+<p>发送任务通知:<br>
+xTaskNotifyGive()<br>
+vTaskNotifyGiveFromISR()</p>
+<p>获取任务通知:<br>
+ulTaskNotifyTake()</p>
+</blockquote>
+<blockquote>
+<p><code>替代长为1的队列与事件组</code></p>
+<p>发送任务通知:<br>
+xTaskNotify()<br>
+vTaskNotifyFromISR()</p>
+<p>获取任务通知:<br>
+ulTaskNotifyWait()</p>
+</blockquote>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>任务中发送通知</p>
+</div>
+<p><code>功能</code>：在任务中向指定任务发送通知，使任务通知值加1，这种方式用于信号量</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;函数原型
+&#x2F;&#x2F;参数1：任务句柄
+&#x2F;&#x2F;参数2：任务通知值，取0
+&#x2F;&#x2F;参数3：指示任务控制块中的变量ulNotifiedValue 实现加一操作
+&#x2F;&#x2F;参数4：空
+&#x2F;&#x2F;返回值：没有超时机制，永远返回pdPASS
+BaseType_t xTaskNotifyGive(TaskHandle_t xTaskToNotify, uint32_t ulValue, eNotifyAction eAction, uint32_t *pulPreviousNotificationValue)
+↓    
+#define xTaskNotifyGive( xTaskToNotify ) xTaskGenericNotify( ( xTaskToNotify ), ( 0 ), eIncrement, NULL )</code></pre>
+<p>参数3可参考：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230413125310.webp" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>任务中获取通知</p>
+</div>
+<p><code>功能</code>：在任务中获取通知，与 xTaskNotifyGive() 配套使用，用于替代二值信号量与计数信号量</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;函数原型
+&#x2F;&#x2F;参数1：退出时是否清0计数，pdTRUE--&gt;清0，pdFALSE--&gt;减1
+&#x2F;&#x2F;参数2：超时时间，单位为系统节拍
+&#x2F;&#x2F;返回值：返回任务之前的任务通知值
+uint32_t ulTaskNotifyTake( BaseType_t xClearCountOnExit, TickType_t xTicksToWait )</code></pre>
+<p>源码分析：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">uint32_t ulTaskNotifyTake( BaseType_t xClearCountOnExit, TickType_t xTicksToWait )
+&#123;
+    uint32_t ulReturn;
+&#x2F;&#x2F;进入临界区保护当前任务，以避免并发问题
+    taskENTER_CRITICAL();	
+    &#123;
+&#x2F;&#x2F;        如果当前任务没有接收到通知，则将任务状态设置为 taskWAITING_NOTIFICATION，表示当前任务正在等待通知
+        if( pxCurrentTCB-&gt;ulNotifiedValue &#x3D;&#x3D; 0UL )
+        &#123;
+            pxCurrentTCB-&gt;ucNotifyState &#x3D; taskWAITING_NOTIFICATION;
+&#x2F;&#x2F;如果 xTicksToWait 的值大于 0，则将当前任务加入延迟列表中，并调用 portYIELD_WITHIN_API() 函数让出 CPU，等待通知到来
+            if( xTicksToWait &gt; ( TickType_t ) 0 )
+            &#123;
+                prvAddCurrentTaskToDelayedList( xTicksToWait, pdTRUE );	&#x2F;&#x2F;将当前任务添加到延迟列表中，并按照任务等待时间的大小排序。该函数的作用是将当前任务从就绪状态转换为阻塞状态，并设置任务的解阻塞时刻
+                traceTASK_NOTIFY_TAKE_BLOCK();	&#x2F;&#x2F;函数记录当前任务进入阻塞状态的事件
+                portYIELD_WITHIN_API();	&#x2F;&#x2F;让出 CPU，将当前任务挂起，等待通知到来
+            &#125;
+            else
+            &#123;
+                mtCOVERAGE_TEST_MARKER();	&#x2F;&#x2F; 是一个空函数，通常用于测试覆盖率的统计
+            &#125;
+        &#125;
+        else
+        &#123;
+            mtCOVERAGE_TEST_MARKER();	&#x2F;&#x2F; 是一个空函数，通常用于测试覆盖率的统计
+        &#125;
+    &#125;
+    taskEXIT_CRITICAL();
+
+    taskENTER_CRITICAL();
+    &#123;
+        traceTASK_NOTIFY_TAKE();	&#x2F;&#x2F;用于记录任务接收到通知的事件
+        ulReturn &#x3D; pxCurrentTCB-&gt;ulNotifiedValue;
+&#x2F;&#x2F;如果当前任务已经接收到通知，则直接获取通知计数器的值并退出函数
+        if( ulReturn !&#x3D; 0UL )
+        &#123;
+            &#x2F;&#x2F;清0还是减1
+            if( xClearCountOnExit !&#x3D; pdFALSE )
+            &#123;
+                pxCurrentTCB-&gt;ulNotifiedValue &#x3D; 0UL;
+            &#125;
+            else
+            &#123;
+                pxCurrentTCB-&gt;ulNotifiedValue &#x3D; ulReturn - ( uint32_t ) 1;	&#x2F;&#x2F;用于更新任务接收到通知计数器的值的
+            &#125;
+        &#125;
+        else
+        &#123;
+            mtCOVERAGE_TEST_MARKER();	&#x2F;&#x2F; 是一个空函数，通常用于测试覆盖率的统计
+        &#125;
+
+        pxCurrentTCB-&gt;ucNotifyState &#x3D; taskNOT_WAITING_NOTIFICATION;
+    &#125;
+&#x2F;&#x2F;离开临界区并返回任务接收到的通知计数器的值    
+    taskEXIT_CRITICAL();
+
+    return ulReturn;
+&#125;</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>任务中发送通知</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;函数原型
+&#x2F;&#x2F;参数1：任务句柄
+&#x2F;&#x2F;参数2：任务通知值，取0
+&#x2F;&#x2F;参数3：指示任务控制块中的变量ulNotifiedValue 实现加一操作
+&#x2F;&#x2F;参数4：空
+&#x2F;&#x2F;返回值：根据上面第3个形参的说明，将其设置为eSetValueWithoutOverwrite，有可能返回pdFALSE，其余所有情况都返回值pdPASS
+BaseType_t xTaskNotify(TaskHandle_t xTaskToNotify, uint32_t ulValue, eNotifyAction eAction, uint32_t *pulPreviousNotificationValue)</code></pre>
+<p>参数3可取下面的：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230413131259.webp" alt=""></p>
+<p>源码：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230413132014.webp" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>在任务中获取通知</p>
+</div>
+<p><code>功能</code>：在任务中获取通知，与xTaskNotify()配套使用，用于替代长度位1的队列与事件组</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;函数原型
+&#x2F;&#x2F;形参1:进入函数时，清除哪些位-&gt; 0:无变化  1∶清除相应位
+&#x2F;&#x2F;形参2:退出函数时，清除哪些位-&gt; 0:无变化  1∶清除相应位
+&#x2F;&#x2F;形参3:保存通知值
+&#x2F;&#x2F;形参4:超时时间，单位为系统节拍
+&#x2F;&#x2F;返回值：pdTRUE:获取任务通知成功    pdFALSE:获取任务通知失败
+BaseType_t xTaskNotifyWait( uint32_t ulBitsToClearOnEntry, uint32_t ulBitsToClearOnExit, uint32_t *pulNotificationValue, TickType_t xTicksToWait )</code></pre>
+<p>使用注意：</p>
+<ol>
+<li>
+<p>任务创建后，任务控制块中的变量 <code>ulNotifiedValue</code> 初始计数值是0</p>
+</li>
+<li>
+<p>默认配置此函数可以使用的的宏定义已经在FreeRTOS.h 文件中使能:</p>
+</li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#define configUSE_TASK_NOTIFICATIONS 1</code></pre>
+<p>当然，如果用户不需要使用任务通知功能相关的函数，可以在 FreeRTOSConfig.h文件中配置此宏定义为0来禁止，这样创建的每个任务可以 <code>节省5个字节</code> 的需求</p>
+<h3 id="任务通知代替二值信号量编程">任务通知代替二值信号量编程</h3>
+<p>任务的话配置一个同步任务即可</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>程序编写</p>
+</div>
+<details ><summary> AllTask.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">extern osThreadId vbinaryHandle;
+
+void vBinarySem_Sync_Task(void const * argument)
+&#123;
+	BaseType_t xResult;
+	uint16_t TakeCnt &#x3D; 0;
+	
+	for(;;)
+	&#123;
+		printf(&quot;获取任务通知，无限等待\r\n&quot;);
+		xResult &#x3D; ulTaskNotifyTake(pdTRUE,portMAX_DELAY);	&#x2F;&#x2F;二值信号量需要清0 无限等待
+		&#x2F;&#x2F;任务通知值被清0之前，通知值必为1(其实不需要判断这里只是演示返回值)
+		if(1 &#x3D;&#x3D; xResult)
+		&#123;
+			printf(&quot;成功获取任务通知，次数&#x3D;%u\r\n&quot;,++TakeCnt);
+			LED.Led_State ^&#x3D; 2;
+			LED.vLed_write_all(LED.Led_State);
+		&#125;
+	&#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> KEY.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void vKey_run_flag_function(void)
+&#123;
+    uint8_t xResult;
+    static uint16_t GiveCnt &#x3D; 0;
+
+    if(KEY.Key_Down_Buff[1])
+    &#123;
+        KEY.Key_Down_Buff[1] &#x3D; 0;
+        xResult &#x3D; xTaskNotifyGive(vbinaryHandle);	&#x2F;&#x2F;任务句柄
+        if(pdPASS &#x3D;&#x3D; xResult)
+        &#123;
+            printf(&quot;任务通知发送成功，次数&#x3D;%u\r\n&quot;, ++GiveCnt);
+        &#125;
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<h3 id="任务通知代替计数信号量编程">任务通知代替计数信号量编程</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>MX配置</p>
+</div>
+<p>这里的话需要单独开两个任务进行获取和释放信号量还有一个LCD显示任务优先级全部中等即可，不能在按键里进行因为它会超时等待，按键还需要做其他事情不能被挂起所以不能在按键里进行获取和释放</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230413144952.webp" alt=""></p>
+<p>有点不太正常，按一次有可能多触发，是因为按键任务里有按下清0然后获取和释放函数里也有可能是有Bug，解决方法是把按键任务里按键1按键2的标志位清0去掉，在获取和释放那进行判断，这样就不会出现多触发</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>程序编写</p>
+</div>
+<details ><summary> AllTask.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">extern osThreadId TakeNotifyHandle;
+extern osThreadId GiveNotifyHandle;
+extern osThreadId DisplayLcdHandle;
+extern osSemaphoreId myBinarySem01Handle;
+
+uint8_t myCountingSem_ucMessagesWaiting &#x3D; 20;
+
+
+&#x2F;&#x2F;显示
+void DisplayLcd_function(void const * argument)
+&#123;
+	BaseType_t xResult;
+	char arr[20] &#x3D; &quot; &quot;;
+	for(;;)
+	&#123;
+		xResult &#x3D; xSemaphoreTake(myBinarySem01Handle,portMAX_DELAY);	&#x2F;&#x2F;获取信号量 无限等待
+		if(pdTRUE &#x3D;&#x3D; xResult)
+		&#123;
+			snprintf(arr,sizeof(arr),&quot;CAR NUMBER have:%d &quot;,myCountingSem_ucMessagesWaiting);
+			LCD_DisplayStringLine(Line1,(uint8_t*)arr);			
+		&#125;
+	&#125;
+&#125;
+
+&#x2F;&#x2F;获取任务通知
+void TakeNotify_function(void const * argument)
+&#123;
+	for(;;)
+	&#123;
+		if(KEY.Key_Down_Buff[2])
+		&#123;
+			KEY.Key_Down_Buff[2] &#x3D; 0;
+			&#x2F;&#x2F;获取任务通知，获取后，任务通知值减1
+			myCountingSem_ucMessagesWaiting &#x3D; ulTaskNotifyTake(pdFALSE,0);	&#x2F;&#x2F;减1 不等待\等待也可以
+			if(myCountingSem_ucMessagesWaiting &gt; 0)
+			&#123;
+				printf(&quot;获取任务通知成功，申请1个车位，发送同步显示信号\r\n&quot;);
+				myCountingSem_ucMessagesWaiting--;
+				xSemaphoreGive(myBinarySem01Handle);
+			&#125;
+			else
+			&#123;
+				printf(&quot;获取任务通知失败，停车位已满\r\n&quot;);
+			&#125;
+		&#125;
+		osDelay(20);
+	&#125;
+
+&#125;
+&#x2F;&#x2F;发送任务通知
+void GiveNotify_function(void const * argument)
+&#123;
+	BaseType_t xResult;
+	&#x2F;&#x2F;初始化计数信号量初始值(因为它默认是0所以想初始化为20就用这个函数)
+	xTaskNotify(TakeNotifyHandle,myCountingSem_ucMessagesWaiting,eSetValueWithOverwrite);	&#x2F;&#x2F;覆盖方式
+	for(;;)
+	&#123;
+		if(KEY.Key_Down_Buff[3])
+		&#123;
+			KEY.Key_Down_Buff[3] &#x3D; 0;
+			if(myCountingSem_ucMessagesWaiting &lt; 20)
+			&#123;
+				&#x2F;&#x2F;发送任务通知
+				xResult &#x3D; xTaskNotifyGive(TakeNotifyHandle);
+				if(pdPASS &#x3D;&#x3D; xResult)
+				&#123;
+					printf(&quot;发送任务通知成功，释放1个停车位\r\n&quot;);
+					myCountingSem_ucMessagesWaiting++;
+					xSemaphoreGive(myBinarySem01Handle);
+				&#125;
+			&#125;
+			else
+			&#123;
+				printf(&quot;不能释放，停车位已空\r\n&quot;);
+			&#125;
+		&#125;
+		osDelay(20);
+	&#125;	
+
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> KEY.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;注释掉清0操作
+if(KEY.Key_Down_Buff[2])	
+&#123;
+    &#x2F;&#x2F;KEY.Key_Down_Buff[2] &#x3D; 0;
+&#125;
+if(KEY.Key_Down_Buff[3])	
+&#123;
+    &#x2F;&#x2F;KEY.Key_Down_Buff[3] &#x3D; 0;
+&#125;</code></pre>
+              </div>
+            </details>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验现象</p>
+</div>
+<p>跟之前模拟车库一样</p>
+<h3 id="任务通知代替消息队列编程">任务通知代替消息队列编程</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>MX配置</p>
+</div>
+<p>在上面工程基础上写即可不需要再配置</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>程序编写</p>
+</div>
+<details ><summary> AllTask.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">extern osThreadId TakeNotifyHandle;
+extern osThreadId GiveNotifyHandle;
+
+&#x2F;&#x2F;接收任务通知
+void TakeNotify_function(void const * argument)
+&#123;
+	BaseType_t xResult;
+	uint32_t ucRec_Data &#x3D; 0;
+	
+	const TickType_t ucReceiveBlockTime &#x3D; pdMS_TO_TICKS(1000);
+	
+	for(;;)
+	&#123;
+		xResult &#x3D; xTaskNotifyWait(
+									0x00000000,	&#x2F;&#x2F;进入函数时不清除任务通知任何位
+									0xFFFFFFFF,	&#x2F;&#x2F;退出函数时清除任务通知值所有位
+									&amp;ucRec_Data,	&#x2F;&#x2F;保存任务通知值
+									ucReceiveBlockTime	
+								 );
+		if(pdTRUE &#x3D;&#x3D; xResult)
+		&#123;
+			printf(&quot;成功获取任务通知的数据：%u\r\n&quot;,ucRec_Data);
+		&#125;
+		else
+		&#123;
+			printf(&quot;获取任务通知的数据出现超时！！！\r\n&quot;);
+		&#125;
+	&#125;
+
+&#125;
+&#x2F;&#x2F;接收任务通知2
+void GiveNotify_function(void const * argument)
+&#123;
+	BaseType_t xResult;
+	uint8_t *pucRec_Data &#x3D; NULL;
+	
+	for(;;)
+	&#123;
+		xResult &#x3D; xTaskNotifyWait(
+									0x00000000,	&#x2F;&#x2F;进入函数时不清除任务通知值任何位
+									0xFFFFFFFF,	&#x2F;&#x2F;退出函数时清除任务通知值所有位
+									(uint32_t*)&amp;pucRec_Data,
+									portMAX_DELAY
+								 );
+		if(pdTRUE &#x3D;&#x3D; xResult)
+		&#123;
+			printf(&quot;成功获取任务通知的数据:%s\r\n&quot;,pucRec_Data);
+		&#125;
+	&#125;	
+
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> KEY.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">if(KEY.Key_Down_Buff[2])
+&#123;
+    KEY.Key_Down_Buff[2] &#x3D; 0;
+    xTaskNotify(TakeNotifyHandle, ucSend_Data, eSetValueWithoutOverwrite);
+    ucSend_Data +&#x3D; 1000;
+&#125;
+if(KEY.Key_Down_Buff[3])
+&#123;
+    KEY.Key_Down_Buff[3] &#x3D; 0;
+    printf(&quot;发送任务通知-模拟队列发送字符串：%s\r\n&quot;, &quot;MCUSTM32G431&quot;);
+    xTaskNotify(GiveNotifyHandle, (uint32_t)&quot;MCUSTM32G431&quot;, eSetValueWithoutOverwrite);
+&#125;</code></pre>
+              </div>
+            </details>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验现象</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230413193652.webp" alt=""></p>
+<h3 id="任务通知代替事件组编程">任务通知代替事件组编程</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>MX配置</p>
+</div>
+<p>在上面工程上即可不需要配置</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>程序编写</p>
+</div>
+<details ><summary> AllTask.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">extern osThreadId TakeNotifyHandle;
+
+&#x2F;&#x2F;接收任务通知
+void TakeNotify_function(void const * argument)
+&#123;
+	BaseType_t xResult;
+	uint32_t Rec_Event &#x3D; 0;	&#x2F;&#x2F;定义任务通知接收变量
+    uint32_t Last_Event &#x3D; 0;	&#x2F;&#x2F;缓存任务通知之前的值，用于多事件
+	uint16_t SynCnt &#x3D; 0;	&#x2F;&#x2F;同步计数
+	
+	for(;;)
+	&#123;
+		printf(&quot;获取任务通知，无限等待\r\n&quot;);
+		xResult &#x3D; xTaskNotifyWait(
+									0x00000000,
+									0xFFFFFFFF,
+									&amp;Rec_Event,	&#x2F;&#x2F;保存任务通知值
+									portMAX_DELAY
+								 );
+		if(pdTRUE &#x3D;&#x3D; xResult)
+		&#123;
+			Last_Event |&#x3D; Rec_Event;	&#x2F;&#x2F;缓存
+			if((Last_Event&amp;(KEY2_EVENT|KEY3_EVENT|KEY4_EVENT)) &#x3D;&#x3D; (KEY2_EVENT|KEY3_EVENT|KEY4_EVENT))
+			&#123;
+				printf(&quot;成功接收到任务通知同步信号，次数&#x3D;%u\r\n&quot;,++SynCnt);
+				LED.Led_State ^&#x3D; 2;
+				LED.vLed_write_all(LED.Led_State);
+				Last_Event &#x3D; 0;
+			&#125;
+		&#125;
+	&#125;
+
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> KEY.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#define KEY2_EVENT (EventBits_t)(0x0001 &lt;&lt; 0)	&#x2F;&#x2F;设置事件组掩码位0
+#define KEY3_EVENT (EventBits_t)(0x0001 &lt;&lt; 1)	&#x2F;&#x2F;设置事件组掩码位1
+#define KEY4_EVENT (EventBits_t)(0x0001 &lt;&lt; 2)	&#x2F;&#x2F;设置事件组掩码位2
+
+if(KEY.Key_Down_Buff[1])
+&#123;
+    KEY.Key_Down_Buff[1] &#x3D; 0;
+    xTaskNotify(TakeNotifyHandle, KEY2_EVENT, eSetBits);
+&#125;
+if(KEY.Key_Down_Buff[2])
+&#123;
+    KEY.Key_Down_Buff[2] &#x3D; 0;
+    xTaskNotify(TakeNotifyHandle, KEY3_EVENT, eSetBits);
+&#125;
+if(KEY.Key_Down_Buff[3])
+&#123;
+    KEY.Key_Down_Buff[3] &#x3D; 0;
+    xTaskNotify(TakeNotifyHandle, KEY4_EVENT, eSetBits);
+&#125;</code></pre>
+              </div>
+            </details>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验现象</p>
+</div>
+<p>三个按键按下才触发一次打印</p>
+<h2 id="综合应用1">综合应用1</h2>
+<blockquote>
+<p>用到的组件：</p>
+<p>①队列</p>
+<p>②二值信号量</p>
+<p>③事件组</p>
+<p>④任务通知</p>
+<p>⑤软件定时器</p>
+</blockquote>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>MX配置</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230414155950.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230414155937.webp" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>程序编写</p>
+</div>
+<details ><summary> app_freertos.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">EventGroupHandle_t MyEvent01Handle &#x3D; NULL;	&#x2F;&#x2F;定义事件组
+uint8_t Queue01_Buff[8] &#x3D; &#123;0&#125;;	&#x2F;&#x2F;队列1缓存
+
+void MX_FREERTOS_Init(void)
+&#123;
+    ...
+    MyEvent01Handle &#x3D; xEventGroupCreate();
+    if(MyEvent01Handle !&#x3D; NULL)
+    &#123;
+        printf(&quot;创建事件组成功\r\n&quot;);
+    &#125;
+
+    if(MyTimer01Handle !&#x3D; NULL)
+    &#123;
+        printf(&quot;软件定时器1创建成功\r\n&quot;);
+        printf(&quot;软件定时器1的周期调整为1000ms\r\n&quot;);
+
+        xTimerChangePeriod(MyTimer01Handle, 1000, 0);	&#x2F;&#x2F;修改周期为1000ms
+        if(pdPASS &#x3D;&#x3D; xTimerStart(MyTimer01Handle, 0))
+        &#123;
+            printf(&quot;启动软件定时器1成功\r\n&quot;);
+        &#125;
+    &#125;
+    ...
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> AllTask.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">extern osThreadId Led_TaskHandle;
+extern osThreadId Key_TaskHandle;
+extern osThreadId Lcd_TaskHandle;
+extern osThreadId Event_Sync_TaskHandle;
+extern osThreadId Usart1_TaskHandle;
+extern osThreadId Queue_Receive_TaskHandle;
+extern osTimerId MyTimer01Handle;	&#x2F;&#x2F;软件定时器
+extern EventGroupHandle_t MyEvent01Handle;	&#x2F;&#x2F;事件组
+extern osSemaphoreId myBinarySem01Handle;	&#x2F;&#x2F;二值
+extern osMessageQId myQueue01Handle;
+extern uint8_t Queue01_Buff[8];	&#x2F;&#x2F;队列1缓存
+
+&#x2F;*
+队列任务
+*&#x2F;
+void Queue_Receive_Handler(void const * argument)
+&#123;
+	char arr[3] &#x3D; &#123;&#39;0&#39;,&#39;0&#39;,&#39; &#39;&#125;;
+		
+	for(;;)
+	&#123;
+		if(pdPASS &#x3D;&#x3D; xQueueReceive(myQueue01Handle,Queue01_Buff,portMAX_DELAY))
+		&#123;
+			printf(&quot;队列1收到的数据：&quot;);
+			
+		&#125;
+		for(uint8_t i &#x3D; 0; i &lt; 8; i++)
+		&#123;
+			arr[0] &#x3D; Queue01_Buff[i]&#x2F;16;	&#x2F;&#x2F;高位
+			if(arr[0] &lt;&#x3D; 9)
+			&#123;
+				arr[0] +&#x3D; &#39;0&#39;;
+			&#125;
+			else
+			&#123;
+				arr[0] +&#x3D; (&#39;A&#39; - 10);
+			&#125;
+			arr[1] &#x3D; Queue01_Buff[i]%16;	&#x2F;&#x2F;低位
+			if(arr[1] &lt;&#x3D; 9)		
+			&#123;
+				arr[1] +&#x3D; &#39;0&#39;;
+			&#125;
+			else
+			&#123;
+				arr[1] +&#x3D; (&#39;A&#39; - 10);
+			&#125;
+			HAL_UART_Transmit(&amp;huart1,(uint8_t*)&amp;arr,3,200);	&#x2F;&#x2F;发送到串口助手打印
+		&#125;
+		printf(&quot;\r\n&quot;);
+	&#125;
+&#125;
+
+&#x2F;*
+功能：LED任务
+*&#x2F;
+void Led_Handler(void const * argument)
+&#123;
+	for(;;)
+	&#123;
+		LED.Led_State ^&#x3D; 1;
+		LED.vLed_write_all(LED.Led_State);
+		osDelay(1000);
+	&#125;
+&#125;
+&#x2F;*
+功能：按键检测与执行任务
+*&#x2F;
+void Key_Handler(void const * argument)
+&#123;
+	for(;;)
+	&#123;
+		KEY.vKey_scan_function();
+		KEY.vKey_run_flag_function();
+		osDelay(20);		
+	&#125;
+&#125;
+&#x2F;*
+功能：LCD显示任务
+*&#x2F;
+void Lcd_Handler(void const * argument)
+&#123;
+	char display_Arr[20] &#x3D; &quot; &quot;; 
+	
+	for(;;)
+	&#123;
+		ulTaskNotifyTake(pdTRUE,portMAX_DELAY);	&#x2F;&#x2F;获取任务通知
+		
+		MyADC.vAdc_get_value_function();	&#x2F;&#x2F;数据更新
+		LED.Led_State ^&#x3D; 2;
+		LED.vLed_write_all(LED.Led_State);
+		&#x2F;&#x2F;显示在LCD
+		snprintf(display_Arr,sizeof(display_Arr),&quot;ADC2 value:%.2f &quot;,MyADC.Adc_Value);
+		LCD_DisplayStringLine(Line1,(uint8_t*)display_Arr);
+	&#125;
+&#125;
+&#x2F;*
+功能：事件任务
+*&#x2F;
+void Event_Sync_Handler(void const * argument)
+&#123;
+	EventBits_t Rx_Event &#x3D; 0;
+	
+	for(;;)
+	&#123;
+		Rx_Event &#x3D; xEventGroupWaitBits(
+										MyEvent01Handle,	&#x2F;&#x2F;事件组句柄
+										KEY2_EVENT|KEY3_EVENT|KEY4_EVENT,
+										pdTRUE,	&#x2F;&#x2F;退出时清除标志位
+										pdTRUE,	&#x2F;&#x2F;逻辑与
+										portMAX_DELAY	&#x2F;&#x2F;无限等待
+									  );
+		if((Rx_Event&amp;(KEY2_EVENT|KEY3_EVENT|KEY4_EVENT)) &#x3D;&#x3D; (KEY2_EVENT|KEY3_EVENT|KEY4_EVENT))
+		&#123;
+			if(BUZZER_STATE_OFF &#x3D;&#x3D; BUZZER.Buzzer_State)
+			&#123;
+				BUZZER.vBuzzer_control(SET);
+			&#125;
+			else
+			&#123;
+				BUZZER.vBuzzer_control(RESET);
+			&#125;
+		&#125;
+	&#125;
+&#125;
+&#x2F;*
+功能：串口任务
+*&#x2F;
+void Usart1_Handler(void const * argument)
+&#123;
+	BaseType_t xResult;
+	__HAL_UART_ENABLE_IT(&amp;huart1,UART_IT_RXNE);
+	__HAL_UART_ENABLE_IT(&amp;huart1,UART_IT_IDLE);
+	for(;;)
+	&#123;
+		HAL_UART_Receive_DMA(&amp;huart1,(uint8_t*)&amp;ucUSART1_RX_BUFF,RX_MAX_LEN);
+		xResult &#x3D; xSemaphoreTake(myBinarySem01Handle,portMAX_DELAY);	&#x2F;&#x2F;获取二值信号量
+		if(pdTRUE &#x3D;&#x3D; xResult)
+		&#123;
+			LED.Led_State ^&#x3D; 4;
+			LED.vLed_write_all(LED.Led_State);
+			MyUSART.vUsart1_Protocol_Analysis();	&#x2F;&#x2F;数据解析
+		&#125;
+	&#125;
+&#125;
+&#x2F;*
+功能：软件定时器回调函数
+*&#x2F;
+void vMyTimerCallback(void const * argument)
+&#123;
+	configASSERT(argument);	&#x2F;&#x2F;断言
+
+	xTaskNotifyGive(Lcd_TaskHandle);	&#x2F;&#x2F;发送任务通知给LCD任务
+&#125;
+
+&#x2F;&#x2F;初始化
+void HardWare_init(void)
+&#123;
+	LCD_Init();
+	LCD_Clear(White);
+	LCD_SetBackColor(White);
+	LCD_SetTextColor(Black);
+	LED_Dis(0xFF,RESET);
+	printf(&quot;----FreeRTOS----\r\n&quot;);
+	printf(&quot;----综合应用1----\r\n&quot;);
+	printf(&quot;按键1--打印任务\r\n&quot;);
+	printf(&quot;按键2--设置按键事件\r\n&quot;);
+	printf(&quot;按键3--设置按键事件\r\n&quot;);
+	printf(&quot;按键4--设置按键事件\r\n&quot;);
+	HAL_TIM_Base_Start_IT(&amp;htim6);	&#x2F;&#x2F;开启定时器6
+	HAL_ADCEx_Calibration_Start(&amp;hadc2,ADC_SINGLE_ENDED);
+	HAL_ADC_Start_DMA(&amp;hadc2,(uint32_t*)&amp;MyADC.Adc_Rx_Buff,10);
+&#125;
+
+&#x2F;&#x2F;打印任务使用情况函数
+void vTask_Print_function(void)
+&#123;
+    uint8_t CPU_Run[500];	&#x2F;&#x2F;保存任务运行时间信息
+
+    vTaskList((char *)&amp;CPU_Run);
+    printf(&quot;-----------------------------------------------------------------------------------------\r\n&quot;);
+    printf(&quot;任务名                                  任务状态  优先级  剩余栈  任务序号\r\n&quot;);
+    printf(&quot;%s&quot;, CPU_Run);
+    printf(&quot;-----------------------------------------------------------------------------------------\r\n&quot;);
+
+    vTaskGetRunTimeStats((char *)&amp;CPU_Run);
+    printf(&quot;-----------------------------------------------------------------------------------------\r\n&quot;);
+    printf(&quot;任务名                                 运行计数              利用率\r\n&quot;);
+    printf(&quot;%s&quot;, CPU_Run);
+    printf(&quot;-----------------------------------------------------------------------------------------\r\n&quot;);
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> KEY.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#define KEY2_EVENT (EventBits_t)(0x0001 &lt;&lt; 0)	&#x2F;&#x2F;设置事件组掩码位0
+#define KEY3_EVENT (EventBits_t)(0x0001 &lt;&lt; 1)	&#x2F;&#x2F;设置事件组掩码位1
+#define KEY4_EVENT (EventBits_t)(0x0001 &lt;&lt; 2)	&#x2F;&#x2F;设置事件组掩码位2</code></pre>
+              </div>
+            </details>
+<details ><summary> KEY.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">extern EventGroupHandle_t MyEvent01Handle;
+
+&#x2F;&#x2F;按键执行功能
+void vKey_run_flag_function(void)
+&#123;
+	if(KEY.Key_Down_Buff[0])	
+	&#123;
+		KEY.Key_Down_Buff[0] &#x3D; 0;
+		vTask_Print_function();
+	&#125;
+	if(KEY.Key_Down_Buff[1])	
+	&#123;
+		KEY.Key_Down_Buff[1] &#x3D; 0;
+		xEventGroupSetBits(MyEvent01Handle,KEY2_EVENT);
+	&#125;
+	if(KEY.Key_Down_Buff[2])	
+	&#123;
+		KEY.Key_Down_Buff[2] &#x3D; 0;
+        xEventGroupSetBits(MyEvent01Handle,KEY3_EVENT);
+	&#125;
+	if(KEY.Key_Down_Buff[3])	
+	&#123;
+		KEY.Key_Down_Buff[3] &#x3D; 0;
+		xEventGroupSetBits(MyEvent01Handle,KEY4_EVENT);
+	&#125;	
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> usart.c(自带) </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">extern osSemaphoreId myBinarySem01Handle;	&#x2F;&#x2F;二值
+
+void USART1_IRQHandler(void)
+&#123;
+	BaseType_t xHighPeriorityTaskWoken &#x3D; pdFALSE;
+	
+	if(SET &#x3D;&#x3D; __HAL_UART_GET_FLAG(&amp;huart1,UART_FLAG_IDLE))
+	&#123;
+		__HAL_UART_CLEAR_FLAG(&amp;huart1,UART_FLAG_IDLE);
+		HAL_UART_DMAStop(&amp;huart1);
+		ucRx_Len &#x3D; RX_MAX_LEN - __HAL_DMA_GET_COUNTER(&amp;hdma_usart1_rx);
+		xSemaphoreGiveFromISR(myBinarySem01Handle,&amp;xHighPeriorityTaskWoken);	&#x2F;&#x2F;释放二值
+		portYIELD_FROM_ISR(xHighPeriorityTaskWoken);	&#x2F;&#x2F;如果有高优先级任务则执行
+	&#125;
+  HAL_UART_IRQHandler(&amp;huart1);
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> my_usart.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">uint8_t ucUSART1_RX_BUFF[RX_MAX_LEN] &#x3D; &#123;0&#125;;
+uint8_t ucRx_Len &#x3D; 0;
+bool Rx_Over_Flag &#x3D; 0;
+uint8_t Usart1_Order_Buff[USART1_ORDER_LEN] &#x3D; &#123;0&#125;;
+extern osMessageQId myQueue01Handle;
+
+&#x2F;*
+功能：串口协议解析(共8字节)
+举例：0x55 0x01 0x01 0x00 0x00 0x00 0x00 0xBB
+*&#x2F;
+void vUsart1_Protocol_Analysis(void)
+&#123;
+	uint8_t i &#x3D; 0,j &#x3D; 0,Index &#x3D; 0;
+	bool Analysis_Over_Flag &#x3D; 0;
+	char arr[50];
+	
+	if(ucRx_Len &lt; 1)
+	&#123;
+		return;
+	&#125;
+	
+	&#x2F;&#x2F;过滤干扰数据，首字节为0x55，共8字节
+	for(i &#x3D; 0; i &lt; RX_MAX_LEN; i++)
+	&#123;
+		if((0x55 &#x3D;&#x3D; ucUSART1_RX_BUFF[i]) &amp;&amp; (0xBB &#x3D;&#x3D; ucUSART1_RX_BUFF[i+7]))
+		&#123;
+			for(j  &#x3D; 0;j &lt; USART1_ORDER_LEN; j++)
+			&#123;
+				Usart1_Order_Buff[j] &#x3D; ucUSART1_RX_BUFF[i+Index];
+				Index++;
+				Analysis_Over_Flag &#x3D; 1;
+			&#125;
+		&#125;
+	&#125;
+	xQueueSend(myQueue01Handle,Usart1_Order_Buff,0);	&#x2F;&#x2F;向队列1发送数据
+
+	memset(ucUSART1_RX_BUFF,0,sizeof(ucUSART1_RX_BUFF));
+	
+	if(Analysis_Over_Flag)
+	&#123;
+		Analysis_Over_Flag &#x3D; 0;
+		snprintf(arr,sizeof(arr),&quot;RX_DATA:%#x-%#x-%#x-%#x-%#x-%#x-%#x-%#x\r\n&quot;,Usart1_Order_Buff[0],Usart1_Order_Buff[1],Usart1_Order_Buff[2],Usart1_Order_Buff[3],Usart1_Order_Buff[4],Usart1_Order_Buff[5],Usart1_Order_Buff[6],Usart1_Order_Buff[7]);
+		HAL_UART_Transmit(&amp;huart1,(uint8_t*)&amp;arr,strlen(arr),200);	&#x2F;&#x2F;发送回去
+		
+		if(0x01 &#x3D;&#x3D; Usart1_Order_Buff[1])
+		&#123;
+			switch(Usart1_Order_Buff[2])
+			&#123;
+				case LED8_OPEN:
+				&#123;
+					LED.Led_State &#x3D; (~0x80)&amp;LED.Led_State;
+					LED.vLed_write_all(LED.Led_State);
+					break;
+				&#125;
+				case LED8_CLOSE:
+				&#123;
+					LED.Led_State &#x3D; (0x80)|LED.Led_State;
+					LED.vLed_write_all(LED.Led_State);	
+					break;	
+				&#125;
+				case BUZZER_OFF:
+				&#123;
+					BUZZER.vBuzzer_control(RESET);
+					break;
+				&#125;
+				case BUZZER_ON:
+				&#123;
+					BUZZER.vBuzzer_control(SET);
+					break;
+				&#125;
+				default:break;
+			&#125;
+		&#125;
+	&#125;
+	memset(Usart1_Order_Buff,0,sizeof(Usart1_Order_Buff));
+&#125;</code></pre>
+              </div>
+            </details>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验现象</p>
+</div>
+<div class="video-bilibili">
+  <iframe
+    src="https://player.bilibili.com/player.html?aid=484895848&bvid=BV12T411W75y&cid=1095312339&page=1"
+    scrolling="no"
+    border="0"
+    frameborder="no"
+    framespacing="0"
+    high_quality="1"
+    danmaku="1"
+    allowfullscreen="true"
+  ></iframe>
+</div>
+<h2 id="第17讲">第17讲</h2>
+<h3 id="动态内存管理介绍">动态内存管理介绍</h3>
+<p>动态内存管理是FreeRTOS非常重要的一项功能，任务创建、信号量、消息队列、事件标志组、互斥信号量、软件定时器组等需要的RAM空间都是通过动态内存管理从FreeRTOSConfig.h文件定义的heap空间中申请的。</p>
+<p>FreeRTOS支持5种动态内存管理方案，分别通过文件 <code>heap_1</code> , <code>heap_2</code> , <code>heap_3</code> , <code>heap_4</code> 和 <code>heap_5</code> 实现</p>
+<blockquote>
+<p>五种动态内存管理方式简单总结如下，实际项目中，用户根据需要选择合适的:</p>
+<ul>
+<li><code>heap_1</code> :五种方式里面最简单的，但是申请的内存不允许释放</li>
+</ul>
+<p>用户通过函数 <code>xPortGetFreeHeapSize</code> 就能获得FreeRTOS动态内存的剩余，进而可以根据剩余情况优化动态内存的大小。</p>
+<p>①项目应用不需要删除任务、信号量、消息队列等已经创建的资源</p>
+<p>②具有时间确定性，即申请动态内存的时间是固定的并且不会产生内存碎片</p>
+<p>③确切的说这是一种静态内存分配，因为申请的内存是不允许被释放掉的</p>
+<ul>
+<li>
+<p>heap_2:支持动态内存的申请和释放，但是不支持内存碎片的处理</p>
+</li>
+<li>
+<p>heap_3∶将编译器自带的malloc和free函数进行简单的封装</p>
+</li>
+<li>
+<p><code>heap_4</code> :支持动态内存的申请和释放，支持内存碎片处理</p>
+</li>
+</ul>
+<p>用户通过函数 <code>xPortGetFreeHeapSize</code> 就能获得FreeRTOS动态内存的剩余，但是不提供动态内存是如何被分配成各个小内存块的信息。使用函数 <code>xPortGetMinimumEverFreeHeapSize</code> 能够获取从系统启动到当前时刻的动态内存最小剩余，从而用户就可以根据剩余情况优化动态内存的大小</p>
+<p>①可以用于需要重复的创建和删任务、信号量、事件标志组、软件定时器等内部资源的场合</p>
+<p>②随机的调用pvPortMalloc()和vPortFree()，且每次申请的大小都不同，也不会像heap_2那样产生很多的内存碎片</p>
+<p>③不具有时间确定性，即申请动态内存的时间不是确定的</p>
+<ul>
+<li><code>heap_5</code> :在heap_4的基础上支持将动态内存设置在不连续的区域上(即可以将外部SARM和内部一起使用)</li>
+</ul>
+<p>heap_5动态内存管理是通过函数 <code>vPortDefineHeapRegions</code> 进行初始化的，也就是说用户在创建任务FreeRTOS的内部资源前要优先级调用这个函数vPortDefineHeapRegions，否则是无法通过函数pvPortMalloc申请到动态内存的。</p>
+<p><code>定义的时候要注意两个问题，一个是内存段结束时要定义NULL。另一个是内存段的地址是从低地址到高地址排列</code></p>
+<p>用户通过函数 <code>xPortGetFreeHeapSize</code> 就能获得FreeRTOS动态内存的剩余，但是不提供动态内存是如何被分配成各个小内存块的信息。使用函数 <code>xPortGetMinimumEverFreeHeapSize</code> 能够获取从系统启动到当前时刻的动态内存最小剩余，从而用户就可以根据剩余情况优化动态内存的大小</p>
+</blockquote>
+<p>FreeRTOS的动态内存大小在FreeRTOSConfig.h 文件中进行了定义:</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#define configTOTAL_HEAP_SIZE                    ((size_t)10240)</code></pre>
+<h3 id="heap-1和heap-4测试">heap_1和heap_4测试</h3>
 <h2 id="FreeRTOS的疑问">FreeRTOS的疑问</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>这几个的意思？</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#define tskRUNNING_CHAR		( &#39;X&#39; )	&#x2F;&#x2F;运行
+#define tskBLOCKED_CHAR		( &#39;B&#39; )	&#x2F;&#x2F;阻塞
+#define tskREADY_CHAR		( &#39;R&#39; )	&#x2F;&#x2F;准备
+#define tskDELETED_CHAR		( &#39;D&#39; )	&#x2F;&#x2F;删除
+#define tskSUSPENDED_CHAR	( &#39;S&#39; )	&#x2F;&#x2F;挂起</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>pdTRUE和pdPASS是否等效？</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230412095227.webp" alt=""></p>
 <div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>临界段和调度锁？</p>
 </div>
 <p>在 FreeRTOS 中， <code>临界段只是禁止其他中断打断当前任务，而并没有禁止其他任务抢占当前任务的 CPU 时间</code>。因此，如果当前任务在临界区内被一个高优先级任务抢占，那么当前任务会被挂起，等待高优先级任务执行完毕后才能继续执行。  <code>临界段的作用是保护共享资源，在临界区内对共享资源的访问是原子的，即不会被其他中断打断，但是并没有保护当前任务不被其他任务抢占</code>。 <code>如果需要保护当前任务不被其他任务抢占，可以使用调度锁来实现</code>。 因此，在使用临界段时，需要注意该机制只能保证共享资源的原子性，而不能保证当前任务不被其他任务抢占。如果需要保证当前任务不被其他任务抢占，可以使用调度锁或者其他机制来实现。【所以单单使用临界段访问共享资源还是有风险的最好配合调度锁】</p>
@@ -3700,6 +5631,7 @@ size_t xPortGetMinimumEverFreeHeapSize( void ); &#x2F;&#x2F;获取未分配的�
 <div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>中断优先级跟任务优先级区别</p>
 </div>
 <p>简单的说，这两个之间没有任何关系， <code>不管中断的优先级是多少，中断的优先级永远高于任何任务的优先级，即任务在执行的过程中，中断来了就开始执行中断服务程序</code>。</p>
+<p>既然你调用了FreeRTOS的API，你的中断优先级设置就应该是属于FreeRTOS管理的,所以如果你的中断应该设置为 <code>将其优先级手动设置为数值等于或大于configMAX_SYSCALL_INTERRUPT_PRIORITY设置的值</code></p>
 <div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>HAL_Delay在FreeRTOS作用</p>
 </div>
 <p><code>HAL_Delay</code> 函数在FreeRTOS里也可以使用，但是它不会造成阻塞，它是在那空等时间到</p>
@@ -3908,11 +5840,17 @@ vTaskDelayUntil 延迟，延迟 10ms。</li>
 </tbody>
 </table>
 <h2 id="FreeRTOS坑">FreeRTOS坑</h2>
-<div class="note simple"><p>今天创建了两个任务一个是串口打印一个是LED闪烁，但是一直是高优先级的在运行另一个不允许，查了原因原来是CubeMX默认生成的任务导致，把默认的任务函数去掉不实现它即可(它是weak的)</p>
+<div class="note simple"><p>今天创建了两个任务一个是串口打印一个是LED闪烁，但是一直是高优先级的在运行另一个不运行，查了原因原来是CubeMX默认生成的任务导致，把默认的任务函数去掉不实现它即可(它是weak的)</p>
 </div>
 <div class="note simple"><p>使用 <code>printf</code> 造成挂死，原因是任务分配的栈大小太小了，默认是 <code>128</code>，改成 <code>512</code> 即可</p>
 <p>还有打印都是框框问号原因是重定向函数里 <code>HAL_UART_Transmit</code> 函数写错，里面参数 <code>ch</code>必须是 <code>&amp;ch</code></p>
-</div></article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num104.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%99%E5%AD%A6%E5%A4%A7%E7%BA%B2"><span class="toc-number">2.</span> <span class="toc-text">教学大纲</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeRTOS%E4%BB%8B%E7%BB%8D"><span class="toc-number">3.</span> <span class="toc-text">FreeRTOS介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeRTOS%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">4.</span> <span class="toc-text">FreeRTOS文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC1%E8%AE%B2"><span class="toc-number">5.</span> <span class="toc-text">第1讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FreeRTOS%E7%9A%84%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B"><span class="toc-number">5.1.</span> <span class="toc-text">FreeRTOS的启动流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC2%E8%AE%B2"><span class="toc-number">6.</span> <span class="toc-text">第2讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FreeRTOS%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC"><span class="toc-number">6.1.</span> <span class="toc-text">FreeRTOS编程风格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FreeRTOS%E8%B0%83%E8%AF%95%E6%96%B9%E6%B3%95"><span class="toc-number">6.2.</span> <span class="toc-text">FreeRTOS调试方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC3%E8%AE%B2"><span class="toc-number">7.</span> <span class="toc-text">第3讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E"><span class="toc-number">7.1.</span> <span class="toc-text">系统配置说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Config%E5%BC%80%E5%A7%8B%E7%9A%84%E5%AE%8F"><span class="toc-number">7.2.</span> <span class="toc-text">Config开始的宏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#include-%E5%BC%80%E5%A7%8B%E7%9A%84%E5%AE%8F"><span class="toc-number">7.3.</span> <span class="toc-text">include 开始的宏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%AD%E8%A8%80%E9%85%8D%E7%BD%AE"><span class="toc-number">7.4.</span> <span class="toc-text">断言配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MX%E9%87%8C%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE"><span class="toc-number">7.5.</span> <span class="toc-text">MX里参数配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC4%E8%AE%B2"><span class="toc-number">8.</span> <span class="toc-text">第4讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E7%8A%B6%E6%80%81"><span class="toc-number">8.1.</span> <span class="toc-text">任务的概念和状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E8%B0%83%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B2%E4%BB%BB%E5%8A%A1"><span class="toc-number">8.2.</span> <span class="toc-text">系统启动调度与空闲任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E7%9A%84%E8%AE%BE%E8%AE%A1%E8%A6%81%E7%82%B9"><span class="toc-number">8.3.</span> <span class="toc-text">任务的设计要点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="toc-number">8.4.</span> <span class="toc-text">任务的创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%A6%E8%A7%A3%E4%BB%BB%E5%8A%A1%E5%8F%A5%E6%9F%84"><span class="toc-number">8.5.</span> <span class="toc-text">详解任务句柄</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E5%88%A0%E9%99%A4%EF%BC%8C%E6%8C%82%E8%B5%B7%E4%B8%8E%E6%81%A2%E5%A4%8D"><span class="toc-number">8.6.</span> <span class="toc-text">任务删除，挂起与恢复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C%E7%A8%8B%E5%BA%8F"><span class="toc-number">8.7.</span> <span class="toc-text">综合实验程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC5%E8%AE%B2"><span class="toc-number">9.</span> <span class="toc-text">第5讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%86%E8%A7%A3%E8%B0%83%E5%BA%A6%E5%99%A8"><span class="toc-number">9.1.</span> <span class="toc-text">了解调度器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E6%A0%88%E5%A4%A7%E5%B0%8F%E7%A1%AE%E5%AE%9A"><span class="toc-number">9.2.</span> <span class="toc-text">任务栈大小确定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E6%A0%88%E6%BA%A2%E5%87%BA%E4%B8%8E%E6%A3%80%E6%B5%8B"><span class="toc-number">9.3.</span> <span class="toc-text">任务栈溢出与检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C%E7%A8%8B%E5%BA%8F-2"><span class="toc-number">9.4.</span> <span class="toc-text">综合实验程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC6%E8%AE%B2"><span class="toc-number">10.</span> <span class="toc-text">第6讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">10.1.</span> <span class="toc-text">中断优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">10.2.</span> <span class="toc-text">任务优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">10.3.</span> <span class="toc-text">函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%85%B3%E4%B8%AD%E6%96%AD%E4%B8%8E%E4%B8%B4%E7%95%8C%E6%AE%B5%E5%87%BD%E6%95%B0"><span class="toc-number">10.4.</span> <span class="toc-text">开关中断与临界段函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C%E7%A8%8B%E5%BA%8F-3"><span class="toc-number">10.5.</span> <span class="toc-text">综合实验程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC7%E8%AE%B2"><span class="toc-number">11.</span> <span class="toc-text">第7讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E9%94%81-%E4%B8%AD%E6%96%AD%E9%94%81%EF%BC%8C%E4%BB%BB%E5%8A%A1%E9%94%81"><span class="toc-number">11.1.</span> <span class="toc-text">调度锁,中断锁，任务锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C%E7%A8%8B%E5%BA%8F-4"><span class="toc-number">11.2.</span> <span class="toc-text">综合实验程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC8%E8%AE%B2"><span class="toc-number">12.</span> <span class="toc-text">第8讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E8%8A%82%E6%8B%8D"><span class="toc-number">12.1.</span> <span class="toc-text">系统节拍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%B6%E6%97%B6%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0"><span class="toc-number">12.2.</span> <span class="toc-text">延时相关函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C%E7%A8%8B%E5%BA%8F-5"><span class="toc-number">12.3.</span> <span class="toc-text">综合实验程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC9%E8%AE%B2"><span class="toc-number">13.</span> <span class="toc-text">第9讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">13.1.</span> <span class="toc-text">链表的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E5%90%91-%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8"><span class="toc-number">13.2.</span> <span class="toc-text">单向&#x2F;双向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FreeRTOS%E9%87%8C%E9%93%BE%E8%A1%A8%E5%AE%9E%E7%8E%B0"><span class="toc-number">13.3.</span> <span class="toc-text">FreeRTOS里链表实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E8%8A%82%E7%82%B9%E5%AE%9A%E4%B9%89-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">13.4.</span> <span class="toc-text">链表的节点定义&#x2F;初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E6%8F%92%E5%85%A5"><span class="toc-number">13.5.</span> <span class="toc-text">链表的插入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E5%88%A0%E9%99%A4"><span class="toc-number">13.6.</span> <span class="toc-text">链表的删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C%E7%A8%8B%E5%BA%8F-6"><span class="toc-number">13.7.</span> <span class="toc-text">综合实验程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC10%E8%AE%B2"><span class="toc-number">14.</span> <span class="toc-text">第10讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">14.1.</span> <span class="toc-text">消息队列的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97API"><span class="toc-number">14.2.</span> <span class="toc-text">消息队列API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%88%9B%E5%BB%BA%EF%BC%8C%E5%88%A0%E9%99%A4"><span class="toc-number">14.3.</span> <span class="toc-text">消息队列创建，删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E4%B8%AD%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%8F%91%E9%80%81"><span class="toc-number">14.4.</span> <span class="toc-text">任务中消息队列发送</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E4%B8%AD%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%8F%91%E9%80%81"><span class="toc-number">14.5.</span> <span class="toc-text">中断中消息队列发送</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%8E%A5%E6%94%B6"><span class="toc-number">14.6.</span> <span class="toc-text">消息队列接收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E4%B8%8E%E4%BB%BB%E5%8A%A1%E7%A8%8B%E5%BA%8F"><span class="toc-number">14.7.</span> <span class="toc-text">任务与任务程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E4%B8%8E%E4%BB%BB%E5%8A%A1%E7%A8%8B%E5%BA%8F"><span class="toc-number">14.8.</span> <span class="toc-text">中断与任务程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC11%E8%AE%B2"><span class="toc-number">15.</span> <span class="toc-text">第11讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E9%87%8F%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%88%86%E7%B1%BB"><span class="toc-number">15.1.</span> <span class="toc-text">信号量的概念与分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%80%BC%E4%BF%A1%E5%8F%B7%E9%87%8F%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%BA%94%E7%94%A8"><span class="toc-number">15.2.</span> <span class="toc-text">二值信号量的定义与应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%80%BC%E4%BF%A1%E5%8F%B7%E9%87%8F%E7%9A%84%E8%BF%90%E4%BD%9C%E6%9C%BA%E5%88%B6"><span class="toc-number">15.3.</span> <span class="toc-text">二值信号量的运作机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84API%E5%87%BD%E6%95%B0"><span class="toc-number">15.4.</span> <span class="toc-text">常用的API函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E4%B8%8E%E4%BB%BB%E5%8A%A1%E7%A8%8B%E5%BA%8F-2"><span class="toc-number">15.5.</span> <span class="toc-text">任务与任务程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E4%B8%8E%E4%BB%BB%E5%8A%A1%E7%A8%8B%E5%BA%8F-2"><span class="toc-number">15.6.</span> <span class="toc-text">中断与任务程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC12%E8%AE%B2"><span class="toc-number">16.</span> <span class="toc-text">第12讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E6%95%B0%E4%BF%A1%E5%8F%B7%E9%87%8F%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%BA%94%E7%94%A8"><span class="toc-number">16.1.</span> <span class="toc-text">计数信号量的定义与应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="toc-number">17.</span> <span class="toc-text">内存管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeRTOS%E7%9A%84%E7%96%91%E9%97%AE"><span class="toc-number">18.</span> <span class="toc-text">FreeRTOS的疑问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeRTOS%E5%87%BD%E6%95%B0"><span class="toc-number">19.</span> <span class="toc-text">FreeRTOS函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeRTOS%E5%9D%91"><span class="toc-number">20.</span> <span class="toc-text">FreeRTOS坑</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://lib.baomitu.com/KaTeX/latest/katex.min.css"><script src="https://jsd.onmicrosoft.cn/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+</div>
+<div class="note simple"><p>因为FreeRTOS很多结构体都是定义在 <code>.c</code> 文件的，所以用户一般不能去操作它的结构体来访问成员变量</p>
+</div>
+<div class="note simple"><p>基于FreeRTOS开发时使用 <code>空闲中断+DMA</code>需要注意不要把这两行代码放串口初始化那，否则会造成卡死，但是在裸机开发时没问题，原因是因为 <code>加入FreeRTOS之后，程序已经变成了多任务系统，其中每个任务都有自己的上下文环境和栈空间。如果你在初始化函数中直接开启串口中断，那么中断处理函数将会在中断上下文中运行，而这个上下文环境和栈空间是由FreeRTOS动态分配的，而不是由裸机时静态分配的，因此可能会覆盖其他任务的栈内存，导致其他任务出错。</code>，所以最好把初始化放在任务开头</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">__HAL_UART_ENABLE_IT(&amp;huart1,UART_IT_RXNE);
+__HAL_UART_ENABLE_IT(&amp;huart1,UART_IT_IDLE);</code></pre>
+</div></article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num104.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%99%E5%AD%A6%E5%A4%A7%E7%BA%B2"><span class="toc-number">2.</span> <span class="toc-text">教学大纲</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeRTOS%E4%BB%8B%E7%BB%8D"><span class="toc-number">3.</span> <span class="toc-text">FreeRTOS介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeRTOS%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">4.</span> <span class="toc-text">FreeRTOS文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC1%E8%AE%B2"><span class="toc-number">5.</span> <span class="toc-text">第1讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FreeRTOS%E7%9A%84%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B"><span class="toc-number">5.1.</span> <span class="toc-text">FreeRTOS的启动流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC2%E8%AE%B2"><span class="toc-number">6.</span> <span class="toc-text">第2讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FreeRTOS%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC"><span class="toc-number">6.1.</span> <span class="toc-text">FreeRTOS编程风格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FreeRTOS%E8%B0%83%E8%AF%95%E6%96%B9%E6%B3%95"><span class="toc-number">6.2.</span> <span class="toc-text">FreeRTOS调试方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC3%E8%AE%B2"><span class="toc-number">7.</span> <span class="toc-text">第3讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E"><span class="toc-number">7.1.</span> <span class="toc-text">系统配置说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Config%E5%BC%80%E5%A7%8B%E7%9A%84%E5%AE%8F"><span class="toc-number">7.2.</span> <span class="toc-text">Config开始的宏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#include-%E5%BC%80%E5%A7%8B%E7%9A%84%E5%AE%8F"><span class="toc-number">7.3.</span> <span class="toc-text">include 开始的宏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%AD%E8%A8%80%E9%85%8D%E7%BD%AE"><span class="toc-number">7.4.</span> <span class="toc-text">断言配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MX%E9%87%8C%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE"><span class="toc-number">7.5.</span> <span class="toc-text">MX里参数配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC4%E8%AE%B2"><span class="toc-number">8.</span> <span class="toc-text">第4讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E7%8A%B6%E6%80%81"><span class="toc-number">8.1.</span> <span class="toc-text">任务的概念和状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E8%B0%83%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B2%E4%BB%BB%E5%8A%A1"><span class="toc-number">8.2.</span> <span class="toc-text">系统启动调度与空闲任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E7%9A%84%E8%AE%BE%E8%AE%A1%E8%A6%81%E7%82%B9"><span class="toc-number">8.3.</span> <span class="toc-text">任务的设计要点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="toc-number">8.4.</span> <span class="toc-text">任务的创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%A6%E8%A7%A3%E4%BB%BB%E5%8A%A1%E5%8F%A5%E6%9F%84"><span class="toc-number">8.5.</span> <span class="toc-text">详解任务句柄</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E5%88%A0%E9%99%A4%EF%BC%8C%E6%8C%82%E8%B5%B7%E4%B8%8E%E6%81%A2%E5%A4%8D"><span class="toc-number">8.6.</span> <span class="toc-text">任务删除，挂起与恢复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C%E7%A8%8B%E5%BA%8F"><span class="toc-number">8.7.</span> <span class="toc-text">综合实验程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC5%E8%AE%B2"><span class="toc-number">9.</span> <span class="toc-text">第5讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%86%E8%A7%A3%E8%B0%83%E5%BA%A6%E5%99%A8"><span class="toc-number">9.1.</span> <span class="toc-text">了解调度器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E6%A0%88%E5%A4%A7%E5%B0%8F%E7%A1%AE%E5%AE%9A"><span class="toc-number">9.2.</span> <span class="toc-text">任务栈大小确定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E6%A0%88%E6%BA%A2%E5%87%BA%E4%B8%8E%E6%A3%80%E6%B5%8B"><span class="toc-number">9.3.</span> <span class="toc-text">任务栈溢出与检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C%E7%A8%8B%E5%BA%8F-2"><span class="toc-number">9.4.</span> <span class="toc-text">综合实验程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC6%E8%AE%B2"><span class="toc-number">10.</span> <span class="toc-text">第6讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">10.1.</span> <span class="toc-text">中断优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">10.2.</span> <span class="toc-text">任务优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">10.3.</span> <span class="toc-text">函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%85%B3%E4%B8%AD%E6%96%AD%E4%B8%8E%E4%B8%B4%E7%95%8C%E6%AE%B5%E5%87%BD%E6%95%B0"><span class="toc-number">10.4.</span> <span class="toc-text">开关中断与临界段函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C%E7%A8%8B%E5%BA%8F-3"><span class="toc-number">10.5.</span> <span class="toc-text">综合实验程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC7%E8%AE%B2"><span class="toc-number">11.</span> <span class="toc-text">第7讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E9%94%81-%E4%B8%AD%E6%96%AD%E9%94%81%EF%BC%8C%E4%BB%BB%E5%8A%A1%E9%94%81"><span class="toc-number">11.1.</span> <span class="toc-text">调度锁,中断锁，任务锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C%E7%A8%8B%E5%BA%8F-4"><span class="toc-number">11.2.</span> <span class="toc-text">综合实验程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC8%E8%AE%B2"><span class="toc-number">12.</span> <span class="toc-text">第8讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E8%8A%82%E6%8B%8D"><span class="toc-number">12.1.</span> <span class="toc-text">系统节拍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%B6%E6%97%B6%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0"><span class="toc-number">12.2.</span> <span class="toc-text">延时相关函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C%E7%A8%8B%E5%BA%8F-5"><span class="toc-number">12.3.</span> <span class="toc-text">综合实验程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC9%E8%AE%B2"><span class="toc-number">13.</span> <span class="toc-text">第9讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">13.1.</span> <span class="toc-text">链表的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E5%90%91-%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8"><span class="toc-number">13.2.</span> <span class="toc-text">单向&#x2F;双向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FreeRTOS%E9%87%8C%E9%93%BE%E8%A1%A8%E5%AE%9E%E7%8E%B0"><span class="toc-number">13.3.</span> <span class="toc-text">FreeRTOS里链表实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E8%8A%82%E7%82%B9%E5%AE%9A%E4%B9%89-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">13.4.</span> <span class="toc-text">链表的节点定义&#x2F;初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E6%8F%92%E5%85%A5"><span class="toc-number">13.5.</span> <span class="toc-text">链表的插入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E5%88%A0%E9%99%A4"><span class="toc-number">13.6.</span> <span class="toc-text">链表的删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C%E7%A8%8B%E5%BA%8F-6"><span class="toc-number">13.7.</span> <span class="toc-text">综合实验程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC10%E8%AE%B2"><span class="toc-number">14.</span> <span class="toc-text">第10讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">14.1.</span> <span class="toc-text">消息队列的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97API"><span class="toc-number">14.2.</span> <span class="toc-text">消息队列API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%88%9B%E5%BB%BA%EF%BC%8C%E5%88%A0%E9%99%A4"><span class="toc-number">14.3.</span> <span class="toc-text">消息队列创建，删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E4%B8%AD%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%8F%91%E9%80%81"><span class="toc-number">14.4.</span> <span class="toc-text">任务中消息队列发送</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E4%B8%AD%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%8F%91%E9%80%81"><span class="toc-number">14.5.</span> <span class="toc-text">中断中消息队列发送</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%8E%A5%E6%94%B6"><span class="toc-number">14.6.</span> <span class="toc-text">消息队列接收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E4%B8%8E%E4%BB%BB%E5%8A%A1%E7%A8%8B%E5%BA%8F"><span class="toc-number">14.7.</span> <span class="toc-text">任务与任务程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E4%B8%8E%E4%BB%BB%E5%8A%A1%E7%A8%8B%E5%BA%8F"><span class="toc-number">14.8.</span> <span class="toc-text">中断与任务程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC11%E8%AE%B2"><span class="toc-number">15.</span> <span class="toc-text">第11讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E9%87%8F%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%88%86%E7%B1%BB"><span class="toc-number">15.1.</span> <span class="toc-text">信号量的概念与分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%80%BC%E4%BF%A1%E5%8F%B7%E9%87%8F%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%BA%94%E7%94%A8"><span class="toc-number">15.2.</span> <span class="toc-text">二值信号量的定义与应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%80%BC%E4%BF%A1%E5%8F%B7%E9%87%8F%E7%9A%84%E8%BF%90%E4%BD%9C%E6%9C%BA%E5%88%B6"><span class="toc-number">15.3.</span> <span class="toc-text">二值信号量的运作机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84API%E5%87%BD%E6%95%B0"><span class="toc-number">15.4.</span> <span class="toc-text">常用的API函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E4%B8%8E%E4%BB%BB%E5%8A%A1%E7%A8%8B%E5%BA%8F-2"><span class="toc-number">15.5.</span> <span class="toc-text">任务与任务程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E4%B8%8E%E4%BB%BB%E5%8A%A1%E7%A8%8B%E5%BA%8F-2"><span class="toc-number">15.6.</span> <span class="toc-text">中断与任务程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC12%E8%AE%B2"><span class="toc-number">16.</span> <span class="toc-text">第12讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E6%95%B0%E4%BF%A1%E5%8F%B7%E9%87%8F%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%BA%94%E7%94%A8"><span class="toc-number">16.1.</span> <span class="toc-text">计数信号量的定义与应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84API%E5%87%BD%E6%95%B0-2"><span class="toc-number">16.2.</span> <span class="toc-text">常用的API函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E4%B8%8E%E4%BB%BB%E5%8A%A1"><span class="toc-number">16.3.</span> <span class="toc-text">任务与任务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC13%E8%AE%B2"><span class="toc-number">17.</span> <span class="toc-text">第13讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%92%E6%96%A5%E4%BF%A1%E5%8F%B7%E9%87%8F%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%BA%94%E7%94%A8"><span class="toc-number">17.1.</span> <span class="toc-text">互斥信号量的定义与应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%85%88%E7%BA%A7%E7%BF%BB%E8%BD%AC%E9%97%AE%E9%A2%98"><span class="toc-number">17.2.</span> <span class="toc-text">优先级翻转问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%85%88%E7%BA%A7%E7%BF%BB%E8%BD%AC%E7%BC%96%E7%A8%8B%E9%AA%8C%E8%AF%81"><span class="toc-number">17.3.</span> <span class="toc-text">优先级翻转编程验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84API%E5%87%BD%E6%95%B0-3"><span class="toc-number">17.4.</span> <span class="toc-text">常用的API函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%92%E6%96%A5%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%BA%94%E7%94%A8%E7%BC%96%E7%A8%8B"><span class="toc-number">17.5.</span> <span class="toc-text">互斥信号量应用编程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%92%E5%BD%92%E4%BA%92%E6%96%A5%E4%BF%A1%E5%8F%B7%E9%87%8F"><span class="toc-number">17.6.</span> <span class="toc-text">递归互斥信号量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC14%E8%AE%B2"><span class="toc-number">18.</span> <span class="toc-text">第14讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%BA%94%E7%94%A8"><span class="toc-number">18.1.</span> <span class="toc-text">事件的概念与应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E7%9A%84%E8%BF%90%E4%BD%9C%E5%85%B3%E7%B3%BB"><span class="toc-number">18.2.</span> <span class="toc-text">事件的运作关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84API%E5%87%BD%E6%95%B0-4"><span class="toc-number">18.3.</span> <span class="toc-text">常用的API函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E4%B8%8E%E4%BB%BB%E5%8A%A1-2"><span class="toc-number">18.4.</span> <span class="toc-text">任务与任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E4%B8%8E%E4%BB%BB%E5%8A%A1"><span class="toc-number">18.5.</span> <span class="toc-text">中断与任务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC15%E8%AE%B2"><span class="toc-number">19.</span> <span class="toc-text">第15讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%BA%94%E7%94%A8"><span class="toc-number">19.1.</span> <span class="toc-text">软件定时器的概念与应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84API%E5%87%BD%E6%95%B0-5"><span class="toc-number">19.2.</span> <span class="toc-text">常用的API函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E7%BC%96%E7%A8%8B"><span class="toc-number">19.3.</span> <span class="toc-text">应用编程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC16%E8%AE%B2"><span class="toc-number">20.</span> <span class="toc-text">第16讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">20.1.</span> <span class="toc-text">任务通知的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5%E7%9A%84%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6"><span class="toc-number">20.2.</span> <span class="toc-text">任务通知的运行机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84API%E5%87%BD%E6%95%B0-6"><span class="toc-number">20.3.</span> <span class="toc-text">常用的API函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5%E4%BB%A3%E6%9B%BF%E4%BA%8C%E5%80%BC%E4%BF%A1%E5%8F%B7%E9%87%8F%E7%BC%96%E7%A8%8B"><span class="toc-number">20.4.</span> <span class="toc-text">任务通知代替二值信号量编程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5%E4%BB%A3%E6%9B%BF%E8%AE%A1%E6%95%B0%E4%BF%A1%E5%8F%B7%E9%87%8F%E7%BC%96%E7%A8%8B"><span class="toc-number">20.5.</span> <span class="toc-text">任务通知代替计数信号量编程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5%E4%BB%A3%E6%9B%BF%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%BC%96%E7%A8%8B"><span class="toc-number">20.6.</span> <span class="toc-text">任务通知代替消息队列编程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5%E4%BB%A3%E6%9B%BF%E4%BA%8B%E4%BB%B6%E7%BB%84%E7%BC%96%E7%A8%8B"><span class="toc-number">20.7.</span> <span class="toc-text">任务通知代替事件组编程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A81"><span class="toc-number">21.</span> <span class="toc-text">综合应用1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC17%E8%AE%B2"><span class="toc-number">22.</span> <span class="toc-text">第17讲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E4%BB%8B%E7%BB%8D"><span class="toc-number">22.1.</span> <span class="toc-text">动态内存管理介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#heap-1%E5%92%8Cheap-4%E6%B5%8B%E8%AF%95"><span class="toc-number">22.2.</span> <span class="toc-text">heap_1和heap_4测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeRTOS%E7%9A%84%E7%96%91%E9%97%AE"><span class="toc-number">23.</span> <span class="toc-text">FreeRTOS的疑问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeRTOS%E5%87%BD%E6%95%B0"><span class="toc-number">24.</span> <span class="toc-text">FreeRTOS函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeRTOS%E5%9D%91"><span class="toc-number">25.</span> <span class="toc-text">FreeRTOS坑</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://lib.baomitu.com/KaTeX/latest/katex.min.css"><script src="https://jsd.onmicrosoft.cn/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
   document.querySelectorAll('#article-container span.katex-display').forEach(item => {
     btf.wrap(item, 'div', { class: 'katex-wrap'})
   })

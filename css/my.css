@@ -1629,4 +1629,16 @@ div.btns a[href]:hover {
 #page .category-lists .category-list li.category-list-item:nth-child(25) a.category-list-link::before {
     content: "🖥️";
 }
+
+#page .category-lists .category-list li.category-list-item:nth-child(26) a.category-list-link::before {
+    content: "📚";
+}
+
+#page .category-lists .category-list li.category-list-item:nth-child(26) {
+    background: -webkit-linear-gradient(left, #6639a6, #3490de);
+    background: -moz-linear-gradient(left, #6639a6, #3490de);
+    background: -o-linear-gradient(left, #6639a6, #3490de);
+    background: -ms-linear-gradient(left, #6639a6, #3490de);
+    background: linear-gradient(to right, #6639a6, #3490de);
+}
 /* 分类美化end */
