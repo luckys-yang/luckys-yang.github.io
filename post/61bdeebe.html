@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>VS Code安装教程 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="安装与配置vscode   官网下载 VS Code：Visual Studio Code    下载 TDM-GCC：tdm-gcc   安装过程需要注意：    安装完成先不要打开 vs code ，先在没有中文的路径下新建一个文件夹，然后进去文件夹里右键选择【通过 code 打开】，然后进入到 vs code 在里面左边栏右键新建文件，取名 main.cpp 然后简单写几行代码用来调试（得先">
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>VS Code安装教程 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="安装与配置vscode 参考文章：https:&#x2F;&#x2F;juejin.cn&#x2F;post&#x2F;7054468187600977956  官网下载 Visual Studio Code  去下载 MingG64，选择 x86_64-posix-seh，直接解压到D盘某文件夹里即可，我的路径是 D:\GW64\mingw64\bin 配置环境变量，进去到刚刚解压的文件夹里，找到 bin ，复制当前路径打开环境变量在">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VS Code安装教程">
 <meta property="og:url" content="https://mdcm.yang5201314.cn/post/61bdeebe.html">
 <meta property="og:site_name" content="Luckys-Yangの小栈">
-<meta property="og:description" content="安装与配置vscode   官网下载 VS Code：Visual Studio Code    下载 TDM-GCC：tdm-gcc   安装过程需要注意：    安装完成先不要打开 vs code ，先在没有中文的路径下新建一个文件夹，然后进去文件夹里右键选择【通过 code 打开】，然后进入到 vs code 在里面左边栏右键新建文件，取名 main.cpp 然后简单写几行代码用来调试（得先">
+<meta property="og:description" content="安装与配置vscode 参考文章：https:&#x2F;&#x2F;juejin.cn&#x2F;post&#x2F;7054468187600977956  官网下载 Visual Studio Code  去下载 MingG64，选择 x86_64-posix-seh，直接解压到D盘某文件夹里即可，我的路径是 D:\GW64\mingw64\bin 配置环境变量，进去到刚刚解压的文件夹里，找到 bin ，复制当前路径打开环境变量在">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://mdcm.yang5201314.cn/img/num46.webp">
 <meta property="article:published_time" content="2022-05-30T07:40:00.000Z">
-<meta property="article:modified_time" content="2022-09-25T05:38:36.000Z">
+<meta property="article:modified_time" content="2023-04-16T04:50:12.899Z">
 <meta property="article:author" content="Luckys-Yang">
 <meta property="article:tag" content="VS Code">
 <meta property="article:tag" content="PicGo">
@@ -58,7 +58,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2022-09-25 13:38:36'
+  postUpdate: '2023-04-16 12:50:12'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -175,60 +175,65 @@ window.addEventListener('load',()=> { preloader.endLoading() })
 if (true) {
   document.addEventListener('pjax:send', () => { preloader.initLoading() })
   document.addEventListener('pjax:complete', () => { preloader.endLoading() })
-}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">124</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">77</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">VS Code安装教程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-30T07:40:00.000Z" title="发表于 2022-05-30 15:40:00">2022-05-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-09-25T05:38:36.000Z" title="更新于 2022-09-25 13:38:36">2022-09-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB%E4%B8%8E%E6%95%99%E7%A8%8B/">资源分享与教程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">766</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="安装与配置vscode">安装与配置vscode</h2>
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">126</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">77</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">VS Code安装教程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-30T07:40:00.000Z" title="发表于 2022-05-30 15:40:00">2022-05-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-16T04:50:12.899Z" title="更新于 2023-04-16 12:50:12">2023-04-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB%E4%B8%8E%E6%95%99%E7%A8%8B/">资源分享与教程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">806</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="安装与配置vscode">安装与配置vscode</h2>
+<p>参考文章：<a href="https://juejin.cn/post/7054468187600977956">https://juejin.cn/post/7054468187600977956</a></p>
 <ul>
-<li>
-<p>官网下载 <font color='orange'>VS Code</font>：<a href="https://code.visualstudio.com/">Visual Studio Code </a></p>
-</li>
-<li>
-<p>下载 TDM-GCC：<a href="https://jmeubank.github.io/tdm-gcc/download/">tdm-gcc</a></p>
-</li>
-<li>
-<p>安装过程需要注意：<br>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205301656472.png" alt=""></p>
-</li>
-<li>
-<p>安装完成先不要打开 <code>vs code</code> ，先在没有中文的路径下新建一个文件夹，然后进去文件夹里右键选择【通过 code 打开】，然后进入到 <code>vs code</code> 在里面左边栏右键新建文件，取名 <code>main.cpp</code> 然后简单写几行代码用来调试（得先下载相关插件）</p>
-</li>
-<li>
-<p>安装插件<br>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220614171327.jpg" alt=""><br>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205301741486.jpg" alt=""><br>
-如果运行报错：<code>launch: program 'd:\vsProject\mian.exe'does not exist</code>，则需要配置<code>tasks.json</code> 和 <code>launch.json</code>，直接替换成下面的模板修改一下路径即可</p>
-</li>
+<li>官网下载 <a href="https://code.visualstudio.com/">Visual Studio Code </a></li>
+<li>去下载 <a href="https://sourceforge.net/projects/mingw-w64/files/">MingG64</a>，选择 <code>x86_64-posix-seh</code>，直接解压到D盘某文件夹里即可，我的路径是 <code>D:\GW64\mingw64\bin</code></li>
+<li>配置环境变量，进去到刚刚解压的文件夹里，找到 <code>bin</code> ，复制当前路径打开环境变量在 Path里添加即可</li>
 </ul>
-<p>tasks.json</p>
-<p>注意：&quot;command&quot;和&quot;detail&quot;的路径得看你之前下载的<code>TDM-GCC</code>的路径，替换即可<br>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220614172023.jpg" alt=""></p>
-<pre class="line-numbers language-json" data-language="json"><code class="language-json">&#123;
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416124922.webp" alt=""></p>
+<ul>
+<li>打开vscode，安装中文插件还有 <code>C\C++</code> 插件，然后 <code>CTRL+SHIFT+P</code> 打开控制面板，输入 <code>C\C++</code> ，找到UI配置，进去路径选择你刚刚那个bin里面(一般已经自动检测到)，然后下面选择 <code>window-gcc-x64</code></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416124810.webp" alt=""></p>
+<ul>
+<li>然后写一个C语言测试代码点击 <code>以非调试模式运行</code></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416124039.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416124053.webp" alt=""></p>
+<p>它会生成一个 <code>.vscode</code> 文件夹，里面有 <code>tasks.json</code>，<code>launch.json(可能没有这个需要自己创建)</code>，然后按下面修改即可</p>
+<details ><summary> tasks.json </summary>
+              <div class='content'>
+              <pre class="line-numbers language-json" data-language="json"><code class="language-json">&#123;
     &quot;tasks&quot;: [
-    &#123;
-        &quot;type&quot;: &quot;cppbuild&quot;,
-        &quot;label&quot;: &quot;C&#x2F;C++: g++.exe build active file&quot;,
-        &quot;command&quot;: &quot;D:&#x2F;tdmgcc&#x2F;tdd&#x2F;bin&#x2F;g++.exe&quot;,
-        &quot;args&quot;: [&quot;-g&quot;, &quot;$&#123;file&#125;&quot;, &quot;-o&quot;, &quot;$&#123;fileDirname&#125;\\$&#123;fileBasenameNoExtension&#125;.exe&quot;],
-        &quot;options&quot;: &#123;
-        &quot;cwd&quot;: &quot;$&#123;fileDirname&#125;&quot;
-        &#125;,
-        &quot;problemMatcher&quot;: [&quot;$gcc&quot;],
-        &quot;group&quot;: &#123;
-        &quot;kind&quot;: &quot;build&quot;,
-        &quot;isDefault&quot;: true
-        &#125;,
-        &quot;detail&quot;: &quot;compiler: D:&#x2F;tdmgcc&#x2F;tdd&#x2F;bin&#x2F;g++.exe&quot;
-    &#125;
+        &#123;
+            &quot;type&quot;: &quot;cppbuild&quot;,
+            &quot;label&quot;: &quot;C&#x2F;C++: gcc.exe 生成活动文件&quot;,
+            &quot;command&quot;: &quot;D:\\GW64\\mingw64\\bin\\gcc.exe&quot;,	&#x2F;&#x2F;路径看你自己那改
+            &quot;args&quot;: [
+                &quot;-fdiagnostics-color&#x3D;always&quot;,
+                &quot;-g&quot;,
+                &quot;-fexec-charset&#x3D;GBK&quot;,   &#x2F;&#x2F; 处理mingw中文编码问题
+                &quot;-finput-charset&#x3D;UTF-8&quot;,&#x2F;&#x2F; 处理mingw中文编码问题
+                &quot;$&#123;file&#125;&quot;,
+                &quot;-o&quot;,
+                &quot;$&#123;fileDirname&#125;\\$&#123;fileBasenameNoExtension&#125;.exe&quot;
+            ],
+            &quot;options&quot;: &#123;
+                &quot;cwd&quot;: &quot;$&#123;fileDirname&#125;&quot;
+            &#125;,
+            &quot;problemMatcher&quot;: [
+                &quot;$gcc&quot;
+            ],
+            &quot;group&quot;: &#123;
+                &quot;kind&quot;: &quot;build&quot;,
+                &quot;isDefault&quot;: true
+            &#125;,
+            &quot;detail&quot;: &quot;调试器生成的任务。&quot;
+        &#125;
     ],
     &quot;version&quot;: &quot;2.0.0&quot;
 &#125;</code></pre>
-<p>launch.json</p>
-<p>注意：这里&quot;miDebuggerPath&quot;路径跟上面一样需要改成你的路径</p>
-<pre class="line-numbers language-json" data-language="json"><code class="language-json">&#123;
-    &#x2F;&#x2F; 使用 IntelliSense 了解相关属性。 
-    &#x2F;&#x2F; 悬停以查看现有属性的描述。
-    &#x2F;&#x2F; 欲了解更多信息，请访问: https:&#x2F;&#x2F;go.microsoft.com&#x2F;fwlink&#x2F;?linkid&#x3D;830387
+              </div>
+            </details>
+<details ><summary> launch.json </summary>
+              <div class='content'>
+              <pre class="line-numbers language-json" data-language="json"><code class="language-json">&#123;
     &quot;version&quot;: &quot;0.2.0&quot;,
-    &quot;configurations&quot;: [&#123;
-        &quot;name&quot;: &quot;g++.exe - Build and debug active file&quot;,
+    &quot;configurations&quot;: [
+      &#123;
+        &quot;name&quot;: &quot;g++.exe - 生成和调试活动文件&quot;,
         &quot;type&quot;: &quot;cppdbg&quot;,
         &quot;request&quot;: &quot;launch&quot;,
         &quot;program&quot;: &quot;$&#123;fileDirname&#125;\\$&#123;fileBasenameNoExtension&#125;.exe&quot;,
@@ -236,19 +241,22 @@ if (true) {
         &quot;stopAtEntry&quot;: false,
         &quot;cwd&quot;: &quot;$&#123;fileDirname&#125;&quot;,
         &quot;environment&quot;: [],
-        &quot;externalConsole&quot;: false,
+        &quot;externalConsole&quot;: true,  &#x2F;&#x2F;打开控制台需要在程序里加 system(&quot;pause&quot;);否则控制台一闪而过
         &quot;MIMode&quot;: &quot;gdb&quot;,
-        &quot;miDebuggerPath&quot;: &quot;D:\\tdmgcc\\tdd\\bin\\gdb.exe&quot;,
+        &quot;miDebuggerPath&quot;: &quot;D:\\GW64\\mingw64\\bin\\gdb.exe&quot;,
         &quot;setupCommands&quot;: [
-        &#123;
-            &quot;description&quot;: &quot;Enable pretty-printing for gdb&quot;,
+          &#123;
+            &quot;description&quot;: &quot;为 gdb 启用整齐打印&quot;,
             &quot;text&quot;: &quot;-enable-pretty-printing&quot;,
             &quot;ignoreFailures&quot;: true
-        &#125;
-    ],
-    &quot;preLaunchTask&quot;: &quot;C&#x2F;C++: g++.exe build active file&quot;
-    &#125;]
-&#125;</code></pre>
+          &#125;
+        ],
+        &quot;preLaunchTask&quot;: &quot;C&#x2F;C++: gcc.exe 生成活动文件&quot;
+      &#125;
+    ]
+  &#125;</code></pre>
+              </div>
+            </details>
 <h2 id="附：PicGo上传图片问题">附：PicGo上传图片问题</h2>
 <p>1、需要把 <code>火绒</code> 关了！！！<br>
 2、<code>设置</code>-&gt;<code>代理</code>-&gt;<code>手动设置代理</code>，选上<br>

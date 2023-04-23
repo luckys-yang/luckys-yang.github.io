@@ -1,0 +1,1323 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>硬件基础篇 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言 学习硬件是因为我的弱项就是硬件，想通过学习硬件来加强自己的弱项！ 电阻 理论讲解 电阻定义：电荷在导体中运动时，形成电流。导体中的分子、原子等其他粒子阻碍电荷移动，进而阻碍电流，这种阻碍作用，我们称之为电阻 电阻单位为Ω，电阻越大，阻碍作用越大，电流越小。  I(安培A)&#x3D;U(伏特V)R(欧姆Ω)I(\text{安培A}) &#x3D; \frac{U(\text{伏特V})}{R(\text{欧姆}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="硬件基础篇">
+<meta property="og:url" content="https://mdcm.yang5201314.cn/post/f1b90b6e.html">
+<meta property="og:site_name" content="Luckys-Yangの小栈">
+<meta property="og:description" content="前言 学习硬件是因为我的弱项就是硬件，想通过学习硬件来加强自己的弱项！ 电阻 理论讲解 电阻定义：电荷在导体中运动时，形成电流。导体中的分子、原子等其他粒子阻碍电荷移动，进而阻碍电流，这种阻碍作用，我们称之为电阻 电阻单位为Ω，电阻越大，阻碍作用越大，电流越小。  I(安培A)&#x3D;U(伏特V)R(欧姆Ω)I(\text{安培A}) &#x3D; \frac{U(\text{伏特V})}{R(\text{欧姆}">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mdcm.yang5201314.cn/img/num125.webp">
+<meta property="article:published_time" content="2023-04-15T10:00:28.000Z">
+<meta property="article:modified_time" content="2023-04-18T13:58:22.868Z">
+<meta property="article:author" content="Luckys-Yang">
+<meta property="article:tag" content="博客,个人博客,技术,学习,Hexo,Blog,STM32,嵌入式,单片机">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mdcm.yang5201314.cn/img/num125.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"><link rel="canonical" href="https://mdcm.yang5201314.cn/post/f1b90b6e.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '硬件基础篇',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-18 21:58:22'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/aplayer.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">126</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">77</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">硬件基础篇</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-15T10:00:28.000Z" title="发表于 2023-04-15 18:00:28">2023-04-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-18T13:58:22.868Z" title="更新于 2023-04-18 21:58:22">2023-04-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A1%AC%E4%BB%B6/">硬件</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">13.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>43分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
+<p>学习硬件是因为我的弱项就是硬件，想通过学习硬件来加强自己的弱项！</p>
+<h2 id="电阻">电阻</h2>
+<h3 id="理论讲解">理论讲解</h3>
+<p><code>电阻定义</code>：电荷在导体中运动时，形成电流。导体中的分子、原子等其他粒子阻碍电荷移动，进而阻碍电流，这种阻碍作用，我们称之为电阻</p>
+<p>电阻单位为<code>Ω</code>，电阻越大，阻碍作用越大，电流越小。</p>
+<blockquote>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mo stretchy="false">(</mo><mtext>安培A</mtext><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi>U</mi><mo stretchy="false">(</mo><mtext>伏特V</mtext><mo stretchy="false">)</mo></mrow><mrow><mi>R</mi><mo stretchy="false">(</mo><mtext>欧姆</mtext><mi mathvariant="normal">Ω</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">I(\text{安培A}) = \frac{U(\text{伏特V})}{R(\text{欧姆}Ω)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mopen">(</span><span class="mord text"><span class="mord cjk_fallback">安培</span><span class="mord">A</span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.53em;vertical-align:-0.52em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.00773em;">R</span><span class="mopen mtight">(</span><span class="mord text mtight"><span class="mord cjk_fallback mtight">欧姆</span></span><span class="mord mtight">Ω</span><span class="mclose mtight">)</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">U</span><span class="mopen mtight">(</span><span class="mord text mtight"><span class="mord cjk_fallback mtight">伏特</span><span class="mord mtight">V</span></span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.52em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
+</blockquote>
+<blockquote>
+<p>单位换算：1KΩ = 1000Ω；1MΩ = 1000KΩ；1mΩ = 0.001Ω</p>
+</blockquote>
+<h3 id="选型">选型</h3>
+<p>基于产品越来越趋向于小巧、生产工艺不断提升、后焊人工成本高等考虑， 绝大部分产品选择 <code>贴片电阻</code></p>
+<blockquote>
+<p>根据电路，选择合适的阻值</p>
+<p>常见阻值</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230415203144.webp" alt=""></p>
+</blockquote>
+<blockquote>
+<p>贴片电阻标称</p>
+<ul>
+<li>其中“04”表示长和宽的尺寸分别为0.04英寸，即1.0mm x 0.5mm，而“02”表示厚度为0.02英寸，即0.5mm， <code>0402</code> 指的是一种贴片电阻封装规格</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230415203540.webp" alt=""></p>
+<ul>
+<li>第一个数字表示有效数字1、第二个数字表示有效数字2、第三个数字表示乘数0(即10的多少次方)，单位 <code>Ω</code></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230415205103.webp" alt=""></p>
+<ul>
+<li><code>R</code> 表示小数点，单位 <code>Ω</code></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230415205439.webp" alt=""></p>
+<ul>
+<li>2701Ω就是2.7KΩ</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230415205658.webp" alt=""></p>
+<ul>
+<li>跟上面333计算一样</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230415210146.webp" alt=""></p>
+<ul>
+<li>小于1Ω的，开头是R，表示 <code>0.</code></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230415210313.webp" alt=""></p>
+</blockquote>
+<blockquote>
+<p>非常规电阻，通过 <code>串联</code> 或者 <code>并联</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230415210659.webp" alt=""></p>
+</blockquote>
+<blockquote>
+<p>确认电阻值的方法：</p>
+<p>分 <code>计算取值</code>， <code>手册取值</code> ， <code>经验取值</code></p>
+<ol>
+<li>计算取值分压电压，反馈电路，取样电路，根据电路计算即可</li>
+<li>手册取值设计电路时，参考手册应用电路，按建议取值</li>
+<li>经验取值比如 <code>上拉，一般1k，4.7k，10k，100k等</code>，电阻越小，上拉越强，下拉也是。</li>
+</ol>
+</blockquote>
+<ul>
+<li>封装与功耗</li>
+</ul>
+<blockquote>
+<p>公式：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mtext>瓦特W</mtext><mo stretchy="false">)</mo><mo>=</mo><mi>U</mi><mo stretchy="false">(</mo><mtext>电压V</mtext><mo stretchy="false">)</mo><mo>∗</mo><mi>I</mi><mo stretchy="false">(</mo><mtext>电流A</mtext><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(\text{瓦特W}) = U(\text{电压V})*I(\text{电流A})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord text"><span class="mord cjk_fallback">瓦特</span><span class="mord">W</span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mopen">(</span><span class="mord text"><span class="mord cjk_fallback">电压</span><span class="mord">V</span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mopen">(</span><span class="mord text"><span class="mord cjk_fallback">电流</span><span class="mord">A</span></span><span class="mclose">)</span></span></span></span></p>
+</blockquote>
+<p>它功耗对应不同的封装，比如0603它功耗不能超过 <code>1/10</code> W，但一般来说我们不会超过它的80%，即 <code>0.1*0.8 = 0.08W</code></p>
+<p>还有就是看板子大小，小的板子就选择小点的封装，优先选择0603</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230415212002.webp" alt=""></p>
+<ul>
+<li>精度</li>
+</ul>
+<p>综合考虑电路性能，成本，采购方便性，合理选择精度，常规精度为 <code>5%，1%</code></p>
+<p>电路方面：</p>
+<blockquote>
+<p>电压反馈电路，取样电路等，要求1%精度，其他默认5%精度</p>
+</blockquote>
+<p>成本方面:</p>
+<blockquote>
+<p>5%精度比1%精度便宜，满足需求的情况下，尽量选择低成本的</p>
+</blockquote>
+<p>采购方面:</p>
+<blockquote>
+<p>如果有5个1%精度的10k电阻，有3个5%的精度的10k电阻，而产品对成本又没有过高的要求，可以统一使用1%精度的，减少物料采购种类，也方便贴片</p>
+</blockquote>
+<p>比如这个，就需要大点的精度了1%( <code>上限：5 + 1% × 5 = 5 + 0.05 = 5.05V 下限：5 - 1% × 5 = 5 - 0.05 = 4.95V</code>)，如果使用5%精度可能误差就有点大( <code>上限：5 + 5% × 5 = 5 + 0.25 = 5.25V 下限：5 - 5% × 5 = 5 - 0.25 = 4.75V</code>)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230415213156.webp" alt=""></p>
+<p>其他那些的话不需要精度高就5%就行了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230415214022.webp" alt=""></p>
+<ul>
+<li>成本</li>
+</ul>
+<p>满足要求的情况下，选择成本低的</p>
+<ul>
+<li>PCB板尺寸</li>
+</ul>
+<p>PCB尺寸很小时，可以选择0402，甚至0201的;PCB尺寸适中时，可以选择0603的，对工艺要求低些</p>
+<ul>
+<li>工艺</li>
+</ul>
+<p>满足需求的情况下，尽量不选择过小封装的，降低工艺要求</p>
+<ul>
+<li>维修</li>
+</ul>
+<p>满足需求的情况下，尽量不选择过小封装的，降低维修难度</p>
+<h3 id="阅读数据手册">阅读数据手册</h3>
+<ul>
+<li>风华高科 - 常规厚膜片式固定电阻器</li>
+</ul>
+<p>了解一下手册的命名方法</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230415215414.webp" alt=""></p>
+<h3 id="仪器测量">仪器测量</h3>
+<p><code>工具</code>：万用表</p>
+<p><code>测量方法</code>：万用表调节至 <code>欧姆档</code> ，表笔位于V/Q与COM接口，笔头放置在电阻两端进行测量</p>
+<p><code>注意事项</code>： <code>不要带电测量电阻</code>；如果电阻安装在电路板上，确定电阻两端是否受其他电路影响； <code>选择自动量程</code>，如果手动量程，量程与实际值不要相差过大，影响测量精度</p>
+<h3 id="产品应用">产品应用</h3>
+<ul>
+<li>限流</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230415221325.webp" alt=""></p>
+<blockquote>
+<p><code>R50</code>：限制发光二极管D6的电流。<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mo>=</mo><mfrac><mrow><mo stretchy="false">(</mo><mn>3.3</mn><mi>V</mi><mo>−</mo><mn>1.6</mn><mi>V</mi><mo stretchy="false">)</mo></mrow><mrow><mn>470</mn><mi mathvariant="normal">Ω</mi></mrow></mfrac><mo>=</mo><mn>3.6</mn><mi>m</mi><mi>A</mi></mrow><annotation encoding="application/x-tex">I= \frac{(3.3V -1.6V)}{470Ω} = 3.6mA</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.355em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">470Ω</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight">3.3</span><span class="mord mathnormal mtight" style="margin-right:0.22222em;">V</span><span class="mbin mtight">−</span><span class="mord mtight">1.6</span><span class="mord mathnormal mtight" style="margin-right:0.22222em;">V</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">3.6</span><span class="mord mathnormal">m</span><span class="mord mathnormal">A</span></span></span></span>，因为当PG13推挽输出时管脚电压是3.3V，发光二极管两端电压是1.6(不同颜色灯可能不一样)，为什么加电阻呢因为这个LED它有限制电流的，比如不能超过20mA，如果超过就会烧掉了</p>
+<p><code>R51</code>：限制晶体管Q2的电流，使其工作在饱和状态，因为对于常见的硅晶体管（NPN/PNP型），其基极与发射极之间的压降大约在 <code>0.6-0.7V</code> 左右，如果将3.3V直接加到NPN/PNP型晶体管的基极上，可能会出现以下两种情况：</p>
+<ol>
+<li>基极电流过大，导致晶体管损坏：由于晶体管的放大作用，一旦将高电平直接接到基极上，晶体管会自动进入饱和区，产生极大电流。因此，需要通过限流电阻来控制基极电流，从而避免超过晶体管的最大额定电流而损毁</li>
+<li>基极-发射结电压超过额定值，导致晶体管损坏：晶体管的基极-发射结具有一定的正向电压降，如果直接把3.3V信号加到基极上，电压降就会超过额定值，导致基极-发射结失效而损坏晶体管</li>
+</ol>
+<p>可以通过计算公式来确认限流电阻的大小或者计算基极电流值：</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>R限 = (V信号 - VBE) / I限</mtext></mrow><annotation encoding="application/x-tex">\text{R限 = (V信号 - VBE) / I限}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">R</span><span class="mord cjk_fallback">限</span><span class="mord"> = (V</span><span class="mord cjk_fallback">信号</span><span class="mord"> - VBE) / I</span><span class="mord cjk_fallback">限</span></span></span></span></span></p>
+<p>(<code>R限表示限流电阻的电阻值；V信号表示信号源的输出电压（即3.3V）；VBE表示晶体管的基极-发射结电压降（通常为0.6到0.7V）；I限表示限制基极电流的电流值</code>)</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>I限流值=</mtext><mfrac><mrow><mo stretchy="false">(</mo><mn>3.3</mn><mi>V</mi><mo>−</mo><mn>0.6</mn><mi>V</mi><mo stretchy="false">)</mo></mrow><mrow><mn>1</mn><mi>K</mi></mrow></mfrac><mo>=</mo><mn>2.7</mn><mi>m</mi><mi>A</mi></mrow><annotation encoding="application/x-tex">\text{I限流值=}\frac{(3.3V - 0.6V)}{1K}= 2.7mA</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.355em;vertical-align:-0.345em;"></span><span class="mord text"><span class="mord">I</span><span class="mord cjk_fallback">限流值</span><span class="mord">=</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mathnormal mtight" style="margin-right:0.07153em;">K</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight">3.3</span><span class="mord mathnormal mtight" style="margin-right:0.22222em;">V</span><span class="mbin mtight">−</span><span class="mord mtight">0.6</span><span class="mord mathnormal mtight" style="margin-right:0.22222em;">V</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">2.7</span><span class="mord mathnormal">m</span><span class="mord mathnormal">A</span></span></span></span>，即该晶体管的基极电流为2.7mA，这个电流应该在NPN型晶体管的额定电流之内(不同型号晶体管额定电流不一样)，这个NPN型号是 <code>S8050</code>它的额定电流是700mA， 所以不会导致晶体管的损坏</p>
+</blockquote>
+<ul>
+<li>恒流</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416145607.webp" alt=""></p>
+<p><code>R21</code>：对锂电池快速充电时，充电电流恒定在3A，因为CSP和BAT固定电压是120mA</p>
+<ul>
+<li>分压</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416151431.webp" alt=""></p>
+<p><code>R32，R35，R45</code>：通过分压，使LDO输出电压为2.5V</p>
+<ul>
+<li>取样</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416151828.webp" alt=""></p>
+<p><code>R21</code>：通过取样，将4-20mA电流转化为0.6V-3V电压( <code>U1=IR=0.004*150=0.6V U2=IR=0.02*150=3V</code>)，供ADC采样</p>
+<ul>
+<li>阻抗匹配</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416152547.webp" alt=""></p>
+<p><code>R26</code>: RS-485阻抗匹配电阻，满足长距离传输时，减少终端反射，一般通讯用得多</p>
+<ul>
+<li>上拉，下拉</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416152839.webp" alt=""></p>
+<p><code>R4，R5</code>：上拉电阻(电阻接电源)，让IIC总线默认为高电平</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416153316.webp" alt=""></p>
+<p><code>R62</code>:下拉电阻(电阻接地)，确保PA8为浮空时，Q4(PNP)为截止状态。</p>
+<h3 id="0Ω电阻">0Ω电阻</h3>
+<p>零欧姆电阻又称为 <code>跨接电阻器</code>，是一种特殊用途的电阻，0欧姆电阻的阻值并非为零。风华高科对0Q贴片电阻有三个精度等级，分别是 <code>F档(≤10mQ)、G档(≤20mQ2)、J档(≤50mQ)</code></p>
+<blockquote>
+<p>常规用途：</p>
+<ul>
+<li>备用功能</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416154310.webp" alt=""></p>
+<p>电源电路放置了2个0Ω电阻，方便调试或维修时，断开某一路电源，需要时，也可以更换为磁珠等。，比如上电发现板子不工作，那我可以把这些电阻断开，然后一个个加上去测试看看哪里出现问题</p>
+<p>(<code>磁珠也叫磁性射频滤波器。它通常是一颗小型的磁铁，由磁性材料制成，内部包含一个或多个线圈。磁珠可以用来实现电路中的高频滤波、信号隔离和噪声抑制等功能</code>)</p>
+<ul>
+<li>可以作为数字地与模拟地的跨接电阻，地线分开，方便走线与覆铜</li>
+</ul>
+<p>如果两个地之间没有电阻连接，可能会导致一些毛刺和噪声，影响系统性能和稳定性</p>
+<p>(<code>数字地和模拟地是在电路设计中常见的两种地，它们分别为数字信号处理部分和模拟信号处理部分提供电源和信号参考。数字地主要用于数字电路，例如微处理器、数字信号处理器、FPGA等数字电路，而模拟地主要用于模拟电路，例如放大器、滤波器、ADC/DAC等电路</code>)</p>
+<ul>
+<li>作为配置短路使用。这个作用类似拨码开关，但是可以避免用户随意修改配置。通过安装不同位置的电阻，可以实现不同的功能。比如TFT屏幕就可以通过0Q电阻设置8位或16位数据总线。</li>
+<li>预留参数调整</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416155452.webp" alt=""></p>
+<p><code>R83</code>：预留GSM天线匹配电路，因为有时候你不知道这里的值是多少，可以用0Ω代替后面再把具体值改回去</p>
+</blockquote>
+<h3 id="热敏电阻">热敏电阻</h3>
+<p>热敏电阻器是敏感元件的一类，按照温度系数不同分为 <code>正温度系数热敏电阻器(PTC也叫自恢复保险丝)</code> 和 <code>负温度系数热敏电阻器(NTC)</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416161231.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416162916.webp" alt=""></p>
+<p>热敏电阻器的典型特点是对 <code>温度敏感</code>， <code>不同的温度下表现出不同的电阻值</code>。正温度系数热敏电阻器(PTC)在 <code>温度越高时电阻值越大</code>，负温度系数热敏电阻器(NTC)在 <code>温度越高时电阻值越低</code>，它们同属于 <code>半导体器件</code>。</p>
+<ul>
+<li>NTC热敏电阻用于开关电源启动限流</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416160320.webp" alt=""></p>
+<p><code>RT1作用</code>：电源启动时，输入电容C5电压为0，充电瞬间电流很大。有了RT1，启动时限制充电电流，一旦RT1发热，阻值降低，相当于短接了。</p>
+<p>电容充放电的公式：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mo>=</mo><mi>C</mi><mo>×</mo><mfrac><mrow><mi>d</mi><mi>V</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">I = C \times \frac{dV}{dt}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.2251em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="mord mathnormal mtight">t</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="mord mathnormal mtight" style="margin-right:0.22222em;">V</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
+<p>(<code>I 表示电容器中的电流，C 表示电容器的电容量，dV/dt 表示电容器电压随时间的变化率</code>)</p>
+<ul>
+<li>通过NTC电阻测量温度</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416161802.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416161959.webp" alt=""></p>
+<p><code>RT1</code>:B型NTC热敏电阻(CMFB103F3950FANT)，温度与阻值呈现一定关系，通过ADC采集电压，计算电阻，即可测出环境温度</p>
+<ul>
+<li>PTC电阻用于短路保护</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416162600.webp" alt=""></p>
+<p><code>F2</code>: PTC电阻，输出短路时，PTC阻值发热，阻值变大，启动短路保护作用。此电路不能用于高温环境中，合理使用。当你把短接拿开后温度慢慢降下来然后又恢复原样，不同型号它的最大承受电压电流不一样，看实际电路选择合适的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416163305.webp" alt=""></p>
+<h3 id="光敏电阻">光敏电阻</h3>
+<p>光敏电阻器是利用半导体的光电效应制成的一种电阻值随入射光的强弱而改变的电阻器; <code>入射光强、电阻减小、入射光弱、电阻增大</code>。</p>
+<blockquote>
+<p>应用于摄像头红外灯板:</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416163753.webp" alt=""></p>
+</blockquote>
+<p><code>工作原理</code>:白天，光线较强，CDS阻值很小，Q1导通，U1的EN管脚为OV，停止工作灯灭;夜晚，光线较暗，CDS阻值很大，Q1截止，U1的EN管脚有电压，正常工作，灯亮。</p>
+<h3 id="习题">习题</h3>
+<ul>
+<li>电阻R21上的功耗范围为多少?</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416165129.webp" alt=""></p>
+<p><code>答</code>：这是一个ADC电路，PG5相当于高阻态，所以电流方向就是上面箭头方向，直接使用公式计算即可：</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><msup><mi>I</mi><mn>2</mn></msup><mi>R</mi></mrow><annotation encoding="application/x-tex">P = I^2R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>m</mi><mi>i</mi><mi>n</mi><mo>=</mo><mn>4</mn><mi>m</mi><mi>A</mi><mo>∗</mo><mn>4</mn><mi>m</mi><mi>A</mi><mo>∗</mo><mn>150</mn><mi mathvariant="normal">Ω</mi><mo>=</mo><mn>2.4</mn><mi>m</mi><mi>W</mi></mrow><annotation encoding="application/x-tex">Pmin = 4mA*4mA*150Ω=2.4mW</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord mathnormal">min</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">4</span><span class="mord mathnormal">m</span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">4</span><span class="mord mathnormal">m</span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">150Ω</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">2.4</span><span class="mord mathnormal" style="margin-right:0.13889em;">mW</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mi>m</mi><mi>a</mi><mi>x</mi><mo>=</mo><mn>20</mn><mi>m</mi><mi>A</mi><mo>∗</mo><mn>20</mn><mi>m</mi><mi>A</mi><mo>∗</mo><mn>150</mn><mi mathvariant="normal">Ω</mi><mo>=</mo><mn>60</mn><mi>m</mi><mi>W</mi></mrow><annotation encoding="application/x-tex">pmax = 20mA*20mA*150Ω=60mW</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span><span class="mord mathnormal">ma</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">20</span><span class="mord mathnormal">m</span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">20</span><span class="mord mathnormal">m</span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">150Ω</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">60</span><span class="mord mathnormal" style="margin-right:0.13889em;">mW</span></span></span></span></p>
+<p>结果是 <code>2.4mW~60mW</code> 而这个电阻是0603，它的功耗是1/10W也就是最大是100mW，所以如果计算结果知道是满足的</p>
+<ul>
+<li>如下图，哪些方面设计不合理?</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416170055.webp" alt=""></p>
+<p><code>答</code>：这个电路用到NTC，所以应该是测量温度，那应该要求精度高，所以R11精度就应该取高点的1%或者以上</p>
+<p>①提高温度测量精度，电阻R11应该使用1%精度的</p>
+<p>②降低成本，电阻 R12应该使用5%精度的</p>
+<p>③R11与C13均为0603封装，R12封装应一致，使用0603</p>
+<h2 id="电容">电容</h2>
+<h3 id="理论讲解-2">理论讲解</h3>
+<p>参考视频：<a href="https://www.bilibili.com/video/BV14S4y127UR/?spm_id_from=333.337.search-card.all.click">https://www.bilibili.com/video/BV14S4y127UR/?spm_id_from=333.337.search-card.all.click</a></p>
+<p><code>概念</code>：两个相互靠近的金属板中间夹一层绝缘介质组成的器件，当两端存在电势差时，由于介质阻碍了电荷移动而累积在金属板上，衡量金属板上储存电荷的能力称之为电容，相应的器件称为电容器。电容的符号为 <code>C</code>，单位为 <code>法(F)</code>。 <code>电容越大，储存电荷的能力越强</code>。</p>
+<blockquote>
+<p>电路图中电容的符号表示通常有两种，分别是 <code>欧姆表现法</code> 和 <code>法拉第表现法</code>。</p>
+<p>欧姆表现法的电容符号是 <code>两条平行的直线</code>，表示两个电极之间没有其他电路元件连接。这种表示法通常用于简单的电路图中，因为它简单、清晰，易于理解。</p>
+<p>而法拉第表现法的电容符号则是 <code>一条曲线和一条直线</code>组成，表示电容器是由两个电极之间的电介质隔开的。这种表示法更加详细，可以告诉我们电容器内部有一个电介质，还有一个正极和一个负极。通常用于较为复杂的电路图中，或者需要对电容器进行具体分析和计算时使用。</p>
+<p>需要注意的是，这 <code>两个符号表示法的本质是相同的，只是表述方式不同，所表示的电容器是相同的</code></p>
+</blockquote>
+<blockquote>
+<p>我们可以把电容器想象成一个装有水的水槽，水的高度表示电容器的电荷量，而水的流动则对应着电容器的充电和放电。</p>
+<p>当电容器接入电源时，和水槽中的水流入过程类似，电荷会流入电容器并累积在电容板上，直到达到一定的电压或电荷量。这个过程就是电容器的充电过程。</p>
+<p>当电容器断开电源时，就像水槽中打开出水口一样，电荷会从电容器中流出，并释放出储存的能量。这个过程就是电容器的放电过程。</p>
+<p>而滤波器的作用，则类似于给水槽装上阀门一样，通过合适设计的滤波电路，可以对电容器输出的电压进行平滑处理，从而起到稳定电源的作用。</p>
+</blockquote>
+<blockquote>
+<p>公式：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo>=</mo><mfrac><mi>Q</mi><mi>U</mi></mfrac></mrow><annotation encoding="application/x-tex">C= \frac{Q}{U}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2694em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9244em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">U</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.4461em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">Q</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
+<p>( <code>C-电容，Q-电荷量，U-电势差</code>)<br>
+在电路学里，在电势差1U下，电容器的储存电荷的能力，称为电容。</p>
+<p>单位换算：</p>
+<p>法拉单位很大，通常使用uF, nF, pF</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>F</mi><mo>=</mo><mn>1</mn><msup><mn>0</mn><mn>3</mn></msup><mi>m</mi><mi>F</mi><mo>=</mo><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup><mi>u</mi><mi>F</mi><mo>=</mo><mn>1</mn><msup><mn>0</mn><mn>9</mn></msup><mi>n</mi><mi>F</mi><mo>=</mo><mn>1</mn><msup><mn>0</mn><mn>1</mn></msup><mn>2</mn><mi>p</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">1F = 10^3mF = 10^6uF = 10^9nF = 10^12pF</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">1</span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mord mathnormal">m</span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span><span class="mord mathnormal">u</span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0085em;vertical-align:-0.1944em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span></span></span></span></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.13889em;">pF</span></span></span></span></p>
+</blockquote>
+<ul>
+<li>电容的作用</li>
+</ul>
+<p>电容的本质是充电与放电，在电路中起到阻直流通交流的作用。</p>
+<p><code>阻直流</code>:只充电，不放电。充满后无法放电，断开状态</p>
+<p><code>通交流</code>:循环充电与放电。按交流信号频率循环充放电，导通状态。</p>
+<blockquote>
+<p>电容内部有绝缘介质，内部永远不会导通，通交流是应用电容的充放电功能，从外部看，感觉导通了而已。</p>
+</blockquote>
+<blockquote>
+<p>电容充放电电流计算公式:</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mo>=</mo><mi>C</mi><mo>×</mo><mfrac><mrow><mi>d</mi><mi>V</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">I = C \times \frac{dV}{dt}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.2251em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="mord mathnormal mtight">t</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="mord mathnormal mtight" style="margin-right:0.22222em;">V</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
+<p>在电路设计中，要特别注意电容的充放电电流。有时为了加快信号上升速度，需要提高充放电电流;有时为了防止充电电流过大损坏其他器件，需要减小充放电电流，从公式中可以看出，电压越高，充放电时间越短，电容越大，充放电电流越大，反之则充放电电流越小。</p>
+</blockquote>
+<p><code>电容特性</code>：充放电有个过程，电容两端电压不能突变，如果突变，将会产生很大的充放电电流，设计时需要避免，可以通过电阻，电感等器件进行限流。</p>
+<p><code>电容类型</code>：方便理解，对电容进行类型区分，但需要记住， <code>电容的本质就是储能，充放电</code>。</p>
+<ol>
+<li><code>滤波电容</code>:用在滤波电路中的电容器称为滤波电容</li>
+<li><code>旁路电容</code>:用在旁路电路中的电容器称为旁路电容</li>
+<li><code>耦合电容</code>:用在耦合电路中的电容称为耦合电容</li>
+<li><code>退耦电容</code>:用在退耦电路中的电容器称为退耦电容</li>
+<li><code>自举电容</code>:用在自举电路中的电容器称为自举电容</li>
+<li>…</li>
+</ol>
+<h3 id="器件选型">器件选型</h3>
+<ul>
+<li>安装方式</li>
+</ul>
+<p>插件(DIP)与贴片(SMD)</p>
+<p><code>陶瓷电容</code>， <code>铝电解电容</code>， <code>钽电解电容</code> 一般选择 <code>贴片</code>的</p>
+<p><code>安规电容</code>一般是 <code>插件</code>的；铝电解电容，降低成本，也有选择插件的</p>
+<p>长脚是+极，短脚-极</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416175538.webp" alt=""></p>
+<ul>
+<li>电容值</li>
+</ul>
+<p>根据电路，选择合适的电容值。电容值从几pF到几百几千uF不等，确定方法如下:</p>
+<ol>
+<li>计算取值晶体震荡电路，LC滤波电容等，可以通过计算取值;</li>
+<li>手册取值设计电路时，参考手册应用电路，按建议取值</li>
+<li>经验取值滤波电容，储能电容等，一般凭经验取值，再根据实际测试进行调整。</li>
+</ol>
+<ul>
+<li>电容串联并联</li>
+</ul>
+<p><code>电容串联</code> :耐压增大，容值减小</p>
+<p><code>电容并联</code>:耐压不变，容值增大</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416175913.webp" alt=""></p>
+<ul>
+<li>电容类型</li>
+</ul>
+<p>根据电路，合理选择电容类型。</p>
+<blockquote>
+<p>按容值:</p>
+<p>一般小于10uF的，优先选择陶瓷电容</p>
+<p>小于几百uF的，可以选择铝电解电容与钽电解电容</p>
+<p>大于几百uF的，一般选择铝电解电容</p>
+</blockquote>
+<blockquote>
+<p>按环境温度:</p>
+<p>高温环境，一般选择陶瓷电容与钮电容，因为铝电解电容里面是电解液，高温环境对寿命影响较大</p>
+<p>低温环境，都可以选择</p>
+</blockquote>
+<ul>
+<li>耐压，封装</li>
+</ul>
+<p>根据电路，确定电容耐压值，再选择封装。封装越大，耐压越大。</p>
+<p>耐压方面，陶瓷电容较好，钽电解电容较差(要求耐压为承受电压的2倍)</p>
+<p>例如:给5V电源滤波，可以选用10uF/6.3V的陶瓷电容，100uF/6.3V的铝电解电容，也可以选用47uF/10V的B型钽电解电容。</p>
+<p>常用陶瓷电容封装: <code>0402，0603，0805，1206</code>等</p>
+<p>常用贴片铝电解电容封装: <code>5*5.5,6.3*7.7</code>等</p>
+<p>常用钮电解电容封装: <code>A型，B型，C型，D型，E型</code>等</p>
+<ul>
+<li>寿命</li>
+</ul>
+<p>铝电解电容较差，内部电解质受温度影响较大，但因为耐压可以，容值较大，价格便宜，使用较多，设计时避免靠近热源，不要在高温环境使用。</p>
+<ul>
+<li>价格</li>
+</ul>
+<p>钽电容较贵，插件铝电解电容便宜，容值大的陶瓷也较贵，在满足需求的情况下，尽量选择低成本的。</p>
+<p><code>ESR</code>:陶瓷电容与钽电解电容都较小，滤波效果好。铝电解电容可以通过并联容值小的陶瓷电容降低ESR，提升滤波效果。</p>
+<h3 id="陶瓷电容">陶瓷电容</h3>
+<p><code>优点</code>: 无极性，耐压较好，耐温好，ESR小，滤波效果好</p>
+<p><code>缺点</code>: 容值小，一般使用10uF以下的容值大，耐压高的价格贵</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416183040.webp" alt=""></p>
+<h3 id="电解电容">电解电容</h3>
+<ul>
+<li>铝电解电容</li>
+</ul>
+<p><code>铝电解电容优点</code>：容值大，耐压好，价格便宜</p>
+<p><code>缺点</code>: ESR大，耐温差</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416184126.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416185502.webp" alt=""></p>
+<blockquote>
+<p>纹波电流是指在交流电源或变换器的输出端口上出现的交流成分，由于电源输出的电压不是完美的直流电压，在其上会有一定大小的交流成分，这就是纹波电流。纹波电流可能会带来一些不良影响，例如增加电源和负载的温升、降低系统的效率等</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416185749.webp" alt=""></p>
+<ul>
+<li>钽电解电容</li>
+</ul>
+<p><code>优点</code>: 容值大，耐温好，ESR小</p>
+<p><code>缺点</code>: 价格贵，耐压差</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416184809.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416190330.webp" alt=""></p>
+<blockquote>
+<p><code>正负极</code>：常规器件，有丝印标记的一端一般为负极，比如二极管，铝电解电容; <code>但钮电解电容有丝印标记的为正极，如果接反了，会烧毁</code></p>
+</blockquote>
+<h3 id="安规电容">安规电容</h3>
+<p><code>定义</code>：失效后，不会导致电击，不危及人身安全的电容器，称之为安规电容</p>
+<ul>
+<li>分类</li>
+</ul>
+<p>X电容和Y电容</p>
+<p><code>X电容</code>：跨接在电力线（L-N)之间的电容，一般选用 <code>金属薄膜电容</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416191048.webp" alt=""></p>
+<p><code>Y电容</code>：跨接在电力线和地之间（(L-E，N-E）的电容，一般是 <code>成对</code>出现</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416191210.webp" alt=""></p>
+<blockquote>
+<p>L（Line）表示电源的“火线”，N（Neutral）表示电源的“零线”</p>
+</blockquote>
+<ul>
+<li>应用</li>
+</ul>
+<p>一般应用于开关电源中，X电容抑制差模干扰，Y电容抑制共模干扰</p>
+<ul>
+<li>安全等级</li>
+</ul>
+<p>X电容分为 <code>X1，X2，X3</code>∶X1耐高压大于2.5 kV，小于等于4 kV；X2耐高压小于等于2.5 kV；X3耐高压小于等于1.2 kV</p>
+<p>Y电容分为 <code>Y1，Y2，Y3，Y4</code>∶1Y1耐高压大于8 kV; Y2耐高压大于5 kV; Y3耐高压n/a; Y4耐高压大于2.5 kv</p>
+<h3 id="演示电容充放电">演示电容充放电</h3>
+<p>将电容+极接电源，然后-极碰一下即可充电完成(很快的)，然后万用表测量一下电压，放电的话可以直接使用镊子碰两个引脚，可能会有火花(因为电流很大)，很正常，但是不会爆炸(电容爆炸是因为超过它的额定电压)</p>
+<p>也可以使用LED进行放电看现象，可以把两个20K电阻绕一起(并联)就是一个10K电阻，然后电阻一端绕电容+极，然后另一端接LED+极，电容-极接LED-极，LED就会亮，然后慢慢的暗下去等放完电</p>
+<h3 id="产品应用-2">产品应用</h3>
+<ul>
+<li>陶瓷电容应用于滤波</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416212451.webp" alt=""></p>
+<p>电源电路，负载电流较小时，可以使用陶瓷电容进行滤波</p>
+<ul>
+<li>铝电解电容用于滤波</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416213259.webp" alt=""></p>
+<p>电源电路，负载电流较大时，使用铝电解电容进行滤波，为了降低ESR，提升滤波效果，通过并联陶瓷电容。</p>
+<ul>
+<li>钽电解电容用于滤波</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416214451.webp" alt=""></p>
+<p>GPRS模块电源管脚，瞬间电流可达2A，选择低ESR，高容量的钽电解电容，避免压降过大导致模块重启。</p>
+<ul>
+<li>LC滤波</li>
+</ul>
+<blockquote>
+<p>如果电路中有 <code>电感器和电容器</code>，并且它们之间有 <code>串联或并联</code>的连接方式，那么这个电路就是一个LC滤波电路</p>
+<p>当电感与电容并联时，组成的电路为 <code>LC并联滤波电路</code>；而当电感与电容串联时，组成的电路为 <code>LC串联滤波电路</code>。</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416214637.webp" alt=""></p>
+<p>PWM脉宽调制电源中，使用LC进行滤波，将PWM波形滤成直流电压，达到调压的目的。</p>
+<blockquote>
+<p>如果滤波只使用电容，上电瞬间，电源芯片内部NMOS管导通时，滤波电容C9瞬间充电电流很大，将烧毁内部NMOS管或出现短路保护，无法正常工作。<br>
+使用LC进行滤波， <code>电感起到限制电流的作用，电感电流不能突变</code>，很好的限制了滤波电容的充电电流，同时利用储能，也可以起到滤波作用，构成LC滤波器</p>
+</blockquote>
+<ul>
+<li>储能电容1</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416215556.webp" alt=""></p>
+<p>电容C55给VOUT1提供能量缓冲，避免VOUT1负载电流变化时干扰VCC电源。可以把VOUT1比喻成水龙头，C55比喻成蓄水池，当瞬间打开水龙头时，蓄水池提供足够的水，不影响其他地方用水。</p>
+<blockquote>
+<p>C55不能放在U12后面，否则，U12打开时，C55充电电流很大，会下拉VCC电压，同时，有可能烧毁U12</p>
+</blockquote>
+<ul>
+<li>储能电容2</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416215843.webp" alt=""></p>
+<p>C1作为U2储能电容，避免后面的数码管打开时，瞬间耗电较大影响3.3V电源。</p>
+<ul>
+<li>储能电容3</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416220036.webp" alt=""></p>
+<p>数字IC的电源管脚━般需要放置储能电容。</p>
+<blockquote>
+<p>小电容 — 为高频信号(内部开关信号)提供瞬间能量，通常为0.1uF，频率越高，电容越小</p>
+<p>大电容 — 为低频信号(内部外设耗电)提供能量</p>
+</blockquote>
+<ul>
+<li>自举电路</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416220303.webp" alt=""></p>
+<p>利用电容C73的充放电特性构成自举电路，驱动芯片内部的功率NMOS管</p>
+<ul>
+<li>旁路电容</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416220547.webp" alt=""></p>
+<p>C25为高频信号提供低阻抗回路，提高电源稳定性</p>
+<ul>
+<li>震荡电路</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416220710.webp" alt=""></p>
+<p>电容C39、C52与晶体构成震荡电路，提供时钟信号输出</p>
+<h2 id="电感">电感</h2>
+<h3 id="理论讲解-3">理论讲解</h3>
+<p>参考文章：<a href="https://www.bilibili.com/video/BV1o7411A7nw/?spm_id_from=333.337.search-card.all.click&amp;vd_source=5fb3f08926cbdbc6d84b3f2bda38c0b1">https://www.bilibili.com/video/BV1o7411A7nw/?spm_id_from=333.337.search-card.all.click&amp;vd_source=5fb3f08926cbdbc6d84b3f2bda38c0b1</a></p>
+<p><code>定义</code>：将漆包线、纱包线或塑皮线等在绝缘骨架或磁心、铁心上绕制而成的器件，当线圈通过电流后，在线圈中形成磁场感应，感应磁场又会产生感应电流来阻碍线圈中电流的变化，这种电流与线圈的相互作用关系称为电的感抗，也就是电感，相应的器件成为电感器。</p>
+<p>电感的符号为 <code>L</code>，单位为 <code>亨利(H)</code>。电感越大，感抗能力越强。</p>
+<blockquote>
+<p>电感总是试图阻碍自身的电流变化，是一种自然现象。电感器是根据自然现象制成的元器件</p>
+</blockquote>
+<p>单位换算：<br>
+亨利单位很大，通常使用 <code>mH</code>, <code>uH</code></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>H</mi><mo>=</mo><mn>1</mn><msup><mn>0</mn><mn>3</mn></msup><mi>m</mi><mi>H</mi><mo>=</mo><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup><mi>u</mi><mi>H</mi></mrow><annotation encoding="application/x-tex">1H = 10^3mH = 10^6uH</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">1</span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mord mathnormal">m</span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span><span class="mord mathnormal">u</span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span></span></span></span></p>
+<ul>
+<li>自感与互感</li>
+</ul>
+<p>电感线圈通过电流时，线圈的周围产生磁场，当线圈中电流发生变化时，其周围的磁场也产生相应的变化，此变化的磁场阻碍电流的变化，成为自感。</p>
+<p>两个电感线圈相互靠近时，一个电感线圈的磁场变化将影响另一个电感线圈，这种影响就是互感。互感的大小取决于电感线圈的自感与两个电感线圈耦合的程度，利用此原理制成的元件叫做互感器。</p>
+<ul>
+<li>感应电压</li>
+</ul>
+<p>电感线圈产生自感时，感应电流通过负载维持电流变化，将产生感应电压。感应电压的大小取决于感应电流与负载，感应电流与负载越大，感应电压越大，反之越小。</p>
+<blockquote>
+<p>电感突然断开时，需要提供合理的续流路径，否则负载很大，将会产生很高的感应电压，损坏电路。比如BUCK降压与电磁继电器电路中的续流二极管，就是给电感提供续流路径的，减小感应电压。</p>
+</blockquote>
+<ul>
+<li>电感的作用</li>
+</ul>
+<p>电感的本质是阻碍自身的电流变化，在电路中起到 <code>通直流阻交流</code> 的作用。</p>
+<p><code>通直流</code>: 流过电感的电流无变化时，电感相当于导线，不过，与导线的区别是，电感周围会产生磁场;<br>
+<code>阻交流</code>: 注意，是阻碍，不是阻止。电感阻碍电流变化，让电流变化变缓。</p>
+<ul>
+<li>电路应用</li>
+</ul>
+<p>① 滤波︰电感阻碍电流变化，与电容C组成LC滤波器<br>
+② 升压：利用感应电压，达到升压效果，比如BOOST升压电路</p>
+<p>…</p>
+<h3 id="选型-2">选型</h3>
+<ul>
+<li>电感类型</li>
+</ul>
+<p><code>常用电感类型</code>: 贴片高频电感，功率电感，共模电感，差模电感</p>
+<p><code>贴片高频电感</code>: 高频信号滤波，小功率LC滤波</p>
+<p><code>功率电感</code>: LC滤波，升压</p>
+<p><code>共模电感</code>: 滤除共模信号</p>
+<p><code>差模电感</code>: 滤除差模信号</p>
+<ul>
+<li>电感值</li>
+</ul>
+<p>根据电路，选择合适的电感值。电感值越大，感抗越大，对电流的阻碍越大。</p>
+<blockquote>
+<p>分计算取值，手册取值，经验取值</p>
+<ol>
+<li>计算取值 LC滤波电路，可以根括中心频率计算：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo>=</mo><msqrt><mrow><mn>2</mn><mi>π</mi><mi>L</mi><mi>C</mi></mrow></msqrt></mrow><annotation encoding="application/x-tex">f=\sqrt{2πLC}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.1133em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9267em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="mord mathnormal">L</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span><span style="top:-2.8867em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1133em;"><span></span></span></span></span></span></span></span></span></li>
+<li>手册取值设计电路时，参考手册典型应用电路，按建议取值;</li>
+<li>经验取值凭经验取值，再根据实际测试进行调整。</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>电感串联与并联<br>
+<code>电感串联</code>: 感值增大，对电流的阻碍作用加强</p>
+<p><code>电感并联</code>: 感值减小，对电流的阻碍作用减小</p>
+</blockquote>
+<ul>
+<li>DCR</li>
+</ul>
+<p>电感的直流阻抗。导线必定存在电阻，此电阻导致电感发热，根据<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><msup><mi>I</mi><mn>2</mn></msup><mi>R</mi></mrow><annotation encoding="application/x-tex">P=I^2R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span></span></span>， <code>DCR越小越好</code>。</p>
+<ul>
+<li>饱和电流</li>
+</ul>
+<p>电感饱和电流， <code>当流过电感的电流超过饱和电流时，电感作用将降低，甚至失效，变成一根导线，损坏短路</code>。应用中一定要避免电感中的电流超过饱和电流，可靠性考虑，尽量留有一定裕量。</p>
+<p>比如BUCK降压，如果电感饱和了，LC滤波变成C滤波，电容充电电流将损坏PWM开关管，电路失效。</p>
+<p><code>饱和电流取值</code>: 流过电感的电流导致感值降为 <code>70%</code> 时，此时的电流为饱和电流。如果电流进一步增加，电感性能将降低，甚至失效。</p>
+<ul>
+<li>封装</li>
+</ul>
+<p>选择封装，需要考虑结构高度，PCB尺寸，感值，饱和电流，DCR，成本等，满足需求的情况下， <code>尽量选择小些封装的</code>。</p>
+<ul>
+<li>成本</li>
+</ul>
+<p>满足需求的情况下，尽量选择价格便宜的</p>
+<h3 id="功率电感">功率电感</h3>
+<p>特点: <code>感值高，功率大，饱和电流大，封装尺寸相对较大</code></p>
+<p>应用: <code>低频LC滤波，升压</code></p>
+<blockquote>
+<p>带屏蔽的功率电感比非屏蔽的EMl效果好些，但价格稍贵些。</p>
+<p>EMI是指 <code>电磁干扰</code>，它是指电磁场中的能量在环境中传播时，对其他设备或线路产生的感受性、传导性或耦合性干扰。这些干扰信号可以造成设备或线路的错误或失效，并可能会对无线通信或其他电子设备带来负面影响。</p>
+</blockquote>
+<p>下图中线圈裸露的是非屏蔽的，有外壳的是屏蔽的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230417114515.webp" alt=""></p>
+<ul>
+<li><code>功率电感  - 顺络 SWPA系列</code></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230417115244.webp" alt=""></p>
+<ul>
+<li><code>功率电感 - chilisin(奇力新) MHCC、MHCI系列</code></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230417120352.webp" alt=""></p>
+<h3 id="贴片电感">贴片电感</h3>
+<p>特点: <code>感值小，功率小，饱和电流小，封装尺寸小</code></p>
+<p>应用: 高频信号滤波</p>
+<p><code>没有+-极之分</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230417120919.webp" alt=""></p>
+<ul>
+<li><code>贴片电感 - 风华 叠层片式高频电感</code></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230417121119.webp" alt=""></p>
+<h3 id="共模与差模电感">共模与差模电感</h3>
+<ul>
+<li>共模电感</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230417121325.webp" alt=""></p>
+<p><code>构成</code>: 两组直径与圈数相同的线圈，方向相反的绕制在同一个铁芯上，引出4个引脚。</p>
+<p><code>作用</code>: 滤除共模干扰信号，降低EMI</p>
+<p><code>共模信号</code>: 大小相等、方向相同的信号</p>
+<ul>
+<li>差模电感</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230417121546.webp" alt=""></p>
+<p><code>构成</code>: 一组线圈绕制在铁芯上，引出2个引脚。</p>
+<p><code>作用</code>: 滤除差模干扰信号，降低EMI，一般成对出现。</p>
+<p><code>差模信号</code>: 大小相等、方向相反的信号。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230417122118.webp" alt=""></p>
+<h3 id="产品应用-3">产品应用</h3>
+<ul>
+<li>BUCK降压</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230417141650.webp" alt=""></p>
+<p><code>说明</code>: LC滤波器，采用功率电感，电感饱和电流至少大于平均电流的 <code>4/3</code> (经验值)，将电源PWM波滤成直流电压，改变PWM占空比即可改变直流电压，达到降压的目的。 <code>D14为电感L4进行续流，为续流二极管，必不可少</code>。</p>
+<blockquote>
+<p>BUCK电路得名于其降压（step-down）的特性。BUCK的英文原义是“雄鹿”，与升压型DC-DC转换器Boost得名于其升压（step-up）特性相对应。当直流电压需要被降低时，BUCK电路是一种有效的选择。</p>
+<p>在BUCK电路中，通过开关管周期性地切换电压源和负载之间的连接，利用电感器的电能存储和释放，将输入电压降低到所需的输出电压水平。因为这个操作过程中，电压是先上升，然后下降到较低水平，就像雄鹿扬起头然后向下冲击一样，因此这种电路就被称为BUCK电路。</p>
+</blockquote>
+<ul>
+<li>BOOST升压</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230417142042.webp" alt=""></p>
+<p><code>说明</code>：利用电感的感应电压进行升压。</p>
+<blockquote>
+<p>在Boost电路中，电源电压通过一个电感器和一个开关管交替连接到负载电容器上，从而实现电压升高。当开关管关闭时，电感器通过自感作用将电能存储到电感器中；当开关管打开时，电感器发生自感电势，将电能传递到负载电容器中，使其电压升高。同时，负载电容器也可以平滑输出电压，减少电压的纹波</p>
+</blockquote>
+<ul>
+<li>电源LC滤波</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230417142329.webp" alt=""></p>
+<p><code>说明</code>：LC低频滤波</p>
+<ul>
+<li>贴片电感</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230417161348.webp" alt=""></p>
+<p><code>说明</code>：LC低频滤波，负载电流小，使用贴片电感</p>
+<ul>
+<li>共模电感用于开关电源输入部分</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230417161643.webp" alt=""></p>
+<h2 id="二极管">二极管</h2>
+<h3 id="理论讲解-4">理论讲解</h3>
+<ul>
+<li>PN结</li>
+</ul>
+<p>一块一侧掺杂成P型半导体，另一侧掺杂成N型半导体，中间二者相连的接触面称为PN结。PN结是电子技术中许多元件，例如半导体二极管、双极性晶体管的物质基础。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418095758.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418095847.webp" alt=""></p>
+<p><code>P区接正极，N区接负极</code>，这是由PN结的内部结构决定的。</p>
+<p>在P型半导体中，杂质原子掺入了三价元素，如硼（B），形成了较多的空穴；在N型半导体中，杂质原子掺入了五价元素，如磷（P），形成了较多的自由电子。当P型半导体和N型半导体直接结合时，两种半导体的空隙区域中出现大量的不完整电子和空穴，在这些区域内发生了多种载流子之间的复合过程，从而形成了p-n结。</p>
+<ul>
+<li>PN结伏安特性曲线</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418100546.webp" alt=""></p>
+<blockquote>
+<ul>
+<li>PN结不加外部电压</li>
+</ul>
+<p>内部处于平衡状态，多子扩散运动等于少子漂移运动，电流i = 0</p>
+<ul>
+<li>PN结加外加正向电压</li>
+</ul>
+<p>u&lt;Uon时，正向电流i≈0;<br>
+u&gt;Uon时，正向电流i随电压u随指数增长;</p>
+<ul>
+<li>PN结加外加反向电压</li>
+</ul>
+<p>|u| &lt; |Ubr| 时，反向电流i = Is，Is很小，通常忽略不计<br>
+|u| &gt; |Ubr| 时，反向电流i急剧增加，称之为反向击穿，此原理制成稳压管，TVS管等</p>
+<p>其中: Uon为正常开启电压，Ubr为反向击穿电压</p>
+</blockquote>
+<p><code>结论</code>：PN结具有单向导电性。外加正向且大于Uon开启电压时，PN结导通;外加正向且小于Uon或外加反向且小于Ubr时，PN结截止;外加反向电压且大于Ubr时，PN结反向击穿。</p>
+<ul>
+<li>二极管构成</li>
+</ul>
+<p>将PN结用外壳封装起来，并加上电极引线构成半导体二极管，简称二极管。由P区引出的电极为阳极，由N区引出的电极为阴极。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418102943.webp" alt=""></p>
+<blockquote>
+<p>PN结导通时的结压降通常只有零点几伏，而导通电流随外加电压的增大呈指数增长，应用时，需要串联电阻等元器件限制回路的电流，防止PN结因正向电流过大而损坏。</p>
+</blockquote>
+<h3 id="通用二极管">通用二极管</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>通用开关二极管</p>
+</div>
+<p><code>特点</code>: 电流小，工作频率高</p>
+<p><code>选型依据</code>: 正向电流、正向压降、功耗，反向最大电压，反向恢复时间，封装等</p>
+<p>参考手册：BAS316，IN4148WS</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418104137.webp" alt=""></p>
+<blockquote>
+<p>“Reverse recovery time”，中文翻译为“反向恢复时间”，指的是 PN 结二极管在由正向电压工作（导通）状态下，突然变为反向偏置（截止）状态后，从截止状态回到正向工作状态的过程中所需的时间。换句话说，就是 PN 结二极管截止后，反向电流消失至某一特定值所需的时间。</p>
+<p>反向恢复时间越短，说明二极管的传输速度越快，开关速度也会更快。但是如果反向恢复时间过短，可能会导致电压或电流尖峰值过高而损坏 PN 结二极管或其他器件</p>
+</blockquote>
+<ul>
+<li>应用</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418104507.webp" alt=""></p>
+<p><code>说明</code>: 应用于低电平复位电路中，当电源快速断电再上电时，开关二极管提供电容C1的快速放电回路,让MCU进行可靠复位。</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>通用整流二极管</p>
+</div>
+<p><code>特点</code>: 电流大，工作频率低</p>
+<p><code>选型依据</code>: 正向电流、正向压降、功耗，反向最大电压，封装等</p>
+<p>参考手册：1N4007</p>
+<ul>
+<li>应用</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418105859.webp" alt=""></p>
+<p><code>说明</code>: 将交流电，经常桥路整流，再滤波成直流电。</p>
+<h3 id="肖特基二极管">肖特基二极管</h3>
+<ul>
+<li>定义</li>
+</ul>
+<p>肖特基二极管不是利用P型半导体与N型半导体接触形成PN结原理制作的，而是贵金属(金、银、铝、铂等) <code>A为正极，以N型半导体</code>， <code>B为负极</code>，利用二者接触面上形成的势垒具有整流特性而制成的金属-半导体器件。</p>
+<ul>
+<li>优缺点</li>
+</ul>
+<p><code>优点</code>: 开关频率高，正向压降低(低至0.2V，电流越大，压降越大)</p>
+<p><code>缺点</code>: 反向击穿电压低，反向漏电流偏大(温度越高，漏电流越大)</p>
+<ul>
+<li>应用场合</li>
+</ul>
+<p>肖特基二极管的结构及特点使其适合于在低压、高频、大电流，比如BUCK降压的续流二极管，BOOST升压的隔离二极管等。</p>
+<ul>
+<li>选型依据</li>
+</ul>
+<p>正向电流、正向压降、功耗，反向最大电压，封装等</p>
+<p>参考手册：DSK34</p>
+<ul>
+<li>应用</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418110354.webp" alt=""></p>
+<p><code>说明</code>: 肖特基应用于防反接与电源隔离中。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418110404.webp" alt=""></p>
+<p><code>说明</code>: 肖特基二极管D14，应用于BUCK拓扑的续流二极管，符合高频、低压、大电流场合。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418110417.webp" alt=""></p>
+<p><code>说明</code>: 肖特基二极管D1，提供电机线圈电感的续流路径，符合高频、低压、大电流场合</p>
+<h3 id="发光二极管">发光二极管</h3>
+<p><code>定义</code>：LED是一种能够将电能转化为光能的半导体，主要由支架、银胶、晶片、金线、环氧树脂五种物料所组成。</p>
+<p>当电子与空穴复合时能辐射出可见光，因而可以用来制成发光二极管。砷化该二极管发红光，磷化该二极管发绿光，碳化硅二极管发黄光，氮化家二极管发蓝光。</p>
+<p><code>应用场合</code>：在电路及仪器中作为指示灯，或者组成文字或数字显示。数码管，LED点阵，LED广告屏，LED显示屏等均是LED灯构成的。</p>
+<ul>
+<li>选型依据</li>
+</ul>
+<p><code>颜色</code>: 红，绿，蓝，黄，白，三基色等</p>
+<p><code>封装</code>: 单颗(贴片，插件)，数码管(各种尺寸)，点阵，定制等</p>
+<p><code>功率</code>: 小功率，大功率<br>
+<code>亮度</code>: 普通亮度，高亮度</p>
+<p>参考手册：红色发光二极管</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418113054.webp" alt=""></p>
+<blockquote>
+<p>正向压降: 发光二极管的正向压降大致在 <code>1.5V至3.3V</code>。红色的 <code>1.6V~1.8V;</code>绿色的 <code>2V~2.4V</code>;蓝色/白色的 <code>3V~3.3V</code></p>
+<p>正向电流:小功率的一般最大20mA， <code>使用时需要串联限流电阻</code>。</p>
+</blockquote>
+<ul>
+<li>产品应用</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418113324.webp" alt=""></p>
+<p><code>说明</code>: 应用于指示灯，电流 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mo>=</mo><mfrac><mrow><mo stretchy="false">(</mo><mn>5</mn><mi>V</mi><mo>−</mo><mn>1.6</mn><mi>V</mi><mo stretchy="false">)</mo></mrow><mrow><mn>10</mn><mi>k</mi></mrow></mfrac><mo>=</mo><mn>0.34</mn><mi>m</mi><mi>A</mi></mrow><annotation encoding="application/x-tex">I =\frac{(5V - 1.6V)}{10k} = 0.34mA</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.355em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">10</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight">5</span><span class="mord mathnormal mtight" style="margin-right:0.22222em;">V</span><span class="mbin mtight">−</span><span class="mord mtight">1.6</span><span class="mord mathnormal mtight" style="margin-right:0.22222em;">V</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">0.34</span><span class="mord mathnormal">m</span><span class="mord mathnormal">A</span></span></span></span></p>
+<h3 id="稳压管">稳压管</h3>
+<p><code>定义</code>：稳压二极管(又叫齐纳二极管)是一种硅材料制成的面接触型晶体二极管，简称稳压管。此二极管是一种直到临界反向击穿电压前都具有很高电阻的半导体器件。</p>
+<p>稳压管在反向击穿时，在一定的电流范围内(或者说在一定功率损耗范围内)，端电压几乎不变，表现出稳压特性，因而广泛应用于稳压电源与限幅电路之中。</p>
+<p>稳压二极管是 <code>根据击穿电压来分档</code> 的，因为这种特性，稳压管主要被作为稳压器或电压基准元件使用。</p>
+<p>参考手册：LM3Z7V5T1G</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418114441.webp" alt=""></p>
+<p><code>参数1</code>: 稳压值，根据电路选择<br>
+<code>参数2</code>: 反向电流，实际使用，不可以超过反向电流值，需要串联电阻限流。</p>
+<ul>
+<li>产品应用</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418114631.webp" alt=""></p>
+<p><code>说明</code>: 稳压管D5限制NMOS管的Vgs电压最大值为5.1V，避免VIN输入电压过大，导致Vgs电压值过大损坏NMOS管。</p>
+<h3 id="TVS管">TVS管</h3>
+<p><code>定义</code>：TVS管，全称瞬变电压抑制二极管，是在稳压管工艺基础上发展起来的一种新产品，其电路符号和普通稳压二极管相同。当TVS管两端经受瞬间的高能量冲击时，它能以极高的速度使其阻抗骤然降低，同时吸收一个大电流，将其两端间的电压箝位在一个预定的数值上，从而确保后面的电路元件免受瞬态高能量的冲击而损坏。</p>
+<ul>
+<li>伏安特性曲线</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418115048.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418115059.webp" alt=""></p>
+<p>分析上图可知: 双向TVS正反特性相同，使用时不需要注意方向，并联在电路中可以抑制浪涌。但单向TVS管正反特性不同，正向导通压降很低，没法做浪涌保护，我们需要使用反向击穿部分的特性， <code>并联在电路中时，正极接单向TVS管的负极</code>。</p>
+<blockquote>
+<p>“浪涌”（surge）是指短时间内电路中出现的瞬间、突然的大幅电压或电流变化。浪涌可以由多种因素造成，比如断电、闪电、电源开关、电感阻抗等等，都可能导致电路中出现瞬间变化的幅值高的电压或电流。这种电压或电流的瞬态变化会对电子器件、电气线路和电力设备等产生不利影响。</p>
+</blockquote>
+<p>参考手册：SMBJ</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418115531.webp" alt=""></p>
+<p><code>参数1</code>: Vrmw，反向关闭电压，此时TVS管不起作用，此电压必须大于VIN最大输入电压</p>
+<p><code>参数2</code>: Vbr，反向击穿电压，必须小于浪涌电压</p>
+<p><code>参数3</code>: lpp，峰值脉冲电流</p>
+<p>此外，还需要考虑单向还是双向，封装类型，最大功耗等。</p>
+<ul>
+<li>产品应用</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418122228.webp" alt=""></p>
+<p><code>说明</code>: 双向TVS管应用于电源输入，抑制浪涌。</p>
+<blockquote>
+<p>此处如果使用单向TVS管，必须放置在防反接肖特基D12的后面，否则的话，电源反接，单向TVS管刚好正接，正向导通电流很大，将烧毁单向TVS管。</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418122438.webp" alt=""></p>
+<p><code>说明</code>: 单向TVS管应用于抑制尖峰干扰电压，避免损坏GPRS模块。</p>
+<h2 id="三极管">三极管</h2>
+<h3 id="理论讲解-5">理论讲解</h3>
+<p><code>定义</code>：根据不同的掺杂方式在同一个硅片上制造出 <code>三个掺杂区域</code>，并形成 <code>两个PN结</code>，即构成BJT晶体管。</p>
+<ul>
+<li>类型</li>
+</ul>
+<ol>
+<li>NPN三极管</li>
+</ol>
+<p>如下图，NPN型三极管，由三块半导体构成，其中 <code>两块N型和一块P型</code> 半导体组成，P型半导体在中间，两块N型半导体在两侧。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418124319.webp" alt=""></p>
+<blockquote>
+<p>基区–P型半导体，很薄且杂质浓度很低，引出基极b</p>
+<p>发射区–N型半导体，杂质浓度很高，自由电子很多，引出发射极</p>
+<p>e集电区–N型半导体，杂质浓度很低，但面积很大，引出集电极c</p>
+</blockquote>
+<ol start="2">
+<li>PNP三极管</li>
+</ol>
+<p>如下图，PNP型三极管，由三块半导体构成，其中 <code>两块P型和一块N型</code> 半导体组成，N型半导体在中间,两块P型半导体在两侧。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418124602.webp" alt=""></p>
+<blockquote>
+<p>基区–N型半导体，很薄且杂质浓度很低，引出基极b</p>
+<p>发射区–P型半导体，杂质浓度很高，空穴很多，引出发射极e</p>
+<p>集电区–P型半导体，杂质浓度很低，但面积很大，引出集电极c</p>
+</blockquote>
+<h3 id="工作原理">工作原理</h3>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418130930.webp" alt=""></p>
+<ol>
+<li>发射结加正向电压，扩散运动形成发射极电流Ie</li>
+</ol>
+<p>由于发射结加正向电压，又因为发射区的杂质浓度高，自由电子很多，所以大量自由电子因扩散运动越过发射结到达基区，形成发射极电流Ie</p>
+<ol start="2">
+<li>扩散到基础的自由电子与空穴复合形成基极电流lb</li>
+</ol>
+<p>由于基区很薄，杂质浓度很低，所以扩散到基区的自由电子只有极少部分与空穴符合，形成微弱的基极电流Ib</p>
+<ol start="3">
+<li>集电结加反向电压，飘移运动形成集电极电流lc</li>
+</ol>
+<p>由于集电结加反向电压且结面积很大，基区的非平衡少子(主要为发射极扩散过来的，未与空穴复合的大量自由电子)在外电场的作用下越过集电结达到集电区，形成漂移电流Ic</p>
+<ul>
+<li>输出特性曲线</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418131356.webp" alt=""></p>
+<blockquote>
+<ol>
+<li>截止区</li>
+</ol>
+<p>发射结电压小于开启电压且集电结反向偏置，即 <code>Ube&lt;Uon且Uce&gt;Ube</code>。此时Ib≈0，Ic≈0<br>
+2. 放大区</p>
+<p>发射结电压大于开启电压且集电结反向偏置，即 <code>Ube&gt;Uon且Uce&gt;Ube</code>。此时Ic仅仅取决于Ib, <code>Ic = β*Ib</code><br>
+3. 饱和区</p>
+<p>发射结电压大于开启电压且集电结正向偏置，即 <code>Ube&gt;Uon且Uce&lt;Ube</code>。此时Ic不仅仅与Ib有关，而且随Uce的增大而增大,<code>Ic ＜ β*Ib</code></p>
+</blockquote>
+<h3 id="开关应用">开关应用</h3>
+<p>实际应用时，晶体管常作开关使用，放大电路使用集成运放。此时，晶体管工作在 <code>截止区与饱和区</code>。</p>
+<p>截止区，Ic≈0，此时，功率 <code>P=Ic*Uce</code> 很小</p>
+<p>饱和区，Uce深度饱和电压很小，功率 <code>P=Ic*Uce</code>相对也很小</p>
+<ul>
+<li>NPN用于信号开关</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418142722.webp" alt=""></p>
+<ul>
+<li>PNP用于信号开关</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418142834.webp" alt=""></p>
+<h3 id="光电三极管与二极管">光电三极管与二极管</h3>
+<p>光电三极管依据 <code>光照的强度来控制集电极电流的大小</code>，其功能等效为一只光电二极管与一只晶体管的相连。并引出集电极与发射极，如下图:</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418144638.webp" alt=""></p>
+<ul>
+<li>光耦运用</li>
+</ul>
+<p>参考手册：PC817B</p>
+<ul>
+<li>光电二极管</li>
+</ul>
+<p>光电二极管依据光照的强度来控制PN结，与普通二极管一样，具有单方向导电特性。</p>
+<p>参考手册：S8050，S8550，S9014，S9015</p>
+<h3 id="产品应用-4">产品应用</h3>
+<ul>
+<li>驱动有源蜂鸣器</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418150639.webp" alt=""></p>
+<ul>
+<li>驱动无源蜂鸣器</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418151023.webp" alt=""></p>
+<h2 id="MOS管">MOS管</h2>
+<h3 id="理论讲解-6">理论讲解</h3>
+<p>参考视频：<a href="https://www.bilibili.com/video/BV1To4y1p7zb/?spm_id_from=333.337.search-card.all.click&amp;vd_source=5fb3f08926cbdbc6d84b3f2bda38c0b1">https://www.bilibili.com/video/BV1To4y1p7zb/?spm_id_from=333.337.search-card.all.click&amp;vd_source=5fb3f08926cbdbc6d84b3f2bda38c0b1</a></p>
+<p><code>定义</code>：英文简写FET，利用输入回路的电场效应控制输出回路电流的一种半导体器件。</p>
+<ul>
+<li>分类</li>
+</ul>
+<ol>
+<li>结型场效应管，简称JFET(<code>不怎么用</code>)</li>
+<li>绝缘栅型场效应管，也称金属氧化物半导体场效应管，简称MOS-FET，也是我们通常所说的MOS管</li>
+</ol>
+<ul>
+<li>MOS管分类</li>
+</ul>
+<p>MOS管分为N沟道与P沟道两类，每一类又分为增强型与耗尽型两种，因此MOS管共有四种类型: <code>N沟道增强型、N沟道耗尽型、P沟道增强型、P沟道耗尽型</code></p>
+<p><code>增强型</code>：Ugs电压为0时，Ids=0的管子( <code>常用，就是还没导通时电流是为0的</code>)</p>
+<p><code>耗尽型</code>：Ugs电压为0时，Ids≠0的管子</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418152731.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418153314.webp" alt=""></p>
+<blockquote>
+<p>记忆：输入输出的话看寄生二极管，保证它不会导通即可</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418155932.webp" alt=""></p>
+<h3 id="增强型NMOS">增强型NMOS</h3>
+<p>实际应用时，NMOS管常作低端驱动与开关使用，此时，MOS管工作在夹断区与可变电阻区。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418154345.webp" alt=""></p>
+<h3 id="增强型PMOS">增强型PMOS</h3>
+<p>实际应用时，PMOS管常作高端驱动与开关使用，此时，PMOS管工作在夹断区与可变电阻区。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418154503.webp" alt=""></p>
+<h3 id="寄生参数">寄生参数</h3>
+<ol>
+<li>寄生电容</li>
+</ol>
+<p>如下图，由于源极S与衬底B相连，源极S、栅极G、绝缘膜刚好组成寄生电容Cgs，此电容大小为pF级别，一般规格书可以查到。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418162349.webp" alt=""></p>
+<p>使用时，要特别注意GS管脚的寄生电容Cgs，控制MOS管的导通与截止，本质上是控制Cgs电容的充放电;</p>
+<p>如果要求MOS管快速导通与截止，此时需要驱动源能够提供足够大的驱动电流，以提供Cgs电容的瞬间充放电;</p>
+<p>如果仅仅作为开关使用，可以串电阻，以减小Cgs的充放电电流，此时，对驱动源的要求就不高，单片机的IO口(推挽输出时，可以提供20mA的驱动电流)可以直接驱动。</p>
+<ol start="2">
+<li>寄生二极管</li>
+</ol>
+<p>如下图，为NMOS管的构造，衬底B与源极S、漏极D均存在PN结，由于源极S与衬底B相连，左边的二极管无效，源极S与漏极D存在寄生二极管，方向为S指向D。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418162558.webp" alt=""></p>
+<p>使用时，要特别注意内部寄生二极管，如果接反，将导致无法关闭MOS管;另外，某些场合可以巧用寄生二极管，比如做防反接使用时。</p>
+<h3 id="应用">应用</h3>
+<ul>
+<li>NMOS管用于低端开关</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418172433.webp" alt=""></p>
+<ol>
+<li>R14起到限流作用，单片机输出高电平时，通过R14给Cgs电容充电，U7导通;单片机输出低电平时，Cgs电容通过R14放电，U7截止;</li>
+<li>由于单片机输出电压没有超过Vgs的运行电压，GS端不需要并电阻到地。</li>
+</ol>
+<ul>
+<li>PMOS管用于防反接保护</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418173726.webp" alt=""></p>
+<ol>
+<li>巧妙利用内部寄生二极管。上电时，通过内部寄生二极管，|Vgs|电压大于|Vth|电压，PMOS管完全导通;</li>
+<li>R29，R31:电阻分压，调整|Vgs|电压，|Vgs|电压尽量大，这样，Ron越小，压降越小，损耗越低;3、D5、稳压二极管，防止|Vgs|电压超过极限电压。</li>
+</ol>
+<h3 id="选型-3">选型</h3>
+<ul>
+<li>MOS管类型</li>
+</ul>
+<p>一般选择增强型NMOS管，同等工艺条件下，导通电阻Ron更小，发热更低，允许通过的电流更大，型号也更多。</p>
+<ul>
+<li>Vgs电压</li>
+</ul>
+<p>需要考虑开启电压，驱动电压，极限电压;</p>
+<ul>
+<li>Id电流</li>
+</ul>
+<p>通常，尺寸越大，导通电阻Ron越小，允许的Id越大，具体手册为准</p>
+<ul>
+<li>Vds电压</li>
+</ul>
+<p>主要考虑Vds极限电压，防止击穿MOS管</p>
+<ul>
+<li>开关性能</li>
+</ul>
+<p>如果作为开关使用，需要考虑开关速率，开关性能，主要受寄生电容的影响，因为开关过程中需要对寄生电容充放电，产生开关损耗。</p>
+<ul>
+<li>品牌，封装尺寸，价格等</li>
+</ul>
+<p>参考手册：AOD4184A(NMOS)，AOD4185(PMOS)，AO3400A(NMOS)，AO3401A(PMOS)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418175235.webp" alt=""></p>
+<h3 id="MOS管与三极管差异">MOS管与三极管差异</h3>
+<p>场效应管的 <code>栅极g，源极s，漏极d</code> 对应于晶体管的 <code>基极b，发射极e、集电极c</code>，作用比较类似，都可以作为开关、放大使用，但结构，工作方式，性能差异较大。</p>
+<ol>
+<li>场效应管只有多子参与导电，为单极性;而晶体管的多子与少子均参与导电，为双极性;</li>
+<li>因为少子数目受温度、辐射影响较大，因而场效应管比晶体管的温度稳定性好、抗辐射能力强。</li>
+<li>场效应管用Ugs控制漏极电流ld，输入阻抗达10“Q，栅极电流几乎为0;而晶体管工作时基极需要一定的电流。因此，要求输入阻抗高的电路应选用场效应管。</li>
+<li>场效应管的电流方向可以为D到S，也可以S到D，而晶体管的电流方向只能为C到E(NPN)或E到C(PNP)，不能同时两个方向。</li>
+</ol>
+<blockquote>
+<p>NMOS -&gt;方向D至S，与寄生二极管反向，NMOS管可控<br>
+方向S至D，与寄生二极管同向，NMOS管不能关闭<br>
+PMOS -&gt;方向S至D，与寄生二极管反向，PMOS管可控<br>
+方向D至S，与寄生二极管同向，PMOS管不能关闭</p>
+</blockquote>
+<h2 id="集成运放">集成运放</h2>
+<h3 id="理论讲解-7">理论讲解</h3>
+<p><code>集成电路</code>：集成电路是采用专门的制造工艺，在半导体单晶硅上，把晶体管、场效应管、二极管、电阻和电容等元器件及它们之间的连线所组成的电路制作在一起，使之具有特定功能的芯片。(相当于模块化)</p>
+<p><code>集成运放</code>：集成运放，全称集成运算放大器，是具有超高放大倍数(可达<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><msup><mn>0</mn><mn>5</mn></msup></mrow><annotation encoding="application/x-tex">10^5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">5</span></span></span></span></span></span></span></span></span></span></span>甚至<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup></mrow><annotation encoding="application/x-tex">10^6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span></span></span></span>)的集成电路。常用于各种模拟信号的运算(如比例、求和、求差、积分、微分等)。</p>
+<p><code>集成运放构成</code>：如下图，集成运放由输入级、中间级、输出极和偏置电路等四部分构成。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418184904.webp" alt=""></p>
+<p>① <code>输入级</code><br>
+输入级又称前置极，通常是一个双端输入的高性能差分放大电路。一般要求输入阻抗高，差模放大倍数大，抑制共模信号能力强，静态电流小，对整个集成运放的性能参数至关重要。<br>
+② <code>中间级</code><br>
+中间级是集成运放的主放大器，其作用是使集成运放具有较强的放大能力，多采用共射(或共源)放大电路，其电压放大倍数可达几千倍。<br>
+③ <code>输出级</code><br>
+输出级具有输出电压线性范围宽、输出阻抗小(即带载能力强)、非线性失真小等特点，通常采用互补输出电路。<br>
+④ <code>偏置电路</code><br>
+偏置电路用于设置集成运放各级放大电路的静态工作点。</p>
+<ul>
+<li>符号</li>
+</ul>
+<p>Vs+一般接5V，Vs-一般接-5V或者地</p>
+<p><code>V+ &gt; V-；Vout = 5V</code></p>
+<p><code>V+ &lt; V-；Vout = 0V</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418185851.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418185859.webp" alt=""></p>
+<p><code>集成运放特点</code>：开环差模放大倍数(增益)超级大，差模输入电阻超级大，输出电阻超级小</p>
+<ul>
+<li>集成运放用途</li>
+</ul>
+<p>①加减乘除</p>
+<p>②积分/微分</p>
+<p>③电压跟随器</p>
+<p>④电压比较器</p>
+<p>⑤同向/反向放大器</p>
+<p>⑥差分放大器</p>
+<p>⑦I/V转换</p>
+<p>⑧精密电流源</p>
+<p>⑨波形发生器</p>
+<p>…</p>
+<ul>
+<li>集成运放常用封装</li>
+</ul>
+<p>双路运放：SOP8，DIP8</p>
+<p>它里面集成有两组运放</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418190435.webp" alt=""></p>
+<h3 id="工作原理-2">工作原理</h3>
+<ul>
+<li>电压传输特性</li>
+</ul>
+<p>集成运放的输出电压Uo与输入电压(同相输入端与反相输入端的电位差)(Up - Un)之间的关系曲线称为电压传输特性，即:</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>U</mi><mi>o</mi><mo>=</mo><mi>f</mi><mo stretchy="false">(</mo><mi>U</mi><mi>p</mi><mo>−</mo><mi>U</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Uo = f(Up - Un)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mord mathnormal">o</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
+<p>对于正、负两路供电的集成运放，曲线如下图(1,3象限分别是正电压负电压):</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230418190914.webp" alt=""></p>
+<p>曲线分析:</p>
+<p><code>线性区</code>: <code>Uo = Aod*(Up - Un)</code>,其中Aod为差模开环放大倍数，非常高，可达几十万倍，因此，集成运放的线性区非常窄。</p>
+<p><code>非线性区</code>: 输出电压要么Uom，要么-Uom，达到饱和，一般用于比较器。</p>
+<blockquote>
+<p>如果要做运算一般工作在线性区，如果是比较器就非线性区</p>
+</blockquote>
+<ul>
+<li>“虚短&quot;与&quot;虚断” — 线性区</li>
+</ul>
+<ol>
+<li>虚短</li>
+</ol>
+<p>对于理想运放，当工作在线性区时， <code>Uo = Aod*(Up - Un)</code>，Aod无穷大，得出:</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>U</mi><mi>p</mi><mo>−</mo><mi>U</mi><mi>n</mi><mo>=</mo><mfrac><mrow><mi>U</mi><mi>o</mi></mrow><mrow><mi>A</mi><mi>o</mi><mi>d</mi></mrow></mfrac><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">Up - Un = \frac{Uo}{Aod} = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2173em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8723em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">A</span><span class="mord mathnormal mtight">o</span><span class="mord mathnormal mtight">d</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">U</span><span class="mord mathnormal mtight">o</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span>，得出 <code>Up = Un</code>，即输入端&quot;虚短&quot;(两个输入端好像是短接一起)</p>
+<ol start="2">
+<li>虚断</li>
+</ol>
+<p>对于理想运放，输入电压Ri无穷大，Up-Un = 0,得出:</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mi>p</mi><mo>=</mo><mi>I</mi><mi>n</mi><mo>=</mo><mfrac><mrow><mo stretchy="false">(</mo><mi>U</mi><mi>p</mi><mo>−</mo><mi>U</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><mrow><mi>R</mi><mi>i</mi></mrow></mfrac><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">Ip = In = \frac{(Up-Un)}{Ri} = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.355em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.00773em;">R</span><span class="mord mathnormal mtight">i</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.10903em;">U</span><span class="mord mathnormal mtight">p</span><span class="mbin mtight">−</span><span class="mord mathnormal mtight" style="margin-right:0.10903em;">U</span><span class="mord mathnormal mtight">n</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span>，即输入端&quot;虚断&quot;(两个输入端好像是断开一样)</p>
+<blockquote>
+<p>利用&quot;虚短&quot;与&quot;虚断&quot;，可以计算出集成运算电路输出电压与输入电压的公式</p>
+</blockquote>
+<ul>
+<li>负反馈</li>
+</ul>
+<p>从集成运放的电压传输特性可知，开环应用时，由于放大倍数Aod超级大，导致线性区非常窄，没法应用到运算电路中，比如: Aod = 1000000，供电电压正负10V，只有当|Up-Un| &lt;10uV时，电路才工作在线性区，而输入电压纹波，温度影响等都会超过10uV，电路没法使用。<br>
+为了解决这一问题，引入了负反馈，将 <code>输出电路的一部分或全部通过一定的电路形式返回到输入端，达到改善电路性能，稳定放大倍数的目的</code>。</p>
+<ul>
+<li>电压跟随器</li>
+</ul>
+<h2 id="疑问">疑问</h2>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num125.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%B5%E9%98%BB"><span class="toc-number">2.</span> <span class="toc-text">电阻</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%90%86%E8%AE%BA%E8%AE%B2%E8%A7%A3"><span class="toc-number">2.1.</span> <span class="toc-text">理论讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">选型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%85%E8%AF%BB%E6%95%B0%E6%8D%AE%E6%89%8B%E5%86%8C"><span class="toc-number">2.3.</span> <span class="toc-text">阅读数据手册</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%AA%E5%99%A8%E6%B5%8B%E9%87%8F"><span class="toc-number">2.4.</span> <span class="toc-text">仪器测量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A7%E5%93%81%E5%BA%94%E7%94%A8"><span class="toc-number">2.5.</span> <span class="toc-text">产品应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0%CE%A9%E7%94%B5%E9%98%BB"><span class="toc-number">2.6.</span> <span class="toc-text">0Ω电阻</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%AD%E6%95%8F%E7%94%B5%E9%98%BB"><span class="toc-number">2.7.</span> <span class="toc-text">热敏电阻</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%89%E6%95%8F%E7%94%B5%E9%98%BB"><span class="toc-number">2.8.</span> <span class="toc-text">光敏电阻</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%A0%E9%A2%98"><span class="toc-number">2.9.</span> <span class="toc-text">习题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%B5%E5%AE%B9"><span class="toc-number">3.</span> <span class="toc-text">电容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%90%86%E8%AE%BA%E8%AE%B2%E8%A7%A3-2"><span class="toc-number">3.1.</span> <span class="toc-text">理论讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%99%A8%E4%BB%B6%E9%80%89%E5%9E%8B"><span class="toc-number">3.2.</span> <span class="toc-text">器件选型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%99%B6%E7%93%B7%E7%94%B5%E5%AE%B9"><span class="toc-number">3.3.</span> <span class="toc-text">陶瓷电容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B5%E8%A7%A3%E7%94%B5%E5%AE%B9"><span class="toc-number">3.4.</span> <span class="toc-text">电解电容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A7%84%E7%94%B5%E5%AE%B9"><span class="toc-number">3.5.</span> <span class="toc-text">安规电容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%94%E7%A4%BA%E7%94%B5%E5%AE%B9%E5%85%85%E6%94%BE%E7%94%B5"><span class="toc-number">3.6.</span> <span class="toc-text">演示电容充放电</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A7%E5%93%81%E5%BA%94%E7%94%A8-2"><span class="toc-number">3.7.</span> <span class="toc-text">产品应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%B5%E6%84%9F"><span class="toc-number">4.</span> <span class="toc-text">电感</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%90%86%E8%AE%BA%E8%AE%B2%E8%A7%A3-3"><span class="toc-number">4.1.</span> <span class="toc-text">理论讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E5%9E%8B-2"><span class="toc-number">4.2.</span> <span class="toc-text">选型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E7%8E%87%E7%94%B5%E6%84%9F"><span class="toc-number">4.3.</span> <span class="toc-text">功率电感</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%B4%E7%89%87%E7%94%B5%E6%84%9F"><span class="toc-number">4.4.</span> <span class="toc-text">贴片电感</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B1%E6%A8%A1%E4%B8%8E%E5%B7%AE%E6%A8%A1%E7%94%B5%E6%84%9F"><span class="toc-number">4.5.</span> <span class="toc-text">共模与差模电感</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A7%E5%93%81%E5%BA%94%E7%94%A8-3"><span class="toc-number">4.6.</span> <span class="toc-text">产品应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E6%9E%81%E7%AE%A1"><span class="toc-number">5.</span> <span class="toc-text">二极管</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%90%86%E8%AE%BA%E8%AE%B2%E8%A7%A3-4"><span class="toc-number">5.1.</span> <span class="toc-text">理论讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E4%BA%8C%E6%9E%81%E7%AE%A1"><span class="toc-number">5.2.</span> <span class="toc-text">通用二极管</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%82%96%E7%89%B9%E5%9F%BA%E4%BA%8C%E6%9E%81%E7%AE%A1"><span class="toc-number">5.3.</span> <span class="toc-text">肖特基二极管</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E5%85%89%E4%BA%8C%E6%9E%81%E7%AE%A1"><span class="toc-number">5.4.</span> <span class="toc-text">发光二极管</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%B3%E5%8E%8B%E7%AE%A1"><span class="toc-number">5.5.</span> <span class="toc-text">稳压管</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TVS%E7%AE%A1"><span class="toc-number">5.6.</span> <span class="toc-text">TVS管</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E6%9E%81%E7%AE%A1"><span class="toc-number">6.</span> <span class="toc-text">三极管</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%90%86%E8%AE%BA%E8%AE%B2%E8%A7%A3-5"><span class="toc-number">6.1.</span> <span class="toc-text">理论讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">6.2.</span> <span class="toc-text">工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%85%B3%E5%BA%94%E7%94%A8"><span class="toc-number">6.3.</span> <span class="toc-text">开关应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%89%E7%94%B5%E4%B8%89%E6%9E%81%E7%AE%A1%E4%B8%8E%E4%BA%8C%E6%9E%81%E7%AE%A1"><span class="toc-number">6.4.</span> <span class="toc-text">光电三极管与二极管</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A7%E5%93%81%E5%BA%94%E7%94%A8-4"><span class="toc-number">6.5.</span> <span class="toc-text">产品应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MOS%E7%AE%A1"><span class="toc-number">7.</span> <span class="toc-text">MOS管</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%90%86%E8%AE%BA%E8%AE%B2%E8%A7%A3-6"><span class="toc-number">7.1.</span> <span class="toc-text">理论讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A2%9E%E5%BC%BA%E5%9E%8BNMOS"><span class="toc-number">7.2.</span> <span class="toc-text">增强型NMOS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A2%9E%E5%BC%BA%E5%9E%8BPMOS"><span class="toc-number">7.3.</span> <span class="toc-text">增强型PMOS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%84%E7%94%9F%E5%8F%82%E6%95%B0"><span class="toc-number">7.4.</span> <span class="toc-text">寄生参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-number">7.5.</span> <span class="toc-text">应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E5%9E%8B-3"><span class="toc-number">7.6.</span> <span class="toc-text">选型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MOS%E7%AE%A1%E4%B8%8E%E4%B8%89%E6%9E%81%E7%AE%A1%E5%B7%AE%E5%BC%82"><span class="toc-number">7.7.</span> <span class="toc-text">MOS管与三极管差异</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%86%E6%88%90%E8%BF%90%E6%94%BE"><span class="toc-number">8.</span> <span class="toc-text">集成运放</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%90%86%E8%AE%BA%E8%AE%B2%E8%A7%A3-7"><span class="toc-number">8.1.</span> <span class="toc-text">理论讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-2"><span class="toc-number">8.2.</span> <span class="toc-text">工作原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%96%91%E9%97%AE"><span class="toc-number">9.</span> <span class="toc-text">疑问</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://lib.baomitu.com/KaTeX/latest/katex.min.css"><script src="https://jsd.onmicrosoft.cn/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '可惜你不听王杰，也不懂我...' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script defer src="/js/my_aplayer.js"></script><script defer src="/js/meting.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
