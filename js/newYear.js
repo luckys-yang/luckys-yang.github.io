@@ -26,7 +26,7 @@ var newYear = () => {
             document.querySelector('#newYear .newYear-time').innerHTML = '<span class="happyNewYear">重在参与</p>';
         } else {
             // 大于0则时间还没到
-            document.querySelector('#newYear .title').innerHTML = '距离2024专插本剩余：'
+            document.querySelector('#newYear .title').innerHTML = '距离2024毕业剩余：'
 
             // 大于一天则直接渲染天数
             if (second > 86400) {
