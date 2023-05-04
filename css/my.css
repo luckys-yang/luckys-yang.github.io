@@ -1641,4 +1641,16 @@ div.btns a[href]:hover {
     background: -ms-linear-gradient(left, #6639a6, #3490de);
     background: linear-gradient(to right, #6639a6, #3490de);
 }
+
+#page .category-lists .category-list li.category-list-item:nth-child(27) a.category-list-link::before {
+    content: "💬";
+}
+
+#page .category-lists .category-list li.category-list-item:nth-child(27) {
+    background: -webkit-linear-gradient(right, #38ef7d, #11998e);
+    background: -moz-linear-gradient(right, #38ef7d, #11998e);
+    background: -o-linear-gradient(right, #38ef7d, #11998e);
+    background: -ms-linear-gradient(right, #38ef7d, #11998e);
+    background: linear-gradient(to left, #38ef7d, #11998e);
+}
 /* 分类美化end */
