@@ -1,0 +1,161 @@
+# Hexo Configuration
+## 文档: https://hexo.io/docs/configuration.html
+## 源码: https://github.com/hexojs/hexo/
+
+# 基础设置
+title: Luckys-Yangの小栈 # 网站标题
+subtitle: ''  # 网站副标题【设置鼠标指上 subtitle 后翻转另一行字】
+description: '关于嵌入式的个人博客' # 网站描述
+keywords: '博客,个人博客,技术,学习,Hexo,Blog,STM32,嵌入式,单片机' # 网站的关键词
+author: Luckys-Yang  # 你的名字
+language: zh-CN # 网站使用的语言
+timezone: ''  # 时区默认是电脑时区(选填)
+favicon: https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/icon-fa-gem.webp  # 网站图标
+
+# 网站设置
+## 在此处设置您的网站网址。 例如，如果您使用 GitHub Page，请将 url 设置为 'https://username.github.io/project'
+url: https://mdcm.yang5201314.cn
+permalink: post/:abbrlink.html # post为自定义前缀  文章的永久链接格式 year/:month/:day/:title/
+abbrlink: 
+  alg: crc32   #算法： crc16(default) and crc32
+  rep: hex     #进制： dec(default) and hex
+permalink_defaults: # 永久链接中各部分的默认值
+pretty_urls:  # 网址美化
+  trailing_index: false # 是否在永久链接中保留尾部的 index.html
+  trailing_html: true # 是否在永久链接中保留尾部的 .html
+
+# Directory 目录设置
+source_dir: source # 资源文件夹，这个文件夹用来存放内容
+public_dir: public  # 公共文件夹，这个文件夹用于存放生成的站点文件
+tag_dir: tags # 标签文件夹
+archive_dir: archives # 归档文件夹
+category_dir: categories  # 分类文件夹
+code_dir: downloads/code  # Include code 文件夹，source_dir 下的子目录
+i18n_dir: :lang # 国际化（i18n）文件夹
+skip_render:  # 跳过渲染
+  - README.md
+  - error.html
+  - close.html
+  - about\**
+
+# Writing 写作
+new_post_name: :title.md # 新文章的文件名
+default_layout: post # 默认类型
+titlecase: false # 将 title 转换为 title case
+external_link:
+  enable: false # 在新标签页中打开外部链接
+  field: site # 适用于全站适用于全站(post则仅对文章生效)
+  exclude: '' # 排除
+filename_case: 0  # 把文件名称转换为 (1) 小写或 (2) 大写
+render_drafts: false  # 显示草稿
+post_asset_folder: false  # 启动 Asset 文件夹创建新文章时自动创建一个文件夹。这个资源文件夹将会有与这个文章文件一样的名字。将所有与你的文章有关的资源放在这个关联文件夹中之后，你可以通过相对路径来引用它们
+relative_link: false  # 把链接改为与根目录的相对位址
+future: true  # 显示未来的文章
+highlight: # 代码高亮(当 line_number 和 wrap 为 false，hljs 为 true 的时候，你可以在站点上直接应用 highlight.js 的主题。)
+  enable: false
+  line_number: true
+  auto_detect: false # 自动检测代码块的语言
+  tab_replace: '' # 用代码内的 tab (\t) 替换为给定值，默认值是两个空格
+  wrap: true
+  hljs: true
+prismjs:  # 代码块的设置
+  enable: true
+  preprocess: false
+  line_number: true
+  tab_replace: ''
+
+# Home page setting 主页设置
+# path: 您的博客索引页面的根路径 (默认 = '')
+# per_page: 每页显示的帖子 (0 = 禁用分页)
+# order_by: 帖子顺序 (默认按日期降序排序)
+index_generator:
+  path: ''
+  per_page: 12
+  order_by: -date
+
+# Category & Tag 类别和标签
+default_category: uncategorized # 默认类别
+# 把分类名称改成英文
+category_map:	
+# 把标签名称改成英文
+tag_map:
+
+# Metadata elements 元数据元素
+## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
+meta_generator: true
+
+# Date / Time format 日期/时间格式
+## Hexo 使用 Moment.js 解析和显示日期
+## 您可以自定义日期格式，如中所定义
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+## updated_option 支持 'mtime', 'date', 'empty'
+updated_option: 'mtime'
+
+# Pagination 分页设置
+## 将 per_page 设置为 0 以禁用分页 
+per_page: 8
+pagination_dir: page
+
+# 包含/排除文件
+## include:/exclude: 选项仅适用于 'source/' 文件夹
+### include:
+### exclude:
+### ignore:
+
+# Extensions 扩展设置
+## 扩展: https://hexo.io/plugins/
+## 主题: https://hexo.io/themes/
+### theme 主题
+theme: butterfly
+### plugins 扩展
+
+# Deployment 部署
+## Docs: https://hexo.io/docs/one-command-deployment
+deploy:
+    type: git
+    repo: 
+        github: git@github.com:luckys-yang/luckys-yang.github.io.git #GitHub仓库
+    branch: master  # 分支看你是main还是master
+
+# 搜索【来自插件npm install hexo-generator-search --save】
+# 参考文章：https://tzy1997.com/articles/hexo1607/
+#  hexo algolia 
+# search:
+#   path: search.xml
+#   field: post
+#   content: true  
+
+# 【来自插件npm install hexo-algoliasearch --save】
+algolia:
+  appId: "MSZRRKNRKT"
+  apiKey: "71e2a5ac35435ee76602cd55d727e5ff"
+  adminApiKey: "21fd75470227d291fcc5fb6e6df9ced7"
+  chunkSize: 5000
+  indexName: "aaa"
+  fields:
+    - content:strip:truncate,0,500
+    - excerpt:strip
+    - gallery
+    - permalink
+    - photos
+    - slug
+    - tags
+    - title
+
+# 双栏插件【npm i hexo-butterfly-article-double-row --save】
+butterfly_article_double_row:
+  enable: true    
+
+# Mathjs 
+# 需要先卸载原生的
+#【npm i hexo-renderer-markdown-it --save # 需要安装这个渲染插件】
+#【npm install katex @renbaoshuo/markdown-it-katex #需要安装这个katex插件】
+markdown:
+    plugins:
+      - '@renbaoshuo/markdown-it-katex'  
+
+aplayer:
+  meting: true
+  asset_inject: false      

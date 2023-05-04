@@ -1,0 +1,191 @@
+﻿- class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#16e5de;display:inline-block;"></i><span style="color:#abb4d7;">嵌入式相关</span>
+  class_desc: 
+  link_list:
+    - name: ShowRo-Cc
+      link: https://showrom.gitee.io/
+      avatar: ./touxiang/link1.webp
+      descr: 就是因为太懂。 
+      # theme_color: "#447c7bb3" 
+    - name: 陶小桃Blog
+      link: https://www.52txr.cn/
+      avatar: ./touxiang/link5.webp
+      descr: Python,PyQT
+    - name: 蒋智昊的博客
+      link: http://chanpinxue.cn/
+      avatar: ./touxiang/link6.webp
+      descr: 各类学习都有  
+    - name: 原子哥个人博客
+      link: http://www.openedv.com/
+      avatar: ./touxiang/link10.webp
+      descr: 正点原子   
+    - name: 丁丁
+      link: https://www.hexcode.cn/
+      avatar: ./touxiang/link12.webp
+      descr: 软硬件、前后端全栈开发者(已不更)   
+    - name: 洋桃电子
+      link: http://www.doyoung.net/YT/index.html
+      avatar: ./touxiang/link11.webp
+      descr: B站UP主(我的STM32入门导师)    
+    - name: 飞起的小田
+      link:  https://www.cnblogs.com/tianxxl/tag/STM32CubeIDE/
+      avatar: ./touxiang/link42.webp
+      descr: FreeRTOS,MX,uC/OS,QT           
+- class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#16e5de;display:inline-block;"></i><span style="color:#abb4d7;">美化/分享资源相关</span>
+  class_desc: 
+  link_list:
+    - name: 爆胎
+      link: https://itggg.cn/
+      avatar: ./touxiang/link2.webp
+      descr: 互联网长方形物体空间移动师
+    - name: 清墨的橘   
+      link: https://www.abcio.cn/
+      avatar: ./touxiang/link7.webp
+      descr: 一些美化教程资源 
+    - name: 狱长
+      link: https://www.xccx.cc/
+      avatar: ./touxiang/link8.webp
+      descr: 一些美化教程资源     
+    - name: 神秘的热心网友
+      link: https://imyshare.com/
+      avatar: ./touxiang/link14.webp
+      descr: 精品实用网络资源导航  
+    - name: 小宜技术猫
+      link: https://azpay.cn/
+      avatar: ./touxiang/link15.webp
+      descr: 美化,资源分享
+    - name: 小刀娱乐
+      link: https://xd.x6d.com/
+      avatar: ./touxiang/link16.webp
+      descr: 美化,资源分享   
+    - name: 尘遇
+      link: https://chenyu.me/
+      avatar: ./touxiang/link17.webp
+      descr: 美化,资源分享    
+    - name: 利熙博客
+      link: https://www.liitk.com/
+      avatar: ./touxiang/link18.webp
+      descr: 无偿共享全网干货分享无限激！
+    - name: 云星日记
+      link: https://moil.cc/
+      avatar: ./touxiang/link20.webp
+      descr: 资源,软件分享  
+    - name: 猪头
+      link: https://www.iculture.cc/
+      avatar: ./touxiang/link19.webp
+      descr: 资源,软件分享，社区交流      
+    - name: 青云博客
+      link: https://blog.qinglin.co/
+      avatar: ./touxiang/link22.webp
+      descr: 技术,资源分享 
+    - name: 51学代码
+      link: https://www.51xcode.com/
+      avatar: ./touxiang/link23.webp
+      descr: 编程技术分享、知识导航、IT技术学习的网站
+    - name: 满心主页
+      link: https://lovelu.top/
+      avatar: ./touxiang/link24.webp
+      descr: 美化,资源分享
+    - name: Xlenco
+      link: https://xlenco.eu.org/
+      avatar: ./touxiang/link25.webp
+      descr: 美化,资源分享 
+    - name: Sianx's Blog
+      link: https://sianx.com/
+      avatar: ./touxiang/link30.webp
+      descr: 资源分享           
+- class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#16e5de;display:inline-block;"></i><span style="color:#abb4d7;">C/C++ && Linux相关</span>
+  class_desc: 
+  link_list:
+    - name: 辰的小站
+      link: https://blog.chening.cc/
+      avatar: ./touxiang/link3.webp
+      descr: c语言,Linux    
+    - name: 小飞博客
+      link: https://www.xffjs.com/
+      avatar: ./touxiang/link9.webp
+      descr: Linux
+    - name: 梁臣洋-个人博客
+      link: https://www.itqaq.com/
+      avatar: ./touxiang/link13.webp
+      descr: Linux,Git   
+    - name: BARAN的小站🔥🔥🔥
+      link: https://cxvh.com/
+      avatar: ./touxiang/link26.webp
+      descr: Git  
+    - name: CodeAnime
+      link: https://codeanime.cc/
+      avatar: ./touxiang/link31.webp
+      descr: Git,Linux,Java 
+    - name: Leonus
+      link: https://blog.leonus.cn/
+      avatar: ./touxiang/link32.webp
+      descr: Git,其他 
+    - name: 金晖のBlog
+      link: https://www.adguy.top/
+      avatar: ./touxiang/link33.webp
+      descr: C++ 
+    - name: StackFrame - 一个笔记栈
+      link: https://chengzi516.github.io/
+      avatar: ./touxiang/link34.webp
+      descr: C,Linux,Java 
+    - name: GoogTech
+      link: https://goog.tech/blog/
+      avatar: ./touxiang/link35.webp
+      descr: C++详细入门,Shell详细入门   
+    - name: GoogTech
+      link: https://www.cwwwxl.top/
+      avatar: ./touxiang/link37.webp
+      descr: Java,Linux  
+    - name: Mycpen
+      link: https://cpen.top/
+      avatar: ./touxiang/link38.webp
+      descr: Linux,Python  
+    - name: a.d
+      link:  http://blog.aiheadn.cn/
+      avatar: ./touxiang/link40.webp
+      descr: Java
+    - name: 6x
+      link:  https://6xyun.cn/
+      avatar: ./touxiang/link41.webp
+      descr: Linux,Java   
+- class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#16e5de;display:inline-block;"></i><span style="color:#abb4d7;">简约相关</span>
+  class_desc: 
+  link_list:
+    - name: 繁星博客
+      link: https://blog.emoao.com/
+      avatar: ./touxiang/link4.webp
+      descr: 允你一世繁星，许你一世星辰！ 
+    - name: 故人随笔
+      link: https://imgod.me/
+      avatar: ./touxiang/link21.webp
+      descr: 寒江孤影，江湖故人，相逢何必曾相识
+- class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#16e5de;display:inline-block;"></i><span style="color:#abb4d7;">Butterfly魔改相关</span>
+  class_desc: 
+  link_list:
+    - name: 唐志远の博客
+      link: https://tzy1997.com/
+      avatar: ./touxiang/link27.webp
+      descr: 古今之成大事者，不惟有超世之才，亦必有坚忍不拔之志 
+    - name: Butterfly
+      link: https://butterfly.js.org/
+      avatar: ./touxiang/link28.webp
+      descr: 主题作者
+    - name: Fomalhaut🥝
+      link: https://www.fomal.cc/
+      avatar: ./touxiang/link29.webp
+      descr: 魔改大佬
+    - name: MghyのBlog
+      link: https://lmghy.top/
+      avatar: ./touxiang/link36.webp
+      descr: 为了明天的摸鱼所以现在摸鱼ing  
+    - name: 张洪Heo
+      link: https://blog.zhheo.com/
+      avatar: ./touxiang/link39.webp
+      descr: 分享设计与科技生活
+- class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#16e5de;display:inline-block;"></i><span style="color:#abb4d7;">好友</span>
+  class_desc: 
+  link_list:
+    - name: codehxx · 遺憾
+      link: https://codehxx.cn/
+      avatar: ./touxiang/link43.webp
+      descr: 人生短暂，一如轻烟与飞雾。       

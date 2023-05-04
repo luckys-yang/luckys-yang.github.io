@@ -1,0 +1,67 @@
+﻿#rightMenu.js-pjax
+    .rightMenu-group.rightMenu-small
+        a.rightMenu-item(href="javascript:window.history.back();")
+            i.fa.fa-arrow-left
+        a.rightMenu-item(href="javascript:window.history.forward();")
+            i.fa.fa-arrow-right
+        a.rightMenu-item(href="javascript:window.location.reload();")
+            i.fa.fa-refresh
+    .rightMenu-group.rightMenu-line.hide#menu-text
+        a.rightMenu-item(href="javascript:rmf.copySelect();")
+            i.fa.fa-copy
+            span='复制'
+        a.rightMenu-item(href="javascript:window.open(\"https://www.baidu.com/s?wd=\"+window.getSelection().toString());window.location.reload();")
+            i.fa.fa-paw
+            span='百度搜索'
+    .rightMenu-group.rightMenu-line.hide#menu-too
+        a.rightMenu-item(href="javascript:window.open(window.getSelection().toString());window.location.reload();")
+            i.fa.fa-link
+            span='转到链接'
+    .rightMenu-group.rightMenu-line.hide#menu-paste
+    .rightMenu-group.rightMenu-line.hide#menu-post
+        a.rightMenu-item(href="javascript:rmf.copyWordsLink()")
+            i.fa.fa-link
+            span='复制本文地址'
+    .rightMenu-group.rightMenu-line.hide#menu-to
+        a.rightMenu-item(href="javascript:rmf.openWithNewTab()")
+            i.fa.fa-window-restore
+            span='新窗口打开'
+        a.rightMenu-item#menu-too(href="javascript:rmf.open()")
+            i.fa.fa-link
+            span='转到链接'
+        a.rightMenu-item(href="javascript:rmf.copyLink()")
+            i.fa.fa-copy
+            span='复制链接'
+    .rightMenu-group.rightMenu-line.hide#menu-img
+        a.rightMenu-item(href="javascript:rmf.saveAs()")
+            i.fa.fa-download
+            span='保存图片'
+        a.rightMenu-item(href="javascript:rmf.openWithNewTab()")
+            i.fa.fa-window-restore
+            span='在新窗口打开'
+        a.rightMenu-item(href="javascript:rmf.copyLink()")
+            i.fa.fa-copy
+            span='复制图片链接'           
+    .rightMenu-group.rightMenu-line
+        a.rightMenu-item(href="https://yang5201314.cn/")
+            i.fa.fa-home
+            span='主页'   
+        a.rightMenu-item(href="/categories/")
+            i.fa-solid.fa-folder-open
+            span='文章分类'  
+        a.rightMenu-item(href="/tags/")
+            i.fa-solid.fa-tags
+            span='文章标签'             
+        a.rightMenu-item(href="/archives/")
+            i.fa-solid.fa-folder-open
+            span='文章归档'  
+        a.rightMenu-item(href="https://www.foreverblog.cn/go.html" target="_blank")
+            i.fa.fa-certificate
+            span='虫洞' 
+        a.rightMenu-item(href="javascript:rmf.fullScreen();")
+            i.fas.fa-expand
+            span='切换全屏'                                             
+        //- a.rightMenu-item(href="javascript:rmf.switchDarkMode();")
+        //-     i.fa.fa-moon
+        //-     span='昼夜切换'                    
+        
