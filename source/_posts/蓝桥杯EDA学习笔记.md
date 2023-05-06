@@ -1,9 +1,9 @@
 ---
-title: 蓝桥杯EDA学习笔记
+title: EDA学习笔记
 cover: /img/num98.webp
 comments: false
 categories:
-  - 蓝桥杯
+  - EDA
 abbrlink: 366a746c
 date: 2022-12-04 12:05:18
 ---

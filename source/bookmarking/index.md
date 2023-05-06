@@ -172,6 +172,14 @@ comments: false
       link: http://bbs.eeworld.com.cn/forum-128-1.html
       avatar: ./book_image/book8.webp
       descr:       　　
+    - name: 32CPU单片机查询网
+      link: https://www.32mcu.com/iccat.php?id=0&brand=19&price_min=0&price_max=0&page=2&sort=click_count&order=DESC
+      avatar: ./book_image/book8.webp
+      descr: 可查询各种厂家的单片机型号   　　
+    - name: WCH沁恒
+      link: https://www.32mcu.com/iccat.php?id=0&brand=19&price_min=0&price_max=0&page=2&sort=click_count&order=DESC
+      avatar: ./book_image/book8.webp
+      descr: CH单片机的厂家官网      　　
 
 - class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#dfe516;display:inline-block;"></i><span style="color:#abb4d7;">博客相关</span>
   class_desc: 

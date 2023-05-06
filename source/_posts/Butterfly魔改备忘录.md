@@ -650,6 +650,13 @@ comments: false
 1. 在主题文件下 `\layout\includes\loading\`下创建 `doodle.pug`，粘贴代码进去即可然后在末尾添加下面代码(以免一直在加载画面卡住)：
 
 ```pug
+#loading-box
+  style.
+    css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}
+  css-doodle(use="var(--rule)")
+  script(async src='https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js')
+
+
 script.
   const preloader = {
     endLoading: () => {
@@ -891,3 +898,48 @@ category_map:
 ## 友链新增
 
 参考文章：https://blog.4t.pw/posts/3161a535.html#css%E6%B7%BB%E5%8A%A0%E6%96%B9%E5%BC%8F%E4%BA%8C
+
+
+
+## 文章新窗口打开
+
+- 主页面， `\themes\butterfly\layout\includes\mixins\post-ui.pug`
+
+```diff
+mixin postUI(posts)
+  each article , index in page.posts.data
+    .recent-post-item
+      -
+        let link = article.link || article.path
+        let title = article.title || _p('no_title')
+        const position = theme.cover.position
+        let leftOrRight = position === 'both'
+          ? index%2 == 0 ? 'left' : 'right'
+          : position === 'left' ? 'left' : 'right'
+        let post_cover = article.cover
+        let no_cover = article.cover === false || !theme.cover.index_enable ? 'no-cover' : ''
+      -
+      if post_cover && theme.cover.index_enable
+        .post_cover(class=leftOrRight)
+-          a(href=url_for(link) title=title)
++          a(href=url_for(link), target='_blank', title=title)
+            img.post_bg(src=url_for(post_cover) onerror=`this.onerror=null;this.src='`+ url_for(theme.error_img.post_page) + `'` alt=title)
+      .recent-post-info(class=no_cover)
+-        a.article-title(href=url_for(link) title=title)= title
++        a.article-title(href=url_for(link), target='_blank', title=title)= title
+```
+
+- 归档页面, `\themes\butterfly\layout\includes\mixins\article-sort.pug`
+
+```diff
+      .article-sort-item(class=no_cover)
+        if article.cover && theme.cover.archives_enable
+-          a.article-sort-item-img(href=url_for(article.path) title=title)
++          a.article-sort-item-img(href=url_for(article.path), target='_blank', title=title)
+            img(src=url_for(article.cover) alt=title onerror=`this.onerror=null;this.src='${url_for(theme.error_img.post_page)}'`)
+        .article-sort-item-info
+-          a.article-sort-item-title(href=url_for(article.path) title=title)= title
++          a.article-sort-item-title(href=url_for(article.path), target='_blank', title=title)= title
+          span.article-sort-item-index= (current - 1) * config.per_page + post_index + 1
+```
+

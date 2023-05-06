@@ -10,6 +10,12 @@ date: 2023-03-29 11:41:28
 
 
 
+## 前言
+
+{% note blue 'fas fa-fan' flat %}参考文章{% endnote %}
+
+[使用 Github Action 自动部署 Hexo 博客](https://ll.sc.cn/posts/10d9/)
+
 ## 我的Git仓库
 
 https协议访问经常访问不了，ssh安全快速
@@ -23,7 +29,7 @@ git@github.com:luckys-yang/luckys-yang.github.io.git
 - [【博客源码】仓库](https://github.com/luckys-yang/my_blog)
 
 ```bash
-git@github.com:luckys-yang/my_blog.git
+git@github.com:luckys-yang/MyBlog_Code.git
 ```
 
 - [【嵌入式应用开发-主车程序】仓库](https://github.com/luckys-yang/Embedded_Main_Car)

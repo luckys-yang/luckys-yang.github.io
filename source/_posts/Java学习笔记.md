@@ -1499,6 +1499,14 @@ public class helloworld {
 
 
 
+#### instanceof
+
+`instanceof`: 判断左边的对象是否是右边的类的实例，或者是其直接或间接子类，或者是其接口的实现类
+
+用于判断一个对象是否是某个类或其子类的实例，通常与类型转换（包括向上转型和向下转型）一起使用，以确保类型转换的安全性
+
+
+
 ### 继承
 
 #### 基本介绍
@@ -1642,7 +1650,7 @@ class Animal2 {
 方法重写的校验注解： `@Override`
 
 * 方法加了这个注解，那就必须是成功重写父类的方法，否则报错
-* @Override 优势： `可读性好，安全，优雅`
+* @Override 优势： `可读性好，安全，优雅`(这个可以省略的但是为了可读性一般重写的话需要加)
 
 **子类可以扩展父类的功能，但不能改变父类原有的功能**， `重写有以下三个限制`：
 
@@ -1993,13 +2001,117 @@ interface InterfaceJDK8() {
 
 * 父类类型范围 > 子类类型范围
 
+```java
+父类类型 对象名称 = new 子类构造器;
+接口	  对象名称 = new 实现类构造器;
+```
+
+多态的执行：
+
+* 对于方法的调用：**编译看左边，运行看右边**（分派机制）
+* 对于变量的调用：**编译看左边，运行看左边**
+
+多态的使用规则：
+
+* 必须存在继承或者实现关系
+* 必须存在父类类型的变量引用子类类型的对象
+* 存在方法重写
+
+多态的优势：
+
+* 在多态形式下，右边对象可以实现组件化切换，便于扩展和维护，也可以实现类与类之间的**解耦**
+* 父类类型作为方法形式参数，传递子类对象给方法，可以传入一切子类对象进行方法的调用，更能体现出多态的**扩展性**与便利性
+
+多态的劣势： 
+
+* 多态形式下，不能直接调用子类特有的功能，因为编译看左边，父类中没有子类独有的功能，所以代码在编译阶段就直接报错了
+
+```java
+public class helloworld {
+    public static void main(String[] args) {
+        Animal cat = new Cat();
+        Animal dog = new Dog();
+        dog.run();  // 输出 "狗在跑"
+//        可以去判断这个对象是不是属于Dog，如果是就把它强制类型转换为Dog这样就可以调用Dog的方法
+        if(dog instanceof Dog) {
+            ((Dog)dog).eat();   // 输出 "狗在吃饭"
+        }
+//        dog.eat();    // 错误的，编译看左边
+        cat.run();  // 输出 "动物在跑"
+        go(dog);    // 输出 "狗在跑"
+    }
+//    用 Dog或者Cat 都没办法让所有动物参与进来，只能用Anima
+    public static  void go(Animal d) {
+        d.run();
+    }
+}
+
+
+class Cat extends Animal {
+}
+
+class Dog extends Animal {
+    public void eat(){
+        System.out.println("狗在吃饭");
+    }
+    @Override
+    public void run() {
+        System.out.println("狗在跑");
+    }
+}
+
+class Animal {
+    public void run(){
+        System.out.println("动物在跑");
+    }
+}
+```
 
 
 
+#### 上下转型
+
+> 基本数据类型的转换：
+>
+> 1. 小范围类型的变量或者值可以直接赋值给大范围类型的变量
+> 2. 大范围类型的变量或者值必须强制类型转换给小范围类型的变量
+
+引用数据类型的**自动**类型转换语法： `子类类型的对象或者变量可以自动类型转换赋值给父类类型的变量`
+
+**父类引用指向子类对象**
+
+- **向上转型 (upcasting)**：通过子类对象（小范围）实例化父类对象（大范围），这种属于自动转换
+- **向下转型 (downcasting)**：通过父类对象（大范围）实例化子类对象（小范围），这种属于强制转换
+
+```java
+public class helloworld {
+    public static void main(String[] args) {
+//        向上转型
+        Animal a = new Dog();
+        a.run();    // 输出 "狗在跑"
+//        向下转型
+        Dog dog = (Dog)a;
+        dog.eat();  // 输出 "狗在吃饭"
+    }
+}
 
 
+class Dog extends Animal {
+    public void eat(){
+        System.out.println("狗在吃饭");
+    }
+    @Override
+    public void run() {
+        System.out.println("狗在跑");
+    }
+}
 
-
+class Animal {
+    public void run(){
+        System.out.println("动物在跑");
+    }
+}
+```
 
 
 

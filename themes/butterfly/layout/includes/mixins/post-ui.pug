@@ -13,13 +13,15 @@ mixin postUI(posts)
       -
       if post_cover && theme.cover.index_enable
         .post_cover(class=leftOrRight)
-          a(href=url_for(link) title=title)
+          //- a(href=url_for(link) title=title)
+          a(href=url_for(link), target='_blank', title=title)
             if article.cover_type === 'img'
               img.post-bg(src=url_for(post_cover) onerror=`this.onerror=null;this.src='${url_for(theme.error_img.post_page)}'` alt=title)
             else
               div.post-bg(style=`background: ${post_cover}`)
       .recent-post-info(class=no_cover)     
-        a.article-title(href=url_for(link) title=title)= title
+        //- a.article-title(href=url_for(link) title=title)= title
+        a.article-title(href=url_for(link), target='_blank', title=title)= title
         .article-meta-wrap
           if (is_home() && (article.top || article.sticky > 0))
             span.article-meta

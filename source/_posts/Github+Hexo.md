@@ -249,21 +249,6 @@ hexo render渲染文件
 
 - 为Git安装 `tree`命令，把tree.exe复制到 `E:\gits\Git\mingw64\bin\` 下即可，命令是 `tree .`
 
-- 首先创建私有库【选Private，勾Add README file】
-- 配置git，本地需要有秘钥，github也要有这样才能相连，下面命令是验证是否可以相连成功
-
-```bash
-ssh -T git@github.com
-```
-
-- 本地创建一个文件夹，进去右键打开git命令界面，输入命令
-
-```bash
-git init
-```
-
-它会生成一个管理git仓库的文件夹 `.git`，里面包括所有git操作所需要的文件。
-
 -   `.gitignore` 文件夹是来筛选出不想提交或者屏蔽的文件，push 的时候也不会上传到git上
 
 ```bash
@@ -275,47 +260,6 @@ Gitignore用法简介：
 *.sln        忽略掉以.sln为后缀的文件
 ```
 
-
-
-- 继续输入命令
-
-```bash
-git remote add origin git@github.com:xxx/xxx.git
-```
-
-<span style="color:red">注意</span>：这个可以在窗口点击【Code】查看SSH
-
-- 【其他用法1】同步仓库内容，输入命令
-
-```bash
-git pull git@github.com:xxx/xxx.git
-```
-
-这时候你文件下就会多出原本在github上的文件
-
-- 【其他用法2】把本地上传到仓库，执行增加命令(添加文件到暂存区)
-
-```bash
-git add .
-```
-
-<span style="color:red">注意</span>：add后面的点表示提交所有文件，如果需要指定文件可以写文件名
-
-执行提交命令(将暂存区内容添加到仓库中)
-
-```bash
-git commit -m '提交信息：测试'
-```
-
-<span style="color:red">注意</span>：-m后面是提示信息
-
-推送命令
-
-```bash
-git pull git@github.com:xxx/xxx.git
-```
-
-- 这样就可以在仓库看到提交的文件了
 - 【其他用法3】清空远程仓库
 
 ```bash
@@ -403,93 +347,6 @@ git pull git@gitee.com:luckys-yang/luckys-yang.git
 参考文章：https://www.fomal.cc/posts/d1927166.html
 
 
-
-## 最新推送教程
-
-适用于 `hexo d` 时报错，首先需要清空仓库，按顺序执行下面命令：
-
-- 首先将该仓库克隆到本地
-
-```bash
-git clone git@github.com:luckys-yang/luckys-yang.github.io.git
-```
-
-- 查看
-
-```bash
-ls
-```
-
-- 进入到本地仓库
-
-```bash
-cd luckys-yang.github.io
-```
-
-- 删除文件
-
-需求1：删除制定文件（删除仓库中名为的xxx文件）
-
-```bash
-git rm -r --cached xxx
-```
-
-需求2：删除所有文件(不会删除 `.` 开头的！得命令最后加个.才能删除，最后需要注意 `.和..这两个文件是必须存在的删不了不影响`)
-
-```bash
-git rm * -f -r
-```
-
-- 提交操作说明
-
-```bash
-git commit -m '删除了文件'
-```
-
-- 将本次更改更新到github项目上去
-
-```bash
-git push
-```
-
-- 在博客根目录下进行 `hexo clean && hexo g` 后：
-
-1. 复制 `public` 文件夹下的所有文件到另一个本地仓库路径下(待会要去那个本地仓库里进行推送)，需要 -r递归里面文件夹
-
-```bash
-cp G:/yangblog/yang/public/* G:/yangblog/ts/luckys-yang.github.io -r
-```
-
-2. cd到你本地仓库文件夹下
-
-```bash
-cd ..
-cd ts
-```
-
-3. 同步远程仓库
-
-```bash
-git pull git@github.com:luckys-yang/luckys-yang.github.io.git
-```
-
-4. 添加文件
-
-```bash
-git add .
-```
-
-5. 提交操作说明
-
-```bash
-git commit -m '更新'
-```
-
-6. 更新远程仓库(<span style="color:red;">到这就完成了！</span>)
-
-```bash
-git push origin master
-```
 
 ## 其他命令
 
