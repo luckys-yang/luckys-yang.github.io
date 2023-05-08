@@ -1897,4 +1897,15 @@ figure {
     content: "🌐";
 }
 
+#page .category-lists .category-list li.category-list-item:nth-child(29) {
+    background: -webkit-linear-gradient(left, #b91d73, #f953c6);
+    background: -moz-linear-gradient(left, #b91d73, #f953c6);
+    background: -o-linear-gradient(left, #b91d73, #f953c6);
+    background: -ms-linear-gradient(left, #b91d73, #f953c6);
+    background: linear-gradient(to right, #b91d73, #f953c6);
+}
+
+#page .category-lists .category-list li.category-list-item:nth-child(29) a.category-list-link::before {
+    content: "📝";
+}
 /* 分类美化end */
