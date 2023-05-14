@@ -1505,7 +1505,7 @@ public class helloworld {
 
 用于判断一个对象是否是某个类或其子类的实例，通常与类型转换（包括向上转型和向下转型）一起使用，以确保类型转换的安全性
 
-
+参考 `多态上下转型那里`
 
 ### 继承
 
@@ -2112,6 +2112,300 @@ class Animal {
     }
 }
 ```
+
+
+
+### 内部类
+
+#### 描述
+
+内部类是类的五大成分之一： `成员变量，方法，构造器，代码块，内部类`
+
+概念： `定义在一个类里面的类就是内部类`
+
+作用：提供更好的封装性，体现出组件思想，**间接解决类无法多继承引起的一系列问题**
+
+分类：静态内部类、实例内部类（成员内部类）、局部内部类、**匿名内部类**（重点） 
+
+
+
+####  静态内部类
+
+定义：有 static 修饰，属于外部类本身，会加载一次
+
+静态内部类中的成分研究：
+
+* 类有的成分它都有，静态内部类属于外部类本身，只会加载一次
+* 特点与外部类是完全一样的，只是位置在别人里面
+* 可以定义静态成员
+
+静态内部类的访问格式：
+
+```java
+外部类名称.内部类名称
+    
+// 示例
+Outter.StaticOutter    
+```
+
+静态内部类创建对象的格式：
+
+```java
+外部类名称.内部类名称 对象名称 = new 外部类名称.内部类构造器
+// 示例
+Outter.StaticOutter S1 = new Outter.StaticOutter();    
+```
+
+静态内部类的访问拓展：
+
+* 静态内部类中是否可以直接访问外部类的静态成员?	`可以，外部类的静态成员只有一份，可以被共享`
+* 静态内部类中是否可以直接访问外部类的实例成员?	`不可以，外部类的成员必须用外部类对象访问`
+
+静态内部类的优点：相对于非静态内部类和匿名内部类，静态内部类的一个优势是，在不需要访问外部类的非静态成员时，可以 `避免创建不必要的外部类实例，从而减少内存开销和对象创建的时间`。静态内部类通常用来封装和隐藏外部类的实现细节，或者作为与外部类相关联的工具类。
+
+```java
+// 在静态内部类中，确实可以直接访问外部类的静态成员，无需通过外部类的实例来访问
+// 在外部类中，若想要访问内部类的实例或者成员，则需要创建内部类的实例
+public class helloworld {
+    public static void main(String[] args) {
+//        需要创建一个内部类实例
+        Outter.StaticOutter S1 = new Outter.StaticOutter();
+        S1.Print(); // 输出"我是静态" "变量2"
+    }
+}
+
+//创建一个类
+class Outter {
+    private static int Number = 2;
+//创建一个内部静态类
+    static class StaticOutter {
+        void Print() {
+            System.out.println("我是静态类");
+            System.out.println("变量"+Number);
+        }
+    }
+}
+```
+
+
+
+#### 实例内部类
+
+定义：无 `static` 修饰的内部类，属于外部类的每个对象，跟着外部类对象一起加载
+
+实例内部类的成分特点：实例内部类中不能定义静态成员，其他都可以定义
+
+实例内部类的访问格式：
+
+```java
+外部类名称.内部类名称
+```
+
+创建对象的格式：
+
+```java
+外部类名称.内部类名称 对象名称 = new 外部类构造器.new 内部构造器
+
+// 示例
+Outer.Inner S1 = new Outer().new Inner();    
+```
+
+**实例内部类可以访问外部类的全部成员**
+
+* 实例内部类中可以直接访问外部类的静态成员，外部类的静态成员可以被共享访问
+* 实例内部类中可以访问外部类的实例成员，实例内部类属于外部类对象，可以直接访问外部类对象的实例成员
+
+```java
+public class helloworld {
+    public static void main(String[] args) {
+//        创建一个内部类的实例
+        Outer.Inner S1 = new Outer().new Inner();
+//        或者另一种创建方法 -- S2
+        Outer out = new Outer();
+        Outer.Inner S2 = out.new Inner();
+        S2.Inner_Print();   // 输出 "Inner"
+        out.Outer_Print();  // 输出 "外部类" "Inner"
+        S1.Inner_Print();   // 输出 "Inner"
+    }
+}
+
+class Outer {
+    private String Str = "我是外部类";
+
+    void Outer_Print() {
+        Inner ner = new Inner();
+        System.out.println("外部类");
+        ner.Inner_Print();
+    }
+//    创建一个内部类
+    class Inner {
+        void Inner_Print() {
+            System.out.println("Inner");
+        }
+    }
+}
+```
+
+
+
+#### 局部内部类
+
+局部内部类：定义在方法中，在构造器中，代码块中，for 循环中定义的内部类
+
+局部内部类中的成分特点：只能定义实例成员，不能定义静态成员
+
+局部内部类的作用域仅限于方法或代码块中，因此只能在定义它的方法或代码块中被使用。而且，局部内部类不能添加访问修饰符，但可以使用 final 进行修饰
+
+```java
+public class helloworld {
+    public static void main(String[] args) {
+//        创建外部类实例并且调用它的方法
+        Animal animal = new Animal();
+        animal.Func();
+    }
+}
+
+class Animal {
+    private String name = "小鸟";
+    private int Number = 999;
+
+    public void Func() {
+        final int Cnt = 0;
+        class Tiger {
+            String info = "Tiger";
+            public void Func2() {
+                // 在局部内部类中访问成员变量
+                System.out.println(info);
+                // 在局部内部类中访问外部类变量
+                System.out.println(name);
+                System.out.println(Number);
+                // 局部内部类访问 final 的局部变量
+                int sum = Cnt + 200;
+                System.out.println(sum);
+            }
+        }
+        // 创建局部内部类的对象
+        Tiger tiger = new Tiger();
+        // 调用局部内部类的方法
+        tiger.Func2();
+    }
+}
+```
+
+
+
+#### 匿名内部类
+
+匿名内部类：没有名字的局部内部类
+
+匿名内部类的格式：
+
+```java
+new 类名|抽象类|接口(形参){
+	//方法重写。
+}
+```
+
+匿名内部类的特点：
+
+* 匿名内部类不能定义静态成员
+* 匿名内部类一旦写出来，就会立即创建一个匿名内部类的对象返回
+* **匿名内部类的对象的类型相当于是当前 new 的那个的类型的子类类型**
+* 匿名内部类引用局部变量必须是**常量**，底层创建为内部类的成员变量（原因：JVM → 运行机制 → 代码优化）
+
+```java
+public class helloworld {
+    public static void main(String[] args) {
+        Runnable S1 = new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("我是匿名内部类");
+            }
+        };
+        S1.run();   // 输出 "我是匿名内部类"
+    }
+}
+```
+
+
+
+### 权限符
+
+权限修饰符：有四种（ `private -> 缺省 -> protected - > public` ）
+可以修饰成员变量，修饰方法，修饰构造器，内部类，不同修饰符修饰的成员能够被访问的权限将受到限制
+
+| 四种修饰符访问权限 | private | 缺省 | protected | public |
+| ------------------ | :-----: | :--: | :-------: | :----: |
+| 本类中             |    √    |  √   |     √     |   √    |
+| 本包下的子类中     |    X    |  √   |     √     |   √    |
+| 本包下其他类中     |    X    |  √   |     √     |   √    |
+| 其他包下的子类中   |    X    |  X   |     √     |   √    |
+| 其他包下的其他类中 |    X    |  X   |     X     |   √    |
+
+`protected` 用于修饰成员，表示在继承体系中成员对于子类可见
+
+* 基类的 protected 成员是包内可见的，并且对子类可见
+* 若子类与基类不在同一包中，那么子类实例可以访问其从基类继承而来的 protected 方法（重写），而不能访问基类实例的 protected 方法
+
+> `protected` 关键字的作用是为了支持继承，并且对于一些需要被子类访问的成员，但是不需要被其他类访问的情况，使用 protected可以帮助我们更容易地实现这个需求
+
+
+
+### 代码块
+
+####  静态代码块
+
+静态代码块的格式：
+
+ ```java
+static {
+}
+ ```
+
+* 静态代码块特点： 
+  * 必须有 static 修饰，只能访问静态资源
+  * 会与类一起优先加载，且自动触发执行一次
+* 静态代码块作用：
+  * 可以在执行类的方法等操作之前先在静态代码块中进行静态资源的初始化 
+  * `先执行静态代码块，在执行 main 函数里的操作`
+
+```java
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class helloworld {
+    public static String Name;
+    public static ArrayList<String> lists = new ArrayList<>();
+    // 静态代码块,属于类，与类一起加载一次!
+    static {
+        System.out.println("静态初始化开始");
+        // 在静态代码块中进行静态资源的初始化操作
+        Name = "Luckys-Yang";
+        lists.add("3");
+        lists.add("4");
+        lists.add("5");
+    }
+    public static void main(String[] args) {
+        System.out.println("Main方法执行");
+        System.out.println(Name);
+        System.out.println(lists);
+    }
+}
+
+// 输出结果
+// 静态初始化开始
+// Main方法执行
+// Luckys-Yang
+// [3, 4, 5]
+```
+
+
+
+#### 实例代码块
+
+待写
+
+
 
 
 

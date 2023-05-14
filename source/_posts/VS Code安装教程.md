@@ -144,6 +144,16 @@ date: 2022-05-30 15:40:00
 
 ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205301849751.jpg)
 
+现在我使用的字体是 `HarmonyOS Sans SC Light`，[HarmonyOS](https://github.com/IKKI2000/harmonyos-fonts/blob/main/fonts/HarmonyOS_Sans/HarmonyOS_Sans_Bold.ttf)
 
+
+
+## 快捷键
+
+- 快捷键回到上一次编辑的地方
+
+`alt + <-` 返回上一级
+
+`alt + ->` 回到下一级
 
   

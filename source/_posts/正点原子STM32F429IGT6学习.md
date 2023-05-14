@@ -194,7 +194,7 @@ CubeMX里 --- `sys` --- 选择《serial Write》
 
 ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20221105171806.png)
 
-[collapse status="false" title="代码"]
+
 
 ```cpp
 /*LED.h*/
@@ -234,7 +234,7 @@ LED_togg(0);
 HAL_Delay(500);
 LED_togg(1);
 ```
-[/collapse]
+
 
 ## KEY
 
@@ -343,6 +343,12 @@ EXTI_ClearITPendingBit(uint32_t EXTI_Line)
 |  TIM7  |          |     16     |   递增    |       0       | 基本 |    Y    |
 
 因为系统初始化Systemlnit函数里初始化APB 1总线时钟为4分频即42M，APB2总线时钟为2分频即84M,所以 `TIM1、 TIM8- TIM11`的时钟为APB2时钟的两倍即168M， `TIM2~ TIM7、TIM12~TIM14` 的时钟为APB1的时钟的两倍即84M(<span style="color:red;">注意这个智能硬件定时器有用到</span>)
+
+
+
+## 停更说明
+
+由于板子Bug很多暂时停更了
 
 
 

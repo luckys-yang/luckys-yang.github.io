@@ -943,3 +943,21 @@ mixin postUI(posts)
           span.article-sort-item-index= (current - 1) * config.per_page + post_index + 1
 ```
 
+
+
+## 文章加密
+
+安装插件
+
+```bash
+npm install --save hexo-blog-encrypt
+```
+
+在需要加密的文章头部添加
+
+```bash
+password: hello	# 密码
+message: 您好, 这里需要密码.	# 描述
+```
+
+然后可以去找它的css改一下，hexo-blog-encrypt

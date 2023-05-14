@@ -193,7 +193,7 @@ pause
 
 [VS Code配置开发环境时出现“未定义标识符”](https://blog.csdn.net/qq_43784626/article/details/111638186?spm=1001.2101.3001.6650.5&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-5-111638186-blog-124092622.235%5Ev29%5Epc_relevant_default_base3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-5-111638186-blog-124092622.235%5Ev29%5Epc_relevant_default_base3&utm_relevant_index=10)
 
-
+{% note red 'fas fa-fan' flat %}方法1{% endnote %}
 
 - 安装插件 `Keil V`
 - 写UV4.exe的路径
@@ -248,6 +248,18 @@ pause
 
 - vscode最好用管理员身份打开，这样不需要每次编译或者下载时需要点击弹窗
 - MX配置完后vscode自动会刷新
+
+{% note red 'fas fa-fan' flat %}方法2{% endnote %}
+
+下载插件`Keil Assistant` ，然后配置一下路径
+
+> 推荐下载 `1.6.2版本`，可以使用快捷键进行编译下载，新版本不行
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230508183557.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230508183754.webp)
+
+
 
 
 

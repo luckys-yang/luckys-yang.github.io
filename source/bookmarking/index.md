@@ -72,30 +72,14 @@ comments: false
       link: https://chat1.binjie.site:7777/#/chat/1679960396212
       avatar: ./book_image/book8.webp
       descr:           　             
-    - name: 百科荣创
-      link: http://vs.r8c.com/
+    - name: 广理职教务系统
+      link: http://jwxt.gdpi.edu.cn/
       avatar: ./book_image/book8.webp
-      descr:  　      
-    - name: 『圆梦杯』全国大学生智能硬件设计大赛
-      link: http://vs.r8c.com/
+      descr:           　                   
+    - name: Gravatar
+      link: https://en.gravatar.com/
       avatar: ./book_image/book8.webp
-      descr:  　            
-    - name: 广东省职业院校技能大赛
-      link: https://jnds.gdedu.gov.cn/web/index.shtml
-      avatar: ./book_image/book8.webp
-      descr:  　                  
-    - name: 远程云端硬件实验平台
-      link: https://dev.bj-jc.com:20002/RemoteExp/login
-      avatar: ./book_image/book8.webp
-      descr:  　                  
-    - name: 龙芯官网
-      link: https://www.loongson.cn/
-      avatar: ./book_image/book8.webp
-      descr:  　                 
-    - name: 蓝桥杯官网
-      link: https://dasai.lanqiao.cn/
-      avatar: ./book_image/book8.webp
-      descr:  　                       
+      descr:           　                         
 
 - class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#dfe516;display:inline-block;"></i><span style="color:#abb4d7;">Github</span>
   class_desc: 
@@ -179,7 +163,35 @@ comments: false
     - name: WCH沁恒
       link: https://www.32mcu.com/iccat.php?id=0&brand=19&price_min=0&price_max=0&page=2&sort=click_count&order=DESC
       avatar: ./book_image/book8.webp
-      descr: CH单片机的厂家官网      　　
+      descr: CH单片机的厂家官网      　
+    - name: 百科荣创
+      link: http://vs.r8c.com/
+      avatar: ./book_image/book8.webp
+      descr:  　      
+    - name: 『圆梦杯』全国大学生智能硬件设计大赛
+      link: http://vs.r8c.com/
+      avatar: ./book_image/book8.webp
+      descr:  　            
+    - name: 广东省职业院校技能大赛
+      link: https://jnds.gdedu.gov.cn/web/index.shtml
+      avatar: ./book_image/book8.webp
+      descr:  　                  
+    - name: 远程云端硬件实验平台
+      link: https://dev.bj-jc.com:20002/RemoteExp/login
+      avatar: ./book_image/book8.webp
+      descr:  　                  
+    - name: 龙芯官网
+      link: https://www.loongson.cn/
+      avatar: ./book_image/book8.webp
+      descr:  　                 
+    - name: 蓝桥杯官网
+      link: https://dasai.lanqiao.cn/
+      avatar: ./book_image/book8.webp
+      descr:  　                             　
+    - name: GD32官网
+      link: https://www.gd32mcu.com/cn/download/6?kw=GD32F10
+      avatar: ./book_image/book8.webp
+      descr:  　                        
 
 - class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#dfe516;display:inline-block;"></i><span style="color:#abb4d7;">博客相关</span>
   class_desc: 

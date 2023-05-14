@@ -20,20 +20,6 @@ comments: false
                     </span>
                     <div class="cbp_tmlabel">
                         <p></p>
-                        <p>搞完指纹门禁，接下来的话准备入手一个国产芯片玩玩，本来想搞智能车的但是有点贵那个一套下来好几百，等暑假打工赚钱再买了</p>
-                        <p></p>
-                        <p class="shuoshuo_time"><i class="fa fa-clock-o"></i>
-                            <span id="masked">2023年5月04日</span>&emsp;<i class="fas fa-mobile-alt"></i> <span id="masked">发自iPhone</span>
-                        </p>
-                    </div>
-                </li>            
-                <li> 
-                    <span class="shuoshuo_author_img">
-                    <img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"
-                            class="avatar avatar-48 zhuan" width="48" height="48">
-                    </span>
-                    <div class="cbp_tmlabel">
-                        <p></p>
                         <p>我也想放松呀但是看看还有这么多东西还要学在校时间也就剩下一年了</p>
                         <img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20230306094034.webp" alt=" " style="zoom:33%;" />
                         <p></p>
