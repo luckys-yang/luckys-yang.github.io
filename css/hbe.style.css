@@ -53,8 +53,8 @@
 	float: right;
 	padding: 0 1em;
 	width: 40%;
-	color: #696969;
-	font-weight: bold;
+	color: #976666;
+	/*font-weight: bold;*/
 	font-size: 70.25%;
 	-webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -136,7 +136,7 @@
 	background: transparent;
 	padding: 0.5em;
 	margin-bottom: 2em;
-	color: #f9f7f6;
+	color: #000;
 	z-index: 100;
 	opacity: 0;
 }
@@ -144,8 +144,8 @@
 .hbe-input-label-default {
 	width: 100%;
 	position: absolute;
-	text-align: left;
-	padding: 0.5em 0;
+	text-align: center;
+	/*padding: 0.5em 0;*/
 	pointer-events: none;
 	font-size: 1em;
 }

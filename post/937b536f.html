@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>GD32F103VET6入门学习笔记 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言 参考文章  GD32替换STM32，这些细节一定要知道 博主-Car12 博主-Leung 不问归期的博客 资源  Pack包下载GDF10x GD32F1选型手册 GD数据手册 GD32F10x标准固件库下载 GD32F10x系列MCU用户手册-中英文  固件库手册的话可以在下载的固件库压缩包里面找到  注意  以下所说的用户手册指 GD32F10x_User_Manual_Rev2.6_">
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>GD32F103VET6入门学习笔记 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言 参考文章  GD32替换STM32，这些细节一定要知道 博主-Car12 博主-Leung 不问归期的博客 在线时间戳 资源  Pack包下载GDF10x GD32F1选型手册 GD数据手册 GD32F10x标准固件库下载 GD32F10x系列MCU用户手册-中英文 GD32F103xx系列MCU数据手册-英文  固件库手册的话可以在下载的固件库压缩包里面找到  注意  以下所说的用户手册指">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GD32F103VET6入门学习笔记">
 <meta property="og:url" content="https://mdcm.yang5201314.cn/post/937b536f.html">
 <meta property="og:site_name" content="Luckys-Yangの小栈">
-<meta property="og:description" content="前言 参考文章  GD32替换STM32，这些细节一定要知道 博主-Car12 博主-Leung 不问归期的博客 资源  Pack包下载GDF10x GD32F1选型手册 GD数据手册 GD32F10x标准固件库下载 GD32F10x系列MCU用户手册-中英文  固件库手册的话可以在下载的固件库压缩包里面找到  注意  以下所说的用户手册指 GD32F10x_User_Manual_Rev2.6_">
+<meta property="og:description" content="前言 参考文章  GD32替换STM32，这些细节一定要知道 博主-Car12 博主-Leung 不问归期的博客 在线时间戳 资源  Pack包下载GDF10x GD32F1选型手册 GD数据手册 GD32F10x标准固件库下载 GD32F10x系列MCU用户手册-中英文 GD32F103xx系列MCU数据手册-英文  固件库手册的话可以在下载的固件库压缩包里面找到  注意  以下所说的用户手册指">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://mdcm.yang5201314.cn/img/num129.webp">
 <meta property="article:published_time" content="2023-05-07T23:07:42.000Z">
-<meta property="article:modified_time" content="2023-05-14T04:56:24.344Z">
+<meta property="article:modified_time" content="2023-05-16T06:37:20.159Z">
 <meta property="article:author" content="Luckys-Yang">
 <meta property="article:tag" content="博客,个人博客,技术,学习,Hexo,Blog,STM32,嵌入式,单片机">
 <meta name="twitter:card" content="summary">
@@ -57,7 +57,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-05-14 12:56:24'
+  postUpdate: '2023-05-16 14:37:20'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -174,13 +174,14 @@ window.addEventListener('load',()=> { preloader.endLoading() })
 if (true) {
   document.addEventListener('pjax:send', () => { preloader.initLoading() })
   document.addEventListener('pjax:complete', () => { preloader.endLoading() })
-}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">131</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">77</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">29</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">GD32F103VET6入门学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-07T23:07:42.000Z" title="发表于 2023-05-08 07:07:42">2023-05-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-14T04:56:24.344Z" title="更新于 2023-05-14 12:56:24">2023-05-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/GD32/">GD32</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">13.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>54分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">132</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">76</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">30</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">GD32F103VET6入门学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-07T23:07:42.000Z" title="发表于 2023-05-08 07:07:42">2023-05-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-16T06:37:20.159Z" title="更新于 2023-05-16 14:37:20">2023-05-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/GD32/">GD32</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">22.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>94分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
 <div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>参考文章</p>
 </div>
 <p><a href="https://blog.csdn.net/best_xiaolong/article/details/113777603?spm=1001.2101.3001.6650.3&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-3-113777603-blog-124493353.235%5Ev32%5Epc_relevant_yljh&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-3-113777603-blog-124493353.235%5Ev32%5Epc_relevant_yljh&amp;utm_relevant_index=6">GD32替换STM32，这些细节一定要知道</a></p>
 <p><a href="https://blog.csdn.net/u010261063/category_11741272.html">博主-Car12</a></p>
 <p><a href="https://blog.csdn.net/qq_36347513/category_11737720.html">博主-Leung</a></p>
 <p><a href="https://blog.csdn.net/bruceoxl/category_11795330.html">不问归期的博客</a></p>
+<p><a href="https://tool.lu/timestamp/">在线时间戳</a></p>
 <div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>资源</p>
 </div>
 <p><a href="https://www.keil.com/dd2/Pack/#!#%2Fthird-party-download-dialog">Pack包下载GDF10x</a></p>
@@ -188,6 +189,7 @@ if (true) {
 <p><a href="https://www.gd32mcu.com/cn/download/5?kw=GD32F1">GD数据手册</a></p>
 <p><a href="https://www.gd32mcu.com/cn/download/7?kw=GD32F1">GD32F10x标准固件库下载</a></p>
 <p><a href="https://www.gd32mcu.com/cn/download/6?kw=GD32F1">GD32F10x系列MCU用户手册-中英文</a></p>
+<p><a href="https://www.gd32mcu.com/data/documents/datasheet/GD32F103xx_Datasheet_Rev2.14.pdf">GD32F103xx系列MCU数据手册-英文</a></p>
 <blockquote>
 <p>固件库手册的话可以在下载的固件库压缩包里面找到</p>
 </blockquote>
@@ -295,7 +297,7 @@ if (true) {
 <p><s>这里不能像MX生成的代码那样直接就在vscode里编译和下载，但是能写代码，编译的话就需要使用终端命令执行bat脚本进行编译，下载的话只能回到Keil里了</s> <code>目前可以了可看STM32破解那篇文章</code></p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">.\xxx.bat</code></pre>
 <h2 id="芯片介绍">芯片介绍</h2>
-<p>GD32F103VET6信息：最大时钟频率<code>108MHz</code>，Flash<code>512K</code>，SRAM<code>64K</code>，管脚<code>80个</code>，通用定时器 <code>4个</code>，高级定时器<code>2个</code>，基本定时器<code>2个</code>，都是 <code>16位</code>；滴答定时器是 <code>24位</code>，看门狗 <code>2个</code>，RTC <code>1个</code>，USART+UART <code>5个</code></p>
+<p>GD32F103VET6信息：最大时钟频率<code>108MHz</code>，Flash<code>512K</code>，SRAM<code>64K</code>，管脚<code>80个</code>，通用定时器 <code>4个</code>，高级定时器<code>2个</code>，基本定时器<code>2个</code>，都是 <code>16位</code>；滴答定时器是 <code>24位</code>，看门狗 <code>2个</code>，RTC <code>1个</code>，USART+UART <code>5个</code>，ADC16位 <code>3个</code>，DAC12位 <code>2个</code>，I2C <code>2个</code>，SPI <code>3个</code>，CAN2.0B <code>1个</code></p>
 <ul>
 <li>GD32和STM32区别</li>
 </ul>
@@ -376,9 +378,9 @@ if (true) {
 </li>
 </ul>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 采样周期配置如下
-RCC_ADCCLKConfig(RCC_PCLK2_Divx);
+rcu_adc_clock_config(RCU_CKADC_CKAPB2_DIV8);
 &#x2F;&#x2F; ADC使能后需要加不少于20us延时
-for(i&#x3D;0;i&lt;0x1000;i++)</code></pre>
+for(i&#x3D;0;i&lt;0x1000;i++);</code></pre>
 <ol start="10">
 <li>FSMC</li>
 </ol>
@@ -1891,6 +1893,21 @@ void vTIMER0_Pwn_Init(uint16_t psc,uint16_t arr,uint16_t ch0_duty,uint16_t ch1_d
 <div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验现象</p>
 </div>
 <p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230514124915.webp" alt=""></p>
+<h3 id="Systick定时器">Systick定时器</h3>
+<p>就一个普通的计数，可当做基本定时器使用，而且函数的延时也是调用的它</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void SysTick_Handler(void)
+&#123;
+    static uint16_t Led_Cnt &#x3D; 0;
+    &#x2F;&#x2F; 自带不需要管
+    delay_decrement();
+    Led_Cnt++;
+    if (1000 &#x3D;&#x3D; Led_Cnt)
+    &#123;
+        Led_Cnt &#x3D; 0;
+        MyLed.bLed1_State &#x3D; !MyLed.bLed1_State;
+        MyLed.vLED_Control(MyLed.bLed1_State);
+    &#125;
+&#125;</code></pre>
 <h2 id="外部中断">外部中断</h2>
 <p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230513202053.webp" alt=""></p>
 <p>对应的中断函数可在 <code>startup_gd32f10x_hd.s</code> 里面找：</p>
@@ -1949,6 +1966,1142 @@ void EXTI10_15_IRQHandler(void)
 </div>
 <p>设置为下降沿触发的话，按下一瞬间就触发，设置为上升沿触发的话就抬起一瞬间才触发，这个看个人需要设置</p>
 <p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230513214819.webp" alt=""></p>
+<h2 id="ADC">ADC</h2>
+<p>获取内部温度传感器温度：<a href="https://bruceou.blog.csdn.net/article/details/126150848">https://bruceou.blog.csdn.net/article/details/126150848</a></p>
+<h3 id="介绍">介绍</h3>
+<p>具体哪个引脚是ADC通道，可以去MX查找(输入STM32对应跟GD32一样后缀型号的板子即可)，也可以去看 <code>GD32F103xx系列MCU数据手册</code> 然后看时钟树可以知道它最大频率不能超过14MHz，所以一般8分频即可(108MHz/8=13.5MHz)</p>
+<ul>
+<li>GD32多达 <code>18</code> 个通道，然后又分为 <code>注入组</code> 和 <code>规则组</code>，常用的是 <code>规则组</code>，注入的话相当于插队，跟中断有点像。数据转换后也会产生中断，ADC时钟的话可以看时钟树我的是最大只能是 <code>14MHz</code></li>
+</ul>
+<blockquote>
+<p>ADC的转换时间跟ADC的输入时钟和采样时间有关，公式：</p>
+<p><code>Tconv = 采样时间+12.5个周期</code></p>
+<p>例如：当ADCLK=14MHz，采样时间设置为1.5个周期(最快)，那么总的转换时间：<code>Tconv=1.5周期+12.5周期=14周期=1us</code>，具体计算过程：</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>转换时钟周期</mtext><mo>=</mo><mfrac><mn>1</mn><mrow><mn>14</mn><mi>M</mi><mi>H</mi><mi>z</mi><mo stretchy="false">(</mo><mi>A</mi><mi>D</mi><mi>C</mi><mi>L</mi><mi>K</mi><mo stretchy="false">)</mo></mrow></mfrac><mo>≈</mo><mn>71.4</mn><mi>n</mi><mi>s</mi><mi mathvariant="normal">/</mi><mtext>周期</mtext></mrow><annotation encoding="application/x-tex">\text{转换时钟周期} = \frac{1}{14MHz(ADCLK)} ≈ 71.4ns/\text{周期}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">转换时钟周期</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.3651em;vertical-align:-0.52em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">14</span><span class="mord mathnormal mtight" style="margin-right:0.10903em;">M</span><span class="mord mathnormal mtight" style="margin-right:0.04398em;">Hz</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight">A</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">D</span><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span><span class="mord mathnormal mtight">L</span><span class="mord mathnormal mtight" style="margin-right:0.07153em;">K</span><span class="mclose mtight">)</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.52em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">71.4</span><span class="mord mathnormal">n</span><span class="mord mathnormal">s</span><span class="mord">/</span><span class="mord text"><span class="mord cjk_fallback">周期</span></span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mi>c</mi><mi>o</mi><mi>n</mi><mi>v</mi><mo>=</mo><mtext>采样时间</mtext><mo>+</mo><mn>12.5</mn><mo>×</mo><mtext>转换时钟时间</mtext></mrow><annotation encoding="application/x-tex">Tconv = \text{采样时间}+12.5\times\text{转换时钟时间}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal">co</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord text"><span class="mord cjk_fallback">采样时间</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">12.5</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">转换时钟时间</span></span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mtext>1.5周期 + 12.5 x 71.4ns/周期</mtext><mo>≈</mo><mn>1</mn><mi>u</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">= \text{1.5周期 + 12.5 x 71.4ns/周期} ≈ 1us</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">1.5</span><span class="mord cjk_fallback">周期</span><span class="mord"> + 12.5 x 71.4ns/</span><span class="mord cjk_fallback">周期</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mord mathnormal">u</span><span class="mord mathnormal">s</span></span></span></span></p>
+<p>故当采样时间设置为1.5个周期时，总的转换时间约为1us</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230514185700.webp" alt=""></p>
+<ul>
+<li>转换模式</li>
+</ul>
+<blockquote>
+<p>【单次转换模式】</p>
+<ol>
+<li>规则通道单次转换结束后，转换数据将被存放于 <code>ADC_RDATA</code> 寄存器中，  <code>EOC</code> 将会置1。如果 <code>EOCIE</code> 位被置1，将产生一个中断</li>
+<li>注入通道单次转换结束后，转换数据将被存放于 <code>ADC_IDATA0</code> 寄存器中， <code>EOC</code> 和 <code>EOIC</code> 位将会置1。如果 <code>EOCIE 或EOICIE</code> 位被置1，将产生一个中断</li>
+<li>单次的话它采样一次就停止了</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230515111440.webp" alt=""></p>
+</blockquote>
+<blockquote>
+<p>【连续运行模式】</p>
+<ol>
+<li>连续模式下一旦触发ADC采样则一直采样，采样的轮数看用户，实时更新数值</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230515112232.webp" alt=""></p>
+</blockquote>
+<blockquote>
+<p>【扫描模式】</p>
+<ol>
+<li>ADC就会一个接一个通道的采样和转换规则组或注入组通道。转换数据存储在 <code>ADC_RDATA</code> 或 <code>ADC_IDATAx</code>寄存器中</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230515131510.webp" alt=""></p>
+</blockquote>
+<p>一个简单的ADC采集电路可参考：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230515131918.webp" alt=""></p>
+<p><code>注</code>：由于我的是最小系统板故没有ADC采集电路</p>
+<ul>
+<li>DMA0相关通道</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230515135316.webp" alt=""></p>
+<ul>
+<li>DMA1相关通道</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230515135346.webp" alt=""></p>
+<h3 id="ADC单通道轮询采集">ADC单通道轮询采集</h3>
+<details ><summary> myADC.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;myADC.h&quot;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;变量区 BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+MyADC_TypeDef MyADC &#x3D;
+&#123;
+    .fADC_Value &#x3D; &#123;0.0&#125;,
+    .bADC_Start_Flag &#x3D; 0,
+    .vADC_Init &#x3D; &amp;vADC_Init,
+    .usADC_Get_Value &#x3D; &amp;usADC_Get_Value
+&#125;;
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;变量区    END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+
+&#x2F;*
+ * @description: ADC初始化
+ * @return &#123;*&#125;
+ * @Date: 2023-05-14 17:03:43
+ *&#x2F;
+&#x2F;&#x2F; ADC初始化
+void vADC_Init(void)
+&#123;
+    &#x2F;&#x2F; 使能GPIOA时钟
+    rcu_periph_clock_enable(RCU_GPIOA);
+    &#x2F;&#x2F; 使能ADC时钟
+    rcu_periph_clock_enable(RCU_ADC0);
+    &#x2F;&#x2F; 配置ADC时钟，ADC最大14MHz
+    rcu_adc_clock_config(RCU_CKADC_CKAPB2_DIV8);
+    &#x2F;&#x2F; 端口初始化--一定要设置成模拟输入
+    gpio_init(GPIOA, GPIO_MODE_AIN, GPIO_OSPEED_50MHZ, GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4);
+    &#x2F;&#x2F; ----------------ADC配置----------------
+    &#x2F;&#x2F; ADC工作模式---独立模式(只使用了一个ADC)
+    adc_mode_config(ADC_MODE_FREE);
+    &#x2F;&#x2F; 数据对齐方式---右对齐
+    adc_data_alignment_config(ADC0, ADC_DATAALIGN_RIGHT);
+    &#x2F;&#x2F; 是否开启连续转换模式---单次转换模式
+    adc_special_function_config(ADC0, ADC_CONTINUOUS_MODE, ENABLE);
+    &#x2F;&#x2F; 规则序列的长度(通道数)---常规组，1
+    adc_channel_length_config(ADC0, ADC_REGULAR_CHANNEL, 1);
+    &#x2F;&#x2F; ADC规则通道触发源选择---软件触发
+    adc_external_trigger_source_config(ADC0, ADC_REGULAR_CHANNEL, ADC0_1_2_EXTTRIG_REGULAR_NONE);
+    &#x2F;&#x2F; 配置ADC外部触发---使能
+    adc_external_trigger_config(ADC0, ADC_REGULAR_CHANNEL, ENABLE);
+    &#x2F;&#x2F; 使能ADC
+    adc_enable(ADC0);
+    &#x2F;&#x2F; 延时1ms
+    delay_1ms(1);
+    &#x2F;&#x2F; ADC校准复位
+    adc_calibration_enable(ADC0);
+&#125;
+
+&#x2F;*
+ * @description: ADC采样
+ * @return &#123;*&#125;
+ * @Date: 2023-05-14 18:11:17
+ *&#x2F;
+&#x2F;&#x2F; ADC采样
+uint16_t usADC_Get_Value(uint8_t channel)
+&#123;
+    &#x2F;&#x2F; 配置规则通道采集---采样时间为7.5个时钟周期
+    adc_regular_channel_config(ADC0, 0, channel, ADC_SAMPLETIME_7POINT5);
+    &#x2F;&#x2F; 软件触发使能
+    adc_software_trigger_enable(ADC0, ADC_REGULAR_CHANNEL);
+    &#x2F;&#x2F; 等待采样完成
+    while(!adc_flag_get(ADC0, ADC_FLAG_EOC));
+    &#x2F;&#x2F; 清除标志
+    adc_flag_clear(ADC0, ADC_FLAG_EOC);
+
+    return (adc_regular_data_read(ADC0));
+&#125;
+
+</code></pre>
+              </div>
+            </details>
+<details ><summary> myUSART.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 定时器200ms扫描一次然后进行ADC采集打印
+if(MyADC.bADC_Start_Flag)
+&#123;
+    MyADC.fADC_Value[0] &#x3D; (float)MyADC.usADC_Get_Value(ADC_CHANNEL_1);
+    MyADC.fADC_Value[0] &#x3D; (float)MyADC.fADC_Value[0] &#x2F; 4096 * 3.3f;
+    MyADC.fADC_Value[1] &#x3D; (float)MyADC.usADC_Get_Value(ADC_CHANNEL_2);
+    MyADC.fADC_Value[1] &#x3D; (float)MyADC.fADC_Value[1] &#x2F; 4096 * 3.3f;
+    MyADC.fADC_Value[2] &#x3D; (float)MyADC.usADC_Get_Value(ADC_CHANNEL_3);
+    MyADC.fADC_Value[2] &#x3D; (float)MyADC.fADC_Value[2] &#x2F; 4096 * 3.3f;
+    MyADC.fADC_Value[3] &#x3D; (float)MyADC.usADC_Get_Value(ADC_CHANNEL_4);
+    MyADC.fADC_Value[3] &#x3D; (float)MyADC.fADC_Value[3] &#x2F; 4096 * 3.3f;
+    printf(&quot;%.1f--%.1f--%.1f--%.1f\r\n&quot;, MyADC.fADC_Value[0], MyADC.fADC_Value[1], MyADC.fADC_Value[2], MyADC.fADC_Value[3]);
+    MyADC.bADC_Start_Flag &#x3D; 0;
+&#125;</code></pre>
+              </div>
+            </details>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验现象</p>
+</div>
+<p>把PA1引脚引到5V或者3.3就看到数值变化，接到GND则全部为0</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230514204824.webp" alt=""></p>
+<h3 id="DMA-连续扫描模式">DMA+连续扫描模式</h3>
+<p><code>注意</code>：定义存储的数组类型要跟配置的那里一样，用float的话会报错，定义是16位则配置那都用16位，32位则32位，不能乱</p>
+<details ><summary> myADC.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+ * @description: ADC初始化
+ * @return &#123;*&#125;
+ * @Date: 2023-05-14 17:03:43
+ *&#x2F;
+&#x2F;&#x2F; ADC初始化
+void vADC_Init(void)
+&#123;
+    &#x2F;&#x2F; 使能GPIOA时钟
+    rcu_periph_clock_enable(RCU_GPIOA);
+    &#x2F;&#x2F; 使能ADC时钟
+    rcu_periph_clock_enable(RCU_ADC0);
+    &#x2F;&#x2F; 配置ADC时钟，ADC最大14MHz
+    rcu_adc_clock_config(RCU_CKADC_CKAPB2_DIV8);
+    &#x2F;&#x2F; 端口初始化--一定要设置成模拟输入
+    gpio_init(GPIOA,GPIO_MODE_AIN,GPIO_OSPEED_50MHZ,GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4);
+    &#x2F;&#x2F; ----------------DMA配置----------------
+    &#x2F;&#x2F; 使能DMA时钟
+    rcu_adc_clock_config(RCU_DMA0);
+    dma_parameter_struct myDMA0;
+    &#x2F;&#x2F; 复位DMA-CH0
+    dma_deinit(DMA0,DMA_CH0);
+    &#x2F;&#x2F; 外设基地址---ADC的规则数据寄存器
+    myDMA0.periph_addr &#x3D; (uint32_t)(&amp;ADC_RDATA(ADC0));
+    &#x2F;&#x2F; 外设数据传输宽度---32位
+    myDMA0.periph_width &#x3D; DMA_PERIPHERAL_WIDTH_32BIT;
+    &#x2F;&#x2F; 存储器基地址 
+    myDMA0.memory_addr &#x3D; (uint32_t)(&amp;MyADC.ulADC_Value);
+    &#x2F;&#x2F; 存储器数据传输宽度---32位
+    myDMA0.memory_width &#x3D; DMA_MEMORY_WIDTH_32BIT;
+    &#x2F;&#x2F; DMA通道数据传输数量---4个通道
+    myDMA0.number &#x3D; 4;
+    &#x2F;&#x2F; DMA通道传输软件优先级---高
+    myDMA0.priority &#x3D; DMA_PRIORITY_HIGH;
+    &#x2F;&#x2F; 外设地址生成算法模式---外设基地址不增加
+    myDMA0.periph_inc &#x3D; DMA_PERIPH_INCREASE_DISABLE;
+    &#x2F;&#x2F; 存储器地址生成算法模式---内存基地址自增
+    myDMA0.memory_inc &#x3D; DMA_MEMORY_INCREASE_ENABLE;
+    &#x2F;&#x2F; DMA通道数据传输方向---外设到内存
+    myDMA0.direction &#x3D; DMA_PERIPHERAL_TO_MEMORY;
+    &#x2F;&#x2F; DMA初始化
+    dma_init(DMA0,DMA_CH0,&amp;myDMA0);
+    &#x2F;&#x2F; 循环模式---开启
+    dma_circulation_enable(DMA0,DMA_CH0);
+    &#x2F;&#x2F; DMA通道使能
+    dma_channel_enable(DMA0,DMA_CH0);
+
+
+    &#x2F;&#x2F; ----------------ADC配置----------------
+    &#x2F;&#x2F; ADC工作模式---独立模式(只使用了一个ADC)
+    adc_mode_config(ADC_MODE_FREE);
+    &#x2F;&#x2F; 数据对齐方式---右对齐
+    adc_data_alignment_config(ADC0,ADC_DATAALIGN_RIGHT);
+    &#x2F;&#x2F; 是否开启连续转换模式---使能
+    adc_special_function_config(ADC0,ADC_CONTINUOUS_MODE,ENABLE);
+    &#x2F;&#x2F; 扫描模式开启
+    adc_special_function_config(ADC0,ADC_SCAN_MODE,ENABLE);
+    &#x2F;&#x2F; 规则序列的长度(通道数)---常规组，4
+    adc_channel_length_config(ADC0,ADC_REGULAR_CHANNEL,4);
+    &#x2F;&#x2F; 配置4个规则通道采集---采样时间为7.5个时钟周期
+    adc_regular_channel_config(ADC0,0,ADC_CHANNEL_0,ADC_SAMPLETIME_7POINT5);
+    adc_regular_channel_config(ADC0,1,ADC_CHANNEL_1,ADC_SAMPLETIME_7POINT5);
+    adc_regular_channel_config(ADC0,2,ADC_CHANNEL_2,ADC_SAMPLETIME_7POINT5);
+    adc_regular_channel_config(ADC0,3,ADC_CHANNEL_3,ADC_SAMPLETIME_7POINT5);
+    &#x2F;&#x2F; ADC规则通道触发源选择---软件触发
+    adc_external_trigger_source_config(ADC0,ADC_REGULAR_CHANNEL,ADC0_1_2_EXTTRIG_REGULAR_NONE);
+    &#x2F;&#x2F; 配置ADC外部触发---使能
+    adc_external_trigger_config(ADC0,ADC_REGULAR_CHANNEL,ENABLE);
+    &#x2F;&#x2F; 使能ADC
+    adc_enable(ADC0);
+    &#x2F;&#x2F; 延时1ms
+    delay_1ms(1);
+    &#x2F;&#x2F; ADC校准复位
+    adc_calibration_enable(ADC0);
+    &#x2F;&#x2F; ADC DMA使能
+    adc_dma_mode_enable(ADC0);
+    &#x2F;&#x2F; ADC 软件触发使能
+    adc_software_trigger_enable(ADC0,ADC_REGULAR_CHANNEL);
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> myADC.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">typedef struct 
+&#123;
+    &#x2F;&#x2F; ADC存储值
+    uint32_t ulADC_Value[4];    
+    &#x2F;&#x2F; ADC开始采集标志位
+    bool bADC_Start_Flag;
+    void (*vADC_Init)(void);
+    uint16_t (*usADC_Get_Value)(uint8_t);
+&#125;MyADC_TypeDef;</code></pre>
+              </div>
+            </details>
+<details ><summary> myUSART.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">if(MyADC.bADC_Start_Flag)
+&#123;
+    float adc_temp[4] &#x3D; &#123;0.0&#125;;
+
+    adc_temp[0] &#x3D; (float)MyADC.fADC_Value[0] &#x2F; 4096 * 3.3f;
+    adc_temp[1] &#x3D; (float)MyADC.fADC_Value[1] &#x2F; 4096 * 3.3f;
+    adc_temp[2] &#x3D; (float)MyADC.fADC_Value[2] &#x2F; 4096 * 3.3f;
+    adc_temp[3] &#x3D; (float)MyADC.fADC_Value[3] &#x2F; 4096 * 3.3f;
+    printf(&quot;%.1f--%.1f--%.1f--%.1f\r\n&quot;, adc_temp[0], adc_temp[1], adc_temp[2], adc_temp[3]);
+    MyADC.bADC_Start_Flag &#x3D; 0;
+&#125;</code></pre>
+              </div>
+            </details>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验现象</p>
+</div>
+<p>同上</p>
+<h3 id="DMA-连续扫描模式-DMA中断">DMA+连续扫描模式+DMA中断</h3>
+<blockquote>
+<p>在上面的工程基础上添加修改即可</p>
+</blockquote>
+<details ><summary> myADC.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+ * @description: ADC初始化
+ * @return &#123;*&#125;
+ * @Date: 2023-05-14 17:03:43
+ *&#x2F;
+&#x2F;&#x2F; ADC初始化
+void vADC_Init(void)
+&#123;
+    &#x2F;&#x2F; 使能GPIOA时钟
+    rcu_periph_clock_enable(RCU_GPIOA);
+    &#x2F;&#x2F; 使能ADC时钟
+    rcu_periph_clock_enable(RCU_ADC0);
+    &#x2F;&#x2F; 配置ADC时钟，ADC最大14MHz
+    rcu_adc_clock_config(RCU_CKADC_CKAPB2_DIV8);
+    &#x2F;&#x2F; 端口初始化--一定要设置成模拟输入
+    gpio_init(GPIOA, GPIO_MODE_AIN, GPIO_OSPEED_50MHZ, GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4);
+    &#x2F;&#x2F; ----------------DMA配置----------------
+    &#x2F;&#x2F; 使能DMA时钟
+    rcu_adc_clock_config(RCU_DMA0);
+    dma_parameter_struct myDMA0;
+    &#x2F;&#x2F; 复位DMA-CH0
+    dma_deinit(DMA0, DMA_CH0);
+    &#x2F;&#x2F; 外设基地址---ADC的规则数据寄存器
+    myDMA0.periph_addr &#x3D; (uint32_t)(&amp;ADC_RDATA(ADC0));
+    &#x2F;&#x2F; 外设数据传输宽度---16位
+    myDMA0.periph_width &#x3D; DMA_PERIPHERAL_WIDTH_32BIT;
+    &#x2F;&#x2F; 存储器基地址
+    myDMA0.memory_addr &#x3D; (uint32_t)(&amp;MyADC.ulADC_Value);
+    &#x2F;&#x2F; 存储器数据传输宽度---16位
+    myDMA0.memory_width &#x3D; DMA_MEMORY_WIDTH_32BIT;
+    &#x2F;&#x2F; DMA通道数据传输数量---4个通道
+    myDMA0.number &#x3D; 4;
+    &#x2F;&#x2F; DMA通道传输软件优先级---高
+    myDMA0.priority &#x3D; DMA_PRIORITY_HIGH;
+    &#x2F;&#x2F; 外设地址生成算法模式---外设基地址不增加
+    myDMA0.periph_inc &#x3D; DMA_PERIPH_INCREASE_DISABLE;
+    &#x2F;&#x2F; 存储器地址生成算法模式---内存基地址自增
+    myDMA0.memory_inc &#x3D; DMA_MEMORY_INCREASE_ENABLE;
+    &#x2F;&#x2F; DMA通道数据传输方向---外设到内存
+    myDMA0.direction &#x3D; DMA_PERIPHERAL_TO_MEMORY;
+    &#x2F;&#x2F; DMA初始化
+    dma_init(DMA0, DMA_CH0, &amp;myDMA0);
+    &#x2F;&#x2F; 循环模式---开启
+    dma_circulation_enable(DMA0, DMA_CH0);
+    &#x2F;&#x2F; 打开DMA通道中断
+    nvic_irq_enable(DMA0_Channel0_IRQn, 0, 1);
+    &#x2F;&#x2F; 转换结束产生中断
+    dma_interrupt_enable(DMA0, DMA_CH0, DMA_INT_FTF);
+    &#x2F;&#x2F; DMA通道使能
+    dma_channel_enable(DMA0, DMA_CH0);
+
+
+    &#x2F;&#x2F; ----------------ADC配置----------------
+    &#x2F;&#x2F; ADC工作模式---独立模式(只使用了一个ADC)
+    adc_mode_config(ADC_MODE_FREE);
+    &#x2F;&#x2F; 数据对齐方式---右对齐
+    adc_data_alignment_config(ADC0, ADC_DATAALIGN_RIGHT);
+    &#x2F;&#x2F; 是否开启连续转换模式---使能
+    adc_special_function_config(ADC0, ADC_CONTINUOUS_MODE, ENABLE);
+    &#x2F;&#x2F; 扫描模式开启
+    adc_special_function_config(ADC0, ADC_SCAN_MODE, ENABLE);
+    &#x2F;&#x2F; 规则序列的长度(通道数)---常规组，4
+    adc_channel_length_config(ADC0, ADC_REGULAR_CHANNEL, 4);
+    &#x2F;&#x2F; 配置4个规则通道采集---采样时间为7.5个时钟周期
+    adc_regular_channel_config(ADC0, 0, ADC_CHANNEL_0, ADC_SAMPLETIME_7POINT5);
+    adc_regular_channel_config(ADC0, 1, ADC_CHANNEL_1, ADC_SAMPLETIME_7POINT5);
+    adc_regular_channel_config(ADC0, 2, ADC_CHANNEL_2, ADC_SAMPLETIME_7POINT5);
+    adc_regular_channel_config(ADC0, 3, ADC_CHANNEL_3, ADC_SAMPLETIME_7POINT5);
+    &#x2F;&#x2F; ADC规则通道触发源选择---软件触发
+    adc_external_trigger_source_config(ADC0, ADC_REGULAR_CHANNEL, ADC0_1_2_EXTTRIG_REGULAR_NONE);
+    &#x2F;&#x2F; 配置ADC外部触发---使能
+    adc_external_trigger_config(ADC0, ADC_REGULAR_CHANNEL, ENABLE);
+    &#x2F;&#x2F; 使能ADC
+    adc_enable(ADC0);
+    &#x2F;&#x2F; 延时1ms
+    delay_1ms(1);
+    &#x2F;&#x2F; ADC校准复位
+    adc_calibration_enable(ADC0);
+    &#x2F;&#x2F; ADC DMA使能
+    adc_dma_mode_enable(ADC0);
+    &#x2F;&#x2F; ADC 软件触发使能
+    adc_software_trigger_enable(ADC0, ADC_REGULAR_CHANNEL);
+&#125;
+
+&#x2F;*
+ * @description: DMA中断函数
+ * @return &#123;*&#125;
+ * @Date: 2023-05-15 14:54:16
+ *&#x2F;
+void DMA0_Channel0_IRQHandler(void)
+&#123;
+    if(SET &#x3D;&#x3D; dma_interrupt_flag_get(DMA0, DMA_CH0, DMA_INT_FLAG_FTF))
+    &#123;
+        &#x2F;&#x2F; 清除标志位
+        dma_interrupt_flag_clear(DMA0, DMA_CH0, DMA_INT_FLAG_FTF);
+        MyADC.bADC_Dma_Flag &#x3D; 1;
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> myADC.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">typedef struct 
+&#123;
+    &#x2F;&#x2F; ADC DMA 中断标志位
+    bool bADC_Dma_Flag;
+    &#x2F;&#x2F; ADC存储值
+    uint32_t ulADC_Value[4];    
+    &#x2F;&#x2F; ADC开始采集标志位
+    bool bADC_Start_Flag;
+    void (*vADC_Init)(void);
+    uint16_t (*usADC_Get_Value)(uint8_t);
+&#125;MyADC_TypeDef;</code></pre>
+              </div>
+            </details>
+<details ><summary> myUSART.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">if(MyADC.bADC_Start_Flag &amp;&amp; MyADC.bADC_Dma_Flag)
+&#123;
+    float adc_temp[4] &#x3D; &#123;0.0&#125;;
+
+    adc_temp[0] &#x3D; (float)MyADC.ulADC_Value[0] &#x2F; 4096 * 3.3f;
+    adc_temp[1] &#x3D; (float)MyADC.ulADC_Value[1] &#x2F; 4096 * 3.3f;
+    adc_temp[2] &#x3D; (float)MyADC.ulADC_Value[2] &#x2F; 4096 * 3.3f;
+    adc_temp[3] &#x3D; (float)MyADC.ulADC_Value[3] &#x2F; 4096 * 3.3f;
+    printf(&quot;%.1f--%.1f--%.1f--%.1f\r\n&quot;, adc_temp[0], adc_temp[1], adc_temp[2], adc_temp[3]);
+    MyADC.bADC_Start_Flag &#x3D; 0;
+    MyADC.bADC_Dma_Flag &#x3D; 0;
+&#125;</code></pre>
+              </div>
+            </details>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验现象</p>
+</div>
+<p>同上</p>
+<h2 id="RTC">RTC</h2>
+<blockquote>
+<p>掉电，是指主电源 VDD断开的情况，为了 RTC 外设掉电继续运行，必须给GD32芯片通过 VBAT引脚接上锂电池，RTC 一般使用低速外部时钟LXTAL，频率为实时时钟模块中常用的 32.768KHz</p>
+</blockquote>
+<h3 id="设置时间获取时间">设置时间获取时间</h3>
+<ul>
+<li>这里RTC跟STM32有点不太一样，设置时间也比较麻烦，需要传一个时间戳，获取的话也没有库函数，需要计算时间戳获得当前时间</li>
+</ul>
+<details ><summary> myRTC.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;myRTC.h&quot;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;变量区 BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+MyRTC_TypeDef MyRTC &#x3D; 
+&#123;
+    .bRTC_Sec_Flag &#x3D; 0,
+    .ucYear &#x3D; 0,
+    .ucMon &#x3D; 0,
+    .ucDay &#x3D; 0,
+    .ucHour &#x3D; 0,
+    .ucMin &#x3D; 0,
+    .ucSecond &#x3D; 0,
+    .vRTC_Init &#x3D; &amp;vRTC_Init,
+    .vRTC_Convert_Time &#x3D; &amp;vRTC_Convert_Time
+&#125;;
+
+static int DAYS &#x3D; 24 * 3600;
+static int FOURSYEARS &#x3D; 365 * 3 + 366;
+static int norMoth[] &#x3D; &#123;31,28,31,30,31,30,31,31,30,31,30,31&#125;;
+static int leapMoth[] &#x3D; &#123;31,29,31,30,31,30,31,31,30,31,30,31&#125;;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;变量区    END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;静态内部函数声明区 BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void svRTC_Config(void);
+static void svRTC_Time_Set(uint32_t timestamp_value);
+static void svRTC_Get_Hour_Min_Sec(uint32_t timestamp, uint16_t *hour, uint16_t *min, uint16_t *sec);
+static void svRTC_Get_Mon_Day(bool year_state,int nDays,uint16_t *nMon,uint16_t *nDay);
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;静态内部函数声明区    END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+&#x2F;*
+ * @description: RTC配置
+ * @return &#123;*&#125;
+ * @Date: 2023-05-15 15:26:05
+ *&#x2F;
+&#x2F;&#x2F; RTC配置
+static void svRTC_Config(void)
+&#123;
+    &#x2F;&#x2F; 备份区域的时钟使能
+    rcu_periph_clock_enable(RCU_BKPI);
+    &#x2F;&#x2F; 电源管理时钟使能
+    rcu_periph_clock_enable(RCU_PMU);
+    &#x2F;&#x2F; 备份区允许访问
+    pmu_backup_write_enable();
+    &#x2F;&#x2F; 备份域复位
+    bkp_deinit();
+    &#x2F;&#x2F; 使能外部低速时钟32.768K
+    rcu_osci_on(RCU_LXTAL);
+    &#x2F;&#x2F; 等待低速振荡器稳定
+    rcu_osci_stab_wait(RCU_LXTAL);
+    &#x2F;&#x2F; RTC时钟源选择
+    rcu_rtc_clock_config(RCU_RTCSRC_LXTAL);
+    &#x2F;&#x2F; 使能RTC时钟
+    RCU_RTCSRC_LXTAL
+    rcu_periph_clock_enable(RCU_RTC);
+    &#x2F;&#x2F; 进入RTC配置模式
+    rtc_configuration_mode_enter();
+     &#x2F;&#x2F; 等待寄存器与APB1时钟同步
+    rtc_register_sync_wait();
+    &#x2F;&#x2F; 等待最后一次操作完成
+    rtc_lwoff_wait();
+    &#x2F;&#x2F; 使能秒中断
+    rtc_interrupt_enable(RTC_INT_SECOND);
+    &#x2F;&#x2F; 等待配置完成
+    rtc_lwoff_wait();
+    &#x2F;&#x2F; 设置预分频,1s
+    rtc_prescaler_set(32767);
+    &#x2F;&#x2F; 等待配置完成
+    rtc_lwoff_wait();
+&#125;
+
+&#x2F;*
+ * @description: 设置时间
+ * @param &#123;uint32_t&#125; timestamp_value 时间戳
+ * @return &#123;*&#125;
+ * @Date: 2023-05-15 15:28:46
+ *&#x2F;
+&#x2F;&#x2F; 设置时间
+static void svRTC_Time_Set(uint32_t timestamp_value)
+&#123;
+    &#x2F;&#x2F; 等待最后一次操作完成
+    rtc_lwoff_wait();
+    &#x2F;&#x2F; 改变当前时间
+    rtc_counter_set(timestamp_value);
+    &#x2F;&#x2F; 等待最后一次操作完成
+    rtc_lwoff_wait();
+&#125;
+
+&#x2F;*
+ * @description: RTC初始化
+ * @return &#123;*&#125;
+ * @Date: 2023-05-15 15:26:31
+ *&#x2F;
+&#x2F;&#x2F; RTC初始化
+void vRTC_Init(void)
+&#123;
+    printf(&quot;RTC中断初始化\r\n&quot;);
+    &#x2F;&#x2F; 读取备份区寄存器0的数据，检查是否已经配置
+    if(bkp_data_read(BKP_DATA0) !&#x3D; 0xA5A5)
+    &#123;
+        &#x2F;&#x2F; 说明没配置过
+        printf(&quot;RTC 没有配置过\r\n&quot;);
+        &#x2F;&#x2F; 配置
+        svRTC_Config();
+        printf(&quot;RTC配置完成\r\n&quot;);
+        &#x2F;&#x2F; 首次调整时间，传入一个时间戳
+        svRTC_Time_Set(1684142909);
+        bkp_data_write(BKP_DATA_0,0xA5A5);
+    &#125;
+    else
+    &#123;
+        &#x2F;&#x2F; 判断是不是电源复位标志
+        if(SET &#x3D;&#x3D; rcu_flag_get(RCU_FLAG_PORRST))
+        &#123;
+            printf(&quot;电源复位\r\n&quot;);
+        &#125;
+        &#x2F;&#x2F; 判断是不是软件复位标志
+        else if(SET &#x3D;&#x3D; rcu_flag_get(RCU_FLAG_SWRST))
+        &#123;
+            printf(&quot;软件复位\r\n&quot;);
+        &#125;
+        &#x2F;&#x2F; 判断是不是外部引脚复位标志
+        else if(SET &#x3D;&#x3D; rcu_flag_get(RCU_FLAG_EPRST))
+        &#123;
+            printf(&quot;外部引脚复位\r\n&quot;);
+        &#125;
+        &#x2F;&#x2F; 等待寄存器与APB1时钟同步
+        rtc_register_sync_wait();
+        &#x2F;&#x2F; 使能秒中断
+        rtc_interrupt_enable(RTC_INT_SECOND);
+        &#x2F;&#x2F; 等待配置完成
+        rtc_lwoff_wait();
+    &#125;
+    &#x2F;&#x2F; 使能中断
+    nvic_irq_enable(RTC_IRQn,1,0);
+    &#x2F;&#x2F; 退出配置模式， 更新配置
+    rtc_configuration_mode_exit();
+    &#x2F;&#x2F; 清除所有标志
+    rcu_all_reset_flag_clear();
+&#125;
+
+&#x2F;*
+ * @description: RTC中断函数
+ * @return &#123;*&#125;
+ * @Date: 2023-05-15 16:11:08
+ *&#x2F;
+&#x2F;&#x2F; RTC中断函数
+void RTC_IRQHandler(void)
+&#123;
+    if(SET &#x3D;&#x3D; rtc_interrupt_flag_get(RTC_INT_FLAG_SECOND))
+    &#123;
+        &#x2F;&#x2F; 清除标志位
+        rtc_interrupt_flag_clear(RTC_INT_FLAG_SECOND);
+        MyRTC.bRTC_Sec_Flag &#x3D; 1;
+    &#125;
+&#125;
+
+&#x2F;*
+ * @description: 获取时分秒
+ * @param &#123;uint32_t&#125; timestamp_value
+ * @return &#123;*&#125;
+ * @Date: 2023-05-15 16:41:50
+ *&#x2F;
+&#x2F;&#x2F; 获取时分秒
+static void svRTC_Get_Hour_Min_Sec(uint32_t timestamp, uint16_t *hour, uint16_t *min, uint16_t *sec)
+&#123;
+    &#x2F;&#x2F; 计算当前时间的秒数
+    uint32_t current_seconds &#x3D; timestamp % 60;
+    &#x2F;&#x2F; 分别计算当前时间的总分钟数和分钟部分
+    uint32_t total_minutes &#x3D; timestamp &#x2F; 60;
+    uint32_t current_minutes &#x3D; total_minutes % 60;
+    &#x2F;&#x2F; 分别计算当前时间的总小时数和小时部分
+    uint32_t total_hours &#x3D; total_minutes &#x2F; 60;
+    uint32_t current_hours &#x3D; (total_hours + 8) % 24;  &#x2F;&#x2F; 以东八区的北京时间为准
+    &#x2F;&#x2F; 赋值
+    *hour &#x3D; current_hours;
+    *min &#x3D; current_minutes;
+    *sec &#x3D; current_seconds;
+&#125;
+
+&#x2F;*
+ * @description: 获取月份日期
+ * @param &#123;bool&#125; year_state
+ * @param &#123;int&#125; nDay
+ * @param &#123;uint16_t&#125; *nMon
+ * @param &#123;uint16_t&#125; *nDay
+ * @return &#123;*&#125;
+ * @Date: 2023-05-15 16:45:01
+ *&#x2F;
+&#x2F;&#x2F; 获取月份日期
+static void svRTC_Get_Mon_Day(bool year_state,int nDays,uint16_t *nMon,uint16_t *nDay)
+&#123;
+    int nTemp &#x3D; 0;
+    &#x2F;&#x2F; &#x2F;&#x2F; 根据是否是闰年来选择月份天数数组
+    int *pMon &#x3D; year_state ? leapMoth : norMoth;
+
+    &#x2F;&#x2F; 遍历月份
+    for(uint8_t i &#x3D; 0;i &lt; 12; i++)
+    &#123;
+        &#x2F;&#x2F; 计算天数
+        nTemp &#x3D; nDays - pMon[i];
+        &#x2F;&#x2F; 找到对应的月份
+        if(nTemp &lt;&#x3D; 0)
+        &#123;
+            &#x2F;&#x2F; 存储月份
+            *nMon &#x3D; i + 1;
+            &#x2F;&#x2F; 如果正好等于本月最后一天
+            if(0 &#x3D;&#x3D; nTemp)
+            &#123;
+                &#x2F;&#x2F; 存储本月最后一天
+                *nDay &#x3D; pMon[i];
+            &#125;
+            &#x2F;&#x2F; 否则就存储剩余天数
+            else
+            &#123;
+                &#x2F;&#x2F; 存储天数
+                *nDay &#x3D; nDays;
+            &#125;
+            break;
+        &#125;
+        &#x2F;&#x2F; 计算剩余天数
+        nDays &#x3D; nTemp;
+    &#125;
+    return;
+&#125;
+
+void vRTC_Convert_Time(uint32_t timestamp_value)
+&#123;
+    &#x2F;&#x2F; 计算天数，加上余数不为0就再加一天
+    int nDays &#x3D; timestamp_value &#x2F; DAYS + ((timestamp_value % DAYS) ? 1 : 0);
+    &#x2F;&#x2F; 计算整除四年的个数
+    int nYear4 &#x3D; nDays &#x2F; FOURSYEARS;
+    &#x2F;&#x2F; 计算剩余天数
+    int nRemain &#x3D; nDays % FOURSYEARS;
+    &#x2F;&#x2F; 计算公历年份
+    int nDecyear &#x3D; 1970 + nYear4 * 4;
+    int nDemon &#x3D; 0;
+    int nDeday &#x3D; 0;
+    &#x2F;&#x2F; 是否闰年的标志
+    bool year_Flag &#x3D; 0;
+
+    &#x2F;&#x2F; 剩余天数小于365，说明是当年的日期
+    if(nRemain &lt; 365)
+    &#123;
+        ;
+    &#125;
+    &#x2F;&#x2F; 剩余天数小于365*2，说明是第二年的日期
+    else if(nRemain &lt; (365 * 2))
+    &#123;
+        nDecyear +&#x3D; 1;
+        &#x2F;&#x2F; 减去第一年的天数
+        nRemain -&#x3D; 365;
+    &#125;
+    &#x2F;&#x2F; 剩余天数小于365*3，说明是第三年的日期
+    else if(nRemain &lt; (365 * 3))
+    &#123;
+        nDecyear +&#x3D; 2;
+        &#x2F;&#x2F; 减去前两年的天数
+        nRemain -&#x3D; 365 * 2;
+    &#125;
+    &#x2F;&#x2F; 否则就是第四年的日期
+    else
+    &#123;
+        nDecyear +&#x3D; 3;
+        &#x2F;&#x2F; 减去前三年的天数
+        nRemain -&#x3D; 365 * 3;
+        &#x2F;&#x2F; 设为闰年
+        year_Flag &#x3D; 1;
+    &#125;
+    svRTC_Get_Mon_Day(year_Flag,nRemain,&amp;MyRTC.ucMon,&amp;MyRTC.ucDay);
+    svRTC_Get_Hour_Min_Sec(timestamp_value,&amp;MyRTC.ucHour,&amp;MyRTC.ucMin,&amp;MyRTC.ucSecond);
+    MyRTC.ucYear &#x3D; nDecyear;
+&#125;
+</code></pre>
+              </div>
+            </details>
+<details ><summary> myRTC.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __MYRTC_H
+#define __MYRTC_H
+#include &quot;AllHead.h&quot;
+
+typedef struct
+&#123;
+    &#x2F;&#x2F; 秒中断标志位
+    bool bRTC_Sec_Flag;
+    uint16_t ucYear;
+    uint16_t ucMon;
+    uint16_t ucDay;
+    uint16_t ucHour;
+    uint16_t ucMin;
+    uint16_t ucSecond;
+    void (*vRTC_Init)(void);
+    void (*vRTC_Convert_Time)(uint32_t);
+&#125;MyRTC_TypeDef;
+
+extern MyRTC_TypeDef MyRTC;
+
+void vRTC_Init(void);
+void vRTC_Convert_Time(uint32_t timestamp_value);
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> myUSART.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">if(MyRTC.bRTC_Sec_Flag)
+&#123;
+    int timestamp_temp;
+
+    MyRTC.bRTC_Sec_Flag &#x3D; 0;
+    &#x2F;&#x2F; 获取时间戳
+    timestamp_temp &#x3D; rtc_counter_get();
+    MyRTC.vRTC_Convert_Time(timestamp_temp);
+    printf(&quot;%d-%d-%d %d:%d:%d\r\n&quot;, MyRTC.ucYear, MyRTC.ucMon, MyRTC.ucDay, MyRTC.ucHour, MyRTC.ucMin, MyRTC.ucSecond);
+&#125;</code></pre>
+              </div>
+            </details>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验现象</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230515181618.webp" alt=""></p>
+<h3 id="RTC闹钟间隔10s中断">RTC闹钟间隔10s中断</h3>
+<p>在上面的基础上添加一个闹钟即可</p>
+<details ><summary> myRTC.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+ * @description: 创建一个闹钟
+ * @return &#123;*&#125;
+ * @Date: 2023-05-15 18:31:46
+ *&#x2F;
+&#x2F;&#x2F; 创建一个闹钟
+void vRTC_Alarm_Create(void)
+&#123;
+    &#x2F;&#x2F; 备份区域的时钟使能
+    rcu_periph_clock_enable(RCU_BKPI);
+    &#x2F;&#x2F; 电源管理时钟使能
+    rcu_periph_clock_enable(RCU_PMU);
+    &#x2F;&#x2F; 备份区域允许访问
+    pmu_backup_write_enable();
+    &#x2F;&#x2F; 等待寄存器与APB1时钟同步
+    rtc_register_sync_wait();
+    &#x2F;&#x2F; 等待最后一次完成
+    rtc_lwoff_wait();
+    uint32_t tick &#x3D; rtc_counter_get() + 10;
+    &#x2F;&#x2F; 等待最后一次完成
+    rtc_lwoff_wait();
+    rtc_alarm_config(tick);
+    &#x2F;&#x2F; 使能闹钟中断
+    rtc_interrupt_enable(RTC_INT_ALARM);
+    rtc_alarm_config(tick);
+    pmu_backup_write_disable();
+&#125;
+
+&#x2F;*
+ * @description: RTC中断函数
+ * @return &#123;*&#125;
+ * @Date: 2023-05-15 16:11:08
+ *&#x2F;
+&#x2F;&#x2F; RTC中断函数
+void RTC_IRQHandler(void)
+&#123;
+    if(SET &#x3D;&#x3D; rtc_interrupt_flag_get(RTC_INT_FLAG_SECOND))
+    &#123;
+        &#x2F;&#x2F; 清除标志位
+        rtc_interrupt_flag_clear(RTC_INT_FLAG_SECOND);
+        MyRTC.bRTC_Sec_Flag &#x3D; 1;
+    &#125;
+    if(SET &#x3D;&#x3D; rtc_interrupt_flag_get(RTC_FLAG_ALARM))
+    &#123;
+        &#x2F;&#x2F; 清除标志位
+        rtc_interrupt_flag_clear(RTC_FLAG_ALARM);
+        MyRTC.bRTC_Alarm_Flag &#x3D; 1;
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> myRTC.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">typedef struct
+&#123;
+    &#x2F;&#x2F; 闹钟触发标志位
+    bool bRTC_Alarm_Flag;
+    &#x2F;&#x2F; 秒中断标志位
+    bool bRTC_Sec_Flag;
+    uint16_t ucYear;
+    uint16_t ucMon;
+    uint16_t ucDay;
+    uint16_t ucHour;
+    uint16_t ucMin;
+    uint16_t ucSecond;
+    void (*vRTC_Init)(void);
+    void (*vRTC_Convert_Time)(uint32_t);
+    void (*vRTC_Alarm_Create)(void);
+&#125;MyRTC_TypeDef;</code></pre>
+              </div>
+            </details>
+<details ><summary> main.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 在初始化那里先启动一次闹钟
+&#x2F;&#x2F; 闹钟初始化启动
+MyRTC.vRTC_Alarm_Create();</code></pre>
+              </div>
+            </details>
+<details ><summary> myUSART.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">if(MyRTC.bRTC_Alarm_Flag)
+&#123;
+    MyRTC.bRTC_Alarm_Flag &#x3D; 0;
+    MyRTC.vRTC_Alarm_Create();
+    printf(&quot;闹钟触发\r\n&quot;);
+&#125;</code></pre>
+              </div>
+            </details>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验现象</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230515192414.webp" alt=""></p>
+<h2 id="看门狗">看门狗</h2>
+<blockquote>
+<p><code>FWDGT</code> 最适合应用于那些需要看门狗作为一个在主程序之外，能够完全独立工作，并且对时间精度要求较低的场合。 <code>WWDGT</code>最适合那些要求看门狗在精确计时窗口起作用的应用程序。</p>
+</blockquote>
+<h3 id="独立看门狗">独立看门狗</h3>
+<p>独立看门狗用通俗一点的话来解释就是一个 <code>12</code> 位的递减计数器，当计数器的值从某个值一直减到 0 的时候，系统就会产生一个复位信号，即 <code>IWDG_RESET</code>。如果在计数没减到 0 之前，刷新了计数器的值的话，那么就不会产生复位信号，这个动作就是我们经常说的喂狗。看门狗功能由 VDD 电压域供电，在停止模式和待机模式下仍能工作。</p>
+<p>独立看门狗由内部专门的 <code>40KHz</code> 低速时钟驱动，即使主时钟发生故障，它也仍然有效。这里需要注意独立看门狗的时钟是一个内部 RC 时钟，所以并不是准确的 40Khz，而是在 <code>30~60KHz</code> 之间的一个可变化的时钟，只是我们在估算的时候，以 40Khz 的频率来计算，看门狗对时间的要求不是很精确，所以，时钟有些偏差，都是可以接受的。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230515201858.webp" alt=""></p>
+<blockquote>
+<p>这些时间是按照40kHz时钟给出</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230515202135.webp" alt=""></p>
+<ul>
+<li>控制寄存器<code>FWDGT_CTL</code></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230515202549.webp" alt=""></p>
+<p>在控制寄存器(FWDGT_CTL)中写入 <code>0xCCCC</code>，开始启用独立看门狗；此时计数器开始从其复位值 <code>0xFFF</code> 递减计数。当计数器计数到末尾 <code>0x000</code> 时，会产生一个复位信号(FWDGT_RESET)。无论何时，只要键寄存器FWDGT_CTL中被写入 <code>0xAAAA</code>，FWDGT_RLD中的值就会被重新加载到计数器中从而避免产生看门狗复位 。</p>
+<ul>
+<li>预分频寄存器 <code>FWDGT_PSC</code> 和 重装载寄存器 <code>FWDGT_RLD</code></li>
+</ul>
+<p>具有写保护功能。要修改这两个寄存器的值，必须先向FWDGT_CTL寄存器中写入 <code>0x5555</code></p>
+<blockquote>
+<p>注意PSC范围只能是 <code>0~7</code>，即预分频只能选择 <code>0~128</code>，RLD范围只能是 <code>0~4095</code></p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230515203335.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230515203358.webp" alt=""></p>
+<ul>
+<li>
+<p><code>独立看门狗一般用来检测和解决由程序引起的故障</code></p>
+</li>
+<li>
+<p>注意FWDGT在一旦启用，就不能再被关闭！想要关闭，只能重启，并且重启之后不能打开FWDGT，否则问题依旧</p>
+</li>
+<li>
+<p>看门狗溢出计算公式：</p>
+</li>
+</ul>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>o</mi><mi>u</mi><mi>t</mi><mo>=</mo><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mn>4</mn><mo>×</mo><msup><mn>2</mn><mrow><mi>p</mi><mi>r</mi><mi>e</mi><mi>r</mi></mrow></msup><mo stretchy="false">)</mo><mo>×</mo><mi>r</mi><mi>l</mi><mi>r</mi><mo stretchy="false">)</mo><mi mathvariant="normal">/</mi><mn>40</mn><mi>M</mi><mi>H</mi><mi>z</mi></mrow><annotation encoding="application/x-tex">out=((4×2^{prer}) ×rlr) /40MHz</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">o</span><span class="mord mathnormal">u</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">((</span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">rer</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mclose">)</span><span class="mord">/40</span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mord mathnormal" style="margin-right:0.04398em;">Hz</span></span></span></span></p>
+<p>设置预分频 <code>40000Hz / 64 = 625Hz</code>，一个周期就是 <code>1 /625 = 1.6ms</code></p>
+<details ><summary> myDog.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;myDOG.h&quot;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;变量区 BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+MyDog_TypeDef MyDog &#x3D; 
+&#123;
+    .vDOG_Fwdgt_Init &#x3D; &amp;vDOG_Fwdgt_Init
+&#125;;
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;变量区    END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+void vDOG_Fwdgt_Init(void)
+&#123;
+    &#x2F;&#x2F; 使能写功能
+    fwdgt_write_enable();
+    &#x2F;&#x2F; 设置预分频 40000&#x2F;64&#x3D;625Hz，1&#x2F;625 &#x3D; 1.6ms
+    &#x2F;&#x2F; 设置初值 800*1.6&#x3D;1.28s
+    fwdgt_config(800,FWDGT_PSC_DIV64);
+    &#x2F;&#x2F; 喂狗
+    fwdgt_counter_reload();
+    &#x2F;&#x2F; 使能独立看门狗
+    fwdgt_enable();
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> myDog.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+*@Description: 看门狗
+*@Author: Yang
+*@Date: 2023-05-15 21:01:33
+*&#x2F;
+#ifndef __MYDOG_H
+#define __MYDOG_H
+#include &quot;AllHead.h&quot;
+
+typedef struct
+&#123;
+    void (*vDOG_Fwdgt_Init)(void);
+&#125;MyDog_TypeDef;
+
+extern MyDog_TypeDef MyDog;
+
+void vDOG_Fwdgt_Init(void);
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> myTIMER.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">if(800 &#x3D;&#x3D; Dog_Fwdgt_Cnt)
+&#123;
+    Dog_Fwdgt_Cnt &#x3D; 0;
+    &#x2F;&#x2F; 喂狗
+    fwdgt_counter_reload();
+&#125;</code></pre>
+              </div>
+            </details>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验现象</p>
+</div>
+<p>如果喂狗时间小于1.28s的话正常，太长时间的话会像下面那样重启</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230515212643.webp" alt=""></p>
+<h3 id="窗口看门狗">窗口看门狗</h3>
+<p>窗口看门狗通常被用来监测，由外部干扰或不可预见的逻辑条件造成的应用程序背离正常的运行序列而产生的软件故障</p>
+<p>跟独立看门狗类似的地方，不同的地方是窗口看门狗的计数器的值在减到某一个数之前喂狗的话也会产生复位，这个值叫窗口的上限，上限值由用户独立设置。因此 <code>窗口看门狗计数器的值必须在上窗口和下窗口之间才可以喂狗</code></p>
+<p>窗口看门狗定时器开启后， <code>7</code> 位向下递减计数器值逐渐减小。计数值达到 <code>0x3F</code> 时会产生系统复位，窗口看门狗定时器在计数器计数值达到 <code>0x40</code>，会产生一个提前唤醒标志，如果使能中断将会产生提前唤醒中断</p>
+<p>窗口看门狗定时器时钟是由 <code>APB1</code> 时钟预分频而来(看手册)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230516075634.webp" alt=""></p>
+<blockquote>
+<p>当计数器的值小于窗口值，且大于0x3F的时候，重装载向下计数器可以避免复位，否则在其他时候进行重加载就会引起复位</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230516080127.webp" alt=""></p>
+<details ><summary> myDOG.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+ * @description: 窗口看门狗初始化
+ * @return &#123;*&#125;
+ * @Date: 2023-05-16 08:06:26
+ *&#x2F;
+&#x2F;&#x2F; 窗口看门狗初始化
+void vDOG_Wwdgt_Init(void)
+&#123;
+    &#x2F;&#x2F; 使能窗口看门狗时钟
+    rcu_periph_clock_enable(RCU_WWDGT);
+    &#x2F;&#x2F; 窗口上限值
+    wwdgt_config(0x7F,0x5F,WWDGT_CFG_PSC_DIV8);
+    &#x2F;&#x2F; 使能窗口看门狗
+    wwdgt_enable();
+    &#x2F;&#x2F; 清除中断标志
+    wwdgt_flag_clear();
+    &#x2F;&#x2F; 开启中断
+    wwdgt_interrupt_enable();
+    nvic_irq_enable(WWDGT_IRQn,2,0);
+&#125;
+
+&#x2F;*
+ * @description: 窗口看门狗中断函数
+ * @return &#123;*&#125;
+ * @Date: 2023-05-16 08:14:18
+ *&#x2F;
+&#x2F;&#x2F; 窗口看门狗中断函数
+void WWDGT_IRQHandler(void)
+&#123;
+    wwdgt_counter_update(0x7F);
+    wwdgt_flag_clear();
+    printf(&quot;WWDG\r\n&quot;);
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> myDOG.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __MYDOG_H
+#define __MYDOG_H
+#include &quot;AllHead.h&quot;
+
+typedef struct
+&#123;
+    void (*vDOG_Fwdgt_Init)(void);
+    void (*vDOG_Wwdgt_Init)(void);
+&#125;MyDog_TypeDef;
+
+extern MyDog_TypeDef MyDog;
+
+void vDOG_Fwdgt_Init(void);
+void vDOG_Wwdgt_Init(void);
+#endif</code></pre>
+              </div>
+            </details>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验现象</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230516084039.webp" alt=""></p>
+<h2 id="程序加密">程序加密</h2>
+<p>GD32通过读取芯片唯一ID号来实现程序的保护，防止被抄袭， <code>96位</code> 的产品唯一身份标识所提供的参考号码对任意一个GD32微控制器，在任何情况下都是唯一的。用户在何种情况下，都不能修改这个身份标识。</p>
+<blockquote>
+<p>可以以字节(8位)为单位读取，也可以以半字(16位)或者全字(32位)读取，但是需要注意大小端模式</p>
+</blockquote>
+<p>读取的3个地址为：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230516092055.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230516091937.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230516091959.webp" alt=""></p>
+<details ><summary> main.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+ * @description: 芯片ID检查
+ * @return &#123;*&#125;
+ * @Date: 2023-05-16 11:23:45
+ *&#x2F;
+&#x2F;&#x2F; 芯片ID检查
+static void svSYS_Id_Check(void)
+&#123;
+    for(uint8_t i &#x3D; 0; i &lt; 12; i++)
+    &#123;
+        &#x2F;&#x2F; 先强制类型转换为无符号char类型以防溢出然后解引用取值
+        Sys_Id[i] &#x3D; *(uint8_t*)(0x1FFFF7E8 + i);
+        &#x2F;&#x2F; 我的是：25 7b 48 53 39 36 32 04 50 36 31 33
+        &#x2F;&#x2F; printf(&quot;%0.2x &quot;,Sys_Id[i]);
+    &#125;
+    &#x2F;&#x2F; 判断
+    if(0x25 &#x3D;&#x3D; Sys_Id[0] &amp;&amp; 0x7b &#x3D;&#x3D; Sys_Id[1] &amp;&amp; 0x48 &#x3D;&#x3D; Sys_Id[2] &amp;&amp; 0x53 &#x3D;&#x3D; Sys_Id[3] &amp;&amp;
+        0x39 &#x3D;&#x3D; Sys_Id[4] &amp;&amp; 0x36 &#x3D;&#x3D; Sys_Id[5] &amp;&amp; 0x32 &#x3D;&#x3D; Sys_Id[6] &amp;&amp; 0x04 &#x3D;&#x3D; Sys_Id[7] &amp;&amp;
+        0x50 &#x3D;&#x3D; Sys_Id[8] &amp;&amp; 0x36 &#x3D;&#x3D; Sys_Id[9] &amp;&amp; 0x31 &#x3D;&#x3D; Sys_Id[10] &amp;&amp; 0x33 &#x3D;&#x3D; Sys_Id[11])
+    &#123;
+        printf(&quot;\r\nPASS\r\n&quot;);
+    &#125;
+    &#x2F;&#x2F; 错误则死循环
+    else
+    &#123;
+        printf(&quot;\r\nFAIL\r\n&quot;);
+        while(1);
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<h2 id="GD32存储结构">GD32存储结构</h2>
+<p>存储器映射是指把芯片中或芯片外的FLASH，RAM，外设，BOOTBLOCK等进行统一编址。即用地址来表示对象。这个地址绝大多数是由厂家规定好的，用户只能用而不能改。用户只能在挂外部RAM或FLASH的情况下可进行自定义。</p>
+<p>GD32的存储器地址空间被划分为大小相等的 <code>8</code> 块区域，每块区域大小为 <code>512MB</code></p>
+<ul>
+<li>GD32的Flash</li>
+</ul>
+<p>严格说，应该是Flash模块。该Flash模块包括： <code>Flash主存储区（Main memory）</code>、 <code>Flash信息区（Information block）</code>，以及 <code>Flash存储接口寄存器区（Flash memory interface）</code>。三个组成部分分别在 <code>0x0000 0000 - 0xFFFF FFFF</code> 不同的区域</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230516115618.webp" alt=""></p>
+<blockquote>
+<p><code>Peripherals</code>：外设的存储器映射，对该区域操作，就是对相应的外设进行操作；<br>
+<code>SRAM</code>：运行时临时存放代码的地方；<br>
+<code>Flash</code>：存放代码的地方；<br>
+<code>System Memory</code>：GD32出厂时自带的你只能使用，不能写或擦除；<br>
+<code>Option Bytes</code>：可以按照用户的需要进行配置（如配置看门狗为硬件实现还是软件实现）</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230516120153.webp" alt=""></p>
+<ul>
+<li>启动方式</li>
+</ul>
+<p>有3种：</p>
+<ol>
+<li>
+<p>主闪存存储器(Main Flash)启动：从GD32内置的Flash启动(0x0800 0000-0x0807 FFFF)，一般我们使用JTAG或者SWD模式下载程序时，就是下载到这个里面，重启后也直接从这启动程序。以0x08000000 对应的内存为例，则该块内存既可以通过0x00000000 操作也可以通过0x08000000 操作，且都是操作的同一块内存。</p>
+</li>
+<li>
+<p>系统存储器(System Memory)启动：从系统存储器启动(0x1FFFF000 - 0x1FFF F7FF)，这种模式启动的程序功能是由厂家设置的。一般来说，我们选用这种启动模式时，是为了从串口下载程序，因为在厂家提供的ISP程序中，提供了串口下载程序的固件，可以通过这个ISP程序将用户程序下载到系统的Flash中。以0x1FFFFFF0对应的内存为例，则该块内存既可以通过0x00000000 操作也可以通过0x1FFFFFF0操作，且都是操作的同一块内存。</p>
+</li>
+<li>
+<p>片上SRAM启动：从内置SRAM启动(0x2000 0000-0x3FFFFFFF)，既然是SRAM，自然也就没有程序存储的能力了，这个模式一般用于程序调试。SRAM 只能通过0x20000000进行操作，与上述两者不同。从SRAM 启动时，需要在应用程序初始化代码中重新设置向量表的位置。</p>
+</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230516122736.webp" alt=""></p>
+<blockquote>
+<p>启动模式只决定程序烧录的位置，加载完程序之后会有一个重映射(映射到0x00000000地址位置)；真正产生复位信号的时候，CPU还是从开始位置执行。<code>GD32上电复位以后，代码区都是从0x00000000开始的，三种启动模式只是将各自存储空间的地址映射到0x00000000中</code></p>
+</blockquote>
+<h3 id="Flash读写">Flash读写</h3>
+<p>参考：<a href="https://bruceou.blog.csdn.net/article/details/126669695">https://bruceou.blog.csdn.net/article/details/126669695</a></p>
+<p>GD32F10x的片上Flash起始地址是从 <code>0x800 0000</code> 开始，可支持字节、半字(16 bits)和字(32 bits)访问。 Flash 编程以半字(16 bits)或字(32bits)为单位。擦除可以以页(page)为单位，也可以进行全片擦除（information blocks 除外）</p>
+<blockquote>
+<ol>
+<li>Flash解锁操作</li>
+<li>清除Flash标志</li>
+<li>页擦除</li>
+<li>读写操作</li>
+<li>锁定</li>
+</ol>
+</blockquote>
+<details ><summary> main.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+ * @description: Flash读写测试
+ * @param &#123;uint32_t&#125; Data
+ * @return &#123;*&#125;
+ * @Date: 2023-05-16 12:13:40
+ *&#x2F;
+&#x2F;&#x2F; Flash读写测试
+static void svFLASH_Test(uint32_t InData)
+&#123;
+    #define FLASH_ADD 0x0807F800
+
+    uint32_t OutData &#x3D; 0;
+    &#x2F;&#x2F; 解锁
+    fmc_unlock();
+    &#x2F;&#x2F; 清除标志位
+    fmc_flag_clear(FMC_FLAG_BANK0_PGERR | FMC_FLAG_BANK0_WPERR | FMC_FLAG_BANK0_END | FMC_FLAG_BANK1_PGERR | FMC_FLAG_BANK1_WPERR | FMC_FLAG_BANK1_END);
+    &#x2F;&#x2F; 要擦除页起始地址
+    fmc_page_erase(FLASH_ADD);
+    &#x2F;&#x2F; 写数据
+    fmc_word_program(FLASH_ADD,InData);
+    &#x2F;&#x2F; 锁定
+    fmc_lock();
+    OutData &#x3D; (*(__IO uint32_t*)(FLASH_ADD));
+    printf(&quot;InData:%d--OutData:%d\r\n&quot;,InData,OutData);
+    if(InData &#x3D;&#x3D; OutData)
+    &#123;
+        printf(&quot;Flash PASS\r\n&quot;);
+    &#125;
+    else
+    &#123;
+        printf(&quot;Flash FAIL\r\n&quot;);
+    &#125;
+&#125;
+
+&#x2F;&#x2F; 调用
+svFLASH_Test(12345678);</code></pre>
+              </div>
+            </details>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验现象</p>
+</div>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230516122504.webp" alt=""></p>
+<h2 id="I2C">I2C</h2>
+<p>I2C (内部集成电路总线)模块提供了符合工业标准的两线串行制接口，可用于 MCU和外部 I2C设备的通讯。 I2C总线使用两条串行线： <code>串行数据线 SDA</code> 和 <code>串行时钟线 SCL</code></p>
 <h2 id="附1-常用函数">附1-常用函数</h2>
 <blockquote>
 <p><code>rcu_periph_clock_enable(rcu_periph_enum periph)</code></p>
@@ -2189,6 +3342,163 @@ void EXTI10_15_IRQHandler(void)
 <p>参数1：TIMER外设(0,7)</p>
 <p>参数2：刹车功能配置结构体</p>
 </blockquote>
+<blockquote>
+<p><code>rcu_adc_clock_config(uint32_t adc_psc)</code></p>
+<p>功能：配置ADC的时钟分频系数</p>
+<p>参数1：ADC分频因子(2/4/6/8/12)</p>
+<p><code>adc_mode_config(uint32_t mode)</code></p>
+<p>功能：配置ADC同步模式</p>
+<p>参数1：ADC运行模式</p>
+<p><code>adc_data_alignment_config(uint32_t adc_periph, uint32_t data_alignment)</code></p>
+<p>功能：配置ADC数据对齐方式</p>
+<p>参数1：ADC外设(0/1/2)</p>
+<p>参数2：数据对齐方式选择(左对齐/右对齐)</p>
+<p><code>adc_special_function_config(uint32_t adc_periph, uint32_t function, ControlStatus newvalue)</code></p>
+<p>功能：使能或禁能ADC特殊功能</p>
+<p>参数1：ADC外设(0/1/2)</p>
+<p>参数2：功能配置</p>
+<p>参数3：功能使能/禁能(ENABLE/DISABLE)</p>
+<p><code>adc_channel_length_config(uint32_t adc_periph, uint8_t adc_channel_group, uint32_t length)</code></p>
+<p>功能：配置规则通道组或注入通道组的长度</p>
+<p>参数1：ADC外设(0/1/2)</p>
+<p>参数2：通道组选择(规则组/注入组)</p>
+<p>参数3：通道长度，规则通道组为(1-16)，注入通道组为(1-4)</p>
+<p><code>adc_external_trigger_source_config(uint32_t adc_periph, uint8_t adc_channel_group, uint32_t external_trigger_source)</code></p>
+<p>功能：配置ADC外部触发源</p>
+<p>参数1：ADC外设(0/1/2)</p>
+<p>参数2：通道组选择(规则组/注入组)</p>
+<p>参数3：规则通道组或注入通道组触发源(一般选择软件触发规则组)ADC0_1_2_EXTTRIG_REGULAR_NONE</p>
+<p><code>adc_external_trigger_config(uint32_t adc_periph, uint8_t adc_channel_group, ControlStatus newvalue)</code></p>
+<p>功能：配置ADC外部触发</p>
+<p>参数1：ADC外设(0/1/2)</p>
+<p>参数2：通道组选择(规则组/注入组)</p>
+<p>参数3：通道使能/禁能(ENABLE/DISABLE)</p>
+<p><code>adc_enable(uint32_t adc_periph)</code></p>
+<p>功能：ADC使能</p>
+<p>参数1：ADC外设(0/1/2)</p>
+<p><code>adc_calibration_enable(uint32_t adc_periph)</code></p>
+<p>功能：ADC校准复位</p>
+<p>参数1：ADC外设(0/1/2)</p>
+<p><code>adc_regular_channel_config(uint32_t adc_periph, uint8_t rank, uint8_t adc_channel, uint32_t sample_time)</code></p>
+<p>功能：配置ADC规则通道组</p>
+<p>参数1：ADC外设(0/1/2)</p>
+<p>参数2：规则组通道序列，取值范围为0~15</p>
+<p>参数3：ADC通道选择</p>
+<p>参数4：采样时间(1.5/7.5/13.5/28.5/41.5/55.5/71.5/239.5)</p>
+<p><code>dma_circulation_enable(uint32_t dma_periph, dma_channel_enum channelx)</code></p>
+<p>功能：使能DMA循环模式</p>
+<p>参数1：DMA外设(0/1)</p>
+<p>参数2：DMA通道</p>
+<p><code>adc_dma_mode_enable(uint32_t adc_periph)</code></p>
+<p>功能：ADC DMA请求使能</p>
+<p>参数1：ADC外设(0/1/2)</p>
+<p><code>adc_flag_clear(uint32_t adc_periph, uint32_t adc_flag)</code></p>
+<p>功能：清除ADC标志位</p>
+<p>参数1：ADC外设(0/1/2)</p>
+<p>参数2：ADC标志位</p>
+<p><code>adc_flag_get(uint32_t adc_periph, uint32_t adc_flag)</code></p>
+<p>功能：获取ADC标志位</p>
+<p>参数1：ADC外设(0/1/2)</p>
+<p>参数2：ADC标志位</p>
+<p>返回值：SET/RESET</p>
+<p><code>dma_interrupt_flag_get(uint32_t dma_periph, dma_channel_enum channelx, uint32_t flag)</code></p>
+<p>功能：获取DMAx通道y中断标志位状态</p>
+<p>参数1：DMA外设(0/1)</p>
+<p>参数2：DMA通道</p>
+<p>参数3：DMA标志</p>
+<p>返回值：SET/RESET</p>
+<p><code>dma_interrupt_flag_clear(uint32_t dma_periph, dma_channel_enum channelx, uint32_t flag)</code></p>
+<p>功能：清除DMAx通道y中断标志位状态</p>
+<p>参数1：DMA外设(0/1)</p>
+<p>参数2：DMA通道</p>
+<p>参数3：DMA标志</p>
+</blockquote>
+<blockquote>
+<p><code>pmu_backup_write_enable(void)</code></p>
+<p>功能：备份域写使能</p>
+<p><code>bkp_deinit(void)</code></p>
+<p>功能：备份域复位</p>
+<p><code>rcu_osci_on(rcu_osci_type_enum osci)</code></p>
+<p>功能：打开振荡器</p>
+<p>参数：振荡器类型，一般是 RCU_LXTAL</p>
+<p><code>rcu_osci_stab_wait(rcu_osci_type_enum osci)</code></p>
+<p>功能：等待振荡器稳定标志位置位或振荡器起振超时</p>
+<p>参数：振荡器类型，一般是 RCU_LXTAL</p>
+<p>返回值：SUCCESS/ERROR</p>
+<p><code>rcu_rtc_clock_config(uint32_t rtc_clock_source)</code></p>
+<p>功能：配置RTC的时钟源选择</p>
+<p>参数：RTC时钟源选择，一般是 RCU_RTCSRC_LXTAL</p>
+<p><code>rtc_configuration_mode_enter(void)</code></p>
+<p>功能：进入RTC配置模式</p>
+<p><code>rtc_register_sync_wait(void)</code></p>
+<p>功能：等待寄存器与APB1时钟同步</p>
+<p><code>rtc_lwoff_wait(void)</code></p>
+<p>功能：等待最后一次操作完成</p>
+<p><code>rtc_interrupt_enable(uint32_t interrupt)</code></p>
+<p>功能：使能RTC中断</p>
+<p>注意：调用此函数之前，必须调用函数rtc_lwoff_wait</p>
+<p>参数：待使能的RTC中断源(秒中断/闹钟中断/溢出中断)</p>
+<p><code>rtc_prescaler_set(uint32_t psc)</code></p>
+<p>功能：设置RTC预分频值</p>
+<p>注意：调用此函数之前，必须调用函数rtc_lwoff_wait</p>
+<p>参数：RTC预分频值（0~0x000FFFFF）</p>
+<p><code>rtc_counter_set(uint32_t cnt)</code></p>
+<p>功能：设置RTC计数器的值</p>
+<p>注意：调用此函数之前，必须调用函数rtc_lwoff_wait</p>
+<p>参数：RTC计数器的值（0~0xFFFF FFFF）</p>
+<p><code>bkp_data_read(bkp_data_register_enum register_number)</code></p>
+<p>功能：读备份数据寄存器</p>
+<p>参数：参考枚举</p>
+<p>返回值：0~0xffff</p>
+<p><code>bkp_data_write(bkp_data_register_enum register_number, uint16_t data)</code></p>
+<p>功能：写备份数据寄存器</p>
+<p>参数1：参考枚举</p>
+<p>参数2：待写入BKP数据寄存器的数据(0~0xFFFF)</p>
+<p><code>rtc_configuration_mode_exit(void)</code></p>
+<p>功能：退出配置模式， 更新配置</p>
+<p><code>rcu_all_reset_flag_clear(void)</code></p>
+<p>功能：清除所有标志</p>
+<p><code>rtc_interrupt_flag_get(uint32_t flag)</code></p>
+<p>功能：获取RTC中断标志位状态</p>
+<p>参数：需要获取的RTC中断标志位(秒中断/闹钟中断/溢出中断)</p>
+<p>返回值：SET/RESET</p>
+<p><code>rtc_interrupt_flag_clear(uint32_t flag)</code></p>
+<p>功能：清除RTC中断标志位</p>
+<p>参数：需要清除的RTC中断标志位(秒中断/闹钟中断/溢出中断)</p>
+<p><code>rtc_alarm_config(uint32_t alarm)</code></p>
+<p>功能：设置RTC闹钟值</p>
+<p>注意：调用此函数之前，必须调用函数rtc_lwoff_wait</p>
+<p>参数：RTC闹钟值（0~0xFFFF FFFF）</p>
+<p><code>pmu_backup_write_disable(void)</code></p>
+<p>功能：备份域写除能</p>
+</blockquote>
+<blockquote>
+<p><code>fwdgt_write_enable(void)</code></p>
+<p>功能：使能对寄存器FWDGT_PSC和FWDGT_RLD的写操作</p>
+<p><code>fwdgt_config(uint16_t reload_value, uint8_t prescaler_div)</code></p>
+<p>功能：设置FWDGT重装载值、预分频值</p>
+<p>参数1：重装载值(0x0000 - 0x0FFF)</p>
+<p>参数2：FWDGT预分频值</p>
+<p>返回值：ERROR/SUCCESS</p>
+<p><code>fwdgt_counter_reload(void)</code></p>
+<p>功能：按照FWDGT_RLD寄存器的值重装载FWDGT计数器</p>
+<p><code>fwdgt_enable(void)</code></p>
+<p>功能：使能独立看门狗</p>
+<p><code>wwdgt_config(uint16_t counter, uint16_t window, uint32_t prescaler)</code></p>
+<p>功能：设置WWDGT计数器值、窗口值和预分频值</p>
+<p>参数1：0x00 - 0x7F</p>
+<p>参数2：0x00 - 0x7F</p>
+<p>参数3：WWDGT预分频值(1/2/4/8)</p>
+<p><code>wwdgt_enable(void)</code></p>
+<p>功能：使能窗口看门狗</p>
+<p><code>wwdgt_flag_clear(void)</code></p>
+<p>功能：清除窗口看门狗中断标志</p>
+<p><code>wwdgt_interrupt_enable(void)</code></p>
+<p>功能：使能窗口看门狗中断</p>
+<p><code>wwdgt_counter_update(uint16_t counter_value)</code></p>
+<p>功能：设置WWDGT计数器更新值</p>
+<p>参数：0x00 - 0x7F</p>
+</blockquote>
 <h2 id="问题">问题</h2>
 <ul>
 <li>关于中断里判断SET或RESET问题</li>
@@ -2240,7 +3550,11 @@ void EXTI10_15_IRQHandler(void)
 <blockquote>
 <p>解决方法：打开魔法棒，勾选 Use MicroLIB</p>
 </blockquote>
-</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num129.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E7%8E%AF%E5%A2%83"><span class="toc-number">2.</span> <span class="toc-text">搭建环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%83%A7%E5%BD%95%E7%A8%8B%E5%BA%8F"><span class="toc-number">3.</span> <span class="toc-text">烧录程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B%E6%A8%A1%E6%9D%BF"><span class="toc-number">4.</span> <span class="toc-text">新建工程模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vscode%E7%BC%96%E5%86%99"><span class="toc-number">5.</span> <span class="toc-text">vscode编写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8A%AF%E7%89%87%E4%BB%8B%E7%BB%8D"><span class="toc-number">6.</span> <span class="toc-text">芯片介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BA%E4%BB%B6%E5%BA%93%E8%AF%A6%E8%A7%A3"><span class="toc-number">7.</span> <span class="toc-text">固件库详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%96%E8%AE%BE%E7%BC%A9%E5%86%99"><span class="toc-number">7.1.</span> <span class="toc-text">外设缩写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="toc-number">7.2.</span> <span class="toc-text">命名规则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E6%A0%91"><span class="toc-number">8.</span> <span class="toc-text">时钟树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GPIO%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">9.</span> <span class="toc-text">GPIO的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GPIO%E7%9A%84%E4%BD%8D%E5%B8%A6%E6%93%8D%E4%BD%9C"><span class="toc-number">9.1.</span> <span class="toc-text">GPIO的位带操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3"><span class="toc-number">10.</span> <span class="toc-text">串口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3%E4%B8%AD%E6%96%AD%E6%96%B9%E5%BC%8F%E6%8E%A5%E6%94%B6%E6%95%B0%E6%8D%AE%E5%92%8C%E8%BE%93%E5%87%BA%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-number">10.1.</span> <span class="toc-text">串口中断方式接收数据和输出重定向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3DMA-IDLE%E6%96%B9%E5%BC%8F"><span class="toc-number">10.2.</span> <span class="toc-text">串口DMA+IDLE方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">11.</span> <span class="toc-text">定时器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E5%AE%9A%E6%97%B6"><span class="toc-number">11.1.</span> <span class="toc-text">普通定时</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PWM%E8%BE%93%E5%87%BA"><span class="toc-number">11.2.</span> <span class="toc-text">PWM输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PWM%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7"><span class="toc-number">11.3.</span> <span class="toc-text">PWM输入捕获</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PWM3%E8%B7%AF%E4%BA%92%E8%A1%A5%E8%BE%93%E5%87%BA"><span class="toc-number">11.4.</span> <span class="toc-text">PWM3路互补输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PWM%E5%88%B9%E8%BD%A6%E6%AD%BB%E5%8C%BA%E4%BF%9D%E6%8A%A4"><span class="toc-number">11.5.</span> <span class="toc-text">PWM刹车死区保护</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E9%83%A8%E4%B8%AD%E6%96%AD"><span class="toc-number">12.</span> <span class="toc-text">外部中断</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%841-%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-number">13.</span> <span class="toc-text">附1-常用函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-number">14.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%A5%E9%94%99%E9%9B%86%E5%90%88"><span class="toc-number">15.</span> <span class="toc-text">报错集合</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num129.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E7%8E%AF%E5%A2%83"><span class="toc-number">2.</span> <span class="toc-text">搭建环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%83%A7%E5%BD%95%E7%A8%8B%E5%BA%8F"><span class="toc-number">3.</span> <span class="toc-text">烧录程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B%E6%A8%A1%E6%9D%BF"><span class="toc-number">4.</span> <span class="toc-text">新建工程模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vscode%E7%BC%96%E5%86%99"><span class="toc-number">5.</span> <span class="toc-text">vscode编写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8A%AF%E7%89%87%E4%BB%8B%E7%BB%8D"><span class="toc-number">6.</span> <span class="toc-text">芯片介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BA%E4%BB%B6%E5%BA%93%E8%AF%A6%E8%A7%A3"><span class="toc-number">7.</span> <span class="toc-text">固件库详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%96%E8%AE%BE%E7%BC%A9%E5%86%99"><span class="toc-number">7.1.</span> <span class="toc-text">外设缩写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="toc-number">7.2.</span> <span class="toc-text">命名规则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E6%A0%91"><span class="toc-number">8.</span> <span class="toc-text">时钟树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GPIO%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">9.</span> <span class="toc-text">GPIO的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GPIO%E7%9A%84%E4%BD%8D%E5%B8%A6%E6%93%8D%E4%BD%9C"><span class="toc-number">9.1.</span> <span class="toc-text">GPIO的位带操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3"><span class="toc-number">10.</span> <span class="toc-text">串口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3%E4%B8%AD%E6%96%AD%E6%96%B9%E5%BC%8F%E6%8E%A5%E6%94%B6%E6%95%B0%E6%8D%AE%E5%92%8C%E8%BE%93%E5%87%BA%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-number">10.1.</span> <span class="toc-text">串口中断方式接收数据和输出重定向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3DMA-IDLE%E6%96%B9%E5%BC%8F"><span class="toc-number">10.2.</span> <span class="toc-text">串口DMA+IDLE方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">11.</span> <span class="toc-text">定时器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E5%AE%9A%E6%97%B6"><span class="toc-number">11.1.</span> <span class="toc-text">普通定时</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PWM%E8%BE%93%E5%87%BA"><span class="toc-number">11.2.</span> <span class="toc-text">PWM输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PWM%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7"><span class="toc-number">11.3.</span> <span class="toc-text">PWM输入捕获</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PWM3%E8%B7%AF%E4%BA%92%E8%A1%A5%E8%BE%93%E5%87%BA"><span class="toc-number">11.4.</span> <span class="toc-text">PWM3路互补输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PWM%E5%88%B9%E8%BD%A6%E6%AD%BB%E5%8C%BA%E4%BF%9D%E6%8A%A4"><span class="toc-number">11.5.</span> <span class="toc-text">PWM刹车死区保护</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Systick%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">11.6.</span> <span class="toc-text">Systick定时器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E9%83%A8%E4%B8%AD%E6%96%AD"><span class="toc-number">12.</span> <span class="toc-text">外部中断</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ADC"><span class="toc-number">13.</span> <span class="toc-text">ADC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">13.1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ADC%E5%8D%95%E9%80%9A%E9%81%93%E8%BD%AE%E8%AF%A2%E9%87%87%E9%9B%86"><span class="toc-number">13.2.</span> <span class="toc-text">ADC单通道轮询采集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DMA-%E8%BF%9E%E7%BB%AD%E6%89%AB%E6%8F%8F%E6%A8%A1%E5%BC%8F"><span class="toc-number">13.3.</span> <span class="toc-text">DMA+连续扫描模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DMA-%E8%BF%9E%E7%BB%AD%E6%89%AB%E6%8F%8F%E6%A8%A1%E5%BC%8F-DMA%E4%B8%AD%E6%96%AD"><span class="toc-number">13.4.</span> <span class="toc-text">DMA+连续扫描模式+DMA中断</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTC"><span class="toc-number">14.</span> <span class="toc-text">RTC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E6%97%B6%E9%97%B4%E8%8E%B7%E5%8F%96%E6%97%B6%E9%97%B4"><span class="toc-number">14.1.</span> <span class="toc-text">设置时间获取时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTC%E9%97%B9%E9%92%9F%E9%97%B4%E9%9A%9410s%E4%B8%AD%E6%96%AD"><span class="toc-number">14.2.</span> <span class="toc-text">RTC闹钟间隔10s中断</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9C%8B%E9%97%A8%E7%8B%97"><span class="toc-number">15.</span> <span class="toc-text">看门狗</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8B%AC%E7%AB%8B%E7%9C%8B%E9%97%A8%E7%8B%97"><span class="toc-number">15.1.</span> <span class="toc-text">独立看门狗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AA%97%E5%8F%A3%E7%9C%8B%E9%97%A8%E7%8B%97"><span class="toc-number">15.2.</span> <span class="toc-text">窗口看门狗</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E5%8A%A0%E5%AF%86"><span class="toc-number">16.</span> <span class="toc-text">程序加密</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GD32%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-number">17.</span> <span class="toc-text">GD32存储结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Flash%E8%AF%BB%E5%86%99"><span class="toc-number">17.1.</span> <span class="toc-text">Flash读写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I2C"><span class="toc-number">18.</span> <span class="toc-text">I2C</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%841-%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-number">19.</span> <span class="toc-text">附1-常用函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-number">20.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%A5%E9%94%99%E9%9B%86%E5%90%88"><span class="toc-number">21.</span> <span class="toc-text">报错集合</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://lib.baomitu.com/KaTeX/latest/katex.min.css"><script src="https://jsd.onmicrosoft.cn/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
     document.body.oncopy = function () {
         iziToast.info({
             timeout: 4000, // 关闭弹窗的时间
