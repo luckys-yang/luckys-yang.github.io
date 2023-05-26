@@ -1,0 +1,2051 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>屏幕学习 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言 参考博主&#x2F;文章  STM32物联网项目-HMI串口屏 水比赛系列-HMI串口屏的使用 【我的电赛日记（一）】HMI USART串口屏 资源网站  陶晶驰资料中心 陶晶驰官网 HMI串口屏 基本操作  选型表(可在官网查找)     下载上位机  首先去官网资料那下载最新版的上位机软件，解压安装即可  新建工程选择串口屏的型号  下载完直接打开，然后点击左上角【新建】，选择工程要保存的路径(可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="屏幕学习">
+<meta property="og:url" content="https://mdcm.yang5201314.cn/post/cd044841.html">
+<meta property="og:site_name" content="Luckys-Yangの小栈">
+<meta property="og:description" content="前言 参考博主&#x2F;文章  STM32物联网项目-HMI串口屏 水比赛系列-HMI串口屏的使用 【我的电赛日记（一）】HMI USART串口屏 资源网站  陶晶驰资料中心 陶晶驰官网 HMI串口屏 基本操作  选型表(可在官网查找)     下载上位机  首先去官网资料那下载最新版的上位机软件，解压安装即可  新建工程选择串口屏的型号  下载完直接打开，然后点击左上角【新建】，选择工程要保存的路径(可">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mdcm.yang5201314.cn/img/num134.webp">
+<meta property="article:published_time" content="2023-05-24T11:33:08.000Z">
+<meta property="article:modified_time" content="2023-05-26T13:55:48.540Z">
+<meta property="article:author" content="Luckys-Yang">
+<meta property="article:tag" content="博客,个人博客,技术,学习,Hexo,Blog,STM32,嵌入式,单片机">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mdcm.yang5201314.cn/img/num134.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"><link rel="canonical" href="https://mdcm.yang5201314.cn/post/cd044841.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '屏幕学习',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-26 21:55:48'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/aplayer.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">134</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">76</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">30</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">屏幕学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-24T11:33:08.000Z" title="发表于 2023-05-24 19:33:08">2023-05-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-26T13:55:48.540Z" title="更新于 2023-05-26 21:55:48">2023-05-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BB%86%E5%8C%96%E5%AD%A6%E4%B9%A0/">细化学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">15.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>55分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>参考博主/文章</p>
+</div>
+<p><a href="https://blog.csdn.net/weixin_46251230/article/details/126728674">STM32物联网项目-HMI串口屏</a></p>
+<p><a href="https://blog.csdn.net/m0_51220742/article/details/123955312?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522168493156716800184183752%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=168493156716800184183752&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~top_click~default-2-123955312-null-null.268%5Ev1%5Ekoosearch&amp;utm_term=%E4%B8%B2%E5%8F%A3%E5%B1%8F&amp;spm=1018.2226.3001.4450">水比赛系列-HMI串口屏的使用</a></p>
+<p><a href="https://blog.csdn.net/qq_45416203/article/details/108013925?ops_request_misc=&amp;request_id=&amp;biz_id=&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~koosearch~default-10-108013925-null-null.268%5Ev1%5Ekoosearch&amp;utm_term=%E4%B8%B2%E5%8F%A3%E5%B1%8F&amp;spm=1018.2226.3001.4450">【我的电赛日记（一）】HMI USART串口屏</a></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>资源网站</p>
+</div>
+<p><a href="http://wiki.tjc1688.com/video.html#id2">陶晶驰资料中心</a></p>
+<p><a href="http://tjc1688.com/">陶晶驰官网</a></p>
+<h2 id="HMI串口屏">HMI串口屏</h2>
+<h3 id="基本操作">基本操作</h3>
+<ul>
+<li>选型表(可在官网查找)</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524202431.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524202443.webp" alt=""></p>
+<ul>
+<li>下载上位机</li>
+</ul>
+<p>首先去官网资料那下载最新版的上位机软件，解压安装即可</p>
+<ul>
+<li>新建工程选择串口屏的型号</li>
+</ul>
+<p>下载完直接打开，然后点击左上角【新建】，选择工程要保存的路径(可提前在盘下新建一个文件夹存放)，然后弹出选择型号界面，选择型号(可看屏幕的背面)</p>
+<blockquote>
+<p>显示方向的话看个人需要</p>
+<p>最好一开始就确定编码，不建议修改工程编码，会导致乱码等问题</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524204832.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524204852.webp" alt=""></p>
+<ul>
+<li>进去后默认空白，右边的 <code>page 0</code> 表示上电显示第一个页面(可更改这个名字)</li>
+</ul>
+<h3 id="调试-下载">调试/下载</h3>
+<ul>
+<li>外部供电接法</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230525090135.webp" alt=""></p>
+<ul>
+<li>下载程序到屏幕</li>
+</ul>
+<p>需要用USB转TTL模块连接屏幕，芯片为cp2102或者ft232芯片，ch340也不是不可以但是假货太多可能会导致无法下载</p>
+<p>然后点击下载，下载波特率的话选择最高921600(这个跟通信波特率是分开的互不干扰)，可能第一次下载会弹出固件版本低啥的需要更新点击更新即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230525102712.webp" alt=""></p>
+<ul>
+<li>连接STM32，使用到串口1引脚 <code>PA9(TX)</code>，<code>PA10(RX)</code></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524214223.webp" alt=""></p>
+<ul>
+<li>调试</li>
+</ul>
+<blockquote>
+<p>使用模拟器调试的话，直接在左下方的框写就行了，不需要写结束符(自带了)，右边会显示模拟器返回的数据，如果没有返回表示成功，返回其他的红色报错表示有问题</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230525112331.webp" alt=""></p>
+</blockquote>
+<h3 id="通讯协议">通讯协议</h3>
+<h4 id="单片机to串口屏">单片机to串口屏</h4>
+<blockquote>
+<p>首先需要单片机已经调通串口，重定向printf</p>
+<p>发完一次数据要发一个结束符： <code>发送3个0xFF作为结束符</code>，需要注意转义字符需要加 <code>\</code></p>
+<p>属性栏中显示为 <code>绿色</code> 的属性都可以在运行中修改， <code>黑色</code> 的属性只能在编辑时修改，不能在运行中修改</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 格式一般是：页面名.控件名.属性值 &#x3D; xxx
+printf(&quot;Main.g0.txt&#x3D;\&quot;你好\&quot;\xFF\xFF\xFF&quot;);</code></pre>
+<p>对应十六进制是：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230525114604.webp" alt=""></p>
+<p>如果是 <code>program.s</code> 中使用int定义的整形，例如sys0，我们要让sys0显示为123，则通过单片机发送：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">printf(&quot;sys0&#x3D;123\xFF\xFF\xFF&quot;)</code></pre>
+<h4 id="串口屏to单片机">串口屏to单片机</h4>
+<blockquote>
+<p>没有固定格式，用户自定义即可</p>
+<p>常见是 <code>帧头+主命令+副1命令+副2命令+副3命令+校验和+帧尾</code></p>
+<p>一般使用指令集 <code>printh</code> 或者 <code>prints</code> ，发送16进制格式需要必须写成偶数，不能单数，0x前缀不需要写，也可以发送控件的值回去</p>
+</blockquote>
+<h3 id="控件使用">控件使用</h3>
+<h4 id="认识控件">认识控件</h4>
+<ul>
+<li>控件是什么</li>
+</ul>
+<p>在串口屏上位机的界面编辑窗口中,一切你能看到的,都是控件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230525120835.webp" alt=""></p>
+<p>有些控件是看不见的，比如定时器，触摸捕捉等控件，位于底部的特殊控件栏</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230525121055.webp" alt=""></p>
+<ul>
+<li>控件事件</li>
+</ul>
+<p>控件事件，指的是这个控件被操作时要执行的功能。</p>
+<ol>
+<li>
+<p>触摸被按下：对应名称叫做【按下事件】</p>
+</li>
+<li>
+<p>触摸被按下后弹起：对应名称叫做【弹起事件】</p>
+</li>
+<li>
+<p>滑块控件被滑动：对应的名称叫做【滑动事件】</p>
+</li>
+<li>
+<p>定时器定时运行：对应的名称叫做【定时事件】</p>
+</li>
+<li>
+<p>动画播放完成：对应的名称叫做【播放完成事件】</p>
+</li>
+<li>
+<p>视频播放完成：对应的名称叫做【播放完成事件】</p>
+</li>
+</ol>
+<ul>
+<li>控件属性</li>
+</ul>
+<blockquote>
+<p>【type】</p>
+<p>控件类型，可读，不可更改，不同类型的控件type属性不一样，相同类型的控件type属性一样</p>
+<p>使用场景：</p>
+<ol>
+<li>
+<p>在键盘页面判断跳转过来的控件是什么类型的控件，不同的控件有不同的转换方法</p>
+</li>
+<li>
+<p>在触摸捕捉中判断按下去的控件是什么类型</p>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>【id】</p>
+<p>控件id，可通过上位机左上角的上下箭头置顶或置底，不能通过指令进行修改</p>
+<p>每个页面中最底层都有一个页面控件，其id固定为0，可以设置当前页面的背景图片，背景色等操作</p>
+<p>除了页面控件，每个页面最多放250个控件，占据id 1-250 ，每个页面各个控件之间id号是唯一的，不会重复</p>
+<p>可以理解为控件的图层，id大的控件会挡住id小的控件</p>
+<p>使用场景：</p>
+<p>通过名称组操作控件</p>
+</blockquote>
+<blockquote>
+<p>【objname】</p>
+<p>控件名称，可通过上位机进行修改，不可通过指令更改，不可读取</p>
+</blockquote>
+<blockquote>
+<p>【vscope】</p>
+<p>内存占用: <code>0-私有;1-全局</code>; 可通过上位机进行修改，可读取，不可通过指令更改</p>
+<p>私有占用只能在当前页面被访问，全局占用可以在所有页面被访问</p>
+<p>当设置为私有时，跳转页面后，该控件占用的内存会被释放，重新返回该页面后该控件会恢复到最初的设置</p>
+</blockquote>
+<h4 id="页面控件">页面控件</h4>
+<p>页面控件拥有以下五个事件：</p>
+<ol>
+<li><code>前初始化事件</code>：每次在执行page命令时，在执行页面刷新操作以前，串口屏会自动执行一次《前初始化事件》中的代码</li>
+<li><code>后初始化事件</code>：每次在执行page命令时，在页面刷新操作完成以后，串口屏会自动执行一次《后初始化事件》中的代码</li>
+<li><code>页面按下事件</code>：显示区域内且没有控件的区域，触摸被按下的瞬间，串口屏会自动执行一次页面的《按下事件》中的代码</li>
+<li><code>页面弹起事件</code>：显示区域内且没有控件的区域（以触摸按下是的坐标为准），触摸按下以后松开触摸的的瞬间，串口屏会自动执行一次页面的《弹起事件》中的代码</li>
+<li><code>页面离开事件</code>：每次在执行page切换新的页面前，串口屏会自动执行一次当前页面的《页面离开事件》中的代码</li>
+</ol>
+<ul>
+<li>常用属性</li>
+</ul>
+<p><code>up</code>：上滑翻页页面ID(255为无滑动翻页) <code>[X_TRUE]</code></p>
+<p><code>down</code> ：下滑翻页页面ID(255为无滑动翻页) <code>[X_TRUE]</code></p>
+<p><code>left</code> ：左滑翻页页面ID(255为无滑动翻页) <code>[X_TRUE]</code></p>
+<p><code>right</code> ：右滑翻页页面ID(255为无滑动翻页) <code>[X_TRUE]</code></p>
+<p><code>sta</code> ：背景填充方式: 0–无背景;1–单色;2–图片</p>
+<p><code>bco</code> ：背景色，仅sta设置为单色时可用</p>
+<p><code>pic</code> ：背景图片(必须是全屏图片)，仅sta设置为图片时可用，不允许为空</p>
+<h4 id="文本控件">文本控件</h4>
+<blockquote>
+<p>想要显示文本信息，包括数字，字母，符号，汉字和其他各国语言，使用前需要 <code>提前导入字库</code></p>
+<p>然后字库的选择那如果选择 <code>所有字符</code> 的话生成的文件很大，一般是需要什么字就指定什么字</p>
+<p>GB2312编码下，一个英文或者数字占1个字节，一个中文占2个字节</p>
+<p>utf-8编码下，一个英文或者数字占1个字节，一个中文占3个字节</p>
+<p>字符串属性-数值型属性，将会删除字符串属性后面若干个字符</p>
+<p>单片机跟串口屏赋值什么的需要保证单片机与串口屏的编码相同，否则串口屏会显示乱码,或者不显示(串口屏默认编码是gb2312)</p>
+<p>屏幕返回 <code>1C FF FF FF</code> 表示赋值语句格式错误</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 例如一个字符串是： &quot;你好呀&quot;
+&#x2F;&#x2F; 则发送下面指令
+printf(&quot;main.t0.txt&#x3D;\&quot;测试\&quot;-1\xFF\xFF\xFF&quot;);
+&#x2F;&#x2F; 结果是字符串还剩下：&quot;你好&quot;</code></pre>
+<p>目前仅有 <code>txt、path、dir、filter</code> 这4个属性属性是字符串型属性，其他属性一般都是数值型属性</p>
+<p>数值型属性和字符串属性互相转换需要使用 <code>covx</code> 指令</p>
+</blockquote>
+<ul>
+<li>创建字库（指定）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230525091305.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230525091641.webp" alt=""></p>
+<p>点击【生成字库】然后把它保存在工程目录下即可</p>
+<ul>
+<li>文本控件跨页面使用</li>
+</ul>
+<p>假设page0页面的t0文本控件，如果需要跨页面使用，需要将该控件的 <code>vscope</code> 设置为全局</p>
+<ul>
+<li>文本和数字之间相互转换</li>
+</ul>
+<blockquote>
+<p>使用这个的前提是对应控件设置为全局</p>
+<p>lenth始终表示的是字符串长度， <code>数值转字符串的时候是目标变量的长度，字符串转数值的时候是源变量长度</code></p>
+<p>当原变量是数值属性时，目标变量必须是字符串属性，当原变量是字符串属性时，目标变量必须是数值属性。</p>
+<p>如果目标变量和源变量类型相同，转换失败</p>
+</blockquote>
+<p>串口屏上仅有两种数据类型，即数值和字符串类型</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 示例格式
+covx att1,att2,lenth,format
+
+att1:源变量
+
+att2:目标变量
+
+lenth:字符串的长度(0为自动长度，非0为固定长度)
+
+format:申明数值类型(0-数字;1-货币;2-Hex)</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230525134513.webp" alt=""></p>
+<ul>
+<li>在文本控件后面追加文本</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 示例
+t0.txt+&#x3D;&quot;哈哈哈&quot;
+
+&#x2F;&#x2F;将t1.txt追加在t0.txt后面
+t0.txt+&#x3D;t1.txt
+
+&#x2F;&#x2F;可以跨页面追加文本，前提是对应控件设置为全局
+main.t0.txt+&#x3D;page0.t1.txt</code></pre>
+<ul>
+<li>删除文本控件后面的几个字符(只能从后面开始删除)</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;删除1个字符
+ t0.txt-&#x3D;1
+
+ &#x2F;&#x2F;删除n0.val个字符
+ t0.txt-&#x3D;n0.val
+
+ &#x2F;&#x2F;可以跨页面删除，前提是对应控件设置为全局，假设这个汉字只有2个，但是-了10个字节也不会报错可能内部有判断
+ main.t0.txt-&#x3D;main.n0.val</code></pre>
+<ul>
+<li>清空文本控件</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;将文本赋值为空
+t0.txt&#x3D;&quot;&quot;</code></pre>
+<ul>
+<li>键盘</li>
+</ul>
+<blockquote>
+<p>某个控件绑定了键盘时，当点击了该控件时，仅会触发控件的 <code>按下事件</code>，接下来键盘 <code>跳转事件</code> 会被触发， <code>弹起事件</code> 中的内容将永远不会被执行</p>
+<p>键盘并不是一个单纯的控件，键盘是一个独立的页面,调用键盘时,会触发当前页面的 <code>&lt;页面离开事件&gt;</code> 以及键盘页面的 <code>&lt;前初始化事件&gt;</code> 和 <code>&lt;后初始化事件&gt;</code></p>
+<p>点击键盘的OK按键时,会触发键盘页面的 <code>&lt;页面离开事件&gt;</code> 以及控件调用页面的 <code>&lt;前初始化事件&gt;</code> 和 <code>&lt;后初始化事件&gt;</code></p>
+<p>当触发了键盘控件跳转了页面时，当前页面私有的控件会被回收，从键盘页面返回时，私有的控件初始化并变回初始状态</p>
+</blockquote>
+<ul>
+<li>换行</li>
+</ul>
+<p>在控件的事件中给文本赋值时用 <code>\r</code></p>
+<p>单片机通过串口发送给屏幕时用 <code>\r\n</code></p>
+<ul>
+<li>常用属性</li>
+</ul>
+<p><code>key</code> ：绑定键盘</p>
+<p><code>sta</code> ：背景填充方式: 0–切图;1–单色;2–图片;3–透明（仅x系列支持透明）</p>
+<p><code>pco</code> ：字体色 <code>[TRUE]</code></p>
+<p><code>pw</code> ：是否显示为密码(内容仍为实际内容,仅仅显示出来为*): 0–否;1–是 <code>[TRUE]</code></p>
+<p><code>txt</code>：字符内容 <code>[TRUE]</code></p>
+<p><code>isbr</code>：是否自动换行:0–否;1–是 <code>[TRUE]</code></p>
+<p><code>style</code>：显示风格: 0–平面;1–边框;2–3D_Down;3–3D_Up;4–3D_Auto，sta为单色时才有这个属性</p>
+<p><code>borderc</code>：边框颜色。当style设置为边框时可用 <code>[X_TRUE]</code></p>
+<p><code>borderw</code>：边框粗细。当style设置为边框时可用。最大值:255 <code>[X_TRUE]</code></p>
+<h4 id="滚动控件">滚动控件</h4>
+<blockquote>
+<p>需要提前导入字库</p>
+<p>滚动文本不建议换行显示，会导致显示效果有问题</p>
+</blockquote>
+<ul>
+<li>常用属性值</li>
+</ul>
+<p><code>txt</code>：填写内容的地方 <code>[TRUE]</code></p>
+<p><code>txt_maxl</code>：字符最大长度(即分配内存空间)</p>
+<p><code>spax</code>：字符横向间距(最小0,最大255) <code>[X_TRUE]</code></p>
+<p><code>spay</code>：字符纵向间距(最小0,最大255) <code>[X_TRUE]</code></p>
+<p><code>tim</code>：滚动周期(单位ms,最小80,最大65534) <code>[TRUE]</code></p>
+<p><code>dir</code>：滚动方向: 0–从左往右; 1–从右往左; 2–从上往下; 3–从下往上 <code>[TRUE]</code></p>
+<p><code>xcen</code>：水平对齐: 0-靠左;1-居中;2-靠右 <code>[TRUE]</code></p>
+<p><code>ycen</code>：垂直对齐: 0-靠上;1-居中;2-靠下 <code>[TRUE]</code></p>
+<p><code>style</code>：显示风格: 0–平面;1–边框;2–3D_Down;3–3D_Up;4–3D_Auto，sta为单色时才有这个属性</p>
+<p><code>borderc</code>：边框颜色。当style设置为边框时可用 <code>[X_TRUE]</code></p>
+<p><code>borderw</code>：边框粗细。当style设置为边框时可用。最大值:255 <code>[X_TRUE]</code></p>
+<p><code>sta</code>：背景填充方式: 0–切图;1–单色;2–图片;3–透明（仅x系列支持透明）</p>
+<p><code>font</code>：控件调用的字库id，调用不同的字库会显示不同的字体或字号 <code>[TRUE]</code></p>
+<h4 id="数字控件">数字控件</h4>
+<blockquote>
+<p>需要提前导入字库</p>
+<p>给数字控件赋值必须是整形（int），否则会出错</p>
+<p>数字控件val赋值范围 <code>-2147483648~2147483647</code></p>
+<p>字控件是可以显示负数的，如果负号没有显示，请检查当前调用的字库是否有”-”</p>
+<p>跨页使用的话需要设置为全局</p>
+</blockquote>
+<ul>
+<li>使用数字控件显示RTC时钟数据</li>
+</ul>
+<p>仅k0，x5系列支持，参考：<a href="http://wiki.tjc1688.com/widgets/Number.html">http://wiki.tjc1688.com/widgets/Number.html</a></p>
+<ul>
+<li>显示小数</li>
+</ul>
+<p>使用虚拟浮点数控件或者文本控件</p>
+<ul>
+<li>数字控件如何在一定情况不显示默认值</li>
+</ul>
+<p><code>解决方法一</code>：数字控件默认值是一直有的，不能像文本控件为空。要实现数字控件默认值为空的话，可以先将数字控件属性font（字库）设置为不含数字的字库。赋值的时候再将font（字库）设置为包含数字的字库。</p>
+<p><code>解决方法二</code>：通过一个空白控件挡住，当数字控件不显示为0时，将空白控件通过vis指令隐藏</p>
+<ul>
+<li>常用属性</li>
+</ul>
+<p><code>val</code> ：初始值(最小-2147483648,最大2147483647) <code>[TRUE]</code></p>
+<p><code>length</code>： 显示位数(0为自动,最大15位) <code>[TRUE]</code></p>
+<p><code>format</code> ：格式化类型: 0–数字;1–货币;2–Hex <code>[TRUE]</code></p>
+<h4 id="虚拟浮点数控件">虚拟浮点数控件</h4>
+<blockquote>
+<p>需要提前导入字库</p>
+<p>虚拟浮点数控件是可以显示负数的，如果负号没有显示，请检查当前调用的字库是否有”-”</p>
+<p>用于在串口屏上显示浮点型（float）类型的数据，但是本质上仍然是整形（int）</p>
+<p>虚拟浮点数本质上还是整数,只是额外显示了一个小数点，但是这个小数点其实是假的</p>
+</blockquote>
+<ul>
+<li>虚拟浮点数计算</li>
+</ul>
+<p>需要把所有浮点数的小数位设置为相等</p>
+<ul>
+<li>浮点数发送给单片机</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 屏幕发送数值，此时单片机使用float类型变量x接收存储
+prints x0.val,0
+&#x2F;&#x2F; 然后单片机发送小数位，此时单片机将这个值保存到u8类型变量j
+prints x0.vvs1，0
+&#x2F;&#x2F; 单片机将乘以j次10
+uint32_t j2 &#x3D; 1;    
+for(i&#x3D;0;i&lt;j;i++)
+&#123;
+    j2&#x3D;j2*10;
+&#125;    
+&#x2F;&#x2F; 然后将float变量除以j2得到最终浮点数
+x &#x3D; x &#x2F; j2;
+j2 &#x3D; 1;</code></pre>
+<ul>
+<li>常用属性</li>
+</ul>
+<p><code>val</code> ：初始值(最小-2147483648,最大2147483647) <code>[TRUE]</code></p>
+<p><code>vvs0</code> ：整数位数(0为自动,最大10位) <code>[TRUE]</code></p>
+<p><code>vvs1</code> ：小数位数(0为无小数,最大8位) <code>[TRUE]</code></p>
+<h4 id="按钮控件">按钮控件</h4>
+<blockquote>
+<p>需要提前导入字库</p>
+</blockquote>
+<ul>
+<li>通过按钮跳转Display页面</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 以下内容写在按钮控件的【弹起事件】里
+page Display</code></pre>
+<ul>
+<li>让按钮在开始和停止之间切换</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 以下内容写在按钮控件的【弹起事件】里
+if(Main.b0.txt&#x3D;&#x3D;&quot;开始&quot;)
+&#123;
+  Main.b0.txt&#x3D;&quot;停止&quot;
+&#125;
+else
+&#123;
+  Main.b0.txt&#x3D;&quot;开始&quot;
+&#125;</code></pre>
+<ul>
+<li>按钮禁用触摸功能</li>
+</ul>
+<blockquote>
+<p>使用 <code>tsw</code> 指令来实现</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; b0是按钮控件，不需要在前面加页面名否则报错
+&#x2F;&#x2F; 禁用触摸
+tsw b0,0
+&#x2F;&#x2F; 开启触摸
+tsw b0,1    </code></pre>
+<p>也可以使用其他方法来实现，比如文本控件下的按下事件或者弹起事件里判断bco或者pic属性，只有属性为自己需要时才可触发对应的代码</p>
+<ul>
+<li>使用按钮实现长按功能</li>
+</ul>
+<blockquote>
+<p>需配合定时器使用</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 点击左边栏创建一个定时器，设置定时2000，en&#x3D;0禁用先
+&#x2F;&#x2F; 在按钮控件的【按下事件】写
+tm0.tim&#x3D;2000
+tm0.en&#x3D;1
+&#x2F;&#x2F; 在按钮控件的【弹起事件】写   
+tm0.en&#x3D;0
+&#x2F;&#x2F; 在定时器tm0的定时事件中写上想操作的长按事件代码
+...    </code></pre>
+<ul>
+<li>使用按钮实现双击功能</li>
+</ul>
+<blockquote>
+<p>需配合定时器使用和数字控件使用</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 先创建一个定时器，定时200，en&#x3D;0
+&#x2F;&#x2F; 创建一个数字控件用来调试
+&#x2F;&#x2F; 在按钮控件【按下事件】写
+tm0.en&#x3D;1
+va0.val++
+if(va0.val&gt;&#x3D;2)
+&#123;
+  if(Main.b0.txt&#x3D;&#x3D;&quot;开始&quot;)
+  &#123;
+    Main.b0.txt&#x3D;&quot;停止&quot;
+  &#125;else
+  &#123;
+    Main.b0.txt&#x3D;&quot;开始&quot;
+  &#125;
+&#125;
+&#x2F;&#x2F; 在定时器事件写
+tm0.en&#x3D;0
+va0.val&#x3D;0
+&#x2F;&#x2F; 调试直到想要的效果然后把数字控件替换成变量控件    </code></pre>
+<ul>
+<li>常用属性</li>
+</ul>
+<p><code>bco</code> ：按钮没按下时背景色，sta为单色时才有这个属性 <code>[TRUE]</code></p>
+<p><code>bco2</code> ：按钮按下时背景色 ，sta为单色时才有这个属性 <code>[TRUE]</code></p>
+<p><code>pco</code>：按钮没按下时字体色 <code>[TRUE]</code></p>
+<p><code>pco2</code>：按钮按下时字体色 <code>[TRUE]</code></p>
+<h4 id="进度条控件">进度条控件</h4>
+<blockquote>
+<p>用于在串口屏上显示进度（例如开机进度）</p>
+<p>给进度条控件赋值必须是整形（int），否则会出错</p>
+</blockquote>
+<ul>
+<li>搭配定时器控件实现进度条自动增长并在进度为100时跳转页面</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 新建一个定时器tm0，en属性设置为1，定时器的tim属性建议设置为200
+&#x2F;&#x2F; 在定时器里写
+if(j0.val&lt;100)
+&#123;
+   j0.val++
+&#125;else
+&#123;
+   page main
+&#125;</code></pre>
+<ul>
+<li>使用定时器控件实现进度条和数值变量之间同步</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 创建一个变量控件
+&#x2F;&#x2F; 在按钮控件里【弹起事件】写
+if(j0.val&lt;100)
+&#123;
+  va0.val+&#x3D;10
+&#125;
+&#x2F;&#x2F; 在定时器里写，同步数值
+j0.val&#x3D;va0.val</code></pre>
+<ul>
+<li>常用属性</li>
+</ul>
+<p><code>sta</code> ：进度方式:0–横向;1–竖向</p>
+<p><code>val</code> ：初始进度值 <code>[TRUE]</code></p>
+<p><code>dis</code> ：外形圆角半径百分比(0-100,0为直角) sta为单色时可用 <code>[TRUE]</code></p>
+<p><code>bco</code> ：进度条背景色 <code>[TRUE]</code></p>
+<p><code>pco</code> ：进度条前景色 <code>[TRUE]</code></p>
+<h4 id="图片控件">图片控件</h4>
+<blockquote>
+<p>图片的话类型只能是 <code>JPG</code>，<code>bmp</code>，<code>PNG</code>(其中T系列和K系列不支持PNG透明图层)</p>
+<p>注意图片的分辨率，超出大小会导入失败(可使用笔记本自带画图工具修改分辨率)，具体分辨率可以点击上面【设备】，查看当前型号那的分辨率，我的是 <code>320x240</code></p>
+</blockquote>
+<ul>
+<li>导入图片</li>
+</ul>
+<p>左下角 <code>+</code> 即可导入，注意分辨率不能太大，导入后可以修改分辨率，双击图片点击【编辑】即可</p>
+<ul>
+<li>设置为界面背景图片</li>
+</ul>
+<p>点击页面空白处-设置页面控件的sta为图片，将页面控件的pic属性设置为你想要显示的背景图片</p>
+<ul>
+<li>显示自定义大小图片</li>
+</ul>
+<p>点击左边栏的图片即可，然后填写图片ID到 <code>pic</code> 里</p>
+<h4 id="切图控件">切图控件</h4>
+<blockquote>
+<p>作用是将全屏图片的一部分抠出来显示，请注意切图控件pic属性对应的一定要是全屏图片</p>
+</blockquote>
+<p>先把页面背景换成全屏图片，然后点击左栏的切图控件，然后拉这个方框到你想切的最终位置即可，然后把页面背景改为单色，即可看到切图控件已经切好了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230525172031.webp" alt=""></p>
+<h4 id="触摸热区控件">触摸热区控件</h4>
+<blockquote>
+<p>触摸热区控件可以理解为一个看不见的按钮控件</p>
+</blockquote>
+<ul>
+<li>实现一个隐藏按钮功能，当点击的次数足够多时，进入后台页面</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 下面例子是1s内触摸热区被触摸5次以上触发隐藏，1s后计数清0
+&#x2F;&#x2F; 首先在program.s中定义一个count变量
+int count
+&#x2F;&#x2F; 新建一个触摸热区---在触摸热区控件中编写以下代码   
+count++
+if(count&gt;5)
+&#123;
+     &#x2F;&#x2F;跳转到Display页面
+     page Display
+&#125;
+tm0.en&#x3D;1    
+&#x2F;&#x2F; 新建一个定时器，en属性设置为1，定时器的tim属性建议设置为1000，在定时器中编写以下代码
+count&#x3D;0    </code></pre>
+<h4 id="触摸捕捉控件">触摸捕捉控件</h4>
+<blockquote>
+<p>触摸捕捉控件可以获取到被点击控件的id</p>
+<p>click指令触发控件时，不会导致触摸捕捉控件被触发，只有用手去点击屏幕时才会被捕捉</p>
+<p>每个页面虽然能创建多个触摸捕捉控件，但只有1个会生效（id值最高且有事件代码的触摸捕捉控件会生效），因此请勿在同一个页面创建多个触摸捕捉控件</p>
+</blockquote>
+<ul>
+<li>触摸捕捉控件实现屏保功能</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 下面例子可以实现不触摸屏幕10s以上进入屏保界面，中途任意触摸都会触发触摸捕捉导致计数清0
+&#x2F;&#x2F; 需要搭配定时器控件和数字控件实现实现
+&#x2F;&#x2F; 新建一个触摸捕捉控件tc0和数字控件n0，定时器控件tm0，tm0的en设置为1，tim设置为1000
+&#x2F;&#x2F; 因为点击任何控件都会触发触摸捕捉控件，在触摸捕捉控件编写以下代码
+n0.val&#x3D;0
+&#x2F;&#x2F; 在定时器里写
+n0.val++
+if(n0.val &gt; 10)
+&#123;
+    &#x2F;&#x2F;超过10秒，跳转到屏保页面
+    page Display
+&#125;   </code></pre>
+<h4 id="滑块控件">滑块控件</h4>
+<blockquote>
+<p>用于在串口屏上滑动调整数值，例如亮度，音量</p>
+<p>音量属性是默认关机保存的，设置了，下次开机也是这个值</p>
+</blockquote>
+<ul>
+<li>滑块控件修改亮度</li>
+</ul>
+<p>将滑块的minval设置为20，避免将dim设置为0后，结果重启后发现屏幕不亮，以为屏幕坏了</p>
+<p>将亮度赋值给滑块控件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230525183108.webp" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">在滑块控件的滑动事件编写以下代码
+dim&#x3D;h0.val
+在滑块控件的弹起事件编写以下代码    
+dim&#x3D;h0.val    </code></pre>
+<ul>
+<li>滑块控件修改音量大小(仅x3、x5系列支持)</li>
+</ul>
+<p>跟上面操作流程一样</p>
+<ul>
+<li>发送滑块的数据</li>
+</ul>
+<p>在滑块控件的弹起事件编写即可</p>
+<h4 id="定时器控件">定时器控件</h4>
+<blockquote>
+<p>定时器控件用于定时执行某些代码，或者延时执行某些代码,当定时被使能时，定时器里的代码会定时执行。</p>
+<p>每个页面的定时器数量不能超过12个</p>
+<p>RTC：rtc0~rtc6分别代表年月日时分秒星期</p>
+<p>定时器只能在当前页面运行，不可后台运行,如果想要定时器一直运行，每个页面都加个定时器</p>
+<p>在定时器开启的情况下，对定时器的任意属性赋值（设置tim属性或者en属性），都会导致定时器重新计时</p>
+<p>若不想定时器重新计时，请使用以下操作：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;判断定时器是否打开，如果没打开，则打开
+if(tm0.en!&#x3D;1)
+&#123;
+    tm0.en&#x3D;1
+&#125;</code></pre>
+</blockquote>
+<ul>
+<li>定时器定时刷新RTC到数字控件上</li>
+</ul>
+<p>定时器的tim设置为300(定时器每300ms执行一次定时事件中的代码)，en设置为1(定时器开启)</p>
+<ul>
+<li>使用定时器配合图片控件循环播放图片</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">if(p0.pic&lt;20)
+&#123;
+     p0.pic++
+&#125;else
+&#123;
+     p0.pic&#x3D;10
+&#125;</code></pre>
+<ul>
+<li>RTC功能</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 开一个定时器，开一个变量控件，在Program.s里定义一个变量
+int lastSecond&#x3D;-1
+&#x2F;&#x2F; 在定时器里写    
+if(lastSecond!&#x3D;rtc5)
+&#123;
+  lastSecond&#x3D;rtc5
+  va0.val++
+  n0.val&#x3D;va0.val&#x2F;60
+  n1.val&#x3D;va0.val%60
+&#125;
+&#x2F;&#x2F; 开两个数字控件显示</code></pre>
+<h4 id="变量控件">变量控件</h4>
+<blockquote>
+<p>变量控件将sta设置为数值时，相当于一个看不见的数字控件，使用方法参考数字控件</p>
+<p>变量控件将sta设置为字符串时，相当于一个看不见的文本控件，使用方法参考文本控件</p>
+</blockquote>
+<h4 id="双态按钮控件">双态按钮控件</h4>
+<blockquote>
+<p>此按钮类似于自锁开关，使用前需要提前导入字库</p>
+<p>就是只有两种状态 <code>OFF</code> 和 <code>ON</code>，按下颜色也会变化</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230525215753.webp" alt=""></p>
+<ul>
+<li>实现按键锁定功能</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 按下锁屏图标后，禁用所有控件的触摸事件，只有再次触摸解锁图标解锁才可以触摸其他按键
+if(bt0.val&#x3D;&#x3D;1)
+&#123;
+  bt0.txt&#x3D;&quot;解锁&quot;
+  tsw 255,0   &#x2F;&#x2F;失能所有控件
+  tsw bt0,1  &#x2F;&#x2F;使能btn_lock
+&#125;else
+&#123;
+  bt0.txt&#x3D;&quot;锁定&quot;
+  tsw 255,1   &#x2F;&#x2F;使能所有控件
+&#125;</code></pre>
+<ul>
+<li>常用属性</li>
+</ul>
+<p><code>bco</code> ：按钮没按下时背景色，sta为单色时才有这个属性 <code>[TRUE]</code></p>
+<p><code>bco2</code> ：按钮按下时背景色 ，sta为单色时才有这个属性 <code>[TRUE]</code></p>
+<p><code>val</code> ：当前状态(0或1),0为弹起，1为按下 <code>[TRUE]</code></p>
+<p><code>txt</code> ：字符内容（按钮上显示的文本）<code>[TRUE]</code></p>
+<h4 id="复选框控件">复选框控件</h4>
+<blockquote>
+<p>也是只有0和1两种状态</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 初始复选框为0，则变成1表示被选中
+if(c0.val&#x3D;&#x3D;1)
+&#123;
+
+&#125;</code></pre>
+<ul>
+<li>常用属性</li>
+</ul>
+<p><code>bco</code> ：按钮没按下时背景色，sta为单色时才有这个属性 <code>[TRUE]</code></p>
+<p><code>pco</code> ：按钮没按下时字体色 <code>[TRUE]</code></p>
+<p><code>val</code> ：当前状态(0或1)，即是否被选中 <code>[TRUE]</code></p>
+<h4 id="单选框控件">单选框控件</h4>
+<blockquote>
+<p>一般要求互斥性，即所有单选框只能存在一个被选中</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 开一个触摸捕获，放在按下事件，单选框6个id必须要连续
+if(tc0.val&gt;&#x3D;r0.id&amp;&amp;tc0.val&lt;&#x3D;r5.id)
+&#123;
+   for(sys0&#x3D;r0.id;sys0&lt;&#x3D;r5.id;sys0++)
+   &#123;
+      if(sys0!&#x3D;tc0.val)
+      &#123;
+         b[sys0].val&#x3D;0
+      &#125;
+   &#125;
+&#125;</code></pre>
+<h4 id="二维码控件">二维码控件</h4>
+<blockquote>
+<p>用于在串口屏上显示动态的二维码，如果二维码是固定不变的，或者只有几个，则建议使用图片控件来代替</p>
+<p>可以通过按键重新赋值txt</p>
+</blockquote>
+<p>直接在txt里填写内容即可，可以是图片链接，文字，网址等等</p>
+<ul>
+<li>常用属性</li>
+</ul>
+<p><code>bco</code> ：背景色 <code>[TRUE]</code></p>
+<p><code>pco</code> ：前景色 <code>[TRUE]</code></p>
+<p><code>txt</code> ：二维码中的字符内容</p>
+<p><code>txt_maxl</code> ：字符最大长度(即分配内存空间:0-192)</p>
+<h4 id="状态开关控件">状态开关控件</h4>
+<blockquote>
+<p>跟双态按钮差不多的(仅X系列支持)</p>
+</blockquote>
+<p>在txt填写两种状态时的文字即可，也可以不填写，仅显示按钮</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230525215802.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230525220033.png" alt=""></p>
+<ul>
+<li>常用属性</li>
+</ul>
+<p><code>val</code> ：当前值 <code>[X_TRUE]</code></p>
+<p><code>bco</code> ：状态0背景色 <code>[X_TRUE]</code></p>
+<p><code>pco</code> ：状态0圆心色 <code>[X_TRUE]</code></p>
+<p><code>bco2</code> ：状态1背景色 <code>[X_TRUE]</code></p>
+<p><code>pco2</code> ：状态1圆心色 <code>[X_TRUE]</code></p>
+<p><code>pco1</code> ：字体色 <code>[X_TRUE]</code></p>
+<p><code>font</code> ：字库 <code>[X_TRUE]</code></p>
+<h4 id="下拉框控件">下拉框控件</h4>
+<blockquote>
+<p>在串口屏上显示文本信息，包括数字，字母，符号，汉字和其他各国语言，使用前需要提前导入字库</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230525221438.webp" alt=""></p>
+<ul>
+<li>将下拉框置顶</li>
+</ul>
+<p>由于下拉框是可展开的，因此在展开是可能会被其他控件挡住，此时就需要将下拉框置顶</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;将下拉框cb0置于最顶层
+setlayer cb0,255</code></pre>
+<ul>
+<li>当点击某个下拉框时让其他下拉框缩回</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;下拉框cb0的按下事件中写，其他的也是这样
+cb1.down&#x3D;0
+cb2.down&#x3D;0</code></pre>
+<ul>
+<li>获取下拉框被当前被选中的值</li>
+</ul>
+<p>直接获取cb0.txt即可</p>
+<ul>
+<li>常用属性</li>
+</ul>
+<p><code>txt</code> ：字符内容(运行中会根据val值的变化自动改变)。可读，可通过上位机修改，可通过指令修改。</p>
+<p><code>txt_maxl</code> ：字符最大长度(即分配内存空间)。GB2312下，ascii字符占用1个字节，一个汉字占2字节。UTF8下，ascii字符占用1个字节，一个汉字占3字节。可读，可通过上位机修改，不可通过指令修改。</p>
+<p><code>up</code> ：字符框是否显示箭头:0-不显示;1-显示。可读，可通过上位机修改，可通过指令修改。</p>
+<p><code>pco3</code> ：字符框箭头颜色。可读，可通过上位机修改，可通过指令修改。</p>
+<p><code>bco1</code> ：单元格背景色。可读，可通过上位机修改，可通过指令修改。</p>
+<p><code>pco1</code> ：单元格字体色。可读，可通过上位机修改，可通过指令修改。</p>
+<p><code>path</code> ：单元格内容集合(请使用多行输入,每行为一条单元格内容)。可读，可通过上位机修改，可通过指令修改。</p>
+<p><code>path_m</code> ：单元格内容集合最大长度(即分配内存空间)。可读，可通过上位机修改，不可通过指令修改。</p>
+<p><code>dir</code> ：单元格展开方向:0-上;1-下;2-左;3-右。可读，可通过上位机修改，可通过指令修改。</p>
+<p><code>qty</code> ：最大展开单元格数量(1-254)。可读，可通过上位机修改，可通过指令修改。</p>
+<p><code>vvs0</code> ：展开单元格间距(最小0,最大255)。可读，可通过上位机修改，可通过指令修改。</p>
+<p><code>val</code> ：当前选中单元格ID(运行中每次改变会将相应的内容同步到txt属性)。可读，可通过上位机修改，可通过指令修改。</p>
+<h4 id="选择文本控件">选择文本控件</h4>
+<blockquote>
+<p>用于在串口屏上展示语言选择，设置日期等，使用前需要提前导入字库</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230525222358.webp" alt=""></p>
+<ul>
+<li>获取数值或者txt</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">select0.val&#x3D;select0.val
+t0.txt&#x3D;select0.txt
+&#x2F;&#x2F;如果需要显示在另一个文本控件需要把val转字符串    </code></pre>
+<ul>
+<li>常用属性</li>
+</ul>
+<p><code>dis</code> ：选中项加横线:0-否;1-是。可读，可通过上位机修改，可通过指令修改。</p>
+<p><code>pco1</code> ：横线颜色。可读，可通过上位机修改，可通过指令修改。</p>
+<p><code>txt</code> ：当前val值指向的文本(自动随val值改变,只可获取不可设置)。</p>
+<p><code>val</code> ：当前选择项ID(每改变一次,txt值会相应变化)。可读，可通过上位机修改，可通过指令修改。</p>
+<p><code>ch</code> ：滑动惯性力度(0-32,0为无惯性)。可读，可通过上位机修改，可通过指令修改。</p>
+<p><code>path</code> ：滑动选择项集合(每行为一项)。可读，可通过上位机修改，可通过指令修改。</p>
+<p><code>path_m</code> ：滑动选择项集合最大长度(即分配内存空间)。可读，可通过上位机修改，不可通过指令修改。</p>
+<h4 id="滑动文本控件">滑动文本控件</h4>
+<blockquote>
+<p>用于在串口屏上显示文本信息，包括数字，字母，符号，汉字和其他各国语言，使用前需要提前导入字库</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230525223508.webp" alt=""></p>
+<h4 id="数据记录控件">数据记录控件</h4>
+<blockquote>
+<p>数据记录控件有4个方法，分别为insert，delete，up，clear</p>
+<p>insert：追加一条记录(成功返回1,失败返回0)</p>
+<p>delete：删除数据(成功返回1,失败返回0)</p>
+<p>up：修改一条记录(成功返回1,失败返回0)</p>
+<p>clear：清除所有数据记录</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230526093454.webp" alt=""></p>
+<ul>
+<li>插入/删除/清空/修改</li>
+</ul>
+<blockquote>
+<p>插入需要先创建一个文本控件用来组合你的数据，需要注意这个组合的控件的txt_maxl设置得大一点</p>
+<p>注意如果是数字的话需要转为字符串才能组合</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 按钮1--增加数据(增加是从上往下)
+t9.txt&#x3D;t6.txt+&quot;^&quot;+t7.txt+&quot;^&quot;+t8.txt
+data0.insert(t9.txt)
+&#x2F;&#x2F; 按钮2--删除数据第1行(删除是从下往上)    
+data0.delete(data0.val,1)   
+&#x2F;&#x2F; 按钮3--清空    
+data0.clear()
+&#x2F;&#x2F; 按钮4--修改某行数据
+t9.txt&#x3D;t6.txt+&quot;^&quot;+t7.txt+&quot;^&quot;+t8.txt
+&#x2F;&#x2F;更新被选中的数据
+data0.up(t9.txt,data0.val)    
+&#x2F;&#x2F;数据记录控件修改某一行的背景色和字体色
+&#x2F;&#x2F;将背景颜色设置为1024（绿色），将字体颜色设置为63488（红色），添加内容为1 2 3
+data0.insert(&quot;&lt;font b&#x3D;1024,p&#x3D;63488&gt;1^2^3&quot;)    </code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230526110402.webp" alt=""></p>
+<ul>
+<li>数据记录控件由3列修改为4列或更多列</li>
+</ul>
+<p>需要修改数据记录控件的dez属性，只能在上位机中修改，不能通过指令修改，修改后数据记录控件会显示黑屏和报错信息</p>
+<p>此时你需要到SD卡或者虚拟SD卡的目录下删除原有的.data文件，重新调试运行后，控件会自动生成新的.data文件</p>
+<p>修改了length属性或者maxval属性导致的黑屏也是同样的操作进行解决</p>
+<ul>
+<li>隐藏数据记录控件表头</li>
+</ul>
+<p>删除数据记录控件的dir属性里的值即可</p>
+<ul>
+<li>出现控件黑屏</li>
+</ul>
+<blockquote>
+<p>原因：因为记录的字段和所指定的.data文件中的字段数量不符导致的</p>
+<p>解决方法：</p>
+<ol>
+<li>
+<p>你改动了数据记录控件的 <code>length、maxval、dez</code>属性，将其恢复即可</p>
+</li>
+<li>
+<p>把存储卡或者虚拟sd卡文件夹中的原本绑定的对应的的 <code>.data</code> 文件删除</p>
+</li>
+<li>
+<p>修改数据记录控件的path属性，将其指向一个不存在的文件（将会自动创建），例如原本是 <code>sd0/1.data</code>，改为 <code>sd0/123.data</code></p>
+</li>
+</ol>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230526095202.webp" alt=""></p>
+<ul>
+<li>提示file lost</li>
+</ul>
+<p>没插micro sd(tf)卡</p>
+<p>卡的格式不对（非fat32格式）</p>
+<p>尝试换一张卡</p>
+<ul>
+<li>多个数据记录打开同一个路径下文件导致黑屏</li>
+</ul>
+<p>这是因为文件已经被上一个数据记录打开导致新的数据记录无法打开文件</p>
+<p>解决方法是：即每次跳转时，将当前页面的数据记录控件指向一个临时的文件，从而解除目标文件的占用状态，再将即将跳转到的页面的数据记录控件指向目标文件</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 示例
+&#x2F;&#x2F; 当需要从page0跳转到page1时，在对应的控件中写下
+page0.data0.path&#x3D;&quot;sd0&#x2F;tmp0.data&quot;
+page1.data0.path&#x3D;&quot;sd0&#x2F;1.data&quot;
+page page1</code></pre>
+<h4 id="动画控件">动画控件</h4>
+<blockquote>
+<p>动画控件用于显示gif动画，仅X3/X5系列支持</p>
+<p>使用动画前，需要先用动画制作工具将gif图片转换为特定格式才能导入串口屏上位机中</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230526111208.webp" alt=""></p>
+</blockquote>
+<ul>
+<li>导入动画</li>
+</ul>
+<p>点击左下角动画添加即可，导入 一张gif动图，并等待动画转换完成</p>
+<ul>
+<li>在动画播放完成后跳转页面</li>
+</ul>
+<p>在动画控件gm0的播放完成事件编写以下代码</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">1 page main  &#x2F;&#x2F;跳转到main页面</code></pre>
+<h4 id="视频控件">视频控件</h4>
+<blockquote>
+<p>视频控件用于播放视频，仅X5系列支持</p>
+<p>当需要在上位机的模拟器里调试时，请将资源复制到虚拟SD卡文件夹中，需要在串口屏实物上调试时，请将资源复制到SD卡里，并插到串口屏上(SD卡不能超过32GB)</p>
+<p>视频的后缀名要 <code>.video</code>，可以点击上面的工具栏进行视频转换把MP4转换为需要的格式</p>
+</blockquote>
+<h4 id="曲线波形控件">曲线波形控件</h4>
+<blockquote>
+<p>每个页面不能超过5个曲线波形控件</p>
+<p>无论是使用add还是会用addt，添加的值范围为0-255，需要注意的是，最大值不要超过控件高度，即这个值必须小于255的同时也要小于控件高度</p>
+<p>从曲线控件的底部开始算，在dis（缩放比例）为默认100%的情况下，添加的值是多少，就代表距离曲线控件底部的高度</p>
+<p>曲线控件只能添加0-255之间的数据，因此不能添加负数</p>
+<p>但是曲线控件只是表示一个趋势</p>
+<p>用户不会在意你添加进去的值是多少，只会去看坐标</p>
+</blockquote>
+<p>直接用控件做的话比较丑，可以用ps做在背景图片上，甚至刻度也可以不是线性的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230526135133.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230526135326.webp" alt=""></p>
+<h3 id="指令集">指令集</h3>
+<h4 id="page-页面跳转">page-页面跳转</h4>
+<blockquote>
+<p>page指令后面的代码将不会被执行，所以千万不要把代码写在page指令后面</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">page 页面ID或者页面名称
+    
+&#x2F;&#x2F; 串口发送示例
+printf(&quot;page main\xff\xff\xff&quot;);    </code></pre>
+<h4 id="prints从串口打印变量-常量">prints从串口打印变量/常量</h4>
+<blockquote>
+<p>当att为数值类型时，length最大为4，length为0和length为4的效果是完全相同的</p>
+<p>当att为字符串类型时，length为0会发出整个完整的字符串,当length小于字符串长度时，发出指定的字节数（不是字符数），在99%的情况下，当att为字符串时，length都是为0。</p>
+<p>从串口打印一个Hex请使用printh</p>
+<p>使用prints指令获取数据的时候，设备仅仅只发送数据内容，没有起始标示符，也没有结束符</p>
+<p>prints指令可以配合printh指令在前面加一段自定义标示来告诉单片机此变量是属于哪个控件的</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">prints att,lenth
+
+att:变量名称
+
+lenth:发送长度(0为自动长度)
+    
+&#x2F;&#x2F; 示例
+prints t0.txt,0    </code></pre>
+<h4 id="printh从串口打印16进制">printh从串口打印16进制</h4>
+<blockquote>
+<p>需要发送多个固定的16进制数据时，建议用一个printh发送即可，不建议使用多个printh进行发送</p>
+<p>使用printh指令发送数据的时候，设备仅仅只发送指定的字符</p>
+<p>参数中每组字符间必须有且只能有一个空格隔开，16进制的字符串表达式大小写均支持</p>
+<p>printh只能发送固定格式的16进制数据,不能发送变量,变量需要使用prints指令</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">printh hex
+
+hex:需要发送的固定的16进制，hex可以是多个16进制，必须写成偶数个的形式
+
+正确：printh 0d 0a
+
+错误：printh d a</code></pre>
+<h4 id="click激活控件的按下-弹起事件">click激活控件的按下/弹起事件</h4>
+<blockquote>
+<p>激活当前页面控件的按下或弹起事件，不支持跨页面激活控件的按下或弹起事件</p>
+<p>控件被隐藏后，无法使用手指去触发控件，但是仍然可以通过click指令触发</p>
+<p>由于串口屏上没有函数的概念，因此有大量重复的代码需要调用时，可以将代码写在触摸热区内，然后用click指令去触发</p>
+<p>控件的按下/弹起事件在屏幕上触摸的时候会自动激活，如果在没有触摸的情况下想要手动激活，就使用click指令即可</p>
+<p><code>请勿click控件自身，否则会因为递归过深导致问题</code></p>
+<p><code>click指令触发控件时，不会导致触摸捕捉控件被触发</code></p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">click obj,event
+
+obj:控件ID或控件名称
+
+event:事件序号:0为弹起，1为按下</code></pre>
+<h4 id="vis-隐藏-显示控件">vis-隐藏/显示控件</h4>
+<blockquote>
+<p>隐藏/显示当前页面控件，不支持跨页面显示或隐藏控件</p>
+<p>控件被隐藏后，无法使用手指去触发控件，但是仍然可以通过click指令触发。</p>
+<p>可以利用全局变量来跨页面隐藏/显示控件</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">vis obj,state
+
+obj:控件名称或控件ID
+
+state:状态(0或1)</code></pre>
+<ul>
+<li>隐藏/显示所有控件</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;隐藏所有控件
+vis 255,0
+&#x2F;&#x2F;显示所有控件
+vis 255,1    </code></pre>
+<h4 id="tsw-控件触摸使能">tsw-控件触摸使能</h4>
+<blockquote>
+<p>使能或失能当前页面控件，不支持跨页面使能或失能控件</p>
+<p>可以利用全局变量来跨页面使能或失能控件</p>
+<p>使用了tsw命令将控件失能了之后，控件就无法触摸了，但是可以使用click命令触发</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">tsw obj,state
+
+obj:控件名称或控件ID
+
+state:状态(0或1)</code></pre>
+<ul>
+<li>使能/失能所有控件</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;让所有控件触摸失效
+tsw 255,0
+&#x2F;&#x2F;让所有控件触摸有效
+tsw 255,1    </code></pre>
+<h4 id="randset-随机数范围设置">randset-随机数范围设置</h4>
+<blockquote>
+<p>使用随机数之前需要先使用randset指令设定一次随机数产生范围，如果不设置，默认是最小0，最大2147483647。设置完范围以后，每读取一次系统变量rand将会得到一个随机数</p>
+<p>使用randset指令每设定一次范围，将一直有效，直到重新上电或者设备复位才会恢复默认</p>
+<p>随机数设定范围的数据类型为int类型(即：最小-2147483648,最大2147483647)</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">randset minval,maxval
+
+minval:最小值
+
+maxval:最大值</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 示例
+&#x2F;&#x2F;设置当前随机数产生范围为最小1，最大100
+randset 1,100
+n0.val&#x3D;rand</code></pre>
+<h4 id="covx-变量类型转换">covx-变量类型转换</h4>
+<blockquote>
+<p>如果目标变量和源变量类型相同，转换失败</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">covx att1,att2,lenth,format
+
+att1:源变量
+
+att2:目标变量
+
+lenth:字符串的长度(0为自动长度，非0为固定长度)
+
+format:申明数值类型(0-数字;1-货币;2-Hex)</code></pre>
+<h4 id="strlen-字符串变量字符长度测试">strlen-字符串变量字符长度测试</h4>
+<blockquote>
+<p>strlen测试的是以字符为单位的长度，而btlen测试的是以字节为单位的长度,比如一个汉字用btlen测试出来的长度是2字节,用strlen测试出来的长度是1字符</p>
+<p>被测试的变量必须是字符串类型，写入的变量必须是数值类型，否则会报错</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">strlen att0,att1
+
+att0:需要测试的字符串变量
+
+att1:把测试结果赋值给此变量</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 示例
+&#x2F;&#x2F;把字符串变量t0.txt的实际字符长度赋值给n0.val
+strlen t0.txt,n0.val</code></pre>
+<h4 id="btlen-字符串变量字节长度测试">btlen-字符串变量字节长度测试</h4>
+<blockquote>
+<p>btlen测试的是以字节为单位的长度，而strlen测试的是以字符为单位的长度，比如在GB2312下，一个汉字用btlen测试出来的长度是2字节,用strlen测试出来的长度是1字符。</p>
+<p>汉字在不同编码下占用的字节数量不一样，例如在gb2312编码下，1个汉字占用2字节，但是在utf8编码下，1个汉字占用3字节。</p>
+<p>被测试的变量必须是字符串类型，写入测试结果的变量必须是数值类型，否则会报错。</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">btlen att0,att1
+
+att0:需要被测试的字符串变量
+
+att1:把测试结果赋值给此变量</code></pre>
+<h4 id="substr-字符串截取">substr-字符串截取</h4>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">substr att0,att1,star,lenth
+
+att0:源变量(必须是字符串变量)
+
+att1:目标变量(必须是字符串变量)
+
+star:在源变量中的字符起始位置
+
+lenth:截取字符串长度</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 示例
+&#x2F;&#x2F;从t0.txt中的0位置开始截取2个字符赋值给t1.txt
+substr t0.txt,t1.txt,0,2</code></pre>
+<h4 id="spstr-字符串分割">spstr-字符串分割</h4>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">spstr src,dec,key,index
+
+src:源变量(必须是字符串变量)
+
+dec:目标变量(必须是字符串变量)
+
+key:分隔符字符串(必须是字符串变量)
+
+index:取第几份(在src字符串中用key字符串做分割后，取第index份字符内容赋值给dec变量)</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 示例
+&#x2F;&#x2F; 把t6字符串&quot;123.567.891&quot; 以.分割然后取下标是0那份赋值给t7.txt
+spstr t6.txt,t7.txt,&quot;.&quot;,0</code></pre>
+<h4 id="touch-j-触摸校准">touch_j-触摸校准</h4>
+<blockquote>
+<p>仅电阻屏实物支持该指令</p>
+<p>不支持在模拟器中使用</p>
+<p>不支持在电容屏和无触摸款串口屏中使用</p>
+</blockquote>
+<p>没啥用这功能</p>
+<h4 id="add-往曲线控件添加数据">add-往曲线控件添加数据</h4>
+<blockquote>
+<p>往当前页面的曲线控件添加数据，不支持跨页面添加曲线控件数据</p>
+<p>使用s0.id的好处:避免因为置顶/置底或者删除控件导致id改变从而出错</p>
+<p>当曲线波形控件的ch属性为1（通道数量为1）时，只有一个通道0可以使用，而不是通道1</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">add objid,ch,val
+
+objid:曲线控件ID序号(此处必须是ID号，不支持使用控件名称)，推荐使用s0.id这种形式
+
+ch:曲线控件通道号（范围：0-3）
+
+val:数据 (最小0，最大255，还取决于曲线控件的实际高度，例如曲线控件实际高200像素
+，当你添加的值超过200的部分就显示不出来。超过255软件会自动取低8位，即对255取余)</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;往s0曲线控件的0通道添加数据30
+add s0.id,0,30
+&#x2F;&#x2F;往s0曲线控件的0通道随机添加数据
+add s0.id,0,rand    </code></pre>
+<h4 id="addt-曲线数据透传指令">addt-曲线数据透传指令</h4>
+<blockquote>
+<p>往当前页面的曲线控件透传数据，不支持跨页面透传曲线控件数据</p>
+<p>曲线数据只支持8位数据，最小0，最大255。单次透传数据量最大1024字节</p>
+<p>发完透传指令后，用户需要等待设备响应才能开始透传数据，设备收到透传指令后，准备透传初始化数据大概需要 <code>5ms左右(如果在透传指令执行前串口缓冲区还有很多别的指令，那时间会更长,且t系列和k系列会更久)</code>，设备透传初始化准备好以后会发送一个透传就绪的数据给用户 <code>（0XFE+结束符）</code>，表示设备已经准备好，此时可以开始发送透传数据。透传数据为纯16进制数据，不再使用字符串，也不再需要结束符,设备收完指定的数据量以后，才会恢复指令接收状态。否则一直处于数据透传状态，透传数据完成以后,设备会发送结束标记给用户 <code>（0XFD+结束符）</code></p>
+<p>在指定的透传数量传输完成以前，曲线不会刷新，透传完毕之后会立即自动刷新</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">addt  objid,ch,qyt
+
+objid: 曲线控件ID序号(此处必须是ID号，不支持使用控件名称)
+
+ch:曲线控件中的通道号
+
+qyt:本次透传数据的点数量</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;s0曲线控件的通道0进入数据透传模式，透传点数为100点
+&#x2F;&#x2F;推荐使用这种方式，不会因为s0的id号改变而报错
+addt s0.id,0,100</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;向曲线s0的通道0透传100个数据,addt指令不支持跨页面
+printf(&quot;addt s0.id,0,100\xff\xff\xff&quot;);
+
+&#x2F;&#x2F;等待适量时间
+delay_ms(100);
+
+for(int i &#x3D;0;i&lt;100;i++)
+&#123;
+    printf(&quot;%c&quot;,(int)(rand() % 256));
+&#125;
+
+&#x2F;&#x2F;确保透传结束，以免影响下一条指令
+printf(&quot;\x01\xff\xff\xff&quot;);</code></pre>
+<h4 id="cle-清除曲线控件中的数据">cle-清除曲线控件中的数据</h4>
+<blockquote>
+<p>用于清除当前页面曲线控件的数据</p>
+<p>只能清除当前页面曲线控件的数据/不支持跨页面清除曲线控件的数据/不能清除其他页面曲线控件的数据</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">cle objid,ch
+
+objid:曲线控件ID序号(此处必须是ID号，不支持使用控件名称)
+
+ch:曲线控件通道号(255表示所有通道)</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;清除s0曲线控件的0通道数据
+cle s0.id,0</code></pre>
+<h4 id="rest-复位串口屏">rest-复位串口屏</h4>
+<blockquote>
+<p><code>禁止在program.s以及program.s里跳转的页面初始化事件里写rest指令,会导致屏幕不断重启!!!</code></p>
+<p>如果你已经这么做了,请用sd卡烧写一个正常的工程进入即可</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">rest</code></pre>
+<h4 id="wepo-写入数据掉电存储">wepo-写入数据掉电存储</h4>
+<blockquote>
+<p>仅k0系列/x系列支持</p>
+<p>使用掉电存储功能前需要先对存储空间初始化，否则未初始化的掉电存储空间里面有什么数据是不确定的，可能会导致程序运行出错，例如会导致模拟器中的效果与串口屏实物的效果不一致</p>
+<p>存储空间的读写范围是0-1023,当读写的是val属性时,最后一个读写的位置是1020,因为当读写1020时,其读写范围是1020-1023</p>
+<p>掉电存储空间写入寿命有限，请勿频繁擦写，只建议存储低频次修改的数据，例如用户名，密码等，写入消耗掉电存储空间寿命，读取不消耗掉电存储空间寿命</p>
+<p>写入数据后不能马上从原有位置读取数据,需等待几秒后再读取</p>
+<p>写入数据后不允许立刻断电,需等待几秒后再断电</p>
+</blockquote>
+<blockquote>
+<ol>
+<li>
+<p>写入内容为变量字符串的时候，在储存区中的占用空间为 <code>此变量的最大字符数+1</code>；写入内容为常量字符串的时候，在储存区中的占用空间为此常量字符串的实际字符数+1,多出来的一个字节是为了存储字符串 <code>结束符0x00</code>。</p>
+</li>
+<li>
+<p>写入内容为变量数值或常量数值的时候，在储存区中的占用空间统一为 <code>4字节</code>。</p>
+</li>
+<li>
+<p>使用用户存储区读写操作过程中请切记规划好数据区位置，以免位置交错引起数据覆盖错乱。</p>
+</li>
+<li>
+<p>用户存储区大小为1k，位置为0-1023</p>
+</li>
+</ol>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 以下代码写在program.s里
+int restFlag     &#x2F;&#x2F;自定义的变量
+&#x2F;&#x2F;从掉电存储区最后一个位置读取数据出来
+repo restFlag,1020
+&#x2F;&#x2F;如果不是指定的数据，说明掉电存储区未初始化
+if(restFlag!&#x3D;0x12345678)
+&#123;
+  &#x2F;&#x2F;用for循环初始化掉电存储空间
+  for(sys0&#x3D;0;sys0&lt;1020;sys0+&#x3D;4)
+  &#123;
+    wepo 0,sys0
+  &#125;
+  wepo 0x12345678,1020
+&#125;</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">wepo att,add
+
+att:变量&#x2F;常量
+
+add: 用户存储区位置(从0开始)</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;将t0.txt的内容写入用户存储区的第10位置,在储存区中的占用空间为t0.txt的最大设置值+1，即t0的txt_maxl属性表示的大小+1，例如控件的txt_maxl等于10，则使用wepo写入时总共需要占用11个字节，占用的地址为10-20
+wepo t0.txt,10</code></pre>
+<h4 id="repo-读取数据掉电存储">repo-读取数据掉电存储</h4>
+<blockquote>
+<p>读取到txt属性时遇到字符串结束符0才停止，因此之前通过wepo或者wept写入字符串类型的变量时，一定要留有空间存储0,否则读取时就会出错</p>
+<p>读入内容为变量字符串的时候，在储存区中的读取数据量为此变量的最大字符数+1。</p>
+<p>读入内容为变量数值时候，在储存区中的读取数据量统一为4字节。</p>
+<p>使用用户存储区读写操作过程中请切记规划好数据区位置，以免位置交错引起数据覆盖错乱。</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">repo att,add
+
+att:目标变量
+
+add: 用户存储区位置(从0开始)</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;从用户存储区的10位置读数据到t0.txt变量中,直到遇到字符串结束符\0才停止
+repo t0.txt,10</code></pre>
+<h3 id="系统变量">系统变量</h3>
+<p>program.s中创建的变量均为全局变量</p>
+<blockquote>
+<p>sys0-sys2是生成工程时默认可以使用变量</p>
+</blockquote>
+<blockquote>
+<p>dp-当前页面ID</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 等效于page 1
+dp&#x3D;1</code></pre>
+</blockquote>
+<blockquote>
+<p>volume-系统音量</p>
+<p>仅x5 x3系列才支持，音量设置范围为0-100，每次设置会自动保存，断电后再开机依然有效</p>
+</blockquote>
+<blockquote>
+<p>dims-上电默认背光亮度值</p>
+<p>dimS范围：0-100</p>
+<p>dims掉电后保存，下次上电后继续有效</p>
+<p>dim和dims区别：</p>
+<p>dim：不会自动关机保存</p>
+<p>dims：会自动保存，下次开机时还是此亮度值</p>
+</blockquote>
+<blockquote>
+<p>dim-当前背光亮度值</p>
+<p>亮度范围：0-100</p>
+</blockquote>
+<blockquote>
+<p>bauds-上电默认波特率值(掉电后保存，重启后继续有效)</p>
+</blockquote>
+<blockquote>
+<p>baud-当前波特率值(重启后丢失)</p>
+</blockquote>
+<blockquote>
+<p>ussp-无串口数据自动睡眠时间</p>
+<p>单位:秒,最小3，最大65535，上电默认0(0为关闭串口数据超时自动睡眠)</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 示例
+&#x2F;&#x2F;30秒无串口数据自动进入睡眠模式
+ussp&#x3D;30</code></pre>
+</blockquote>
+<blockquote>
+<p>thsp-无触摸操作自动睡眠时间</p>
+<p>(单位:秒,最小3，最大65535，上电默认0[0为关闭触摸超时自动睡眠])</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 示例
+&#x2F;&#x2F;30秒无触摸操作自动进入睡眠模式
+thsp&#x3D;30</code></pre>
+</blockquote>
+<blockquote>
+<p>thup-睡眠模式下触摸自动唤醒开关</p>
+<p>上电默认0，不管thup为0还是1，睡眠模式下有触摸操作的时候设备均会发送触摸坐标到串口</p>
+</blockquote>
+<blockquote>
+<p>usup-睡眠模式下串口数据自动唤醒开关</p>
+<p>此指令仅在淘晶字符串指令模式下起作用，在主动解析下串口屏无法被唤醒</p>
+<p>如果设置为1，串口收到任何数据（需要加上结束符16进制3个ff）都会立刻自动唤醒</p>
+</blockquote>
+<blockquote>
+<p>wup-睡眠唤醒后刷新页面设置</p>
+<p>设备已经在睡眠状态下，也可以执行串口传过来的wup=X赋值</p>
+</blockquote>
+<blockquote>
+<p>sleep-睡眠</p>
+<p>用于配置串口屏睡眠、休眠</p>
+<p>进入睡眠状态下，亮度为0，可以执行如下指令：get,prints, printh。也可以执行 sleep=0，wup=X 的赋值语句，并且支持上位软件联机，其他指令不会执行</p>
+</blockquote>
+<blockquote>
+<p>bkcmd-串口指令执行状态数据返回</p>
+<p>(上电默认为2)</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">0:不返回结果
+1:只返回成功的结果
+2:只返回失败的结果
+3:成功或者失败都返回结果    </code></pre>
+</blockquote>
+<blockquote>
+<p>delay-延时</p>
+<p>串口屏是单线程的,调用delay会直接死等,时间过长就会造成很明显的卡顿现象,延时超过50ms时不建议使用delay，超过50ms时建议用定时器控件来延时</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;让设备停顿10ms
+delay&#x3D;10</code></pre>
+</blockquote>
+<blockquote>
+<p>rand-随机数</p>
+<p>使用随机数之前需要先使用randset指令设定一次随机数产生范围，如果不设置，默认是最小0，最大2147483647。设置完范围以后，每读取一次系统变量rand将会得到一个随机数</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;设置随机数取值范围0-100
+ randset 0,100
+
+ &#x2F;&#x2F;把一个随机数赋值给n0.val变量
+ n0.val&#x3D;rand</code></pre>
+</blockquote>
+<blockquote>
+<p>crcval-crc校验结果(只可读取不可设置,使用前请先用crcrest指令复位初始值）</p>
+<p>先使用crcrest复位CRC值，复位之后，可使用crcputs或crcputh或crcputu校验指定数据,检验完毕读取系统变量crcval获得校验结果)</p>
+<p>完整的CRC校验实例代码请参考: <a href="http://wiki.tjc1688.com/advanced/crc2.html#crc">程序中使用CRC校验数据</a></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;复位CRC初始值为0xffff，以便后续检验数据
+crcrest 1,0xffff
+&#x2F;&#x2F;CRC校验hex:0x03,0x25
+crcputh 03 25
+&#x2F;&#x2F;CRC校验hex:0x0d,0x0a
+crcputh 0d 0a
+&#x2F;&#x2F;发送校验值
+prints crcval,2</code></pre>
+</blockquote>
+<blockquote>
+<p>rtc0~rtc6-RTC时钟变量</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;获取年
+ n0.val&#x3D;rtc0
+
+ &#x2F;&#x2F;获取月
+ n1.val&#x3D;rtc1
+
+ &#x2F;&#x2F;获取日
+ n2.val&#x3D;rtc2
+
+ &#x2F;&#x2F;获取小时
+ n3.val&#x3D;rtc3
+
+ &#x2F;&#x2F;获取分钟
+ n4.val&#x3D;rtc4
+
+ &#x2F;&#x2F;获取秒钟
+ n5.val&#x3D;rtc5
+ &#x2F;&#x2F;获取星期
+ if(rtc6&#x3D;&#x3D;0)
+ &#123;
+   t0.txt&#x3D;&quot;星期日&quot;
+ &#125;else if(rtc6&#x3D;&#x3D;1)
+ &#123;
+   t0.txt&#x3D;&quot;星期一&quot;
+ &#125;else if(rtc6&#x3D;&#x3D;2)
+ &#123;
+   t0.txt&#x3D;&quot;星期二&quot;
+ &#125;else if(rtc6&#x3D;&#x3D;3)
+ &#123;
+   t0.txt&#x3D;&quot;星期三&quot;
+ &#125;else if(rtc6&#x3D;&#x3D;4)
+ &#123;
+   t0.txt&#x3D;&quot;星期四&quot;
+ &#125;else if(rtc6&#x3D;&#x3D;5)
+ &#123;
+   t0.txt&#x3D;&quot;星期五&quot;
+ &#125;else if(rtc6&#x3D;&#x3D;6)
+ &#123;
+   t0.txt&#x3D;&quot;星期六&quot;
+ &#125;</code></pre>
+</blockquote>
+<h3 id="注意-问题">注意/问题</h3>
+<blockquote>
+<p>以上内容中有 <code>[TRUE]</code> 表示可通过指令修改，<code>[X_TRUE]</code> 表示只有X系列才支持且可通过指令修改，<code>[X]</code> 表示只有X系列才支持，但不能指令修改</p>
+</blockquote>
+<blockquote>
+<p>喇叭型号与接法参考：<a href="http://wiki.tjc1688.com/QA/QA37.html#id4">http://wiki.tjc1688.com/QA/QA37.html#id4</a></p>
+<p>sd卡旁边j5接口是否接有喇叭</p>
+</blockquote>
+<blockquote>
+<p>外部图片控件用于显示SD卡中的图片，仅X系列支持，需要插入SD卡</p>
+</blockquote>
+<blockquote>
+<p>hmi_color示例</p>
+<table>
+<thead>
+<tr>
+<th>代号</th>
+<th>10进制</th>
+<th>所表示的颜色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RED</td>
+<td>63488</td>
+<td>红色</td>
+</tr>
+<tr>
+<td>BLUE</td>
+<td>31</td>
+<td>蓝色</td>
+</tr>
+<tr>
+<td>GRAY</td>
+<td>33840</td>
+<td>灰色</td>
+</tr>
+<tr>
+<td>BLACK</td>
+<td>0</td>
+<td>黑色</td>
+</tr>
+<tr>
+<td>WHITE</td>
+<td>65535</td>
+<td>白色</td>
+</tr>
+<tr>
+<td>GREEN</td>
+<td>2016</td>
+<td>绿色</td>
+</tr>
+<tr>
+<td>BROWN</td>
+<td>48192</td>
+<td>橙色</td>
+</tr>
+<tr>
+<td>YELLOW</td>
+<td>65504</td>
+<td>黄色</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<blockquote>
+<p>常见错误返回或者其他数据返回</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230526150834.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230526150955.webp" alt=""></p>
+</blockquote>
+<blockquote>
+<ul>
+<li>单片机上电后为什么要先发一次 0x00 0xff 0xff 0xff给屏幕?</li>
+</ul>
+<p>单片机初始化后，先给一定时间的延时给屏幕初始化，具体延时时间可以参考上面一条。</p>
+<p>延时之后，第一次发指令前先发一次0x00 0xff 0xff 0xff,是因为上电过程中有可能串口引脚上产生了杂波导致屏幕已经收到一个或</p>
+<p>者多个错误数据了，所以先发一次0x00 0xff 0xff 0xff来结束当前指令，后面就可以正常操作了。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">printf(&quot;\x00\xff\xff\xff&quot;);</code></pre>
+</blockquote>
+<blockquote>
+<ul>
+<li>串口屏如何制作弹窗</li>
+</ul>
+<p>参考：<a href="http://wiki.tjc1688.com/QA/QA73.html">http://wiki.tjc1688.com/QA/QA73.html</a></p>
+</blockquote>
+<blockquote>
+<ul>
+<li>屏保制作</li>
+</ul>
+<p>参考：<a href="http://wiki.tjc1688.com/QA/QA82.html">http://wiki.tjc1688.com/QA/QA82.html</a></p>
+</blockquote>
+<blockquote>
+<p>需要注意的是在单片机里发送指令到串口屏要有\0结束符不然没效果</p>
+</blockquote>
+<h3 id="附1-项目1">附1- 项目1</h3>
+<ol>
+<li>选择型号，方向选择 <code>横屏90</code></li>
+<li>修改主页面名为 <code>Main</code>，新建界面 <code>Display</code>，<code>Step_Motor</code></li>
+</ol>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>Main页面</p>
+</div>
+<blockquote>
+<p>t1和t2按钮勾【弹起事件】里的 <code>发送键值</code></p>
+<p>然后在【弹起事件】里写跳转页面</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230526153321.webp" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>Display页面</p>
+</div>
+<blockquote>
+<p>b0按钮勾【弹起事件】里的 <code>发送键值</code></p>
+<p>然后在【弹起事件】里写跳转页面</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230526192210.webp" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>Step_Motor页面</p>
+</div>
+<blockquote>
+<p>bt0，bt1，b0，b1按钮勾【弹起事件】里的 <code>发送键值</code></p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230526160200.webp" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*******************bt0【弹起事件】**************************&#x2F;
+if(bt0.val&#x3D;&#x3D;0)
+&#123;
+  bt0.txt&#x3D;&quot;关&quot;
+  n0.val&#x3D;0
+&#125;else
+&#123;
+  bt0.txt&#x3D;&quot;开&quot;
+  n0.val&#x3D;3
+&#125;
+&#x2F;*******************bt1【弹起事件】**************************&#x2F;
+if(bt1.val&#x3D;&#x3D;0)
+&#123;
+  bt1.txt&#x3D;&quot;正&quot;
+&#125;else
+&#123;
+  bt1.txt&#x3D;&quot;反&quot;
+&#125;
+&#x2F;*******************b0【弹起事件】**************************&#x2F;
+if(n1.val&lt;9)
+&#123;
+  n1.val+&#x3D;1
+&#125;
+&#x2F;*******************b1【弹起事件】**************************&#x2F;
+if(n1.val&gt;1)
+&#123;
+  n1.val-&#x3D;1
+&#125;</code></pre>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>程序编写</p>
+</div>
+<p>MX的话打开串口1DMA接收，勾空闲中断即可，不需要DMA中断</p>
+<details ><summary> HMI.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __HMI_H
+#define __HMI_H
+#include &quot;AllHead.h&quot;
+
+#define huart_HMI	huart1
+#define FALSE	0
+#define TRUE	1
+&#x2F;&#x2F;显示屏页面
+typedef enum
+&#123;
+	Page_Main &#x3D; (uint8_t)0x00,
+	Page_Display &#x3D; (uint8_t)0x01,
+	Page_Step_Motor &#x3D; (uint8_t)0x02,
+&#125;HMI_Page_t;
+
+&#x2F;&#x2F; 定义结构体类型
+typedef struct
+&#123;
+	HMI_Page_t Page;	&#x2F;&#x2F; 显示屏页面
+	uint8_t* pucRec_Buffer;	&#x2F;&#x2F; 接收缓存
+	uint8_t Page_Step_Motor_KEY_Flag;	&#x2F;&#x2F; 按键标志位：用于区分按键中断与显示屏键值信息
+	void (*Init)(void);	&#x2F;&#x2F; HMI初始化
+	void (*SendString)(uint8_t*);	&#x2F;&#x2F; 发送字符串给HMI
+	void (*Protocol)(void);	&#x2F;&#x2F; 接口协议
+&#125;HMI_t;
+
+extern HMI_t HMI;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> HMI.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;AllHead.h&quot;
+
+#define HMI_Rec_Buffer_LENGTH	(uint8_t)20
+&#x2F;&#x2F; 键值信息是7个字节
+#define Protocol_Data_LEN	(uint8_t)7
+static uint8_t ucHMI_Rec_Buffer[HMI_Rec_Buffer_LENGTH] &#x3D; &#123;0x00&#125;;
+static uint8_t ucHMI_EndData[3] &#x3D; &#123;0xFF,0xFF,0xFF&#125;;
+
+void HAL_UART_IdleCallback(UART_HandleTypeDef *huart);static void HMI_Init(void);
+static void HMI_SendString(uint8_t*);
+static void HMI_Protocol(void);
+static void HMI_SendEndData(void);
+
+HMI_t HMI &#x3D; 
+&#123;
+	Page_Main,
+	ucHMI_Rec_Buffer,
+	FALSE,
+	HMI_Init,
+	HMI_SendString,
+	HMI_Protocol
+&#125;;
+
+static void HMI_Init(void)
+&#123;
+	HMI_SendEndData();
+	&#x2F;&#x2F; 显示屏默认显示主页面
+	HMI.SendString((uint8_t*)&quot;page 0&quot;);
+&#125;
+
+static void HMI_SendString(uint8_t* pucStr)
+&#123;
+	HAL_UART_Transmit(&amp;huart_HMI,pucStr,strlen((const char*)pucStr),100);
+	HMI_SendEndData();
+&#125;
+
+static void HMI_Protocol(void)
+&#123;
+	uint8_t Temp_Array[7] &#x3D; &#123;0x00&#125;;
+	uint8_t i &#x3D; 0,Index &#x3D; 0;
+	
+	&#x2F;&#x2F; 串口停止DMA接收
+	HAL_UART_DMAStop(&amp;huart_HMI);
+	&#x2F;&#x2F; 读取HMI缓存数据，共7字节起始值为0x65
+	for(i &#x3D; 0;i &lt; HMI_Rec_Buffer_LENGTH;i++)
+	&#123;
+		&#x2F;&#x2F;检测键值起始数据0x65
+		if(0 &#x3D;&#x3D; Index)
+		&#123;
+			if(*(HMI.pucRec_Buffer + i) !&#x3D; 0x65)
+			&#123;
+				continue;
+			&#125;
+		&#125;
+		Temp_Array[Index] &#x3D; *(HMI.pucRec_Buffer + i);
+		&#x2F;&#x2F; 已读取7字节
+		if(Protocol_Data_LEN &#x3D;&#x3D; Index)
+		&#123;
+			break;
+		&#125;
+		Index++;
+	&#125;
+	&#x2F;&#x2F; 串口开启DMA接收
+	HAL_UART_Receive_DMA(&amp;huart1,HMI.pucRec_Buffer,(uint16_t)20);
+	&#x2F;&#x2F; 处理数据
+	if(Protocol_Data_LEN &#x3D;&#x3D; Index)
+	&#123;
+		&#x2F;&#x2F; 主页面的键值信息
+		if(0x00 &#x3D;&#x3D; Temp_Array[1])
+		&#123;
+			&#x2F;&#x2F; 控件t1弹起事件--数码管
+			if((0x02 &#x3D;&#x3D; Temp_Array[2]) &amp;&amp; (0x00 &#x3D;&#x3D; Temp_Array[3]))
+			&#123;
+				&#x2F;&#x2F; 切换到数码管页面
+				HMI.Page &#x3D; Page_Display;				
+				&#x2F;&#x2F;操作...
+			&#125;
+			&#x2F;&#x2F; 控件t2弹起事件--步进电机
+			if((0x03 &#x3D;&#x3D; Temp_Array[2]) &amp;&amp; (0x00 &#x3D;&#x3D; Temp_Array[3]))
+			&#123;
+				&#x2F;&#x2F; 切换到电机页面
+				HMI.Page &#x3D; Page_Step_Motor;				
+				&#x2F;&#x2F;操作...显示电机圈数
+				&#x2F;&#x2F;显示电机速度
+			&#125;			
+		&#125;
+		&#x2F;&#x2F; 数码管页面的键值信息
+		if(0x01 &#x3D;&#x3D; Temp_Array[1])
+		&#123;
+			&#x2F;&#x2F; 控件b0弹起事件--返回
+			if((0x08 &#x3D;&#x3D; Temp_Array[2]) &amp;&amp; (0x00 &#x3D;&#x3D; Temp_Array[3]))
+			&#123;
+				&#x2F;&#x2F; 切换到主页面
+				HMI.Page &#x3D; Page_Main;
+				&#x2F;&#x2F;操作...
+			&#125;
+		&#125;
+		&#x2F;&#x2F; 步进电机页面的键值信息
+		if(0x02 &#x3D;&#x3D; Temp_Array[1])
+		&#123;
+			&#x2F;&#x2F; 控件b2弹起事件--返回
+			if((0x0B &#x3D;&#x3D; Temp_Array[2]) &amp;&amp; (0x00 &#x3D;&#x3D; Temp_Array[3]))
+			&#123;
+				&#x2F;&#x2F; 切换到主页面
+				HMI.Page &#x3D; Page_Main;
+				&#x2F;&#x2F;操作...
+				&#x2F;&#x2F;关闭步进电机
+			&#125;
+			&#x2F;&#x2F; 控件bt0弹起事件--开关
+			if((0x01 &#x3D;&#x3D; Temp_Array[2]) &amp;&amp; (0x00 &#x3D;&#x3D; Temp_Array[3]))
+			&#123;
+				HMI.Page_Step_Motor_KEY_Flag &#x3D; TRUE;
+				&#x2F;&#x2F; 调用按键1按下函数(里面需要有下面这段，其他类似)
+				if(FALSE &#x3D;&#x3D; HMI.Page_Step_Motor_KEY_Flag)
+				&#123;
+					HMI.SendString((uint8_t*)&quot;click bt0,1&quot;);
+					HMI.SendString((uint8_t*)&quot;click bt0,0&quot;);
+				&#125;
+				HMI.Page_Step_Motor_KEY_Flag &#x3D; FALSE;
+			&#125;
+			&#x2F;&#x2F; 控件bt1弹起事件--正反
+			if((0x02 &#x3D;&#x3D; Temp_Array[2]) &amp;&amp; (0x00 &#x3D;&#x3D; Temp_Array[3]))
+			&#123;
+				HMI.Page_Step_Motor_KEY_Flag &#x3D; TRUE;
+				&#x2F;&#x2F; 调用按键2按下函数(这里面会判断Page_Step_Motor_KEY_Flag是否为false，是就表示是单片机触发的不是触摸导致的，不是表示触摸了串口屏)
+				if(FALSE &#x3D;&#x3D; HMI.Page_Step_Motor_KEY_Flag)
+				&#123;
+					HMI.SendString((uint8_t*)&quot;click bt1,1&quot;);
+					HMI.SendString((uint8_t*)&quot;click bt1,0&quot;);
+				&#125;				
+				HMI.Page_Step_Motor_KEY_Flag &#x3D; FALSE;
+			&#125;
+			&#x2F;&#x2F; 控件b0弹起事件--加速
+			if((0x03 &#x3D;&#x3D; Temp_Array[2]) &amp;&amp; (0x00 &#x3D;&#x3D; Temp_Array[3]))
+			&#123;
+				HMI.Page_Step_Motor_KEY_Flag &#x3D; TRUE;
+				&#x2F;&#x2F; 调用按键3按下函数
+				if(FALSE &#x3D;&#x3D; HMI.Page_Step_Motor_KEY_Flag)
+				&#123;
+					HMI.SendString((uint8_t*)&quot;click b0,1&quot;);
+					HMI.SendString((uint8_t*)&quot;click b0,0&quot;);
+				&#125;				
+				HMI.Page_Step_Motor_KEY_Flag &#x3D; FALSE;
+			&#125;
+			&#x2F;&#x2F; 控件b1弹起事件--减速
+			if((0x04 &#x3D;&#x3D; Temp_Array[2]) &amp;&amp; (0x00 &#x3D;&#x3D; Temp_Array[3]))
+			&#123;
+				HMI.Page_Step_Motor_KEY_Flag &#x3D; TRUE;
+				&#x2F;&#x2F; 调用按键4按下函数
+				if(FALSE &#x3D;&#x3D; HMI.Page_Step_Motor_KEY_Flag)
+				&#123;
+					HMI.SendString((uint8_t*)&quot;click b1,1&quot;);
+					HMI.SendString((uint8_t*)&quot;click b1,0&quot;);
+				&#125;				
+				HMI.Page_Step_Motor_KEY_Flag &#x3D; FALSE;
+			&#125;			
+		&#125;		
+		
+	&#125;
+&#125;
+
+static void HMI_SendEndData(void)
+&#123;
+	&#x2F;&#x2F;连续发送3个0xFF
+	HAL_UART_Transmit(&amp;huart_HMI,ucHMI_EndData,(uint8_t)3,0x0A);
+&#125;
+
+&#x2F;&#x2F; 自己写的空闲中断回调函数
+void HAL_UART_IdleCallback(UART_HandleTypeDef *huart)
+&#123;
+	if(huart-&gt;Instance &#x3D;&#x3D; huart1.Instance)
+	&#123;
+		&#x2F;&#x2F; 解析协议
+		HMI.Protocol();
+	&#125;
+&#125;
+
+void USART1_IRQHandler(void)
+&#123;
+    if(__HAL_UART_GET_FLAG(&amp;huart1, UART_FLAG_IDLE) !&#x3D; 0x00u)
+    &#123;
+        __HAL_UART_CLEAR_IDLEFLAG(&amp;huart1);
+        HAL_UART_IdleCallback(&amp;huart1);
+    &#125;
+
+    HAL_UART_IRQHandler(&amp;huart1);
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> main.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">static void Fun_Page_Main(void);
+static void Fun_Page_Display(void);
+static void Fun_Page_Step_Motor(void);
+void Run(void);
+void vHardware_Init(void);
+
+void vHardware_Init(void)
+&#123;
+	HAL_TIM_Base_Start_IT(&amp;htim4);
+	&#x2F;&#x2F; 使能HMI串口空闲中断
+	__HAL_UART_ENABLE_IT(&amp;huart1,UART_IT_IDLE);
+	&#x2F;&#x2F; 串口1开启DMA接收
+	HAL_UART_Receive_DMA(&amp;huart1,HMI.pucRec_Buffer,(uint16_t)20);
+	&#x2F;&#x2F; HMI屏幕初始化
+	HMI.Init();
+&#125;
+
+void Run(void)
+&#123;
+	&#x2F;&#x2F; 根据HMI串口屏的页面执行相应功能
+	switch(HMI.Page)
+	&#123;
+		case Page_Main:
+		&#123;
+			Fun_Page_Main();
+			break;
+		&#125;
+		case Page_Display:
+		&#123;
+			Fun_Page_Display();
+			break;
+		&#125;
+		case Page_Step_Motor:
+		&#123;
+			Fun_Page_Step_Motor();
+			break;
+		&#125;
+		default:
+		&#123;
+			Fun_Page_Main();
+			break;
+		&#125;			
+	&#125;
+&#125;
+
+&#x2F;&#x2F;主页面显示
+static void Fun_Page_Main(void)
+&#123;
+	
+&#125;
+&#x2F;&#x2F; 数码管显示页面
+static void Fun_Page_Display(void)
+&#123;
+	static uint32_t Cnt &#x3D; 0;
+	uint8_t i &#x3D; 0;
+	&#x2F;&#x2F; 这里 &#39;\0&#39; 不能漏！！！
+	uint8_t Disp_Str[9] &#x3D; &#123;&#39;n&#39;,&#39;0&#39;,&#39;.&#39;,&#39;v&#39;,&#39;a&#39;,&#39;l&#39;,&#39;&#x3D;&#39;,&#39;0&#39;,&#39;\0&#39;&#125;;
+	uint8_t Cnt_Arr[6] &#x3D; &#123;0x00&#125;;
+	Cnt_Arr[0] &#x3D; Cnt % 10;	&#x2F;&#x2F; 个位
+	Cnt_Arr[1] &#x3D; Cnt &#x2F; 10 % 10;	&#x2F;&#x2F; 十位
+	Cnt_Arr[2] &#x3D; Cnt &#x2F; 100 % 10;	&#x2F;&#x2F; 百位
+	Cnt_Arr[3] &#x3D; Cnt &#x2F; 1000 % 10;	&#x2F;&#x2F; 千位
+	Cnt_Arr[4] &#x3D; Cnt &#x2F; 10000 % 10;	&#x2F;&#x2F; 万位
+	Cnt_Arr[5] &#x3D; Cnt &#x2F; 100000;	&#x2F;&#x2F; 十万位
+	&#x2F;&#x2F;数码管显示计数值...省略
+	
+	&#x2F;&#x2F;显示完把数据传给HMI显示屏(因为是显示ASCII所以需要+&#39;1&#39;，文本控件名称要连续0~5摆放)
+	for(i &#x3D; 0;i &lt; 6;i++)
+	&#123;
+		Disp_Str[1] &#x3D; i + &#39;0&#39;;
+		Disp_Str[7] &#x3D; Cnt_Arr[i] + &#39;0&#39;;
+		HMI.SendString(Disp_Str);
+	&#125;
+	&#x2F;&#x2F;更新计数值
+	if(++Cnt &gt; 999999)
+	&#123;
+		Cnt &#x3D; 0;
+	&#125;
+	&#x2F;&#x2F;测试
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_RESET);
+	HAL_Delay(50);
+&#125;
+
+static void Fun_Page_Step_Motor(void)
+&#123;
+	&#x2F;&#x2F; 不需要了已经在按键里高了
+	&#x2F;&#x2F;测试
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_SET);
+&#125;
+
+int main(void)
+&#123;
+    vHardware_Init();
+    while(1)
+    &#123;
+        Run();
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验现象</p>
+</div>
+<p>数字正常，灯正常</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num134.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HMI%E4%B8%B2%E5%8F%A3%E5%B1%8F"><span class="toc-number">2.</span> <span class="toc-text">HMI串口屏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">2.1.</span> <span class="toc-text">基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E8%AF%95-%E4%B8%8B%E8%BD%BD"><span class="toc-number">2.2.</span> <span class="toc-text">调试&#x2F;下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.3.</span> <span class="toc-text">通讯协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E7%89%87%E6%9C%BAto%E4%B8%B2%E5%8F%A3%E5%B1%8F"><span class="toc-number">2.3.1.</span> <span class="toc-text">单片机to串口屏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3%E5%B1%8Fto%E5%8D%95%E7%89%87%E6%9C%BA"><span class="toc-number">2.3.2.</span> <span class="toc-text">串口屏to单片机</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A7%E4%BB%B6%E4%BD%BF%E7%94%A8"><span class="toc-number">2.4.</span> <span class="toc-text">控件使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A4%E8%AF%86%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.1.</span> <span class="toc-text">认识控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.2.</span> <span class="toc-text">页面控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.3.</span> <span class="toc-text">文本控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BB%9A%E5%8A%A8%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.4.</span> <span class="toc-text">滚动控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.5.</span> <span class="toc-text">数字控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E6%B5%AE%E7%82%B9%E6%95%B0%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.6.</span> <span class="toc-text">虚拟浮点数控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E9%92%AE%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.7.</span> <span class="toc-text">按钮控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E5%BA%A6%E6%9D%A1%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.8.</span> <span class="toc-text">进度条控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.9.</span> <span class="toc-text">图片控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%87%E5%9B%BE%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.10.</span> <span class="toc-text">切图控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A6%E6%91%B8%E7%83%AD%E5%8C%BA%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.11.</span> <span class="toc-text">触摸热区控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A6%E6%91%B8%E6%8D%95%E6%8D%89%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.12.</span> <span class="toc-text">触摸捕捉控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BB%91%E5%9D%97%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.13.</span> <span class="toc-text">滑块控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.14.</span> <span class="toc-text">定时器控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.15.</span> <span class="toc-text">变量控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E6%80%81%E6%8C%89%E9%92%AE%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.16.</span> <span class="toc-text">双态按钮控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%8D%E9%80%89%E6%A1%86%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.17.</span> <span class="toc-text">复选框控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E9%80%89%E6%A1%86%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.18.</span> <span class="toc-text">单选框控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E7%A0%81%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.19.</span> <span class="toc-text">二维码控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E5%BC%80%E5%85%B3%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.20.</span> <span class="toc-text">状态开关控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8B%E6%8B%89%E6%A1%86%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.21.</span> <span class="toc-text">下拉框控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E6%96%87%E6%9C%AC%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.22.</span> <span class="toc-text">选择文本控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BB%91%E5%8A%A8%E6%96%87%E6%9C%AC%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.23.</span> <span class="toc-text">滑动文本控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%AE%B0%E5%BD%95%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.24.</span> <span class="toc-text">数据记录控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8%E7%94%BB%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.25.</span> <span class="toc-text">动画控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%86%E9%A2%91%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.26.</span> <span class="toc-text">视频控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B2%E7%BA%BF%E6%B3%A2%E5%BD%A2%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.4.27.</span> <span class="toc-text">曲线波形控件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E9%9B%86"><span class="toc-number">2.5.</span> <span class="toc-text">指令集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#page-%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC"><span class="toc-number">2.5.1.</span> <span class="toc-text">page-页面跳转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#prints%E4%BB%8E%E4%B8%B2%E5%8F%A3%E6%89%93%E5%8D%B0%E5%8F%98%E9%87%8F-%E5%B8%B8%E9%87%8F"><span class="toc-number">2.5.2.</span> <span class="toc-text">prints从串口打印变量&#x2F;常量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#printh%E4%BB%8E%E4%B8%B2%E5%8F%A3%E6%89%93%E5%8D%B016%E8%BF%9B%E5%88%B6"><span class="toc-number">2.5.3.</span> <span class="toc-text">printh从串口打印16进制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#click%E6%BF%80%E6%B4%BB%E6%8E%A7%E4%BB%B6%E7%9A%84%E6%8C%89%E4%B8%8B-%E5%BC%B9%E8%B5%B7%E4%BA%8B%E4%BB%B6"><span class="toc-number">2.5.4.</span> <span class="toc-text">click激活控件的按下&#x2F;弹起事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#vis-%E9%9A%90%E8%97%8F-%E6%98%BE%E7%A4%BA%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.5.5.</span> <span class="toc-text">vis-隐藏&#x2F;显示控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#tsw-%E6%8E%A7%E4%BB%B6%E8%A7%A6%E6%91%B8%E4%BD%BF%E8%83%BD"><span class="toc-number">2.5.6.</span> <span class="toc-text">tsw-控件触摸使能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#randset-%E9%9A%8F%E6%9C%BA%E6%95%B0%E8%8C%83%E5%9B%B4%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.5.7.</span> <span class="toc-text">randset-随机数范围设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#covx-%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.5.8.</span> <span class="toc-text">covx-变量类型转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strlen-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8F%98%E9%87%8F%E5%AD%97%E7%AC%A6%E9%95%BF%E5%BA%A6%E6%B5%8B%E8%AF%95"><span class="toc-number">2.5.9.</span> <span class="toc-text">strlen-字符串变量字符长度测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#btlen-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8F%98%E9%87%8F%E5%AD%97%E8%8A%82%E9%95%BF%E5%BA%A6%E6%B5%8B%E8%AF%95"><span class="toc-number">2.5.10.</span> <span class="toc-text">btlen-字符串变量字节长度测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#substr-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%88%AA%E5%8F%96"><span class="toc-number">2.5.11.</span> <span class="toc-text">substr-字符串截取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#spstr-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E5%89%B2"><span class="toc-number">2.5.12.</span> <span class="toc-text">spstr-字符串分割</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#touch-j-%E8%A7%A6%E6%91%B8%E6%A0%A1%E5%87%86"><span class="toc-number">2.5.13.</span> <span class="toc-text">touch_j-触摸校准</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#add-%E5%BE%80%E6%9B%B2%E7%BA%BF%E6%8E%A7%E4%BB%B6%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="toc-number">2.5.14.</span> <span class="toc-text">add-往曲线控件添加数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#addt-%E6%9B%B2%E7%BA%BF%E6%95%B0%E6%8D%AE%E9%80%8F%E4%BC%A0%E6%8C%87%E4%BB%A4"><span class="toc-number">2.5.15.</span> <span class="toc-text">addt-曲线数据透传指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cle-%E6%B8%85%E9%99%A4%E6%9B%B2%E7%BA%BF%E6%8E%A7%E4%BB%B6%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-number">2.5.16.</span> <span class="toc-text">cle-清除曲线控件中的数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#rest-%E5%A4%8D%E4%BD%8D%E4%B8%B2%E5%8F%A3%E5%B1%8F"><span class="toc-number">2.5.17.</span> <span class="toc-text">rest-复位串口屏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#wepo-%E5%86%99%E5%85%A5%E6%95%B0%E6%8D%AE%E6%8E%89%E7%94%B5%E5%AD%98%E5%82%A8"><span class="toc-number">2.5.18.</span> <span class="toc-text">wepo-写入数据掉电存储</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#repo-%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE%E6%8E%89%E7%94%B5%E5%AD%98%E5%82%A8"><span class="toc-number">2.5.19.</span> <span class="toc-text">repo-读取数据掉电存储</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E5%8F%98%E9%87%8F"><span class="toc-number">2.6.</span> <span class="toc-text">系统变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F-%E9%97%AE%E9%A2%98"><span class="toc-number">2.7.</span> <span class="toc-text">注意&#x2F;问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%99%841-%E9%A1%B9%E7%9B%AE1"><span class="toc-number">2.8.</span> <span class="toc-text">附1- 项目1</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '可惜你不听王杰，也不懂我...' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script defer src="/js/my_aplayer.js"></script><script defer src="/js/meting.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
