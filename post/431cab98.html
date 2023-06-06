@@ -1,0 +1,2354 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>基于MSP430F149太阳能路灯 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言 参考文章  TI-芯片资料 TI-编译器 用于 MSP430 的 IAR 嵌入式工作台 硬件家园-软件 IAR其他版本-吴川斌的博客 IAR Embedded Workbench for Arm 更新到 9.30 版本-吴川斌的博客 我的工程  阿里云盘-资料 项目需求  以超低功耗MSP430单片机为主控，设计一款太阳能路灯。 采用太阳能板，锂离子电池，OLED屏幕显示，配合一些外设，在学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于MSP430F149太阳能路灯">
+<meta property="og:url" content="https://mdcm.yang5201314.cn/post/431cab98.html">
+<meta property="og:site_name" content="Luckys-Yangの小栈">
+<meta property="og:description" content="前言 参考文章  TI-芯片资料 TI-编译器 用于 MSP430 的 IAR 嵌入式工作台 硬件家园-软件 IAR其他版本-吴川斌的博客 IAR Embedded Workbench for Arm 更新到 9.30 版本-吴川斌的博客 我的工程  阿里云盘-资料 项目需求  以超低功耗MSP430单片机为主控，设计一款太阳能路灯。 采用太阳能板，锂离子电池，OLED屏幕显示，配合一些外设，在学">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mdcm.yang5201314.cn/img/num135.webp">
+<meta property="article:published_time" content="2023-06-03T06:35:05.000Z">
+<meta property="article:modified_time" content="2023-06-06T13:37:50.965Z">
+<meta property="article:author" content="Luckys-Yang">
+<meta property="article:tag" content="牛逼">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mdcm.yang5201314.cn/img/num135.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"><link rel="canonical" href="https://mdcm.yang5201314.cn/post/431cab98.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '基于MSP430F149太阳能路灯',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-06-06 21:37:50'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/aplayer.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">136</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">76</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">31</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">基于MSP430F149太阳能路灯</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-03T06:35:05.000Z" title="发表于 2023-06-03 14:35:05">2023-06-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-06T13:37:50.965Z" title="更新于 2023-06-06 21:37:50">2023-06-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/TI%E5%8D%95%E7%89%87%E6%9C%BA/">TI单片机</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">10.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>48分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>参考文章</p>
+</div>
+<p><a href="https://www.ti.com.cn/product/zh-cn/MSP430F149?keyMatch=MSP430F149&amp;tisearch=search-everything&amp;usecase=GPN#software-development">TI-芯片资料</a></p>
+<p><a href="https://www.ti.com.cn/tool/cn/IAR-KICKSTART">TI-编译器</a></p>
+<p><a href="https://www.iar.com/products/architectures/iar-embedded-workbench-for-msp430/">用于 MSP430 的 IAR 嵌入式工作台</a></p>
+<p><a href="https://mp.weixin.qq.com/s/q4I55qEqgKxdgQZsiXmNvw">硬件家园-软件</a></p>
+<p><a href="https://pan.baidu.com/s/1gw8yAqLgzV5WinWlUl1EnQ?pwd=25et#list/path=%2Fsharelink3931574662-312139828013323%2FIAR%20Embedded%20Workbench&amp;parentPath=%2Fsharelink3931574662-312139828013323">IAR其他版本-吴川斌的博客</a></p>
+<p><a href="https://www.mr-wu.cn/iar-embedded-workbench-for-arm-9-30-free-download/">IAR Embedded Workbench for Arm 更新到 9.30 版本-吴川斌的博客</a></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>我的工程</p>
+</div>
+<p><a href="https://www.aliyundrive.com/s/Nss4hE22WRW">阿里云盘-资料</a></p>
+<h2 id="项目需求">项目需求</h2>
+<blockquote>
+<p>以超低功耗MSP430单片机为主控，设计一款太阳能路灯。 采用太阳能板，锂离子电池，OLED屏幕显示，配合一些外设，在学习产品设计的过程中，熟练的掌握MSP430单片机的应用</p>
+</blockquote>
+<blockquote>
+<ol>
+<li><code>单片机型号</code></li>
+</ol>
+<p>MSP430F149</p>
+<ol start="2">
+<li><code>太阳能板</code></li>
+</ol>
+<p>光伏发电板, 18V, 10W/15W</p>
+<ol start="3">
+<li><code>电池</code></li>
+</ol>
+<p>锂离子电池 - 电池座，单节/双节</p>
+<ol start="4">
+<li><code>显示</code></li>
+</ol>
+<p>OLED屏幕，显示各种信息</p>
+<p>4个LED灯</p>
+<ol start="5">
+<li><code>输出</code></li>
+</ol>
+<p>大功率LED，恒流源驱动</p>
+<p>一路5V/1A输出接口，扩展用</p>
+<ol start="6">
+<li><code>输入</code></li>
+</ol>
+<p>2个按键， 开关机，触发OLED显示，调整灯亮度等</p>
+<ol start="7">
+<li><code>扩展</code></li>
+</ol>
+<p>USB转TTL接口 - BSL程序烧录</p>
+<p>RS-485接口(自动收发功能)，打印信息，上位机监控或扩展用</p>
+<p>预留GPIO口扩展</p>
+<ol start="8">
+<li><code>其他方面</code></li>
+</ol>
+<p>低功耗设计</p>
+<p>白天自动关闭大功率LED</p>
+<p>晚上自动开启大功率LED</p>
+<p>DEBUG调试接口</p>
+</blockquote>
+<h2 id="需求调整">需求调整</h2>
+<blockquote>
+<ol>
+<li><code>充电电流由4A调整为3A</code></li>
+</ol>
+<p>原因：太阳能电板选择10W/15W的，最大3A充电合适，充电电路成本也低些，同时可以满足学习要求</p>
+<ol start="2">
+<li><code>升压输出，由12V/1A调整为5V/1A</code></li>
+</ol>
+<p>原因：升压至12V/1A,方案不通用，成本较高， 调整为5V/1A,选择通用方案，可以给其它实战板供电，同时可以满足学习要求</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230603153658.webp" alt=""></p>
+<h2 id="数据手册阅读">数据手册阅读</h2>
+<blockquote>
+<p>通过数据手册可知：</p>
+<p>低电源电压范围：1.8V 至 3.6V</p>
+<p>60KB + 256B 闪存， 2KB RAM</p>
+<p>5 种省电模式</p>
+<p>超低功耗： – 激活模式：280μA（在 1MHz 频率和 2.2V 电压 条件下） – 待机模式：1.6μA – 关闭模式（RAM 保持）：0.1μA</p>
+<p>可在不到 6μs 的时间内从待机模式唤醒</p>
+<p>具有 7 个捕捉/比较及影子寄存器的 16 位 Timer_B • 具有 3 个捕捉/比较寄存器的 16 位 Timer_A</p>
+<p>MSP430F14x 和 MSP430F14x1 器件上有两个 USART（USART0、USART1）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230603162239.webp" alt=" "></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230603164811.webp" alt=" "></p>
+</blockquote>
+<h2 id="IAR安装">IAR安装</h2>
+<h3 id="5-3版本">5.3版本</h3>
+<blockquote>
+<p>这个是我一开始安装的版本，确定是 <code>没有补全！！！！</code></p>
+</blockquote>
+<blockquote>
+<p>打开注册机 <code>IAR kegen PartA</code> 进行破解，<code>注意！！！注册机一定要管理员身份打开，IAR安装包也是！！！否则安装完后面编译下面报错</code></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">Fatal Error[Cp001]: Copy protection check, No valid license found for this product [24]</code></pre>
+<p>如果报上面错误直接卸载重装</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">我的版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">IAR For MSP430 V5.3</td>
+</tr>
+</tbody>
+</table>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230604093835.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230604093856.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230604093940.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230604094035.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230604094104.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<h3 id="7-21版本">7.21版本</h3>
+<blockquote>
+<p>这个版本比5.3好，至少有补全</p>
+</blockquote>
+<ul>
+<li>安装IAR</li>
+</ul>
+<p>直接右键管理员身份双击 <code>EW430-7211-Autorun.exe</code>，选择安装即可，安装步骤跟5.3差不多</p>
+<ul>
+<li>破解</li>
+</ul>
+<p>安装完后，把「crack」文件夹内的「iarpatcher32.exe」这个文件拷贝到安装后的路径下，有两处：</p>
+<ol>
+<li>{你的安装路径}\430\bin/</li>
+<li>{你的安装路径}\common\bin\</li>
+</ol>
+<p>然后右键管理员身份双击运行即可</p>
+<blockquote>
+<p>这个破解补丁并没有激活许可证，而只是让IAR Embedded Workbench的编译器和调试器忽略了License，但是，启动软件时，IAR Embedded Workbench 会提示你输入License，我们只需要把 <code>Don‘t run the Wizard for this product at startup.</code> 这个选项勾上，然后点「取消」即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230605003727.webp" alt=""></p>
+</blockquote>
+<h2 id="新建工程">新建工程</h2>
+<blockquote>
+<p>上面两个版本通用</p>
+</blockquote>
+<ul>
+<li>新工程文件夹</li>
+</ul>
+<blockquote>
+<p>新建一个文件夹，然后在里面新建两个文件夹分别是 <code>app</code>，<code>user</code></p>
+<p>app - 放置GPIO、UART、ADC等外设应用程序</p>
+<p>user - 放置main，public等文件</p>
+</blockquote>
+<ul>
+<li>新建工程</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230604102134.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230604102201.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>整理文件 - 将mian.c文件放入user文件夹</li>
+</ul>
+<blockquote>
+<p>在编译器右键 main.c 选择 【remove】，然后在文件夹里重新把main.c 移到【user文件夹】里，然后在编译器里右键添加回去即可</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230604103900.webp" alt=""></p>
+<blockquote>
+<p>编译一下</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230604104056.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230604104219.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230604105951.webp" alt=""></p>
+<ul>
+<li>设置</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230604123737.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230604124111.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230604124407.webp" alt=""></p>
+<h2 id="常用设置">常用设置</h2>
+<blockquote>
+<ul>
+<li>显示行号</li>
+</ul>
+<p>在代码段点击右键，找到Options-&gt;Editor，将右面的Show Line Numbers勾选上就可以了</p>
+<ul>
+<li>注释</li>
+</ul>
+<p>注释的快捷键：Ctrl+K；取消注释：Ctrl+Shfit+K</p>
+<ul>
+<li>格式化源码</li>
+</ul>
+<p>选择代码段，然后CTRL + T</p>
+<ul>
+<li>程序{ }花括号的配对内容查找</li>
+</ul>
+<p>光标放在代码所在括弧内的区域，CTRL + B 则自动的把这段内容反色的选中</p>
+<ul>
+<li>
+<p>Ctrl+Shift+F 在文件中搜索</p>
+</li>
+<li>
+<p>返回上个界面：Ctrl+Tab (打开多个.c文件之后，进行.c文件查看切换)</p>
+</li>
+<li>
+<p>代码左移：Shift+Tab，跟Tab右移相反</p>
+</li>
+<li>
+<p>代码颜色修改</p>
+</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">C Keyword (关键字) – blue(蓝色) – Bold(加粗)
+
+Strings(字符串) --Dark Red(深红)-- Normal(正常字体)
+
+char(字符) – blue(蓝色) – Normal(正常字体)
+
+Preprocessor(预处理) – blue(蓝色) – Normal(正常字体)
+
+C++ comment&#x2F;comment(注释) – Green(绿色) – Italic斜体)</code></pre>
+<ul>
+<li>跳到上一步/下一步</li>
+</ul>
+<p>ALT + 左箭头/右箭头</p>
+<ul>
+<li>MAKE编译工程</li>
+</ul>
+<p>F7</p>
+</blockquote>
+<blockquote>
+<p>设置代码块，节约手敲时间，然后在程序里按快捷键 <code>CTRL+SHIFT+空格</code> 即可插入</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230604203442.webp" alt=""></p>
+</blockquote>
+<blockquote>
+<p>查找与替换</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230606103401.webp" alt=""></p>
+</blockquote>
+<h2 id="仿真-下载">仿真/下载</h2>
+<ul>
+<li>模拟仿真</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230604161156.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230604161453.webp" alt=""></p>
+<blockquote>
+<p>如果出现仿真错误，可以点击恢复出厂设置即可：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230605022053.webp" alt=""></p>
+<p>还有就是仿真点这个，即使没有硬件也可以，别点旁边那个否则报错！！！</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230605022134.webp" alt=""></p>
+</blockquote>
+<ul>
+<li>BSL下载</li>
+</ul>
+<p>这里不使用仿真器下载，使用BSL串口下载(需要安装CH340驱动)，通过 txt 文件进行下载</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230604164922.webp" alt=""></p>
+<p>然后打开软件 <code>MspFet</code> 进行下载，生成的 TXT 文件在工程文件夹下 <code>Debug\Exe</code></p>
+<blockquote>
+<p>选择单片机型号先，注意端口号一定要在 <code>1~8</code> ，如果超过则在设备管理器里修改端口号即可</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230604173208.webp" alt=""></p>
+<blockquote>
+<p>下载即可</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230604173446.webp" alt=""></p>
+<h2 id="新建模板">新建模板</h2>
+<details ><summary> main.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __MAIN_H
+#define __MAIN_H
+#include &lt;msp430x14x.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdbool.h&gt;
+#include &lt;string.h&gt;
+#include &quot;public.h&quot;
+#include &quot;sys_init.h&quot;
+#include &quot;system.h&quot;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> main.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+* File          : main.c
+* Author        : Luckys.
+* Date          : 2023-06-04
+* description   : 主函数 
+****************************************************************************&#x2F;
+#include &lt;main.h&gt;
+
+int main( void )
+&#123;
+  Hardware_Init.vSys_Init(); &#x2F;&#x2F; 系统初始化
+  &#x2F;&#x2F; 主循环
+  while(1)
+  &#123;
+    &#x2F;&#x2F; 主要任务
+    if (System_Run &#x3D;&#x3D; System.ucSystem_Status)
+    &#123;
+      System.vRun();  &#x2F;&#x2F; 系统运行
+    &#125;
+    else
+    &#123;
+      System.vRun();  &#x2F;&#x2F; 系统待机
+    &#125;
+  &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> public.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __PUBLIC_H
+#define __PUBLIC_H
+#include &lt;main.h&gt;
+
+&#x2F;&#x2F; 数据类型重定义
+typedef signed char        sint8_t;
+typedef signed short int   sint16_t;
+typedef signed long        sint32_t;
+
+typedef unsigned char      uint8_t;
+typedef unsigned short int uint16_t;
+typedef unsigned long      uint32_t;
+
+&#x2F;&#x2F; 定义枚举类型
+typedef enum
+&#123;
+  TRUE &#x3D; (uint8_t)1,
+  FALSE &#x3D; (uint8_t)0,
+&#125;BOOL_t;
+
+typedef struct
+&#123;
+  void (*vDelay_ms)(uint16_t); &#x2F;&#x2F; ms延时函数
+&#125;Public_t;
+
+extern Public_t Public;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> public.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+* File          : public.c
+* Author        : Luckys.
+* Date          : 2023-06-04
+* description   : 通用
+****************************************************************************&#x2F;
+
+#include &lt;main.h&gt;
+
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;静态函数声明区 BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void vDelay_ms(uint16_t);  &#x2F;&#x2F; ms延时函数
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;静态函数声明区   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+
+
+Public_t Public &#x3D; 
+&#123;
+  vDelay_ms,
+&#125;;
+
+
+&#x2F;*
+* @function     : vDelay_ms
+* @param        : ms -&gt; 需要延时的时间
+* @retval       : None
+* @brief        : ms延时
+*&#x2F;
+static void vDelay_ms(uint16_t ms)
+&#123;
+  uint16_t i,j;
+  
+  for (i &#x3D; 0; i &lt; ms; i++)
+  &#123;
+    for (j &#x3D; 0; j &lt; 1590; j++); &#x2F;&#x2F; 示波器测量时间校准即可(使用LED翻转)
+  &#125;  
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> system.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __SYSTEM_H
+#define __SYSTEM_H
+#include &lt;main.h&gt;
+
+&#x2F;&#x2F; 系统状态宏定义
+#define System_StandBy  (uint8_t)0
+#define System_Run      (uint8_t)1
+&#x2F;&#x2F; 错误宏定义
+#define ErrorCode_NoError (uint8_t)0
+#define ErrorCode_CLK     (uint8_t)1
+
+typedef struct
+&#123;
+  uint8_t ucSystem_Status;  &#x2F;&#x2F; 系统状态
+  uint8_t ucSystem_ErrorCode; &#x2F;&#x2F; 系统错误码
+  
+  void (*vRun)(void); &#x2F;&#x2F; 系统运行
+  void (*vStandBy)(void); &#x2F;&#x2F; 系统待机
+  void (*vError_Handle)(void);  &#x2F;&#x2F; 错误处理
+&#125;System_t;
+
+
+extern System_t System;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> system.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File          : system.c
+ * Author        : Luckys.
+ * Date          : 2023-06-05
+ * description   : 系统运行函数
+****************************************************************************&#x2F;
+
+#include &lt;main.h&gt;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;静态函数声明区 BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;  
+static void vRun(void); &#x2F;&#x2F; 系统运行
+static void vStandBy(void); &#x2F;&#x2F; 系统待机
+static void vError_Handle(void);  &#x2F;&#x2F; 错误处理
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;静态函数声明区   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+System_t System &#x3D; 
+&#123;
+  System_Run,
+  ErrorCode_NoError,
+  
+  vRun,
+  vStandBy,
+  vError_Handle,
+&#125;;
+
+&#x2F;*
+* @function     : vRun
+* @param        : None
+* @retval       : None
+* @brief        : 系统运行
+*&#x2F;
+static void vRun(void)
+&#123;
+  
+&#125;
+
+&#x2F;*
+* @function     : vStandBy
+* @param        : None
+* @retval       : None
+* @brief        : 系统待机
+*&#x2F;
+static void vStandBy(void)
+&#123;
+  
+&#125;
+
+&#x2F;*
+* @function     : vError_Handle
+* @param        : None
+* @retval       : None
+* @brief        : 错误处理
+*&#x2F;
+static void vError_Handle(void)
+&#123;
+  
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> sys_init.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __SYS_INIT_H
+#define __SYS_INIT_H
+#include &lt;main.h&gt;
+
+typedef struct
+&#123;
+  void (*vCLK_Init)(void);  &#x2F;&#x2F; 时钟初始化
+  void (*vGPIO_Init)(void); &#x2F;&#x2F; 通用输入输出端口初始化
+  void (*vIE_Init)(void); &#x2F;&#x2F; 中断初始化
+  void (*vPower_On_Indication)(void); &#x2F;&#x2F; 上电指示
+  void (*vSys_Init)(void); &#x2F;&#x2F; 系统初始化
+&#125;Hardware_Init_t;
+
+extern Hardware_Init_t Hardware_Init;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> sys_init.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+* File          : sys_init.c
+* Author        : Luckys.
+* Date          : 2023-06-04
+* description   : 系统初始化  
+****************************************************************************&#x2F;
+
+#include &lt;main.h&gt;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;静态函数声明区 BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void vCLK_Init(void);  &#x2F;&#x2F; 时钟初始化
+static void vGPIO_Init(void); &#x2F;&#x2F; 通用输入输出端口初始化
+static void vIE_Init(void); &#x2F;&#x2F; 中断初始化
+static void vPower_On_Indication(void); &#x2F;&#x2F; 上电指示
+static void vSys_Init(void); &#x2F;&#x2F; 系统初始化
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;静态函数声明区   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+Hardware_Init_t Hardware_Init &#x3D; 
+&#123;
+  vCLK_Init,
+  vGPIO_Init,
+  vIE_Init,
+  vPower_On_Indication,
+  vSys_Init,
+&#125;;
+
+&#x2F;*
+* @function     : vCLK_Init
+* @param        : None
+* @retval       : None
+* @brief        : 时钟初始化
+*&#x2F;
+static void vCLK_Init(void)
+&#123;
+  
+&#125;
+
+&#x2F;*
+* @function     : vGPIO_Init
+* @param        : None
+* @retval       : None
+* @brief        : 通用输入输出端口初始化
+*&#x2F;
+static void vGPIO_Init(void)
+&#123;
+  
+&#125;
+
+&#x2F;*
+* @function     : vIE_Init
+* @param        : None
+* @retval       : None
+* @brief        : 中断初始化
+*&#x2F;
+static void vIE_Init(void)
+&#123;
+  __enable_interrupt(); &#x2F;&#x2F; 使能全局中断
+&#125;
+
+&#x2F;*
+* @function     : vPower_On_Indication
+* @param        : None
+* @retval       : None
+* @brief        : 上电指示
+*&#x2F;
+static void vPower_On_Indication(void)
+&#123;
+  
+&#125;
+
+&#x2F;*
+* @function     : Sys_Init
+* @param        : None
+* @retval       : None
+* @brief        : 系统初始化
+*&#x2F;
+static void vSys_Init(void)
+&#123;
+  WDTCTL &#x3D; WDTPW + WDTHOLD; &#x2F;&#x2F; 停止看门狗定时器以防止超时复位
+&#125;</code></pre>
+              </div>
+            </details>
+<h2 id="时钟详解">时钟详解</h2>
+<ul>
+<li>时钟源</li>
+</ul>
+<blockquote>
+<p><code>LFXT1CLK</code>：低频/高频振荡器，可用于低频32768Hz</p>
+<p><code>XT2CLK</code>：可选的高频振荡器</p>
+<p><code>DCOCLK</code>：具有RC型特性的内部数控振荡器(DCO)</p>
+</blockquote>
+<ul>
+<li>时钟信号</li>
+</ul>
+<blockquote>
+<p><code>ACLK</code>：辅助时钟 — 主要给低速外设使用</p>
+<p><code>MCLK</code>：主时钟 — CPU使用</p>
+<p><code>SMCLK</code>：副主时钟 — 主要给高速外设使用</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230605090311.webp" alt=""></p>
+<blockquote>
+<p>上电复位后，MCU 和 SMCK 默认使用 DCOCLK时钟，频率为 800KHz,ACLK使用 LFXT1，频率为 32.768KHz</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230605101859.webp" alt=""></p>
+<blockquote>
+<p>寄存器</p>
+<ul>
+<li>寄存器下面那行是默认值</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230605110853.webp" alt=""></p>
+<ul>
+<li>寄存器图空白处</li>
+</ul>
+<p>该位可能被其他模块使用。 请参阅特定于设备的数据表。一般下面有注解</p>
+</blockquote>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230605104151.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230605104235.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230605104246.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230605112151.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230605112201.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>时钟配置程序编写</li>
+</ul>
+<blockquote>
+<p>步骤：</p>
+<ol>
+<li>开启晶振</li>
+<li>清除 OFIFG 标志</li>
+<li>等待至少 50 us</li>
+<li>测试 OFIFG，并重复步骤 1-4，直到 OFIFG 保持清零</li>
+</ol>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230605111754.webp" alt=""></p>
+<details ><summary> sys_init.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+* @function     : vCLK_Init
+* @param        : None
+* @retval       : None
+* @brief        : 时钟初始化
+*&#x2F;
+static void vCLK_Init(void)
+&#123;
+  uint8_t i;
+  uint8_t Error_Cnt &#x3D; 0;
+  
+  &#x2F;&#x2F; MCLK  -&gt; 主系统时钟，CPU使用
+  &#x2F;&#x2F; SMCLK -&gt; 子系统时钟，主要给高速外设使用
+  &#x2F;&#x2F; ACLK  -&gt; 辅助系统，主要给低速外设使用
+  
+  &#x2F;&#x2F; 系统复位后，时钟默认情况如下：
+  &#x2F;&#x2F; MCLK与SMCLK默认使用DCO，频率为800kHz；
+  &#x2F;&#x2F; ACLK使用LFXT1，频率为32.768KH;
+  
+  &#x2F;&#x2F; 运行时钟
+  &#x2F;&#x2F; MCLK &#x3D; SMCLK &#x3D; XT2 &#x3D; 8MHz
+  &#x2F;&#x2F; ACLK &#x3D; LFXT1 &#x3D; 32.768KHZ
+  BCSCTL1 &amp;&#x3D; ~XT2OFF;  &#x2F;&#x2F; 打开XT2高频晶体振荡器
+  do
+  &#123;
+    IFG1 &amp;&#x3D; ~OFIFG;     &#x2F;&#x2F; 清除振荡器故障标志位
+    for (i &#x3D; 0; i &lt; 100; i++);  &#x2F;&#x2F; 至少等待50个周期--50us
+
+    if(Error_Cnt++ &gt;&#x3D; 100)        &#x2F;&#x2F; 超时退出
+    &#123;
+      break;
+    &#125;
+  &#125;
+  while (IFG1&amp;OFIFG);   &#x2F;&#x2F; 检测荡器故障标志位，为0时退出循环
+  
+  if (Error_Cnt &lt; 100)  &#x2F;&#x2F; 说明晶体正常，上面语句是正常退出
+  &#123;
+    BCSCTL2 |&#x3D; SELM_2 + SELS;   &#x2F;&#x2F; MCLK和SMCLK选择XT2(可以使用|)
+  &#125;
+  else
+  &#123;
+    BCSCTL1 &#x3D; XT2OFF;   &#x2F;&#x2F; 关闭XT2高频晶体振荡器
+    &#x2F;&#x2F; DCO设置为最大值(全部置1)，8MHz
+    DCOCTL &#x3D; DCO0 + DCO1 + DCO2;
+    BCSCTL1 &#x3D; RSEL0 + RSEL1 + RSEL2;
+    &#x2F;&#x2F; 系统错误处理
+    System.ucSystem_ErrorCode &#x3D; ErrorCode_CLK;
+    System.vError_Handle();
+  &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<h2 id="中断问题">中断问题</h2>
+<p>430是默认关闭总中断的，而且中断优先级是固定，不能嵌套，如果想嵌套则需要在中断函数里打开总中断</p>
+<p>当进入中断服务程序时，只要不在中断服务程序中再次开中断，则总中断是关闭的，此时后面到来的中断不管是比当前中断的优先级高还是低都不执行</p>
+<p>若在中断中开了总中断，后来的中断同时有多个，则会按优先级来执行，即中断优先级只有在多个中断同时到来才起作用！中断服务不执行抢先原则</p>
+<p>还有就是那些需要手动清除中断标志位的中断需要先清除中断标志位再开启总中断否则会造成有相同的中断不断嵌入，而导致堆栈溢出引起复位</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#pragma vector &#x3D; ADC12_VECTOR
+__interrupt void ADC12_ISR(void)
+&#123;
+    _EINT();
+	……
+&#125;</code></pre>
+<h2 id="GPIO手册阅读">GPIO手册阅读</h2>
+<ul>
+<li>讲解</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230605154745.webp" alt=""></p>
+<blockquote>
+<p>MSP430设备最多实现了6个数字I/O端口，<code>P1-P6</code>，每个端口都有 <code>8</code> 个输入输出引脚，每个输入/输出销都可单独配置为输入或输出方向，并且每个输入/输出线都可以单独读取或写入到</p>
+<p>端口P1和P2具有 <code>中断</code> 功能。P1和P2 I/O线的每个中断可以单独启用并配置为提供在输入信号的上升边缘或下降边缘上的中断。 <code>所有 P1 I/O 线都来自一个中断向量，所有 P2 I/O 线都来自不同的单个中断向量</code></p>
+</blockquote>
+<blockquote>
+<p>数字输入/输出功能包括：</p>
+<ol>
+<li>可独立编程的独立 I/O</li>
+<li>任何输入或输出组合</li>
+<li>可单独配置的 P1 和 P2 中断</li>
+<li>独立的输入和输出数据寄存器</li>
+</ol>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">寄存器</th>
+<th style="text-align:center">名称</th>
+<th style="text-align:left">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PxIN</td>
+<td style="text-align:center">输入</td>
+<td style="text-align:left">Bit = 0: The input is low<br>Bit = 1: The input is high</td>
+</tr>
+<tr>
+<td style="text-align:center">PxOUT</td>
+<td style="text-align:center">输出</td>
+<td style="text-align:left">Bit = 0: The output is low<br>Bit = 1: The output is high</td>
+</tr>
+<tr>
+<td style="text-align:center">PxDIR</td>
+<td style="text-align:center">方向</td>
+<td style="text-align:left">Bit = 0: The port pin is switched to input direction<br>Bit = 1: The port pin is switched to output direction</td>
+</tr>
+<tr>
+<td style="text-align:center">PxSEL</td>
+<td style="text-align:center">复用</td>
+<td style="text-align:left">Bit = 0: I/O Function is selected for the pin<br>Bit = 1: Peripheral module function is selected for the pin</td>
+</tr>
+<tr>
+<td style="text-align:center">PxIFG</td>
+<td style="text-align:center">中断</td>
+<td style="text-align:left">Bit = 0: No interrupt is pending<br>Bit = 1: An interrupt is pending</td>
+</tr>
+<tr>
+<td style="text-align:center">PxIES</td>
+<td style="text-align:center">中断沿选择</td>
+<td style="text-align:left">Bit = 0: The PxIFGx flag is set with a low-to-high transition<br>Bit = 1: The PxIFGx flag is set with a high-to-low transition</td>
+</tr>
+<tr>
+<td style="text-align:center">PxIE</td>
+<td style="text-align:center">中断使能</td>
+<td style="text-align:left">Bit = 0: The interrupt is disabled<br>Bit = 1: The interrupt is enabled</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>MSP430管脚要么是GPIO，要么是复用，而且只有一个复用引脚</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">寄存器</th>
+<th style="text-align:center">名称</th>
+<th style="text-align:left">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">P1IFG, P2IFG</td>
+<td style="text-align:center">中断标志位</td>
+<td style="text-align:left">Bit = 0: The input is low<br>Bit = 1: The input is high</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>未使用的 i o 引脚应配置为 i o 功能输出方向，并在印刷电路板上保持未连接以降低功耗 px 输出位的值无关紧要，因为该引脚未连接，请参阅系统章节重置终止未使用引脚的中断和操作模式</p>
+</blockquote>
+<ul>
+<li>程序编写</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+* @function     : vGPIO_Init
+* @param        : None
+* @retval       : None
+* @brief        : 通用输入输出端口初始化
+*&#x2F;
+static void vGPIO_Init(void)
+&#123;
+  &#x2F;&#x2F; GPIO配置
+  &#x2F;&#x2F; 引脚复用PxSEL -&gt;  0 - GPIO &#x2F; 1 - 复用(外部中断禁用)
+  &#x2F;&#x2F; 方向PxDIR -&gt; 0 - 输入 &#x2F; 1 - 输出
+  &#x2F;&#x2F; 输入PxIN &#x2F; 输出PxOUT
+  
+  &#x2F;&#x2F; P1与P2中断
+  &#x2F;&#x2F; 标志位   P1IFG &#x2F; P2IFG - 中断标志位(必须软件清除)
+  &#x2F;&#x2F; 触发选择 P1IES &#x2F; P2IES - 0 - 上升沿   1 - 下降沿(写入时会影响PxIFG)
+  &#x2F;&#x2F; 中断启用 P1IE &#x2F; P2IE 
+  
+  &#x2F;&#x2F; 根据外设进行配置
+  P1DIR &#x3D; 0xC6;P1OUT &#x3D; 0x80;
+  P2DIR &#x3D; 0xFF;P2OUT &#x3D; 0x00;
+  P3DIR &#x3D; 0x7F;P3OUT &#x3D; 0xC0;
+  P4DIR &#x3D; 0xFF;P4OUT &#x3D; 0x00;
+  P5DIR &#x3D; 0xFF;P5OUT &#x3D; 0x61;
+  P6DIR &#x3D; 0x9F;P6OUT &#x3D; 0x70;  
+&#125;</code></pre>
+<h2 id="LED">LED</h2>
+<ul>
+<li>硬件连接</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230605154855.webp" alt=""></p>
+<ul>
+<li>程序编写</li>
+</ul>
+<details ><summary> 杂 </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+* @function     : vRun
+* @param        : None
+* @retval       : None
+* @brief        : 系统运行
+*&#x2F;
+static void vRun(void)
+&#123;
+  &#x2F;&#x2F; LED1间隔500ms闪烁
+  Led.vLed_ON(LED1);
+  Public.vDelay_ms(500);
+  Led.vLed_OFF(LED1);
+  Public.vDelay_ms(500);  
+&#125;
+
+&#x2F;*
+* @function     : Sys_Init
+* @param        : None
+* @retval       : None
+* @brief        : 系统初始化
+*&#x2F;
+static void vSys_Init(void)
+&#123;
+  WDTCTL &#x3D; WDTPW + WDTHOLD; &#x2F;&#x2F; 停止看门狗定时器以防止超时复位
+  Hardware_Init.vCLK_Init();    &#x2F;&#x2F; 时钟初始化
+  Hardware_Init.vGPIO_Init();   &#x2F;&#x2F; GPIO初始化
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> led.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __LED_H
+#define __LED_H
+#include &lt;main.h&gt;
+
+
+&#x2F;&#x2F; 定义枚举类型
+typedef enum
+&#123;
+  LED1 &#x3D; (uint8_t)0x01,
+  LED2 &#x3D; (uint8_t)0x02,
+  LED3 &#x3D; (uint8_t)0x03,
+  LED4 &#x3D; (uint8_t)0x04,
+&#125;Led_Num_t;
+
+
+typedef struct
+&#123;
+  void (*vLed_ON)(Led_Num_t);     &#x2F;&#x2F; 打开
+  void (*vLed_OFF)(Led_Num_t);    &#x2F;&#x2F; 关闭
+  void (*vLed_Flip)(Led_Num_t);   &#x2F;&#x2F; 翻转
+&#125;Led_t;
+
+extern Led_t Led;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> led.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File          : led.c
+ * Author        : Luckys.
+ * Date          : 2023-06-05
+ * description   : LED
+****************************************************************************&#x2F;
+
+#include &lt;main.h&gt;
+
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void vLed_ON(Led_Num_t);     &#x2F;&#x2F; 打开
+static void vLed_OFF(Led_Num_t);    &#x2F;&#x2F; 关闭
+static void vLed_Flip(Led_Num_t);   &#x2F;&#x2F; 翻转
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+Led_t Led &#x3D; 
+&#123;
+  vLed_ON,
+  vLed_OFF,
+  vLed_Flip,
+&#125;;
+
+&#x2F;*
+* @function     : vLed_ON
+* @param        : Led_Num -&gt;LED编号
+* @retval       : None
+* @brief        : LED打开
+*&#x2F;
+static void vLed_ON(Led_Num_t Led_Num)
+&#123;
+  switch(Led_Num)
+  &#123;
+  case LED1:
+    &#123;
+      P5OUT |&#x3D; BIT1;    &#x2F;&#x2F; P51置1
+      break;
+    &#125;
+  case LED2:
+    &#123;
+      P5OUT |&#x3D; BIT2;    &#x2F;&#x2F; P52置1
+      break;
+    &#125;
+  case LED3:
+    &#123;
+      P5OUT |&#x3D; BIT3;    &#x2F;&#x2F; P53置1
+      break;
+    &#125;
+  case LED4:
+    &#123;
+      P5OUT |&#x3D; BIT4;    &#x2F;&#x2F; P54置1
+      break;
+    &#125;
+  default:
+    &#123;
+      P5OUT &amp;&#x3D; (~(BIT1 + BIT2 + BIT3 + BIT4));
+      break;    
+    &#125;
+  &#125;
+&#125;
+
+&#x2F;*
+* @function     : vLed_OFF
+* @param        : Led_Num -&gt;LED编号
+* @retval       : None
+* @brief        : LED关闭
+*&#x2F;
+static void vLed_OFF(Led_Num_t Led_Num)
+&#123;
+  switch(Led_Num)
+  &#123;
+  case LED1:
+    &#123;
+      P5OUT &amp;&#x3D; (~BIT1);    &#x2F;&#x2F; P51置0
+      break;
+    &#125;
+  case LED2:
+    &#123;
+      P5OUT &amp;&#x3D; (~BIT2);    &#x2F;&#x2F; P52置0
+      break;
+    &#125;
+  case LED3:
+    &#123;
+      P5OUT &amp;&#x3D; (~BIT3);    &#x2F;&#x2F; P53置0
+      break;
+    &#125;
+  case LED4:
+    &#123;
+      P5OUT &amp;&#x3D; (~BIT4);    &#x2F;&#x2F; P54置0
+      break;
+    &#125;
+  default:
+    &#123;
+      P5OUT &amp;&#x3D; (~(BIT1 + BIT2 + BIT3 + BIT4));
+      break;    
+    &#125;
+  &#125;
+&#125;
+
+&#x2F;*
+* @function     : vLed_Flip
+* @param        : Led_Num -&gt;LED编号
+* @retval       : None
+* @brief        : LED翻转
+*&#x2F;
+static void vLed_Flip(Led_Num_t Led_Num)
+&#123;
+  switch(Led_Num)
+  &#123;
+  case LED1:
+    &#123;
+      P5OUT ^&#x3D; BIT1;    &#x2F;&#x2F; P51置反
+      break;
+    &#125;
+  case LED2:
+    &#123;
+      P5OUT ^&#x3D; BIT2;    &#x2F;&#x2F; P52置反
+      break;
+    &#125;
+  case LED3:
+    &#123;
+      P5OUT ^&#x3D; BIT3;    &#x2F;&#x2F; P53置反
+      break;
+    &#125;
+  case LED4:
+    &#123;
+      P5OUT ^&#x3D; BIT4;    &#x2F;&#x2F; P54置反
+      break;
+    &#125;
+  default:
+    &#123;
+      P5OUT &amp;&#x3D; (~(BIT1 + BIT2 + BIT3 + BIT4));
+      break;    
+    &#125;
+  &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<h2 id="定时器A-状态机">定时器A+状态机</h2>
+<blockquote>
+<p>有3个TimerA，16位</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230605173414.webp" alt=""></p>
+<blockquote>
+<p>定时器时钟可以来自 ACLK、SMCLK 或通过 TACLK 从外部获取或 INCLK，使用 TASSELx 位选择时钟源。 被选中的<br>
+时钟源可以直接传递给定时器或除以 2、4 或 8</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230605193559.webp" alt=""></p>
+<blockquote>
+<p>寄存器</p>
+</blockquote>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230606073739.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230605174814.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230605175102.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230605175638.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230605192924.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230605193027.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<blockquote>
+<p>模式</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230605195117.webp" alt=""></p>
+</blockquote>
+<ul>
+<li>上升模式</li>
+</ul>
+<p>会产生两种中断：比较中断，溢出中断</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230605200437.webp" alt=""></p>
+<ul>
+<li>连续运行模式</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230605200707.webp" alt=""></p>
+<ul>
+<li>上/下模式</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230605200913.webp" alt=""></p>
+<blockquote>
+<p>中断</p>
+</blockquote>
+<p>两个中断向量与16位Timer_A模块相关联：</p>
+<ol>
+<li><code>TACCR0 CCIFG的TACCR0中断向量</code></li>
+<li><code>AIV中断向量和TAIFG的所有其他CCIFG标志</code></li>
+</ol>
+<p><code>TACCR0CCIFG</code> 标志具有 <code>最高</code> 的Timer_A中断优先级，并且具有一个专用的中断向量</p>
+<ul>
+<li>程序编写</li>
+</ul>
+<blockquote>
+<p>定时器初始化的话首先选择时钟源，这里选择辅助时钟SMCLK，8分频后1us，然后定时5ms，打开中断，编写中断函数(注意格式)</p>
+<p>中断向量可以在头文件最后那找</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230605221035.webp" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#pragma vector &#x3D; TIMERA0_VECTOR &#x2F;&#x2F; 定义一下中断向量
+__interrupt void TimerA_isr(void)       &#x2F;&#x2F; __interrupt 是中断关键字 后面是自定义函数名称
+&#123;
+  ....
+&#125;</code></pre>
+</blockquote>
+<details ><summary> 杂 </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+* @function     : vRun
+* @param        : None
+* @retval       : None
+* @brief        : 系统运行
+*&#x2F;
+static void vRun(void)
+&#123;
+  &#x2F;&#x2F; 流水灯--状态机+定时器A
+  if (TRUE &#x3D;&#x3D; STA_Machine.ucSTA_Machine_Switch_Flag)
+  &#123;
+    STA_Machine.ucSTA_Machine_Switch_Flag &#x3D; FALSE;
+    
+    switch(STA_Machine.ucSTA_Machine_Status)
+    &#123;
+    case STA1:
+      &#123;
+        STA_Machine.vFun_STA1();
+        STA_Machine.ucSTA_Machine_Status &#x3D; STA2;
+        break;
+      &#125;
+    case STA2:
+      &#123;
+        STA_Machine.vFun_STA2();
+        STA_Machine.ucSTA_Machine_Status &#x3D; STA3;        
+        break;
+      &#125;
+    case STA3:
+      &#123;
+        STA_Machine.vFun_STA3();
+        STA_Machine.ucSTA_Machine_Status &#x3D; STA4;        
+        break;
+      &#125;
+    case STA4:
+      &#123;
+        STA_Machine.vFun_STA4();
+        STA_Machine.ucSTA_Machine_Status &#x3D; STA5;        
+        break;
+      &#125;
+    case STA5:
+      &#123;
+        STA_Machine.vFun_STA5();
+        STA_Machine.ucSTA_Machine_Status &#x3D; STA1;
+        break;
+      &#125;
+    default:
+      &#123;
+        STA_Machine.ucSTA_Machine_Status &#x3D; STA1;
+        break;   
+      &#125;   
+    &#125;
+  &#125;
+&#125;
+
+&#x2F;*
+* @function     : vIE_Init
+* @param        : None
+* @retval       : None
+* @brief        : 中断初始化
+*&#x2F;
+static void vIE_Init(void)
+&#123;
+  __enable_interrupt(); &#x2F;&#x2F; 使能全局中断
+&#125;
+
+&#x2F;*
+* @function     : Sys_Init
+* @param        : None
+* @retval       : None
+* @brief        : 系统初始化
+*&#x2F;
+static void vSys_Init(void)
+&#123;
+  WDTCTL &#x3D; WDTPW + WDTHOLD; &#x2F;&#x2F; 停止看门狗定时器以防止超时复位
+  Hardware_Init.vCLK_Init();    &#x2F;&#x2F; 时钟初始化
+  Hardware_Init.vGPIO_Init();   &#x2F;&#x2F; GPIO初始化
+  TimerA.vTimerA_Init();
+  Hardware_Init.vIE_Init();     &#x2F;&#x2F; 中断初始化
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> timerA.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __TIMERA_H
+#define __TIMERA_H
+#include &lt;main.h&gt;
+
+
+&#x2F;&#x2F; 定义枚举类型
+typedef enum
+&#123;
+  TimerA_50ms &#x3D; (uint16_t)10,
+  TimerA_100ms &#x3D; (uint16_t)20,
+  TimerA_500ms &#x3D; (uint16_t)100,
+  TimerA_1s &#x3D; (uint16_t)200,
+&#125;TimerA_Value_t;
+
+typedef struct
+&#123;
+  uint16_t volatile usMCU_Run_Timer;    &#x2F;&#x2F; 系统运行时间
+  
+  void (*vTimerA_Init)(void);   &#x2F;&#x2F; 定时器初始化
+&#125;TimerA_t;
+
+extern TimerA_t TimerA;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> timerA.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File          : timerA.c
+ * Author        : Luckys.
+ * Date          : 2023-06-05
+ * description   : 定时器A 
+****************************************************************************&#x2F;
+
+#include &lt;main.h&gt;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void vTimerA_Init(void);
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+TimerA_t TimerA &#x3D; 
+&#123;
+  0,
+  vTimerA_Init,
+&#125;;
+
+&#x2F;*
+* @function     : vTimerA_Init
+* @param        : None
+* @retval       : None
+* @brief        : 定时器A初始化
+*&#x2F;
+static void vTimerA_Init(void)
+&#123;
+  &#x2F;&#x2F; 设置控制寄存器 -- SMCLK + 8分频 + 工作模式为向上计数
+  TACTL &#x3D; TASSEL_2 + ID_3 + MC_1;
+  &#x2F;&#x2F; 设置捕获&#x2F;比较寄存器 -- 设置周期为5ms
+  &#x2F;&#x2F; 定时计算：
+  &#x2F;&#x2F; 定时器A时钟 &#x3D; SMCLK&#x2F;8 &#x3D; 8000000Hz &#x2F; 8 &#x3D; 1000 000Hz
+  &#x2F;&#x2F; Fre &#x3D; 1 &#x2F; 0.005s &#x3D; 200Hz
+  &#x2F;&#x2F; 1000 000Hz &#x2F; 200Hz &#x3D; 5000 - 1
+  CCR0 &#x3D; 5000 - 1;
+  &#x2F;&#x2F; 设置捕获&#x2F;比较控制寄存器 - 默认比较模式， 开启CCIE中断
+  CCTL0 &#x3D; CCIE;
+&#125;
+
+#pragma vector &#x3D; TIMERA0_VECTOR &#x2F;&#x2F; 定义一下中断向量
+__interrupt void TimerA_isr(void)       &#x2F;&#x2F; __interrupt 是中断关键字
+&#123;
+  if (++TimerA.usMCU_Run_Timer &gt;&#x3D; TimerA_100ms)
+  &#123;
+    TimerA.usMCU_Run_Timer &#x3D; 0;
+    &#x2F;&#x2F; 置位流水灯状态机标志位
+    STA_Machine.ucSTA_Machine_Switch_Flag &#x3D; TRUE;
+  &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> sta_machine.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __STA_MACHINE_H
+#define __STA_MACHINE_H
+#include &lt;main.h&gt;
+
+&#x2F;&#x2F; 定义枚举类型
+typedef enum
+&#123;
+  STA1 &#x3D; (uint8_t)0x01,
+  STA2 &#x3D; (uint8_t)0x02,
+  STA3 &#x3D; (uint8_t)0x03,
+  STA4 &#x3D; (uint8_t)0x04,
+  STA5 &#x3D; (uint8_t)0x05,
+&#125;STA_Machine_Status_t;
+
+typedef struct
+&#123;
+  STA_Machine_Status_t ucSTA_Machine_Status;    &#x2F;&#x2F; 状态机状态
+  uint8_t ucSTA_Machine_Switch_Flag;    &#x2F;&#x2F; 状态机切换状态标志位
+  
+  void (*vFun_STA1)(void);
+  void (*vFun_STA2)(void);
+  void (*vFun_STA3)(void);
+  void (*vFun_STA4)(void);
+  void (*vFun_STA5)(void);
+&#125;STA_Machine_t;
+
+
+extern STA_Machine_t STA_Machine;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> sta_machine.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File          : sta_machine.c
+ * Author        : Luckys.
+ * Date          : 2023-06-05
+ * description   : 状态机   
+****************************************************************************&#x2F;
+
+#include &lt;main.h&gt;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void vFun_STA1(void);
+static void vFun_STA2(void);
+static void vFun_STA3(void);
+static void vFun_STA4(void);
+static void vFun_STA5(void);
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+STA_Machine_t STA_Machine &#x3D; 
+&#123;
+  STA1,
+  FALSE,
+  
+  vFun_STA1,
+  vFun_STA2,
+  vFun_STA3,
+  vFun_STA4,
+  vFun_STA5,
+&#125;;
+
+
+&#x2F;*
+* @function     : vFun_STA1~5
+* @param        : None
+* @retval       : None
+* @brief        : 状态函数
+*&#x2F;
+static void vFun_STA1(void)
+&#123;
+  Led.vLed_ON(LED1);
+  Led.vLed_OFF(LED2);
+  Led.vLed_OFF(LED3);
+  Led.vLed_OFF(LED4);
+&#125;
+
+static void vFun_STA2(void)
+&#123;
+  Led.vLed_OFF(LED1);
+  Led.vLed_ON(LED2);
+  Led.vLed_OFF(LED3);
+  Led.vLed_OFF(LED4);
+&#125;
+
+static void vFun_STA3(void)
+&#123;
+  Led.vLed_OFF(LED1);
+  Led.vLed_OFF(LED2);
+  Led.vLed_ON(LED3);
+  Led.vLed_OFF(LED4);
+&#125;
+
+static void vFun_STA4(void)
+&#123;
+  Led.vLed_OFF(LED1);
+  Led.vLed_OFF(LED2);
+  Led.vLed_OFF(LED3);
+  Led.vLed_ON(LED4);
+&#125;
+
+static void vFun_STA5(void)
+&#123;
+  Led.vLed_OFF(LED1);
+  Led.vLed_OFF(LED2);
+  Led.vLed_OFF(LED3);
+  Led.vLed_OFF(LED4);
+&#125;</code></pre>
+              </div>
+            </details>
+<h2 id="看门狗">看门狗</h2>
+<p>第一次上电，WDT模块自动配置在看门狗中使用 DCOCLK 的初始 <code>32毫秒</code> 复位间隔模式。 用户必须在初始复位间隔到期之前设置或停止 WDT。</p>
+<p>看门狗是 16位，受密码保护的，任何读写访问都必须使用字指令，并且写访问必须在上字节中包含写密码 <code>05Ah</code>。任何具有上字节中除05Ah以外的任何值的WDTCTL写入都是安全密钥冲突，并触发PUC系统重置。任何读取WDTCTL都会在上字节中读取 <code>069h</code></p>
+<p>WDT间隔应与 <code>WDTCNTCL = 1</code> 一起在一条指令中更改，以避免意外的立即PUC或中断。在更改时钟源之前，应停止WDT，以避免可能出现错误的时间间隔。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230606072958.webp" alt=""></p>
+<blockquote>
+<p>寄存器</p>
+</blockquote>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230606073958.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230606074100.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230606074117.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>程序编写</li>
+</ul>
+<blockquote>
+<p><code>WDT_ARST_250</code> 是一个宏，它的替换体是 <code>(WDTPW+WDTCNTCL+WDTSSEL+WDTIS0)</code>，这个已经是算好的时间在ACK 32K下是250ms</p>
+</blockquote>
+<details ><summary> 杂 </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+* @function     : Sys_Init
+* @param        : None
+* @retval       : None
+* @brief        : 系统初始化
+*&#x2F;
+static void vSys_Init(void)
+&#123;
+  WatchDog.vWatchDog_Init();    &#x2F;&#x2F; 看门狗初始化
+  Hardware_Init.vCLK_Init();    &#x2F;&#x2F; 时钟初始化
+  Hardware_Init.vGPIO_Init();   &#x2F;&#x2F; GPIO初始化
+  TimerA.vTimerA_Init();
+  Hardware_Init.vIE_Init();     &#x2F;&#x2F; 中断初始化
+&#125;
+
+#pragma vector &#x3D; TIMERA0_VECTOR &#x2F;&#x2F; 定义一下中断向量
+__interrupt void TimerA_isr(void)       &#x2F;&#x2F; __interrupt 是中断关键字
+&#123;
+  WatchDog.vWatchDog_Feed();    &#x2F;&#x2F;喂狗
+  
+  if (++TimerA.usMCU_Run_Timer &gt;&#x3D; TimerA_100ms)
+  &#123;
+    TimerA.usMCU_Run_Timer &#x3D; 0;
+    &#x2F;&#x2F; 置位流水灯状态机标志位
+    STA_Machine.ucSTA_Machine_Switch_Flag &#x3D; TRUE;
+  &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> watch_dog.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __WATCH_DOG_H
+#define __WATCH_DOG_H
+#include &lt;main.h&gt;
+
+
+typedef struct
+&#123;
+  void (*vWatchDog_Init)(void);   &#x2F;&#x2F; 看门狗初始化
+  void (*vWatchDog_Feed)(void); &#x2F;&#x2F; 喂狗
+&#125;WatchDog_t;
+
+
+extern WatchDog_t WatchDog;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> watch_dog.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File          : watch_dog.c
+ * Author        : Luckys.
+ * Date          : 2023-06-06
+ * description   : 看门狗 
+****************************************************************************&#x2F;
+
+#include &lt;main.h&gt;
+
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void vWatchDog_Init(void);
+static void vWatchDog_Feed(void);
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+WatchDog_t WatchDog &#x3D; 
+&#123;
+  vWatchDog_Init,
+  vWatchDog_Feed,
+&#125;;
+
+&#x2F;*
+* @function     : vWatchDog_Init
+* @param        : None
+* @retval       : None
+* @brief        : 看门狗初始化
+*&#x2F;
+static void vWatchDog_Init(void)
+&#123;
+  WDTCTL &#x3D; WDTPW + WDTHOLD;     &#x2F;&#x2F; 切换时钟源前先关闭看门狗
+  &#x2F;&#x2F; 时钟源选择ACLK,看门狗时间为250ms
+  WDTCTL &#x3D; WDT_ARST_250;
+    
+&#125;
+
+&#x2F;*
+* @function     : vWatchDog_Feed
+* @param        : None
+* @retval       : None
+* @brief        : 喂狗
+*&#x2F;
+static void vWatchDog_Feed(void)
+&#123;
+  WDTCTL &#x3D; WDT_ARST_250;
+&#125;</code></pre>
+              </div>
+            </details>
+<h2 id="USART">USART</h2>
+<p>USART通过 <code>PUC</code> 或设置 <code>SWRST位</code> 来重置，<code>SWRST</code> 默认已经是1了看寄存器可以知道</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230606084846.webp" alt=""></p>
+<p>一般计算公式很复杂，所以直接看推荐值</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230606085806.webp" alt=""></p>
+<blockquote>
+<p>寄存器</p>
+</blockquote>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230606090234.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230606091245.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230606091258.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230606091334.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230606091948.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230606092132.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230606092145.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230606092204.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230606092227.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230606092246.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230606092255.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>硬件连接</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230606095704.webp" alt=""></p>
+<ul>
+<li>程序编写</li>
+</ul>
+<details ><summary> 杂 </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+* @function     : Sys_Init
+* @param        : None
+* @retval       : None
+* @brief        : 系统初始化
+*&#x2F;
+static void vSys_Init(void)
+&#123;
+  WatchDog.vWatchDog_Init();    &#x2F;&#x2F; 看门狗初始化
+  Hardware_Init.vCLK_Init();    &#x2F;&#x2F; 时钟初始化
+  Hardware_Init.vGPIO_Init();   &#x2F;&#x2F; GPIO初始化
+  TimerA.vTimerA_Init();
+  Hardware_Init.vIE_Init();     &#x2F;&#x2F; 中断初始化
+  USART1.vUSART1_Init();        &#x2F;&#x2F; 串口1初始化
+  
+  USART1.vUSART1_SendString(&quot;系统初始化完成\r\n&quot;);
+  printf(&quot;PI &#x3D; %.1f\r\n&quot;,3.14);
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> usart1.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __USART1_H
+#define __USART1_H
+#include &lt;main.h&gt;
+
+typedef struct
+&#123;
+  void (*vUSART1_Init)(void);   &#x2F;&#x2F; 串口1初始化
+  void (*vUSART1_SendArray)(uint8_t*, uint16_t);        &#x2F;&#x2F; 发送数组
+  void (*vUSART1_SendString)(uint8_t*); &#x2F;&#x2F; 发送字符串
+  
+&#125;USART1_t;
+
+
+extern USART1_t USART1;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> usart1.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File          : usart1.c
+ * Author        : Luckys.
+ * Date          : 2023-06-06
+ * description   : 串口1  
+****************************************************************************&#x2F;
+
+#include &lt;main.h&gt;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void vUSART1_Init(void);   &#x2F;&#x2F; 串口1初始化
+static void vUSART1_SendArray(uint8_t*, uint16_t);        &#x2F;&#x2F; 发送数组
+static void vUSART1_SendString(uint8_t*); &#x2F;&#x2F; 发送字符串
+static void vUSART1_SendData(uint8_t);  &#x2F;&#x2F; 发送字符
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+USART1_t USART1 &#x3D; 
+&#123;
+  vUSART1_Init,
+  vUSART1_SendArray,
+  vUSART1_SendString,
+&#125;;
+
+&#x2F;*
+* @function     : vUSART1_Init
+* @param        : None
+* @retval       : None
+* @brief        : 串口1初始化
+*&#x2F;
+static void vUSART1_Init(void)
+&#123;
+  P3SEL |&#x3D; BIT6 + BIT7; &#x2F;&#x2F; 开启复用引脚功能P36(TX) P3(RX)
+  &#x2F;&#x2F; 参数设置
+  UCTL1 |&#x3D; SWRST;       &#x2F;&#x2F; 模块处于复位状态(默认已经置1，此行可要可不要)
+  ME2 |&#x3D; UTXE1 + URXE1; &#x2F;&#x2F; 使能串口1发送和接收
+  UCTL1 |&#x3D; CHAR;        &#x2F;&#x2F; 数据长度选择8位
+  &#x2F;&#x2F; 波特率设置 -- 手册查询可知：9600pcs 对应 00 03 4A
+  UTCTL1 |&#x3D; SSEL0;      &#x2F;&#x2F; 配置ACLK
+  UBR11 &#x3D; 0x00; &#x2F;&#x2F; UxBR1
+  UBR01 &#x3D; 0x03; &#x2F;&#x2F; UxBR0
+  UMCTL1 &#x3D; 0x4A;        &#x2F;&#x2F; UxMCTL
+  UCTL1 &amp;&#x3D; ~SWRST;      &#x2F;&#x2F; 把SWRST置0，启动模块
+  &#x2F;&#x2F; 如果需要中断可以设置
+&#x2F;&#x2F;  IE2 |&#x3D; UTXIE1 + URXIE1;
+&#125;
+
+&#x2F;*
+* @function     : vUSART1_SendArray
+* @param        : p_Arr --&gt; 要发送的数组 Arr_len --&gt; 数据的长度
+* @retval       : None
+* @brief        : 发送数组
+*&#x2F;
+static void vUSART1_SendArray(uint8_t* p_Arr, uint16_t Arr_len)
+&#123;
+  uint16_t i;
+  
+  for (i &#x3D; 0; i &lt; Arr_len; i++)
+  &#123;
+    vUSART1_SendData(*(p_Arr + i));
+  &#125;
+&#125;
+
+&#x2F;*
+* @function     : vUSART1_SendString
+* @param        : p_Str --&gt; 要发送的字符串
+* @retval       : None
+* @brief        : 发送数组
+*&#x2F;
+static void vUSART1_SendString(uint8_t* p_Str)
+&#123;
+  while (*p_Str)
+  &#123;
+    vUSART1_SendData(*(p_Str++));
+  &#125;
+&#125;
+
+&#x2F;*
+* @function     : vUSART1_SendData
+* @param        : ch --&gt; 要发送的字符数据
+* @retval       : None
+* @brief        : 发送字符
+*&#x2F;
+static void vUSART1_SendData(uint8_t ch)
+&#123;
+  while (!(IFG2 &amp; UTXIFG1));    &#x2F;&#x2F; 等待为空才能发送
+  TXBUF1 &#x3D; ch;
+&#125;
+
+&#x2F;&#x2F; putchar函数 重定向
+extern int putchar(int c)
+&#123;
+  vUSART1_SendData((uint8_t)c);
+  
+  return c;
+&#125;</code></pre>
+              </div>
+            </details>
+<h2 id="按键">按键</h2>
+<ul>
+<li>硬件连接</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230606123931.webp" alt=""></p>
+<h3 id="中断-延时">中断+延时</h3>
+<blockquote>
+<p>单击</p>
+</blockquote>
+<details ><summary> 杂 </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+* @function     : vIE_Init
+* @param        : None
+* @retval       : None
+* @brief        : 中断初始化
+*&#x2F;
+static void vIE_Init(void)
+&#123;
+  &#x2F;&#x2F; KEY中断
+  P1IES |&#x3D; KEY1;        &#x2F;&#x2F; 下降沿触发
+  P1IFG &amp;&#x3D; (~KEY1);     &#x2F;&#x2F; 清除标志位，避免误触发
+  P1IE |&#x3D; KEY1; &#x2F;&#x2F; 使能KEY1中断
+  
+  __enable_interrupt(); &#x2F;&#x2F; 使能全局中断
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> key.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __KEY_H
+#define __KEY_H
+#include &lt;main.h&gt;
+
+
+&#x2F;&#x2F; 按键引脚是P13
+#define KEY1    BIT3
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> key.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File          : key.c
+ * Author        : Luckys.
+ * Date          : 2023-06-06
+ * description   : 按键  
+****************************************************************************&#x2F;
+
+#include &lt;main.h&gt;
+   
+
+
+
+&#x2F;&#x2F; 按键中断函数
+#pragma vector &#x3D; PORT1_VECTOR
+__interrupt void Key1_isr(void)
+&#123;
+  static uint16_t Cnt &#x3D; 0;
+  
+  &#x2F;&#x2F; KEY1中断
+  if (KEY1 &#x3D;&#x3D; (P1IFG &amp; KEY1))
+  &#123;
+    &#x2F;&#x2F; 延时消抖
+    Public.vDelay_ms(5);
+    if ((P1IN &amp; KEY1) !&#x3D; KEY1)  &#x2F;&#x2F; 检测输入是否为低电平
+    &#123;
+      &#x2F;&#x2F; 按键按下执行功能
+      printf(&quot;KEY1 Down %u次\r\n&quot;,Cnt);
+    &#125;
+    &#x2F;&#x2F; 清除标志位
+    P1IFG &amp;&#x3D; (~KEY1); 
+  &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<blockquote>
+<p>长按</p>
+</blockquote>
+<p>在上面的基础上修改中断函数即可，这里注意中断优先级问题，要把喂狗的函数丢这里，不然长按导致单片机复位</p>
+<details ><summary> key.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 按键中断函数
+#pragma vector &#x3D; PORT1_VECTOR
+__interrupt void Key1_isr(void)
+&#123;
+  uint8_t Delay_Cnt;
+  
+  &#x2F;&#x2F; KEY1中断
+  if (KEY1 &#x3D;&#x3D; (P1IFG &amp; KEY1))
+  &#123;
+    &#x2F;&#x2F; 延时消抖
+    Public.vDelay_ms(5);
+    if ((P1IN &amp; KEY1) !&#x3D; KEY1)  &#x2F;&#x2F; 检测输入是否为低电平
+    &#123;
+      for (Delay_Cnt &#x3D; 0; Delay_Cnt &lt; 200; Delay_Cnt++)
+      &#123;
+        WatchDog.vWatchDog_Feed();    &#x2F;&#x2F;喂狗  
+        Public.vDelay_ms(10);
+        
+        if (KEY1 &#x3D;&#x3D; (P1IN &amp; KEY1))      &#x2F;&#x2F; 提前弹起则退出
+        &#123;
+          break;
+        &#125;
+      &#125;
+      if (Delay_Cnt &gt;&#x3D; 200)     &#x2F;&#x2F; 长按
+      &#123;
+        &#x2F;&#x2F; 执行功能 ---切换状态
+        if (System.ucSystem_Status &#x3D;&#x3D; System_Run)
+        &#123;
+          System.ucSystem_Status &#x3D; System_StandBy;
+          printf(&quot;系统处于待机状态\r\n&quot;);
+        &#125;
+        else
+        &#123;
+          System.ucSystem_Status &#x3D; System_Run;
+          printf(&quot;系统处于运行状态\r\n&quot;);
+        &#125;
+      &#125;
+      else      &#x2F;&#x2F; 单击
+      &#123;
+        printf(&quot;单击\r\n&quot;);
+      &#125;
+    &#125;
+    &#x2F;&#x2F; 清除标志位
+    P1IFG &amp;&#x3D; (~KEY1); 
+  &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<h3 id="中断-状态机">中断+状态机</h3>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230606205606.webp" alt=""></p>
+<details ><summary> 杂 </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 定义枚举类型
+typedef enum
+&#123;
+  TimerA_10ms &#x3D; (uint16_t)2,
+  TimerA_50ms &#x3D; (uint16_t)10,
+  TimerA_100ms &#x3D; (uint16_t)20,
+  TimerA_200ms &#x3D; (uint16_t)40,
+  TimerA_500ms &#x3D; (uint16_t)100,
+  TimerA_1s &#x3D; (uint16_t)200,
+  TimerA_2s &#x3D; (uint16_t)400,
+&#125;TimerA_Value_t;
+
+#pragma vector &#x3D; TIMERA0_VECTOR &#x2F;&#x2F; 定义一下中断向量
+__interrupt void TimerA_isr(void)       &#x2F;&#x2F; __interrupt 是中断关键字
+&#123;
+  WatchDog.vWatchDog_Feed();    &#x2F;&#x2F;喂狗
+  
+  if (++TimerA.usMCU_Run_Timer &gt;&#x3D; TimerA_100ms)
+  &#123;
+    TimerA.usMCU_Run_Timer &#x3D; 0;
+    &#x2F;&#x2F; 置位流水灯状态机标志位
+    STA_Machine.ucSTA_Machine_Switch_Flag &#x3D; TRUE;
+  &#125;
+  
+  Key_STA_Machine.usKey_STA_Machine_Scan_Timer++;       &#x2F;&#x2F; 按键状态扫描定时器
+  Key_STA_Machine.usKey_Double_Click_Timer++;   &#x2F;&#x2F; KEY1长按检测定时器
+  Key_STA_Machine.usKey_Long_Click_Timer++;     &#x2F;&#x2F; KEY1双击检测定时器
+&#125;
+
+&#x2F;*
+* @function     : vRun
+* @param        : None
+* @retval       : None
+* @brief        : 系统运行
+*&#x2F;
+static void vRun(void)
+&#123;
+  Key.Key_Detect();     &#x2F;&#x2F; 按键扫描
+  
+  if (Key.Key_Flag &#x3D;&#x3D; TRUE)
+  &#123;
+    if (Key.Key_Click &#x3D;&#x3D; TRUE)  &#x2F;&#x2F; 单击
+    &#123;
+      printf(&quot;单击动作\r\n&quot;);
+    &#125;
+    if (Key.Key_Double_Click &#x3D;&#x3D; TRUE)
+    &#123;
+      printf(&quot;双击动作\r\n&quot;);
+    &#125;
+    if (Key.Key_Long_Click &#x3D;&#x3D; TRUE)
+    &#123;
+      printf(&quot;长按动作\r\n&quot;);
+    &#125;
+    &#x2F;&#x2F; 清除KEY所有标志位
+    Key.Key_Flag &#x3D; FALSE;
+    Key.Key_Click &#x3D; FALSE;
+    Key.Key_Double_Click &#x3D; FALSE;
+    Key.Key_Long_Click &#x3D; FALSE;
+  &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> key.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __KEY_H
+#define __KEY_H
+#include &lt;main.h&gt;
+
+
+&#x2F;&#x2F; 按键引脚是P13
+#define KEY1    BIT3
+&#x2F;&#x2F; 设定长按时间
+#define Set_Long_TIME   TimerA_2s
+&#x2F;&#x2F; 设定双击时间
+#define Set_Double_TIME TimerA_200ms
+
+typedef struct
+&#123;
+  uint8_t Key_Flag;     &#x2F;&#x2F; 按键 标志位
+  uint8_t Key_Click;    &#x2F;&#x2F; 单击
+  uint8_t Key_Double_Click;     &#x2F;&#x2F; 双击
+  uint8_t Key_Long_Click;       &#x2F;&#x2F; 长按
+  
+  void (*Key_Detect)(void);     &#x2F;&#x2F; 按键检测
+&#125;Key_t;
+
+typedef enum
+&#123;
+  STA1_KEY_UP &#x3D; (uint8_t)0x01,  &#x2F;&#x2F; 按键弹起
+  STA2_KEY_D_SHAKE &#x3D; (uint8_t)0x02,       &#x2F;&#x2F; 按下抖动
+  STA3_KEY_DOWN &#x3D; (uint8_t)0x03,        &#x2F;&#x2F; 按键按下
+  STA4_KEY_U_SHAKE &#x3D; (uint8_t)0x04,     &#x2F;&#x2F; 弹起抖动
+&#125;Key_STA_Machine_Status_t;
+
+typedef struct
+&#123;
+  Key_STA_Machine_Status_t ucKey_STA_Machine_Status;    &#x2F;&#x2F; 按键状态机状态
+  uint16_t volatile usKey_STA_Machine_Scan_Timer;       &#x2F;&#x2F; 状态机扫描定时器
+  uint16_t volatile usKey_Double_Click_Timer;   &#x2F;&#x2F; 双击定时器
+  uint16_t volatile usKey_Long_Click_Timer;     &#x2F;&#x2F; 长按定时器
+&#125;Key_STA_Machine_t;
+
+extern Key_t Key;
+extern Key_STA_Machine_t Key_STA_Machine;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> key.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File          : key.c
+ * Author        : Luckys.
+ * Date          : 2023-06-06
+ * description   : 按键  
+****************************************************************************&#x2F;
+
+#include &lt;main.h&gt;
+   
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;variable definition declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static uint8_t Key_Click_Status &#x3D; FALSE;        &#x2F;&#x2F; 单击状态缓存
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;variable definition declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void Key_Detect(void);   &#x2F;&#x2F; 按键检测
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+Key_t Key &#x3D; 
+&#123;
+  FALSE,
+  FALSE,
+  FALSE,
+  FALSE,
+  Key_Detect,
+&#125;;
+
+Key_STA_Machine_t Key_STA_Machine &#x3D; 
+&#123;
+  STA1_KEY_UP,
+  0,
+  0,
+  0,
+&#125;;
+
+
+static void Key_Detect(void)
+&#123;
+  if (Key_STA_Machine.usKey_STA_Machine_Scan_Timer &gt;&#x3D; TimerA_10ms)      &#x2F;&#x2F; 间隔10ms扫描
+  &#123;
+    switch(Key_STA_Machine.ucKey_STA_Machine_Status)    &#x2F;&#x2F; 运行状态机检测-&gt; 单击 双击 长按
+    &#123;
+    case STA1_KEY_UP:   &#x2F;&#x2F; 按键弹起
+      &#123;
+        &#x2F;&#x2F; 单击检测
+        if ((P1IN &amp; KEY1) &#x3D;&#x3D; KEY1)      &#x2F;&#x2F; 高电平
+        &#123;
+          if (Key_Click_Status &#x3D;&#x3D; TRUE) &#x2F;&#x2F; 判断缓存，只有前面有单击，而且没检测到双击与长按 单击才有效
+          &#123;
+            if (Key_STA_Machine.usKey_Double_Click_Timer &gt;&#x3D; Set_Double_TIME)    &#x2F;&#x2F; 双击检测超时，单击有效
+            &#123;
+              Key.Key_Flag &#x3D; TRUE;
+              Key.Key_Click &#x3D; TRUE;
+              Key_Click_Status &#x3D; FALSE; &#x2F;&#x2F; 清除单击缓存
+            &#125;
+          &#125;
+        &#125;
+        else    &#x2F;&#x2F; 检测到低电平 状态切换到按下抖动
+        &#123;
+          Key_STA_Machine.ucKey_STA_Machine_Status &#x3D; STA2_KEY_D_SHAKE;
+          printf(&quot;事件通知：弹起状态 -&gt; 按下抖动状态\r\n&quot;);
+        &#125;
+        break;
+      &#125;
+    case STA2_KEY_D_SHAKE:      &#x2F;&#x2F; 按下抖动
+      &#123;
+        if ((P1IN &amp; KEY1) &#x3D;&#x3D; KEY1)      &#x2F;&#x2F; 检测到高电平，抖动引起，状态切换到弹起状态
+        &#123;
+          Key_STA_Machine.ucKey_STA_Machine_Status &#x3D; STA1_KEY_UP;
+        &#125;
+        else    &#x2F;&#x2F; 检测到低电平 确认按键按下，状态回到按下状态
+        &#123;
+          Key_STA_Machine.ucKey_STA_Machine_Status &#x3D; STA3_KEY_DOWN;
+          Key_STA_Machine.usKey_Long_Click_Timer &#x3D; 0;   &#x2F;&#x2F; 长按检测定时器清0 开始计时
+          printf(&quot;事件通知：按下抖动状态 -&gt; 按下状态\r\n&quot;);
+        &#125;
+        break;
+      &#125;
+    case STA3_KEY_DOWN: &#x2F;&#x2F; 按键按下
+      &#123;
+        if ((P1IN &amp; KEY1) &#x3D;&#x3D; KEY1)      &#x2F;&#x2F; 检测到高电平，抖动引起，状态切换到弹起抖动状态
+        &#123;
+          Key_STA_Machine.ucKey_STA_Machine_Status &#x3D; STA4_KEY_U_SHAKE;
+          &#x2F;&#x2F; 双击检测
+          if (Key.Key_Long_Click &#x3D;&#x3D; FALSE)
+          &#123;
+            if (Key_Click_Status &#x3D;&#x3D; TRUE)
+            &#123;
+              Key.Key_Flag &#x3D; TRUE;
+              Key.Key_Double_Click &#x3D; TRUE;
+              Key_Click_Status &#x3D; FALSE; &#x2F;&#x2F; 清除单击缓存
+            &#125;
+            else
+            &#123;
+              Key_Click_Status &#x3D; TRUE; &#x2F;&#x2F; 单击缓存
+              Key_STA_Machine.usKey_Double_Click_Timer &#x3D; 0;     &#x2F;&#x2F; 双击检测定时器清0 开始定时
+            &#125;
+          &#125;
+          printf(&quot;事件通知：按下状态 -&gt; 弹起抖动状态\r\n&quot;);
+        &#125;
+        else    &#x2F;&#x2F; 检测到低电平 按键保持按下 进行长按检测
+        &#123;
+          if (Key.Key_Long_Click &#x3D;&#x3D; FALSE)      &#x2F;&#x2F; 长按检测
+          &#123;
+            if (Key_STA_Machine.usKey_Long_Click_Timer &gt;&#x3D; Set_Long_TIME)
+            &#123;
+              Key_STA_Machine.ucKey_STA_Machine_Status &#x3D; STA4_KEY_U_SHAKE;      &#x2F;&#x2F; 按键按下超过Set_Press_TIME，状态切换至STA4弹起抖动，避免反复检测长按
+              Key.Key_Flag &#x3D; TRUE;
+              Key.Key_Long_Click &#x3D; TRUE;
+              Key_Click_Status &#x3D; FALSE; &#x2F;&#x2F; 清除单击缓存
+              printf(&quot;事件通知：按下状态 -&gt; 弹起抖动状态\r\n&quot;);
+            &#125;
+          &#125;
+        &#125;
+        break;
+      &#125;
+    case STA4_KEY_U_SHAKE:      &#x2F;&#x2F; 弹起抖动
+      &#123;
+        if ((P1IN &amp; KEY1) &#x3D;&#x3D; KEY1)      &#x2F;&#x2F; 检测到高电平 回到弹起状态
+        &#123;
+          Key_STA_Machine.ucKey_STA_Machine_Status &#x3D; STA1_KEY_UP;
+          printf(&quot;事件通知：弹起抖动状态 -&gt; 弹起状态\r\n&quot;);
+        &#125;
+        else    &#x2F;&#x2F; 检测到低电平 抖动引起 按键保持弹起抖动状态
+        &#123;
+          
+        &#125;
+        break;
+      &#125;
+    default:
+      &#123;
+        Key_STA_Machine.ucKey_STA_Machine_Status &#x3D; STA1_KEY_UP;
+        break;
+      &#125;      
+    &#125;
+    Key_STA_Machine.usKey_STA_Machine_Scan_Timer &#x3D; 0;   &#x2F;&#x2F; 扫描定时清0
+  &#125;
+&#125;
+
+
+&#x2F;&#x2F; 按键中断函数
+#pragma vector &#x3D; PORT1_VECTOR
+__interrupt void Key1_isr(void)
+&#123;
+  uint8_t Delay_Cnt;
+  
+  &#x2F;&#x2F; KEY1中断
+  if (KEY1 &#x3D;&#x3D; (P1IFG &amp; KEY1))
+  &#123;
+    &#x2F;&#x2F; 延时消抖
+    Public.vDelay_ms(5);
+    if ((P1IN &amp; KEY1) !&#x3D; KEY1)  &#x2F;&#x2F; 检测输入是否为低电平
+    &#123;
+      for (Delay_Cnt &#x3D; 0; Delay_Cnt &lt; 200; Delay_Cnt++)
+      &#123;
+        Public.vDelay_ms(10);
+        
+        if (KEY1 &#x3D;&#x3D; (P1IN &amp; KEY1))      &#x2F;&#x2F; 提前弹起则退出
+        &#123;
+          break;
+        &#125;
+      &#125;
+      if (Delay_Cnt &gt;&#x3D; 200)     &#x2F;&#x2F; 长按
+      &#123;
+        &#x2F;&#x2F; 执行功能 ---切换状态
+        if (System.ucSystem_Status &#x3D;&#x3D; System_Run)
+        &#123;
+          System.ucSystem_Status &#x3D; System_StandBy;
+          printf(&quot;系统处于待机状态\r\n&quot;);
+        &#125;
+        else
+        &#123;
+          System.ucSystem_Status &#x3D; System_Run;
+          printf(&quot;系统处于运行状态\r\n&quot;);
+        &#125;
+      &#125;
+      else      &#x2F;&#x2F; 单击
+      &#123;
+        printf(&quot;单击\r\n&quot;);
+      &#125;
+    &#125;
+    &#x2F;&#x2F; 清除标志位
+    P1IFG &amp;&#x3D; (~KEY1); 
+  &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> my.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"></code></pre>
+              </div>
+            </details>
+<details ><summary> my.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"></code></pre>
+              </div>
+            </details>
+<details ><summary> my.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"></code></pre>
+              </div>
+            </details>
+<details ><summary> my.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"></code></pre>
+              </div>
+            </details></article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num135.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82"><span class="toc-number">2.</span> <span class="toc-text">项目需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E8%B0%83%E6%95%B4"><span class="toc-number">3.</span> <span class="toc-text">需求调整</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%89%8B%E5%86%8C%E9%98%85%E8%AF%BB"><span class="toc-number">4.</span> <span class="toc-text">数据手册阅读</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IAR%E5%AE%89%E8%A3%85"><span class="toc-number">5.</span> <span class="toc-text">IAR安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3%E7%89%88%E6%9C%AC"><span class="toc-number">5.1.</span> <span class="toc-text">5.3版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-21%E7%89%88%E6%9C%AC"><span class="toc-number">5.2.</span> <span class="toc-text">7.21版本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B"><span class="toc-number">6.</span> <span class="toc-text">新建工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E8%AE%BE%E7%BD%AE"><span class="toc-number">7.</span> <span class="toc-text">常用设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BF%E7%9C%9F-%E4%B8%8B%E8%BD%BD"><span class="toc-number">8.</span> <span class="toc-text">仿真&#x2F;下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E6%A8%A1%E6%9D%BF"><span class="toc-number">9.</span> <span class="toc-text">新建模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E8%AF%A6%E8%A7%A3"><span class="toc-number">10.</span> <span class="toc-text">时钟详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E9%97%AE%E9%A2%98"><span class="toc-number">11.</span> <span class="toc-text">中断问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GPIO%E6%89%8B%E5%86%8C%E9%98%85%E8%AF%BB"><span class="toc-number">12.</span> <span class="toc-text">GPIO手册阅读</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LED"><span class="toc-number">13.</span> <span class="toc-text">LED</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8A-%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="toc-number">14.</span> <span class="toc-text">定时器A+状态机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9C%8B%E9%97%A8%E7%8B%97"><span class="toc-number">15.</span> <span class="toc-text">看门狗</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#USART"><span class="toc-number">16.</span> <span class="toc-text">USART</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%89%E9%94%AE"><span class="toc-number">17.</span> <span class="toc-text">按键</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD-%E5%BB%B6%E6%97%B6"><span class="toc-number">17.1.</span> <span class="toc-text">中断+延时</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD-%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="toc-number">17.2.</span> <span class="toc-text">中断+状态机</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '键盘敲烂 月薪过万' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script defer src="/js/my_aplayer.js"></script><script defer src="/js/meting.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>

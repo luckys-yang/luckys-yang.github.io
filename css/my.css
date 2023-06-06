@@ -1920,4 +1920,17 @@ figure {
 #page .category-lists .category-list li.category-list-item:nth-child(30) a.category-list-link::before {
     content: "🎨";
 }
+
+#page .category-lists .category-list li.category-list-item:nth-child(31) {
+    background: -webkit-linear-gradient(left, #009ad6, #1b315e);
+    background: -moz-linear-gradient(left, #009ad6, #1b315e);
+    background: -o-linear-gradient(left, #009ad6, #1b315e);
+    background: -ms-linear-gradient(left, #009ad6, #1b315e);
+    background: linear-gradient(to right, #009ad6, #1b315e);
+}
+
+#page .category-lists .category-list li.category-list-item:nth-child(31) a.category-list-link::before {
+    content: "📖";
+}
+
 /* 分类美化end */
