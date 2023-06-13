@@ -1933,4 +1933,15 @@ figure {
     content: "📖";
 }
 
+#page .category-lists .category-list li.category-list-item:nth-child(32) {
+    background: -webkit-linear-gradient(left, #ef5b9c, #f5af19);
+    background: -moz-linear-gradient(left, #ef5b9c, #f5af19);
+    background: -o-linear-gradient(left, #ef5b9c, #f5af19);
+    background: -ms-linear-gradient(left, #ef5b9c, #f5af19);
+    background: linear-gradient(to right, #ef5b9c, #f5af19);
+}
+
+#page .category-lists .category-list li.category-list-item:nth-child(32) a.category-list-link::before {
+    content: "🎭";
+}
 /* 分类美化end */
