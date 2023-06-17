@@ -36,7 +36,7 @@ comments: false
 ```yml
 name: Luckys-Yangの小栈
 link: https://love.yang5201314.cn/
-avatar: https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp
+avatar: https://pic1.imgdb.cn/item/646b2b31e03e90d874ca00b6.webp
 descr: 循环的圆，不循环的缘
 ```
 

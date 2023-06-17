@@ -35,13 +35,17 @@
       avatar: ./touxiang/link45.webp
       descr: B站UP主，搞嵌入式的
     - name: 社会易姐QwQ
-      link:  shakaianee.top
+      link:  https://shakaianee.top/
       avatar: ./touxiang/link46.webp
       descr: 给岁月以文明，而不是给文明以岁月
     - name: BruceOu
       link:  https://blog.bruceou.cn/
       avatar: ./touxiang/link47.webp
       descr: 嵌入式大牛
+    - name: 吴川斌的博客
+      link:  https://www.mr-wu.cn/
+      avatar: ./touxiang/link49.webp
+      descr: 一个专注于智能硬件 嵌入式系统 物联网 电子产品设计美学 的独立博客
 - class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#16e5de;display:inline-block;"></i><span style="color:#abb4d7;">美化/分享资源相关</span>
   class_desc: 
   link_list:
@@ -149,9 +153,17 @@
       avatar: ./touxiang/link37.webp
       descr: Java,Linux  
     - name: Mycpen
-      link: https://cpen.top/
+      link: https://blog.cpen.top/
       avatar: ./touxiang/link38.webp
       descr: Linux,Python  
+    - name: codehxx · 遺憾
+      link: https://codehxx.cn/
+      avatar: ./touxiang/link43.webp
+      descr: 人生短暂，一如轻烟与飞雾。
+    - name: LiangJiaXin
+      link: https://ljx1104.github.io/
+      avatar: ./touxiang/link44.webp
+      descr: 新晋大佬一个      
     - name: a.d
       link:  http://blog.aiheadn.cn/
       avatar: ./touxiang/link40.webp
@@ -160,7 +172,7 @@
       link:  https://6xyun.cn/
       avatar: ./touxiang/link41.webp
       descr: Linux,Java   
-- class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#16e5de;display:inline-block;"></i><span style="color:#abb4d7;">简约相关</span>
+- class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#16e5de;display:inline-block;"></i><span style="color:#abb4d7;">优秀博客相关</span>
   class_desc: 
   link_list:
     - name: 繁星博客
@@ -171,11 +183,15 @@
       link: https://imgod.me/
       avatar: ./touxiang/link21.webp
       descr: 寒江孤影，江湖故人，相逢何必曾相识
+    - name: Ading阿定の小站
+      link: https://saop.cc/
+      avatar: ./touxiang/link48.webp
+      descr: 我们终会相遇相知，在那悠远的苍穹
 - class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#16e5de;display:inline-block;"></i><span style="color:#abb4d7;">Butterfly魔改相关</span>
   class_desc: 
   link_list:
     - name: 唐志远の博客
-      link: https://tzy1997.com/
+      link: https://fe32.top/
       avatar: ./touxiang/link27.webp
       descr: 古今之成大事者，不惟有超世之才，亦必有坚忍不拔之志 
     - name: Butterfly
@@ -194,14 +210,3 @@
       link: https://blog.zhheo.com/
       avatar: ./touxiang/link39.webp
       descr: 分享设计与科技生活
-- class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#16e5de;display:inline-block;"></i><span style="color:#abb4d7;">工作室好友</span>
-  class_desc: 
-  link_list:
-    - name: codehxx · 遺憾
-      link: https://codehxx.cn/
-      avatar: ./touxiang/link43.webp
-      descr: 人生短暂，一如轻烟与飞雾。
-    - name: LiangJiaXin
-      link: https://ljx1104.github.io/
-      avatar: ./touxiang/link44.webp
-      descr: 新晋大佬一个

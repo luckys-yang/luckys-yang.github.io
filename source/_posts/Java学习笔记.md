@@ -2403,13 +2403,123 @@ public class helloworld {
 
 #### 实例代码块
 
-待写
+实例代码块的格式：
+
+```java
+{
+
+}
+```
+
+* 实例代码块的特点：
+  * 无 static 修饰，属于对象
+  * 会与类的对象一起加载，每次创建类的对象的时候，实例代码块都会被加载且自动触发执行一次
+  * 实例代码块的代码在底层实际上是提取到每个构造器中去执行的
+* 实例代码块的作用：实例代码块可以在创建对象之前进行实例资源的初始化操作
+* 实例化代码块中的代码在 `对象创建前被执行`，因此可以用于初始化对象的非静态成员变量
+
+```java
+public class helloworld {
+    int x;
+    int y;
+    public helloworld() {
+        System.out.println("调用了无参构造函数");
+    }
+//    初始化实例代码
+    {
+        x = 111;
+        y = 999;
+        System.out.println("调用实例代码块");
+    }
+    public static void main(String[] args) {
+        helloworld hello = new helloworld();
+        System.out.println("x = "+hello.x);
+        System.out.println("y = "+hello.y);
+    }
+}
+// 输出
+调用实例代码块
+调用了无参构造函数
+x = 111
+y = 999
+```
 
 
 
+## API
+
+### Object
+
+#### 基本介绍
+
+Object 类是 Java 中的 `祖宗类`，一个类或者默认继承 Object 类，或者间接继承 Object 类，Object 类的方法是一切子类都可以直接使用
+
+- 常用方法
+
+> `toString()` ：默认是返回当前对象在堆内存中的地址信息：类的全限名@内存地址
+>
+> ```java
+> public class helloworld {
+>  public static void main(String[] args) {
+>      Object Oject1 = new Object();
+>      System.out.println(Oject1.toString());
+>  }
+> }
+> // 输出
+> java.lang.Object@1b6d3586
+> ```
+> `equals(Object o)`：比较两个对象的引用是否一样
+>
+> ```java
+> public class helloworld {
+>     public static void main(String[] args) {
+> //        创建两个Object类
+>         Object Oject1 = new Object();
+>         Object Oject2 = new Object();
+>         System.out.println(Oject1.toString());
+> //        比较两个对象的引用是否一样
+>         if(Oject1.equals(Oject2))
+>         {
+>             System.out.println("一样");
+>         }
+>         else
+>         {
+>             System.out.println("不一样");
+>         }
+>     }
+> }
+> ```
+
+> - `== 和 equals 的区别`
+>
+> == 比较的是变量（栈）内存中存放的对象的（堆）内存地址，用来判断两个对象的**地址**是否相同，即是否是指相同一个对象，比较的是真正意义上的指针操作Object 类中的方法，
+>
+> equals **默认比较两个对象的引用**，重写 equals 方法比较的是两个对象的**内容**是否相等，所有的类都是继承自 java.lang.Object 类，所以适用于所有对象
+>
+> ```java
+> public class helloworld {
+>     public static void main(String[] args) {
+>         String str1 = "测试";
+>         String str2 = new String("测试");
+>         String str3 = "测试";
+>         System.out.println(str1 == str2);   // 输出 "false"
+>         System.out.println(str1 == str3);   // 输出 "true"
+>         System.out.println(str1.equals(str2));   // 输出 "true"
+>     }
+> }
+> ```
+
+hashCode 的作用：
+
+* hashCode 的存在主要是用于查找的快捷性，如 Hashtable，HashMap 等，可以在散列存储结构中确定对象的存储地址
+* 如果 `两个对象相同`，就是适用于 equals(java.lang.Object) 方法，那么这 `两个对象的 hashCode 一定要相同`
+*  `哈希值相同的数据不一定内容相同，内容相同的数据哈希值一定相同`
 
 
 
+### 深浅克隆
+
+> 深拷贝相当于修改一个对象的值另一个对象的值不会受影响，浅拷贝的话则相当于指针操作修改一个另一个也会改变
 
 
 

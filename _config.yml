@@ -5,8 +5,8 @@
 # 基础设置
 title: Luckys-Yangの小栈 # 网站标题
 subtitle: ''  # 网站副标题【设置鼠标指上 subtitle 后翻转另一行字】
-description: '嵌入式小白' # 网站描述
-keywords: '博客,个人博客,技术,学习,Hexo,Blog,STM32,嵌入式,单片机' # 网站的关键词
+description: '你不懂单片机,更不懂我...' # 网站描述
+keywords: '牛逼' # 网站的关键词
 author: Luckys-Yang  # 你的名字
 language: zh-CN # 网站使用的语言
 timezone: ''  # 时区默认是电脑时区(选填)
@@ -159,5 +159,3 @@ markdown:
 aplayer:
   meting: true
   asset_inject: false      
-encrypt:
-    password: 123456

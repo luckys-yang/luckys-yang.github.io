@@ -990,7 +990,7 @@ inject:
                   iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
                   backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
                   title: '复制成功', // 通知标题
-                  message: '可惜你不听王杰，也不懂我...' // 通知消息内容
+                  message: '键盘敲烂 月薪过万' // 通知消息内容
               });
           }
       </script>

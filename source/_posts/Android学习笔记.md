@@ -2,7 +2,6 @@
 title: Android学习笔记
 cover: /img/num101.webp
 comments: false
-top: 95
 categories:
   - Android
 abbrlink: 6ba9642b

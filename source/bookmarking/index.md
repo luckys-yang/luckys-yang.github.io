@@ -76,10 +76,22 @@ comments: false
       link: http://jwxt.gdpi.edu.cn/
       avatar: ./book_image/book8.webp
       descr:           　                   
+    - name: 广理职软件
+      link: http://10.5.128.26/
+      avatar: ./book_image/book8.webp
+      descr:           　                         
     - name: Gravatar
       link: https://en.gravatar.com/
       avatar: ./book_image/book8.webp
       descr:           　                         
+    - name: 英语四六级报名
+      link: https://cet.neea.edu.cn/html1/folder/1608/1178-1.htm
+      avatar: ./book_image/book8.webp
+      descr:           　                         
+    - name: visual
+      link: https://online.visual-paradigm.com/
+      avatar: ./book_image/book8.webp
+      descr: 可画流程图，架构图在线
 
 - class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#dfe516;display:inline-block;"></i><span style="color:#abb4d7;">Github</span>
   class_desc: 
@@ -130,10 +142,6 @@ comments: false
       descr:  　　
     - name: 21IC电子网
       link: https://www.21ic.com/
-      avatar: ./book_image/book8.webp
-      descr:  　　
-    - name: 电子元器件搜索
-      link: https://www.alldatasheetcn.com/
       avatar: ./book_image/book8.webp
       descr:  　　
     - name: 单片机教程网
@@ -192,7 +200,18 @@ comments: false
       link: https://www.gd32mcu.com/cn/download/6?kw=GD32F10
       avatar: ./book_image/book8.webp
       descr:  　                        
-
+    - name: 电子森林
+      link: https://www.eetree.cn/
+      avatar: ./book_image/book8.webp
+      descr:  　                        
+    - name: Circuit Basics
+      link: https://www.circuitbasics.com/
+      avatar: ./book_image/book8.webp
+      descr:  　                              
+    - name: 武汉芯源半导体(CW32)
+      link: https://www.whxy.com/
+      avatar: ./book_image/book8.webp
+      descr:  　                                    
 - class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#dfe516;display:inline-block;"></i><span style="color:#abb4d7;">博客相关</span>
   class_desc: 
   link_list:
@@ -581,6 +600,18 @@ comments: false
       avatar: ./book_image/book8.webp
       descr: 　　        
 
+- class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#dfe516;display:inline-block;"></i><span style="color:#abb4d7;">元器件官网</span>      
+  class_desc: 
+  link_list:
+    - name: 金升阳
+      link: https://www.mornsun.cn/
+      avatar: ./book_image/book8.webp
+      descr: 一站式电源解决方案，485模块
+    - name: All Datasheet
+      link: https://www.alldatasheet.com/
+      avatar: ./book_image/book8.webp
+      descr: 电子元件数据表
+
 - class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#dfe516;display:inline-block;"></i><span style="color:#abb4d7;">字体/API</span>
   class_desc: 
   link_list:
@@ -623,5 +654,5 @@ comments: false
     - name: 夏柔api
       link: https://api.aa1.cn/
       avatar: ./book_image/book8.webp
-      descr: 很全的！                                                 
+      descr: 很全的！
 {% endflink %}

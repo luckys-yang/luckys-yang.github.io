@@ -2,7 +2,6 @@
 title: FreeRTOS学习笔记
 cover: /img/num104.webp
 comments: false
-top: 96
 katex: true
 categories:
   - 实时操作系统

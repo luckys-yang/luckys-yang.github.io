@@ -1,5 +1,5 @@
 ---
-title: STM32-Keil破解和配置
+title: Keil相关
 cover: /img/num54.webp
 comments: false
 tags:
@@ -13,10 +13,16 @@ date: 2022-04-10 23:08:00
 ##  前言
 收集的各种报错解决方案
 - [解决keil MDK 5 编译出现"Could not open file ..\output\core_cm3.o: No such file or directory"的终极超简单方法](https://blog.csdn.net/qq_42926939/article/details/89502253)
+- [国产32冒充STM32导致daplink下载不了](https://blog.csdn.net/chunquqiulailll/article/details/113257923)
 
 其他
 
 - [ARM-GCC等等其他](https://gnutoolchains.com/arm-eabi/)
+- [pack](https://www.keil.arm.com/packs/stm32f1xx_dfp-keil/boards/)
+
+软件
+
+- [阿里云](https://www.aliyundrive.com/s/42kfPMTvnJD)
 
 ## 配置 STM32 开发环境
 
@@ -150,8 +156,7 @@ date: 2022-04-10 23:08:00
 
 [RT-Thread Studio - RT-Thread物联网操作系统](https://www.rt-thread.org/page/studio.html)
 
-##  参考文章
-vscode开发单片机：https://blog.zeruns.tech/archives/690.html
+
 
 ## keil编译脚本
 
@@ -312,3 +317,65 @@ Edit:Advanced:Uncomment Selection
 }
 ```
 
+
+
+##  问题
+
+- static声明了函数但是未使用的话会有警告
+
+> warning:  #177-D: function "GUI_ST7735_DrawBox"  was declared but never referenced
+
+解决方法：
+
+1. 保留这个函数的声明，但不想看到这个警告，可以在函数名称前加修饰符 `__attribute__((unused))` 告诉编译器这个函数不使用
+2. 注释掉不使用的函数，使用宏定义来把不使用到的集中起来注释，用到再提出去
+
+- 安装完，如果芯片页面是绿色的点击下载按钮会卡死，这个需要安装 `MDK-For Cortex 524.exe`，然后看看有没有变灰，变了就OK，实在不行重启，还不行的话就新建一个工程，选择另一个不要选下面这个：
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230527205130.webp)
+
+- Keil的注册表信息
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230528102209.webp)
+
+- AC5
+
+开发要用MDK，建议安装5.36版本，这个版本有AC5编译器，之后的版本不再集成
+
+解决方法：
+
+1. 先安装5.36再安装最新版本，这样AC5可以自动集成到MDK中
+2. 安装最新版本后手动添加AC5编译器，安装完MDK后把ARMCC文件夹手动放到keil安装目录的ARM文件夹中，然后在keil中手动添加，选择刚刚添加的文件夹
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230611102530.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230611102623.webp)
+
+- 编译报cmsis_version.h或__COMPILER_BARRIER的错误
+
+这两个都和CMSIS CORE有关，要勾选如下选项，例程里应该已经默认勾选了，注意CORE的版本，低于5.1.0勾上也还会报错，可以尝试安装网盘或群文件里的 `ARM.CMSIS.5.9.0.pack` 或者 `直接升级MDK`
+
+[github](https://github.com/ARM-software/CMSIS_5/releases)
+
+[ARM](https://www.keil.arm.com/packs/?q=&sort_by=)
+
+- 溢出
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230612072623.webp)
+
+解决方法：
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230612072757.webp)
+
+- HAL库，勾选了C库后编译报错：
+
+```cpp
+Undefined symbol __use_two_region_memory
+Undefined symbol __initial_sp
+```
+
+解决方法是打开工程下的 `startup_xxx.s` 文件，翻到最后面，注释下面这两行，然后编译再取消注释再编译就正常了
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230614000006.webp)
+
+> 参考文章：https://blog.csdn.net/qq_62014938/article/details/125602277

@@ -97,7 +97,7 @@ layout: false
     <div class="card">
         <div class="top">
             <div class="logo">
-                <img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230121163443.webp" alt="头像">
+                <img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20230604205827.webp" alt="头像">
             </div>
             <div class="info">
                 <div>
@@ -109,7 +109,7 @@ layout: false
         </div>
 
         <div class="QRcode">
-            <img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/QQ%E6%88%AA%E5%9B%BE20230121163946.webp" alt="二维码">
+            <img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20230604210137.webp" alt="二维码">
         </div>
         <p class="text">扫一扫上面的二维码图案，加我微信</p>
     </div>
