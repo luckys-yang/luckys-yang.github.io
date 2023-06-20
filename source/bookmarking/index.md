@@ -177,7 +177,7 @@ comments: false
       avatar: ./book_image/book8.webp
       descr:  　      
     - name: 『圆梦杯』全国大学生智能硬件设计大赛
-      link: http://vs.r8c.com/
+      link: https://www.nipdc.com/
       avatar: ./book_image/book8.webp
       descr:  　            
     - name: 广东省职业院校技能大赛

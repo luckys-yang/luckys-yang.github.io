@@ -122,6 +122,14 @@ git@github.com:luckys-yang/Car2021_Example_v1.2.git
 git@github.com:luckys-yang/blog_giscus.git
 ```
 
+- [【文件模块等等】](https://github.com/luckys-yang/manual/tree/master)
+
+```bash
+git@github.com:luckys-yang/manual.git
+```
+
+
+
 
 
 ## Git推送流程
@@ -254,8 +262,15 @@ git commit -m "$1"
 # 拉取远程仓库
 git pull origin master
 
-# 推送
-git push origin master
+# 询问确认推送操作
+echo "是否要推送到远程仓库？[Y/N]"
+read confirm
+if [ "$confirm" = "Y" ] || [ "$confirm" = "y" ]; then
+  # 推送
+  git push origin master
+else
+  echo "已取消推送"
+fi
 ```
 
 > 运行：打开git bash 界面，运行脚本，6/17是参数$1
@@ -264,7 +279,37 @@ git push origin master
 > sh blog1.bat 6/17
 > ```
 
+- 推送源码
 
+```bat
+#!/bin/bash
+
+# 进入Git仓库所在目录
+cd G:/yangblog/yang/
+
+# 检查当前分支状态
+git status
+
+# 添加所有更改到本地暂存区
+git add .
+
+# 提交更改并添加提交注释
+git commit -m "$1"
+
+# 拉取远程仓库
+git pull origin master
+
+# 推送
+# 询问确认推送操作
+echo "是否要推送到远程仓库？[Y/N]"
+read confirm
+if [ "$confirm" = "Y" ] || [ "$confirm" = "y" ]; then
+  # 推送
+  git push origin master
+else
+  echo "已取消推送"
+fi
+```
 
 
 
