@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>CW32030C8T6饭盒派学习笔记 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言 参考文章\资源  武汉芯源半导体 最新固件库下载地址 CW32L031C8数据手册下载 CW32F030C8数据手册下载 CW Programmer CW32系列芯片的烧录工具配套软件 我的项目工程github 芯源CW32 MCU官方技术支持论坛  吐槽一下，CW32是真的难搞，网上资料也不多，最好去看固件库例程跟着搞吧  开箱 这个板子是参加圆梦杯申请的，饭盒派CW32_48F&#x2F;L大学计">
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>CW32030C8T6饭盒派学习笔记 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言 参考文章\资源  武汉芯源半导体 最新固件库下载地址 CW32L031C8数据手册下载 CW32F030C8数据手册下载 CW Programmer CW32系列芯片的烧录工具配套软件 芯源CW32 MCU官方技术支持论坛  吐槽一下，CW32是真的难搞，网上资料也不多，最好去看固件库例程跟着搞吧  开箱 这个板子是参加圆梦杯申请的，饭盒派CW32_48F&#x2F;L大学计划开发板  焊接前   一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CW32030C8T6饭盒派学习笔记">
 <meta property="og:url" content="https://mdcm.yang5201314.cn/post/ef2c568a.html">
 <meta property="og:site_name" content="Luckys-Yangの小栈">
-<meta property="og:description" content="前言 参考文章\资源  武汉芯源半导体 最新固件库下载地址 CW32L031C8数据手册下载 CW32F030C8数据手册下载 CW Programmer CW32系列芯片的烧录工具配套软件 我的项目工程github 芯源CW32 MCU官方技术支持论坛  吐槽一下，CW32是真的难搞，网上资料也不多，最好去看固件库例程跟着搞吧  开箱 这个板子是参加圆梦杯申请的，饭盒派CW32_48F&#x2F;L大学计">
+<meta property="og:description" content="前言 参考文章\资源  武汉芯源半导体 最新固件库下载地址 CW32L031C8数据手册下载 CW32F030C8数据手册下载 CW Programmer CW32系列芯片的烧录工具配套软件 芯源CW32 MCU官方技术支持论坛  吐槽一下，CW32是真的难搞，网上资料也不多，最好去看固件库例程跟着搞吧  开箱 这个板子是参加圆梦杯申请的，饭盒派CW32_48F&#x2F;L大学计划开发板  焊接前   一">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://mdcm.yang5201314.cn/img/num139.webp">
 <meta property="article:published_time" content="2023-06-10T10:33:39.000Z">
-<meta property="article:modified_time" content="2023-06-18T15:44:04.480Z">
+<meta property="article:modified_time" content="2023-06-23T08:04:27.341Z">
 <meta property="article:author" content="Luckys-Yang">
 <meta property="article:tag" content="牛逼">
 <meta name="twitter:card" content="summary">
@@ -57,7 +57,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-06-18 23:44:04'
+  postUpdate: '2023-06-23 16:04:27'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -174,7 +174,7 @@ window.addEventListener('load',()=> { preloader.endLoading() })
 if (true) {
   document.addEventListener('pjax:send', () => { preloader.initLoading() })
   document.addEventListener('pjax:complete', () => { preloader.endLoading() })
-}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">141</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">77</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">33</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">CW32030C8T6饭盒派学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-10T10:33:39.000Z" title="发表于 2023-06-10 18:33:39">2023-06-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-18T15:44:04.480Z" title="更新于 2023-06-18 23:44:04">2023-06-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CW32-%E8%8A%AF%E6%BA%90/">CW32(芯源)</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">16.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>80分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">142</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">76</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">32</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">CW32030C8T6饭盒派学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-10T10:33:39.000Z" title="发表于 2023-06-10 18:33:39">2023-06-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-23T08:04:27.341Z" title="更新于 2023-06-23 16:04:27">2023-06-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CW32-%E8%8A%AF%E6%BA%90/">CW32(芯源)</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">18.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>94分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
 <div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>参考文章\资源</p>
 </div>
 <p><a href="https://www.whxy.com/">武汉芯源半导体</a></p>
@@ -182,7 +182,6 @@ if (true) {
 <p><a href="https://www.whxy.com/product/detail/11">CW32L031C8数据手册下载</a></p>
 <p><a href="https://www.whxy.com/product/detail/1">CW32F030C8数据手册下载</a></p>
 <p><a href="https://www.whxy.com/support/filelist/18">CW Programmer CW32系列芯片的烧录工具配套软件</a></p>
-<p><a href="https://github.com/luckys-yang/cw32_Project">我的项目工程github</a></p>
 <p><a href="https://bbs.21ic.com/iclist-1116-1.html">芯源CW32 MCU官方技术支持论坛</a></p>
 <blockquote>
 <p>吐槽一下，CW32是真的难搞，网上资料也不多，最好去看固件库例程跟着搞吧</p>
@@ -293,6 +292,12 @@ extern System_Init_t System_Init;
 
 #include &quot;main.h&quot;
 
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;variable definition declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+uint8_t Init_Cnt &#x3D; 10;  &#x2F;&#x2F; 初始化超时等待计数
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;variable definition declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
 &#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
 
 static void Hardware_Init(void);    &#x2F;&#x2F; 硬件初始化
@@ -314,12 +319,49 @@ System_Init_t System_Init &#x3D;
 *&#x2F;
 static void Hardware_Init(void)
 &#123;
+    Public.System_MS_Delay(1000);   &#x2F;&#x2F; DHT11上电后至少需要延时1s等待稳定
     RCC_Config();   &#x2F;&#x2F; 时钟配置
     InitTick(64000000); &#x2F;&#x2F; SYSTICK初始化
+    Btim.BTIM1_Init(1999, BTIM_PRS_DIV32);  &#x2F;&#x2F; 基本定时器1初始化(计算：64000000 &#x2F; 2000 &#x2F; 32 &#x3D; 1000Hz --- 1 &#x2F; 1000Hz &#x3D; 0.001s)    
     Led.Led_Init(); &#x2F;&#x2F; LED初始化
     Key_1.Key_1_Init(); &#x2F;&#x2F; 按键初始化
+    Key_2.Key_2_Init(); &#x2F;&#x2F; 按键初始化
     Buzzer.Buzzer_Init();   &#x2F;&#x2F; 蜂鸣器初始化
+#ifdef USE_TFT 
+    ST7735.ST7735_Init();   &#x2F;&#x2F; ST7735 LCD屏幕初始化
+#elif defined(USE_096_OLED)
+    I2C_Soft.I2C_Init();   &#x2F;&#x2F; I2C初始化
+    OLED096.OLED096_Init(); &#x2F;&#x2F; 0.96寸OLED初始化
+#elif defined(USE_091_OLED)
+    &#x2F;&#x2F; 0.91寸OLED代码待添加
+#endif
+#ifdef USE_ADC_Single_One 
+    ADC_1.ADC1_Single_Channel_One_Init();   &#x2F;&#x2F; ADC单通道单次采集初始化    
+#elif defined(USE_ADC_Serial_Scan) 
+    ADC_1.ADC1_Serial_Scan_Init();  &#x2F;&#x2F; ADC序列扫描初始化
+#endif     
     USART1.USART1_Init();   &#x2F;&#x2F; 串口1初始化
+    myRTC.myRTC_Init(2023, RTC_Month_June, 16, RTC_Weekday_Friday, 18, 50, 20); &#x2F;&#x2F; RTC初始化  
+    myRTC.myRTC_Alarm_A_Init(); &#x2F;&#x2F; 闹钟初始化
+    while (!DHT11.DHT11_Init() &amp;&amp; (Init_Cnt--)) &#x2F;&#x2F; DHT11初始化
+    &#123;
+        Public.System_MS_Delay(100);
+    &#125;
+    DHT11.DHT11_Read_Data(&amp;DHT11.DHT11_Temperture,&amp;DHT11.DHT11_Humidity); &#x2F;&#x2F; 获取一次温湿度
+    Gtim.Gtim1_PWM_Output_Init(399, GTIM_PRESCALER_DIV64);    &#x2F;&#x2F; PWM输出初始化 64000000 &#x2F; 64 &#x2F; 400 &#x3D; 2500Hz (即2.5ms) 
+#ifdef USE_PWM_IC 
+    Gtim.Gtim2_PWM_IC_Init();   &#x2F;&#x2F; 输入捕获初始化
+#endif
+#ifdef USE_GTIM3_TOGG
+    Gtim.Gtim3_PWM_Toggle_Init(399, GTIM_PRESCALER_DIV64);   &#x2F;&#x2F; 互补初始化 64000000 &#x2F; 1024 &#x2F; 12500 &#x3D; 5hz (即200ms)  
+#endif    
+    &#x2F;&#x2F; Atim.Atim_Base_Init(1999, ATIM_Prescaler_DIV32);    &#x2F;&#x2F; 高级定时器1初始化(计算：64000000 &#x2F; 2000 &#x2F; 32 &#x3D; 1000Hz --- 1 &#x2F; 1000Hz &#x3D; 0.001s) 
+#ifdef USE_PWM_IC_ATIM   
+    Atim.Atim_PWM_Input_Init();
+#endif
+#ifdef USE_ATIM_PWM       
+    Atim.Atim_PWM_Output_OC_Init();
+#endif    
     printf(&quot;初始化完成\r\n&quot;);
 &#125;
 
@@ -362,8 +404,9 @@ static void RCC_Config(void)
 
 typedef struct
 &#123;
-    void (*Run)(void);  &#x2F;&#x2F; 系统运行
+    void (*System_Run)(void);  &#x2F;&#x2F; 系统运行
     void (*Error_Handler)(void);    &#x2F;&#x2F; 系统错误处理
+    void (*Task_Marks_Handler)(void);   &#x2F;&#x2F; 任务标记
 &#125;System_t;
 
 
@@ -382,29 +425,31 @@ extern System_t System;
 
 #include &quot;main.h&quot;
 
+
 &#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
-uint8_t arr[8] &#x3D; &#123;0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08&#125;;
-uint8_t* Str &#x3D; &quot;你好呀886AAA\r\n&quot;; 
-static void Run(void);  &#x2F;&#x2F; 系统运行
+static void System_Run(void);  &#x2F;&#x2F; 系统运行
 static void Error_Handler(void);    &#x2F;&#x2F; 系统错误处理
+static void Task_Marks_Handler(void);   &#x2F;&#x2F; 任务标记函数
+static void Task_Pro_Handler(void); &#x2F;&#x2F; 任务处理函数
 
 &#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
 
 System_t System &#x3D; 
 &#123;
-    Run,
+    System_Run,
     Error_Handler,
+    Task_Marks_Handler,
 &#125;;
 
 &#x2F;*
-* @function: Run
+* @function: System_Run
 * @param: None
 * @retval: None
 * @brief: 系统运行
 *&#x2F;
-static void Run(void)
+static void System_Run(void)
 &#123;
-    
+    Task_Pro_Handler();
 &#125;
 
 &#x2F;*
@@ -417,6 +462,50 @@ static void Error_Handler(void)
 &#123;
     Buzzer.Buzzer_ON();
 &#125;
+
+&#x2F;*
+* @function: Task_Marks_Handler
+* @param: None
+* @retval: None
+* @brief: 任务标记函数
+*&#x2F;
+static void Task_Marks_Handler(void)
+&#123;
+    uint8_t i;
+
+    for (i &#x3D; 0; i &lt; ucTasks_Max; i++)
+    &#123;
+        if (Task[i].Task_Cnt)   &#x2F;&#x2F; 判断计数是否为0
+        &#123;
+            Task[i].Task_Cnt--; &#x2F;&#x2F; 递减
+            if (0 &#x3D;&#x3D; Task[i].Task_Cnt)  &#x2F;&#x2F; 计数到0
+            &#123;
+                Task[i].Task_Cnt &#x3D; Task[i].Task_Timer;  &#x2F;&#x2F; 重装载计数
+                Task[i].Run_Status &#x3D; TRUE;  &#x2F;&#x2F; 任务执行状态标志置1
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: Task_Pro_Handler
+* @param: None
+* @retval: None
+* @brief: 任务处理函数
+*&#x2F;
+static void Task_Pro_Handler(void)
+&#123;
+    uint8_t i;
+
+    for (i &#x3D; 0; i &lt; ucTasks_Max; i++)
+    &#123;
+        if (Task[i].Run_Status) &#x2F;&#x2F; 判断执行状态：TRUE--执行 FALSE--不执行
+        &#123;
+            Task[i].Run_Status &#x3D; FALSE;
+            Task[i].Task_Hook();    &#x2F;&#x2F; 执行函数
+        &#125;
+    &#125;
+&#125;
 </code></pre>
               </div>
             </details>
@@ -428,6 +517,34 @@ static void Error_Handler(void)
 
 &#x2F;&#x2F; Debug Port(Default serial port 1)
 #define UART_DEBUG  CW_UART1
+
+&#x2F;***********************全局宏预编译 BEGIN***********************&#x2F;
+
+&#x2F;&#x2F; 选择屏幕(只能3选1)
+&#x2F;&#x2F; #define USE_TFT 
+#define USE_096_OLED
+&#x2F;&#x2F; #define USE_091_OLED
+
+&#x2F;&#x2F; ADC选择模式(单通道单次&#x2F;序列扫描)
+&#x2F;&#x2F; #define USE_ADC_Single_One
+#define USE_ADC_Serial_Scan
+
+&#x2F;&#x2F; RTC中断选择打开
+&#x2F;&#x2F; #define USE_RTC_Interrupt
+
+&#x2F;&#x2F; 输入捕获有问题，暂时屏蔽
+&#x2F;&#x2F; #define USE_PWM_IC
+&#x2F;&#x2F; #define USE_PWM_IC_ATIM
+
+&#x2F;&#x2F; GTIM3互补输出
+&#x2F;&#x2F; #define USE_GTIM3_TOGG
+
+&#x2F;&#x2F; ATIM输出比较
+&#x2F;&#x2F; #define USE_ATIM_PWM
+
+&#x2F;***********************全局宏预编译   END***********************&#x2F;
+
+
 &#x2F;&#x2F; 取消 FALSE 和 TRUE 宏定义(否则下面枚举报错！)
 #undef FALSE
 #undef TRUE
@@ -460,12 +577,15 @@ typedef enum
 
 typedef struct
 &#123;
+    void (*System_10US_Delay)(uint32_t);    &#x2F;&#x2F; 系统延时10*xus
+    void (*System_MS_Delay)(uint32_t);  &#x2F;&#x2F; 系统ms延时
     void (*Memory_Clear)(uint8_t*, uint16_t);   &#x2F;&#x2F; 内存清除
 &#125;Public_t;
 
 extern Public_t Public;
 
-#endif</code></pre>
+#endif
+</code></pre>
               </div>
             </details>
 <details ><summary> public.c </summary>
@@ -481,10 +601,14 @@ extern Public_t Public;
 &#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
 
 static void Memory_Clear(uint8_t*, uint16_t);    &#x2F;&#x2F; 内存清除
+static void System_MS_Delay(uint32_t);   &#x2F;&#x2F; 系统ms延时
+static void System_10US_Delay(uint32_t); &#x2F;&#x2F; 系统延时10*xus
 
 &#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
 Public_t Public &#x3D; 
 &#123;
+    System_10US_Delay,
+    System_MS_Delay,
     Memory_Clear,
 &#125;;
 
@@ -517,7 +641,32 @@ int fputc(int ch, FILE *f)
     while (USART_GetFlagStatus(UART_DEBUG, USART_FLAG_TXE) &#x3D;&#x3D; RESET);
 
     return ch;
-&#125;</code></pre>
+&#125;
+
+&#x2F;*
+* @function: System_MS_Delay
+* @param: ms -&gt; 需要延时的时间(ms)
+* @retval: None
+* @brief: 系统ms延时
+*&#x2F;
+static void System_MS_Delay(uint32_t ms)
+&#123;
+    delay1ms(ms);   &#x2F;&#x2F; CW库的延时函数
+&#125;
+
+&#x2F;*
+* @function: System_10US_Delay
+* @param: us -&gt; 需要延时的时间(us*10)
+* @retval: None
+* @brief: 系统10*xus延时
+*&#x2F;
+static void System_10US_Delay(uint32_t us)
+&#123;
+   delay10us(us);   &#x2F;&#x2F; CW库的延时函数
+&#125;
+
+
+</code></pre>
               </div>
             </details>
 <details ><summary> callback.h </summary>
@@ -526,6 +675,8 @@ int fputc(int ch, FILE *f)
 #define __CALLBACK_H
 #include &quot;main.h&quot;
 
+&#x2F;&#x2F; 调试用
+#define CALLBACK_Debug 0
 
 #endif</code></pre>
               </div>
@@ -538,17 +689,376 @@ int fputc(int ch, FILE *f)
  * Date: 2023&#x2F;06&#x2F;11
  * description: 中断函数
 ****************************************************************************&#x2F;
-#include &quot;main.h&quot;</code></pre>
+#include &quot;main.h&quot;
+
+&#x2F;*
+* @function: UART1_IRQHandler
+* @param: None
+* @retval: None
+* @brief: 串口1中断服务函数
+*&#x2F;
+void UART1_IRQHandler(void)
+&#123;
+    if (USART_GetITStatus(CW_UART1, USART_IT_RC) !&#x3D; RESET)
+    &#123;
+        USART1.puc_Usart1_Rec_Buffer[USART1.ucUsart1_Rx_Cnt] &#x3D; USART_ReceiveData_8bit(CW_UART1);
+        if (USART1.puc_Usart1_Rec_Buffer[USART1.ucUsart1_Rx_Cnt] &#x3D;&#x3D; 0x0A)
+        &#123;
+            if (USART1.puc_Usart1_Rec_Buffer[USART1.ucUsart1_Rx_Cnt - 1] &#x3D;&#x3D; 0x0D)   &#x2F;&#x2F; 判断先后接收到 0x0D 0x0A 则当做一帧
+            &#123;
+#if CALLBACK_Debug                
+                &#x2F;&#x2F; for (uint16_t i &#x3D; 0; i &lt; USART1.ucUsart1_Rx_Cnt - 1; i++)   &#x2F;&#x2F; Cnt - 1去除0x0D
+                &#x2F;&#x2F; &#123;
+                &#x2F;&#x2F;     *(USART1.puc_Usart1_Send_Buffer + i) &#x3D; *(USART1.puc_Usart1_Rec_Buffer + i);
+                &#x2F;&#x2F; &#125;
+                &#x2F;&#x2F; &#x2F;&#x2F; 发送数据
+                &#x2F;&#x2F; USART1.USART1_Send_Array(USART1.puc_Usart1_Send_Buffer, USART1.ucUsart1_Rx_Cnt - 1);    &#x2F;&#x2F; Cnt - 1去除0x0D
+                &#x2F;&#x2F; printf(&quot;\r\n&quot;);
+#endif                
+                &#x2F;&#x2F; ModBus协议解析
+                Modbus.Protocol_Analysis(&amp;USART1);
+            &#125;
+            else
+            &#123;
+                USART1.ucUsart1_Rx_Cnt++;
+            &#125;
+        &#125;
+        else
+        &#123;
+            USART1.ucUsart1_Rx_Cnt++;
+        &#125;
+        USART_ClearITPendingBit(CW_UART1, USART_IT_RC);
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: BTIM1_IRQHandler
+* @param: None
+* @retval: None
+* @brief: BTIM1中断服务函数
+*&#x2F;
+void BTIM1_IRQHandler(void)
+&#123;
+    static uint16_t count_100ms &#x3D; 0;
+    if (BTIM_GetITStatus(CW_BTIM1, BTIM_IT_OV))			&#x2F;&#x2F;检查BTIM的状态寄存器的状态位是否置位
+    &#123;
+        BTIM_ClearITPendingBit(CW_BTIM1, BTIM_IT_OV);	&#x2F;&#x2F;清除中断标志位
+        count_100ms++;
+
+        System.Task_Marks_Handler();
+        if(100 &#x3D;&#x3D; count_100ms)
+        &#123;
+            count_100ms &#x3D; 0;
+            Key_1.vusKey_1_Timer_Count++;
+        &#125;
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: GPIOA_IRQHandler
+* @param: None
+* @retval: None
+* @brief: GPIOB外部中断服务函数
+*&#x2F;
+void GPIOB_IRQHandler(void)
+&#123;
+    if (CW_GPIOB-&gt;ISR_f.PIN2)   &#x2F;&#x2F; 判断哪个引脚触发
+    &#123;
+        GPIOB_INTFLAG_CLR(bv2); &#x2F;&#x2F; 清除标志位
+        Led.Led_Flip(LED2);
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: ADC_IRQHandler
+* @param: None
+* @retval: None
+* @brief: ADC中断服务函数
+*&#x2F;
+void ADC_IRQHandler(void)
+&#123;
+    ADC_1.gFlagIrq &#x3D; CW_ADC-&gt;ISR;   &#x2F;&#x2F; 获取中断标志寄存器
+    CW_ADC-&gt;ICR &#x3D; 0x00; &#x2F;&#x2F; 中断标志清除寄存器
+&#125;
+
+&#x2F;*
+* @function: RTC_IRQHandler
+* @param: None
+* @retval: None
+* @brief: RTC中断服务函数
+*&#x2F;
+void RTC_IRQHandler(void)
+&#123;
+    if (RTC_GetITState(RTC_IT_ALARMA))  &#x2F;&#x2F; 闹钟中断触发
+    &#123;
+        RTC_ClearITPendingBit(RTC_IT_ALARMA);
+        Buzzer.Buzzer_ON();
+    &#125;
+#ifdef USE_RTC_Interrupt    
+    if (RTC_GetITState(RTC_IT_INTERVAL))    &#x2F;&#x2F; RTC秒中断触发
+    &#123;
+        RTC_ClearITPendingBit(RTC_IT_INTERVAL);
+    &#125;
+#endif    
+&#125;
+
+&#x2F;*
+* @function: GTIM1_IRQHandler
+* @param: None
+* @retval: None
+* @brief: 定时器1中断函数
+*&#x2F;
+void GTIM1_IRQHandler(void)
+&#123;
+    &#x2F;&#x2F; static uint16_t Timer_Cnt;
+
+    GTIM_ClearITPendingBit(CW_GTIM1, GTIM_IT_OV);
+    &#x2F;&#x2F; 需要再打开
+    &#x2F;&#x2F; Timer_Cnt++;
+    &#x2F;&#x2F; if (Timer_Cnt &gt;&#x3D; 800)   &#x2F;&#x2F; 2.5x400 &#x3D; 2s
+    &#x2F;&#x2F; &#123;
+    &#x2F;&#x2F;     Timer_Cnt &#x3D; 0;
+    &#x2F;&#x2F;     Gtim.Gtim1_CH_Set_Pulse[0] +&#x3D; 40; &#x2F;&#x2F; 占空比+10%
+    &#x2F;&#x2F;     if (Gtim.Gtim1_CH_Set_Pulse[0] &gt; 360)
+    &#x2F;&#x2F;     &#123;
+    &#x2F;&#x2F;         Gtim.Gtim1_CH_Set_Pulse[0] &#x3D; 40;
+    &#x2F;&#x2F;     &#125;
+    &#x2F;&#x2F;     &#x2F;&#x2F; GTIM_SetCompare1(CW_GTIM1, Gtim.Gtim1_CH_Set_Pulse[3]);
+    &#x2F;&#x2F;     CW_GTIM1-&gt;CCR1 &#x3D; Gtim.Gtim1_CH_Set_Pulse[3];  &#x2F;&#x2F; 设置占空比跟上面函数作用一样
+    &#x2F;&#x2F; &#125;
+&#125;
+
+&#x2F;*
+* @function: ATIM_IRQHandler
+* @param: None
+* @retval: None
+* @brief: 高级定时器中断服务函数
+*&#x2F;
+void ATIM_IRQHandler(void)
+&#123;
+    if (ATIM_GetITStatus(ATIM_IT_OVF))
+    &#123;
+        ATIM_ClearITPendingBit(ATIM_IT_OVF);
+    &#125;
+
+    if (ATIM_GetITStatus(ATIM_IT_C1BF))
+    &#123;
+        ATIM_ClearITPendingBit(ATIM_IT_C1BF);
+    &#125;
+
+    if (ATIM_GetITStatus(ATIM_IT_C1AF))
+    &#123;
+        ATIM_ClearITPendingBit(ATIM_IT_C1AF);
+    &#125;
+&#125;
+
+#ifdef USE_PWM_IC
+&#x2F;*
+* @function: GTIM2_IRQHandler
+* @param: None
+* @retval: None
+* @brief: GTIM2中断服务函数
+*&#x2F;
+void GTIM2_IRQHandler(void)
+&#123;
+    static uint8_t Status &#x3D; 0;   &#x2F;&#x2F; 标志位，用于表示当前处于PWM信号的哪一阶段
+    static uint32_t cnt &#x3D; 0;    &#x2F;&#x2F; 计数
+    if (GTIM_GetITStatus(CW_GTIM2, GTIM_IT_OV)) &#x2F;&#x2F; 判断是否为GTIM1计数器溢出中断
+    &#123;
+        GTIM_ClearITPendingBit(CW_GTIM2, GTIM_IT_OV); &#x2F;&#x2F; 清除计数器溢出中断标志位
+        if (Status &#x3D;&#x3D; 1)                              &#x2F;&#x2F; 如果当前处于PWM信号的第二阶段
+        &#123;
+            cnt++;
+        &#125;
+    &#125;
+    if (GTIM_GetITStatus(CW_GTIM2, GTIM_IT_CC1)) &#x2F;&#x2F; 判断是否为GTIM1捕获比较匹配中断
+    &#123;
+        if (Status &#x3D;&#x3D; 0) &#x2F;&#x2F; 如果当前处于PWM信号的第一阶段
+        &#123;
+            Gtim.Gtim2_IC_Fre &#x3D; CW_GTIM2-&gt;CCR1; &#x2F;&#x2F; 获取捕获比较器1的值，即为PWM信号的周期
+            Status &#x3D; 1;                                     &#x2F;&#x2F; 切换至PWM信号的第二阶段
+        &#125;
+        else if (Status &#x3D;&#x3D; 1) &#x2F;&#x2F; 如果当前处于PWM信号的第二阶段
+        &#123;
+            Gtim.Gtim2_IC_Fre &#x3D; CW_GTIM2-&gt;CCR1 + cnt * 65536 - Gtim.Gtim2_IC_Fre; &#x2F;&#x2F; 计算PWM信号的周期
+            Status &#x3D; 0;                                                                       &#x2F;&#x2F; 切换至PWM信号的第一阶段
+            cnt &#x3D; 0;                                                                          &#x2F;&#x2F; 计数器清零
+        &#125;
+        GTIM_ClearITPendingBit(CW_GTIM2, GTIM_IT_CC1); &#x2F;&#x2F; 清除捕获比较器1匹配中断标志位
+    &#125;
+
+    if (GTIM_GetITStatus(CW_GTIM2, GTIM_IT_CC2)) &#x2F;&#x2F; 判断是否为GTIM1捕获比较匹配中断
+    &#123;
+        if (Status &#x3D;&#x3D; 1) &#x2F;&#x2F; 如果当前处于PWM信号的第二阶段
+        &#123;
+            Gtim.Gtim2_IC_Duty &#x3D; CW_GTIM2-&gt;CCR2 + cnt * 65536 - Gtim.Gtim2_IC_Fre; &#x2F;&#x2F; 计算PWM信号的占空比
+        &#125;
+        GTIM_ClearITPendingBit(CW_GTIM2, GTIM_IT_CC2); &#x2F;&#x2F; 清除捕获比较器2匹配中断标志位
+    &#125;
+&#125;
+#endif
+</code></pre>
               </div>
             </details>
 <details ><summary> task.h </summary>
               <div class='content'>
-              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"></code></pre>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __TASK_H
+#define __TASK_H
+#include &quot;main.h&quot;
+
+typedef struct
+&#123;
+    uint8_t Run_Status; &#x2F;&#x2F; 任务状态：TRUE&#x2F;FALSE
+    uint16_t Task_Cnt;  &#x2F;&#x2F; 任务定时计数器(ms)
+    uint16_t Task_Timer;    &#x2F;&#x2F; 重载计数器(任务分配的时间ms)
+    void (*Task_Hook)(void);    &#x2F;&#x2F; 任务函数
+&#125;Task_t;
+
+extern Task_t Task[];
+extern uint8_t ucTasks_Max;
+
+#endif</code></pre>
               </div>
             </details>
 <details ><summary> task.c </summary>
               <div class='content'>
-              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"></code></pre>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: task.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;06&#x2F;13
+ * description: 任务调度
+****************************************************************************&#x2F;
+#include &quot;main.h&quot;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+static void TasksHandle_10MS(void); &#x2F;&#x2F; 任务
+static void TasksHandle_20MS(void); &#x2F;&#x2F; 任务
+static void TasksHandle_100MS(void); &#x2F;&#x2F; 任务
+static void TasksHandle_250MS(void); &#x2F;&#x2F; 任务
+static void TasksHandle_1S(void); &#x2F;&#x2F; 任务
+static void TasksHandle_1p5S(void); &#x2F;&#x2F; 任务
+
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+Task_t Task[] &#x3D; 
+&#123;
+    &#123;FALSE, 10, 10, TasksHandle_10MS&#125;,  &#x2F;&#x2F; task Period: 10ms
+    &#123;FALSE, 100, 100, TasksHandle_100MS&#125;,  &#x2F;&#x2F; task Period: 20ms
+    &#123;FALSE, 20, 20, TasksHandle_20MS&#125;,  &#x2F;&#x2F; task Period: 20ms
+    &#123;FALSE, 250, 250, TasksHandle_250MS&#125;,  &#x2F;&#x2F; task Period: 250ms  
+    &#123;FALSE, 1000, 1000, TasksHandle_1S&#125;,  &#x2F;&#x2F; task Period: 1s  
+    &#123;FALSE, 1500, 1500, TasksHandle_1p5S&#125;,  &#x2F;&#x2F; task Period: 1.5s  
+&#125;;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;variable definition declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+&#x2F;&#x2F; 最大任务数量
+uint8_t ucTasks_Max &#x3D; sizeof(Task) &#x2F; sizeof(Task[0]);
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;variable definition declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+&#x2F;*
+* @function: TasksHandle_10MS
+* @param: None
+* @retval: None
+* @brief: 任务
+*&#x2F;
+static void TasksHandle_10MS(void)
+&#123;
+    Key_1.Key_1_Scan();
+    Key_1.Key_1_Handler();
+&#125;
+
+&#x2F;*
+* @function: TasksHandle_20MS
+* @param: None
+* @retval: None
+* @brief: 任务
+*&#x2F;
+static void TasksHandle_20MS(void)
+&#123;
+
+#ifdef USE_096_OLED     
+    switch(Menu.Now_Page_Status)
+    &#123;
+        case PAGE_TempHum:Menu.Menu_Page1();break;
+        case PAGE_RtcTimeDate:Menu.Menu_Page2();break;
+        case PAGE_ADC:Menu.Menu_Page3();break;
+        case PAGE_PWM:Menu.Menu_Page4();break;
+        default:Menu.Now_Page_Status &#x3D; PAGE_TempHum;break;
+    &#125;
+#endif    
+&#125;
+
+&#x2F;*
+* @function: TasksHandle_100MS
+* @param: None
+* @retval: None
+* @brief: 任务
+*&#x2F;
+static void TasksHandle_100MS(void)
+&#123;
+#ifdef USE_ADC_Single_One
+    ADC_1.ADC1_Single_Channel_One_Convert();    
+#elif defined(USE_ADC_Serial_Scan)
+    ADC_1.ADC1_Serial_Scan_Convert();
+#endif
+    if (Menu.Now_Page_Status &#x3D;&#x3D; PAGE_ADC)
+    &#123;
+        &#x2F;&#x2F; OLED刷新
+        &#x2F;&#x2F; printf(&quot;A---%.1f\r\n&quot;,ADC_1.ADC_Single_Result);
+        sprintf((char*)Page3.OLED096_Display_Buff[0],&quot;B0:%.2f A4:%.2f&quot;,ADC_1.ADC_Serial_Result_Arr[0], ADC_1.ADC_Serial_Result_Arr[1]);
+        OLED096.padString((char*)Page3.OLED096_Display_Buff[0],16);
+        sprintf((char*)Page3.OLED096_Display_Buff[1],&quot;A5:%.2f A6:%.2f&quot;,ADC_1.ADC_Serial_Result_Arr[2], ADC_1.ADC_Serial_Result_Arr[3]);
+        OLED096.padString((char*)Page3.OLED096_Display_Buff[1],16);
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: TasksHandle_250MS
+* @param: None
+* @retval: None
+* @brief: 任务
+*&#x2F;
+static void TasksHandle_250MS(void)
+&#123;
+    Led.Led_Flip(LED1);
+    if (Menu.Now_Page_Status &#x3D;&#x3D; PAGE_PWM)
+    &#123;
+        Gtim.Gtim1_Calculate(); &#x2F;&#x2F; 计算
+    &#125;  
+&#125;
+&#x2F;*
+* @function: TasksHandle_1S
+* @param: None
+* @retval: None
+* @brief: 任务
+*&#x2F;
+static void TasksHandle_1S(void)
+&#123;
+    Led.Led_Flip(LED2);
+    if (Menu.Now_Page_Status &#x3D;&#x3D; PAGE_RtcTimeDate)
+    &#123;    
+        myRTC.myRTC_Refresh();
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: TasksHandle_1p5S
+* @param: None
+* @retval: None
+* @brief: 任务
+*&#x2F;
+static void TasksHandle_1p5S(void)
+&#123;
+    if (Menu.Now_Page_Status &#x3D;&#x3D; PAGE_TempHum)
+    &#123;    
+        DHT11.DHT11_Read_Data(&amp;DHT11.DHT11_Temperture,&amp;DHT11.DHT11_Humidity); &#x2F;&#x2F; 获取一次温湿度
+    &#125;
+&#125;
+</code></pre>
               </div>
             </details>
 <details ><summary> main.h </summary>
@@ -587,15 +1097,29 @@ int fputc(int ch, FILE *f)
 #include &lt;stdbool.h&gt;
 #include &lt;string.h&gt;
 
+#include &quot;task.h&quot;
 #include &quot;system_init.h&quot;
 #include &quot;system.h&quot;
 #include &quot;callback.h&quot;
 #include &quot;public.h&quot;
 #include &quot;led.h&quot;
 #include &quot;key_1.h&quot;
+#include &quot;key_2.h&quot;
 #include &quot;buzzer.h&quot;
-#include &quot;callback.h&quot;
 #include &quot;usart1.h&quot;
+#include &quot;crc_16.h&quot;
+#include &quot;modbus.h&quot;
+#include &quot;btim.h&quot;
+#include &quot;gtim.h&quot;
+#include &quot;atim.h&quot;
+#include &quot;tft_st7735.h&quot;
+#include &quot;i2c.h&quot;
+#include &quot;oled_096.h&quot;
+#include &quot;adc1.h&quot;
+#include &quot;rtc.h&quot;
+#include &quot;menu.h&quot;
+#include &quot;dht11.h&quot;
+
 #endif
 </code></pre>
               </div>
@@ -606,17 +1130,17 @@ int fputc(int ch, FILE *f)
  * File: main.c
  * Author: Luckys.
  * Date: 2023&#x2F;06&#x2F;11
- * description: CW32030C8T6饭盒派学习
+ * description: CW32030C8T6大学板
 ****************************************************************************&#x2F;
 #include &quot;main.h&quot;
 
 int main(void)
 &#123;
   System_Init.Hardware_Init();
-
+  
   while (1)
   &#123;
-    System.Run();
+    System.System_Run();
   &#125;
 &#125;</code></pre>
               </div>
@@ -983,23 +1507,6 @@ static void Led_Flip(Led_Num_t LEDx)
 <ul>
 <li>程序编写</li>
 </ul>
-<details ><summary> system_init.c </summary>
-              <div class='content'>
-              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
-* @function: Hardware_Init
-* @param: None
-* @retval: None
-* @brief: 硬件初始化
-*&#x2F;
-static void Hardware_Init(void)
-&#123;
-    RCC_Config();   &#x2F;&#x2F; 时钟配置
-    InitTick(64000000); &#x2F;&#x2F; SYSTICK初始化
-    Led.Led_Init(); &#x2F;&#x2F; LED初始化
-    Key_1.Key_1_Init(); &#x2F;&#x2F; 按键初始化
-&#125;</code></pre>
-              </div>
-            </details>
 <details ><summary> key1.h </summary>
               <div class='content'>
               <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __KEY_1_H
@@ -1030,6 +1537,7 @@ typedef struct
     uint8_t volatile vucKey_1_Flag_Arr[6];  &#x2F;&#x2F; 按键标志位(短长按)
     void (*Key_1_Init)(void);   &#x2F;&#x2F; 按键初始化
     void (*Key_1_Scan)(void);   &#x2F;&#x2F; 按键三行消抖---按键扫描
+    void (*Key_1_Handler)(void);    &#x2F;&#x2F; 按键处理
 &#125;Key_1_t;
 
 extern Key_1_t Key_1;
@@ -1044,7 +1552,7 @@ extern Key_1_t Key_1;
  * File: key_1.c
  * Author: Luckys.
  * Date: 2023&#x2F;06&#x2F;11
- * description: 独立按键
+ * description: 底板独立按键(低电平有效)
 ****************************************************************************&#x2F;
 
 #include &quot;main.h&quot;
@@ -1060,6 +1568,7 @@ static uint8_t ucKey_1_Value,ucKey_1_Up,ucKey_1_Down;
 static void Key_1_Init(void);    &#x2F;&#x2F; 按键初始化
 static uint8_t Key_1_Return_Value(void); &#x2F;&#x2F; 返回键值
 static void Key_1_Scan(void);   &#x2F;&#x2F; 按键三行消抖---按键扫描
+static void Key_1_Handler(void);    &#x2F;&#x2F; 按键处理
 &#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
 
 Key_1_t Key_1 &#x3D; 
@@ -1068,6 +1577,7 @@ Key_1_t Key_1 &#x3D;
     &#123;FALSE&#125;,
     Key_1_Init,
     Key_1_Scan,
+    Key_1_Handler,
 &#125;;
 
 &#x2F;*
@@ -1156,7 +1666,63 @@ static void Key_1_Scan(void)
             default:break;
         &#125;
     &#125;
-&#125;</code></pre>
+&#125;
+
+&#x2F;*
+* @function: Key_1_Handler
+* @param: None
+* @retval: None
+* @brief: 按键处理
+*&#x2F;
+static void Key_1_Handler(void)
+&#123;
+    if (Key_1.vucKey_1_Flag_Arr[0]) &#x2F;&#x2F; K1短按
+    &#123;
+        if (Buzzer.Buzzer_Status &#x3D;&#x3D; Buzzer_Status_OFF)
+        &#123;
+            Buzzer.Buzzer_ON();
+        &#125;
+        else
+        &#123;
+            Buzzer.Buzzer_OFF();
+        &#125;
+        Key_1.vucKey_1_Flag_Arr[0] &#x3D; FALSE;
+    &#125;
+    else if (Key_1.vucKey_1_Flag_Arr[1])    &#x2F;&#x2F; K2短按
+    &#123;
+        &#x2F;&#x2F; 切换页面
+        Menu.Now_Page_Status &#x3D; (Menu.Now_Page_Status % PAGE_MAX) + 1;
+        OLED096.OLED096_Clear();
+        Key_1.vucKey_1_Flag_Arr[1] &#x3D; FALSE;
+    &#125;
+    else if (Key_1.vucKey_1_Flag_Arr[2])    &#x2F;&#x2F;K3短按
+    &#123;
+        Key_1.vucKey_1_Flag_Arr[2] &#x3D; FALSE;
+    &#125;
+    else if (Key_1.vucKey_1_Flag_Arr[3])    &#x2F;&#x2F; K1长按
+    &#123;
+        Gtim.Gtim1_CH_Set_Pulse[0] +&#x3D; 20;   &#x2F;&#x2F; 占空比加5%
+        Gtim.Gtim1_CH_Set_Pulse[1] +&#x3D; 20;   &#x2F;&#x2F; 占空比加5%
+
+        if (Gtim.Gtim1_CH_Set_Pulse[0] &gt; 380)
+        &#123;
+            Gtim.Gtim1_CH_Set_Pulse[0] &#x3D; 20;    &#x2F;&#x2F; 占空比恢复到5%
+        &#125;
+        if (Gtim.Gtim1_CH_Set_Pulse[1] &gt; 380)
+        &#123;
+            Gtim.Gtim1_CH_Set_Pulse[1] &#x3D; 40;    &#x2F;&#x2F; 占空比恢复到10%
+        &#125;
+        &#x2F;&#x2F; 更新占空比
+        CW_GTIM1-&gt;CCR1 &#x3D; Gtim.Gtim1_CH_Set_Pulse[0];
+        CW_GTIM1-&gt;CCR2 &#x3D; Gtim.Gtim1_CH_Set_Pulse[1];
+        Key_1.vucKey_1_Flag_Arr[3] &#x3D; FALSE;
+    &#125;
+    else if (Key_1.vucKey_1_Flag_Arr[4])    &#x2F;&#x2F; K2长按
+    &#123;
+        Key_1.vucKey_1_Flag_Arr[4] &#x3D; FALSE;
+    &#125;    
+&#125;
+</code></pre>
               </div>
             </details>
 <h3 id="最小系统板按键-外部中断">最小系统板按键+外部中断</h3>
@@ -1194,7 +1760,7 @@ extern Key_2_t Key_2;
 <details ><summary> key_2.c </summary>
               <div class='content'>
               <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
- * File: USER
+ * File: key_2.c
  * Author: Luckys.
  * Date: 2023&#x2F;06&#x2F;13
  * description: 最小系统板的按键---外部中断方式(按键高电平有效)
@@ -1233,27 +1799,13 @@ static void Key_2_Init(void)
 
     GPIOB_INTFLAG_CLR(bv2);  &#x2F;&#x2F; 清除PB2中断标志
     NVIC_EnableIRQ(GPIOB_IRQn); &#x2F;&#x2F; 使能NVIC 
-&#125;</code></pre>
+&#125;
+</code></pre>
               </div>
             </details>
-<details ><summary> callback.c </summary>
-              <div class='content'>
-              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
-* @function: GPIOA_IRQHandler
-* @param: None
-* @retval: None
-* @brief: GPIOB外部中断服务函数
-*&#x2F;
-void GPIOB_IRQHandler(void)
-&#123;
-    if (CW_GPIOB-&gt;ISR_f.PIN2)   &#x2F;&#x2F; 判断哪个引脚触发
-    &#123;
-        GPIOB_INTFLAG_CLR(bv2); &#x2F;&#x2F; 清除标志位
-        Led.Led_Flip(LED2);
-    &#125;
-&#125;</code></pre>
-              </div>
-            </details>
+<blockquote>
+<p>编写中断</p>
+</blockquote>
 <h2 id="蜂鸣器">蜂鸣器</h2>
 <ul>
 <li>硬件连接</li>
@@ -1262,24 +1814,6 @@ void GPIOB_IRQHandler(void)
 <ul>
 <li>程序编写</li>
 </ul>
-<details ><summary> system_init.c </summary>
-              <div class='content'>
-              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
-* @function: Hardware_Init
-* @param: None
-* @retval: None
-* @brief: 硬件初始化
-*&#x2F;
-static void Hardware_Init(void)
-&#123;
-    RCC_Config();   &#x2F;&#x2F; 时钟配置
-    InitTick(64000000); &#x2F;&#x2F; SYSTICK初始化
-    Led.Led_Init(); &#x2F;&#x2F; LED初始化
-    Key_1.Key_1_Init(); &#x2F;&#x2F; 按键初始化
-    Buzzer.Buzzer_Init();   &#x2F;&#x2F; 蜂鸣器初始化
-&#125;</code></pre>
-              </div>
-            </details>
 <details ><summary> buzzer.h </summary>
               <div class='content'>
               <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __BUZZER_H
@@ -1311,7 +1845,7 @@ extern Buzzer_t Buzzer;
 <details ><summary> buzzer.c </summary>
               <div class='content'>
               <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
- * File: USER
+ * File: buzzer.c
  * Author: Luckys.
  * Date: 2023&#x2F;06&#x2F;12
  * description: 蜂鸣器
@@ -1376,7 +1910,8 @@ static void Buzzer_OFF(void)
 &#123;
     GPIO_WritePin(CW_GPIOB,Buzzer_Pin,GPIO_Pin_RESET);
     Buzzer.Buzzer_Status &#x3D; Buzzer_Status_OFF;
-&#125;</code></pre>
+&#125;
+</code></pre>
               </div>
             </details>
 <h2 id="串口">串口</h2>
@@ -1439,8 +1974,7 @@ typedef struct
 extern USART1_t USART1;
 
 
-#endif
-</code></pre>
+#endif</code></pre>
               </div>
             </details>
 <details ><summary> usart1.c </summary>
@@ -1563,16 +2097,8 @@ static void USART1_Send_String(uint8_t* p_Str)
     while (*p_Str)
     &#123;
         USART_SendData_8bit(CW_UART1,*p_Str);
-    uint32_t TimerOut &#x3D; GetTick() + UART_TX_TimerOut;   &#x2F;&#x2F; 获取当前计数值+串口超时时间
-    &#x2F;&#x2F; 等待发送完成+超时机制，1：完成，0：还没完成
-    while ((USART_GetFlagStatus(UART_DEBUG, USART_FLAG_TXE) &#x3D;&#x3D; RESET) &amp;&amp; (TimerOut--))
-    &#123;
-        if (0 &#x3D;&#x3D; TimerOut)
-        &#123;
-            System.Error_Handler();
-            return;
-        &#125;
-    &#125;
+        &#x2F;&#x2F; 等待发送完成，1：完成，0：还没完成
+        while (USART_GetFlagStatus(UART_DEBUG, USART_FLAG_TXE) &#x3D;&#x3D; RESET);
         p_Str++;
     &#125;
     while(USART_GetFlagStatus(CW_UART1, USART_FLAG_TXBUSY) &#x3D;&#x3D; SET); &#x2F;&#x2F; 等待串口空闲
@@ -1580,49 +2106,9 @@ static void USART1_Send_String(uint8_t* p_Str)
 </code></pre>
               </div>
             </details>
-<details ><summary> callback.c </summary>
-              <div class='content'>
-              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
-* @function: UART1_IRQHandler
-* @param: None
-* @retval: None
-* @brief: 串口1中断服务函数
-*&#x2F;
-void UART1_IRQHandler(void)
-&#123;
-    if (USART_GetITStatus(CW_UART1, USART_IT_RC) !&#x3D; RESET)
-    &#123;
-        USART1.puc_Usart1_Rec_Buffer[USART1.ucUsart1_Rx_Cnt] &#x3D; USART_ReceiveData_8bit(CW_UART1);
-        if (USART1.puc_Usart1_Rec_Buffer[USART1.ucUsart1_Rx_Cnt] &#x3D;&#x3D; 0x0A)
-        &#123;
-            if (USART1.puc_Usart1_Rec_Buffer[USART1.ucUsart1_Rx_Cnt - 1] &#x3D;&#x3D; 0x0D)   &#x2F;&#x2F; 判断先后接收到 0x0D 0x0A 则当做一帧
-            &#123;
-#if CALLBACK_Debug                
-                &#x2F;&#x2F; for (uint16_t i &#x3D; 0; i &lt; USART1.ucUsart1_Rx_Cnt - 1; i++)   &#x2F;&#x2F; Cnt - 1去除0x0D
-                &#x2F;&#x2F; &#123;
-                &#x2F;&#x2F;     *(USART1.puc_Usart1_Send_Buffer + i) &#x3D; *(USART1.puc_Usart1_Rec_Buffer + i);
-                &#x2F;&#x2F; &#125;
-                &#x2F;&#x2F; &#x2F;&#x2F; 发送数据
-                &#x2F;&#x2F; USART1.USART1_Send_Array(USART1.puc_Usart1_Send_Buffer, USART1.ucUsart1_Rx_Cnt - 1);    &#x2F;&#x2F; Cnt - 1去除0x0D
-                &#x2F;&#x2F; printf(&quot;\r\n&quot;);
-#endif                
-                &#x2F;&#x2F; ModBus协议解析
-                Modbus.Protocol_Analysis(&amp;USART1);
-            &#125;
-            else
-            &#123;
-                USART1.ucUsart1_Rx_Cnt++;
-            &#125;
-        &#125;
-        else
-        &#123;
-            USART1.ucUsart1_Rx_Cnt++;
-        &#125;
-        USART_ClearITPendingBit(CW_UART1, USART_IT_RC);
-    &#125;
-&#125;</code></pre>
-              </div>
-            </details>
+<blockquote>
+<p>编写中断函数</p>
+</blockquote>
 <details ><summary> modbus.h </summary>
               <div class='content'>
               <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __MODBUS_H
@@ -3153,6 +3639,22 @@ DMA_InitStructure.DMA_TransferWidth &#x3D; DMA_TRANSFER_WIDTH_32BIT; &#x2F;&#x2F
 DMA_InitStructure.HardTrigSource &#x3D; DMA_HardTrig_ADC_TRANSCOMPLETE;    &#x2F;&#x2F; ADC转换完成触发 -- 硬触发
 DMA_InitStructure.TrigMode &#x3D; DMA_HardTrig;  &#x2F;&#x2F; 触发模式 -- 硬触发</code></pre>
 </blockquote>
+<h2 id="更新记录">更新记录</h2>
+<p><a href="https://github.com/luckys-yang/cw32_Project">我的项目工程github</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">时间</th>
+<th style="text-align:center">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">2023/6/23</td>
+<td style="text-align:center">提交最终版</td>
+</tr>
+</tbody>
+</table>
 <h2 id="常见问题">常见问题</h2>
 <div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>以下问题大部分来自群大佬总结，我把一些会遇到的记录在这！</p>
 </div>
@@ -3198,7 +3700,7 @@ void assert_failed(uint8_t *file, uint32_t line)
 <li>把原来的算法文件删掉重新添加，列表里找不到CW32的请确认是否安装了pack</li>
 </ol>
 </blockquote>
-</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num139.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E7%AE%B1"><span class="toc-number">2.</span> <span class="toc-text">开箱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="toc-number">3.</span> <span class="toc-text">配置开发环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%BF%E5%AD%90%E8%B5%84%E6%BA%90"><span class="toc-number">4.</span> <span class="toc-text">板子资源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%89%8B%E5%86%8C%E9%98%85%E8%AF%BB"><span class="toc-number">5.</span> <span class="toc-text">数据手册阅读</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E5%86%8C%E9%97%AE%E9%A2%98"><span class="toc-number">6.</span> <span class="toc-text">手册问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SYStick"><span class="toc-number">7.</span> <span class="toc-text">SYStick</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LED"><span class="toc-number">8.</span> <span class="toc-text">LED</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KEY"><span class="toc-number">9.</span> <span class="toc-text">KEY</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%95%E6%9D%BF%E6%8C%89%E9%94%AE"><span class="toc-number">9.1.</span> <span class="toc-text">底板按键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F%E6%9D%BF%E6%8C%89%E9%94%AE-%E5%A4%96%E9%83%A8%E4%B8%AD%E6%96%AD"><span class="toc-number">9.2.</span> <span class="toc-text">最小系统板按键+外部中断</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%9C%82%E9%B8%A3%E5%99%A8"><span class="toc-number">10.</span> <span class="toc-text">蜂鸣器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3"><span class="toc-number">11.</span> <span class="toc-text">串口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">12.</span> <span class="toc-text">定时器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%89%8B%E5%86%8C%E4%BB%8B%E7%BB%8D"><span class="toc-number">12.1.</span> <span class="toc-text">数据手册介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">12.2.</span> <span class="toc-text">基本定时器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">12.3.</span> <span class="toc-text">通用定时器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">12.4.</span> <span class="toc-text">高级定时器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TFT-ST7735"><span class="toc-number">13.</span> <span class="toc-text">TFT-ST7735</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OLED"><span class="toc-number">14.</span> <span class="toc-text">OLED</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ADC"><span class="toc-number">15.</span> <span class="toc-text">ADC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTC"><span class="toc-number">16.</span> <span class="toc-text">RTC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DHT11%E6%B8%A9%E6%B9%BF%E5%BA%A6"><span class="toc-number">17.</span> <span class="toc-text">DHT11温湿度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%89%E6%95%8F%E7%94%B5%E9%98%BB"><span class="toc-number">18.</span> <span class="toc-text">光敏电阻</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DMA"><span class="toc-number">19.</span> <span class="toc-text">DMA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-number">20.</span> <span class="toc-text">常见问题</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num139.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E7%AE%B1"><span class="toc-number">2.</span> <span class="toc-text">开箱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="toc-number">3.</span> <span class="toc-text">配置开发环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%BF%E5%AD%90%E8%B5%84%E6%BA%90"><span class="toc-number">4.</span> <span class="toc-text">板子资源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%89%8B%E5%86%8C%E9%98%85%E8%AF%BB"><span class="toc-number">5.</span> <span class="toc-text">数据手册阅读</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E5%86%8C%E9%97%AE%E9%A2%98"><span class="toc-number">6.</span> <span class="toc-text">手册问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SYStick"><span class="toc-number">7.</span> <span class="toc-text">SYStick</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LED"><span class="toc-number">8.</span> <span class="toc-text">LED</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KEY"><span class="toc-number">9.</span> <span class="toc-text">KEY</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%95%E6%9D%BF%E6%8C%89%E9%94%AE"><span class="toc-number">9.1.</span> <span class="toc-text">底板按键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F%E6%9D%BF%E6%8C%89%E9%94%AE-%E5%A4%96%E9%83%A8%E4%B8%AD%E6%96%AD"><span class="toc-number">9.2.</span> <span class="toc-text">最小系统板按键+外部中断</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%9C%82%E9%B8%A3%E5%99%A8"><span class="toc-number">10.</span> <span class="toc-text">蜂鸣器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3"><span class="toc-number">11.</span> <span class="toc-text">串口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">12.</span> <span class="toc-text">定时器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%89%8B%E5%86%8C%E4%BB%8B%E7%BB%8D"><span class="toc-number">12.1.</span> <span class="toc-text">数据手册介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">12.2.</span> <span class="toc-text">基本定时器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">12.3.</span> <span class="toc-text">通用定时器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">12.4.</span> <span class="toc-text">高级定时器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TFT-ST7735"><span class="toc-number">13.</span> <span class="toc-text">TFT-ST7735</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OLED"><span class="toc-number">14.</span> <span class="toc-text">OLED</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ADC"><span class="toc-number">15.</span> <span class="toc-text">ADC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTC"><span class="toc-number">16.</span> <span class="toc-text">RTC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DHT11%E6%B8%A9%E6%B9%BF%E5%BA%A6"><span class="toc-number">17.</span> <span class="toc-text">DHT11温湿度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%89%E6%95%8F%E7%94%B5%E9%98%BB"><span class="toc-number">18.</span> <span class="toc-text">光敏电阻</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DMA"><span class="toc-number">19.</span> <span class="toc-text">DMA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E8%AE%B0%E5%BD%95"><span class="toc-number">20.</span> <span class="toc-text">更新记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-number">21.</span> <span class="toc-text">常见问题</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
     document.body.oncopy = function () {
         iziToast.info({
             timeout: 4000, // 关闭弹窗的时间
