@@ -19,6 +19,18 @@ comments: false
                             class="avatar avatar-48 zhuan" width="48" height="48">
                     </span>
                     <div class="cbp_tmlabel">
+                        <p>当我知道这个消息后很震惊，我也有责任，如果我之前好好培训的话如果我出题简单点的话也许他们就不会被OUT，虽然考核得不理想，但是有些人确实挺优秀的，可能这些只有我看到吧，看着她们离开也无能为力，只希望他们在以后可以认认真真的自学，找到自己喜欢的方向去深造...</p>
+                        <p class="shuoshuo_time"><i class="fa fa-clock-o"></i>
+                            <span id="masked">2023年6月20日</span>&emsp;<i class="fas fa-mobile-alt"></i> <span id="masked">发自iPhone</span>
+                        </p>
+                    </div>
+                </li>            
+                <li> 
+                    <span class="shuoshuo_author_img">
+                    <img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"
+                            class="avatar avatar-48 zhuan" width="48" height="48">
+                    </span>
+                    <div class="cbp_tmlabel">
                         <p></p>
                         <p>其实工作室睡觉也挺不错的感觉，可能开始不习惯，尤其第一两天那时候确实有点怕毕竟关灯一片黑然后电脑有时候莫名其妙亮了，然后时不时哪里有异响啥的差点吓死我，现在感觉好像好多了，把工作室当家就好了，跟在宿舍睡差不了多少，而且我对睡觉的地方没什么要求的；大学生活嘛肯定是该尝试的都去尝试一遍，最后想说的是：卷王们，当你起床刷牙时我已经在电脑前了喔&#128522;</p>
                         <img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230606235048.webp" alt=" " style="zoom:33%;" />

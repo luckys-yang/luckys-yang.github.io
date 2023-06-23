@@ -128,7 +128,11 @@ git@github.com:luckys-yang/blog_giscus.git
 git@github.com:luckys-yang/manual.git
 ```
 
+- [【圆梦杯2023】](https://github.com/luckys-yang/Dream_Cup2023)
 
+```bash
+git@github.com:luckys-yang/Dream_Cup2023.git
+```
 
 
 
