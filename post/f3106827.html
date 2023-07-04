@@ -1,0 +1,2060 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>电机与PID学习 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="参考文章&#x2F;资料  电机驱动芯片——DRV8833、TB6612、A4950、L298N的详解与比较 全国大学生电子设计竞赛(三)–SPWM与PID–果果小师弟 网盘资料     记录了电机驱动芯片     LV8548MC   TB6612FNG   A4950   DRV8833   L298N       记录了电机型号     MG310直流减速电机    电机 有刷直流电机 介绍  简介">
+<meta property="og:type" content="article">
+<meta property="og:title" content="电机与PID学习">
+<meta property="og:url" content="https://mdcm.yang5201314.cn/post/f3106827.html">
+<meta property="og:site_name" content="Luckys-Yangの小栈">
+<meta property="og:description" content="参考文章&#x2F;资料  电机驱动芯片——DRV8833、TB6612、A4950、L298N的详解与比较 全国大学生电子设计竞赛(三)–SPWM与PID–果果小师弟 网盘资料     记录了电机驱动芯片     LV8548MC   TB6612FNG   A4950   DRV8833   L298N       记录了电机型号     MG310直流减速电机    电机 有刷直流电机 介绍  简介">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mdcm.yang5201314.cn/img/num143.webp">
+<meta property="article:published_time" content="2023-06-25T06:10:48.000Z">
+<meta property="article:modified_time" content="2023-06-27T08:13:44.227Z">
+<meta property="article:author" content="Luckys-Yang">
+<meta property="article:tag" content="牛逼">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mdcm.yang5201314.cn/img/num143.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"><link rel="canonical" href="https://mdcm.yang5201314.cn/post/f3106827.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '电机与PID学习',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-06-27 16:13:44'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/aplayer.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">143</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">76</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">32</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">电机与PID学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-25T06:10:48.000Z" title="发表于 2023-06-25 14:10:48">2023-06-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-27T08:13:44.227Z" title="更新于 2023-06-27 16:13:44">2023-06-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BB%86%E5%8C%96%E5%AD%A6%E4%B9%A0/">细化学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">12.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>48分钟</span></span></div></div></div><article class="post-content" id="article-container"><div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>参考文章/资料</p>
+</div>
+<p><a href="https://blog.51cto.com/u_15262460/2883155">电机驱动芯片——DRV8833、TB6612、A4950、L298N的详解与比较</a></p>
+<p><a href="https://mp.weixin.qq.com/s/xa3o6SjaeFCSDEWV_BS6Nw">全国大学生电子设计竞赛(三)–SPWM与PID–果果小师弟</a></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>网盘资料</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">记录了电机驱动芯片</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">LV8548MC</td>
+</tr>
+<tr>
+<td style="text-align:center">TB6612FNG</td>
+</tr>
+<tr>
+<td style="text-align:center">A4950</td>
+</tr>
+<tr>
+<td style="text-align:center">DRV8833</td>
+</tr>
+<tr>
+<td style="text-align:center">L298N</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">记录了电机型号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">MG310直流减速电机</td>
+</tr>
+</tbody>
+</table>
+<h2 id="电机">电机</h2>
+<h3 id="有刷直流电机">有刷直流电机</h3>
+<h4 id="介绍">介绍</h4>
+<ul>
+<li>简介</li>
+</ul>
+<p>直流有刷电机是内含电刷装置的将直流电能转换成机械能（直流电动机）或将机械能转换成直流电能（直流发电机）的旋转电机。区别于直流无刷电机，电刷装置是用来引入或引出直流电压和直流电流的。 <code>直流有刷电机是所有电机的基础，它具有启动快、制动及时、可在大范围内平滑地调速、控制电路相对简单等特点</code>。是 <code>闭环</code>的</p>
+<ul>
+<li>优点</li>
+</ul>
+<p>① 价钱比较便宜，有刷直流电机因为使用的空间比较广，而得到广泛应用的原因就是价钱比较便宜，因此上，出现使用的问题不管是维修还是更换都不会造成经济拮据的问题<br>
+② 方便控制，在进行操作的时候只需施加直流电压即可使电机转动。有刷直流电机在使用的时候甚至不需要使用微控制器，只要把电机连接到电池就可以进行很好的使用。<br>
+③ 有刷直流电机在低速时会产生输出高扭矩，这样的使用状况即使电机有负载，那么在这种高启动转矩的使用状况下，也可使电机快速上升。</p>
+<ul>
+<li>缺点</li>
+</ul>
+<p>① 有刷电机的刷子在不断地运转时，这些电刷会随着时间的推移而磨损。这样，与其他类型的电机相比，这样的磨损会造成一些使用的麻烦。<br>
+② 有刷直流电动机，在使用的时候电刷和换向器之间的电弧。在这样的转换过程中会导致大量的电噪声，而这样的噪声会给人产生较大的不舒服的感觉。<br>
+③ 在操作有刷直流电机的时候。部件之间存在摩擦，而这些摩擦会产生热量。有刷直流电机的运转时最大的速度的出现，会因为过高的速度会导致热量过高而出现使用的问题</p>
+<ul>
+<li>减速器的作用(有的电机有减速器)</li>
+</ul>
+<p>因为电机转的比较快所以需要减速来进行控制它</p>
+<ol>
+<li>
+<p>降低电机速度</p>
+</li>
+<li>
+<p>提高输出扭矩</p>
+</li>
+</ol>
+<p>rpm是每分钟多少转意思，比如一个电机是10000/rpm，减速比是1:20，那它实际转速是 10000 / 20 = 500/rpm，转速减少了扭矩增大，比如原本扭矩是0.1Kg/cm，就变成 1.6Kg/cm，这个看比例</p>
+<blockquote>
+<p>按照传动级数不同可分为单级和多级减速器；按照传动类型可分为齿轮减速器、蜗杆减速器和行星齿轮减速器</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230625145741.webp" alt=""></p>
+<ul>
+<li><code>齿轮减速箱体积较小，传递扭矩大，但是有一定的回程间隙</code></li>
+<li><code>蜗轮蜗杆减速机的主要特点是具有反向自锁功能，可以有较大的减速比，但是一般体积较大，传动效率不高，精度不高</code></li>
+<li><code>行星减速机其优点是结构比较紧凑，回程间隙小、精度较高，使用寿命很长，额定输出扭矩可以做的很大，但价格略贵</code></li>
+</ul>
+</blockquote>
+<ul>
+<li>电机选型</li>
+</ul>
+<ol>
+<li>
+<p>尺寸：根据结构大小选择尺寸</p>
+</li>
+<li>
+<p>扭力：要足够带动负载</p>
+</li>
+<li>
+<p>驱动电压：一般5V，12V，24V</p>
+</li>
+<li>
+<p>驱动电流：电流和电压影响功率，一般功率越大，扭力越大</p>
+</li>
+</ol>
+<ul>
+<li>驱动方式</li>
+</ul>
+<ol>
+<li>只能打开或关闭，不能变速与换向，用继电器，BJT或MOS开关控制通断即可</li>
+<li>可以打开或关闭，可以变速，但不能换向，可用PWM控制电子开关，也可控制驱动电压大小，一般选用PWM控制，比较简单</li>
+<li>可以打开或关闭，可以变速，也可以换向（正转/反转），用PWM控制桥路，改变流经电机的电流，就能改变电机转向</li>
+</ol>
+<blockquote>
+<p>情况1</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524073418.webp" alt=""></p>
+<blockquote>
+<p>情况2</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524073521.webp" alt=""></p>
+<ul>
+<li>衰减模式</li>
+</ul>
+<p>衰减模式，可简单理解为 <code>如何使电机停下</code>：如果控制电机一直向一个方向旋转不会产生问题。但是如果这是想让电机停下，那么问题就来了。由于电机是感性负载，电流不能突变。在断开电机两端所加的电压时，电机产生的反向电动势很有可能损坏FET(场效应晶体管，它是一种用于控制电流的半导体器件)。因此想让电机停下，除了断开供电，还要形成一个续流的回路，释放掉电机上的能量。</p>
+<ul>
+<li>补充</li>
+</ul>
+<blockquote>
+<p>驱动电压越大，转速越快；电流越大，扭矩越大</p>
+<p>当 <code>扭矩&lt;负载</code> 时，电机转速会下降，电流上升从而增大扭矩。当负载非常大，电机带不动从而停止转动时（堵转），电流达到最大值，此时需特别注意，很有可能烧坏电机驱动</p>
+<p>H桥中绝对不能出现同侧（左侧/右侧）的FET同时导通的情况(这样会导致电流不经过电机直接到地，形成短路！因此在状态切换时需要一步一步来，而集成H桥的芯片一般会在内部自动解决这个问题 – 利用死区控制)</p>
+</blockquote>
+<h4 id="编程示例1">编程示例1</h4>
+<blockquote>
+<p>程序基于GD32F103VET6</p>
+</blockquote>
+<ul>
+<li>直流电机常用驱动IC — LV8548MC(安森美)</li>
+</ul>
+<p><code>LV8548MC</code> 是一种2通道低饱和电压正/反向电机驱动芯片。适用于 <code>12V</code> 系统产品，可驱动两台直流电机，一台采用 <code>并联方式</code>的直流电机，或者 <code>可全程</code> 和 <code>半步</code> 驱动步进电机。</p>
+<p>供电电压为： <code>4 ~ 16V</code></p>
+<ul>
+<li>引脚</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524075912.webp" alt=""></p>
+<blockquote>
+<p>IN1和IN2引脚一起工作，驱动输出引脚OUT1和OUT2；IN3和IN4引脚一起工作，驱动输出引脚OUT3和OUT4</p>
+</blockquote>
+<ul>
+<li>控制逻辑</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524080206.webp" alt=""></p>
+<blockquote>
+<p>Forward表示正转，Reverse表示反转，这跟电机接线有关系</p>
+<p>控制有刷直流电机正转简单来说其实就是控制电机+极转给高电平，-极默认低电平，反转的话就调转过来</p>
+<p>初始化状态下管脚都是低电平，就绪</p>
+</blockquote>
+<ul>
+<li>注意</li>
+</ul>
+<p>只需要改变电机的占空比即可控制，至于PWM频率是多少也没有一个固定的数值需要自己去调试，虽然好像频率对电机的影响也不算很大</p>
+<ul>
+<li>硬件连接</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524084942.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524084304.webp" alt=""></p>
+<blockquote>
+<p>这次我们控制一个直流电机测试，OUT1接-极，OUT2接+极，IN1接到了32的PB1引脚，是TIM3_CH4，INT2接到PB0，是TIM3_CH3，所以用32单片机控制一路通道输出PWM波，另一路输出低电平，就能用OUT1和OUT2控制电机转动</p>
+</blockquote>
+<ul>
+<li>MX配置</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524090727.webp" alt=""></p>
+<ul>
+<li>程序编写</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524090925.webp" alt=""></p>
+<blockquote>
+<p>这里占空比设置到100%的话需要比重装载值大1，否则波形是很小间隙，而不是一条直线</p>
+</blockquote>
+<details ><summary> DC_Motor.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;AllHead.h&quot;
+
+&#x2F;&#x2F; 定义枚举类型
+typedef enum
+&#123;
+    Start_State &#x3D; (uint8_t)0,
+    Stop_State &#x3D; (uint8_t)1,
+&#125;Status_t;
+
+typedef enum
+&#123;
+    Forward_State &#x3D; (uint8_t)0,
+    Reverse_State &#x3D; (uint8_t)1,
+&#125;Direction_t;
+
+typedef enum
+&#123;
+    Speed_50 &#x3D; (uint8_t)500,
+    Speed_60 &#x3D; (uint8_t)600,
+    Speed_70 &#x3D; (uint8_t)700,
+    Speed_80 &#x3D; (uint8_t)800,
+    Speed_90 &#x3D; (uint8_t)900,
+    Speed_100 &#x3D; (uint8_t)1001,    
+&#125;Speed_t;
+
+typedef enum
+&#123;
+    Speed_up &#x3D; (uint8_t)0,	&#x2F;&#x2F; 加速
+    Speed_down &#x3D; (uint8_t)1,	&#x2F;&#x2F; 减速
+&#125;Speed_Change_t;
+
+typedef struct
+&#123;
+    uint8_t Status;	&#x2F;&#x2F; 直流电机状态
+    uint8_t Direction;	&#x2F;&#x2F; 直流电机方向
+    uint8_t Speed;	&#x2F;&#x2F; 直流电机速度
+    void (*Start)(void);
+    void (*Stop)(void);
+    void (*Direction_Adjust)(void);
+    void (*Speed_Adjust)(Speed_Change_t);
+&#125;DC_Motor_t;
+
+extern DC_Motor_t DC_Motor;</code></pre>
+              </div>
+            </details>
+<details ><summary> DC_Motor.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;AllHead.h&quot;
+
+static void Start(void);
+static void Stop(void);
+static void Direction_Adjust(void);
+static void Speed_Adjust(Speed_Change_t);
+
+DC_Motor_t DC_Motor &#x3D; 
+&#123;
+    Stop_State,
+   	Forward_State,
+    Speed_50,
+    Start,
+    Stop,
+    Direction_Adjust,
+    Speed_Adjust
+&#125;;
+
+
+static void Start()
+&#123;
+    &#x2F;&#x2F;启动电机
+    if(DC_Motor.Direction &#x3D;&#x3D;  Forward_Status)   &#x2F;&#x2F;如果电机的方向是正转
+    &#123;
+        HAL_TIM_PWM_Start(&amp;htim3, TIM_CHANNEL_3);   &#x2F;&#x2F;启动定时器3通道3的PWM输出
+    &#125;
+    else &#x2F;&#x2F;如果电机方向是反转
+    &#123;
+        HAL_TIM_PWM_Start(&amp;htim3, TIM_CHANNEL_4);   &#x2F;&#x2F;启动定时器3通道4的PWM输出
+    &#125;
+    &#x2F;&#x2F;更新电机状态
+    DC_Motor.Status &#x3D; Start_Status;
+&#125;
+
+static void Stop()
+&#123;
+    &#x2F;&#x2F;关闭电机
+    if(DC_Motor.Status &#x3D;&#x3D; Start_Status)
+    &#123;
+        HAL_TIM_PWM_Stop(&amp;htim3, TIM_CHANNEL_3);    &#x2F;&#x2F;关闭通道的3PWM输出
+        HAL_TIM_PWM_Stop(&amp;htim3, TIM_CHANNEL_4);    &#x2F;&#x2F;关闭通道的4PWM输出
+    &#125;
+    &#x2F;&#x2F;更新电机状态
+    DC_Motor.Status &#x3D; Stop_Status;
+&#125;
+
+&#x2F;*
+* @name   Direction_Adjust
+* @brief  调整转动方向
+* @param  Direction：要设置的方向
+* @retval None
+*&#x2F;
+static void Direction_Adjust()
+&#123;
+    &#x2F;&#x2F;判断是否是启动状态
+    if(DC_Motor.Status &#x3D;&#x3D; Start_Status)
+    &#123;
+        if(DC_Motor.Direction &#x3D;&#x3D; Reverse_Status)        &#x2F;&#x2F;如果原来是反转
+        &#123;
+            &#x2F;&#x2F;设置为正转
+            HAL_TIM_PWM_Stop(&amp;htim3, TIM_CHANNEL_4);    &#x2F;&#x2F;关闭通道4的PWM输出
+            HAL_Delay(200);                             &#x2F;&#x2F;延时200ms，等待电机停止
+            HAL_TIM_PWM_Start(&amp;htim3, TIM_CHANNEL_3);   &#x2F;&#x2F;启动定时器3通道3的PWM输出
+            DC_Motor.Direction &#x3D; Forward_Status;        &#x2F;&#x2F;更新方向为正转
+        &#125;
+        else        &#x2F;&#x2F;如果原来是正转
+        &#123;
+            &#x2F;&#x2F;设置为反转
+            HAL_TIM_PWM_Stop(&amp;htim3, TIM_CHANNEL_3);    &#x2F;&#x2F;关闭通道3的PWM输出
+            HAL_Delay(200);                             &#x2F;&#x2F;延时200ms，等待电机停止
+            HAL_TIM_PWM_Start(&amp;htim3, TIM_CHANNEL_4);   &#x2F;&#x2F;启动定时器3通道4的PWM输出
+            DC_Motor.Direction &#x3D; Reverse_Status;        &#x2F;&#x2F;更新方向为反转
+        &#125;
+    &#125;
+&#125;
+
+&#x2F;*
+* @name   Speed_Adjust
+* @brief  调整转动速度
+* @param  Speed_Change：增加速度或者减少速度
+* @retval None
+*&#x2F;
+static void Speed_Adjust(Speed_Change_t Speed_Change)
+&#123;
+    &#x2F;&#x2F;判断是否是启动状态
+    if(DC_Motor.Status &#x3D;&#x3D; Start_Status)
+    &#123;
+        &#x2F;&#x2F;增大电机速度
+        if(Speed_Change &#x3D;&#x3D; speed_up)
+        &#123;
+            switch (DC_Motor.Speed)
+            &#123;
+            case Speed_50:
+                DC_Motor.Speed &#x3D; Speed_60;
+                break;
+            case Speed_60:
+                DC_Motor.Speed &#x3D; Speed_70;
+                break;
+            case Speed_70:
+                DC_Motor.Speed &#x3D; Speed_80;
+                break;
+            case Speed_80:
+                DC_Motor.Speed &#x3D; Speed_90;
+                break;
+            case Speed_90:
+                DC_Motor.Speed &#x3D; Speed_100;
+                break;
+            case Speed_100:
+                DC_Motor.Speed &#x3D; Speed_100;
+                break;
+            default:
+                DC_Motor.Speed &#x3D; Speed_50;
+                break;
+            &#125;
+        &#125;
+        &#x2F;&#x2F;减少电机速度
+        else
+        &#123;
+            switch (DC_Motor.Speed)
+            &#123;
+            case Speed_50:
+                DC_Motor.Speed &#x3D; Speed_50;
+                break;
+            case Speed_60:
+                DC_Motor.Speed &#x3D; Speed_50;
+                break;
+            case Speed_70:
+                DC_Motor.Speed &#x3D; Speed_60;
+                break;
+            case Speed_80:
+                DC_Motor.Speed &#x3D; Speed_70;
+                break;
+            case Speed_90:
+                DC_Motor.Speed &#x3D; Speed_80;
+                break;
+            case Speed_100:
+                DC_Motor.Speed &#x3D; Speed_90;
+                break;
+            default:
+                DC_Motor.Speed &#x3D; Speed_90;
+                break;
+            &#125;
+        &#125;
+        &#x2F;&#x2F;改变占空比
+        TIM3-&gt;CCR3 &#x3D; DC_Motor.Speed;
+        TIM3-&gt;CCR4 &#x3D; DC_Motor.Speed;
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<h4 id="编程示例2">编程示例2</h4>
+<blockquote>
+<p>电机驱动板是TB6612FNG，电机型号是MG310直流减速电机，减速比20，电压范围7-13V，速度1.3m/s，编码器是13线霍尔</p>
+</blockquote>
+<blockquote>
+<p>程序基于GD32F103VET6</p>
+</blockquote>
+<ul>
+<li>电机驱动模块详解</li>
+</ul>
+<ol>
+<li>TB6612FNG是直流电机驱动器件，它具有大电流 <code>MOSFET-H</code> 桥结构，双通道电路输出，可同时驱动2个电机</li>
+<li>相比L298N 的热耗性和外围二极管续流电路，它无需外加散热片，外围电路简单，只需外接电源滤波电容就可以直接驱动电机，<br>
+利于减小系统尺寸。对于PWM 信号输入频率范围，高达 <code>100 kHz(一般10~20KHz就够了)</code></li>
+<li>参数：最大输入电压：VM = 15V ；最大输出电流：Iout = 1.2A（平均）/3.2A（峰值）；正反转/短路刹车/停机功能模式；内置过热保护和低压检测电路</li>
+</ol>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230625080128.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230625080140.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230625080259.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230625161756.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230625180508.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230625180726.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>数据手册</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230625184519.webp" alt=""></p>
+<blockquote>
+<p>CW（Clockwise顺时针）：即正向旋转；</p>
+<p>CCW（Counterclockwise逆时针）：即反向旋转；</p>
+<p>Stop（自由停车）：即前述的滑动/电流快衰减；</p>
+<p>Short brake（刹车）：即前述的制动/电流慢衰减；</p>
+<p>Standby（待机）：即芯片不工作</p>
+<p>仔细观察上表，可发现其相比于DRV8833的控制，不同在于多了一个PWM脚</p>
+<ul>
+<li>
+<p>如果令PWM输入脚一直为高电平，即只通过IN1和IN2控制电机的四个状态（旋转时为满速状态），这便是最基础的控制</p>
+</li>
+<li>
+<p>当加入了PWM后，便可和之前一样，通过占空比调节速度</p>
+<ol>
+<li>一种是 <code>IN1和IN2固定，PWM脚输入PWM</code>，此时是配合慢衰减调速。例如：IN1为1，IN2为0，PWM为PWM，则正转和慢衰减相互切换；</li>
+<li>另外一种是 <code>PWM脚为高电平，IN1、IN2中的一个固定另一个为PWM输入</code>，此时是配合快衰减调速。例如，IN1为1，IN2为PWM输入，PWM为1，则正转与快衰减相互切换</li>
+</ol>
+</li>
+<li>
+<p>PWM的频率一般选在5k~20kHz</p>
+</li>
+</ul>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/8a2eda5bb899ccb06f398b40454a197b.webp" alt=""></p>
+<ul>
+<li>接线注意</li>
+</ul>
+<blockquote>
+<p>Motor_B 对应车的左轮，Motor_A对应车的右轮</p>
+<p><code>STBY</code> 是使能端高电平有效，接3.3或者5V即可</p>
+<p><code>AO1/AO2</code> 的话接电机的 <code>+/-</code>即可(这个无所谓这个只会影响正反转)</p>
+<p><code>PWMA</code> 的话接单片机的PWM输出引脚，一般是给10KHz即可，通过输出 <code>0%~100%</code> 占空比控制电机的速度</p>
+<p><code>AIN1/AIN2</code> 是控制电机的正反转引脚通过高低电平，接单片机IO即可</p>
+<p><code>VM</code> 的话接12V</p>
+<p><code>注意：必须要有PWM 输入才有AO1 和AO2 的信号，只接AIN1 和AIN2不会产生AO1 和AO2 的信号</code></p>
+<p>另一路电机B同理</p>
+</blockquote>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>轮子动起来</p>
+</div>
+<details ><summary> Motor.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __MOTOR_H
+#define __MOTOR_H
+#include &quot;AllHead.h&quot;
+
+&#x2F;&#x2F; 宏定义 管脚
+&#x2F;*后左*&#x2F;
+#define LATER_LEFT_PWMB GPIO_PIN_6
+#define LATER_LEFT_BIN1 GPIO_PIN_4
+#define LATER_LEFT_BIN2 GPIO_PIN_5
+&#x2F;*后右*&#x2F;
+#define LATER_RIGHT_PWMA GPIO_PIN_7
+#define LATER_RIGHT_AIN1 GPIO_PIN_8
+#define LATER_RIGHT_AIN2 GPIO_PIN_9
+&#x2F;*前左*&#x2F;
+#define FRONT_LEFT_PWMA GPIO_PIN_0
+#define FRONT_LEFT_AIN1 GPIO_PIN_14
+#define FRONT_LEFT_AIN2 GPIO_PIN_15
+&#x2F;*前右*&#x2F;
+#define FRONT_RIGHT_PWMB GPIO_PIN_1
+#define FRONT_RIGHT_BIN1 GPIO_PIN_12
+#define FRONT_RIGHT_BIN2 GPIO_PIN_13
+
+typedef struct
+&#123;
+    uint16_t usLater_Left_Duty; &#x2F;&#x2F; 后左电机占空比
+    uint16_t usLater_Right_Duty; &#x2F;&#x2F; 后右电机占空比
+    uint16_t usFront_Left_Duty; &#x2F;&#x2F; 前左电机占空比
+    uint16_t usFront_Right_Duty; &#x2F;&#x2F; 前右电机占空比
+    void (*Motor_Init)(void);
+&#125;Motor_t;
+
+
+extern Motor_t Motor;
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> Motor.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: Motor.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;06&#x2F;24
+ * description: 电机
+ -----------------------------------
+接线：
+    后左轮：PA6 --- Timer_CH0     PA4 --- BIN1 PA5 --- BIN2
+    后右轮：PA7 --- Timer_CH1     PB8 --- AIN1 PB9 --- AIN2
+    前左轮：PB0 --- Timer_CH2     PB14 --- AIN1 PB15 --- AIN2
+    前右轮：PB1 --- Timer_CH3     PB12 --- BIN1 PB13 --- BIN2
+    STBY --- 3.3V    
+ -----------------------------------
+****************************************************************************&#x2F;
+#include &quot;Motor.h&quot;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+static void Motor_Init(void);
+static void Motor_Timer_Init(uint16_t arr, uint16_t psc);
+static void Motor_GPIO_Init(void);
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+Motor_t Motor &#x3D; 
+&#123;
+    0,
+    0,
+    0,
+    0,
+    Motor_Init
+&#125;;
+
+
+&#x2F;*
+* @function: Motor_Init
+* @param: None
+* @retval: None
+* @brief: 电机初始化
+*&#x2F;
+static void Motor_Init(void)
+&#123;
+    Motor_GPIO_Init();
+    Motor_Timer_Init(5400 - 1 , 1 - 0);    &#x2F;&#x2F; 54000000 &#x2F; 5400 &#x2F; 1 &#x3D; 10KHz APB1时钟是系统时钟的一半
+&#125;
+
+&#x2F;*
+* @function: Motor_Timer_Init
+* @param: None
+* @retval: None
+* @brief: 电机--定时器初始化
+*&#x2F;
+static void Motor_Timer_Init(uint16_t arr, uint16_t psc)
+&#123;
+    timer_parameter_struct myTIMER2;
+    timer_oc_parameter_struct myTIMER2_OC;
+
+    &#x2F;&#x2F; 开启定时器时钟和复用时钟
+    rcu_periph_clock_enable(RCU_TIMER2);
+    gpio_init(GPIOA, GPIO_MODE_AF_PP, GPIO_OSPEED_50MHZ, LATER_LEFT_PWMB | LATER_RIGHT_PWMA);  &#x2F;&#x2F; PA6 PA7
+    gpio_init(GPIOB, GPIO_MODE_AF_PP, GPIO_OSPEED_50MHZ, FRONT_LEFT_PWMA | FRONT_RIGHT_PWMB);  &#x2F;&#x2F; PB0 PB1
+    &#x2F;&#x2F; 结构体复位初始化
+    timer_deinit(TIMER2);
+
+    &#x2F;&#x2F; 初始化定时器结构体
+    timer_struct_para_init(&amp;myTIMER2);
+    &#x2F;&#x2F; 预分频--psc值
+    myTIMER2.prescaler &#x3D; psc;
+    &#x2F;&#x2F; 对齐模式
+    myTIMER2.alignedmode &#x3D; TIMER_COUNTER_EDGE;
+    &#x2F;&#x2F; 计数方向--向上计数
+    myTIMER2.counterdirection &#x3D; TIMER_COUNTER_UP;
+    &#x2F;&#x2F; 重装载值--arr
+    myTIMER2.period &#x3D; arr;
+    &#x2F;&#x2F; 时钟分频因子--不分频
+    myTIMER2.clockdivision &#x3D; TIMER_CKDIV_DIV1;
+    &#x2F;&#x2F; 初始化
+    timer_init(TIMER2,&amp;myTIMER2);
+
+    &#x2F;&#x2F; 通道使能
+    myTIMER2_OC.outputstate &#x3D; TIMER_CCX_ENABLE;
+    &#x2F;&#x2F; 通道极性--高电平有效
+    myTIMER2_OC.ocpolarity &#x3D; TIMER_OC_POLARITY_HIGH;
+
+    &#x2F;&#x2F; ----------------通道0配置(后左)----------------
+    timer_channel_output_config(TIMER2,TIMER_CH_0,&amp;myTIMER2_OC);    &#x2F;&#x2F; 外设TIMERx的通道输出配置
+    timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_0,Motor.usLater_Left_Duty); &#x2F;&#x2F; 通道占空比设置
+    timer_channel_output_mode_config(TIMER2,TIMER_CH_0,TIMER_OC_MODE_PWM0); &#x2F;&#x2F; 通道模式---PWM0模式
+    timer_channel_output_shadow_config(TIMER2,TIMER_CH_0,TIMER_OC_SHADOW_DISABLE);  &#x2F;&#x2F; 不使用输出比较影子寄存器
+
+    &#x2F;&#x2F; ----------------通道1配置(后右)----------------
+    timer_channel_output_config(TIMER2,TIMER_CH_1,&amp;myTIMER2_OC);    &#x2F;&#x2F; 外设TIMERx的通道输出配置
+    timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_1,Motor.usLater_Right_Duty); &#x2F;&#x2F; 通道占空比设置   
+    timer_channel_output_mode_config(TIMER2,TIMER_CH_1,TIMER_OC_MODE_PWM0); &#x2F;&#x2F; 通道模式---PWM0模式
+    timer_channel_output_shadow_config(TIMER2,TIMER_CH_1,TIMER_OC_SHADOW_DISABLE);  &#x2F;&#x2F; 不使用输出比较影子寄存器
+
+    &#x2F;&#x2F; ----------------通道2配置(前左)----------------
+    timer_channel_output_config(TIMER2,TIMER_CH_2,&amp;myTIMER2_OC);    &#x2F;&#x2F; 外设TIMERx的通道输出配置
+    timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_2,Motor.usFront_Left_Duty); &#x2F;&#x2F; 通道占空比设置
+    timer_channel_output_mode_config(TIMER2,TIMER_CH_2,TIMER_OC_MODE_PWM0); &#x2F;&#x2F; 通道模式---PWM0模式
+    timer_channel_output_shadow_config(TIMER2,TIMER_CH_2,TIMER_OC_SHADOW_DISABLE);  &#x2F;&#x2F; 不使用输出比较影子寄存器
+
+    &#x2F;&#x2F; ----------------通道1配置(前右)----------------
+    timer_channel_output_config(TIMER2,TIMER_CH_3,&amp;myTIMER2_OC);    &#x2F;&#x2F; 外设TIMERx的通道输出配置
+    timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_3,Motor.usFront_Right_Duty); &#x2F;&#x2F; 通道占空比设置   
+    timer_channel_output_mode_config(TIMER2,TIMER_CH_3,TIMER_OC_MODE_PWM0); &#x2F;&#x2F; 通道模式---PWM0模式
+    timer_channel_output_shadow_config(TIMER2,TIMER_CH_3,TIMER_OC_SHADOW_DISABLE);  &#x2F;&#x2F; 不使用输出比较影子寄存器
+
+    timer_enable(TIMER2);    &#x2F;&#x2F; 使能定时器2
+&#125;
+
+&#x2F;*
+* @function: Motor_GPIO_Init
+* @param: None
+* @retval: None
+* @brief: 电机方向控制引脚初始化
+*&#x2F;
+static void Motor_GPIO_Init(void)
+&#123;
+    rcu_periph_clock_enable(RCU_GPIOA);
+    rcu_periph_clock_enable(RCU_GPIOB);
+
+    &#x2F;* 后左 正转 *&#x2F;
+    gpio_init(GPIOA,GPIO_MODE_OUT_PP,GPIO_OSPEED_50MHZ,LATER_LEFT_BIN1);  &#x2F;&#x2F; PA4  
+    gpio_init(GPIOA,GPIO_MODE_OUT_PP,GPIO_OSPEED_50MHZ,LATER_LEFT_BIN2);  &#x2F;&#x2F; PA5 
+    gpio_bit_write(GPIOA, LATER_LEFT_BIN1,RESET); 
+    gpio_bit_write(GPIOA, LATER_LEFT_BIN2,SET);  
+
+    &#x2F;* 后右 正转 *&#x2F;
+    gpio_init(GPIOB,GPIO_MODE_OUT_PP,GPIO_OSPEED_50MHZ,LATER_RIGHT_AIN1);  &#x2F;&#x2F; PB8 
+    gpio_init(GPIOB,GPIO_MODE_OUT_PP,GPIO_OSPEED_50MHZ,LATER_RIGHT_AIN2);  &#x2F;&#x2F; PB9 
+    gpio_bit_write(GPIOB, LATER_RIGHT_AIN1,RESET); 
+    gpio_bit_write(GPIOB, LATER_RIGHT_AIN2,SET);  
+
+    &#x2F;* 前左 正转 *&#x2F;
+    gpio_init(GPIOB,GPIO_MODE_OUT_PP,GPIO_OSPEED_50MHZ,FRONT_LEFT_AIN1);  &#x2F;&#x2F; PA4  
+    gpio_init(GPIOB,GPIO_MODE_OUT_PP,GPIO_OSPEED_50MHZ,FRONT_LEFT_AIN2);  &#x2F;&#x2F; PA5 
+    gpio_bit_write(GPIOB, FRONT_LEFT_AIN1,SET); 
+    gpio_bit_write(GPIOB, FRONT_LEFT_AIN2,RESET);  
+
+    &#x2F;* 前右 正转 *&#x2F;
+    gpio_init(GPIOB,GPIO_MODE_OUT_PP,GPIO_OSPEED_50MHZ,FRONT_RIGHT_BIN1);  &#x2F;&#x2F; PB8 
+    gpio_init(GPIOB,GPIO_MODE_OUT_PP,GPIO_OSPEED_50MHZ,FRONT_RIGHT_BIN2);  &#x2F;&#x2F; PB9
+    gpio_bit_write(GPIOB, FRONT_RIGHT_BIN1,SET); 
+    gpio_bit_write(GPIOB, FRONT_RIGHT_BIN2,RESET);        
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> Key.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+ * @description: 按键功能执行
+ * @return &#123;*&#125;
+ * @Date: 2023-05-09 09:59:38
+ *&#x2F;
+&#x2F;&#x2F; 按键功能执执行
+void vKEY_Comply_Function(void)
+&#123;
+    static uint8_t Flag;
+    if(MyKey.Key_Down_State[0])
+    &#123;
+        MyKey.Key_Down_State[0] &#x3D; 0;
+
+        switch(Flag)
+        &#123;
+            case 0:
+            &#123;
+                Motor.usLater_Left_Duty &#x3D; 2700; &#x2F;&#x2F; 50%
+                Motor.usLater_Right_Duty &#x3D; 2700;
+                Motor.usFront_Left_Duty &#x3D; 2700;
+                Motor.usFront_Right_Duty &#x3D; 2700;                
+                Flag &#x3D; 1;
+                break;
+            &#125;
+            case 1:
+            &#123;
+                Motor.usLater_Left_Duty &#x3D; 2160; &#x2F;&#x2F; 40%
+                Motor.usLater_Right_Duty &#x3D; 2160;
+                Motor.usFront_Left_Duty &#x3D; 2160;
+                Motor.usFront_Right_Duty &#x3D; 2160;                    
+                Flag &#x3D; 2;
+                break;
+            &#125;
+            case 2:
+            &#123;
+                Motor.usLater_Left_Duty &#x3D; 1620; &#x2F;&#x2F; 30%
+                Motor.usLater_Right_Duty &#x3D; 1620;
+                Motor.usFront_Left_Duty &#x3D; 1620;
+                Motor.usFront_Right_Duty &#x3D; 1620;                
+                Flag &#x3D; 3;
+                break;
+            &#125;
+            case 3:
+            &#123;
+                Motor.usLater_Left_Duty &#x3D; 1080; &#x2F;&#x2F; 20%
+                Motor.usLater_Right_Duty &#x3D; 1080;
+                Motor.usFront_Left_Duty &#x3D; 1080;
+                Motor.usFront_Right_Duty &#x3D; 1080;                
+                Flag &#x3D; 4;
+                break;
+            &#125; 
+            case 4:
+            &#123;
+                Motor.usLater_Left_Duty &#x3D; 540; &#x2F;&#x2F; 10%
+                Motor.usLater_Right_Duty &#x3D; 540;
+                Motor.usFront_Left_Duty &#x3D; 540;
+                Motor.usFront_Right_Duty &#x3D; 540;                
+                Flag &#x3D; 5;
+                break;
+            &#125;
+            case 5: &#x2F;&#x2F; 0%
+            &#123;
+                Motor.usLater_Left_Duty &#x3D; 0;
+                Motor.usLater_Right_Duty &#x3D; 0;
+                Motor.usFront_Left_Duty &#x3D; 0;
+                Motor.usFront_Right_Duty &#x3D; 0;                
+                Flag &#x3D; 0;
+                break;
+            &#125;
+            default : Flag &#x3D; 0;break;                                               
+        &#125;     
+        &#x2F;&#x2F; 调整速度
+        timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_0,Motor.usLater_Left_Duty);
+        timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_1,Motor.usLater_Right_Duty);
+        timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_2,Motor.usFront_Left_Duty);
+        timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_3,Motor.usFront_Right_Duty);        
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<h4 id="编程示例3">编程示例3</h4>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/624b1df5b01f717b3ce5dea758a3706a.webp" alt=""></p>
+<ul>
+<li>驱动芯片介绍</li>
+</ul>
+<blockquote>
+<ul>
+<li>A4950，单H桥电机驱动芯片</li>
+<li>电机驱动电压：8~40V，输出最大电流可达3.5A</li>
+<li>内置过温保护，短路保护和可选择的过流保护</li>
+</ul>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230625195204.webp" alt=""></p>
+<blockquote>
+<p>GND — 接地</p>
+<p>IN2 — H桥逻辑输入1</p>
+<p>IN1 — H桥逻辑输入2</p>
+<p>VREF — 逻辑电压和用于限流比较的电压，一般接5V</p>
+<p>VBB — 电机驱动电压(内部对其处理后供给逻辑电路）</p>
+<p>OUT1 — H桥输出1</p>
+<p>LSS — H桥的电流控制，可通过一个电阻接地限制电流(不限电流时直接接地）</p>
+<p>OUT2 — H桥输出2</p>
+<p>PAD — 用于散热</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/53c2fbe88c5f40032508e3e948bb3b29.webp" alt=""></p>
+<blockquote>
+<p>通过引脚说明和功能框图可看出，此芯片不同之处有：</p>
+<ul>
+<li>只有单H桥，因此引脚较少；</li>
+<li>限流比较的参考电压由外部给出（VREF脚）；因此限流值 <code>Isense=Vref/10/Rsense</code>。如上面的模块中，Vref接5V，Rsense为R250精密检测电阻（0.25Ω），因此限流值为2A</li>
+<li>当IN1和IN2均保持低电平1ms，芯片进入待机模式。而不是通过引脚直接控制。</li>
+</ul>
+</blockquote>
+<p>此芯片的驱动逻辑与DRV8833PWP芯片一模一样</p>
+<h4 id="编程示例4">编程示例4</h4>
+<ul>
+<li>驱动芯片介绍</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/d353c456db466935c48270065431af21.webp" alt=""></p>
+<blockquote>
+<ul>
+<li>L298N是ST公司的一款电机驱动芯片，也是集成了双H桥</li>
+<li>电机驱动电压3~48V；可持续工作的输出电流为2A，峰值可达3A</li>
+<li>如上图，L298N模块明显比前两个芯片模块外接的元件多，这与L298N的内部结构有关（下面将介绍）</li>
+<li>如上图，由于该芯片在H桥上的损耗严重发热较明显（饱和压降大），需要加装散热片，因此在使用上比前两个芯片复杂，体积也相对较大</li>
+</ul>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/5007d74f0cbfff05ba477e2f77a7fe2e.webp" alt=""></p>
+<blockquote>
+<p>Sense A — H桥A的电流控制，可通过一个电阻接地限制电流(不限电流时直接接地）</p>
+<p>VSS — 给内部逻辑电路供电，一般接5V</p>
+<p>Out 1 — H桥A的输出1脚</p>
+<p>Input 3 — H桥B的逻辑输入1</p>
+<p>Out 2 — H桥A的输出2脚</p>
+<p>Enable B — H桥B的使能控制端，高电平打开，低电平关闭</p>
+<p>Vs — 电机驱动电压3~48V，需要一个100nF的滤波电容接地</p>
+<p>Input 4 — H桥B的逻辑输入2</p>
+<p>Input 1 — H桥A的逻辑输入1</p>
+<p>Out 3 — H桥B的输出1脚</p>
+<p>Enable A — H桥A的使能控制端，高电平打开，低电平关闭</p>
+<p>Out 4 — H桥B的输出2脚</p>
+<p>Input 2 — H桥A的逻辑输入2</p>
+<p>Sense B — H桥B的电流控制，可通过一个电阻接地限制电流(不限电流时直接接地）</p>
+<p>GND — 接地</p>
+</blockquote>
+<p>L298N有两个使能控制引脚可分别控制两个H桥是否使能，其余则和前两个芯片类似</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/f5c3ad14ea60bb4a28624e6a7414e534.webp" alt=""></p>
+<blockquote>
+<ul>
+<li>L298N的内部功能很多都类似，比如电流检测，H桥驱动，外接电容等</li>
+<li>主要区别在于L298N的H桥采用了BJT而不是MOSFET。这就直接导致没有寄生二极管，无法像前两个芯片一样实现续流。因此需要外接8个续流二极管。因为频率不高，选用普通的整流二极管即可（如1N4007）</li>
+<li>此芯片的电流检测脚Sense X并不像前面的芯片，其没有在内部进行电压比较从而限流，从数据手册上看，需要一个L297芯片配合进行限流。因此一般直接接地，不进行限流。</li>
+</ul>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230625200649.webp" alt=""></p>
+<blockquote>
+<p>如果想进行速度的控制，那么一种方法是对Enable A输入PWM， 当IN1=1，IN2=0时，即在正转与快衰减之间来回切换，与前面原理类似，占空比越大，速度越快</p>
+</blockquote>
+<blockquote>
+<p>以上三种芯片驱动能力排序： <code>DRV8833&lt;BT6612&lt;A4950≈L298N</code></p>
+<p>选择这种集成H桥芯片时，需要考虑的参数有： <code>可承受的工作电流要大于电机的堵转电流，防止堵转时驱动芯片烧毁；导通电阻尽可能小，减少芯片的发热损耗</code></p>
+<p>以上四种芯片所能驱动的电流最大也就3A。对于一些堵转电流十几安的电机来说是远远不够的。此时，所能选择的集成H桥芯片也很少（英飞凌的BTN系列，价格较高，一般在30元以上）。因此常常采取电桥驱动+MOS管的方式自行搭建H桥</p>
+</blockquote>
+<h4 id="编程示例5">编程示例5</h4>
+<ul>
+<li>驱动芯片介绍</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/d8dda285ecf74b155aba6f5e80fc615c.webp" alt=""></p>
+<blockquote>
+<p>DRV8833，芯片中共有两个全H桥。因此最多可以同时驱动两个直流电机或一个步进电机</p>
+<p>电源供电电压 <code>2.7~10.8V</code>，每个H桥输出的均方根（RMS）电流为 <code>1.5A</code>，峰值可达 <code>2A</code></p>
+<p>内置过热保护和用户可调的限流保护电路</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/db457ef6deb28317c9cc6e6e0c928290.webp" alt=""></p>
+<blockquote>
+<p>nSLEEP — 睡眠模式控制，高电平使能芯片，低电平进入睡眠模式(关闭芯片)</p>
+<p>BIN1 — H桥B的逻辑输入1脚</p>
+<p>AOUT1 — H桥A的输出1脚</p>
+<p>BIN2 — H桥B的逻辑输入2脚</p>
+<p>AISEN — H桥A的电流控制，可通过一个电阻接地限制电流(不限电流时直接接地）</p>
+<p>VCP — 用于高端FET栅极驱动电压，需要一个10nF,耐压16V的陶瓷电容接到VM脚</p>
+<p>AOUT2 — H桥A的输出2脚</p>
+<p>VM — 电机电源供应2.7V-10.8V，需要一个10uF的滤波电容接地</p>
+<p>BOUT2 — H桥B的输出2脚</p>
+<p>GND — 器件接地脚</p>
+<p>BISEN — H桥B的电流控制，可通过一个电阻接地限制电流(不限电流时直接接地）</p>
+<p>VINT — 芯片内部稳压器的输出(3.3V)，需要一个2.2uF,耐压6.3V的滤波电容接地</p>
+<p>BOUT1 — H桥B的输出1脚</p>
+<p>AIN2 — H桥A的逻辑输入2脚</p>
+<p>nFAULT — 当温度过高或通过电流过大时会输出低电平进行提示</p>
+<p>AIN1 — H桥A的逻辑输入1脚</p>
+</blockquote>
+<p>由于MOS管导通后会产生一定的饱和压降(Vsat，不同芯片有较大差异，具体看手册)，因此在选择驱动电压VM时，可以接近或比所用电机额定电压稍高。</p>
+<p>芯片逻辑电压VINT的选择要根据所用单片机的逻辑电平决定。如果单片机是5V逻辑电平，则VINT同样选择5V输入</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/959554acd94791c44a65e6591407796f.webp" alt=""></p>
+<blockquote>
+<p>当温度过高，温度检测保护模块会使nFAULT所接的FET导通拉到低电平,同时H桥转成衰减模式，不再给电机供电</p>
+<p>如果不需要限流，则xISEN脚直接接地即可</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230625211453.webp" alt=""></p>
+<h3 id="步进电机">步进电机</h3>
+<p><code>工作原理</code>：步进电机是将电脉冲信号转变为角位移或线位移的 <code>开环</code> 控制元件。在非超载的情况下，电机的转速、停止的位置只取决于脉冲信号的频率和脉冲数，而不受负载变化的影响，当步进驱动器接收到一个脉冲信号，它就驱动步进电机按设定的方向转动一个固定的角度，称为 <code>&quot;步距角&quot;</code>，它的旋转是以固定的角度一步一步运行的。可以通过控制脉冲个数来控制角位移量，从而达到准确定位的目的;同时可以通过控制脉冲频率来控制电机转动的速度和加速度，从而达到调速的目的。</p>
+<p><code>特征</code>：</p>
+<ol>
+<li>步进电机要加驱动才可以运转，驱动信号，没有脉冲的时候，步进电机静止，加入适当的脉冲信号，就会以角度（称为步角）转动。转动的速度和脉冲的频率成正比。</li>
+<li>步进电机具有瞬间启动和急速停止的特征。</li>
+<li>改变脉冲的顺序，可以方便改变转动的方向。</li>
+</ol>
+<p><code>驱动方法</code>：</p>
+<p>步进电机不能直接接到工频交流或直流电源上工作，必须使用专用的步进电动机驱动器，它由脉冲发生控制单元，功率驱动单元，保护单元等组成。驱动单元与步进电动机直接耦合，也可以理解成步进电动机微机控制器的功率接口</p>
+<blockquote>
+<p>单极性和双极性步进电机区别在于：</p>
+<ol>
+<li>单极性的电流只有一个方向，只能通过单向脉冲信号控制旋转方向，这意味着它只能顺时针或逆时针旋转— <code>用ULN2003A驱动，比较简单</code></li>
+<li>双极性的可以通过变换电流方向控制旋转方向，这使得它可以在两个方向上旋转— <code>需要桥路驱动</code></li>
+</ol>
+</blockquote>
+<ul>
+<li>典型的步进电机分类</li>
+</ul>
+<p><code>两相式步进电机</code>：</p>
+<ol>
+<li>低速下扭矩比较大</li>
+<li>驱动方式多，控制比较简单</li>
+<li>很多变种：四相五线、六线步进电机、八线步进电机</li>
+</ol>
+<p><code>三相式步进电机</code>：</p>
+<ol>
+<li>体积大</li>
+<li>高速性能好</li>
+<li>步距角比较小，控制精度更高，运行更稳定</li>
+<li>驱动方式单一且复杂</li>
+<li>本质（无刷直流电机)</li>
+</ol>
+<h4 id="单极性步进电机">单极性步进电机</h4>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>28BYJ-48</p>
+</div>
+<p>参考：<a href="http://www.taichi-maker.com/homepage/reference-index/motor-reference-index/28byj-48-stepper-motor-intro/">太极创客</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524124930.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524125111.webp" alt=""></p>
+<p>28：步进电机的有效最大外径是28毫米<br>
+B：表示是步进电机<br>
+Y：表示是永磁式<br>
+J：表示是减速型（减速比1:64）<br>
+48：表示四相八拍</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524113110.webp" alt=""></p>
+<blockquote>
+<p>步距角和减速比是两个比较重要的参数</p>
+</blockquote>
+<p>从步进电机内部看，因为正对着的齿上的绕组是串联的，A、B、C、D四个绕组的一端都接到了5V，另一端通过按键接到GND，当某一个按键被按下了，如图中第二个按键被按下，则B和其对面的绕组都有电流流过，电生磁，所以中间转子的0和3端就被磁力吸住维持在一个平衡状态</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524113431.webp" alt=""></p>
+<blockquote>
+<ul>
+<li>步距角</li>
+</ul>
+<p>意思是：每64个脉冲（节拍）步进电机就会转 <code>5.625</code> 度。旋转角度与脉冲之间的计算公式：<code>pulse=(angle/5.625) * 64</code></p>
+<ul>
+<li>驱动方式：单四拍</li>
+</ul>
+<p>四个绕组按B、C、D、A这样的顺序节拍（也可按其他顺序，这个不一定），轮流通电一次，可以让中间的转子转过一个绕组的角度，比如转子的0端本来是对着正上方的，就转到了左上方，这样，再来一个四节拍，转子就将再转过一个齿的角度，到了左边，所以 <code>8个四节拍</code> 以后转子就转完了 <code>一圈</code>，单节拍（这是指 <code>8 * 4</code> 个节拍）的步进角度（步进电机转动的角度）就可以算出来了： <code>360度/（4*8）= 360/32 = 11.25度</code>，所以每 <code>32</code> 个脉冲步进电机就会转 <code>11.25</code> 度</p>
+<ul>
+<li>驱动方式：双四拍</li>
+</ul>
+<p>顺序： <code>AB-BC-CD-DA</code>，A和B两个绕组同时通电，步距角与单四拍的一样，为 <code>11.25°/32</code></p>
+<ul>
+<li>驱动方式：八拍</li>
+</ul>
+<p>而八拍就类似这样的节拍： <code>A-AB-B-BC-C-CD-D-DA</code>，因为有两个绕组同时导电的情况，对转子的吸力一样，这样就又会产生一个新的转动角度，所以转子就会比原来4个节拍的多了4个转动的角度，这样再转一圈，就要 <code>（4+4）* 8 = 64</code> 个节拍了，所以 <code>360度/64 = 5.625度</code>，这 <code>5.625</code> 度是步进电机转动的角度，也就是是下面讲到的输出轴的转动角度；</p>
+<p>通俗理解： <code>64</code> 个节拍，转子转动 <code>一周</code>，步进电机转动 <code>5.625</code> 度，所以这种驱动方式下一个节拍步进电机转动的角度为： <code>5.625/64 = 0.087890625度</code></p>
+<p>这就是参数表步距角 <code>5.625°/64</code> 的由来。</p>
+<ul>
+<li>减速比</li>
+</ul>
+<p>根据步进电机的内部拆解图，参考文章里介绍了中间的转子如果带动周边齿轮，最后带动输出轴转动，这部分不太好理解，我认为只需知道中间的齿轮是转子，也就是上面介绍步距角时的转子以及与最终的输出轴之间的关系就行了。</p>
+<p>如果在八拍的转动方式下， <code>64</code> 个节拍转子就转动 <code>一圈</code>，根据减速比为 <code>1/64</code> ，意思就是说转子要转 <code>64</code> 圈，输出轴才转 <code>一圈</code>，所以 <code>64*64 = 4096个节拍</code> 输出轴就转 <code>一圈</code>，根据上面八拍的步距角可得， <code>64</code> 个节拍已经让输出轴转了 <code>5.625度</code> ，所以 <code>5.625 * 64 = 360度</code></p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524114225.webp" alt=""></p>
+<ul>
+<li>三种驱动方式的特点</li>
+</ul>
+<p>单四拍：电流最小，扭矩最小</p>
+<p>双四拍：电流最大，扭矩最大</p>
+<p>八拍：电流居中，扭矩居中，常用</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524152714.webp" alt=""></p>
+<ul>
+<li>接线图</li>
+</ul>
+<blockquote>
+<p>四相五线接法</p>
+<p>公共线红5接5V电源，是所有线圈的供电端，通过红5线将线圈分成了四个，所以是四相</p>
+<p>电流只能从红5引脚流入，从某一个相的引脚流出</p>
+<p>蓝1，粉红2，黄3，橙4接到驱动IC的输出端，驱动IC的输入端接到单片机引脚</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524152853.webp" alt=""></p>
+<blockquote>
+<p>四相六线接法</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524153320.webp" alt=""></p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>编程示例1</p>
+</div>
+<ul>
+<li>硬件连接</li>
+</ul>
+<blockquote>
+<p>手上的步进电机接线，红色（电源线5V）、橙色（A相）、黄色（B相）、粉红色（C相）、蓝色（D相）</p>
+<p><code>通过改变不同相通电的顺序，可以改变转动的方向</code></p>
+<p><code>通过改变脉冲数量，可以控制转动的角度</code></p>
+<p><code>通过改变脉冲的频率，可以改变转动的速度</code></p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524111345.webp" alt=""></p>
+<ul>
+<li>驱动IC-ULN2003A</li>
+</ul>
+<p>ULN2003是高耐压、大电流达林顿陈列，由七个NPN 达林顿管组成。所有单元共用发射极，每个单元采用开集电极输出。每一对达林顿都串联一个2.7K 的基极电阻，直接兼容TTL 和5V CMOS 电路，可以直接处理原先需要标准逻辑缓冲器来处理的数据。 ULN2003 工作电压高，工作电流大，灌电流可达500mA</p>
+<p>应用：1、继电器驱动 2、直流照明驱动 3、步进电机驱动 4、电磁阀 5、直流无刷电机驱动</p>
+<p>左边为输入，右边为输出，中间是NPN达林顿管，当输入为1时，输出为0，输入为0时，输出为1</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524154025.webp" alt=""></p>
+<ul>
+<li>MX配置</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524155240.webp" alt=""></p>
+<blockquote>
+<p>定时器溢出时间为5ms</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524162450.webp" alt=""></p>
+<ul>
+<li>程序编写</li>
+</ul>
+<details ><summary> Myinit.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void vHardware_Init(void)
+&#123;
+    HAL_TIM_Base_Start_IT(&amp;htim7);	&#x2F;&#x2F; 启动定时器7
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> Motor.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __MOTOR_H
+#define __MOTOR_H
+
+#include &quot;AllHead.h&quot;
+
+&#x2F;&#x2F;宏定义
+#define	SET_Motor_A	HAL_GPIO_WritePin(GPIOF,GPIO_PIN_1,GPIO_PIN_SET);
+#define	CLR_Motor_A	HAL_GPIO_WritePin(GPIOF,GPIO_PIN_1,GPIO_PIN_RESET);
+
+#define	SET_Motor_B	HAL_GPIO_WritePin(GPIOF,GPIO_PIN_2,GPIO_PIN_SET);
+#define	CLR_Motor_B	HAL_GPIO_WritePin(GPIOF,GPIO_PIN_2,GPIO_PIN_RESET);
+
+#define	SET_Motor_C	HAL_GPIO_WritePin(GPIOF,GPIO_PIN_3,GPIO_PIN_SET);
+#define	CLR_Motor_C	HAL_GPIO_WritePin(GPIOF,GPIO_PIN_3,GPIO_PIN_RESET);
+
+#define	SET_Motor_D	HAL_GPIO_WritePin(GPIOF,GPIO_PIN_4,GPIO_PIN_SET);
+#define	CLR_Motor_D	HAL_GPIO_WritePin(GPIOF,GPIO_PIN_4,GPIO_PIN_RESET);
+
+#define Circle_Set_Value (uint8_t)8 &#x2F;&#x2F;转动的圈数
+
+&#x2F;&#x2F;定义枚举类型
+&#x2F;&#x2F;状态
+typedef enum
+&#123;
+	Start_State  	&#x3D; (uint8_t)0,
+	Stop_State  	&#x3D; (uint8_t)1,
+&#125;Status_t;
+&#x2F;&#x2F;方向
+typedef enum
+&#123;
+	Forward_State &#x3D; (uint8_t)0,
+	Reverse_State &#x3D; (uint8_t)1,
+&#125;Direction_t;
+&#x2F;&#x2F;速度等级
+typedef enum
+&#123;
+	Speed_1  &#x3D; (uint8_t)100, &#x2F;&#x2F;100*0.1ms 
+	Speed_2  &#x3D; (uint8_t)90,
+	Speed_3  &#x3D; (uint8_t)80,
+	Speed_4  &#x3D; (uint8_t)70,
+	Speed_5  &#x3D; (uint8_t)60,       &#x2F;&#x2F;6ms
+	Speed_6  &#x3D; (uint8_t)50, &#x2F;&#x2F;10KHz    50*0.1ms &#x3D; 5ms
+	Speed_7  &#x3D; (uint8_t)40,
+	Speed_8  &#x3D; (uint8_t)30,
+	Speed_9  &#x3D; (uint8_t)20, &#x2F;&#x2F;2ms
+&#125;Speed_t;
+&#x2F;&#x2F;加减速
+typedef enum
+&#123;
+	Speed_up    &#x3D; (uint8_t)0, &#x2F;&#x2F;加速
+	Speed_down  &#x3D; (uint8_t)1, &#x2F;&#x2F;减速
+&#125;Speed_Change_t;
+
+&#x2F;&#x2F;驱动模式
+typedef enum
+&#123;
+	Drive_Mode_Single_4_Beats    &#x3D; (uint8_t)0, &#x2F;&#x2F;单四拍 - 步距角为5.625&#x2F;32(型号28BYJ-48)，驱动力度最小
+	Drive_Mode_Double_4_Beats    &#x3D; (uint8_t)1, &#x2F;&#x2F;双四拍 - 步距角为5.625&#x2F;32(型号28BYJ-48)，驱动力度最大
+	Drive_Mode_8_Beats           &#x3D; (uint8_t)2, &#x2F;&#x2F;八拍   - 步距角为5.625&#x2F;64(型号28BYJ-48)，驱动力度居中
+&#125;Drive_Mode_t;
+
+
+&#x2F;&#x2F;定义结构体类型
+typedef struct
+&#123;
+  uint8_t Status;    &#x2F;&#x2F;步进电机状态
+	uint8_t Direction; &#x2F;&#x2F;步进电机方向
+	uint8_t Speed;     &#x2F;&#x2F;步进电机速度
+	uint8_t Circle;    &#x2F;&#x2F;步进电机转动圈数
+	Drive_Mode_t Drive_Mode;   &#x2F;&#x2F;步进电机驱动模式
+	uint16_t Pulse_Cnt;        &#x2F;&#x2F;步进电机脉冲计数
+	uint16_t One_Circle_Pulse; &#x2F;&#x2F;步进电机转动一圈的脉冲数(要跟模式匹配，4或者双4拍则填2048)
+	
+	void (*Direction_Adjust)(void);        &#x2F;&#x2F;步进电机方向调整
+	void (*Speed_Adjust)(Speed_Change_t);  &#x2F;&#x2F;步进电机速度调整
+	void (*Step_One_Pulse)(void);          &#x2F;&#x2F;步进电机步进一个脉冲
+&#125; Unipolar_Step_Motor_t;
+
+extern Unipolar_Step_Motor_t  Unipolar_Step_Motor;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> Motor.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;AllHead.h&quot;
+
+&#x2F;* Private function prototypes------------------------------------------------*&#x2F;      
+static void Direction_Adjust(void);        &#x2F;&#x2F;步进电机方向调整
+static void Speed_Adjust(Speed_Change_t);  &#x2F;&#x2F;步进电机速度调整
+static void Step_One_Pulse(void);          &#x2F;&#x2F;步进电机步进一个脉冲
+
+&#x2F;* Public variables-----------------------------------------------------------*&#x2F;
+
+&#x2F;&#x2F;定义结构体类变量
+Unipolar_Step_Motor_t Unipolar_Step_Motor &#x3D; 
+&#123;
+	Stop_State,
+	Forward_State, 
+	Speed_6,
+	0,
+	Drive_Mode_8_Beats,
+	0,
+	(uint16_t)4096,
+	
+	Direction_Adjust,
+	Speed_Adjust,
+	Step_One_Pulse
+&#125;;
+
+&#x2F;*
+	* @name   Direction_Adjust
+	* @brief  直流电机方向调整
+	* @param  None
+	* @retval None      
+*&#x2F;
+static void Direction_Adjust(void)
+&#123;
+	if(Unipolar_Step_Motor.Status &#x3D;&#x3D; Start_State)
+	&#123;
+		&#x2F;&#x2F;调整电机运行方向
+		if(Unipolar_Step_Motor.Direction &#x3D;&#x3D; Reverse_State)
+		&#123;
+			Unipolar_Step_Motor.Direction &#x3D; Forward_State;
+		&#125;
+		else
+		&#123;
+			Unipolar_Step_Motor.Direction &#x3D; Reverse_State;
+		&#125;
+		
+		Unipolar_Step_Motor.Circle &#x3D; Circle_Set_Value;
+		Unipolar_Step_Motor.Pulse_Cnt &#x3D; 0;
+	&#125;
+&#125;
+
+&#x2F;*
+	* @name   Speed_Adjust
+	* @brief  直流电机速度调整
+	* @param  Speed_Change -&gt; 速度变化
+	* @retval None      
+*&#x2F;
+static void Speed_Adjust(Speed_Change_t Speed_Change)
+&#123;
+	if(Unipolar_Step_Motor.Status &#x3D;&#x3D; Start_State)
+	&#123;
+		if(Speed_Change &#x3D;&#x3D; Speed_up)
+		&#123;
+			&#x2F;&#x2F;增大电机速度
+			switch(Unipolar_Step_Motor.Speed)
+			&#123;
+				case Speed_1: Unipolar_Step_Motor.Speed &#x3D; Speed_2; break;
+				case Speed_2: Unipolar_Step_Motor.Speed &#x3D; Speed_3; break;
+				case Speed_3: Unipolar_Step_Motor.Speed &#x3D; Speed_4; break;
+				case Speed_4: Unipolar_Step_Motor.Speed &#x3D; Speed_5; break;
+				case Speed_5: Unipolar_Step_Motor.Speed &#x3D; Speed_6; break;
+				case Speed_6: Unipolar_Step_Motor.Speed &#x3D; Speed_7; break;
+				case Speed_7: Unipolar_Step_Motor.Speed &#x3D; Speed_8; break;
+				case Speed_8: Unipolar_Step_Motor.Speed &#x3D; Speed_9; break;
+				case Speed_9: Unipolar_Step_Motor.Speed &#x3D; Speed_9; break;
+				default:Unipolar_Step_Motor.Speed &#x3D; Speed_6; 
+			&#125;
+		&#125;
+		else
+		&#123;
+			&#x2F;&#x2F;减小电机速度
+			switch(Unipolar_Step_Motor.Speed)
+			&#123;
+				case Speed_1: Unipolar_Step_Motor.Speed &#x3D; Speed_1; break;
+				case Speed_2: Unipolar_Step_Motor.Speed &#x3D; Speed_1; break;
+				case Speed_3: Unipolar_Step_Motor.Speed &#x3D; Speed_2; break;
+				case Speed_4: Unipolar_Step_Motor.Speed &#x3D; Speed_3; break;
+				case Speed_5: Unipolar_Step_Motor.Speed &#x3D; Speed_4; break;
+				case Speed_6: Unipolar_Step_Motor.Speed &#x3D; Speed_5; break;
+				case Speed_7: Unipolar_Step_Motor.Speed &#x3D; Speed_6; break;
+				case Speed_8: Unipolar_Step_Motor.Speed &#x3D; Speed_7; break;
+				case Speed_9: Unipolar_Step_Motor.Speed &#x3D; Speed_8; break;
+				default:Unipolar_Step_Motor.Speed &#x3D; Speed_6;
+			&#125;
+		&#125;
+		
+		&#x2F;&#x2F;更新定时器7的计时重装载寄存器
+		TIM7 -&gt;ARR &#x3D; Unipolar_Step_Motor.Speed;
+	&#125;
+&#125;
+
+&#x2F;*
+	* @name   Step_One_Pulse
+	* @brief  步进电机步进一个脉冲
+	* @param  Speed_Change -&gt; 速度变化
+	* @retval None      
+*&#x2F;
+static void Step_One_Pulse(void)
+&#123;
+	static uint8_t Position &#x3D; 0;
+	
+	&#x2F;&#x2F;单四拍
+	if(Unipolar_Step_Motor.Drive_Mode &#x3D;&#x3D; Drive_Mode_Single_4_Beats)
+	&#123;
+		if(Unipolar_Step_Motor.Direction &#x3D;&#x3D; Forward_State)
+		&#123;
+			&#x2F;&#x2F;正向步进  A - D - C - B
+			switch(Position)
+			&#123;
+				case 0: SET_Motor_A; CLR_Motor_B; CLR_Motor_C; CLR_Motor_D; break;
+				case 1: CLR_Motor_A; CLR_Motor_B; CLR_Motor_C; SET_Motor_D; break;
+				case 2: CLR_Motor_A; CLR_Motor_B; SET_Motor_C; CLR_Motor_D; break;
+				case 3: CLR_Motor_A; SET_Motor_B; CLR_Motor_C; CLR_Motor_D; break;
+				default: System.Error_Handler();
+			&#125;
+		&#125;
+		else
+		&#123;
+			&#x2F;&#x2F;反向步进  A - B - C - D
+			switch(Position)
+			&#123;
+				case 0: SET_Motor_A; CLR_Motor_B; CLR_Motor_C; CLR_Motor_D; break;
+				case 1: CLR_Motor_A; SET_Motor_B; CLR_Motor_C; CLR_Motor_D; break;
+				case 2: CLR_Motor_A; CLR_Motor_B; SET_Motor_C; CLR_Motor_D; break;
+				case 3: CLR_Motor_A; CLR_Motor_B; CLR_Motor_C; SET_Motor_D; break;
+				default: System.Error_Handler();
+			&#125;
+		&#125;
+		
+		&#x2F;&#x2F;更新位置信息
+		if((++Position) &#x3D;&#x3D; 4)
+				Position &#x3D; 0;
+	&#125;
+	
+	&#x2F;&#x2F;双四拍
+	if(Unipolar_Step_Motor.Drive_Mode &#x3D;&#x3D; Drive_Mode_Double_4_Beats)
+	&#123;
+		if(Unipolar_Step_Motor.Direction &#x3D;&#x3D; Forward_State)
+		&#123;
+			&#x2F;&#x2F;正向步进  DA - CD - BC - AB
+			switch(Position)
+			&#123;
+				case 0: SET_Motor_A; CLR_Motor_B; CLR_Motor_C; SET_Motor_D; break;
+				case 1: CLR_Motor_A; CLR_Motor_B; SET_Motor_C; SET_Motor_D; break;
+				case 2: CLR_Motor_A; SET_Motor_B; SET_Motor_C; CLR_Motor_D; break;
+				case 3: SET_Motor_A; SET_Motor_B; CLR_Motor_C; CLR_Motor_D; break;
+				default: System.Error_Handler();
+			&#125;
+		&#125;
+		else
+		&#123;
+			&#x2F;&#x2F;反向步进  DA - AB - BC - CD
+			switch(Position)
+			&#123;
+				case 0: SET_Motor_A; CLR_Motor_B; CLR_Motor_C; SET_Motor_D; break;
+				case 1: SET_Motor_A; SET_Motor_B; CLR_Motor_C; CLR_Motor_D; break;
+				case 2: CLR_Motor_A; SET_Motor_B; SET_Motor_C; CLR_Motor_D; break;
+				case 3: CLR_Motor_A; CLR_Motor_B; SET_Motor_C; SET_Motor_D; break;
+				default: System.Error_Handler();
+			&#125;
+		&#125;
+		
+		&#x2F;&#x2F;更新位置信息
+		if((++Position) &#x3D;&#x3D; 4)
+				Position &#x3D; 0;
+	&#125;
+	
+	&#x2F;&#x2F;单八拍
+	if(Unipolar_Step_Motor.Drive_Mode &#x3D;&#x3D; Drive_Mode_8_Beats)
+	&#123;
+		if(Unipolar_Step_Motor.Direction &#x3D;&#x3D; Forward_State)
+		&#123;
+			&#x2F;&#x2F;正向步进 A - DA - D - CD - C - BC - B - AB
+			switch(Position)
+			&#123;
+				case 0: SET_Motor_A; CLR_Motor_B; CLR_Motor_C; CLR_Motor_D; break;
+				case 1: SET_Motor_A; CLR_Motor_B; CLR_Motor_C; SET_Motor_D; break;
+				case 2: CLR_Motor_A; CLR_Motor_B; CLR_Motor_C; SET_Motor_D; break;
+				case 3: CLR_Motor_A; CLR_Motor_B; SET_Motor_C; SET_Motor_D; break;
+				case 4: CLR_Motor_A; CLR_Motor_B; SET_Motor_C; CLR_Motor_D; break;
+				case 5: CLR_Motor_A; SET_Motor_B; SET_Motor_C; CLR_Motor_D; break;
+				case 6: CLR_Motor_A; SET_Motor_B; CLR_Motor_C; CLR_Motor_D; break;
+				case 7: SET_Motor_A; SET_Motor_B; CLR_Motor_C; CLR_Motor_D; break;
+				default:System.Error_Handler();
+			&#125;
+		&#125;
+		else
+		&#123;
+			&#x2F;&#x2F;反向步进 A - AB - B - BC - C -CD - D - DA 
+			switch(Position)
+			&#123;
+				case 0: SET_Motor_A; CLR_Motor_B; CLR_Motor_C; CLR_Motor_D; break;
+				case 1: SET_Motor_A; SET_Motor_B; CLR_Motor_C; CLR_Motor_D; break; 
+				case 2: CLR_Motor_A; SET_Motor_B; CLR_Motor_C; CLR_Motor_D; break;
+				case 3: CLR_Motor_A; SET_Motor_B; SET_Motor_C; CLR_Motor_D; break;
+				case 4: CLR_Motor_A; CLR_Motor_B; SET_Motor_C; CLR_Motor_D; break; 
+				case 5: CLR_Motor_A; CLR_Motor_B; SET_Motor_C; SET_Motor_D; break;
+				case 6: CLR_Motor_A; CLR_Motor_B; CLR_Motor_C; SET_Motor_D; break;
+				case 7: SET_Motor_A; CLR_Motor_B; CLR_Motor_C; SET_Motor_D; break;
+				default: System.Error_Handler();
+			&#125;
+		&#125;
+		
+		&#x2F;&#x2F;更新位置信息
+		if((++Position) &#x3D;&#x3D; 8)
+				Position &#x3D; 0;
+	&#125;
+&#125;
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+&#123;
+    &#x2F;&#x2F;控制步进电机
+    if(htim-&gt;Instance &#x3D;&#x3D; htim7.Instance)
+    &#123;
+        &#x2F;&#x2F;没转完指定的圈数
+        if(Unipolar_Step_Motor.Circle &gt; 0)
+        &#123;
+            &#x2F;&#x2F;电机转动一个脉冲
+            Unipolar_Step_Motor.Step_One_Pulse();
+
+            &#x2F;&#x2F;根据脉冲计数判断是否转动了一圈
+            if(++Unipolar_Step_Motor.Pulse_Cnt &#x3D;&#x3D; Unipolar_Step_Motor.One_Circle_Pulse)
+            &#123;
+                Unipolar_Step_Motor.Pulse_Cnt &#x3D; 0;
+                &#x2F;&#x2F;转动圈数减一
+                Unipolar_Step_Motor.Circle--;
+            &#125;
+        &#125;
+        &#x2F;&#x2F;已转完指定的圈数
+        else
+        &#123;
+            Unipolar_Step_Motor.Status &#x3D; Stop_State;
+            CLR_Motor_A;
+            CLR_Motor_B;
+            CLR_Motor_C;
+            CLR_Motor_D;
+        &#125;
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> main.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+&#123;
+  &#x2F;&#x2F;如果按键1被按下
+  if(GPIO_Pin &#x3D;&#x3D; KEY1_Pin)
+  &#123;
+    LED.LED_Fun(LED1,LED_Flip);
+    Uniplar_Step_Motor.Start_Or_Stop();   &#x2F;&#x2F;控制步进电机启动或停止
+  &#125;
+
+  &#x2F;&#x2F;如果按键2被按下
+  if(GPIO_Pin &#x3D;&#x3D; KEY2_Pin)
+  &#123;
+    LED.LED_Fun(LED2,LED_Flip);
+    Uniplar_Step_Motor.Direction_Adjust();  &#x2F;&#x2F;控制步进电机正反转
+  &#125;
+
+  &#x2F;&#x2F;如果按键3被按下
+  if(GPIO_Pin &#x3D;&#x3D; KEY3_Pin)
+  &#123;
+    LED.LED_Fun(LED3,LED_Flip);
+    Uniplar_Step_Motor.Speed_Adjust(Speed_up);    &#x2F;&#x2F;加速
+  &#125;
+
+  &#x2F;&#x2F;如果按键4被按下
+  if(GPIO_Pin &#x3D;&#x3D; KEY4_Pin)
+  &#123;
+    LED.LED_Fun(LED3,LED_Flip);
+    Uniplar_Step_Motor.Speed_Adjust(Speed_down);   &#x2F;&#x2F;减速
+  &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>实验现象</p>
+</div>
+<p>1、在八拍的情况下，脉冲数为4096，则步进电机刚好转一圈</p>
+<p>2、在单四拍的情况下，脉冲数为2048，则步进电机刚好转一圈，如果脉冲数为4096，则电机转两圈</p>
+<p>3、在双四拍的情况下，脉冲数为2048，则步进电机刚好转一圈，如果脉冲数为4096，则电机转两圈</p>
+<p>因为八拍让转子转一圈的脉冲数是64，单四拍或双四拍让转子转一圈的脉冲数都是32，是八拍的一半，在减速比都是64的情况下，让步进电机转一圈，则</p>
+<p>八拍：<code>64 * 64 = 4096</code></p>
+<p>单四拍或双四拍： <code>32 * 64 = 2048</code></p>
+<p>所以当选择单四拍或双四拍的情况下，如果脉冲数仍然是4096，则步进电机就转两圈</p>
+<h4 id="双极性步进电机">双极性步进电机</h4>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524170615.webp" alt=""></p>
+<blockquote>
+<p>通过线圈的电流有两个方向</p>
+<p>电流方向：</p>
+<p><code>A+ 流向 A- 或者 A- 流向 A+</code></p>
+<p><code>B+ 流向 B- 或者 B- 流向 B+</code></p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524170753.webp" alt=""></p>
+<ul>
+<li>驱动方式</li>
+</ul>
+<p>和单极性步进电机一样，有三种驱动方式：单四拍、双四拍、八拍</p>
+<p><code>A+表示电流从A+流向A-，A-表示电流从A-流向A+</code></p>
+<p><code>该电机没有减速比</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524171110.webp" alt=""></p>
+<blockquote>
+<p>单4拍和双四拍转一圈的话则需要 <code>360/7.5=48</code>，则需要48个脉冲</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524183254.webp" alt=""></p>
+<p>八拍转一圈的话则需要 <code>360/3.75=96</code>，则需要96个脉冲</p>
+</blockquote>
+<ul>
+<li>硬件连接</li>
+</ul>
+<blockquote>
+<p>程序里A1表示A+,A2表示A-，B1表示B+，B2表示B-</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524170438.webp" alt=""></p>
+<ul>
+<li>MX配置</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524173252.webp" alt=""></p>
+<blockquote>
+<p>定时器溢出时间为5ms</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524162450.webp" alt=""></p>
+<ul>
+<li>程序编写</li>
+</ul>
+<details ><summary> Myinit.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void vHardware_Init(void)
+&#123;
+    HAL_TIM_Base_Start_IT(&amp;htim7);	&#x2F;&#x2F; 启动定时器7
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> Motor.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __MOTOR_H
+#define __MOTOR_H
+
+#include &quot;AllHead.h&quot;
+
+&#x2F;&#x2F;宏定义
+#define	SET_Motor_A1	HAL_GPIO_WritePin(GPIOF,GPIO_PIN_5,GPIO_PIN_SET);
+#define	CLR_Motor_A1	HAL_GPIO_WritePin(GPIOF,GPIO_PIN_5,GPIO_PIN_RESET);
+#define	SET_Motor_A2	HAL_GPIO_WritePin(GPIOF,GPIO_PIN_6,GPIO_PIN_SET);
+#define	CLR_Motor_A2	HAL_GPIO_WritePin(GPIOF,GPIO_PIN_6,GPIO_PIN_RESET);
+
+#define	SET_Motor_B1	HAL_GPIO_WritePin(GPIOF,GPIO_PIN_7,GPIO_PIN_SET);
+#define	CLR_Motor_B1	HAL_GPIO_WritePin(GPIOF,GPIO_PIN_7,GPIO_PIN_RESET);
+#define	SET_Motor_B2	HAL_GPIO_WritePin(GPIOF,GPIO_PIN_8,GPIO_PIN_SET);
+#define	CLR_Motor_B2	HAL_GPIO_WritePin(GPIOF,GPIO_PIN_8,GPIO_PIN_RESET);
+
+#define Circle_Set_Value (uint8_t)25 &#x2F;&#x2F;转动的圈数
+
+&#x2F;&#x2F;定义枚举类型
+&#x2F;&#x2F;状态
+typedef enum
+&#123;
+	Start_State  	&#x3D; (uint8_t)0,
+	Stop_State  	&#x3D; (uint8_t)1,
+&#125;Status_t;
+&#x2F;&#x2F;方向
+typedef enum
+&#123;
+	Forward_State &#x3D; (uint8_t)0,
+	Reverse_State &#x3D; (uint8_t)1,
+&#125;Direction_t;
+&#x2F;&#x2F;速度等级
+typedef enum
+&#123;
+	Speed_1  &#x3D; (uint8_t)100, &#x2F;&#x2F;100*0.1ms 
+	Speed_2  &#x3D; (uint8_t)90,
+	Speed_3  &#x3D; (uint8_t)80,
+	Speed_4  &#x3D; (uint8_t)70,
+	Speed_5  &#x3D; (uint8_t)60,       &#x2F;&#x2F;6ms
+	Speed_6  &#x3D; (uint8_t)50, &#x2F;&#x2F;10KHz    50*0.1ms &#x3D; 5ms
+	Speed_7  &#x3D; (uint8_t)40,
+	Speed_8  &#x3D; (uint8_t)30,
+	Speed_9  &#x3D; (uint8_t)20, &#x2F;&#x2F;2ms
+&#125;Speed_t;
+&#x2F;&#x2F;加减速
+typedef enum
+&#123;
+	Speed_up    &#x3D; (uint8_t)0, &#x2F;&#x2F;加速
+	Speed_down  &#x3D; (uint8_t)1, &#x2F;&#x2F;减速
+&#125;Speed_Change_t;
+
+&#x2F;&#x2F;驱动模式
+typedef enum
+&#123;
+	Drive_Mode_Single_4_Beats    &#x3D; (uint8_t)0, &#x2F;&#x2F;单四拍 - 步距角为7.5°，驱动力度最小
+	Drive_Mode_Double_4_Beats    &#x3D; (uint8_t)1, &#x2F;&#x2F;双四拍 - 步距角为7.5°，驱动力度最大
+	Drive_Mode_8_Beats           &#x3D; (uint8_t)2, &#x2F;&#x2F;八拍   - 步距角为3.75°，驱动力度居中
+&#125;Drive_Mode_t;
+
+
+&#x2F;&#x2F;定义结构体类型
+typedef struct
+&#123;
+  uint8_t Status;    &#x2F;&#x2F;步进电机状态
+	uint8_t Direction; &#x2F;&#x2F;步进电机方向
+	uint8_t Speed;     &#x2F;&#x2F;步进电机速度
+	uint8_t Circle;    &#x2F;&#x2F;步进电机转动圈数
+	Drive_Mode_t Drive_Mode;   &#x2F;&#x2F;步进电机驱动模式
+	uint8_t Pulse_Cnt;        &#x2F;&#x2F;步进电机脉冲计数
+	uint8_t One_Circle_Pulse; &#x2F;&#x2F;步进电机转动一圈的脉冲数(要跟模式匹配，4或者双4拍则填48,8拍填96)
+	
+	void (*Direction_Adjust)(void);        &#x2F;&#x2F;步进电机方向调整
+	void (*Speed_Adjust)(Speed_Change_t);  &#x2F;&#x2F;步进电机速度调整
+	void (*Step_One_Pulse)(void);          &#x2F;&#x2F;步进电机步进一个脉冲
+&#125; Bipolar_Step_Motor_t;
+
+extern Bipolar_Step_Motor_t  Bipolar_Step_Motor;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> Motor.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;AllHead.h&quot;
+
+&#x2F;* Private function prototypes------------------------------------------------*&#x2F;      
+static void Direction_Adjust(void);        &#x2F;&#x2F;步进电机方向调整
+static void Speed_Adjust(Speed_Change_t);  &#x2F;&#x2F;步进电机速度调整
+static void Step_One_Pulse(void);          &#x2F;&#x2F;步进电机步进一个脉冲
+
+&#x2F;* Public variables-----------------------------------------------------------*&#x2F;
+
+&#x2F;&#x2F;定义结构体类变量
+Bipolar_Step_Motor_t Bipolar_Step_Motor &#x3D; 
+&#123;
+	Stop_State,
+	Forward_State, 
+	Speed_6,
+	0,
+	Drive_Mode_Double_4_Beats,
+	0,
+	(uint8_t)48,
+	
+	Direction_Adjust,
+	Speed_Adjust,
+	Step_One_Pulse
+&#125;;
+
+&#x2F;*
+	* @name   Direction_Adjust
+	* @brief  直流电机方向调整
+	* @param  None
+	* @retval None      
+*&#x2F;
+static void Direction_Adjust(void)
+&#123;
+	if(Bipolar_Step_Motor.Status &#x3D;&#x3D; Start_State)
+	&#123;
+		&#x2F;&#x2F;调整电机运行方向
+		if(Bipolar_Step_Motor.Direction &#x3D;&#x3D; Reverse_State)
+		&#123;
+			Bipolar_Step_Motor.Direction &#x3D; Forward_State;
+		&#125;
+		else
+		&#123;
+			Bipolar_Step_Motor.Direction &#x3D; Reverse_State;
+		&#125;
+		
+		Bipolar_Step_Motor.Circle &#x3D; Circle_Set_Value;
+		Bipolar_Step_Motor.Pulse_Cnt &#x3D; 0;
+	&#125;
+&#125;
+
+&#x2F;*
+	* @name   Speed_Adjust
+	* @brief  直流电机速度调整
+	* @param  Speed_Change -&gt; 速度变化
+	* @retval None      
+*&#x2F;
+static void Speed_Adjust(Speed_Change_t Speed_Change)
+&#123;
+	if(Bipolar_Step_Motor.Status &#x3D;&#x3D; Start_State)
+	&#123;
+		if(Speed_Change &#x3D;&#x3D; Speed_up)
+		&#123;
+			&#x2F;&#x2F;增大电机速度
+			switch(Bipolar_Step_Motor.Speed)
+			&#123;
+				case Speed_1: Bipolar_Step_Motor.Speed &#x3D; Speed_2; break;
+				case Speed_2: Bipolar_Step_Motor.Speed &#x3D; Speed_3; break;
+				case Speed_3: Bipolar_Step_Motor.Speed &#x3D; Speed_4; break;
+				case Speed_4: Bipolar_Step_Motor.Speed &#x3D; Speed_5; break;
+				case Speed_5: Bipolar_Step_Motor.Speed &#x3D; Speed_6; break;
+				case Speed_6: Bipolar_Step_Motor.Speed &#x3D; Speed_7; break;
+				case Speed_7: Bipolar_Step_Motor.Speed &#x3D; Speed_8; break;
+				case Speed_8: Bipolar_Step_Motor.Speed &#x3D; Speed_9; break;
+				case Speed_9: Bipolar_Step_Motor.Speed &#x3D; Speed_9; break;
+				default:Bipolar_Step_Motor.Speed &#x3D; Speed_6; 
+			&#125;
+		&#125;
+		else
+		&#123;
+			&#x2F;&#x2F;减小电机速度
+			switch(Bipolar_Step_Motor.Speed)
+			&#123;
+				case Speed_1: Bipolar_Step_Motor.Speed &#x3D; Speed_1; break;
+				case Speed_2: Bipolar_Step_Motor.Speed &#x3D; Speed_1; break;
+				case Speed_3: Bipolar_Step_Motor.Speed &#x3D; Speed_2; break;
+				case Speed_4: Bipolar_Step_Motor.Speed &#x3D; Speed_3; break;
+				case Speed_5: Bipolar_Step_Motor.Speed &#x3D; Speed_4; break;
+				case Speed_6: Bipolar_Step_Motor.Speed &#x3D; Speed_5; break;
+				case Speed_7: Bipolar_Step_Motor.Speed &#x3D; Speed_6; break;
+				case Speed_8: Bipolar_Step_Motor.Speed &#x3D; Speed_7; break;
+				case Speed_9: Bipolar_Step_Motor.Speed &#x3D; Speed_8; break;
+				default:Bipolar_Step_Motor.Speed &#x3D; Speed_6;
+			&#125;
+		&#125;
+		
+		&#x2F;&#x2F;更新定时器7的计时重装载寄存器
+		TIM7 -&gt;ARR &#x3D; Bipolar_Step_Motor.Speed;
+	&#125;
+&#125;
+
+&#x2F;*
+	* @name   Step_One_Pulse
+	* @brief  步进电机步进一个脉冲
+	* @param  Speed_Change -&gt; 速度变化
+	* @retval None      
+*&#x2F;
+static void Step_One_Pulse(void)
+&#123;
+	static uint8_t Position &#x3D; 0;
+	
+	&#x2F;&#x2F;单四拍
+	if(Bipolar_Step_Motor.Drive_Mode &#x3D;&#x3D; Drive_Mode_Single_4_Beats)
+	&#123;
+		if(Bipolar_Step_Motor.Direction &#x3D;&#x3D; Forward_State)
+		&#123;
+			&#x2F;&#x2F;正向步进  A1 - B2 - A2 - B1
+			switch(Position)
+			&#123;
+				case 0: SET_Motor_A1; CLR_Motor_B1; CLR_Motor_A2; CLR_Motor_B2; break;
+				case 1: CLR_Motor_A1; CLR_Motor_B1; CLR_Motor_A2; SET_Motor_B2; break;
+				case 2: CLR_Motor_A1; CLR_Motor_B1; SET_Motor_A2; CLR_Motor_B2; break;
+				case 3: CLR_Motor_A1; SET_Motor_B1; CLR_Motor_A2; CLR_Motor_B2; break;
+				default: System.Error_Handler();
+			&#125;
+		&#125;
+		else
+		&#123;
+			&#x2F;&#x2F;反向步进  A1 - B1 - A2 - B2
+			switch(Position)
+			&#123;
+				case 0: SET_Motor_A1; CLR_Motor_B1; CLR_Motor_A2; CLR_Motor_B2; break;
+				case 1: CLR_Motor_A1; SET_Motor_B1; CLR_Motor_A2; CLR_Motor_B2; break;
+				case 2: CLR_Motor_A1; CLR_Motor_B1; SET_Motor_A2; CLR_Motor_B2; break;
+				case 3: CLR_Motor_A1; CLR_Motor_B1; CLR_Motor_A2; SET_Motor_B2; break;
+				default: System.Error_Handler();
+			&#125;
+		&#125;
+		
+		&#x2F;&#x2F;更新位置信息
+		if((++Position) &#x3D;&#x3D; 4)
+				Position &#x3D; 0;
+	&#125;
+	
+	&#x2F;&#x2F;双四拍
+	if(Bipolar_Step_Motor.Drive_Mode &#x3D;&#x3D; Drive_Mode_Double_4_Beats)
+	&#123;
+		if(Bipolar_Step_Motor.Direction &#x3D;&#x3D; Forward_State)
+		&#123;
+			&#x2F;&#x2F;正向步进  A1B2 - B2A2 - A2B1 - B1A1
+			switch(Position)
+			&#123;
+				case 0: SET_Motor_A1; CLR_Motor_B1; CLR_Motor_A2; SET_Motor_B2; break;
+				case 1: CLR_Motor_A1; CLR_Motor_B1; SET_Motor_A2; SET_Motor_B2; break;
+				case 2: CLR_Motor_A1; SET_Motor_B1; SET_Motor_A2; CLR_Motor_B2; break;
+				case 3: SET_Motor_A1; SET_Motor_B1; CLR_Motor_A2; CLR_Motor_B2; break;
+				default: System.Error_Handler();
+			&#125;
+		&#125;
+		else
+		&#123;
+			&#x2F;&#x2F;反向步进  A1B1 - B1A2 - A2B2 - B2A1
+			switch(Position)
+			&#123;
+				case 0: SET_Motor_A1; SET_Motor_B1; CLR_Motor_A2; CLR_Motor_B2; break;
+				case 1: CLR_Motor_A1; SET_Motor_B1; SET_Motor_A2; CLR_Motor_B2; break;
+				case 2: CLR_Motor_A1; CLR_Motor_B1; SET_Motor_A2; SET_Motor_B2; break;
+				case 3: SET_Motor_A1; CLR_Motor_B1; CLR_Motor_A2; SET_Motor_B2; break;
+				default: System.Error_Handler();
+			&#125;
+		&#125;
+		
+		&#x2F;&#x2F;更新位置信息
+		if((++Position) &#x3D;&#x3D; 4)
+				Position &#x3D; 0;
+	&#125;
+	
+	&#x2F;&#x2F;单八拍
+	if(Bipolar_Step_Motor.Drive_Mode &#x3D;&#x3D; Drive_Mode_8_Beats)
+	&#123;
+		if(Bipolar_Step_Motor.Direction &#x3D;&#x3D; Forward_State)
+		&#123;
+			&#x2F;&#x2F;正向步进 A1 - A1B2 - B2 - B2A2 - A2 - A2B1 - B1 - B1A1
+			switch(Position)
+			&#123;
+				case 0: SET_Motor_A1; CLR_Motor_B1; CLR_Motor_A2; CLR_Motor_B2; break;
+				case 1: SET_Motor_A1; CLR_Motor_B1; CLR_Motor_A2; SET_Motor_B2; break;
+				case 2: CLR_Motor_A1; CLR_Motor_B1; CLR_Motor_A2; SET_Motor_B2; break;
+				case 3: CLR_Motor_A1; CLR_Motor_B1; SET_Motor_A2; SET_Motor_B2; break;
+				case 4: CLR_Motor_A1; CLR_Motor_B1; SET_Motor_A2; CLR_Motor_B2; break;
+				case 5: CLR_Motor_A1; SET_Motor_B1; SET_Motor_A2; CLR_Motor_B2; break;
+				case 6: CLR_Motor_A1; SET_Motor_B1; CLR_Motor_A2; CLR_Motor_B2; break;
+				case 7: SET_Motor_A1; SET_Motor_B1; CLR_Motor_A2; CLR_Motor_B2; break;
+				default:System.Error_Handler();
+			&#125;
+		&#125;
+		else
+		&#123;
+			&#x2F;&#x2F;反向步进 A1 - A1B1 - B1 - B1A2 - A2 - A2B2 - B2 - B2A1
+			switch(Position)
+			&#123;
+				case 0: SET_Motor_A1; CLR_Motor_B1; CLR_Motor_A2; CLR_Motor_B2; break;
+				case 1: SET_Motor_A1; SET_Motor_B1; CLR_Motor_A2; CLR_Motor_B2; break; 
+				case 2: CLR_Motor_A1; SET_Motor_B1; CLR_Motor_A2; CLR_Motor_B2; break;
+				case 3: CLR_Motor_A1; SET_Motor_B1; SET_Motor_A2; CLR_Motor_B2; break;
+				case 4: CLR_Motor_A1; CLR_Motor_B1; SET_Motor_A2; CLR_Motor_B2; break; 
+				case 5: CLR_Motor_A1; CLR_Motor_B1; SET_Motor_A2; SET_Motor_B2; break;
+				case 6: CLR_Motor_A1; CLR_Motor_B1; CLR_Motor_A2; SET_Motor_B2; break;
+				case 7: SET_Motor_A1; CLR_Motor_B1; CLR_Motor_A2; SET_Motor_B2; break;
+				default: System.Error_Handler();
+			&#125;
+		&#125;
+		
+		&#x2F;&#x2F;更新位置信息
+		if((++Position) &#x3D;&#x3D; 8)
+				Position &#x3D; 0;
+	&#125;
+&#125;
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+&#123;
+    &#x2F;&#x2F;控制步进电机
+    if(htim-&gt;Instance &#x3D;&#x3D; htim7.Instance)
+    &#123;
+        &#x2F;&#x2F;没转完指定的圈数
+        if(Bipolar_Step_Motor.Circle &gt; 0)
+        &#123;
+            &#x2F;&#x2F;电机转动一个脉冲
+            Bipolar_Step_Motor.Step_One_Pulse();
+
+            &#x2F;&#x2F;根据脉冲计数判断是否转动了一圈
+            if(++Bipolar_Step_Motor.Pulse_Cnt &#x3D;&#x3D; Bipolar_Step_Motor.One_Circle_Pulse)
+            &#123;
+                Bipolar_Step_Motor.Pulse_Cnt &#x3D; 0;
+                &#x2F;&#x2F;转动圈数减一
+                Bipolar_Step_Motor.Circle--;
+            &#125;
+        &#125;
+        &#x2F;&#x2F;已转完指定的圈数
+        else
+        &#123;
+            Bipolar_Step_Motor.Status &#x3D; Stop_State;
+            CLR_Motor_A1;
+            CLR_Motor_A2;
+            CLR_Motor_B1;
+            CLR_Motor_B2;
+        &#125;
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<h3 id="无刷电机">无刷电机</h3>
+<h4 id="介绍-2">介绍</h4>
+<p>无刷直流电机由电动机主体和驱动器组成，是一种典型的机电━体化产品。</p>
+<p>结构上，无刷电机和有刷电机有相似之处，也有转子和定子，只不过和有刷电机的结构相反;有刷电机的转子是线圈绕组，和动力输出轴相连，定子是永磁磁钢;无刷电机的转子是永磁磁钢，连同外壳一起和输出轴相连，定子是绕组线圈，去掉了有刷电机用来交替变换电磁场的换向电刷，故称之为无刷电机。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524191147.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524191156.webp" alt=""></p>
+<ul>
+<li>优点</li>
+</ul>
+<p>① 无电刷、低干扰</p>
+<p>② 噪音低，运转顺畅</p>
+<p>③ 寿命长，低维护成本</p>
+<ul>
+<li>缺点</li>
+</ul>
+<p>① 价格贵</p>
+<p>② 驱动复杂</p>
+<ul>
+<li>驱动</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524191415.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524191424.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230524191439.webp" alt=""></p>
+<h2 id="PID学习">PID学习</h2>
+<blockquote>
+<ol>
+<li>Kp（比例系数）：
+<ul>
+<li>比例系数决定了响应系统误差的快慢程度。</li>
+<li>当Kp值较大时，控制器对误差的响应较强，系统的纠正速度会加快。</li>
+<li>然而，如果Kp过大，系统可能会产生过量的振荡或不稳定的行为。</li>
+<li>如果Kp值较小，系统的响应较为缓慢，可能导致误差无法迅速减小。</li>
+</ul>
+</li>
+<li>Ki（积分系数）：
+<ul>
+<li>积分系数决定了对误差累积部分进行纠正的力度。</li>
+<li>它主要用于消除稳态误差（系统无法完全消除的偏差）。</li>
+<li>当Ki值较大时，积分项的影响将更明显，系统将更积极地纠正偏差。</li>
+<li>然而，如果Ki过大，系统可能会产生超调或振荡的现象。</li>
+<li>如果Ki值较小，系统的对稳态误差的纠正能力较弱。</li>
+</ul>
+</li>
+<li>Kd（微分系数）：
+<ul>
+<li>微分系数决定了对误差变化率进行纠正的力度。</li>
+<li>它主要用于预测和抑制系统的超调行为。</li>
+<li>当Kd值较大时，微分项的影响将更明显，系统将更敏锐地对误差的变化做出反应。</li>
+<li>然而，如果Kd过大，系统可能会导致过度抑制或产生震荡。</li>
+<li>如果Kd值较小，系统对误差变化的敏感度较低，可能无法有效抑制超调或振荡。</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num143.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%B5%E6%9C%BA"><span class="toc-number">1.</span> <span class="toc-text">电机</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E5%88%B7%E7%9B%B4%E6%B5%81%E7%94%B5%E6%9C%BA"><span class="toc-number">1.1.</span> <span class="toc-text">有刷直流电机</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B1"><span class="toc-number">1.1.2.</span> <span class="toc-text">编程示例1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B2"><span class="toc-number">1.1.3.</span> <span class="toc-text">编程示例2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B3"><span class="toc-number">1.1.4.</span> <span class="toc-text">编程示例3</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B4"><span class="toc-number">1.1.5.</span> <span class="toc-text">编程示例4</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B5"><span class="toc-number">1.1.6.</span> <span class="toc-text">编程示例5</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA"><span class="toc-number">1.2.</span> <span class="toc-text">步进电机</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E6%9E%81%E6%80%A7%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA"><span class="toc-number">1.2.1.</span> <span class="toc-text">单极性步进电机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E6%9E%81%E6%80%A7%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA"><span class="toc-number">1.2.2.</span> <span class="toc-text">双极性步进电机</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E5%88%B7%E7%94%B5%E6%9C%BA"><span class="toc-number">1.3.</span> <span class="toc-text">无刷电机</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D-2"><span class="toc-number">1.3.1.</span> <span class="toc-text">介绍</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PID%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.</span> <span class="toc-text">PID学习</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '键盘敲烂 月薪过万' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script defer src="/js/my_aplayer.js"></script><script defer src="/js/meting.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
