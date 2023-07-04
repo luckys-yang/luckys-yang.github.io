@@ -379,3 +379,18 @@ Undefined symbol __initial_sp
 ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230614000006.webp)
 
 > 参考文章：https://blog.csdn.net/qq_62014938/article/details/125602277
+
+- 使用V6编译器，如果代码有中文会报警告，可以在魔法棒那添加屏蔽或者在文件顶部写下面这句
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ图片20230624112034.webp)
+
+```cpp
+#pragma clang diagnostic ignored "-Winvalid-source-encoding"
+```
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230624111741.webp)
+
+```cpp
+-Wno-invalid-source-encoding
+```
+
