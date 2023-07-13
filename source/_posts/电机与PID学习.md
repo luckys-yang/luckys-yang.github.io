@@ -4,6 +4,7 @@ cover: /img/num143.webp
 categories:
   - 细化学习
 comments: false
+katex: true	
 abbrlink: f3106827
 date: 2023-06-25 14:10:48
 ---
@@ -16,7 +17,27 @@ date: 2023-06-25 14:10:48
 
 [全国大学生电子设计竞赛(三)--SPWM与PID--果果小师弟](https://mp.weixin.qq.com/s/xa3o6SjaeFCSDEWV_BS6Nw)
 
-{% note blue 'fas fa-fan' flat %}网盘资料{% endnote %}
+[B站天下行走平衡车-gitee](https://gitee.com/GFPhoenix)
+
+[匿名上位机使用方法分享--波形显示](https://blog.csdn.net/wangjt1988/article/details/83686656)
+
+[ANO V7上位机协议程序（新版加入DMA形式发送接收）](https://blog.csdn.net/qq_43603289/article/details/119026568?spm=1001.2014.3001.5502)
+
+[详细介绍如何从0开始写一个数据通信，将数据从单片机发送到上位机](https://blog.csdn.net/qq_44339029/article/details/106004997)
+
+
+
+{% note blue 'fas fa-fan' flat %}资料/软件下载{% endnote %}
+
+[匿名上位机](http://www.anotc.com/wiki/%E5%8C%BF%E5%90%8D%E4%BA%A7%E5%93%81%E8%B5%84%E6%96%99/%E8%B5%84%E6%96%99%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5%E6%B1%87%E6%80%BB)
+
+[VOFA+文档/下载软件](https://www.vofa.plus/docs/FAQ/faq)
+
+[cjson-github](https://github.com/DaveGamble/cJSON)
+
+
+
+
 
 
 
@@ -66,6 +87,8 @@ date: 2023-06-25 14:10:48
 
 rpm是每分钟多少转意思，比如一个电机是10000/rpm，减速比是1:20，那它实际转速是 10000 / 20 = 500/rpm，转速减少了扭矩增大，比如原本扭矩是0.1Kg/cm，就变成 1.6Kg/cm，这个看比例
 
+减速比为1:20,即输出轴转一圈,电机内部实际转20圈
+
 > 按照传动级数不同可分为单级和多级减速器；按照传动类型可分为齿轮减速器、蜗杆减速器和行星齿轮减速器
 >
 > ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230625145741.webp)
@@ -79,12 +102,33 @@ rpm是每分钟多少转意思，比如一个电机是10000/rpm，减速比是1:
 - 电机选型
 
 1. 尺寸：根据结构大小选择尺寸
-
 2. 扭力：要足够带动负载
-
 3. 驱动电压：一般5V，12V，24V
-
 4. 驱动电流：电流和电压影响功率，一般功率越大，扭力越大
+
+> 1. JGA25-370，带编码器，输入电压3.5-20V，约40元
+>
+> ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230704182922.webp)
+>
+> ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230704183020.webp)
+
+> 2. TT马达，品种多，选择余地多。黄色塑料齿轮，1:48，130电机，约1元；蓝色金属齿轮，约6元；黑色高品质带编码器30-50元；黄色塑料齿轮带编码器，14-24元
+
+> 3. GA12-N20，无编码器，速度较慢，约9元
+
+> 4. JGB37-520带编码器电机，约40元
+
+> 5. MG310/370/513，比较可靠的型号，GMR或霍尔编码器，输入电压11-16V(12V)或7-13V(8V)， 约30-120元
+>
+> ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230704183520.webp)
+>
+> ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230704183533.webp)
+>
+> ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230704181814.webp)
+>
+> ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230704182335.webp)
+
+
 
 - 驱动方式
 
@@ -111,6 +155,88 @@ rpm是每分钟多少转意思，比如一个电机是10000/rpm，减速比是1:
 > 当 `扭矩<负载` 时，电机转速会下降，电流上升从而增大扭矩。当负载非常大，电机带不动从而停止转动时（堵转），电流达到最大值，此时需特别注意，很有可能烧坏电机驱动
 >
 > H桥中绝对不能出现同侧（左侧/右侧）的FET同时导通的情况(这样会导致电流不经过电机直接到地，形成短路！因此在状态切换时需要一步一步来，而集成H桥的芯片一般会在内部自动解决这个问题 -- 利用死区控制)
+
+- 编码器
+
+编码器分为 `光电` 和 `霍尔` 编码器，还分为 `增量式` 和 `绝对式`
+
+测量位置(倒立摆)；测量速度(平衡小车)
+
+是一种将 `角位移或者角速度` 转换成 `一连串电数字脉冲` 的旋转式传感器，我们可以通过编码器测量到位移或者速度信息
+
+> 霍尔编码器
+
+霍尔编码器为13位编码器,即电机每转,对于编码器有2的13次方的增量( `简单的说,上面那个霍尔编码器检测的圆盘,转一圈,检测13个脉冲`)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230704184637.webp)
+
+采集数据方式：
+
+第一种软件技术直接采用外部中断进行采集，根据AB相位差的不同可以判断正负
+
+第二种硬件技术直接使用定时器的编码器模式
+
+一般使用第二种，也是大家常说的四倍频，提高测量精度的方法。其实就是把AB相的上升沿和下降沿都采集而已，所以1变4。自己使用外部中断方式实现就比较占用资源了，所以不建议使用
+
+> TI1 <–> 通道A
+>
+> TI2 <–> 通道B
+
+ `那么编码器的输出信号具体是什么？我们如何根据输出信号测量转速 和方向？`
+
+转速:  单位时间测量到的脉冲数量(比如根据每秒测量到多少个脉冲来计算转速)
+
+旋转方向: 两通道信号的相对电平关系
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230704201236.webp)
+
+STM32单片机的定时器和通用定时器具有**编码器接口模式**、在STM32中文参考手册13章中有详细介绍
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230704185445.webp)
+
+这个是计数方向与编码器信号的关系、我们拆开来看
+
+> 仅在TI1计数、电机正转(对原始数据二倍频)
+>
+> (看【3】那里虚线往上看，现在是TI1，所以看 `TI1FP1信号` 那栏，现在是上升，然后里面又有向下和向上计数，到达是哪个呢所以需要看TI2对应是什么，是低电平所以看 `相对信号的电平`那栏找到低，对应过去就是 `向上计数`，其他的也是这样看)
+>
+> ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230704202906.webp)
+>
+> 仅在TI1计数、电机反转(对原始数据二倍频)
+>
+> ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230704203029.webp)
+>
+> 在TI1和TI2都计数(可以看到这样就对原始数据四倍频了)
+>
+> ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230704203158.webp)
+>
+> 计数方向
+>
+> ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230704203606.webp)
+
+> **第一种方法(考虑溢出)：**
+>
+> 这次编码器计数值 = 计数器值+计数溢出次数 * 计数最大器计数最大值
+>
+> 计数器两次变化值 = 这次编码器计数值 - 上次编码器计数值
+>
+> 然后根据这个单位变化量计算速度
+>
+> **还有一种方法(计数一次后下一次前我清0了，因为一般电机转速不会超出的)：**
+>
+> 计数器变化量 = 当前计数器值
+>
+> 每次计数值清空
+>
+> 然后根据这个变化量 计算速度
+>
+> 然后我们再看具体到哪一款电机和编码器上如何测速
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230704234218.webp)
+
+> 会不会溢出？
+>
+> 这个看电机的型号，比如我现在的是MG310，一圈脉冲大概是1040，2ms读取一次编码器值，那就是 `32767/1040=31`，也就是每2ms就要旋转31圈，那每秒就是旋转 `31*500=15500` 圈，可以知道我这个型号电机是不会达到这么大的转速的，所以不会溢出
 
 
 
@@ -372,6 +498,8 @@ static void Speed_Adjust(Speed_Change_t Speed_Change)
 #### 编程示例2
 
 > 电机驱动板是TB6612FNG，电机型号是MG310直流减速电机，减速比20，电压范围7-13V，速度1.3m/s，编码器是13线霍尔
+>
+
 
 > 程序基于GD32F103VET6
 
@@ -390,7 +518,7 @@ static void Speed_Adjust(Speed_Change_t Speed_Change)
 
 ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230625080259.webp)
 
-![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230625161756.webp)
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230625161756.webp) 
 
 ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230625180508.webp)
 
@@ -445,46 +573,80 @@ static void Speed_Adjust(Speed_Change_t Speed_Change)
 
 
 
+##### 速度开环控制
 
+> 无反馈，直接控制。(速度与PWM 值成正比，所以为速度开环控制)
 
-{% note blue 'fas fa-fan' flat %}轮子动起来{% endnote %}
+- MX配置
+
+使用定时器4的4个通道输出PWM给电机，不需要开中断
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230626180131.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230626175957.webp)
+
+- 程序编写
 
 {% folding, Motor.h %}
 
 ```cpp
 #ifndef __MOTOR_H
 #define __MOTOR_H
-#include "AllHead.h"
 
 // 宏定义 管脚
 /*后左*/
-#define LATER_LEFT_PWMB GPIO_PIN_6
-#define LATER_LEFT_BIN1 GPIO_PIN_4
-#define LATER_LEFT_BIN2 GPIO_PIN_5
+#define LATER_LEFT_PWMB GPIO_PIN_12
+#define LATER_LEFT_BIN1 GPIO_PIN_2
+#define LATER_LEFT_BIN2 GPIO_PIN_3
 /*后右*/
-#define LATER_RIGHT_PWMA GPIO_PIN_7
-#define LATER_RIGHT_AIN1 GPIO_PIN_8
-#define LATER_RIGHT_AIN2 GPIO_PIN_9
+#define LATER_RIGHT_PWMA GPIO_PIN_13
+#define LATER_RIGHT_AIN1 GPIO_PIN_4
+#define LATER_RIGHT_AIN2 GPIO_PIN_5
 /*前左*/
-#define FRONT_LEFT_PWMA GPIO_PIN_0
-#define FRONT_LEFT_AIN1 GPIO_PIN_14
-#define FRONT_LEFT_AIN2 GPIO_PIN_15
+#define FRONT_LEFT_PWMA GPIO_PIN_14
+#define FRONT_LEFT_AIN1 GPIO_PIN_0
+#define FRONT_LEFT_AIN2 GPIO_PIN_1
 /*前右*/
-#define FRONT_RIGHT_PWMB GPIO_PIN_1
-#define FRONT_RIGHT_BIN1 GPIO_PIN_12
-#define FRONT_RIGHT_BIN2 GPIO_PIN_13
+#define FRONT_RIGHT_PWMB GPIO_PIN_15
+#define FRONT_RIGHT_BIN1 GPIO_PIN_6
+#define FRONT_RIGHT_BIN2 GPIO_PIN_7
+
+typedef enum
+{
+    Motor_FRONT_LEFT = (uint8_t)0,  // 左前
+    Motor_FRONT_RIGHT = (uint8_t)1, // 右前
+    Motor_LATER_LEFT = (uint8_t)2,  // 左后
+    Motor_LATER_RIGHT = (uint8_t)3, // 右后
+}Motor_Mark_t;
 
 typedef struct
 {
-    uint16_t usLater_Left_Duty; // 后左电机占空比
-    uint16_t usLater_Right_Duty; // 后右电机占空比
-    uint16_t usFront_Left_Duty; // 前左电机占空比
-    uint16_t usFront_Right_Duty; // 前右电机占空比
+	int16_t usMotor_Fre;	// 电机频率
+    int16_t usLater_Left_Duty; // 后左电机占空比
+    int16_t usLater_Right_Duty; // 后右电机占空比
+    int16_t usFront_Left_Duty; // 前左电机占空比
+    int16_t usFront_Right_Duty; // 前右电机占空比
     void (*Motor_Init)(void);
+    void (*Motor_Front_Left_Set_Forward)(void); // 正转
+    void (*Motor_Front_Right_Set_Forward)(void);
+    void (*Motor_Later_Left_Set_Forward)(void);
+    void (*Motor_Later_Right_Set_Forward)(void);
+
+    void (*Motor_Front_Left_Set_Reverse)(void); // 反转
+    void (*Motor_Front_Right_Set_Reverse)(void);
+    void (*Motor_Later_Left_Set_Reverse)(void);
+    void (*Motor_Later_Right_Set_Reverse)(void);   
+
+    void (*Motor_Set_Duty)(Motor_Mark_t, float); // 设置占空比(速度)
+	void (*Motor_Fre_And_Duty_compute)(void);   // 频率占空比计算(用于显示OLED)
+    void (*Motor_Stop)(void);   // 自由停车
+    double (*Motor_Clamp)(double, double, double);   // 限幅 
+    void (*Motor_Brake)(void);  // 刹车
 }Motor_t;
 
 
 extern Motor_t Motor;
+
 #endif
 ```
 
@@ -496,33 +658,66 @@ extern Motor_t Motor;
 /***************************************************************************
  * File: Motor.c
  * Author: Luckys.
- * Date: 2023/06/24
+ * Date: 2023/06/23
  * description: 电机
  -----------------------------------
 接线：
-    后左轮：PA6 --- Timer_CH0     PA4 --- BIN1 PA5 --- BIN2
-    后右轮：PA7 --- Timer_CH1     PB8 --- AIN1 PB9 --- AIN2
-    前左轮：PB0 --- Timer_CH2     PB14 --- AIN1 PB15 --- AIN2
-    前右轮：PB1 --- Timer_CH3     PB12 --- BIN1 PB13 --- BIN2
+    后左轮：PD12 --- Timer4_CH1    PE2 --- BIN1 PE3 --- BIN2
+    后右轮：PD13 --- Timer4_CH2    PE4 --- AIN1 PE5 --- AIN2
+    前左轮：PD14 --- Timer4_CH3    PE0 --- AIN1 PE1 --- AIN2
+    前右轮：PD15 --- Timer4_CH4    PD6 --- BIN1 PD7 --- BIN2
     STBY --- 3.3V    
+频率：
+    MX设置了ARR为7199，PSC为0  ---> 72000000 / (7199 + 1) / (0 + 1) = 10KHz    
  -----------------------------------
 ****************************************************************************/
-#include "Motor.h"
+#include "AllHead.h"
 
 /*====================================static function declaration area BEGIN====================================*/
 
 static void Motor_Init(void);
-static void Motor_Timer_Init(uint16_t arr, uint16_t psc);
-static void Motor_GPIO_Init(void);
+
+static void Motor_Front_Left_Set_Forward(void);
+static void Motor_Front_Right_Set_Forward(void);
+static void Motor_Later_Left_Set_Forward(void);
+static void Motor_Later_Right_Set_Forward(void);
+
+static void Motor_Front_Left_Set_Reverse(void);
+static void Motor_Front_Right_Set_Reverse(void);
+static void Motor_Later_Left_Set_Reverse(void);
+static void Motor_Later_Right_Set_Reverse(void);
+
+static void Motor_Set_Duty(Motor_Mark_t motor, float duty);
+static void Motor_Fre_And_Duty_compute(void);
+static void Motor_Stop(void);
+static double Motor_Clamp(double value, double min_value, double max_value);
+static void Motor_Brake(void);
 
 /*====================================static function declaration area   END====================================*/
+
 Motor_t Motor = 
 {
+	0,
     0,
     0,
     0,
     0,
-    Motor_Init
+    Motor_Init,
+    Motor_Front_Left_Set_Forward,
+    Motor_Front_Right_Set_Forward,
+    Motor_Later_Left_Set_Forward,
+    Motor_Later_Right_Set_Forward,
+
+    Motor_Front_Left_Set_Reverse,
+    Motor_Front_Right_Set_Reverse,
+    Motor_Later_Left_Set_Reverse,
+    Motor_Later_Right_Set_Reverse,
+
+    Motor_Set_Duty,
+	Motor_Fre_And_Duty_compute,
+    Motor_Stop,
+    Motor_Clamp,
+    Motor_Brake
 };
 
 
@@ -534,198 +729,570 @@ Motor_t Motor =
 */
 static void Motor_Init(void)
 {
-    Motor_GPIO_Init();
-    Motor_Timer_Init(5400 - 1 , 1 - 0);    // 54000000 / 5400 / 1 = 10KHz APB1时钟是系统时钟的一半
+    HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
+    HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
+    HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3);
+    HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_4);
+	
+    // 初始化四个轮子正转
+    Motor_Front_Left_Set_Forward();
+    Motor_Front_Right_Set_Forward();
+    Motor_Later_Left_Set_Forward();
+    Motor_Later_Right_Set_Forward();
 }
 
 /*
-* @function: Motor_Timer_Init
+* @function: Motor_Front_Left_Forward
 * @param: None
 * @retval: None
-* @brief: 电机--定时器初始化
+* @brief: 左前轮正转
 */
-static void Motor_Timer_Init(uint16_t arr, uint16_t psc)
+static void Motor_Front_Left_Set_Forward(void)
 {
-    timer_parameter_struct myTIMER2;
-    timer_oc_parameter_struct myTIMER2_OC;
-
-    // 开启定时器时钟和复用时钟
-    rcu_periph_clock_enable(RCU_TIMER2);
-    gpio_init(GPIOA, GPIO_MODE_AF_PP, GPIO_OSPEED_50MHZ, LATER_LEFT_PWMB | LATER_RIGHT_PWMA);  // PA6 PA7
-    gpio_init(GPIOB, GPIO_MODE_AF_PP, GPIO_OSPEED_50MHZ, FRONT_LEFT_PWMA | FRONT_RIGHT_PWMB);  // PB0 PB1
-    // 结构体复位初始化
-    timer_deinit(TIMER2);
-
-    // 初始化定时器结构体
-    timer_struct_para_init(&myTIMER2);
-    // 预分频--psc值
-    myTIMER2.prescaler = psc;
-    // 对齐模式
-    myTIMER2.alignedmode = TIMER_COUNTER_EDGE;
-    // 计数方向--向上计数
-    myTIMER2.counterdirection = TIMER_COUNTER_UP;
-    // 重装载值--arr
-    myTIMER2.period = arr;
-    // 时钟分频因子--不分频
-    myTIMER2.clockdivision = TIMER_CKDIV_DIV1;
-    // 初始化
-    timer_init(TIMER2,&myTIMER2);
-
-    // 通道使能
-    myTIMER2_OC.outputstate = TIMER_CCX_ENABLE;
-    // 通道极性--高电平有效
-    myTIMER2_OC.ocpolarity = TIMER_OC_POLARITY_HIGH;
-
-    // ----------------通道0配置(后左)----------------
-    timer_channel_output_config(TIMER2,TIMER_CH_0,&myTIMER2_OC);    // 外设TIMERx的通道输出配置
-    timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_0,Motor.usLater_Left_Duty); // 通道占空比设置
-    timer_channel_output_mode_config(TIMER2,TIMER_CH_0,TIMER_OC_MODE_PWM0); // 通道模式---PWM0模式
-    timer_channel_output_shadow_config(TIMER2,TIMER_CH_0,TIMER_OC_SHADOW_DISABLE);  // 不使用输出比较影子寄存器
-
-    // ----------------通道1配置(后右)----------------
-    timer_channel_output_config(TIMER2,TIMER_CH_1,&myTIMER2_OC);    // 外设TIMERx的通道输出配置
-    timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_1,Motor.usLater_Right_Duty); // 通道占空比设置   
-    timer_channel_output_mode_config(TIMER2,TIMER_CH_1,TIMER_OC_MODE_PWM0); // 通道模式---PWM0模式
-    timer_channel_output_shadow_config(TIMER2,TIMER_CH_1,TIMER_OC_SHADOW_DISABLE);  // 不使用输出比较影子寄存器
-
-    // ----------------通道2配置(前左)----------------
-    timer_channel_output_config(TIMER2,TIMER_CH_2,&myTIMER2_OC);    // 外设TIMERx的通道输出配置
-    timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_2,Motor.usFront_Left_Duty); // 通道占空比设置
-    timer_channel_output_mode_config(TIMER2,TIMER_CH_2,TIMER_OC_MODE_PWM0); // 通道模式---PWM0模式
-    timer_channel_output_shadow_config(TIMER2,TIMER_CH_2,TIMER_OC_SHADOW_DISABLE);  // 不使用输出比较影子寄存器
-
-    // ----------------通道1配置(前右)----------------
-    timer_channel_output_config(TIMER2,TIMER_CH_3,&myTIMER2_OC);    // 外设TIMERx的通道输出配置
-    timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_3,Motor.usFront_Right_Duty); // 通道占空比设置   
-    timer_channel_output_mode_config(TIMER2,TIMER_CH_3,TIMER_OC_MODE_PWM0); // 通道模式---PWM0模式
-    timer_channel_output_shadow_config(TIMER2,TIMER_CH_3,TIMER_OC_SHADOW_DISABLE);  // 不使用输出比较影子寄存器
-
-    timer_enable(TIMER2);    // 使能定时器2
+    HAL_GPIO_WritePin(GPIOE, FRONT_LEFT_AIN1, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOE, FRONT_LEFT_AIN2, GPIO_PIN_RESET);
 }
 
 /*
-* @function: Motor_GPIO_Init
+* @function: Motor_Front_Right_Set_Forward
 * @param: None
 * @retval: None
-* @brief: 电机方向控制引脚初始化
+* @brief: 右前轮正转
 */
-static void Motor_GPIO_Init(void)
+static void Motor_Front_Right_Set_Forward(void)
 {
-    rcu_periph_clock_enable(RCU_GPIOA);
-    rcu_periph_clock_enable(RCU_GPIOB);
+    HAL_GPIO_WritePin(GPIOD, FRONT_RIGHT_BIN1, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOD, FRONT_RIGHT_BIN2, GPIO_PIN_RESET);    
+}
 
-    /* 后左 正转 */
-    gpio_init(GPIOA,GPIO_MODE_OUT_PP,GPIO_OSPEED_50MHZ,LATER_LEFT_BIN1);  // PA4  
-    gpio_init(GPIOA,GPIO_MODE_OUT_PP,GPIO_OSPEED_50MHZ,LATER_LEFT_BIN2);  // PA5 
-    gpio_bit_write(GPIOA, LATER_LEFT_BIN1,RESET); 
-    gpio_bit_write(GPIOA, LATER_LEFT_BIN2,SET);  
+/*
+* @function: Motor_Later_Left_Set_Forward
+* @param: None
+* @retval: None
+* @brief: 左后轮正转
+*/
+static void Motor_Later_Left_Set_Forward(void)
+{
+    HAL_GPIO_WritePin(GPIOE, LATER_LEFT_BIN1, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOE, LATER_LEFT_BIN2, GPIO_PIN_SET);    
+}
 
-    /* 后右 正转 */
-    gpio_init(GPIOB,GPIO_MODE_OUT_PP,GPIO_OSPEED_50MHZ,LATER_RIGHT_AIN1);  // PB8 
-    gpio_init(GPIOB,GPIO_MODE_OUT_PP,GPIO_OSPEED_50MHZ,LATER_RIGHT_AIN2);  // PB9 
-    gpio_bit_write(GPIOB, LATER_RIGHT_AIN1,RESET); 
-    gpio_bit_write(GPIOB, LATER_RIGHT_AIN2,SET);  
+/*
+* @function: Motor_Later_Right_Set_Forward
+* @param: None
+* @retval: None
+* @brief: 右后轮正转
+*/
+static void Motor_Later_Right_Set_Forward(void)
+{
+    HAL_GPIO_WritePin(GPIOE, LATER_RIGHT_AIN1, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOE, LATER_RIGHT_AIN2, GPIO_PIN_SET);     
+}
 
-    /* 前左 正转 */
-    gpio_init(GPIOB,GPIO_MODE_OUT_PP,GPIO_OSPEED_50MHZ,FRONT_LEFT_AIN1);  // PA4  
-    gpio_init(GPIOB,GPIO_MODE_OUT_PP,GPIO_OSPEED_50MHZ,FRONT_LEFT_AIN2);  // PA5 
-    gpio_bit_write(GPIOB, FRONT_LEFT_AIN1,SET); 
-    gpio_bit_write(GPIOB, FRONT_LEFT_AIN2,RESET);  
+/*
+* @function: Motor_Front_Left_Set_Reverse
+* @param: None
+* @retval: None
+* @brief: 左前轮反转
+*/
+static void Motor_Front_Left_Set_Reverse(void)
+{
+    HAL_GPIO_WritePin(GPIOE, FRONT_LEFT_AIN1, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOE, FRONT_LEFT_AIN2, GPIO_PIN_SET);    
+}
 
-    /* 前右 正转 */
-    gpio_init(GPIOB,GPIO_MODE_OUT_PP,GPIO_OSPEED_50MHZ,FRONT_RIGHT_BIN1);  // PB8 
-    gpio_init(GPIOB,GPIO_MODE_OUT_PP,GPIO_OSPEED_50MHZ,FRONT_RIGHT_BIN2);  // PB9
-    gpio_bit_write(GPIOB, FRONT_RIGHT_BIN1,SET); 
-    gpio_bit_write(GPIOB, FRONT_RIGHT_BIN2,RESET);        
+/*
+* @function: Motor_Front_Right_Set_Reverse
+* @param: None
+* @retval: None
+* @brief: 右前轮反转
+*/
+static void Motor_Front_Right_Set_Reverse(void)
+{
+    HAL_GPIO_WritePin(GPIOD, FRONT_RIGHT_BIN1, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOD, FRONT_RIGHT_BIN2, GPIO_PIN_SET);    
+}
+
+/*
+* @function: Motor_Later_Left_Set_Reverse
+* @param: None
+* @retval: None
+* @brief: 左后轮反转
+*/
+static void Motor_Later_Left_Set_Reverse(void)
+{
+    HAL_GPIO_WritePin(GPIOE, LATER_LEFT_BIN1, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOE, LATER_LEFT_BIN2, GPIO_PIN_RESET);    
+}
+
+/*
+* @function: Motor_Later_Right_Set_Reverse
+* @param: None
+* @retval: None
+* @brief: 右后轮反转
+*/
+static void Motor_Later_Right_Set_Reverse(void)
+{
+    HAL_GPIO_WritePin(GPIOE, LATER_RIGHT_AIN1, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOE, LATER_RIGHT_AIN2, GPIO_PIN_RESET);     
+}
+
+/*
+* @function: Motor_Stop
+* @param: None
+* @retval: None
+* @brief: 自由停车
+*/
+static void Motor_Stop(void)
+{
+    HAL_GPIO_WritePin(GPIOE, FRONT_LEFT_AIN1, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOE, FRONT_LEFT_AIN2, GPIO_PIN_RESET); 
+
+    HAL_GPIO_WritePin(GPIOD, FRONT_RIGHT_BIN1, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOD, FRONT_RIGHT_BIN2, GPIO_PIN_RESET);
+
+    HAL_GPIO_WritePin(GPIOE, LATER_LEFT_BIN1, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOE, LATER_LEFT_BIN2, GPIO_PIN_RESET); 
+
+    HAL_GPIO_WritePin(GPIOE, LATER_RIGHT_AIN1, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOE, LATER_RIGHT_AIN2, GPIO_PIN_RESET);     
+}
+
+/*
+* @function: Motor_Brake
+* @param: None
+* @retval: None
+* @brief: 刹车
+*/
+static void Motor_Brake(void)
+{
+    Motor_Set_Duty(Motor_FRONT_LEFT,0);
+    Motor_Set_Duty(Motor_FRONT_RIGHT,0);
+    Motor_Set_Duty(Motor_LATER_LEFT,0);
+    Motor_Set_Duty(Motor_LATER_RIGHT,0);
+}
+
+/*
+* @function: Motor_Set_Duty
+* @param: motor -> 哪个电机 duty -> 占空比设置(范围0%~101%)
+* @retval: None
+* @brief: 设置电机占空比
+*/
+static void Motor_Set_Duty(Motor_Mark_t motor, float duty)
+{
+    switch(motor)
+    {
+        case Motor_FRONT_LEFT:
+        {
+            Motor.usFront_Left_Duty = (TIM4->ARR + 1) * (duty / 100.0f);
+            TIM4->CCR3 = Motor.usFront_Left_Duty;
+            break;
+        }
+        case Motor_FRONT_RIGHT:
+        {
+            Motor.usFront_Right_Duty = (TIM4->ARR + 1) * (duty / 100.0f);
+            TIM4->CCR4 = Motor.usFront_Right_Duty;
+            break;
+        }
+        case Motor_LATER_LEFT:
+        {
+            Motor.usLater_Left_Duty = (TIM4->ARR + 1) * (duty / 100.0f);
+            TIM4->CCR1 = Motor.usLater_Left_Duty;
+            break;
+        }
+        case Motor_LATER_RIGHT:
+        {
+            Motor.usLater_Right_Duty = (TIM4->ARR + 1) * (duty / 100.0f);
+            TIM4->CCR2 = Motor.usLater_Right_Duty;
+            break;
+        }
+        default:break;                        
+    }
+#if LOG_DEBUG
+    printf("TIM4_CH1:%d  TIM4_CH2:%d\r\nTIM4_CH3:%d  TIM4_CH4:%d\r\n", TIM4->CCR1,TIM4->CCR2,TIM4->CCR3,TIM4->CCR4);
+#endif
+}
+
+/*
+* @function: Motor_Fre_And_Duty_compute
+* @param: None
+* @retval: None
+* @brief: 实际电机频率占空比计算
+*/
+static inline void Motor_Fre_And_Duty_compute(void)
+{
+    uint16_t Timer4_fre = 0;
+    float T4_CH1_Duty = 0, T4_CH2_Duty = 0, T4_CH3_Duty = 0, T4_CH4_Duty = 0;
+
+    Timer4_fre = 72000000 / (TIM4->PSC + 1) / (TIM4->ARR + 1);  // 计算频率
+	Motor.usMotor_Fre = Timer4_fre;
+    T4_CH1_Duty = ((float)TIM4->CCR1 / TIM4->ARR) * 100;    // 计算占空比
+    T4_CH2_Duty = ((float)TIM4->CCR2 / TIM4->ARR) * 100;
+    T4_CH3_Duty = ((float)TIM4->CCR3 / TIM4->ARR) * 100;
+    T4_CH4_Duty = ((float)TIM4->CCR4 / TIM4->ARR) * 100;
+
+		Public.UsartPrintf(huart_debug,"电机频率：%d\r\n",Motor.usMotor_Fre);
+	Public.UsartPrintf(huart_debug,"前左：%.0f 前右：%.0f 后左：%.0f 后右：%.0f\r\n\r\n",T4_CH3_Duty,T4_CH4_Duty,T4_CH1_Duty,T4_CH2_Duty);
+#if LOG_DEBUG
+    printf("CH1:%.0f  CH2:%.0f\r\n CH3:%.0f CH4:%.0f\r\n", T4_CH1_Duty, T4_CH2_Duty, T4_CH3_Duty, T4_CH4_Duty);
+#endif
+}
+
+/*
+* @function: Motor_Clamp
+* @param: None
+* @retval: None
+* @brief: 限幅函数
+*/
+static double Motor_Clamp(double value, double min_value, double max_value)
+{
+    if (value < min_value)
+    {
+        return min_value;
+    }
+    else if (value > max_value)
+    {
+        return max_value;
+    }
+    return value;
 }
 ```
 
 {% endfolding %}
 
-{% folding, Key.h %}
+> 正转的话可以：
+>
+> ```cpp
+> // 正转
+> i = 20;
+> Motor.Motor_Front_Left_Set_Forward();
+> Motor.Motor_Front_Right_Set_Forward();
+> Motor.Motor_Later_Left_Set_Forward();
+> Motor.Motor_Later_Right_Set_Forward();
+> 
+> Motor.Motor_Set_Duty(Motor_FRONT_LEFT, i);
+> Motor.Motor_Set_Duty(Motor_FRONT_RIGHT, i);
+> Motor.Motor_Set_Duty(Motor_LATER_LEFT, i);
+> Motor.Motor_Set_Duty(Motor_LATER_RIGHT, i);
+> ```
+>
+> 反转：
+>
+> ```cpp
+> // 反转
+> i = -20;
+> Motor.Motor_Front_Left_Set_Reverse();
+> Motor.Motor_Front_Right_Set_Reverse();
+> Motor.Motor_Later_Left_Set_Reverse();
+> Motor.Motor_Later_Right_Set_Reverse();
+> 
+> Motor.Motor_Set_Duty(Motor_FRONT_LEFT, -i);
+> Motor.Motor_Set_Duty(Motor_FRONT_RIGHT, -i);
+> Motor.Motor_Set_Duty(Motor_LATER_LEFT, -i);
+> Motor.Motor_Set_Duty(Motor_LATER_RIGHT, -i);
+> ```
+>
+> 刹车(清除占空比即可方向引脚无需改变)：
+>
+> ```cpp
+> Motor.Motor_Brake();
+> ```
+>
+> 自由停车(方向引脚全部拉低PWM引脚无需改变)：
+>
+> ```cpp
+> Motor.Motor_Stop();
+> ```
+
+
+
+##### 速度闭环控制(位置式PID)
+
+> 编码器数值的获取及其数值实际意义： `电机转速=编码器读数*当前频率(单位s)/电机减速比/编码器精度/倍频数(r/s)`
+>
+> 闭环控制的意义： `有反馈的控制`
+>
+> 速度闭环控制的过程： `根据当前速度反馈，调整PWM值`
+
+- MX配置
+
+后右轮：
+
+| 驱动板 | 单片机(定时器接口) |
+| :----: | :----------------: |
+|  E1A   |   TIM8_CH1(PC6)    |
+|  E1B   |   TIM8_CH2(PC7)    |
+
+后左轮：
+
+| 驱动板 | 单片机(定时器接口) |
+| :----: | :----------------: |
+|  E2A   |   TIM5_CH1(PA0)    |
+|  E2B   |   TIM5_CH2(PA1)    |
+
+前左轮：
+
+| 驱动板 | 单片机(定时器接口) |
+| :----: | :----------------: |
+|  E1A   |   TIM8_CH1(PC6)    |
+|  E1B   |   TIM8_CH2(PC7)    |
+
+前右轮：
+
+| 驱动板 | 单片机(定时器接口) |
+| :----: | :----------------: |
+|  E2A   |   TIM2_CH1(PA15)   |
+|  E2B   |   TIM2_CH2(PB3)    |
+
+
+
+编码器需要用一个定时器来进行输入捕获计算速度反馈给pid调速，需要开中断(程序里暂时没用到中断但是还是开启了)，定时器6用作普通计数功能开中断
+
+1. 打开编码器模式，设置ARR，设置滤波器为6，TI1和TI2都计数，然后引脚都设置为上拉
+
+{% gallery %}
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230704215645.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230704232334.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230704232347.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230704232706.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230706154016.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230706154150.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230706154306.webp)
+
+{% endgallery %}
+
+
+
+
+- 测试程序编写
+
+> 首先先简单调试一下看看能不能读取到编码器的值，设置2ms读取打印在上位机，用手去转动轮子，如果向前转读出的值是负数那就需要在前面加一个 `-` 这样才合理，向后转是负数
+
+> 把清0屏蔽掉，然后在轮子那夹张纸片啥的当做标识，手动旋转一圈看看大概跟理论旋转一圈的值是不是差不多，我手动转一圈大概是1059，理论是 `减速比30，霍尔线13，倍频是4，那一圈脉冲数就是 30*13*4=1040`，可以看到很接近(有误差是正常的)
+
+```cpp
+// 初始化
+static void PID_Timer_Init(void)
+{
+    HAL_TIM_Encoder_Start(&htim5,TIM_CHANNEL_ALL);//开启定时器5
+    HAL_TIM_Encoder_Start(&htim8,TIM_CHANNEL_ALL);//开启定时器8
+    HAL_TIM_Base_Start_IT(&htim5);				//开启定时器2 中断
+    HAL_TIM_Base_Start_IT(&htim8);                //开启定时器4 中断
+}
+
+// 测试代码
+static void TasksHandle_2MS(void)
+{
+  Motor.Motor_Brake();	// 刹车(因为测试我们手动转轮子即可)
+  // 1.保存计数器值
+  PID.Encoder1Count = (short)__HAL_TIM_GET_COUNTER(&htim5) * -1;	// 我的左轮向前是负数所以需要*-1转为正数
+  PID.Encoder2Count = (short)__HAL_TIM_GET_COUNTER(&htim8);
+  // 2.清零计数器值
+  __HAL_TIM_SET_COUNTER(&htim5, 0);
+  __HAL_TIM_SET_COUNTER(&htim8, 0);
+  Public.UsartPrintf(huart_debug, "Encoder1Count:%d\r\n", PID.Encoder1Count);	// 打印调试
+  Public.UsartPrintf(huart_debug, "Encoder2Count:%d\r\n", PID.Encoder2Count);
+}
+```
+
+> 转速计算测试，2ms太快了，我们定时10ms进行计算套公式就行了，注意要强制类型转换为float，否则打印结果只有整数部分小数部分丢失！
+
+```cpp
+//在上面结构体里添加两个变量
+float Motor2Speed;  // 电机2速度(s)
+float Motor1Speed;  // 电机1速度(s)
+
+// 然后在上面基础上改一下
+static void TasksHandle_10MS(void)
+{
+  Motor.Motor_Brake();
+  // 1.保存计数器值
+  PID.Encoder1Count = (short)__HAL_TIM_GET_COUNTER(&htim5) * -1;
+  PID.Encoder2Count = (short)__HAL_TIM_GET_COUNTER(&htim8);
+  // 2.清零计数器值
+  __HAL_TIM_SET_COUNTER(&htim5, 0);
+  __HAL_TIM_SET_COUNTER(&htim8, 0);
+
+  PID.Motor1Speed = (float)PID.Encoder1Count * 100 / 20 / 13 / 4;  // 因为是每秒多少转所以需要把10ms转为s
+  PID.Motor2Speed = (float)PID.Encoder2Count * 100 / 20 / 13 / 4;
+
+  Public.UsartPrintf(huart_debug, "Motor1Speed:%.2f\r\n", PID.Motor1Speed);
+  Public.UsartPrintf(huart_debug, "Motor2Speed:%.2f\r\n", PID.Motor2Speed);  
+}
+```
+
+> 添加定时器，在定时器里进行每10ms获取一次计数值
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230705105939.webp)
+
+```cpp
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) // 定时器中断回调函数
+{
+	if (htim == &htim7)
+	{
+		static uint16_t Encode_Cnt;
+        
+		Encode_Cnt++;
+		
+		if ((Encode_Cnt % 10) == 0)
+		{
+			// 1.保存计数器值
+			PID.Encoder1Count = (short)__HAL_TIM_GET_COUNTER(&htim5) * -1;
+			PID.Encoder2Count = (short)__HAL_TIM_GET_COUNTER(&htim8);
+			// 2.清零计数器值
+			__HAL_TIM_SET_COUNTER(&htim5, 0);
+			__HAL_TIM_SET_COUNTER(&htim8, 0);
+
+			PID.Motor1Speed = (float)PID.Encoder1Count * 100 / 20 / 13 / 4; // 因为是每秒多少转所以需要把10ms转为s
+			PID.Motor2Speed = (float)PID.Encoder2Count * 100 / 20 / 13 / 4;
+			Encode_Cnt = 0;
+		}
+		System.Task_Marks_Handler();
+	}
+}
+```
+
+> 如果给占空比为正数，但是车是倒着走就需要在程序里修改，把传入后的占空比前面加一个 `-` 即可，需要注意要先进行占空比正负判断来决定小车是往前还是往后，再把负数改为正数再赋值给CCRx寄存器
 
 ```cpp
 /*
- * @description: 按键功能执行
- * @return {*}
- * @Date: 2023-05-09 09:59:38
- */
-// 按键功能执执行
-void vKEY_Comply_Function(void)
+* @function: Motor_Set_Duty
+* @param: motor -> 哪个电机 duty -> 占空比设置(范围0%~100%)
+* @retval: None
+* @brief: 设置电机占空比
+*/
+static inline void Motor_Set_Duty(Motor_Mark_t motor, float duty)
 {
-    static uint8_t Flag;
-    if(MyKey.Key_Down_State[0])
-    {
-        MyKey.Key_Down_State[0] = 0;
+    uint16_t CH1_pulse,CH2_pulse,CH3_pulse,CH4_pulse;
 
-        switch(Flag)
+    switch(motor)
+    {
+        case Motor_FRONT_LEFT:
         {
-            case 0:
+            if (duty < 0)
             {
-                Motor.usLater_Left_Duty = 2700; // 50%
-                Motor.usLater_Right_Duty = 2700;
-                Motor.usFront_Left_Duty = 2700;
-                Motor.usFront_Right_Duty = 2700;                
-                Flag = 1;
-                break;
+                Motor_Set_Reverse(Motor_FRONT_LEFT);
+                duty = -duty;   // 取反转为正数
             }
-            case 1:
+            else
             {
-                Motor.usLater_Left_Duty = 2160; // 40%
-                Motor.usLater_Right_Duty = 2160;
-                Motor.usFront_Left_Duty = 2160;
-                Motor.usFront_Right_Duty = 2160;                    
-                Flag = 2;
-                break;
+                Motor_Set_Forward(Motor_FRONT_LEFT);
             }
-            case 2:
+            CH1_pulse = (TIM4->ARR + 1) * (float)(duty / 100.0f);
+            TIM4->CCR3 = CH1_pulse;
+            break;
+        }
+        case Motor_FRONT_RIGHT:
+        {
+            if (duty < 0)
             {
-                Motor.usLater_Left_Duty = 1620; // 30%
-                Motor.usLater_Right_Duty = 1620;
-                Motor.usFront_Left_Duty = 1620;
-                Motor.usFront_Right_Duty = 1620;                
-                Flag = 3;
-                break;
+                Motor_Set_Reverse(Motor_FRONT_RIGHT);
+                duty = -duty;   // 取反转为正数
             }
-            case 3:
+            else
             {
-                Motor.usLater_Left_Duty = 1080; // 20%
-                Motor.usLater_Right_Duty = 1080;
-                Motor.usFront_Left_Duty = 1080;
-                Motor.usFront_Right_Duty = 1080;                
-                Flag = 4;
-                break;
-            } 
-            case 4:
+                Motor_Set_Forward(Motor_FRONT_RIGHT);
+            }            
+            CH2_pulse = (TIM4->ARR + 1) * (float)(duty / 100.0f);
+            TIM4->CCR4 = CH2_pulse;
+            break;
+        }
+        case Motor_LATER_LEFT:
+        {
+            if (duty < 0)
             {
-                Motor.usLater_Left_Duty = 540; // 10%
-                Motor.usLater_Right_Duty = 540;
-                Motor.usFront_Left_Duty = 540;
-                Motor.usFront_Right_Duty = 540;                
-                Flag = 5;
-                break;
+                Motor_Set_Reverse(Motor_LATER_LEFT);
+                duty = -duty;   // 取反转为正数
             }
-            case 5: // 0%
+            else
             {
-                Motor.usLater_Left_Duty = 0;
-                Motor.usLater_Right_Duty = 0;
-                Motor.usFront_Left_Duty = 0;
-                Motor.usFront_Right_Duty = 0;                
-                Flag = 0;
-                break;
+                Motor_Set_Forward(Motor_LATER_LEFT);
+            }           
+            CH3_pulse = (TIM4->ARR + 1) * (float)(duty / 100.0f);
+            TIM4->CCR1 = CH3_pulse;
+            break;
+        }
+        case Motor_LATER_RIGHT:
+        {
+            if (duty < 0)
+            {
+                Motor_Set_Reverse(Motor_LATER_RIGHT);
+                duty = -duty;   // 取反转为正数
             }
-            default : Flag = 0;break;                                               
-        }     
-        // 调整速度
-        timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_0,Motor.usLater_Left_Duty);
-        timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_1,Motor.usLater_Right_Duty);
-        timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_2,Motor.usFront_Left_Duty);
-        timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_3,Motor.usFront_Right_Duty);        
+            else
+            {
+                Motor_Set_Forward(Motor_LATER_RIGHT);
+            }            
+            CH4_pulse = (TIM4->ARR + 1) * (float)(duty / 100.0f);
+            TIM4->CCR2 = CH4_pulse;
+            break;
+        }
+        default:break;                        
     }
+#if LOG_DEBUG
+    printf("TIM4_CH1:%d  TIM4_CH2:%d\r\nTIM4_CH3:%d  TIM4_CH4:%d\r\n", TIM4->CCR1,TIM4->CCR2,TIM4->CCR3,TIM4->CCR4);
+#endif
 }
 ```
 
-{% endfolding %}
+```cpp
+Motor.usLater_Left_Duty = 30;
+Motor.usLater_Right_Duty = 30;
+Motor.Motor_Set_Duty(Motor_LATER_LEFT, Motor.usLater_Left_Duty);
+Motor.Motor_Set_Duty(Motor_LATER_RIGHT, Motor.usLater_Right_Duty);
+```
+
+> 简单的闭环速度控制，把转速控制在 `2.9-3.1`转每秒
+
+```cpp
+static void TasksHandle_100MS(void)
+{
+  if (Encoder.Motor1Speed < 2.9)
+  {
+    Motor.usLater_Left_Duty++;
+  }
+  if (Encoder.Motor1Speed > 3.1)
+  {
+    Motor.usLater_Left_Duty--;
+  }
+
+  if (Encoder.Motor2Speed < 2.9)
+  {
+    Motor.usLater_Right_Duty++;
+  }
+  if (Encoder.Motor2Speed > 3.1)
+  {
+    Motor.usLater_Right_Duty--;
+  }  
+
+  Motor.Motor_Set_Duty(Motor_LATER_LEFT,Motor.usLater_Left_Duty);
+	Motor.Motor_Set_Duty(Motor_LATER_RIGHT,Motor.usLater_Right_Duty);
+  
+  Public.UsartPrintf(huart_debug, "Motor1Speed:%.2f duty1:%d\r\n", Encoder.Motor1Speed,Motor.usLater_Left_Duty);
+  Public.UsartPrintf(huart_debug, "Motor2Speed:%.2f duty2:%d\r\n\r\n", Encoder.Motor2Speed,Motor.usLater_Right_Duty);      
+}
+```
+
+转速控制到我们想要的范围，但是我们并不满意、能够看出来控制的速度很慢，给电机一些阻力电机至少要2-3秒能够调整过来，这在一些场景是不允许的。
+
+理想的控制效果是：在电机转速很慢的是时候能快速调整，在电机一直转的不能达到要求时候能够更快速度调整
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230705143528.webp)
+
+> PID控制写在【PID学习-附1-位置式PID】
+
+
+
+- 最终程序编写
+
+
 
 
 
@@ -779,7 +1346,7 @@ void vKEY_Comply_Function(void)
 
 - 驱动芯片介绍
 
-![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/d353c456db466935c48270065431af21.webp)
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230704185037.webp)
 
 > -  L298N是ST公司的一款电机驱动芯片，也是集成了双H桥
 > - 电机驱动电压3~48V；可持续工作的输出电流为2A，峰值可达3A
@@ -1904,7 +2471,571 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 
 
+## 附1-上位机使用
+
+### MiniBalance上位机
+
+直接把 `DataScope_DP.h` 和 `DataScope_DP.c` 加入工程即可，然后调用串口1进行发送数据，间隔50ms即可
+
+{% folding, DataScope_DP.h %}
+
+```cpp
+#ifndef __DATA_PRTOCOL_H
+#define __DATA_PRTOCOL_H
+
+extern unsigned char DataScope_OutPut_Buffer[42]; // 待发送帧数据缓存区
+
+void DataScope_Get_Channel_Data(float Data, unsigned char Channel); // 写通道数据至 待发送帧数据缓存区
+
+unsigned char DataScope_Data_Generate(unsigned char Channel_Number); // 发送帧数据生成函数
+
+#endif
+```
+
+{% endfolding %}
+
+{% folding, DataScope_DP.c %}
+
+```cpp
+#include "DataScope_DP.h"
+unsigned char DataScope_OutPut_Buffer[42] = {0}; // 串口发送缓冲区
+
+// 函数说明：将单精度浮点数据转成4字节数据并存入指定地址
+// 附加说明：用户无需直接操作此函数
+// target:目标单精度数据
+// buf:待写入数组
+// beg:指定从数组第几个元素开始写入
+// 函数无返回
+void Float2Byte(float *target, unsigned char *buf, unsigned char beg)
+{
+	unsigned char *point;
+	point = (unsigned char *)target; // 得到float的地址
+	buf[beg] = point[0];
+	buf[beg + 1] = point[1];
+	buf[beg + 2] = point[2];
+	buf[beg + 3] = point[3];
+}
+
+// 函数说明：将待发送通道的单精度浮点数据写入发送缓冲区
+// Data：通道数据
+// Channel：选择通道（1-10）
+// 函数无返回
+void DataScope_Get_Channel_Data(float Data, unsigned char Channel)
+{
+	if ((Channel > 10) || (Channel == 0))
+		return; // 通道个数大于10或等于0，直接跳出，不执行函数
+	else
+	{
+		switch (Channel)
+		{
+		case 1:
+			Float2Byte(&Data, DataScope_OutPut_Buffer, 1);
+			break;
+		case 2:
+			Float2Byte(&Data, DataScope_OutPut_Buffer, 5);
+			break;
+		case 3:
+			Float2Byte(&Data, DataScope_OutPut_Buffer, 9);
+			break;
+		case 4:
+			Float2Byte(&Data, DataScope_OutPut_Buffer, 13);
+			break;
+		case 5:
+			Float2Byte(&Data, DataScope_OutPut_Buffer, 17);
+			break;
+		case 6:
+			Float2Byte(&Data, DataScope_OutPut_Buffer, 21);
+			break;
+		case 7:
+			Float2Byte(&Data, DataScope_OutPut_Buffer, 25);
+			break;
+		case 8:
+			Float2Byte(&Data, DataScope_OutPut_Buffer, 29);
+			break;
+		case 9:
+			Float2Byte(&Data, DataScope_OutPut_Buffer, 33);
+			break;
+		case 10:
+			Float2Byte(&Data, DataScope_OutPut_Buffer, 37);
+			break;
+		}
+	}
+}
+
+// 函数说明：生成 DataScopeV1.0 能正确识别的帧格式
+// Channel_Number，需要发送的通道个数
+// 返回发送缓冲区数据个数
+// 返回0表示帧格式生成失败
+unsigned char DataScope_Data_Generate(unsigned char Channel_Number)
+{
+	if ((Channel_Number > 10) || (Channel_Number == 0))
+	{
+		return 0;
+	} // 通道个数大于10或等于0，直接跳出，不执行函数
+	else
+	{
+		DataScope_OutPut_Buffer[0] = '$'; // 帧头
+
+		switch (Channel_Number)
+		{
+		case 1:
+			DataScope_OutPut_Buffer[5] = 5;
+			return 6;
+		case 2:
+			DataScope_OutPut_Buffer[9] = 9;
+			return 10;
+		case 3:
+			DataScope_OutPut_Buffer[13] = 13;
+			return 14;
+		case 4:
+			DataScope_OutPut_Buffer[17] = 17;
+			return 18;
+		case 5:
+			DataScope_OutPut_Buffer[21] = 21;
+			return 22;
+		case 6:
+			DataScope_OutPut_Buffer[25] = 25;
+			return 26;
+		case 7:
+			DataScope_OutPut_Buffer[29] = 29;
+			return 30;
+		case 8:
+			DataScope_OutPut_Buffer[33] = 33;
+			return 34;
+		case 9:
+			DataScope_OutPut_Buffer[37] = 37;
+			return 38;
+		case 10:
+			DataScope_OutPut_Buffer[41] = 41;
+			return 42;
+		}
+	}
+	return 0;
+}
+```
+
+{% endfolding %}
+
+> 测试代码
+
+```cpp
+/*
+* @function: Motor_Fre_And_Duty_compute
+* @param: None
+* @retval: None
+* @brief: 实际电机频率占空比计算
+*/
+static inline void Motor_Fre_And_Duty_compute(void)
+{
+    uint8_t Send_Count; //串口需要发送的数据个数
+    uint16_t Timer4_fre = 0;
+    float T4_CH1_Duty = 0, T4_CH2_Duty = 0, T4_CH3_Duty = 0, T4_CH4_Duty = 0;
+
+    Timer4_fre = 72000000 / (TIM4->PSC + 1) / (TIM4->ARR + 1);  // 计算频率
+    Motor.usMotor_Fre = Timer4_fre;
+    T4_CH1_Duty = ((float)TIM4->CCR1 / TIM4->ARR) * 100;    // 计算占空比
+    T4_CH2_Duty = ((float)TIM4->CCR2 / TIM4->ARR) * 100;
+    T4_CH3_Duty = ((float)TIM4->CCR3 / TIM4->ARR) * 100;
+    T4_CH4_Duty = ((float)TIM4->CCR4 / TIM4->ARR) * 100;
+    // 发送到上位机
+    DataScope_Get_Channel_Data(T4_CH1_Duty, 1); // 上位机通道1
+    DataScope_Get_Channel_Data(T4_CH2_Duty, 2); // 上位机通道2
+    DataScope_Get_Channel_Data(T4_CH3_Duty, 3); // 上位机通道3
+    DataScope_Get_Channel_Data(T4_CH4_Duty, 4); // 上位机通道4
+    Send_Count = DataScope_Data_Generate(4);
+    HAL_UART_Transmit(&huart1, DataScope_OutPut_Buffer, Send_Count, 300);   // 调用库函数发送
+}
+```
+
+> 纵轴显示模式--自动里程(递增)；横轴显示模式--自动点距(缩进)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230704152829.webp)
+
+
+
+### 匿名上位机
+
+我使用的版本为 `V7.2.2.8版本`
+
+> 曲线显示速度波形方便观察数据
+
+> 先看通信协议
+
+匿名上位机DATA 数据内容中的数据，采用 `小端模式`，低字节在前，高字节在后。 什么意思呢，这里的小端模式跟上文介绍的单片机的大小端模式无关，不是指同一个东西，这里的小端模式理解为我们向上位机发送数据的时候要先发送数据的低字节，再发送数据的高字节，因此我们在把DATA区的数据放到数组data_to_send里是要先放低字节，拿上文中的数据1000为例要先放1110 1000 再放 0000 0011， `即对于小端模式的单片机先调用BYTE0(1000) ，再调用BYTE1(1000)，而对于大端模式的单片机先调用BYTE1(1000)，再调用BYTE0(1000)`。因此对于本例传递4个int16类型的数据区代码如下：
+
+【大端模式】
+
+```cpp
+data_to_send[_cnt++] = BYTE1(_a);
+data_to_send[_cnt++] = BYTE0(_a);
+
+data_to_send[_cnt++] = BYTE1(_b);
+data_to_send[_cnt++] = BYTE0(_b);
+
+data_to_send[_cnt++] = BYTE1(_c);
+data_to_send[_cnt++] = BYTE0(_c);
+
+data_to_send[_cnt++] = BYTE1(_d);
+data_to_send[_cnt++] = BYTE0(_d);
+```
+
+【小端模式】
+
+```cpp
+data_to_send[_cnt++] = BYTE0(_a);
+data_to_send[_cnt++] = BYTE1(_a);
+
+data_to_send[_cnt++] = BYTE0(_b);
+data_to_send[_cnt++] = BYTE1(_b);
+
+data_to_send[_cnt++] = BYTE0(_c);
+data_to_send[_cnt++] = BYTE1(_c);
+
+data_to_send[_cnt++] = BYTE0(_d);
+data_to_send[_cnt++] = BYTE1(_d);
+```
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230705161139.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230705161148.webp)
+
+> 对16位，32位数据进行拆分,拆分后我们按照协议要求发送数据就可以了
+>
+> ```cpp
+> //需要发送16位,32位数据，对数据拆分，之后每次发送单个字节
+> //拆分过程：对变量dwTemp 去地址然后将其转化成char类型指针，最后再取出指针所指向的内容
+> #define BYTE0(dwTemp)  (*(char *)(&dwTemp))	// 低8位（最低有效字节）
+> #define BYTE1(dwTemp)  (*((char *)(&dwTemp) + 1))	// 第二个8位（次低有效字节）
+> #define BYTE2(dwTemp)  (*((char *)(&dwTemp) + 2))	// 第三个8位（次高有效字节）
+> #define BYTE3(dwTemp)  (*((char *)(&dwTemp) + 3))	// 最高8位（最高有效字节）
+> ```
+
+{% folding, NiMing.h %}
+
+```cpp
+#ifndef __NIMING_H
+#define __NIMING_H
+
+//需要发送16位,32位数据，对数据拆分，之后每次发送单个字节
+//拆分过程：对变量dwTemp 去地址然后将其转化成char类型指针，最后再取出指针所指向的内容
+#define BYTE0(dwTemp)  (*(char *)(&dwTemp))
+#define BYTE1(dwTemp)  (*((char *)(&dwTemp) + 1))
+#define BYTE2(dwTemp)  (*((char *)(&dwTemp) + 2))
+#define BYTE3(dwTemp)  (*((char *)(&dwTemp) + 3))
+
+typedef struct
+{
+    uint8_t data_to_send[100];  // 发送字符串
+    void (*ANO_DT_Send_F1)(uint16_t, uint16_t, uint16_t, uint16_t); // 通过F1帧发送4个uint16类型的数据
+    void (*ANO_DT_Send_F2)(int16_t, int16_t, int16_t, int16_t); // 通过F2帧发送4个int16类型的数据
+    void (*ANO_DT_Send_F3)(int16_t, int16_t, int32_t);      //  通过F3帧发送2个int16类型和1个int32类型的数据
+}NiMing_t;
+
+
+extern NiMing_t NiMing;
+
+#endif
+```
+
+{% endfolding %}
+
+{% folding, NiMing.c %}
+
+```cpp
+/***************************************************************************
+ * File: NiMing.c
+ * Author: Luckys.
+ * Date: 2023/06/30
+ * description: 匿名上位机
+****************************************************************************/
+#include "AllHead.h"
+
+/*====================================static function declaration area BEGIN====================================*/
+
+static void ANO_DT_Send_F1(uint16_t, uint16_t, uint16_t, uint16_t);
+static void ANO_DT_Send_F2(int16_t, int16_t, int16_t, int16_t);
+static void ANO_DT_Send_F3(int16_t, int16_t, int32_t);
+
+/*====================================static function declaration area   END====================================*/
+
+NiMing_t NiMing = 
+{
+    {0},
+    ANO_DT_Send_F1,
+    ANO_DT_Send_F2,
+    ANO_DT_Send_F3
+};
+
+
+
+/*
+* @function: ANO_DT_Send_F1
+* @param: _a -> 数据1 _b -> 数据2 _c -> 数据3 _d -> 数据4
+* @retval: None
+* @brief: 通过F1帧发送4个uint16类型的数据
+*/
+static void ANO_DT_Send_F1(uint16_t _a, uint16_t _b, uint16_t _c, uint16_t _d)
+{
+    uint8_t _cnt = 0;     // 计数值
+    uint8_t sumcheck = 0; // 和校验
+    uint8_t addcheck = 0; // 附加和校验
+    uint8_t i = 0;
+
+    NiMing.data_to_send[_cnt++] = 0xAA; // 帧头
+    NiMing.data_to_send[_cnt++] = 0xFF; // 目标地址
+    NiMing.data_to_send[_cnt++] = 0xF1; // 功能码
+    NiMing.data_to_send[_cnt++] = 8;    // 数据长度
+    // 单片机为小端模式-低地址存放低位数据，匿名上位机要求先发低位数据，所以先发低地址
+    NiMing.data_to_send[_cnt++] = BYTE0(_a);
+    NiMing.data_to_send[_cnt++] = BYTE1(_a);
+
+    NiMing.data_to_send[_cnt++] = BYTE0(_b);
+    NiMing.data_to_send[_cnt++] = BYTE1(_b);
+
+    NiMing.data_to_send[_cnt++] = BYTE0(_c);
+    NiMing.data_to_send[_cnt++] = BYTE1(_c);
+
+    NiMing.data_to_send[_cnt++] = BYTE0(_d);
+    NiMing.data_to_send[_cnt++] = BYTE1(_d);
+    for (i = 0; i < NiMing.data_to_send[3] + 4; i++)
+    {
+        sumcheck += NiMing.data_to_send[i]; // 和校验
+        addcheck += sumcheck;        // 附加校验
+    }
+    NiMing.data_to_send[_cnt++] = sumcheck;
+    NiMing.data_to_send[_cnt++] = addcheck;
+
+    HAL_UART_Transmit(&huart_debug, NiMing.data_to_send, _cnt, 0xFFFF); // 这里是串口发送函数
+}
+
+/*
+* @function: ANO_DT_Send_F2
+* @param: _a -> 数据1 _b -> 数据2 _c -> 数据3 _d -> 数据4
+* @retval: None
+* @brief: 通过F2帧发送4个int16类型的数据
+*/
+static void ANO_DT_Send_F2(int16_t _a, int16_t _b, int16_t _c, int16_t _d) 
+{
+    uint8_t _cnt = 0;
+    uint8_t sumcheck = 0; // 和校验
+    uint8_t addcheck = 0; // 附加和校验
+    uint8_t i = 0;
+
+    NiMing.data_to_send[_cnt++] = 0xAA;
+    NiMing.data_to_send[_cnt++] = 0xFF;
+    NiMing.data_to_send[_cnt++] = 0xF2;
+    NiMing.data_to_send[_cnt++] = 8; // 数据长度
+    // 单片机为小端模式-低地址存放低位数据，匿名上位机要求先发低位数据，所以先发低地址
+    NiMing.data_to_send[_cnt++] = BYTE0(_a);
+    NiMing.data_to_send[_cnt++] = BYTE1(_a);
+
+    NiMing.data_to_send[_cnt++] = BYTE0(_b);
+    NiMing.data_to_send[_cnt++] = BYTE1(_b);
+
+    NiMing.data_to_send[_cnt++] = BYTE0(_c);
+    NiMing.data_to_send[_cnt++] = BYTE1(_c);
+
+    NiMing.data_to_send[_cnt++] = BYTE0(_d);
+    NiMing.data_to_send[_cnt++] = BYTE1(_d);
+
+    for (i = 0; i < NiMing.data_to_send[3] + 4; i++)
+    {
+        sumcheck += NiMing.data_to_send[i];
+        addcheck += sumcheck;
+    }
+
+    NiMing.data_to_send[_cnt++] = sumcheck;
+    NiMing.data_to_send[_cnt++] = addcheck;
+
+    HAL_UART_Transmit(&huart_debug, NiMing.data_to_send, _cnt, 0xFFFF); // 这里是串口发送函数
+}
+
+/*
+* @function: ANO_DT_Send_F3
+* @param: _a -> 数据1 _b -> 数据2 _c -> 数据3
+* @retval: None
+* @brief: 通过F3帧发送2个int16类型和1个int32类型的数据
+*/
+static void ANO_DT_Send_F3(int16_t _a, int16_t _b, int32_t _c)
+{
+    uint8_t _cnt = 0;
+    uint8_t sumcheck = 0; // 和校验
+    uint8_t addcheck = 0; // 附加和校验
+    uint8_t i = 0;
+
+    NiMing.data_to_send[_cnt++] = 0xAA;
+    NiMing.data_to_send[_cnt++] = 0xFF;
+    NiMing.data_to_send[_cnt++] = 0xF3;
+    NiMing.data_to_send[_cnt++] = 8; // 数据长度
+    // 单片机为小端模式-低地址存放低位数据，匿名上位机要求先发低位数据，所以先发低地址
+    NiMing.data_to_send[_cnt++] = BYTE0(_a);
+    NiMing.data_to_send[_cnt++] = BYTE1(_a);
+
+    NiMing.data_to_send[_cnt++] = BYTE0(_b);
+    NiMing.data_to_send[_cnt++] = BYTE1(_b);
+
+    NiMing.data_to_send[_cnt++] = BYTE0(_c);
+    NiMing.data_to_send[_cnt++] = BYTE1(_c);
+    NiMing.data_to_send[_cnt++] = BYTE2(_c);
+    NiMing.data_to_send[_cnt++] = BYTE3(_c);
+
+    for (i = 0; i < NiMing.data_to_send[3] + 4; i++)
+    {
+        sumcheck += NiMing.data_to_send[i];
+        addcheck += sumcheck;
+    }
+
+    NiMing.data_to_send[_cnt++] = sumcheck;
+    NiMing.data_to_send[_cnt++] = addcheck;
+
+    HAL_UART_Transmit(&huart_debug, NiMing.data_to_send, _cnt, 0xFFFF); // 这里是串口发送函数
+}
+
+```
+
+{% endfolding %}
+
+> 代码测试，直接调用即可，`注意上位机不支持浮点数，所以需要扩大倍数然后发送`
+>
+> ```cpp
+> NiMing.ANO_DT_Send_F2(Encoder.Motor1Speed*100, 3.0*100, Encoder.Motor2Speed*100, 3.0*100);  // 匿名上位机调试
+> ```
+
+{% gallery %}
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230705221344.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230705221327.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230705215140.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230705221149.webp)
+
+{% endgallery %}
+
+> 使用cjson调试PID
+
+1. 打开串口中断
+2. 调大堆栈
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230706123500.webp)
+
+3. 编写串口中断函数(记住在中断服务函数里不要清除中断标志位！！否则卡死)
+
+```cpp
+/*
+* @function: USART1_IRQHandler
+* @param: None
+* @retval: None
+* @brief: 串口中断服务函数
+*/
+void USART1_IRQHandler(void)
+{
+	if (__HAL_UART_GET_FLAG(&huart1,UART_FLAG_RXNE) != 0x00u)
+	{
+		// __HAL_UART_CLEAR_FLAG(&huart1,UART_FLAG_RXNE);	// 清除标志位
+		if (UART1.Uart1_Rec_Count >= UART1_REC_MAX)
+		{
+			UART1.Uart1_Rec_Count = 0;
+		}
+		HAL_UART_Receive(&huart1, &UART1.Uart1_Rec_Buff[UART1.Uart1_Rec_Count++], 1, 1000);
+	}
+
+	HAL_UART_IRQHandler(&huart1);
+}
+```
+
+3. 加入cjson  `.c`  和  `.h` 到工程里，编写解析函数(注释的是控制电机PID的测试时暂时屏蔽)
+
+```cpp
+float p,i,d,a;
+
+/*
+* @function: UART1_CJSON_Analyze
+* @param: None
+* @retval: None
+* @brief: CJSON解析
+*/
+static void UART1_CJSON_Analyze(void)
+{
+    cJSON *cJsonData, *cJsonVlaue;
+
+    if (UART1_Wait_Finish() == 0) // 是否接收完毕
+    {
+        cJsonData = cJSON_Parse((const char *)UART1.Uart1_Rec_Buff);
+        if (cJSON_GetObjectItem(cJsonData, "p") != NULL)
+        {
+            cJsonVlaue = cJSON_GetObjectItem(cJsonData, "p");
+            p = cJsonVlaue->valuedouble;
+            // PID_Motor1Speed.Kp = p;
+        }
+        if (cJSON_GetObjectItem(cJsonData, "i") != NULL)
+        {
+            cJsonVlaue = cJSON_GetObjectItem(cJsonData, "i");
+            i = cJsonVlaue->valuedouble;
+            // PID_Motor1Speed.Ki = i;
+        }
+        if (cJSON_GetObjectItem(cJsonData, "d") != NULL)
+        {
+            cJsonVlaue = cJSON_GetObjectItem(cJsonData, "d");
+            d = cJsonVlaue->valuedouble;
+            // PID_Motor1Speed.Kd = d;
+        }
+        if (cJSON_GetObjectItem(cJsonData, "a") != NULL)
+        {
+            cJsonVlaue = cJSON_GetObjectItem(cJsonData, "a");
+            a = cJsonVlaue->valuedouble;
+            // PID_Motor1Speed.target_val = a;
+        }
+        if (cJsonData != NULL)
+        {
+            cJSON_Delete(cJsonData); // 释放空间、但是不能删除cJsonVlaue不然会 出现异常错误
+        }
+        Public.Memory_Clear(UART1.Uart1_Rec_Buff, UART1_REC_MAX);   // 清空接收buf，注意这里不能使用strlen
+    }
+    Public.UsartPrintf(huart_debug,"P:%.3f  I:%.3f  D:%.3f A:%.3f\r\n", p, i, d, a);
+}
+```
+
+3. 发送测试
+
+```cpp
+{"p":110,"i":5,"d":0,"a":2}
+```
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230706140335.webp)
+
+
+
+
+
+### VOFA+
+
+> 波形显示
+
+1. 把左边波形控件拉到右边，然后放大，右键x轴选择【时间轴】，右键y轴选择【通道Ix】
+2. 程序里发送的格式是：
+
+```cpp
+// 这样就发送了两个通道的数据了
+printf("%.2f,%.2f \n",a,b);
+```
+
+> 测试代码
+
+```cpp
+Public.UsartPrintf(huart_debug, "%.2f,%.2f \n", Encoder.Motor1Speed,Encoder.Motor2Speed);  // VOFA+上位机调试
+```
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230705153259.webp)
+
+
+
+
+
 ## PID学习
+
+PID控制器是一种线性控制器，用 `输出量y(t)` 和 `给定量r(t)` 之间的误差的时间函数 `e(t)=r(t)-y(t)` 的 `比例、积分和微分` 的线性组合构成控制量u(t)，称为 `比例、积分、微分控制`，简称 `PID控制(也可以理解为 p:现在 i:过去 d:未来)`
 
 > 1. Kp（比例系数）：
 >    - 比例系数决定了响应系统误差的快慢程度。
@@ -1924,3 +3055,777 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 >    - 然而，如果Kd过大，系统可能会导致过度抑制或产生震荡。
 >    - 如果Kd值较小，系统对误差变化的敏感度较低，可能无法有效抑制超调或振荡。
 
+> - 位置式和增量式PID区别？
+>
+> 1. 位置式PID控制器的公式中直接使用误差项、累积误差项和误差变化项
+> 2. 增量式PID控制器的公式中使用的是误差的增量或变化量
+> 3. 在位置式PID控制器中，一般会有对误差的积分项，而增量式PID控制器中通常没有显式的积分项
+> 4. 位置式PID控制器更常见且应用广泛，而增量式PID控制器通常用于对控制量增量的调节
+
+> - 【PID口诀】
+>
+> 参数整定找最佳，从小到大顺序查
+> 先是比例后积分，最后再把微分加
+> 曲线振荡很频繁，比例度盘要放大
+> 曲线漂浮绕大湾，比例度盘往小扳
+> 曲线偏离回复慢，积分时间往下降
+> 曲线波动周期长，积分时间再加长
+> 曲线振荡频率快，先把微分降下来
+> 动差大来波动慢，微分时间应加长
+> 理想曲线两个波，前高后低四比一
+> 一看二调多分析，调节质量不会低
+
+
+
+
+
+#### 附1-增量式PID
+
+{% note red 'fas fa-fan' flat %}注意{% endnote %}
+
+本例基于上面的【有刷直流电机-编程示例2-速度闭环控制】
+
+
+
+> $U_k = Kp \times e_k + Ki∑^{k} _{j=0}e_j + Kd(e_k - e_{k-1})$
+>
+> 上面从左到右就是 `比例项+积分项+微分项`
+>
+> 位置式PID控制器使用当前误差 $e_k$、累积误差 $Ki∑^{k} _{j=0}e_j$ 以及误差变化率 $e_k - e_{k-1}$ 的加权和来计算控制量 $U_k$
+>
+> 其中，比例项 $Kp$ 乘以当前误差，积分项 $Ki$ 乘以累积误差，而微分项 $Kd$ 乘以误差变化率
+>
+> ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230705222816.webp)
+>
+> ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230706000437.webp)
+
+> 1. 调节P  把 `I=0、D=0` 先给正值或负值值测试P正负(比如给负数如果失控了就表示不对就给正数)、然后根据PID函数输入和输出估算P 大小，然后 `I=0 D=0` 去测试，调节一个较大值
+> 2. 调节I  把P等于前面上一步调好的值 然后测试 `I给较大正值和负值` 测试出I正负，然后I从小值调节，直到没有偏差存在
+> 3.  `一般系统不使用D`
+>
+> ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230706152201.webp)
+
+
+
+{% folding, PID.h %}
+
+```cpp
+#ifndef __PID_H
+#define __PID_H
+
+typedef struct
+{
+    float target_val; // 目标值
+    float actual_val; // 实际值
+
+    float err;        // 当前偏差
+    float err_last;   // 上次偏差
+    float err_sum;    // 误差累计值
+
+    float Kp; // 比例系数
+    float Ki; // 积分系数
+    float Kd; // 微分系数
+}PID_t;
+
+extern PID_t PID_Motor1Speed;
+
+
+void PID_Init(void);
+float P_Control(PID_t* p_pid,float new_actual_val); // 比例p调节控制函数
+float PI_Control(PID_t *p_pid, float new_actual_val);   // 比例P 积分I 控制函数
+float PID_Control(PID_t* p_pid,float new_actual_val); // PID控制函数
+
+#endif
+```
+
+{% endfolding %}
+
+{% folding, PID.c %}
+
+```cpp
+/***************************************************************************
+ * File: PID.c
+ * Author: Luckys.
+ * Date: 2023/06/26
+ * description: PID
+****************************************************************************/
+#include "AllHead.h"
+
+
+PID_t PID_Motor1Speed;
+
+/*
+* @function: PID_Init
+* @param: None
+* @retval: None
+* @brief: PID初始化
+*/
+void PID_Init(void)
+{
+    PID_Motor1Speed.target_val = 0.00; // 目标值
+    PID_Motor1Speed.actual_val = 0.00; // 实际值
+
+    PID_Motor1Speed.err = 0.00;        // 当前偏差
+    PID_Motor1Speed.err_last = 0.00;   // 上次偏差
+    PID_Motor1Speed.err_sum = 0.00;    // 误差累计值
+
+    PID_Motor1Speed.Kp = 0.00; // 比例系数
+    PID_Motor1Speed.Ki = 0.00; // 积分系数
+    PID_Motor1Speed.Kd = 0.00; // 微分系数    
+}
+
+/*
+* @function: P_Control
+* @param: p_pid -> 指向PID结构体的指针 new_actual_val -> 新的实际值
+* @retval: None
+* @brief: 比例p调节控制函数
+*/
+float P_Control(PID_t* p_pid,float new_actual_val)
+{
+    p_pid->actual_val = new_actual_val;       // 传递真实值
+    p_pid->err = p_pid->target_val - p_pid->actual_val; // 当前误差=目标值-真实值
+    // 比例控制调节   输出 = Kp * 当前误差
+    p_pid->actual_val = p_pid->Kp * p_pid->err;
+
+    return p_pid->actual_val;
+}
+
+/*
+* @function: PI_Control
+* @param: p_pid -> 指向PID结构体的指针 new_actual_val -> 新的实际值
+* @retval: None
+* @brief: 比例P 积分I 控制函数
+*/
+float PI_Control(PID_t *p_pid, float new_actual_val)
+{
+    p_pid->actual_val = new_actual_val;                 // 传递真实值
+    p_pid->err = p_pid->target_val - p_pid->actual_val; // 当前误差=目标值-真实值
+    p_pid->err_sum += p_pid->err;                     // 误差累计值 = 当前误差累计和
+    // 使用PI控制 输出 = Kp*当前误差 + Ki*误差累计值
+    p_pid->actual_val = p_pid->Kp * p_pid->err + p_pid->Ki * p_pid->err_sum;
+
+    return p_pid->actual_val;
+}
+
+/*
+* @function: PID_Control
+* @param: p_pid -> 指向PID结构体的指针 new_actual_val -> 新的实际值
+* @retval: None
+* @brief: PID控制函数
+*/
+float PID_Control(PID_t* p_pid,float new_actual_val)
+{
+    p_pid->actual_val = new_actual_val;                 // 传递真实值
+    p_pid->err = p_pid->target_val - p_pid->actual_val; ////当前误差=目标值-真实值
+    p_pid->err_sum += p_pid->err;                     // 误差累计值 = 当前误差累计和
+    // 使用PID控制 输出 = Kp*当前误差  +  Ki*误差累计值 + Kd*(当前误差-上次误差)
+    p_pid->actual_val = p_pid->Kp * p_pid->err + p_pid->Ki * p_pid->err_sum + p_pid->Kd * (p_pid->err - p_pid->err_last);
+    // 保存上次误差: 这次误差赋值给上次误差
+    p_pid->err_last = p_pid->err;
+
+    return p_pid->actual_val;
+}
+```
+
+{% endfolding %}
+
+> 测试代码(调试1) --- 只用Kp(只根据当前误差进行控制)
+
+{% folding, Task.c %}
+
+```cpp
+static void TasksHandle_5MS(void)
+{
+    Motor.Motor_Set_Duty(Motor_LATER_LEFT,PID_Control(&PID_Motor1Speed, Encoder.Motor1Speed));  // PID控制电机1
+    NiMing.ANO_DT_Send_F2(Encoder.Motor1Speed*100, 3.0*100, 0, 0);  // 匿名上位机调试
+}
+```
+
+{% endfolding %}
+
+首先需要把PID赋初始值，否则默认全部0的话电机不会动
+
+分析：看PID控制函数，我们输入大概是 `0~10` 左右，输出是 `0~99`，那Kp可以先给10试试，
+
+```cpp
+PID_Motor1Speed.target_val = 3.00; // 目标值
+PID_Motor1Speed.Kp = 10; // 比例系数
+```
+
+可以看到误差还是挺大的
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230706111659.webp)
+
+尝试把Kp=10改成50，可以看到误差小了，因为Kp大小决定了误差的响应速度
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230706112055.webp)
+
+> 测试代码(调试2) --- 在上面基础上加入Ki(加入历史误差)
+
+```cpp
+PID_Motor1Speed.target_val = 3.00; // 目标值
+PID_Motor1Speed.Kp = 10; // 比例系数
+PID_Motor1Speed.Ki = 5; // 积分系数
+```
+
+可以看到，已经很接近目标值了
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230706113726 (1).webp)
+
+> 把速度改变丢中断里执行,20ms执行一次
+
+```cpp
+static uint16_t PID_Cnt;
+
+
+if ((PID_Cnt % 20) == 0)
+{
+    Motor.Motor_Set_Duty(Motor_LATER_LEFT, PID_Control(&PID_Motor1Speed, Encoder.Motor1Speed)); // PID控制电机1
+    PID_Cnt = 0;
+}
+```
+
+> 实现前进，后退，左转，右转，停止，原地左转，原地右转
+
+- 为什么改变了目标速度后调用 `Motor_Set_Duty`呢？不是在中断里有这个吗？
+
+因为这样保证了实时性，因为中断里 `Motor_Set_Duty` 函数20ms才进入一次 
+
+- 看图就知道这么写了
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230706204721.webp)
+
+```cpp
+/*
+* @function: Motor_Pid_Seet_Speed
+* @param: front_l -> 前左目标速度 front_r -> 前右目标速度 later_l -> 后左目标速度 later_r -> 后右目标速度
+* @retval: None
+* @brief: 电机PID速度设置
+*/
+static void Motor_Pid_Seet_Speed(float front_l, float front_r, float later_l, float later_r)
+{
+    PID_FrontLeft_Speed.target_val = front_l;
+    PID_FrontRight_Speed.target_val = front_r;
+    PID_LaterLeft_Speed.target_val = later_l;
+    PID_LaterRight_Speed.target_val = later_r;
+
+    Motor.Motor_Set_Duty(Motor_FRONT_LEFT, PID_Control(&PID_FrontLeft_Speed, front_l)); 
+    Motor.Motor_Set_Duty(Motor_FRONT_RIGHT, PID_Control(&PID_FrontRight_Speed, front_r));
+    Motor.Motor_Set_Duty(Motor_LATER_LEFT, PID_Control(&PID_LaterLeft_Speed, later_l));
+    Motor.Motor_Set_Duty(Motor_LATER_RIGHT, PID_Control(&PID_LaterRight_Speed, later_r)); 
+}
+```
+
+```cpp
+switch(choose)
+{
+case 1:
+{
+    Motor.Motor_Pid_Seet_Speed(2, 2, 2, 2); // 前进
+    break;
+}
+case 2:
+{
+    Motor.Motor_Pid_Seet_Speed(-2, -2, -2, -2); // 后退
+    break;
+}
+case 3:
+{
+    Motor.Motor_Pid_Seet_Speed(2, 3, 2, 3); // 左转
+    break;
+}
+case 4:
+{
+    Motor.Motor_Pid_Seet_Speed(3, 2, 3, 2); // 右转
+    break;
+}
+case 5:
+{
+    Motor.Motor_Pid_Seet_Speed(0, 0, 0, 0); // 停止
+    break;
+}
+case 6:
+{
+    Motor.Motor_Pid_Seet_Speed(-2, 2, -2, 2); // 原地左转
+    break;
+}
+case 7:
+{
+    Motor.Motor_Pid_Seet_Speed(2, -2, 2, -2); // 原地右转
+    break;
+}
+default:
+    break;
+}
+choose = (choose - 1 + 1) % 7 + 1;
+}
+```
+
+> 向前加速度，向前减速度
+
+```cpp
+// 结构体里定义
+float fMotor_Max_Sub_Speed; // 向前最大减速度上限
+float fMotor_Max_Add_Speed; // 向前最大加速度上限
+
+/*
+* @function: Motor_Go_Acceleration
+* @param: None
+* @retval: None
+* @brief: 向前加速度
+*/
+static void Motor_Go_Acceleration(void)
+{
+    static float SpeedTemp = 0.5;
+
+    if (SpeedTemp <= Motor.fMotor_Max_Add_Speed)
+    {
+        SpeedTemp += 0.5;
+    }
+    Motor_Pid_Seet_Speed(SpeedTemp, SpeedTemp, SpeedTemp, SpeedTemp);
+}
+
+/*
+* @function: Motor_Go_Deceleration
+* @param: None
+* @retval: None
+* @brief: 向前减速度
+*/
+static void Motor_Go_Deceleration(void)
+{
+    if (Motor.fMotor_Max_Sub_Speed >= 0.5)
+    {
+        Motor.fMotor_Max_Sub_Speed -= 0.5;
+    }
+    Motor_Pid_Seet_Speed(Motor.fMotor_Max_Sub_Speed, Motor.fMotor_Max_Sub_Speed, Motor.fMotor_Max_Sub_Speed, Motor.fMotor_Max_Sub_Speed);    
+}
+```
+
+> 里程计算
+
+`里程`: 小车行驶的路程长度
+
+只要计算出每个单位时间小车行驶的长度然后一直相加，就是这一段时间行驶的总里程长度了
+
+20ms计算一次,20ms走过了多少距离，然后一直相加，就是走的总距离，就是里程。这里我们使用后左轮进行计算。也可以两个后轮相加然后除以2(我车的轮胎直径是4.8cm)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230706214246.webp)
+
+```cpp
+// 丢定时器中断里20ms执行一次即可
+
+// 里程数(cm) += 时间周期（s）*车轮转速(转/s)*车轮周长(cm)
+Motor.Mileage += 0.02 * Encoder.MotorSpeed_Arr[Motor_LATER_LEFT] * 15;
+```
+
+> 7路灰度寻迹(未加PID)
+
+{% folding, Track.c %}
+
+```cpp
+/*
+* @function: Track_Read_Sensor
+* @param: None
+* @retval: None
+* @brief: 读取传感器偏离(识别到黑线返回数字信号低电平0，未识别到黑线返回高电平1)
+*/
+static void Track_Read_Sensor(void)
+{
+    Track_Read_Status();
+
+    // 识别到黑线在中间 --- 111 0 111
+    if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status]  == 1 && Track.ucTrack_Status_Buff[L1_Status]  == 1 &&
+        Track.ucTrack_Status_Buff[M_Status] == 0 &&
+        Track.ucTrack_Status_Buff[R1_Status] == 1 && Track.ucTrack_Status_Buff[R2_Status]  == 1 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+        Track.Car_Error_Status = 0;
+        Motor.Motor_Pid_Seet_Speed(2,2,2,2);
+    }   
+    // 小车偏右程度1 --- 110 0 111
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status] == 1 && Track.ucTrack_Status_Buff[L1_Status] == 0 &&
+            Track.ucTrack_Status_Buff[M_Status] == 0 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 1 && Track.ucTrack_Status_Buff[R2_Status] == 1 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+        Motor.Motor_Pid_Seet_Speed(1.5,3,1.5,3);
+    } 
+    // 小车偏右程度2 --- 110 1 111
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status] == 1 && Track.ucTrack_Status_Buff[L1_Status] == 0 &&
+            Track.ucTrack_Status_Buff[M_Status] == 1 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 1 && Track.ucTrack_Status_Buff[R2_Status] == 1 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+        Motor.Motor_Pid_Seet_Speed(1.5,3.5,1.5,3.5);
+    } 
+    // 小车偏右程度3 --- 100 1 111
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status] == 0 && Track.ucTrack_Status_Buff[L1_Status] == 0 &&
+            Track.ucTrack_Status_Buff[M_Status] == 1 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 1 && Track.ucTrack_Status_Buff[R2_Status] == 1 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+        Motor.Motor_Pid_Seet_Speed(1.5,4,1.5,4);
+    }   
+    // 小车偏右程度4 --- 101 1 111
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status] == 0 && Track.ucTrack_Status_Buff[L1_Status] == 1 &&
+            Track.ucTrack_Status_Buff[M_Status] == 1 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 1 && Track.ucTrack_Status_Buff[R2_Status] == 1 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+        Motor.Motor_Pid_Seet_Speed(1.5,4.5,1.5,4.5);
+    }
+    // 小车偏右程度5 --- 001 1 111
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 0 && Track.ucTrack_Status_Buff[L2_Status] == 0 && Track.ucTrack_Status_Buff[L1_Status] == 1 &&
+            Track.ucTrack_Status_Buff[M_Status] == 1 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 1 && Track.ucTrack_Status_Buff[R2_Status] == 1 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+        Motor.Motor_Pid_Seet_Speed(1.5,5,1.5,5);
+    }  
+    // 小车偏右程度6 --- 011 1 111
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 0 && Track.ucTrack_Status_Buff[L2_Status] == 1 && Track.ucTrack_Status_Buff[L1_Status] == 1 &&
+            Track.ucTrack_Status_Buff[M_Status] == 1 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 1 && Track.ucTrack_Status_Buff[R2_Status] == 1 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+        Motor.Motor_Pid_Seet_Speed(1.5,5.5,1.5,5.5);
+    }     
+    // 小车偏左程度1 --- 111 0 011
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status] == 1 && Track.ucTrack_Status_Buff[L1_Status] == 1 &&
+            Track.ucTrack_Status_Buff[M_Status] == 0 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 0 && Track.ucTrack_Status_Buff[R2_Status] == 1 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+        Motor.Motor_Pid_Seet_Speed(3,1.5,3,1.5);
+    } 
+    // 小车偏左程度2 --- 111 1 011
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status] == 1 && Track.ucTrack_Status_Buff[L1_Status] == 1 &&
+            Track.ucTrack_Status_Buff[M_Status] == 1 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 0 && Track.ucTrack_Status_Buff[R2_Status] == 1 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+        Motor.Motor_Pid_Seet_Speed(3.5,1.5,3.5,1.5);
+    } 
+    // 小车偏左程度3 --- 111 1 001
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status] == 1 && Track.ucTrack_Status_Buff[L1_Status] == 1 &&
+            Track.ucTrack_Status_Buff[M_Status] == 1 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 0 && Track.ucTrack_Status_Buff[R2_Status] == 0 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+        Motor.Motor_Pid_Seet_Speed(4,1.5,4,1.5);
+    }   
+    // 小车偏左程度4 --- 111 1 101
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status] == 1 && Track.ucTrack_Status_Buff[L1_Status] == 1 &&
+            Track.ucTrack_Status_Buff[M_Status] == 1 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 1 && Track.ucTrack_Status_Buff[R2_Status] == 0 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+        Motor.Motor_Pid_Seet_Speed(4.5,1.5,4.5,1.5);
+    }
+    // 小车偏左程度5 --- 111 1 100
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status] == 1 && Track.ucTrack_Status_Buff[L1_Status] == 1 &&
+            Track.ucTrack_Status_Buff[M_Status] == 1 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 1 && Track.ucTrack_Status_Buff[R2_Status] == 0 && Track.ucTrack_Status_Buff[R3_Status] == 0)
+    {
+        Motor.Motor_Pid_Seet_Speed(5,1.5,5,1.5);
+    }  
+    // 小车偏左程度6 --- 111 1 110
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status] == 1 && Track.ucTrack_Status_Buff[L1_Status] == 1 &&
+            Track.ucTrack_Status_Buff[M_Status] == 1 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 1 && Track.ucTrack_Status_Buff[R2_Status] == 1 && Track.ucTrack_Status_Buff[R3_Status] == 0)
+    {
+        Motor.Motor_Pid_Seet_Speed(5.5,1.5,5.5,1.5);
+    }      
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status] == 1 && Track.ucTrack_Status_Buff[L1_Status] == 1 &&
+            Track.ucTrack_Status_Buff[M_Status] == 1 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 1 && Track.ucTrack_Status_Buff[R2_Status] == 1 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+        Motor.Motor_Pid_Seet_Speed(0,0,0,0);
+    }  
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 0 && Track.ucTrack_Status_Buff[L2_Status] == 0 && Track.ucTrack_Status_Buff[L1_Status] == 0 &&
+            Track.ucTrack_Status_Buff[M_Status] == 0 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 0 && Track.ucTrack_Status_Buff[R2_Status] == 0 && Track.ucTrack_Status_Buff[R3_Status] == 0)
+    {
+        Motor.Motor_Pid_Seet_Speed(0,0,0,0);
+    }                                   
+}
+```
+
+{% endfolding %}
+
+> 加灰度PID，差速就是一边加一边减，具体哪边加哪边减看调试
+
+{% folding, Track.h %}
+
+```cpp
+#ifndef __TRACK_H
+#define __TRACK_H
+
+// 引脚定义
+#define TRACK_R1 GPIO_PIN_2 
+#define TRACK_R2 GPIO_PIN_1 
+#define TRACK_R3 GPIO_PIN_0
+#define TRACK_M GPIO_PIN_3 
+#define TRACK_L1 GPIO_PIN_4
+#define TRACK_L2 GPIO_PIN_5
+#define TRACK_L3 GPIO_PIN_6
+
+// 测试
+#define SPEED_1 4
+#define SSPEED_2 10
+#define SPEED_3 15
+#define SPEED_4 30
+
+// 最大速度
+#define MAX_SPEED 70
+// 普通速度
+#define MAX_COMMON_SPEED 30
+
+typedef enum
+{
+    R1_Status = (uint8_t)0,
+    R2_Status = (uint8_t)1,
+    R3_Status = (uint8_t)2,
+    M_Status = (uint8_t)3,
+    L1_Status = (uint8_t)4,
+    L2_Status = (uint8_t)5,
+    L3_Status = (uint8_t)6,
+}Track_Status_t;
+
+typedef struct
+{
+    float Track_Motor_PID_Arr[4];    // 电机最后寻迹PID控制速度
+    float Track_PID_Out;    // 寻迹PID计算输出速度
+    uint8_t Car_Stop_Status;  // 到达终点线停止状态
+	int8_t Car_Error_Status;	// 小车的位置偏移量 误差(error),位置偏移越大，误差越大，偏移越小，误差越小(偏右是负偏左是正)
+    uint8_t ucTrack_Status_Buff[7]; // 存储7路状态
+
+    void (*Track_Read_Status)(void);    // 读取状态
+    void (*Track_Read_Sensor)(void);    // 读取寻迹状态与偏离置标志位
+}Track_t;
+
+extern Track_t Track;
+
+
+#endif
+```
+
+{% endfolding %}
+
+{% folding, Track.c %}
+
+```cpp
+/***************************************************************************
+ * File: Track.c
+ * Author: Luckys.
+ * Date: 2023/06/23
+ * description: 光电灰度7路寻迹模块
+ -----------------------------------
+接线：
+    PG0 ---> R3
+    PG1 ---> R2
+    PG2 ---> R1
+    PG3 ---> M
+    PG4 ---> L1
+    PG5 ---> L2
+    PG6 ---> L3   
+    5V ---> VCC
+    GND ---> GND
+ -----------------------------------
+****************************************************************************/
+#include "AllHead.h"
+
+/*====================================variable definition declaration area BEGIN===================================*/
+
+uint8_t go_right_Flag = 0;  // 转右
+
+/*====================================variable definition declaration area   END===================================*/
+
+/*====================================static function declaration area BEGIN====================================*/
+
+static void Track_Read_Status(void);
+static void Track_Read_Sensor(void);
+/*====================================static function declaration area   END====================================*/
+Track_t Track = 
+{
+    {0},
+    0,
+    FALSE,
+	0,
+    {0},
+
+    Track_Read_Status,
+    Track_Read_Sensor,
+};
+
+/*
+* @function: Track_Read_Status
+* @param: None
+* @retval: None
+* @brief: 读取寻迹灯状态
+*/
+static void Track_Read_Status(void)
+{
+    // 从左到右排序 传感器返回的数字信号依次存入
+    Track.ucTrack_Status_Buff[L3_Status] = HAL_GPIO_ReadPin(GPIOG, TRACK_L3) ? 0 : 1;
+    Track.ucTrack_Status_Buff[L2_Status] = HAL_GPIO_ReadPin(GPIOG, TRACK_L2) ? 0 : 1;
+    Track.ucTrack_Status_Buff[L1_Status] = HAL_GPIO_ReadPin(GPIOG, TRACK_L1) ? 0 : 1;
+    Track.ucTrack_Status_Buff[M_Status] = HAL_GPIO_ReadPin(GPIOG, TRACK_M) ? 0 : 1;
+    Track.ucTrack_Status_Buff[R1_Status] = HAL_GPIO_ReadPin(GPIOG, TRACK_R1) ? 0 : 1;
+    Track.ucTrack_Status_Buff[R2_Status] = HAL_GPIO_ReadPin(GPIOG, TRACK_R2) ? 0 : 1;
+    Track.ucTrack_Status_Buff[R3_Status] = HAL_GPIO_ReadPin(GPIOG, TRACK_R3) ? 0 : 1;
+#if LOG_DEBUG
+    printf("R1-%d R2-%d R3-%d\r\nM-%d\r\nL1-%d L2-%d L3-%d\r\n\r\n", Track.ucTrack_Status_Buff[R1_Status],Track.ucTrack_Status_Buff[R2_Status],Track.ucTrack_Status_Buff[R3_Status],Track.ucTrack_Status_Buff[M_Status],Track.ucTrack_Status_Buff[L1_Status],Track.ucTrack_Status_Buff[L2_Status],Track.ucTrack_Status_Buff[L3_Status]);
+#endif    
+}
+
+
+/*
+* @function: Track_Read_Sensor
+* @param: None
+* @retval: None
+* @brief: 读取传感器偏离(识别到黑线返回数字信号低电平0，未识别到黑线返回高电平1)
+*/
+static void Track_Read_Sensor(void)
+{
+    static int8_t Last_Status;  // 上一次状态
+
+    Track_Read_Status();
+
+    // 识别到黑线在中间 --- 111 0 111
+    if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status]  == 1 && Track.ucTrack_Status_Buff[L1_Status]  == 1 &&
+        Track.ucTrack_Status_Buff[M_Status] == 0 &&
+        Track.ucTrack_Status_Buff[R1_Status] == 1 && Track.ucTrack_Status_Buff[R2_Status]  == 1 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+        Track.Car_Error_Status = 0;
+    }   
+    // 小车偏右程度1 --- 110 0 111
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status] == 1 && Track.ucTrack_Status_Buff[L1_Status] == 0 &&
+            Track.ucTrack_Status_Buff[M_Status] == 0 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 1 && Track.ucTrack_Status_Buff[R2_Status] == 1 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+        Track.Car_Error_Status = -1;
+    } 
+    // 小车偏右程度2 --- 110 1 111
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status] == 1 && Track.ucTrack_Status_Buff[L1_Status] == 0 &&
+            Track.ucTrack_Status_Buff[M_Status] == 1 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 1 && Track.ucTrack_Status_Buff[R2_Status] == 1 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+        Track.Car_Error_Status = -2;
+    } 
+    // 小车偏右程度3 --- 100 1 111
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status] == 0 && Track.ucTrack_Status_Buff[L1_Status] == 0 &&
+            Track.ucTrack_Status_Buff[M_Status] == 1 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 1 && Track.ucTrack_Status_Buff[R2_Status] == 1 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+        Track.Car_Error_Status = -3;
+    }   
+    // 小车偏右程度4 --- 101 1 111
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status] == 0 && Track.ucTrack_Status_Buff[L1_Status] == 1 &&
+            Track.ucTrack_Status_Buff[M_Status] == 1 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 1 && Track.ucTrack_Status_Buff[R2_Status] == 1 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+        Track.Car_Error_Status = -4;
+    }
+    // 小车偏右程度5 --- 001 1 111
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 0 && Track.ucTrack_Status_Buff[L2_Status] == 0 && Track.ucTrack_Status_Buff[L1_Status] == 1 &&
+            Track.ucTrack_Status_Buff[M_Status] == 1 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 1 && Track.ucTrack_Status_Buff[R2_Status] == 1 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+        Track.Car_Error_Status = -5;
+    }  
+    // 小车偏右程度6 --- 011 1 111
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 0 && Track.ucTrack_Status_Buff[L2_Status] == 1 && Track.ucTrack_Status_Buff[L1_Status] == 1 &&
+            Track.ucTrack_Status_Buff[M_Status] == 1 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 1 && Track.ucTrack_Status_Buff[R2_Status] == 1 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+        Track.Car_Error_Status = -6;
+    }     
+    // 小车偏左程度1 --- 111 0 011
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status] == 1 && Track.ucTrack_Status_Buff[L1_Status] == 1 &&
+            Track.ucTrack_Status_Buff[M_Status] == 0 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 0 && Track.ucTrack_Status_Buff[R2_Status] == 1 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+        Track.Car_Error_Status = 1;
+    } 
+    // 小车偏左程度2 --- 111 1 011
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status] == 1 && Track.ucTrack_Status_Buff[L1_Status] == 1 &&
+            Track.ucTrack_Status_Buff[M_Status] == 1 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 0 && Track.ucTrack_Status_Buff[R2_Status] == 1 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+        Track.Car_Error_Status = 2;
+    } 
+    // 小车偏左程度3 --- 111 1 001
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status] == 1 && Track.ucTrack_Status_Buff[L1_Status] == 1 &&
+            Track.ucTrack_Status_Buff[M_Status] == 1 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 0 && Track.ucTrack_Status_Buff[R2_Status] == 0 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+        Track.Car_Error_Status = 3;
+    }   
+    // 小车偏左程度4 --- 111 1 101
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status] == 1 && Track.ucTrack_Status_Buff[L1_Status] == 1 &&
+            Track.ucTrack_Status_Buff[M_Status] == 1 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 1 && Track.ucTrack_Status_Buff[R2_Status] == 0 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+        Track.Car_Error_Status = 4;
+    }
+    // 小车偏左程度5 --- 111 1 100
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status] == 1 && Track.ucTrack_Status_Buff[L1_Status] == 1 &&
+            Track.ucTrack_Status_Buff[M_Status] == 1 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 1 && Track.ucTrack_Status_Buff[R2_Status] == 0 && Track.ucTrack_Status_Buff[R3_Status] == 0)
+    {
+        Track.Car_Error_Status = 5;
+    }  
+    // 小车偏左程度6 --- 111 1 110
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status] == 1 && Track.ucTrack_Status_Buff[L1_Status] == 1 &&
+            Track.ucTrack_Status_Buff[M_Status] == 1 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 1 && Track.ucTrack_Status_Buff[R2_Status] == 1 && Track.ucTrack_Status_Buff[R3_Status] == 0)
+    {
+        Track.Car_Error_Status = 6;
+    }      
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 1 && Track.ucTrack_Status_Buff[L2_Status] == 1 && Track.ucTrack_Status_Buff[L1_Status] == 1 &&
+            Track.ucTrack_Status_Buff[M_Status] == 1 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 1 && Track.ucTrack_Status_Buff[R2_Status] == 1 && Track.ucTrack_Status_Buff[R3_Status] == 1)
+    {
+
+    }  
+    else if (Track.ucTrack_Status_Buff[L3_Status] == 0 && Track.ucTrack_Status_Buff[L2_Status] == 0 && Track.ucTrack_Status_Buff[L1_Status] == 0 &&
+            Track.ucTrack_Status_Buff[M_Status] == 0 &&
+            Track.ucTrack_Status_Buff[R1_Status] == 0 && Track.ucTrack_Status_Buff[R2_Status] == 0 && Track.ucTrack_Status_Buff[R3_Status] == 0)
+    {
+
+    }
+
+    Track.Track_PID_Out = PID_Control(&PID_Track, Track.Car_Error_Status);   // PID计算输出目标速度 这个速度，会和基础速度加减  
+
+    Track.Track_Motor_PID_Arr[Motor_FRONT_LEFT] = 5 - Track.Track_PID_Out;   
+    Track.Track_Motor_PID_Arr[Motor_FRONT_RIGHT] = 5 + Track.Track_PID_Out;
+    Track.Track_Motor_PID_Arr[Motor_LATER_LEFT] = 5 - Track.Track_PID_Out;
+    Track.Track_Motor_PID_Arr[Motor_LATER_RIGHT] = 5 + Track.Track_PID_Out;
+    // 限幅
+    Track.Track_Motor_PID_Arr[Motor_FRONT_LEFT] = Motor.Motor_Clamp(Track.Track_Motor_PID_Arr[Motor_FRONT_LEFT], 0, 7);  
+    Track.Track_Motor_PID_Arr[Motor_FRONT_RIGHT] = Motor.Motor_Clamp(Track.Track_Motor_PID_Arr[Motor_FRONT_RIGHT], 0, 7);  
+    Track.Track_Motor_PID_Arr[Motor_LATER_LEFT] = Motor.Motor_Clamp(Track.Track_Motor_PID_Arr[Motor_LATER_LEFT], 0, 7); 
+    Track.Track_Motor_PID_Arr[Motor_LATER_RIGHT] = Motor.Motor_Clamp(Track.Track_Motor_PID_Arr[Motor_LATER_RIGHT], 0, 7); 
+
+    if (Track.Car_Error_Status != Last_Status)
+    {
+        // 通过计算的速度控制电机
+        Motor.Motor_Pid_Seet_Speed(Track.Track_Motor_PID_Arr[Motor_FRONT_LEFT], Track.Track_Motor_PID_Arr[Motor_FRONT_RIGHT], Track.Track_Motor_PID_Arr[Motor_LATER_LEFT], Track.Track_Motor_PID_Arr[Motor_LATER_RIGHT]);
+    } 
+    Last_Status = Track.Car_Error_Status;                         
+}
+
+
+
+
+```
+
+{% endfolding %}
+
+{% folding, PID.c %}
+
+```cpp
+/*寻迹PID*/
+PID_Track.target_val = 0.00; // 目标值
+PID_Track.actual_val = 0.00; // 实际值
+
+PID_Track.err = 0.00;        // 当前偏差
+PID_Track.err_last = 0.00;   // 上次偏差
+PID_Track.err_sum = 0.00;    // 误差累计值
+
+PID_Track.Kp = 10; // 比例系数
+PID_Track.Ki = 0; // 积分系数
+PID_Track.Kd = 0; // 微分系数
+```
+
+{% endfolding %}
