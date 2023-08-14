@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>智能平衡车学习笔记 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言 参考  智能平衡车：（1）硬件选型和原理图设计 电机选型 电机的转速对平衡小车是非常重要的，电压的话选择6V，因为锂电池充电后可达8V多，最低到5.6V左右，所以可以进行降压给MCU供电，然后给电机供电，5.6V电机还是可以转动的 电机转速过大的话会导致回正过大，然后导致一会左偏一会右偏，一直不能回到0度   问题：为什么床比地面好调试，因为床不是一个平面，车轮接触面积变大，轮子在前进时这些">
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>智能平衡车学习笔记 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言 参考  智能平衡车：（1）硬件选型和原理图设计 天问51编译器下载 天问ASRPRO资料汇总 天问语音视频教程 天问文档 HC-05蓝牙模块调试笔记以及使用正点原子例程无法检测到蓝牙模块原因分析 无需另配定时器在STM32 HAL下实现微秒级延时(兼容FreeRTOS)  电机选型 电机的转速对平衡小车是非常重要的，电压的话选择6V，因为锂电池充电后可达8V多，最低到5.6V左右，所以可以进">
 <meta property="og:type" content="article">
 <meta property="og:title" content="智能平衡车学习笔记">
 <meta property="og:url" content="https://mdcm.yang5201314.cn/post/baf0f39a.html">
 <meta property="og:site_name" content="Luckys-Yangの小栈">
-<meta property="og:description" content="前言 参考  智能平衡车：（1）硬件选型和原理图设计 电机选型 电机的转速对平衡小车是非常重要的，电压的话选择6V，因为锂电池充电后可达8V多，最低到5.6V左右，所以可以进行降压给MCU供电，然后给电机供电，5.6V电机还是可以转动的 电机转速过大的话会导致回正过大，然后导致一会左偏一会右偏，一直不能回到0度   问题：为什么床比地面好调试，因为床不是一个平面，车轮接触面积变大，轮子在前进时这些">
+<meta property="og:description" content="前言 参考  智能平衡车：（1）硬件选型和原理图设计 天问51编译器下载 天问ASRPRO资料汇总 天问语音视频教程 天问文档 HC-05蓝牙模块调试笔记以及使用正点原子例程无法检测到蓝牙模块原因分析 无需另配定时器在STM32 HAL下实现微秒级延时(兼容FreeRTOS)  电机选型 电机的转速对平衡小车是非常重要的，电压的话选择6V，因为锂电池充电后可达8V多，最低到5.6V左右，所以可以进">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://mdcm.yang5201314.cn/img/num144.webp">
 <meta property="article:published_time" content="2023-07-08T04:46:13.000Z">
-<meta property="article:modified_time" content="2023-07-12T11:12:18.565Z">
+<meta property="article:modified_time" content="2023-08-14T06:20:00.400Z">
 <meta property="article:author" content="Luckys-Yang">
 <meta property="article:tag" content="牛逼">
 <meta name="twitter:card" content="summary">
@@ -57,7 +57,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-07-12 19:12:18'
+  postUpdate: '2023-08-14 14:20:00'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -174,10 +174,17 @@ window.addEventListener('load',()=> { preloader.endLoading() })
 if (true) {
   document.addEventListener('pjax:send', () => { preloader.initLoading() })
   document.addEventListener('pjax:complete', () => { preloader.endLoading() })
-}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">145</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">76</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">32</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">智能平衡车学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-07-08T04:46:13.000Z" title="发表于 2023-07-08 12:46:13">2023-07-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-12T11:12:18.565Z" title="更新于 2023-07-12 19:12:18">2023-07-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/32%E7%B3%BB%E5%88%97/">32系列</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">145</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">76</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">32</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">智能平衡车学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-07-08T04:46:13.000Z" title="发表于 2023-07-08 12:46:13">2023-07-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-14T06:20:00.400Z" title="更新于 2023-08-14 14:20:00">2023-08-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/32%E7%B3%BB%E5%88%97/">32系列</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">11.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>54分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
 <div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>参考</p>
 </div>
 <p><a href="https://www.bilibili.com/video/BV1fh4y1G7Vg/?vd_source=5fb3f08926cbdbc6d84b3f2bda38c0b1">智能平衡车：（1）硬件选型和原理图设计</a></p>
+<p><a href="http://www.twen51.com/new/twen51/index.php#">天问51编译器下载</a></p>
+<p><a href="https://www.haohaodada.com/new/bbs/forum.php?mod=viewthread&amp;tid=592&amp;page=1&amp;extra=#pid1355">天问ASRPRO资料汇总</a></p>
+<p><a href="http://www.twen51.com/new/twen51/coursePlayCloud.php?id=24&amp;info_id=217">天问语音视频教程</a></p>
+<p><a href="https://haohaodada-official.gitee.io/docs/#/README">天问文档</a></p>
+<p><a href="https://blog.csdn.net/ylzmm/article/details/79138801">HC-05蓝牙模块调试笔记以及使用正点原子例程无法检测到蓝牙模块原因分析</a></p>
+<p><a href="https://blog.csdn.net/weixin_44457994/article/details/114617448?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=stm32vet6%E5%BE%AE%E5%A6%99&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1-114617448.142%5Ev92%5Einsert_down1&amp;spm=1018.2226.3001.4187">无需另配定时器在STM32 HAL下实现微秒级延时(兼容FreeRTOS)</a></p>
+<p><a href="https://blog.csdn.net/weixin_53328450/article/details/131854598"></a></p>
 <h2 id="电机选型">电机选型</h2>
 <p>电机的转速对平衡小车是非常重要的，电压的话选择6V，因为锂电池充电后可达8V多，最低到5.6V左右，所以可以进行降压给MCU供电，然后给电机供电，5.6V电机还是可以转动的</p>
 <p>电机转速过大的话会导致回正过大，然后导致一会左偏一会右偏，一直不能回到0度</p>
@@ -186,6 +193,9 @@ if (true) {
 <p>问题：为什么床比地面好调试，因为床不是一个平面，车轮接触面积变大，轮子在前进时这些都变成阻力，相当于这个阻力削弱了超调的效果</p>
 </blockquote>
 <h2 id="PCB设计">PCB设计</h2>
+<blockquote>
+<p>此原理图非我平衡车使用的，只供参考</p>
+</blockquote>
 <div class="gallery">
     <div class="fj-gallery " data-rowHeight="220" data-limit="10">
     <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230711093148.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230711093219.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230711093312.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230711093359.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230711093419.webp","alt":""}]</span>
@@ -325,7 +335,2168 @@ if (true) {
 <p>ω表示陀螺仪返回实际角速度</p>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>e</mi><mi>k</mi></msub><mo>−</mo><msub><mi>e</mi><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>=</mo><mi>ω</mi></mrow><annotation encoding="application/x-tex">e_k−e_{k−1} = ω</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6389em;vertical-align:-0.2083em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span></span></span></p>
 </blockquote>
-</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num144.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%B5%E6%9C%BA%E9%80%89%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">电机选型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PCB%E8%AE%BE%E8%AE%A1"><span class="toc-number">3.</span> <span class="toc-text">PCB设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PID%E7%AE%97%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">PID算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E6%AD%A5%E4%BA%86%E8%A7%A3"><span class="toc-number">4.1.</span> <span class="toc-text">初步了解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AF%94%E4%BE%8BP"><span class="toc-number">4.2.</span> <span class="toc-text">比例P</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%AF%E5%88%86I"><span class="toc-number">4.3.</span> <span class="toc-text">积分I</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AE%E5%88%86D"><span class="toc-number">4.4.</span> <span class="toc-text">微分D</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%A9%E7%90%86%E6%A8%A1%E5%9E%8B"><span class="toc-number">5.</span> <span class="toc-text">物理模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B4%E7%AB%8B%E7%8E%AF"><span class="toc-number">5.1.</span> <span class="toc-text">直立环</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://lib.baomitu.com/KaTeX/latest/katex.min.css"><script src="https://jsd.onmicrosoft.cn/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+<p>为什么ω可以用角速度表示,因为角速度的定义是单位时间的角度变化,机械中值恒定不变。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230712191414.webp" alt=""></p>
+<p>而我们的 PID 控制的算法是离散的，每间隔固定的时间就计算一次，所以正好也是单位时间。虽然这里计算出的并不是实际角速度，</p>
+<p>因为计算间隔不是1秒。但是我们的Kd系数最后是要去调整的，和实际角速度是成比例的。我们为了减少程序的运算量。这里就直接</p>
+<p>采用陀螺仪输出的角速度即可。所以没必要去管它单位是ms还是s</p>
+<blockquote>
+<p>经过上面的整理，最终的PD公式为：</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>W</mi><mi>M</mi><mo>=</mo><msub><mi>K</mi><mi>p</mi></msub><mo>∗</mo><mo stretchy="false">(</mo><mi>Z</mi><mi>e</mi><mi>r</mi><mi>o</mi><mo>−</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>+</mo><msub><mi>K</mi><mi>d</mi></msub><mo>∗</mo><mi>ω</mi></mrow><annotation encoding="application/x-tex">PWM = K_p*(Zero-θ)+K_d*ω</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span><span class="mord mathnormal">ero</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span></span></span></p>
+<p>公式中的 <code>θ</code> 和 <code>ω</code> 由陀螺仪采集返回给单片机， <code>Zero</code> 由我们自己手动测得</p>
+</blockquote>
+<h3 id="速度环">速度环</h3>
+<p>我们想要直立的同时可以进行运动，所以需要加速度环，下面是串级PID，速度环没用到D是因为我们需要的是一个缓慢的速度，如果加了D当达到我们设定速度后它可能需要去消除震荡就可能会导致轮子抖动，这个是不利的效果</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230712192324.webp" alt=""></p>
+<p>速度反馈可以直接使用编码器的数值，因为速度的定义是单位时间内物体的位移，我们不使用物理世界中的m/s 的单位，因为是呈比</p>
+<p>例关系我们为了计算简便直接采用编码器数值在单位时间的变化量表示速度。又因为我们的PI计算公式是间隔固定周期计算，且编码</p>
+<p>器在固定时间内读取后直接清零，因此 <code>直接读取编码器的数值就可以表示速度</code></p>
+<blockquote>
+<p>标准的PID公式是：</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>U</mi><mi>k</mi><mo>=</mo><msub><mi>K</mi><mi>p</mi></msub><mo>∗</mo><msub><mi>e</mi><mi>k</mi></msub><mo>+</mo><mi>K</mi><mi>i</mi><msubsup><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>0</mn></mrow><mi>k</mi></msubsup><msub><mi>e</mi><mi>j</mi></msub><mo>+</mo><msub><mi>K</mi><mi>d</mi></msub><mo stretchy="false">(</mo><msub><mi>e</mi><mi>k</mi></msub><mo>−</mo><msub><mi>e</mi><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Uk=K_p*e_k+Ki∑_{j=0}^{k}e_j+K_d(e_k−e_{k−1})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.4248em;vertical-align:-0.4358em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.989em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4358em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
+<p>我们只取比例和积分控制，所以公式简化为：</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>U</mi><mi>k</mi><mo>=</mo><msub><mi>K</mi><mi>p</mi></msub><mo>∗</mo><msub><mi>e</mi><mi>k</mi></msub><mo>+</mo><mi>K</mi><mi>i</mi><msubsup><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>0</mn></mrow><mi>k</mi></msubsup><msub><mi>e</mi><mi>j</mi></msub></mrow><annotation encoding="application/x-tex">Uk=K_p*e_k+Ki∑_{j=0}^{k}e_j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.4248em;vertical-align:-0.4358em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.989em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4358em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span></p>
+<p>误差值 = 期望速度 - 实际速度</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>e</mi><mi>k</mi></msub><mo>=</mo><mi>E</mi><mi>n</mi><mi>c</mi><mi>o</mi><mi>d</mi><mi>e</mi><mi>r</mi><mi mathvariant="normal">_</mi><mi>S</mi><mi>e</mi><mi>t</mi><mo>−</mo><mi>E</mi><mi>n</mi><mi>c</mi><mi>o</mi><mi>d</mi><mi>e</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">e_k = Encoder\_Set - Encoder</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0044em;vertical-align:-0.31em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">n</span><span class="mord mathnormal">co</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord mathnormal">e</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">n</span><span class="mord mathnormal">co</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span></span></span></span></p>
+<p>速度环整理得出：</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>o</mi><mi>u</mi><mi>t</mi><mi>p</mi><mi>u</mi><mi>t</mi><mo>=</mo><msub><mi>K</mi><mi>p</mi></msub><mo>∗</mo><mo stretchy="false">(</mo><mi>E</mi><mi>n</mi><mi>c</mi><mi>o</mi><mi>d</mi><mi>e</mi><mi>r</mi><mi mathvariant="normal">_</mi><mi>S</mi><mi>e</mi><mi>t</mi><mo>−</mo><mi>E</mi><mi>n</mi><mi>c</mi><mi>o</mi><mi>d</mi><mi>e</mi><mi>r</mi><mo stretchy="false">)</mo><mo>+</mo><mi>K</mi><mi>i</mi><msubsup><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>0</mn></mrow><mi>k</mi></msubsup><msub><mi>e</mi><mi>j</mi></msub></mrow><annotation encoding="application/x-tex">output=K_p*(Encoder\_Set - Encoder)+Ki∑_{j=0}^{k}e_j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8095em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">o</span><span class="mord mathnormal">u</span><span class="mord mathnormal">tp</span><span class="mord mathnormal">u</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.06em;vertical-align:-0.31em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">n</span><span class="mord mathnormal">co</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord mathnormal">e</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">n</span><span class="mord mathnormal">co</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.4248em;vertical-align:-0.4358em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.989em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4358em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span></p>
+<p>串级PID整理：</p>
+<p>公式①：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>W</mi><mi>M</mi><mo>=</mo><mi>K</mi><mi>p</mi><mo>∗</mo><mo stretchy="false">(</mo><mi>Z</mi><mi>e</mi><mi>r</mi><mi>o</mi><mo>−</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>+</mo><mi>K</mi><mi>d</mi><mo>∗</mo><mi>ω</mi></mrow><annotation encoding="application/x-tex">PWM = Kp*(Zero-θ)+Kd*ω</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span><span class="mord mathnormal">ero</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mord mathnormal">d</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span></span></span></p>
+<p>公式②：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>o</mi><mi>u</mi><mi>t</mi><mi>p</mi><mi>u</mi><mi>t</mi><mo>=</mo><msub><mi>K</mi><mi>p</mi></msub><mo>∗</mo><mo stretchy="false">(</mo><mi>E</mi><mi>n</mi><mi>c</mi><mi>o</mi><mi>d</mi><mi>e</mi><mi>r</mi><mi mathvariant="normal">_</mi><mi>S</mi><mi>e</mi><mi>t</mi><mo>−</mo><mi>E</mi><mi>n</mi><mi>c</mi><mi>o</mi><mi>d</mi><mi>e</mi><mi>r</mi><mo stretchy="false">)</mo><mo>+</mo><mi>K</mi><mi>i</mi><msubsup><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>0</mn></mrow><mi>k</mi></msubsup><msub><mi>e</mi><mi>j</mi></msub></mrow><annotation encoding="application/x-tex">output=K_p*(Encoder\_Set - Encoder)+Ki∑_{j=0}^{k}e_j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8095em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">o</span><span class="mord mathnormal">u</span><span class="mord mathnormal">tp</span><span class="mord mathnormal">u</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.06em;vertical-align:-0.31em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">n</span><span class="mord mathnormal">co</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord mathnormal">e</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">n</span><span class="mord mathnormal">co</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.4248em;vertical-align:-0.4358em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.989em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4358em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span></p>
+<p>那将 <code>output+Zero</code> 作为直立环的输入代入①(由于速度环输出的期望角度是基于机械中值的基础，因此需要加上Zreo之后代入，因为小车运动是在直立的基础上倾斜才能运动)得出:</p>
+<p>公式③：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>W</mi><mi>M</mi><mo>=</mo><mi>K</mi><mi>p</mi><mo>∗</mo><mo stretchy="false">(</mo><mi>o</mi><mi>u</mi><mi>t</mi><mi>p</mi><mi>u</mi><mi>t</mi><mo>+</mo><mi>Z</mi><mi>e</mi><mi>r</mi><mi>o</mi><mo>−</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>+</mo><mi>K</mi><mi>d</mi><mo>∗</mo><mi>ω</mi></mrow><annotation encoding="application/x-tex">PWM = Kp*(output+Zero-θ)+Kd*ω</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">o</span><span class="mord mathnormal">u</span><span class="mord mathnormal">tp</span><span class="mord mathnormal">u</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span><span class="mord mathnormal">ero</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mord mathnormal">d</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span></span></span></p>
+<p>将公式②代入③得出：</p>
+<p>公式④：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>W</mi><mi>M</mi><mo>=</mo><msub><mi>K</mi><mi>p</mi></msub><mo>∗</mo><mo stretchy="false">(</mo><msup><msub><mi>K</mi><mi>p</mi></msub><msup><mrow></mrow><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup></msup><mo>∗</mo><mo stretchy="false">(</mo><mi>E</mi><mi>n</mi><mi>c</mi><mi>o</mi><mi>d</mi><mi>e</mi><mi>r</mi><mi mathvariant="normal">_</mi><mi>S</mi><mi>e</mi><mi>t</mi><mo>−</mo><mi>E</mi><mi>n</mi><mi>c</mi><mi>o</mi><mi>d</mi><mi>e</mi><mi>r</mi><mo stretchy="false">)</mo><mo>+</mo><mi>K</mi><mi>i</mi><msubsup><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>0</mn></mrow><mi>k</mi></msubsup><msub><mi>e</mi><mi>j</mi></msub><mo>+</mo><mi>Z</mi><mi>e</mi><mi>r</mi><mi>o</mi><mo>−</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>+</mo><mi>K</mi><mi>d</mi><mo>∗</mo><mi>ω</mi></mrow><annotation encoding="application/x-tex">PWM=K_p*({K_p}^{&#x27;}*(Encoder\_Set - Encoder)+Ki∑_{j=0}^{k}e_j + Zero-θ) + Kd*ω</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.3018em;vertical-align:-0.2861em;"></span><span class="mopen">(</span><span class="mord"><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.0157em;"><span style="top:-3.0157em;margin-right:0.05em;"><span class="pstrut" style="height:2.5795em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8278em;"><span style="top:-2.931em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.06em;vertical-align:-0.31em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">n</span><span class="mord mathnormal">co</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord mathnormal">e</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">n</span><span class="mord mathnormal">co</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.4248em;vertical-align:-0.4358em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.989em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4358em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span><span class="mord mathnormal">ero</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mord mathnormal">d</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span></span></span></p>
+<p>将公式④展开：</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle mathcolor="red"><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow></mstyle></mrow><annotation encoding="application/x-tex">\color{red}{E = mc^2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord" style="color:red;"><span class="mord mathnormal" style="margin-right:0.05764em;color:red;">E</span><span class="mspace" style="color:red;margin-right:0.2778em;"></span><span class="mrel" style="color:red;">=</span><span class="mspace" style="color:red;margin-right:0.2778em;"></span><span class="mord mathnormal" style="color:red;">m</span><span class="mord" style="color:red;"><span class="mord mathnormal" style="color:red;">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight" style="color:red;"><span class="mord mtight" style="color:red;">2</span></span></span></span></span></span></span></span></span></span></span></span></p>
+</blockquote>
+<h2 id="原理图绘制">原理图绘制</h2>
+<ul>
+<li>主板</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230728205045.webp" alt=""></p>
+<blockquote>
+<p>组成：STM32F103VET6，0.96OLED，MPU6050，TB6612FNG，HC-05蓝牙模块，按键，LED，降压电路，蜂鸣器，超声波，7路灰度，ASR语音模块</p>
+</blockquote>
+<blockquote>
+<p>注意：</p>
+<ol>
+<li><code>VBAT</code> 是外部电池专用引脚，如果没用到则需要接VDD</li>
+<li>看数据手册知道 <code>VDDA</code>，<code>VREF+</code> 都是接VDD，<code>VREF-</code> 跟 <code>VSSA</code> 接地，<code>NC</code> 悬空(即芯片公司预留的一个未连接引脚)</li>
+<li><code>BOOT0</code> 和 <code>BOOT1(PB2)</code> 接地即可</li>
+<li><code>TPS54302DDCR</code> 降压电路直接参考IC数据手册即可，注意布局选用户自定义那，那里找一模一样的官方的不一样不方便画线，只要封装没错就行</li>
+<li>电机固定孔的话用通孔即可，给直径</li>
+</ol>
+</blockquote>
+<ul>
+<li>底板</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230728205057.webp" alt=""></p>
+<blockquote>
+<ul>
+<li>注意尺寸</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230725130907.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230725171952.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230725175849.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230725175859.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+</blockquote>
+<p>元器件在 <code>讯华微电子</code> 买，大多数都有</p>
+<ul>
+<li>主板</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">数量</th>
+<th style="text-align:left">位号</th>
+<th style="text-align:center">封装</th>
+<th style="text-align:center">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">22uF电容</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">C1</td>
+<td style="text-align:center">0805</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">0.1uF电容</td>
+<td style="text-align:center">8</td>
+<td style="text-align:left">C2,C3,C4,C5,C10,C11,C20,C23</td>
+<td style="text-align:center">0805</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">20pF电容</td>
+<td style="text-align:center">2</td>
+<td style="text-align:left">C6,C7</td>
+<td style="text-align:center">0805</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">100nF电容</td>
+<td style="text-align:center">9</td>
+<td style="text-align:left">C8,C15,C16,C19,C26,C27,C28,C29,C30</td>
+<td style="text-align:center">0805</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">10uF电容</td>
+<td style="text-align:center">3</td>
+<td style="text-align:left">C9,C12,C13</td>
+<td style="text-align:center">0805</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">1uF电容</td>
+<td style="text-align:center">2</td>
+<td style="text-align:left">C14,C17</td>
+<td style="text-align:center">0805</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">22pF电容</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">C18</td>
+<td style="text-align:center">0805</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">22uF钽电容</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">C21</td>
+<td style="text-align:center">A型</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">220uF铝电解电容</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">C22</td>
+<td style="text-align:center">贴片</td>
+<td style="text-align:center">额定电压25V</td>
+</tr>
+<tr>
+<td style="text-align:center">DC电源插座</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">DC1</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">内径:2mm 外径:6.3mm 铜材质，额定电流3A，额定电压30V</td>
+</tr>
+<tr>
+<td style="text-align:center">TPS54302DDCR降压转换器</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">U2</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">SOT-23-6封装</td>
+</tr>
+<tr>
+<td style="text-align:center">ME6119C33M5G线性稳压器(LDO)</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">U3</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">SOT-23-5封装，输出极性：正 最大输入电压：18V 输出电压：3.3V 输出电流：400mA</td>
+</tr>
+<tr>
+<td style="text-align:center">TB6612FNG电机驱动芯片</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">U4</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">输出电流：1A ，电源电压：2.7V~5.5V  SSOP-24封装</td>
+</tr>
+<tr>
+<td style="text-align:center">LED</td>
+<td style="text-align:center">2</td>
+<td style="text-align:left"></td>
+<td style="text-align:center">0805</td>
+<td style="text-align:center">红色</td>
+</tr>
+<tr>
+<td style="text-align:center">LED</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left"></td>
+<td style="text-align:center">0805</td>
+<td style="text-align:center">绿色</td>
+</tr>
+<tr>
+<td style="text-align:center">有源蜂鸣器</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">BUZZER1</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">5V</td>
+</tr>
+<tr>
+<td style="text-align:center">4P排母</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">H1</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">2.54mm</td>
+</tr>
+<tr>
+<td style="text-align:center">6P排母</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">H2</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">2.54mm</td>
+</tr>
+<tr>
+<td style="text-align:center">2x4P排母</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">H3</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">2.54mm</td>
+</tr>
+<tr>
+<td style="text-align:center">2x4P排针</td>
+<td style="text-align:center">2</td>
+<td style="text-align:left">J3,J4</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">按键</td>
+<td style="text-align:center">4</td>
+<td style="text-align:left">K1,K2,K3,RESET</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">10uH±20%电感</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">L1</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">额定电压25V</td>
+</tr>
+<tr>
+<td style="text-align:center">MPU6050</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">MPU1</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">SS8050-NPN</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">Q2</td>
+<td style="text-align:center">SOT23</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">10K电阻</td>
+<td style="text-align:center">6</td>
+<td style="text-align:left">R1,R8,R10,R11,R12,R14</td>
+<td style="text-align:center">0805</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">110k 1%电阻</td>
+<td style="text-align:center">2</td>
+<td style="text-align:left">R2,R15</td>
+<td style="text-align:center">0805</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">15k 1%电阻</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">R3</td>
+<td style="text-align:center">0805</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">20k电阻</td>
+<td style="text-align:center">3</td>
+<td style="text-align:left">R4,R5,R6</td>
+<td style="text-align:center">0805</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">1K电阻</td>
+<td style="text-align:center">3</td>
+<td style="text-align:left">R7,R9,R13</td>
+<td style="text-align:center">0805</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">510K电阻</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">R16</td>
+<td style="text-align:center">0805</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">STM32F103VET6</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">U1</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">8MHz晶振</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">X1</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">4P插件XH</td>
+<td style="text-align:center">2</td>
+<td style="text-align:left">XH1,XH3</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">2.54mm</td>
+</tr>
+<tr>
+<td style="text-align:center">9P插件XH</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">XH2</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">2.54mm</td>
+</tr>
+<tr>
+<td style="text-align:center">6P插件ZH</td>
+<td style="text-align:center">2</td>
+<td style="text-align:left">ZH1,ZH2</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1.5mm</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>底板</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">数量</th>
+<th>位号</th>
+<th style="text-align:center">封装</th>
+<th style="text-align:center">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">2P插件PH</td>
+<td style="text-align:center">1</td>
+<td>CN1</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">2.0mm</td>
+</tr>
+<tr>
+<td style="text-align:center">9P排母</td>
+<td style="text-align:center">2</td>
+<td>H1,H2</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">2.54mm</td>
+</tr>
+<tr>
+<td style="text-align:center">4P排母</td>
+<td style="text-align:center">2</td>
+<td>H3,H4</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">2.54mm</td>
+</tr>
+<tr>
+<td style="text-align:center">9P排针</td>
+<td style="text-align:center">2</td>
+<td>J1,J2</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">2.54mm</td>
+</tr>
+<tr>
+<td style="text-align:center">2x4P排针</td>
+<td style="text-align:center">2</td>
+<td>J3,J4</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">2.54mm</td>
+</tr>
+<tr>
+<td style="text-align:center">4P插件XH</td>
+<td style="text-align:center">3</td>
+<td>XH1,XH2,XH4</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">2.54mm</td>
+</tr>
+<tr>
+<td style="text-align:center">2P插件XH</td>
+<td style="text-align:center">1</td>
+<td>XH3</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">2.54mm</td>
+</tr>
+</tbody>
+</table>
+<h2 id="PCB">PCB</h2>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230728205231.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230728205249.webp" alt=""></p>
+<h2 id="焊接">焊接</h2>
+<p>注意引脚分布，看数据手册</p>
+<blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230801220207.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230801220442.webp" alt=""></p>
+</blockquote>
+<h2 id="我的模块">我的模块</h2>
+<h3 id="其他">其他</h3>
+<ul>
+<li>MX配置</li>
+</ul>
+<p>用于系统计数，任务调度</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230803105923.webp" alt=""></p>
+<p>用于编码器，MPU等执行</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230803113609.webp" alt=""></p>
+<h3 id="STM32主控">STM32主控</h3>
+<ul>
+<li>硬件</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230728211738.webp" alt=""></p>
+<h3 id="ASRPRO语音核心板">ASRPRO语音核心板</h3>
+<p>语音模块使用天问51的ASRPRO，需要去官网下载编译器</p>
+<blockquote>
+<p>喇叭的红色是+，黑色是-，分别连接核心板的 <code>SPK+</code> 和 <code>SPK-</code>(端子是2.0)</p>
+<p>麦克风的红色是+，黑色是-，分别连接核心板的 <code>MIC+</code> 和 <code>MIC-</code>(端子是2.54)</p>
+<p>UART0串口不推荐用来MCU通信，一般用来固件烧写</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230725105206.webp" alt=""></p>
+</blockquote>
+<ul>
+<li>硬件</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230728211900.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230728212235.webp" alt=""></p>
+<ul>
+<li>MX配置</li>
+</ul>
+<p>需要跟STM32通信</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">STM32引脚号</th>
+<th style="text-align:center">模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PB10</td>
+<td style="text-align:center">USART3_TX</td>
+</tr>
+<tr>
+<td style="text-align:center">PB11</td>
+<td style="text-align:center">USART3_RX</td>
+</tr>
+</tbody>
+</table>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230728223556.webp" alt=""></p>
+<ul>
+<li>程序</li>
+</ul>
+<details ><summary> Voice.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __VOICE_H
+#define __VOICE_H
+
+&#x2F;&#x2F; 协议是4个字节
+#define Voice_Protocol_Data_LEN	(uint8_t)7
+
+typedef struct
+&#123;
+    void (*Voice_Init)(void);   &#x2F;&#x2F; 语音识别初始化
+    void (*Voice_Protocol_Analyze)(void);   &#x2F;&#x2F; 语音识别协议解析
+&#125;Voice_t;
+
+extern Voice_t Voice;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> Voice.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: Voice.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;08&#x2F;3
+ * description: ASR语音开发板通信
+ -----------------------------------
+协议：
+    语音识别开发板发送给STM32协议格式：【0xAA 0xXX 0xXX 0xBB】
+    STM32发送给语音识别开发板是字符串形式...
+ -----------------------------------
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void Voice_Init(void);
+static void Voice_Protocol_Analyze(void);
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+Voice_t Voice &#x3D; 
+&#123;
+    .Voice_Init &#x3D; &amp;Voice_Init,
+    .Voice_Protocol_Analyze &#x3D; &amp;Voice_Protocol_Analyze
+&#125;;
+
+&#x2F;*
+* @function: Voice_Init
+* @param: None
+* @retval: None
+* @brief: 描述
+*&#x2F;
+static void Voice_Init(void)
+&#123;
+    __HAL_UART_ENABLE_IT(&amp;huart3, UART_IT_IDLE);
+    HAL_UART_Receive_DMA(&amp;huart3, UART3.pucRec_Buffer, (uint16_t)UART3_Rec_MAX_LENGTH);
+&#125;
+
+&#x2F;*
+* @function: Voice_Protocol_Analyze
+* @param: None
+* @retval: None
+* @brief: 描述
+*&#x2F;
+static void Voice_Protocol_Analyze(void)
+&#123;
+    uint8_t Temp_Array[4] &#x3D; &#123;0x00&#125;;
+    uint8_t i &#x3D; 0, Index &#x3D; 0;
+
+    HAL_UART_DMAStop(&amp;huart3); &#x2F;&#x2F; 串口停止DMA接收
+
+    for (i &#x3D; 0; i &lt; UART3_Rec_MAX_LENGTH; i++)
+    &#123;
+        if (0 &#x3D;&#x3D; Index) &#x2F;&#x2F; 检测键值起始数据0xAA
+        &#123;
+            if (*(UART3.pucRec_Buffer + i) !&#x3D; 0xAA)
+            &#123;
+                continue;
+            &#125;
+        &#125;
+        Temp_Array[Index] &#x3D; *(UART3.pucRec_Buffer + i);
+        if (Voice_Protocol_Data_LEN &#x3D;&#x3D; Index)
+        &#123;
+            break;
+        &#125;
+        Index++;
+    &#125;
+    HAL_UART_Receive_DMA(&amp;huart3, UART3.pucRec_Buffer, (uint16_t)UART3_Rec_MAX_LENGTH);
+    &#x2F;&#x2F; 处理数据
+    if (Voice_Protocol_Data_LEN &#x3D;&#x3D; Index)
+    &#123;
+        if ((0xAA &#x3D;&#x3D; Temp_Array[0]) &amp;&amp; (0xBB &#x3D;&#x3D; Temp_Array[3]))
+        &#123;
+            if (0x01 &#x3D;&#x3D; Temp_Array[1])
+            &#123;
+                switch(Temp_Array[2])
+                &#123;
+                    case 0x01:
+                    &#123;
+                        break;
+                    &#125;
+                    case 0x02:
+                    &#123;
+                        break;
+                    &#125;
+                    default:break;
+                &#125;
+            &#125;
+        &#125;
+        else
+        &#123;
+            ;
+        &#125;
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<h4 id="ASRPRO基础">ASRPRO基础</h4>
+<blockquote>
+<p>基本的东西都在编译器里的编程手册中</p>
+</blockquote>
+<blockquote>
+<p>使用专业版，扩展库的初始化一般放系统应用初始化中(不是强制性只是个人习惯问题)</p>
+</blockquote>
+<blockquote>
+<p>上电初始化和系统应用初始化效果一样的就是上电执行一次然后就不会执行</p>
+</blockquote>
+<blockquote>
+<p>功能</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230803141315.webp" alt=""></p>
+</blockquote>
+<h4 id="控制WS2812">控制WS2812</h4>
+<ol>
+<li>在专业版模式下点击扩展，找到官方的WS2812库点击【加载】即可添加进来(版本选择最新)</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230730212849.webp" alt=""></p>
+<h3 id="LED">LED</h3>
+<ul>
+<li>硬件</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230728213710.webp" alt=""></p>
+<ul>
+<li>MX配置</li>
+</ul>
+<p>低电平亮，高电平灭</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">STM32引脚号</th>
+<th style="text-align:center">模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PD10</td>
+<td style="text-align:center">推挽输出，默认高电平</td>
+</tr>
+</tbody>
+</table>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230728223833.webp" alt=""></p>
+<ul>
+<li>程序</li>
+</ul>
+<details ><summary> led.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __LED_H
+#define __LED_H
+
+typedef struct
+&#123;
+    void (*Led_Init)(void); &#x2F;&#x2F; LED初始化
+    void (*Led_ON)(void);   &#x2F;&#x2F; 打开
+    void (*Led_OFF)(void);  &#x2F;&#x2F; 关闭
+    void (*Led_Flip)(void); &#x2F;&#x2F; 翻转
+&#125; Led_t;
+
+extern Led_t Led;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> led.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: Led.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;06&#x2F;23
+ * description: LED
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+static void Led_Init(void);
+static void Led_ON(void);
+static void Led_OFF(void);
+static void Led_Flip(void);
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+Led_t Led &#x3D; 
+&#123;
+    .Led_Init &#x3D; &amp;Led_Init,
+    .Led_ON &#x3D; &amp;Led_ON,
+    .Led_OFF &#x3D; &amp;Led_OFF,
+    .Led_Flip &#x3D; &amp;Led_Flip,
+&#125;;
+
+&#x2F;*
+* @function: Led_Init
+* @param: None
+* @retval: None
+* @brief: 
+*&#x2F;
+static void Led_Init(void)
+&#123;
+    Led.Led_OFF();
+&#125;
+
+&#x2F;*
+* @function: Led_ON
+* @param: None
+* @retval: None
+* @brief: 
+*&#x2F;
+static void Led_ON(void)
+&#123;
+    HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
+&#125;
+
+&#x2F;*
+* @function: Led_OFF
+* @param: None
+* @retval: None
+* @brief: 
+*&#x2F;
+static void Led_OFF(void)
+&#123;
+    HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
+&#125;
+
+&#x2F;*
+* @function: Led_Flip
+* @param: None
+* @retval: None
+* @brief: 
+*&#x2F;
+static void Led_Flip(void)
+&#123;
+    HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
+&#125;</code></pre>
+              </div>
+            </details>
+<h3 id="按键">按键</h3>
+<ul>
+<li>硬件</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230728215613.webp" alt=""></p>
+<ul>
+<li>MX配置</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">STM32引脚号</th>
+<th style="text-align:center">模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PE4</td>
+<td style="text-align:center">上拉输入</td>
+</tr>
+<tr>
+<td style="text-align:center">PE5</td>
+<td style="text-align:center">上拉输入</td>
+</tr>
+<tr>
+<td style="text-align:center">PE6</td>
+<td style="text-align:center">上拉输入</td>
+</tr>
+</tbody>
+</table>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230731221737.webp" alt=""></p>
+<ul>
+<li>程序</li>
+</ul>
+<details ><summary> Key.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __KEY_H
+#define __KEY_H
+
+&#x2F;&#x2F; 读取按键电平
+#define READ_KEY1    HAL_GPIO_ReadPin(K1_GPIO_Port,K1_Pin)
+#define READ_KEY2    HAL_GPIO_ReadPin(K2_GPIO_Port,K2_Pin)
+#define READ_KEY3    HAL_GPIO_ReadPin(K3_GPIO_Port,K3_Pin)
+
+typedef enum
+&#123;
+    KEY_NULL  &#x3D; (uint8_t)0x00,  &#x2F;&#x2F; 无按键按下键值
+    KEY1_DOWN &#x3D; (uint8_t)0x01,  &#x2F;&#x2F; 按键1按下键值  
+    KEY2_DOWN &#x3D; (uint8_t)0x02,  &#x2F;&#x2F; 按键2按下键值
+    KEY3_DOWN &#x3D; (uint8_t)0x03,  &#x2F;&#x2F; 按键3按下键值
+&#125;Key_1_Status_t;
+
+typedef struct
+&#123;
+    uint16_t volatile vusKey_Timer_Count; &#x2F;&#x2F; 长按计数
+    uint8_t volatile vucKey_Flag_Arr[6];  &#x2F;&#x2F; 按键标志位(短长按)
+    void (*Key_Scan)(void);   &#x2F;&#x2F; 按键三行消抖---按键扫描
+    void (*Key_Handler)(void);    &#x2F;&#x2F; 按键处理
+&#125;Key_t;
+
+extern Key_t Key;
+
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> Key.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: Key.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;06&#x2F;23
+ * description: 
+
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;variable definition declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static uint8_t ucKey_Value,ucKey_Up,ucKey_Down;
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;variable definition declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+static uint8_t Key_Return_Value(void); 
+static void Key_Scan(void);
+static void Key_Handler(void);
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+Key_t Key &#x3D; 
+&#123;
+    .vusKey_Timer_Count &#x3D; 0,
+    .vucKey_Flag_Arr &#x3D; &#123;FALSE&#125;,
+    .Key_Scan &#x3D; &amp;Key_Scan,
+    .Key_Handler &#x3D; &amp;Key_Handler
+&#125;;
+
+
+&#x2F;*
+* @function: Key_Return_Value
+* @param: None
+* @retval: None
+* @brief: 
+*&#x2F;
+static uint8_t Key_Return_Value(void)
+&#123;
+    if ((!READ_KEY1) || (!READ_KEY2) || (!READ_KEY3))
+    &#123;
+        if (!READ_KEY1)
+        &#123;
+            return KEY1_DOWN;
+        &#125;
+        else if (!READ_KEY2)
+        &#123;
+            return KEY2_DOWN;
+        &#125;
+        else if (!READ_KEY3)
+        &#123;
+            return KEY3_DOWN;
+        &#125;            
+    &#125;
+
+    return KEY_NULL;
+&#125;
+
+&#x2F;*
+* @function: Key_Scan
+* @param: None
+* @retval: None
+* @brief:
+*&#x2F;
+static void Key_Scan(void)
+&#123;
+    static uint8_t uckey_old;
+    static uint8_t long_press_triggered &#x3D; 0;
+    
+    ucKey_Value &#x3D; Key_Return_Value();                     
+    ucKey_Up &#x3D; ~ucKey_Value &amp; (uckey_old ^ ucKey_Value);
+    ucKey_Down &#x3D; ucKey_Value &amp; (uckey_old ^ ucKey_Value);
+    uckey_old &#x3D; ucKey_Value;                         
+
+    if (ucKey_Down)
+    &#123;
+        Key.vusKey_Timer_Count &#x3D; 0;
+        long_press_triggered &#x3D; 0; 
+    &#125;
+
+    if (Key.vusKey_Timer_Count &lt; 10)
+    &#123;
+        switch (ucKey_Up)
+        &#123;
+        case KEY1_DOWN:
+            Key.vucKey_Flag_Arr[0] &#x3D; TRUE;
+            break;
+        case KEY2_DOWN:
+            Key.vucKey_Flag_Arr[1] &#x3D; TRUE;
+            break;
+        case KEY3_DOWN:
+            Key.vucKey_Flag_Arr[2] &#x3D; TRUE;
+            break;
+            break;
+        default:
+            break;
+        &#125;
+    &#125;
+    else
+    &#123;
+        if (!long_press_triggered) 
+        &#123;
+            switch (ucKey_Value) 
+            &#123;
+            case KEY1_DOWN:
+                Key.vucKey_Flag_Arr[3] &#x3D; TRUE;
+                break;
+            case KEY2_DOWN:
+                Key.vucKey_Flag_Arr[4] &#x3D; TRUE;
+                break;
+            case KEY3_DOWN:
+                Key.vucKey_Flag_Arr[5] &#x3D; TRUE;
+                break;
+            default:
+                break;
+            &#125;
+            long_press_triggered &#x3D; 1;
+        &#125;
+    &#125;
+&#125;
+
+
+&#x2F;*
+* @function: Key_Handler
+* @param: None
+* @retval: None
+* @brief:
+*&#x2F;
+static void Key_Handler(void)
+&#123;
+    if (Key.vucKey_Flag_Arr[0])
+    &#123;
+        Key.vucKey_Flag_Arr[0] &#x3D; FALSE;     
+    &#125;
+
+    else if (Key.vucKey_Flag_Arr[1])
+    &#123;
+        Key.vucKey_Flag_Arr[1] &#x3D; FALSE;
+    &#125;
+
+    else if (Key.vucKey_Flag_Arr[2])
+    &#123;
+        Key.vucKey_Flag_Arr[2] &#x3D; FALSE;
+    &#125;
+
+    else if (Key.vucKey_Flag_Arr[3])
+    &#123;
+        Key.vucKey_Flag_Arr[3] &#x3D; FALSE;
+    &#125;
+
+    else if (Key.vucKey_Flag_Arr[4])
+    &#123;
+        Key.vucKey_Flag_Arr[4] &#x3D; FALSE;
+    &#125;  
+
+    else if (Key.vucKey_Flag_Arr[5])
+    &#123;
+        Key.vucKey_Flag_Arr[5] &#x3D; FALSE;
+    &#125;              
+&#125;</code></pre>
+              </div>
+            </details>
+<h3 id="OLED">OLED</h3>
+<ul>
+<li>硬件</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230728215834.webp" alt=""></p>
+<ul>
+<li>MX配置</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">STM32引脚号</th>
+<th style="text-align:center">模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PC8(SCL)</td>
+<td style="text-align:center">开漏输出</td>
+</tr>
+<tr>
+<td style="text-align:center">PC9(SDA)</td>
+<td style="text-align:center">开漏输出</td>
+</tr>
+</tbody>
+</table>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230731222309.webp" alt=""></p>
+<ul>
+<li>程序</li>
+</ul>
+<details ><summary> OLED.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __OLED_H
+#define __OLED_H
+
+&#x2F;&#x2F; OLED的IIC地址(SA0 &#x3D; 0) --- 0111 1000
+#define OLED_ADDR       0x78
+&#x2F;&#x2F; OLED参数(宽度，高度，页数量)
+#define OLED_WIDTH      128
+#define OLED_HEIGHT     64
+
+&#x2F;&#x2F; 字体大小
+typedef enum
+&#123;
+    ASCII_SIZE_16 &#x3D; 16,
+&#125; ASCII_Size_t;
+
+&#x2F;&#x2F; 最大只能显示4行
+typedef enum
+&#123;
+    OLED_Line1 &#x3D; 0,  
+    OLED_Line2 &#x3D; 2,
+    OLED_Line3 &#x3D; 4,
+    OLED_Line4 &#x3D; 6,
+&#125; OLED091_Line_t;
+
+typedef struct
+&#123;
+    void (*padString)(char *, int); &#x2F;&#x2F; 补全空格
+    void (*OLED_Init)(void);     &#x2F;&#x2F; OLED初始化
+    void (*OLED_Clear)(void);    &#x2F;&#x2F; 清屏
+    void (*OLED_Show_String)(uint8_t, OLED091_Line_t, const char*, ASCII_Size_t);       &#x2F;&#x2F; OLED显示字符串
+    void (*OLED_Show_CHN)(uint8_t, OLED091_Line_t, const char*);        &#x2F;&#x2F; OLED显示单个汉字
+&#125;OLED_t;
+
+extern OLED_t OLED;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> OLED.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: OLED.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;06&#x2F;23
+ * description: 0.96寸OLED
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+#include &quot;Oled_Font.h&quot;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;variable definition declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+&#x2F;&#x2F; 定义注册IIC结构体
+IIC_Data_t OLED_IIC;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;variable definition declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+static void OLED_Init(void);     &#x2F;&#x2F; OLED初始化
+static void OLED_Clear(void);    &#x2F;&#x2F; 清屏
+static void OLED_Show_String(uint8_t, OLED091_Line_t, const char*, ASCII_Size_t);       &#x2F;&#x2F; OLED显示字符串
+static void OLED_Show_CHN(uint8_t, OLED091_Line_t, const char*);        &#x2F;&#x2F; OLED显示单个汉字
+static void padString(char *, int);
+
+static void OLED_Set_Pos(uint8_t, uint8_t); &#x2F;&#x2F; OLED设置坐标
+static void OLED_Write_CMD(uint8_t);    &#x2F;&#x2F; OLED写命令
+static void OLED_Write_Data(uint8_t);    &#x2F;&#x2F; OLED写数据
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+OLED_t OLED &#x3D;
+&#123;
+    .padString &#x3D; &amp;padString,
+    .OLED_Init &#x3D; &amp;OLED_Init,
+    .OLED_Clear &#x3D; &amp;OLED_Clear,
+    .OLED_Show_String &#x3D; &amp;OLED_Show_String,
+    .OLED_Show_CHN &#x3D; &amp;OLED_Show_CHN
+&#125;;
+
+&#x2F;*
+* @function: OLED_Write_CMD
+* @param: CMD -&gt; 待写入命令
+* @retval: None
+* @brief: OLED写命令
+*&#x2F;
+static void OLED_Write_CMD(uint8_t CMD)
+&#123;
+    IIC_Soft.IIC_Start(&amp;OLED_IIC);
+    IIC_Soft.IIC_Write_Byte(&amp;OLED_IIC, OLED_ADDR);   &#x2F;&#x2F; R&#x2F;W#&#x3D;0
+    IIC_Soft.IIC_Write_Byte(&amp;OLED_IIC, 0x00);       &#x2F;&#x2F; Co&#x3D;0,D&#x2F;C#&#x3D;0
+    IIC_Soft.IIC_Write_Byte(&amp;OLED_IIC, CMD);
+    IIC_Soft.IIC_Stop(&amp;OLED_IIC);    
+&#125;
+
+&#x2F;*
+* @function: OLED_Write_Data
+* @param: Data -&gt; 待写入数据
+* @retval: None
+* @brief: OLED写数据
+*&#x2F;
+static void OLED_Write_Data(uint8_t Data)
+&#123;
+    IIC_Soft.IIC_Start(&amp;OLED_IIC);
+    IIC_Soft.IIC_Write_Byte(&amp;OLED_IIC, OLED_ADDR);        &#x2F;&#x2F; R&#x2F;W#&#x3D;0
+    IIC_Soft.IIC_Write_Byte(&amp;OLED_IIC, 0x40);       &#x2F;&#x2F; Co&#x3D;0,D&#x2F;C#&#x3D;0
+    IIC_Soft.IIC_Write_Byte(&amp;OLED_IIC, Data);
+    IIC_Soft.IIC_Stop(&amp;OLED_IIC);
+&#125;
+
+&#x2F;*
+* @function: OLED_Init
+* @param: None
+* @retval: None
+* @brief: OLED初始化
+*&#x2F;
+static void OLED_Init(void)
+&#123;
+    IIC_Soft.IIC_Registered(&amp;OLED_IIC, OLED_SCL_GPIO_Port, OLED_SCL_Pin, OLED_SDA_GPIO_Port, OLED_SDA_Pin);	&#x2F;&#x2F; 注册IIC设备
+
+    Public.Public_Delay_ms(200); &#x2F;&#x2F; 上电延时
+    OLED_Write_CMD(0xAE); &#x2F;&#x2F; OLED休眠
+    OLED_Write_CMD(0x00); &#x2F;&#x2F; 设置低列地址
+    OLED_Write_CMD(0x10); &#x2F;&#x2F; 设置高列地址
+    OLED_Write_CMD(0x40); &#x2F;&#x2F; 设置起始地址线
+    OLED_Write_CMD(0xB0); &#x2F;&#x2F; set page address
+    OLED_Write_CMD(0x81); &#x2F;&#x2F; 设置对比度
+    OLED_Write_CMD(0xFF); &#x2F;&#x2F;--128
+    OLED_Write_CMD(0xA1); &#x2F;&#x2F; 0xa0左右反置 0xa1正常
+    OLED_Write_CMD(0xA6); &#x2F;&#x2F; normal &#x2F; reverse
+    OLED_Write_CMD(0xA8); &#x2F;&#x2F; 设置多路复用(1 to 64)
+    OLED_Write_CMD(0x3F); &#x2F;&#x2F; 1&#x2F;32 duty
+    OLED_Write_CMD(0xC8); &#x2F;&#x2F; Com scan direction
+    OLED_Write_CMD(0xD3); &#x2F;&#x2F; 设置显示的偏移映射内存计数器
+    OLED_Write_CMD(0x00); &#x2F;&#x2F;
+
+    OLED_Write_CMD(0xD5); &#x2F;&#x2F; 设置显示时钟分频比&#x2F;振荡器频率
+    OLED_Write_CMD(0x80); &#x2F;&#x2F; 设置分频比例，时钟设置为100帧&#x2F;秒
+
+    OLED_Write_CMD(0xD8); &#x2F;&#x2F; set area color mode off
+    OLED_Write_CMD(0x05); &#x2F;&#x2F;
+
+    OLED_Write_CMD(0xD9); &#x2F;&#x2F; 预充电时间
+    OLED_Write_CMD(0xF1); &#x2F;&#x2F; 预充电为15个脉冲，释放为1个脉冲
+
+    OLED_Write_CMD(0xDA); &#x2F;&#x2F; 引脚设置硬件配置
+    OLED_Write_CMD(0x12); &#x2F;&#x2F;
+
+    OLED_Write_CMD(0xDB); &#x2F;&#x2F; 设置VCOM电平
+    OLED_Write_CMD(0x30); &#x2F;&#x2F;
+    &#x2F;&#x2F; 唤醒
+    OLED_Write_CMD(0x8D); &#x2F;&#x2F; 设置电荷泵
+    OLED_Write_CMD(0x14); &#x2F;&#x2F; 开启电荷泵
+
+    OLED_Write_CMD(0xAF); &#x2F;&#x2F; OLED唤醒(AE是OLED休眠)
+
+    OLED.OLED_Clear();    &#x2F;&#x2F; 清屏      
+&#125;
+
+&#x2F;*
+* @function: OLED_Clear
+* @param: None
+* @retval: None
+* @brief: OLED清屏
+*&#x2F;
+static void OLED_Clear(void)
+&#123;
+    uint8_t Page, Seg;
+
+    for (Page &#x3D; 0; Page &lt; 8; Page++)
+    &#123;
+        OLED_Write_CMD(0xB0 + Page); &#x2F;&#x2F; 一共8页(行)
+        OLED_Write_CMD(0x00);        &#x2F;&#x2F; 低
+        OLED_Write_CMD(0x01);        &#x2F;&#x2F; 高
+
+        for (Seg &#x3D; 0; Seg &lt; 128; Seg++)
+        &#123;
+            OLED_Write_Data(0x00);
+        &#125;
+    &#125;
+&#125;
+
+&#x2F;*
+* @function     : OLED_Set_Pos
+* @param        : Page -&gt; 行 Seg -&gt; 列
+* @retval       : None
+* @brief        : OLED设置坐标
+*&#x2F;
+static void OLED_Set_Pos(uint8_t Page, uint8_t Seg)
+&#123;
+    OLED_Write_CMD(0xB0 + Seg);
+    OLED_Write_CMD(((Page &amp; 0xF0) &gt;&gt; 4) | 0x10); &#x2F;&#x2F; 高4位
+    OLED_Write_CMD((Page &amp; 0x0F));               &#x2F;&#x2F; 低4位
+&#125;
+
+&#x2F;*
+* @function: OLED_Show_String
+* @param: x -&gt; 列 y -&gt; 行 p_Str -&gt; 要显示的字符串 ch_size -&gt; 字体大小
+* @retval: None
+* @brief: OLED显示字符串
+*&#x2F;
+static void OLED_Show_String(uint8_t x, OLED091_Line_t y, const char *p_Str, ASCII_Size_t ch_size)
+&#123;
+    uint8_t i &#x3D; 0;
+    uint8_t c &#x3D; 0;
+
+    if (ch_size &#x3D;&#x3D; 16)
+    &#123;
+        while (p_Str[i] !&#x3D; &#39;\0&#39;)
+        &#123;
+            c &#x3D; p_Str[i++] - &#39; &#39;;
+            OLED_Set_Pos(x, y);
+            for (uint8_t j &#x3D; 0; j &lt; 8; j++)
+                OLED_Write_Data(ucASCII_16x8[c * 16 + j]);
+            OLED_Set_Pos(x, y + 1);
+            for (uint8_t j &#x3D; 0; j &lt; 8; j++)
+                OLED_Write_Data(ucASCII_16x8[c * 16 + j + 8]);
+
+            x +&#x3D; 8;
+            if (x &gt; 120)
+            &#123;
+                x &#x3D; 0;
+                y +&#x3D; 2;
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: OLED_Show_CHN
+* @param: x -&gt; 列 y -&gt; 行  p_Str -&gt; 单个汉字字符串
+* @retval: None
+* @brief: &#x2F;&#x2F; OLED显示单个汉字
+*&#x2F;
+static void OLED_Show_CHN(uint8_t x, OLED091_Line_t y, const char *p_Str)
+&#123;
+    uint16_t usCHN_Number; &#x2F;&#x2F; 字库中汉字数量
+    uint16_t usIndex;      &#x2F;&#x2F; 字库中的汉字索引
+    uint8_t i;
+
+    &#x2F;&#x2F; 统计汉字的位置
+    usCHN_Number &#x3D; sizeof(CHN_16x16) &#x2F; sizeof(Oled_Font16x16_t);
+    &#x2F;&#x2F; 查找汉字的位置
+    for (usIndex &#x3D; 0; usIndex &lt; usCHN_Number; usIndex++)
+    &#123;
+        if ((CHN_16x16[usIndex].Index[0] &#x3D;&#x3D; *p_Str) &amp;&amp; (CHN_16x16[usIndex].Index[1] &#x3D;&#x3D; *(p_Str + 1))) &#x2F;&#x2F; 因为一个汉字占两个字节
+        &#123;
+            OLED_Set_Pos(x, y);
+            for (i &#x3D; 0; i &lt; 16; i++)
+            &#123;
+                OLED_Write_Data(CHN_16x16[usIndex].CHN_code[i]);
+            &#125;
+
+            OLED_Set_Pos(x, y + 1);
+            for (i &#x3D; 0; i &lt; 16; i++)
+            &#123;
+                OLED_Write_Data(CHN_16x16[usIndex].CHN_code[i + 16]);
+            &#125;
+            break;
+        &#125;
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: Menu_Display
+* @param: str -&gt; 字串符 size -&gt; 最大不能超过多少
+* @retval: None
+* @brief: 补全空格
+*&#x2F;
+static inline void padString(char *str, int size)
+&#123;
+    int len &#x3D; strlen(str);
+    if (len &gt;&#x3D; size)
+    &#123;
+        return; &#x2F;&#x2F; 字符串已经够长了，不需要添加空格
+    &#125;
+    for (int i &#x3D; len; i &lt; size; i++)
+    &#123;
+        if (i &lt; size - 1)
+        &#123;
+            str[i] &#x3D; &#39; &#39;; &#x2F;&#x2F; 在字符串末尾添加空格
+        &#125;
+        else
+        &#123;
+            str[i] &#x3D; &#39;\0&#39;; &#x2F;&#x2F; 添加字符串结束符
+        &#125;
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<h3 id="HC-05蓝牙">HC-05蓝牙</h3>
+<blockquote>
+<p>使用daplink连接蓝牙，然后按住按键再插电，看到灯在慢闪表示进入了AT模式，然后可以进行修改波特率等等</p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230803164127.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230803164652.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230803164800.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+</blockquote>
+<ul>
+<li>硬件</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230728215936.webp" alt=""></p>
+<ul>
+<li>MX配置</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">STM32引脚号</th>
+<th style="text-align:center">模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PA2</td>
+<td style="text-align:center">USART2_TX</td>
+</tr>
+<tr>
+<td style="text-align:center">PA3</td>
+<td style="text-align:center">USART2_RX</td>
+</tr>
+</tbody>
+</table>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230731223259.webp" alt=""></p>
+<ul>
+<li>程序</li>
+</ul>
+<blockquote>
+<p>蓝牙调试PID待写</p>
+</blockquote>
+<details ><summary> HC05.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __HC05_H
+#define __HC05_H
+
+&#x2F;&#x2F; 协议是4个字节
+#define HC05_Protocol_Data_LEN	(uint8_t)4
+
+typedef struct
+&#123;
+    void (*HC05_Init)(void);    &#x2F;&#x2F; 蓝牙初始化
+    void (*HC05_Protocol_Analyze)(void);    &#x2F;&#x2F; 蓝牙协议解析
+&#125; HC05_t;
+
+
+extern HC05_t HC05;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> HC05.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: xxx.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;08&#x2F;3
+ * description: 描述
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+static void HC05_Init(void);
+static void HC05_Protocol_Analyze(void);
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+HC05_t HC05 &#x3D; 
+&#123;
+    .HC05_Init &#x3D; &amp;HC05_Init,
+    .HC05_Protocol_Analyze &#x3D; &amp;HC05_Protocol_Analyze
+&#125;;
+
+&#x2F;*
+* @function: HC05_Init
+* @param: None
+* @retval: None
+* @brief: 描述
+*&#x2F;
+static void HC05_Init(void)
+&#123;
+    __HAL_UART_ENABLE_IT(&amp;huart2, UART_IT_IDLE);
+    HAL_UART_Receive_DMA(&amp;huart2, UART2.pucRec_Buffer, (uint16_t)UART2_Rec_MAX_LENGTH);
+&#125;
+
+&#x2F;*
+* @function: Voice_Protocol_Analyze
+* @param: None
+* @retval: None
+* @brief: 描述
+*&#x2F;
+static void HC05_Protocol_Analyze(void)
+&#123;
+    uint8_t Temp_Array[4] &#x3D; &#123;0x00&#125;;
+    uint8_t i &#x3D; 0, Index &#x3D; 0;
+
+    HAL_UART_DMAStop(&amp;huart2); &#x2F;&#x2F; 串口停止DMA接收
+
+    for (i &#x3D; 0; i &lt; UART2_Rec_MAX_LENGTH; i++)
+    &#123;
+        if (0 &#x3D;&#x3D; Index) &#x2F;&#x2F; 检测键值起始数据0x55
+        &#123;
+            if (*(UART2.pucRec_Buffer + i) !&#x3D; 0x55)
+            &#123;
+                continue;
+            &#125;
+        &#125;
+        Temp_Array[Index] &#x3D; *(UART2.pucRec_Buffer + i);
+        if (HC05_Protocol_Data_LEN &#x3D;&#x3D; Index)
+        &#123;
+            break;
+        &#125;
+        Index++;
+    &#125;
+    HAL_UART_Receive_DMA(&amp;huart2, UART2.pucRec_Buffer, (uint16_t)UART2_Rec_MAX_LENGTH);
+    &#x2F;&#x2F; 处理数据
+    if (HC05_Protocol_Data_LEN &#x3D;&#x3D; Index)
+    &#123;
+        if ((0x55 &#x3D;&#x3D; Temp_Array[0]) &amp;&amp; (0xBB &#x3D;&#x3D; Temp_Array[3]))
+        &#123;
+            if (0x01 &#x3D;&#x3D; Temp_Array[1])
+            &#123;
+                switch(Temp_Array[2])
+                &#123;
+                    case 0x01:
+                    &#123;
+                        break;
+                    &#125;
+                    case 0x02:
+                    &#123;
+                        break;
+                    &#125;
+                    default:break;
+                &#125;
+            &#125;
+        &#125;
+        else
+        &#123;
+            ;
+        &#125;
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<h3 id="HC-SR04超声波">HC-SR04超声波</h3>
+<ul>
+<li>硬件</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230728220043.webp" alt=""></p>
+<ul>
+<li>MX配置</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">STM32引脚号</th>
+<th style="text-align:center">模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PB14(Trig)</td>
+<td style="text-align:center">输出</td>
+</tr>
+<tr>
+<td style="text-align:center">PB15(Echo)</td>
+<td style="text-align:center">输入</td>
+</tr>
+</tbody>
+</table>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230731223803.webp" alt=""></p>
+<ul>
+<li>程序</li>
+</ul>
+<blockquote>
+<p>PID跟随待写</p>
+</blockquote>
+<details ><summary> HC_SR04.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __HC_SR04_H
+#define __HC_SR04_H
+
+typedef struct
+&#123;
+    float HC_SR04_Distance; &#x2F;&#x2F;测距值
+    float (*HC_SR04_Ranging)(void); &#x2F;&#x2F; 测距
+&#125;HC_SR04_t;
+
+extern HC_SR04_t HC_SR04;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> HC_SR04.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: xxx.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;08&#x2F;3
+ * description: 描述
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static float HC_SR04_Ranging(void);
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+HC_SR04_t HC_SR04 &#x3D; 
+&#123;
+    .HC_SR04_Distance &#x3D; 0,
+    .HC_SR04_Ranging &#x3D; &amp;HC_SR04_Ranging
+&#125;;
+
+&#x2F;*
+* @function: xxx
+* @param: None
+* @retval: None
+* @brief: 描述
+*&#x2F;
+static float HC_SR04_Ranging(void)
+&#123;
+    uint32_t i &#x3D; 0;
+    float Distance;
+
+    HAL_GPIO_WritePin(SR04_TIRG_GPIO_Port, SR04_TIRG_Pin, GPIO_PIN_SET); &#x2F;&#x2F; 输出15us高电平
+    Public.Public_Delay_us(15);
+    HAL_GPIO_WritePin(SR04_TIRG_GPIO_Port, SR04_TIRG_Pin, GPIO_PIN_RESET); &#x2F;&#x2F; 高电平输出结束，设置为低电平
+
+    while (HAL_GPIO_ReadPin(SR04_ECHO_GPIO_Port, SR04_ECHO_Pin) &#x3D;&#x3D; GPIO_PIN_RESET) &#x2F;&#x2F; 等待回响高电平
+    &#123;
+        i++;
+        Public.Public_Delay_us(1);
+        if (i &gt; 100000)
+            return -1; &#x2F;&#x2F; 超时退出循环、防止程序卡死这里
+    &#125;
+    i &#x3D; 0;
+    while (HAL_GPIO_ReadPin(SR04_ECHO_GPIO_Port, SR04_ECHO_Pin) &#x3D;&#x3D; GPIO_PIN_SET) &#x2F;&#x2F; 下面的循环是2us
+    &#123;
+        i &#x3D; i + 1;
+        Public.Public_Delay_us(1); &#x2F;&#x2F; 1us 延时，但是整个循环大概2us左右
+        if (i &gt; 100000)
+            return -2; &#x2F;&#x2F; 超时退出循环
+    &#125;
+    Distance &#x3D; i * 2 * 0.033 &#x2F; 2; &#x2F;&#x2F; 这里乘2的原因是上面是2微妙
+    HC_SR04.HC_SR04_Distance &#x3D; Distance;
+    return Distance;
+&#125;</code></pre>
+              </div>
+            </details>
+<h3 id="7路灰度寻迹">7路灰度寻迹</h3>
+<ul>
+<li>硬件</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230728220126.webp" alt=""></p>
+<ul>
+<li>MX配置</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">STM32引脚号</th>
+<th style="text-align:center">模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PD1(L3)</td>
+<td style="text-align:center">上拉输入</td>
+</tr>
+<tr>
+<td style="text-align:center">PD2(L2)</td>
+<td style="text-align:center">上拉输入</td>
+</tr>
+<tr>
+<td style="text-align:center">PD3(L1)</td>
+<td style="text-align:center">上拉输入</td>
+</tr>
+<tr>
+<td style="text-align:center">PD4(M)</td>
+<td style="text-align:center">上拉输入</td>
+</tr>
+<tr>
+<td style="text-align:center">PD5(R1)</td>
+<td style="text-align:center">上拉输入</td>
+</tr>
+<tr>
+<td style="text-align:center">PD6(R2)</td>
+<td style="text-align:center">上拉输入</td>
+</tr>
+<tr>
+<td style="text-align:center">PD7(R3)</td>
+<td style="text-align:center">上拉输入</td>
+</tr>
+</tbody>
+</table>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230731225230.webp" alt=""></p>
+<ul>
+<li>程序</li>
+</ul>
+<details ><summary> Track.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __TRACK_H
+#define __TRACK_H
+
+typedef enum
+&#123;
+    R1_Status &#x3D; (uint8_t)0,
+    R2_Status &#x3D; (uint8_t)1,
+    R3_Status &#x3D; (uint8_t)2,
+    M_Status &#x3D; (uint8_t)3,
+    L1_Status &#x3D; (uint8_t)4,
+    L2_Status &#x3D; (uint8_t)5,
+    L3_Status &#x3D; (uint8_t)6,
+&#125;Track_Status_t;
+
+typedef struct
+&#123;
+    uint8_t ucTrack_Status_Buff[7]; &#x2F;&#x2F; 存储7路状态
+
+    void (*Track_Read_Status)(void);    &#x2F;&#x2F; 读取状态
+&#125;Track_t;
+
+extern Track_t Track;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> Track.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: xxx.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;08&#x2F;3
+ * description: 描述
+ -----------------------------------
+None
+ -----------------------------------
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void Track_Read_Status(void);
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+Track_t Track &#x3D; 
+&#123;
+    .ucTrack_Status_Buff &#x3D; &#123;0&#125;,
+    .Track_Read_Status &#x3D; &amp;Track_Read_Status
+&#125;;
+
+&#x2F;*
+* @function: Track_Read_Status
+* @param: None
+* @retval: None
+* @brief: 读取寻迹灯状态
+*&#x2F;
+static void Track_Read_Status(void)
+&#123;
+    &#x2F;&#x2F; 从左到右排序 传感器返回的数字信号依次存入
+    Track.ucTrack_Status_Buff[L3_Status] &#x3D; HAL_GPIO_ReadPin(L3_GPIO_Port, L3_Pin) ? 0 : 1;
+    Track.ucTrack_Status_Buff[L2_Status] &#x3D; HAL_GPIO_ReadPin(L2_GPIO_Port, L2_Pin) ? 0 : 1;
+    Track.ucTrack_Status_Buff[L1_Status] &#x3D; HAL_GPIO_ReadPin(L1_GPIO_Port, L1_Pin) ? 0 : 1;
+    Track.ucTrack_Status_Buff[M_Status] &#x3D; HAL_GPIO_ReadPin(M_GPIO_Port, M_Pin) ? 0 : 1;
+    Track.ucTrack_Status_Buff[R1_Status] &#x3D; HAL_GPIO_ReadPin(R1_GPIO_Port, R1_Pin) ? 0 : 1;
+    Track.ucTrack_Status_Buff[R2_Status] &#x3D; HAL_GPIO_ReadPin(R2_GPIO_Port, R2_Pin) ? 0 : 1;
+    Track.ucTrack_Status_Buff[R3_Status] &#x3D; HAL_GPIO_ReadPin(R3_GPIO_Port, R3_Pin) ? 0 : 1;
+#if LOG_DEBUG
+    printf(&quot;R1-%d R2-%d R3-%d\r\nM-%d\r\nL1-%d L2-%d L3-%d\r\n\r\n&quot;, Track.ucTrack_Status_Buff[R1_Status],Track.ucTrack_Status_Buff[R2_Status],Track.ucTrack_Status_Buff[R3_Status],Track.ucTrack_Status_Buff[M_Status],Track.ucTrack_Status_Buff[L1_Status],Track.ucTrack_Status_Buff[L2_Status],Track.ucTrack_Status_Buff[L3_Status]);
+#endif    
+&#125;</code></pre>
+              </div>
+            </details>
+<h3 id="蜂鸣器">蜂鸣器</h3>
+<ul>
+<li>硬件</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230728220216.webp" alt=""></p>
+<ul>
+<li>MX配置</li>
+</ul>
+<p>NPN高电平导通</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">STM32引脚号</th>
+<th style="text-align:center">模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PE14</td>
+<td style="text-align:center">推挽输出，默认低电平</td>
+</tr>
+</tbody>
+</table>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230731225804.webp" alt=""></p>
+<ul>
+<li>程序</li>
+</ul>
+<details ><summary> Buzzer.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __BUZZER_H
+#define __BUZZER_H
+
+typedef enum
+&#123;
+    Buzzer_Status_ON &#x3D; (uint8_t)0x01,  
+    Buzzer_Status_OFF &#x3D; (uint8_t)0x00,  
+&#125;Buzzer_Status_t;
+
+typedef struct
+&#123;
+    Buzzer_Status_t Buzzer_Status;    
+    void (*Buzzer_Init)(void); &#x2F;&#x2F; Buzzer 初始化  
+    void (*Buzzer_ON)(void);    &#x2F;&#x2F; 打开Buzzer
+    void (*Buzzer_OFF)(void);   &#x2F;&#x2F; 关闭Buzzer
+    void (*Buzzer_Flip)(void);  &#x2F;&#x2F; 翻转Buzzer
+&#125;Buzzer_t;
+
+extern Buzzer_t Buzzer;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> Buzzer.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: Buzzer.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;06&#x2F;24
+ * description: 蜂鸣器
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+static void Buzzer_Init(void);
+static void Buzzer_ON(void);
+static void Buzzer_OFF(void);
+static void Buzzer_Flip(void);
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+Buzzer_t Buzzer &#x3D; 
+&#123;
+    .Buzzer_Status &#x3D; Buzzer_Status_OFF,
+    .Buzzer_Init &#x3D; &amp;Buzzer_Init,
+    .Buzzer_ON &#x3D; &amp;Buzzer_ON,
+    .Buzzer_OFF &#x3D; &amp;Buzzer_OFF,
+    .Buzzer_Flip &#x3D; &amp;Buzzer_Flip
+&#125;;
+
+&#x2F;*
+* @function: Buzzer_Init
+* @param: None
+* @retval: None
+* @brief: 蜂鸣器初始化
+*&#x2F;
+static void Buzzer_Init(void)
+&#123;
+    Buzzer.Buzzer_OFF();
+&#125;
+
+&#x2F;*
+* @function: Buzzer_ON
+* @param: None
+* @retval: None
+* @brief: 蜂鸣器打开
+*&#x2F;
+static void Buzzer_ON(void)
+&#123;
+    HAL_GPIO_WritePin(Buzzer_GPIO_Port,Buzzer_Pin,GPIO_PIN_SET);
+    Buzzer.Buzzer_Status &#x3D; Buzzer_Status_ON;
+&#125;
+
+&#x2F;*
+* @function: Buzzer_OFF
+* @param: None
+* @retval: None
+* @brief: 蜂鸣器关闭
+*&#x2F;
+static void Buzzer_OFF(void)
+&#123;
+    HAL_GPIO_WritePin(Buzzer_GPIO_Port,Buzzer_Pin,GPIO_PIN_RESET);
+    Buzzer.Buzzer_Status &#x3D; Buzzer_Status_OFF;
+&#125;
+
+&#x2F;*
+* @function: Buzzer_Filp
+* @param: None
+* @retval: None
+* @brief: 蜂鸣器翻转
+*&#x2F;
+static void Buzzer_Flip(void)
+&#123;
+    if (Buzzer_Status_ON &#x3D;&#x3D; Buzzer.Buzzer_Status)
+    &#123;
+        HAL_GPIO_WritePin(Buzzer_GPIO_Port,Buzzer_Pin,GPIO_PIN_RESET);
+        Buzzer.Buzzer_Status &#x3D; Buzzer_Status_OFF;
+    &#125;
+    else
+    &#123;
+        HAL_GPIO_WritePin(Buzzer_GPIO_Port,Buzzer_Pin,GPIO_PIN_SET);
+        Buzzer.Buzzer_Status &#x3D; Buzzer_Status_ON;
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<h3 id="ADC">ADC</h3>
+<blockquote>
+<p>ADC点的电压是VBAT_IN的 五分之一</p>
+<p>如果两个串联的电阻阻值相等，则分压结果是输入电压的一半</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230803194838.webp" alt=""></p>
+<p>总电压12V，总电阻50K。总电流0.00024A，PC4电压(该点的对地阻值)2.4V</p>
+</blockquote>
+<ul>
+<li>硬件</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230803195105.webp" alt=""></p>
+<ul>
+<li>MX配置</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">STM32引脚号</th>
+<th style="text-align:center">模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PC4</td>
+<td style="text-align:center">ADC1_IN14</td>
+</tr>
+</tbody>
+</table>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230803192229.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230803192221.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230731231040.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>程序</li>
+</ul>
+<details ><summary> myADC.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __MYADC_H
+#define __MYADC_H
+
+typedef struct
+&#123;
+    float Power_Adc;    &#x2F;&#x2F; 电池最终计算电压
+    uint16_t usADC_Value;
+    void (*ADC_Calibration_Start_DMA)(void);
+    void (*ADC_Get_Calculate)(void);
+&#125;myADC_t;
+
+extern myADC_t myADC;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> myADC.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: myADC.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;06&#x2F;24
+ * description: ADC
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+static void ADC_Calibration_Start_DMA(void);
+static void ADC_Get_Calculate(void);
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+myADC_t myADC &#x3D; 
+&#123;
+    .Power_Adc &#x3D; 0.0,
+    .usADC_Value &#x3D; 0,
+    .ADC_Calibration_Start_DMA &#x3D; &amp;ADC_Calibration_Start_DMA,
+    .ADC_Get_Calculate &#x3D; &amp;ADC_Get_Calculate
+&#125;;
+
+&#x2F;*
+* @function: ADC_Calibration_Start_DMA
+* @param: None
+* @retval: None
+* @brief: ADC校准+启动+DMA
+*&#x2F;
+static void ADC_Calibration_Start_DMA(void)
+&#123;
+    HAL_ADCEx_Calibration_Start(&amp;hadc1);    &#x2F;&#x2F; ADC校准
+    HAL_ADC_Start_DMA(&amp;hadc1, (uint32_t*)&amp;myADC.usADC_Value, 1);   &#x2F;&#x2F; 开始ADC DMA转换
+&#125;
+
+&#x2F;*
+* @function: ADC_Get_Calculate
+* @param: None
+* @retval: None
+* @brief: ADC计算
+*&#x2F;
+static void ADC_Get_Calculate(void)
+&#123;
+    uint16_t Temp;
+
+    Temp &#x3D; myADC.usADC_Value;
+
+    myADC.Power_Adc &#x3D; (float)Temp &#x2F; 4096 * 3.3 * 5;
+&#125;</code></pre>
+              </div>
+            </details>
+<h3 id="MPU6050">MPU6050</h3>
+<blockquote>
+<p>陀螺仪的us延时如果过大或者过小都会导致初始化失败</p>
+<p>采样率表示1s中陀螺仪输出多少次数值</p>
+<p>还有一个重要的是当你使用官方的自检函数时你的陀螺仪必须是水平正放或者反放！而且初始化大概需要8s，需要你用手扶住，所以我们不想使用自检函数</p>
+<p>去掉标准库头文件不然报错</p>
+<p>IIC使用自己的不知道行不行待检测</p>
+</blockquote>
+<ul>
+<li>硬件</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230728220402.webp" alt=""></p>
+<ul>
+<li>MX配置</li>
+</ul>
+<p>中断引脚暂时没用到</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">STM32引脚号</th>
+<th style="text-align:center">模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PB6(SCL)</td>
+<td style="text-align:center">开漏输出</td>
+</tr>
+<tr>
+<td style="text-align:center">PB7(SDA)</td>
+<td style="text-align:center">开漏输出</td>
+</tr>
+</tbody>
+</table>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230801200917.webp" alt=""></p>
+<ul>
+<li>程序</li>
+</ul>
+<p>首先移植，把MPU6050相关的放一个文件夹</p>
+<h3 id="电机">电机</h3>
+<ul>
+<li>硬件</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230728220531.webp" alt=""></p>
+<ul>
+<li>MX配置</li>
+</ul>
+<p>电机频率10KHz即可</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">STM32引脚号</th>
+<th style="text-align:center">用作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">TIM3_CH1</td>
+<td style="text-align:center">左电机</td>
+</tr>
+<tr>
+<td style="text-align:center">TIM3_CH2</td>
+<td style="text-align:center">右电机</td>
+</tr>
+<tr>
+<td style="text-align:center">TIM4</td>
+<td style="text-align:center">左编码器</td>
+</tr>
+<tr>
+<td style="text-align:center">TIM5</td>
+<td style="text-align:center">右编码器</td>
+</tr>
+</tbody>
+</table>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230803103812.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230803105141.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230803104800.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230803104835.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>
+<p>程序</p>
+</li>
+<li>
+<p>问题</p>
+</li>
+</ul>
+<p>这里 <code>&gt;&gt;15</code> 是为了判断最高位是否是负数，1则是负数，0则是正数，看编码器模式那个表，正转的状态都向上计数，反转的状态都向下计数</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230813221704.webp" alt=""></p>
+<h3 id="串口">串口</h3>
+<blockquote>
+<p>串口1 — 上位机调试</p>
+<p>串口2 — 蓝牙</p>
+<p>串口3 — ASRPRO语音板</p>
+</blockquote>
+<details ><summary> UART.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __UART_H
+#define __UART_H
+
+typedef struct
+&#123;
+    uint8_t *pucSend_Buffer; &#x2F;&#x2F; 发送缓存指针
+    uint8_t *pucRec_Buffer;  &#x2F;&#x2F; 接收缓存指针
+
+    void (*Send_Array)(uint8_t *, uint16_t); &#x2F;&#x2F; 串口发送数组
+    void (*Send_String)(uint8_t *);          &#x2F;&#x2F; 串口发送字符串
+&#125; UART_t;
+
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> UART3.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __UART3_H
+#define __UART3_H
+
+&#x2F;&#x2F; 串口3接收&#x2F;发送数据最大长度
+#define UART3_Rec_MAX_LENGTH 50
+#define UART3_Send_MAX_LENGTH 50
+
+
+extern UART_t UART3;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> UART3.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: xxx.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;08&#x2F;3
+ * description: 描述
+ -----------------------------------
+None
+ -----------------------------------
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static uint8_t ucUart3_Send_Buffer[UART3_Send_MAX_LENGTH] &#x3D; &#123;0x00&#125;;
+static uint8_t ucUart3_Rec_Buffer[UART3_Rec_MAX_LENGTH] &#x3D; &#123;0x00&#125;;
+
+static void UART3_Send_Array(uint8_t *, uint16_t);
+static void UART3_Send_String(uint8_t *);
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+UART_t UART3 &#x3D; 
+&#123;
+    .pucSend_Buffer &#x3D; ucUart3_Send_Buffer,
+    .pucRec_Buffer &#x3D; ucUart3_Rec_Buffer,
+    .Send_Array &#x3D; &amp;UART3_Send_Array,
+    .Send_String &#x3D; &amp;UART3_Send_String
+&#125;;
+
+&#x2F;*
+* @function: UART3_Send_Array
+* @param: None
+* @retval: None
+* @brief: 描述
+*&#x2F;
+static void UART3_Send_Array(uint8_t *p_Arr, uint16_t LEN)
+&#123;
+    HAL_UART_Transmit(&amp;huart3, p_Arr, LEN, 1000);
+&#125;
+
+&#x2F;*
+* @function: UART3_Send_String
+* @param: None
+* @retval: None
+* @brief: 描述
+*&#x2F;
+static void UART3_Send_String(uint8_t *p_Str)
+&#123;
+    HAL_UART_Transmit(&amp;huart3, p_Str, strlen((const char*)p_Str), 1000);
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> UART2.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __UART2_H
+#define __UART2_H
+
+&#x2F;&#x2F; 串口2接收&#x2F;发送数据最大长度
+#define UART2_Rec_MAX_LENGTH 50
+#define UART2_Send_MAX_LENGTH 50
+
+
+extern UART_t UART2;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> UART2.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: xxx.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;08&#x2F;3
+ * description: 描述
+ -----------------------------------
+None
+ -----------------------------------
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static uint8_t ucUart2_Send_Buffer[UART2_Send_MAX_LENGTH] &#x3D; &#123;0x00&#125;;
+static uint8_t ucUart2_Rec_Buffer[UART2_Rec_MAX_LENGTH] &#x3D; &#123;0x00&#125;;
+
+static void UART2_Send_Array(uint8_t *, uint16_t);
+static void UART2_Send_String(uint8_t *);
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+UART_t UART2 &#x3D; 
+&#123;
+    .pucSend_Buffer &#x3D; ucUart2_Send_Buffer,
+    .pucRec_Buffer &#x3D; ucUart2_Rec_Buffer,
+    .Send_Array &#x3D; &amp;UART2_Send_Array,
+    .Send_String &#x3D; &amp;UART2_Send_String
+&#125;;
+
+&#x2F;*
+* @function: UART2_Send_Array
+* @param: None
+* @retval: None
+* @brief: 描述
+*&#x2F;
+static void UART2_Send_Array(uint8_t *p_Arr, uint16_t LEN)
+&#123;
+    HAL_UART_Transmit(&amp;huart2, p_Arr, LEN, 1000);
+&#125;
+
+&#x2F;*
+* @function: UART2_Send_String
+* @param: None
+* @retval: None
+* @brief: 描述
+*&#x2F;
+static void UART2_Send_String(uint8_t *p_Str)
+&#123;
+    HAL_UART_Transmit(&amp;huart2, p_Str, strlen((const char*)p_Str), 1000);
+&#125;</code></pre>
+              </div>
+            </details>
+<h3 id="问题">问题</h3>
+<blockquote>
+<p>这里PCB注释写错了以焊盘为准(PCB里已经修改实物板未修改)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230728212748.webp" alt=""></p>
+</blockquote>
+<blockquote>
+<p>焊接电源后发现输入12V正常测到，输出5V测不到，相当于输出部分电压全部0V，经过看数据手册知道EN引脚需要接高电平，不能悬空，但是没有飞线铜丝所以把杜邦线拆了拿条铜丝进行飞线，把EN飞到VIN那，然后再测量输出5V左右正常了，这个教训告诉我要看数据手册的参考电路，不能只看引脚说明！！！(原理图已修改接到VIN然后顺便修改了IC的5V线宽20~25mil)，不能直接飞会烧IC(刚刚直接燃起来了…)，需要按照手册串联电阻</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230801220207.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230802203657.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230802203723.webp" alt=""></p>
+</blockquote>
+<blockquote>
+<p>重写HAL_Delay</p>
+<p>不太明白官方源码为啥这么写，会多延时1ms，注释掉后更准</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">__weak void HAL_Delay(uint32_t Delay)
+&#123;
+  uint32_t tickstart &#x3D; HAL_GetTick();
+  uint32_t wait &#x3D; Delay;
+
+  &#x2F;* Add a freq to guarantee minimum wait *&#x2F;
+&#x2F;&#x2F;  if (wait &lt; HAL_MAX_DELAY)
+&#x2F;&#x2F;  &#123;
+&#x2F;&#x2F;    wait +&#x3D; (uint32_t)(uwTickFreq);
+&#x2F;&#x2F;  &#125;
+
+  while ((HAL_GetTick() - tickstart) &lt; wait)
+  &#123;
+  &#125;
+&#125;</code></pre>
+</blockquote>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num144.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%B5%E6%9C%BA%E9%80%89%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">电机选型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PCB%E8%AE%BE%E8%AE%A1"><span class="toc-number">3.</span> <span class="toc-text">PCB设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PID%E7%AE%97%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">PID算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E6%AD%A5%E4%BA%86%E8%A7%A3"><span class="toc-number">4.1.</span> <span class="toc-text">初步了解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AF%94%E4%BE%8BP"><span class="toc-number">4.2.</span> <span class="toc-text">比例P</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%AF%E5%88%86I"><span class="toc-number">4.3.</span> <span class="toc-text">积分I</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AE%E5%88%86D"><span class="toc-number">4.4.</span> <span class="toc-text">微分D</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%A9%E7%90%86%E6%A8%A1%E5%9E%8B"><span class="toc-number">5.</span> <span class="toc-text">物理模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B4%E7%AB%8B%E7%8E%AF"><span class="toc-number">5.1.</span> <span class="toc-text">直立环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9F%E5%BA%A6%E7%8E%AF"><span class="toc-number">5.2.</span> <span class="toc-text">速度环</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%E5%9B%BE%E7%BB%98%E5%88%B6"><span class="toc-number">6.</span> <span class="toc-text">原理图绘制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PCB"><span class="toc-number">7.</span> <span class="toc-text">PCB</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%84%8A%E6%8E%A5"><span class="toc-number">8.</span> <span class="toc-text">焊接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E6%A8%A1%E5%9D%97"><span class="toc-number">9.</span> <span class="toc-text">我的模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">9.1.</span> <span class="toc-text">其他</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#STM32%E4%B8%BB%E6%8E%A7"><span class="toc-number">9.2.</span> <span class="toc-text">STM32主控</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ASRPRO%E8%AF%AD%E9%9F%B3%E6%A0%B8%E5%BF%83%E6%9D%BF"><span class="toc-number">9.3.</span> <span class="toc-text">ASRPRO语音核心板</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ASRPRO%E5%9F%BA%E7%A1%80"><span class="toc-number">9.3.1.</span> <span class="toc-text">ASRPRO基础</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6WS2812"><span class="toc-number">9.3.2.</span> <span class="toc-text">控制WS2812</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LED"><span class="toc-number">9.4.</span> <span class="toc-text">LED</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E9%94%AE"><span class="toc-number">9.5.</span> <span class="toc-text">按键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OLED"><span class="toc-number">9.6.</span> <span class="toc-text">OLED</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HC-05%E8%93%9D%E7%89%99"><span class="toc-number">9.7.</span> <span class="toc-text">HC-05蓝牙</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HC-SR04%E8%B6%85%E5%A3%B0%E6%B3%A2"><span class="toc-number">9.8.</span> <span class="toc-text">HC-SR04超声波</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E8%B7%AF%E7%81%B0%E5%BA%A6%E5%AF%BB%E8%BF%B9"><span class="toc-number">9.9.</span> <span class="toc-text">7路灰度寻迹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%9C%82%E9%B8%A3%E5%99%A8"><span class="toc-number">9.10.</span> <span class="toc-text">蜂鸣器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ADC"><span class="toc-number">9.11.</span> <span class="toc-text">ADC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MPU6050"><span class="toc-number">9.12.</span> <span class="toc-text">MPU6050</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B5%E6%9C%BA"><span class="toc-number">9.13.</span> <span class="toc-text">电机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3"><span class="toc-number">9.14.</span> <span class="toc-text">串口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-number">9.15.</span> <span class="toc-text">问题</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://lib.baomitu.com/KaTeX/latest/katex.min.css"><script src="https://jsd.onmicrosoft.cn/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
   document.querySelectorAll('#article-container span.katex-display').forEach(item => {
     btf.wrap(item, 'div', { class: 'katex-wrap'})
   })
