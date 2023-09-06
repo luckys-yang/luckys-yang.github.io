@@ -144,6 +144,10 @@ comments: false
       link: https://www.21ic.com/
       avatar: ./book_image/book8.webp
       descr:  　　
+    - name: 21IC电子网(数据手册)
+      link: https://www.21icsearch.com/
+      avatar: ./book_image/book8.webp
+      descr:  　　    
     - name: 单片机教程网
       link: http://www.51hei.com/
       avatar: ./book_image/book8.webp

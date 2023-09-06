@@ -394,3 +394,8 @@ Undefined symbol __initial_sp
 -Wno-invalid-source-encoding
 ```
 
+- MX后面重新生成代码后，keil工程里自己创建的group和头文件路径全部没了
+
+ 在点击了MX的GENERATE CODE按钮后，在弹出界面那选择【Open Project】最后那个选否
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230816185451.webp)

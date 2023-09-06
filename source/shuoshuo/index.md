@@ -12,19 +12,7 @@ comments: false
 <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
         <div id="shuoshuo_content">
-            <ul class="cbp_tmtimeline">
-                <li> 
-                    <span class="shuoshuo_author_img">
-                    <img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"
-                            class="avatar avatar-48 zhuan" width="48" height="48">
-                    </span>
-                    <div class="cbp_tmlabel">
-                        <p>当我知道这个消息后很震惊，我也有责任，如果我之前好好培训的话如果我出题简单点的话也许他们就不会被OUT，虽然考核得不理想，但是有些人确实挺优秀的，可能这些只有我看到吧，看着她们离开也无能为力，只希望他们在以后可以认认真真的自学，找到自己喜欢的方向去深造...</p>
-                        <p class="shuoshuo_time"><i class="fa fa-clock-o"></i>
-                            <span id="masked">2023年6月20日</span>&emsp;<i class="fas fa-mobile-alt"></i> <span id="masked">发自iPhone</span>
-                        </p>
-                    </div>
-                </li>            
+            <ul class="cbp_tmtimeline">   
                 <li> 
                     <span class="shuoshuo_author_img">
                     <img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"
