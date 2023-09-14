@@ -122,11 +122,9 @@ i.fas.fa-bars.fa-fw {
     text-align: center;
 }
 
-/* 页脚图片不重复只显示一次 */
-/* 图片居中方法：利用“margin:0 auto”实现水平居中；2、利用“text-align:center”实现水平居中； */
-footer#footer {
-    background-repeat: no-repeat;
-}
+
+
+
 
 /* 页脚备案美化begin */
 .github-badge {
@@ -1129,23 +1127,9 @@ div#newYear {
 
 /* end */
 
-/* 重写侧栏网站资讯卡片背景颜色 */
-.card-widget.card-webinfo {
-    background-color: #645c5c61 !important;
-}
 
-/* 重写分类卡片背景颜色 */
-.card-widget.card-categories {
-    background-color: #645c5c61 !important;
-}
 
-/* 重写鼠标放在侧栏分类时的背景颜色 */
-#aside-content .card-archives ul.card-archive-list>.card-archive-list-item a:hover,
-#aside-content .card-categories ul.card-category-list>.card-category-list-item a:hover {
-    padding: 3px 17px;
-    background-color: #8d8a8bbf;
-    border-radius: 8px;
-}
+
 
 /* 友链页css微调begin */
 /* 头像微调 */
@@ -1197,22 +1181,8 @@ div#newYear {
     width: 49%;
 }
 
-/* 鼠标样式 */
-body {
-    cursor: url(https://jsd.onmicrosoft.cn/gh/sviptzk/HexoStaticFile@latest/Hexo/img/default.cur), default;
-}
 
-a,
-img {
-    cursor: url(https://jsd.onmicrosoft.cn/gh/sviptzk/HexoStaticFile@latest/Hexo/img/pointer.cur), default !important;
-}
 
-/* 外挂标签修改区begin */
-
-/* 按钮标签出现冲突把背景改成透明 */
-div.btns a[href]:hover {
-    background: transparent !important;
-}
 
 /* end */
 

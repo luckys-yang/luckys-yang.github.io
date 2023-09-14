@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>圆梦杯V2记录 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="参考文章  LED 灯带效果发生器 PWM+DMA驱动灯带  注：因为原理图跟V1还是差不多的，所以此处就不详细记录基本的东西了，只记一下F1跟F4之间的移植遇到的问题等等，工程文件会上传到Github  框图  资源分配  引脚分配     引脚 引脚功能 用作     A7 TIM3_CH2 E_R_B   A6 TIM3_CH1 E_R_A   A5 TIM2_CH1 E_L_A   B3">
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>圆梦杯V2记录 | Luckys-Yangの小栈</title><meta name="author" content="Luckys-Yang"><meta name="copyright" content="Luckys-Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="参考文章  LED 灯带效果发生器 PWM+DMA驱动灯带 STM32使用定时器实现微秒（us）级延时  注：因为原理图跟V1还是差不多的，所以此处就不详细记录基本的东西了，只记一下F1跟F4之间的移植遇到的问题等等，工程文件会上传到Github  框图  焊接  一开始焊完DCDC那上电后电解电容和DCDC芯片严重发热，后面我换了板子一个个元器件焊，最后焊完也是正常的，输出4.95V，可能是因为">
 <meta property="og:type" content="article">
 <meta property="og:title" content="圆梦杯V2记录">
 <meta property="og:url" content="https://mdcm.yang5201314.cn/post/ac6a7e5d.html">
 <meta property="og:site_name" content="Luckys-Yangの小栈">
-<meta property="og:description" content="参考文章  LED 灯带效果发生器 PWM+DMA驱动灯带  注：因为原理图跟V1还是差不多的，所以此处就不详细记录基本的东西了，只记一下F1跟F4之间的移植遇到的问题等等，工程文件会上传到Github  框图  资源分配  引脚分配     引脚 引脚功能 用作     A7 TIM3_CH2 E_R_B   A6 TIM3_CH1 E_R_A   A5 TIM2_CH1 E_L_A   B3">
+<meta property="og:description" content="参考文章  LED 灯带效果发生器 PWM+DMA驱动灯带 STM32使用定时器实现微秒（us）级延时  注：因为原理图跟V1还是差不多的，所以此处就不详细记录基本的东西了，只记一下F1跟F4之间的移植遇到的问题等等，工程文件会上传到Github  框图  焊接  一开始焊完DCDC那上电后电解电容和DCDC芯片严重发热，后面我换了板子一个个元器件焊，最后焊完也是正常的，输出4.95V，可能是因为">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://mdcm.yang5201314.cn/img/num149.webp">
 <meta property="article:published_time" content="2023-09-06T01:28:59.000Z">
-<meta property="article:modified_time" content="2023-09-06T01:40:47.333Z">
+<meta property="article:modified_time" content="2023-09-12T13:05:19.121Z">
 <meta property="article:author" content="Luckys-Yang">
 <meta property="article:tag" content="牛逼">
 <meta name="twitter:card" content="summary">
@@ -57,7 +57,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-09-06 09:40:47'
+  postUpdate: '2023-09-12 21:05:19'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -174,15 +174,31 @@ window.addEventListener('load',()=> { preloader.endLoading() })
 if (true) {
   document.addEventListener('pjax:send', () => { preloader.initLoading() })
   document.addEventListener('pjax:complete', () => { preloader.endLoading() })
-}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">149</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">76</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">32</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">圆梦杯V2记录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-06T01:28:59.000Z" title="发表于 2023-09-06 09:28:59">2023-09-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-09-06T01:40:47.333Z" title="更新于 2023-09-06 09:40:47">2023-09-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%AF%94%E8%B5%9B/">比赛</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">359</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span></div></div></div><article class="post-content" id="article-container"><div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>参考文章</p>
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">150</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">76</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">32</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Luckys-Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">圆梦杯V2记录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-06T01:28:59.000Z" title="发表于 2023-09-06 09:28:59">2023-09-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-09-12T13:05:19.121Z" title="更新于 2023-09-12 21:05:19">2023-09-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%AF%94%E8%B5%9B/">比赛</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span></div></div></div><article class="post-content" id="article-container"><div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>参考文章</p>
 </div>
 <p><a href="https://adrianotiger.github.io/Neopixel-Effect-Generator/">LED 灯带效果发生器</a></p>
 <p><a href="https://controllerstech.com/interface-ws2812-with-stm32/">PWM+DMA驱动灯带</a></p>
+<p><a href="https://iot-technology.blog.csdn.net/article/details/132403126">STM32使用定时器实现微秒（us）级延时</a></p>
 <blockquote>
 <p>注：因为原理图跟V1还是差不多的，所以此处就不详细记录基本的东西了，只记一下F1跟F4之间的移植遇到的问题等等，工程文件会上传到Github</p>
 </blockquote>
 <h2 id="框图">框图</h2>
 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230905140323.webp" style="zoom:50%;" />
+<h2 id="焊接">焊接</h2>
+<blockquote>
+<p>一开始焊完DCDC那上电后电解电容和DCDC芯片严重发热，后面我换了板子一个个元器件焊，最后焊完也是正常的，输出4.95V，可能是因为加热台不知道哪里虚焊或者短路了吧</p>
+</blockquote>
+<blockquote>
+<p>焊完下载程序半天没效果，原因是拨码开关焊反了，导致地变高电平，正常是1,2丝印朝下，NO在上的，解决方法是把拨码开关全部打上面去，或者拆下来重新焊正</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230911081053.webp" alt=""></p>
+</blockquote>
+<blockquote>
+<p>DAPLINK那个下载座不能直接插那个下载器，暂时找不到原因，只能杜邦线接</p>
+</blockquote>
+<blockquote>
+<p>ASR正常，但是一开始不知道为啥不行8002A一直发烫严重，最后尝试换一块板子焊，然后就正常可以使用了，可能还是哪里虚焊或者啥的吧，但是我都看了也没看到哪里，然后ASR的PA4引脚需要高电平使能才能下载程序，一开始不知道悬空了，所以硬件上只能通过飞线到3.3V了，所以这个教训告诉我要认真看数据手册，不要粗心大意略过</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230911193102.webp" alt=""></p>
+</blockquote>
 <h2 id="资源分配">资源分配</h2>
 <ul>
 <li>引脚分配</li>
@@ -450,15 +466,146 @@ if (true) {
 </tr>
 <tr>
 <td style="text-align:center">TIM8</td>
-<td style="text-align:center">中断里MPU6050，编码器读取</td>
+<td style="text-align:center">中断里MPU6050，编码器读取10ms</td>
 </tr>
 <tr>
 <td style="text-align:center">TIM12</td>
-<td style="text-align:center">裸机任务调度，按键检测等</td>
+<td style="text-align:center">裸机任务调度，按键检测等1ms</td>
+</tr>
+<tr>
+<td style="text-align:center">TIM13</td>
+<td style="text-align:center">us延时不需要中断，设置频率最大arr最大值</td>
 </tr>
 </tbody>
 </table>
-</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num149.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%86%E5%9B%BE"><span class="toc-number">1.</span> <span class="toc-text">框图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E5%88%86%E9%85%8D"><span class="toc-number">2.</span> <span class="toc-text">资源分配</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+<ul>
+<li>中断分组</li>
+</ul>
+<blockquote>
+<p>每一版都用,隔开</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">中断</th>
+<th style="text-align:center">主优先级</th>
+<th style="text-align:center">子优先级</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">DMA1 stream0(WS2812B)</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">TIM9(串口2WiFI接收中断计数用)</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">TIM2(左电机编码器)</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">TIM3(右电机编码器)</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">USART1</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">USART2</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">USART3</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">USART6</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">TIM12(裸机任务调度)</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">TIM8(MPU6050，编码器读取)</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="主要模块">主要模块</h2>
+<h3 id="WS2812B">WS2812B</h3>
+<blockquote>
+<p>需要设置频率为800KHz</p>
+</blockquote>
+<h3 id="独立看门狗">独立看门狗</h3>
+<ul>
+<li>MX</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230908155825.webp" alt=""></p>
+<p>设置了4s，喂狗时间是3.5s间隔</p>
+<h3 id="ADC">ADC</h3>
+<blockquote>
+<p>电池的话充满是12.6V，低于9V就要充电了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230912210330.webp" alt=""></p>
+</blockquote>
+<h3 id="us延时">us延时</h3>
+<p>MX在上面设置了，时钟分频看你是多少，72MHz就设置为72-1</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+* @function: Public_Delay_us
+* @param: us -&gt; 需要延时的时间(us)
+* @retval: None
+* @brief: 系统us延时
+*&#x2F;
+static void Public_Delay_us(uint16_t us)
+&#123;
+	&#x2F;&#x2F; Set timer period for desired delay in microseconds
+	__HAL_TIM_SET_AUTORELOAD(&amp;htim13, us - 1);&#x2F;&#x2F;定时器响应时间为period*定时器频率
+	HAL_TIM_Base_Start(&amp;htim13);&#x2F;&#x2F;start the timer
+	&#x2F;&#x2F;通过轮询的方式等待定时器的更新事件
+	&#x2F;&#x2F;当定时器溢出并计数器更新时，TIM_FLAG_UPDATE标志会被置位。
+	while(__HAL_TIM_GET_FLAG(&amp;htim13,TIM_FLAG_UPDATE)&#x3D;&#x3D;RESET);
+	__HAL_TIM_CLEAR_FLAG(&amp;htim13,TIM_FLAG_UPDATE);&#x2F;&#x2F;清楚更新标志位
+	HAL_TIM_Base_Stop(&amp;htim13);&#x2F;&#x2F;Stop the timer
+&#125;</code></pre>
+<h2 id="问题">问题</h2>
+<blockquote>
+<p>下载程序的话这样设置</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230907180039.webp" alt=""></p>
+</blockquote>
+<blockquote>
+<p>F4的ADC校准函数应该是取消了，故不需要校准</p>
+</blockquote>
+<blockquote>
+<p>结构体有个问题就是结构体本身里面的函数指针如果参数是自己的类型的话会报警告，解决方法是在typedef struct后面加一个结构体名称然后形参也需要加struct像这样：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 这个是报警告的
+typedef struct
+&#123;
+    void (*Set)(AA *a);
+&#125;AA;
+
+&#x2F;&#x2F; 这个是没有警告的
+typedef struct AA
+&#123;
+    void (*set)(struct AA *a);
+&#125;AA;</code></pre>
+</blockquote>
+<blockquote>
+<p>因为画原理图分配引脚时忘记考虑定时器的ARR最大范围问题，所以左轮的编码器定时器最大值是0xFFFFFFFF，在程序里的话还是使用-65536，试了换成-0xFFFFFFFF，但是效果好像差点，MX的话还是设置最大值</p>
+</blockquote>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num149.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%86%E5%9B%BE"><span class="toc-number">1.</span> <span class="toc-text">框图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%84%8A%E6%8E%A5"><span class="toc-number">2.</span> <span class="toc-text">焊接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E5%88%86%E9%85%8D"><span class="toc-number">3.</span> <span class="toc-text">资源分配</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E6%A8%A1%E5%9D%97"><span class="toc-number">4.</span> <span class="toc-text">主要模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#WS2812B"><span class="toc-number">4.1.</span> <span class="toc-text">WS2812B</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8B%AC%E7%AB%8B%E7%9C%8B%E9%97%A8%E7%8B%97"><span class="toc-number">4.2.</span> <span class="toc-text">独立看门狗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ADC"><span class="toc-number">4.3.</span> <span class="toc-text">ADC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#us%E5%BB%B6%E6%97%B6"><span class="toc-number">4.4.</span> <span class="toc-text">us延时</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-number">5.</span> <span class="toc-text">问题</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Luckys-Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
     document.body.oncopy = function () {
         iziToast.info({
             timeout: 4000, // 关闭弹窗的时间
