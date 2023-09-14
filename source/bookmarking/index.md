@@ -52,28 +52,16 @@ comments: false
       link: https://app.netlify.com/teams/luckys-yang/settings/general
       avatar: ./book_image/book8.webp
       descr: 　
-    - name: chatGPT镜像1
-      link: https://aigcfun.com/
-      avatar: ./book_image/book8.webp
-      descr: 　　
     - name: PhindAI
       link: https://phind.com/
       avatar: ./book_image/book8.webp
-      descr:           　  
-    - name: chatGPT镜像2
-      link: http://chat.784111.top/
-      avatar: ./book_image/book8.webp
-      descr: 　
-    - name: chatGPT镜像3
-      link: http://ai.itzun.cn/
-      avatar: ./book_image/book8.webp
-      descr:           　    
+      descr:           　         　    
     - name: chatGPT镜像4
       link: https://chat1.binjie.site:7777/#/chat/1679960396212
       avatar: ./book_image/book8.webp
       descr:           　             
     - name: 广理职教务系统
-      link: http://jwxt.gdpi.edu.cn/
+      link: http://jwgl.gdpi.edu.cn/xtgl/login_slogin.html
       avatar: ./book_image/book8.webp
       descr:           　                   
     - name: 广理职软件

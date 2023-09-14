@@ -396,6 +396,12 @@ Undefined symbol __initial_sp
 
 - MX后面重新生成代码后，keil工程里自己创建的group和头文件路径全部没了
 
+> 最新：这个是CubeMX的Bug，6.9.1版本已经修复
+
  在点击了MX的GENERATE CODE按钮后，在弹出界面那选择【Open Project】最后那个选否
 
 ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230816185451.webp)
+
+- 串口打印都是0问题
+
+使用V5版本+勾选C库就正常，但是使用V6版本的话直接勾C库会报错，需要先使用V5版本然后在主函数main页面点击最左边的那个编译一次，再切换到V6版本+勾C库，然后点击第2个编译按钮编译即可没有错误，但是还是输出0，此时只需要去内存管理那切换到 `-O0`即可
