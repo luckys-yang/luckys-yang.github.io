@@ -98,11 +98,11 @@ katex:
 # --------------------------------------
 
 # Favicon（网站图标）
-favicon: https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp
+favicon: https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/head12312.png
 
 # Avatar (头像)
 avatar:
-  img: https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp
+  img: https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/head12312.png
   effect: false # 头像会一直转圈
 
 # 如果不要显示顶部图，可直接配置为true

@@ -15,7 +15,7 @@ comments: false
             <ul class="cbp_tmtimeline">                                       
                 <li>
                     <span class="shuoshuo_author_img">
-                    <img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"
+                    <img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/head12312.png"
                             class="avatar avatar-48 zhuan" width="48" height="48">
                     </span>
                     <div class="cbp_tmlabel">
@@ -30,7 +30,7 @@ comments: false
                 </li>             
                 <li> 
                     <span class="shuoshuo_author_img">
-                    <img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"
+                    <img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/head12312.png"
                             class="avatar avatar-48 zhuan" width="48" height="48">
                     </span>
                     <div class="cbp_tmlabel">
@@ -44,7 +44,7 @@ comments: false
                 </li>            
                 <li> 
                     <span class="shuoshuo_author_img">
-                    <img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/93801118587.webp"
+                    <img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/head12312.png"
                             class="avatar avatar-48 zhuan" width="48" height="48">
                     </span>
                     <div class="cbp_tmlabel">

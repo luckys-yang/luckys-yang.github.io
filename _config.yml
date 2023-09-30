@@ -3,18 +3,18 @@
 ## 源码: https://github.com/hexojs/hexo/
 
 # 基础设置
-title: Luckys-Yangの小栈 # 网站标题
+title: Yangの小栈 # 网站标题
 subtitle: ''  # 网站副标题【设置鼠标指上 subtitle 后翻转另一行字】
-description: '你不懂单片机,更不懂我...' # 网站描述
-keywords: '牛逼' # 网站的关键词
-author: Luckys-Yang  # 你的名字
+description: '进厂打螺丝前的挣扎' # 网站描述
+keywords: 'aabbcc' # 网站的关键词
+author: Yang  # 你的名字
 language: zh-CN # 网站使用的语言
 timezone: ''  # 时区默认是电脑时区(选填)
 favicon: https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/icon-fa-gem.webp  # 网站图标
 
 # 网站设置
 ## 在此处设置您的网站网址。 例如，如果您使用 GitHub Page，请将 url 设置为 'https://username.github.io/project'
-url: https://mdcm.yang5201314.cn
+url: https://blog.yang5201314.cn
 permalink: post/:abbrlink.html # post为自定义前缀  文章的永久链接格式 year/:month/:day/:title/
 abbrlink: 
   alg: crc32   #算法： crc16(default) and crc32
