@@ -15,13 +15,13 @@ comments: false
 
 <!-- tab 我的信息 -->
 
-{% label 姓名 blue %} Mr.杨<br>{% label 年龄 blue %} 02年滴<br>{% label 星座 blue %} 处女座<br>{% label 家乡 blue %} 广东省江门市新会区<br>{% label 现就读于 blue %} 广东理工职业学院<span style="color: #2d7f70;"> | </span>物联网应用技术专业<span style="color: #2d7f70;"> | </span>大二<br>
+{% label 姓名 blue %} Mr.杨<br>{% label 年龄 blue %} 02年滴<br>{% label 星座 blue %} 处女座<br>{% label 家乡 blue %} 广东省江门市新会区<br>{% label 现就读于 blue %} 广东理工职业学院<span style="color: #2d7f70;"> | </span>物联网应用技术专业<span style="color: #2d7f70;"> | </span>大三<br>
 
 <!-- endtab -->
 
 <!-- tab 生活方式 -->
 
-{% label 爱好 orange %} 宅(除了宿舍教室就是工作室)，内卷(早八晚十)，敲代码(写Bug)，维护博客(CV工程师)，热衷于并献身于嵌入式事业(一是因为听说工资高，二是因为感兴趣)<br>{% label 当前目标 orange %} 学好技术出来工作努力搞钱💰💰💰<br>{% label 理想中的工作 orange %} 早八晚五，中午来杯卡布奇诺，写写Bug，偶尔加班，放假就去自驾游!<br>{% label 闲谈 orange %}也许是实习时接触的太多事，上了专科也就开始收起以前贪玩的心态(也对各种娱乐项目产生厌倦的感觉),只想着努力学习技术为以后工作打下基础，珍惜当下，毕竟在学校里的日子已经转瞬即逝<br>{% label 人生格言 orange %}**Stay Hungry. Stay Foolish! 求知若渴，虚心若愚!**
+{% label 爱好 orange %} 宅(除了宿舍教室就是工作室)，内卷(早八晚十)，敲代码(写Bug)，维护博客(CV工程师)，热衷于并献身于嵌入式事业(一是因为听说工资高，二是因为感兴趣)<br>{% label 当前目标 orange %} 学好技术出来工作努力搞钱💰💰💰<br>{% label 理想中的工作 orange %} 早八晚五，中午来杯卡布奇诺，写写Bug，偶尔加班，放假就去自驾游!(但是这样的生活是不可能滴)<br>{% label 闲谈 orange %}也许是实习时接触的太多事，上了专科也就开始收起以前贪玩的心态(也对各种娱乐项目产生厌倦的感觉),只想着努力学习技术为以后工作打下基础，珍惜当下，毕竟在学校里的日子已经转瞬即逝<br>{% label 人生格言 orange %}**Stay Hungry. Stay Foolish! 求知若渴，虚心若愚!**
 
 <!-- endtab -->
 
@@ -50,6 +50,16 @@ comments: false
 - 2020-07-01 ~ 2021-07-01【新会李锦记】
 
 实习与打工不仅为我带来收入，还让我掌握了技能，同时也让我更加了解社会的各种复杂情况，包括苦辣酸甜和世态炎凉。虽然可能是度日如年无聊的流水线工作，但就是这种经历才会更加锻炼你的意志力和学习欲，让你更加的去努力去奋斗；吃不了学习的苦，那只能将来吃社会的苦，有句话说的好：**不经历风雨，怎么见彩虹**
+
+
+
+{% note green 'fas fa-fan fa-spin' simple%}<center style="color: #fddd61;text-align: center;font-weight: 600;">奖项</center>{% endnote %}
+
+<img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20230923080413.webp" style="zoom:25%;" />
+
+<img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/杨振旺_121403267.webp" style="zoom: 25%;" />
+
+
 
 
 {% note green 'fas fa-fan fa-spin' simple%}<center style="color: #fddd61;text-align: center;font-weight: 600;">博客历程</center>{% endnote %}
