@@ -25,6 +25,8 @@ date: 2023-06-25 14:10:48
 
 [详细介绍如何从0开始写一个数据通信，将数据从单片机发送到上位机](https://blog.csdn.net/qq_44339029/article/details/106004997)
 
+[野火多功能调试助手用户手册](https://www.firebbs.cn/forum.php?mod=viewthread&tid=29923&extra=page%3D1)
+
 
 
 {% note blue 'fas fa-fan' flat %}资料/软件下载{% endnote %}
@@ -3030,6 +3032,24 @@ Public.UsartPrintf(huart_debug, "%.2f,%.2f \n", Encoder.Motor1Speed,Encoder.Moto
 ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230705153259.webp)
 
 
+
+### 野火PID调试助手
+
+首先我们测试一下看看野火上位机下发的命令格式，需要另一个串口调试助手协助，打开虚拟串口，然后发送，在另一个串口助手即可收到
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230918100351.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230918101018.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230918100750.webp)
+
+> 发送部分格式
+>
+> ```cpp
+> set_computer_value(SEND_FACT_CMD, CURVES_CH1, &a, 1);	// 发送实际值--a是int类型
+> ```
+>
+> 
 
 
 

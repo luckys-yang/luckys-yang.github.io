@@ -80,6 +80,10 @@ comments: false
       link: https://online.visual-paradigm.com/
       avatar: ./book_image/book8.webp
       descr: 可画流程图，架构图在线
+    - name: 物联网仿真实训教学平台
+      link: https://10.5.128.82/
+      avatar: ./book_image/book8.webp
+      descr: 物联网仿真实训教学平台      
 
 - class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#dfe516;display:inline-block;"></i><span style="color:#abb4d7;">Github</span>
   class_desc: 
@@ -203,7 +207,11 @@ comments: false
     - name: 武汉芯源半导体(CW32)
       link: https://www.whxy.com/
       avatar: ./book_image/book8.webp
-      descr:  　                                    
+      descr:  　                 
+    - name: ADI智库(有电子技术书)
+      link: https://www.analog.com/cn/landing-pages/002/adi-zhiku.html
+      avatar: ./book_image/book8.webp
+      descr:  　                                       
 - class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#dfe516;display:inline-block;"></i><span style="color:#abb4d7;">博客相关</span>
   class_desc: 
   link_list:

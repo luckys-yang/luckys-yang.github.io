@@ -119,26 +119,28 @@ date: 2022-05-30 15:40:00
 
 {% note blue 'fas fa-fan' flat %}开发微信小程序插件{% endnote %}
 
-- <font color='orange'>vscode weapp api</font>（为vscode提供小程序[API](https://so.csdn.net/so/search?q=API&spm=1001.2101.3001.7020)提示及代码片段）
-- <font color='orange'>vscode wxml</font>（为Vscode提供 wxml 语法支持及代码片段）
-- <font color='orange'>vscode-wechat</font>（wechat app support for vscode(version v1.6.0+)）
-- <font color='orange'>Easy WXLESS</font>（为vscode提供wxss语法支持及代码片段）
+- `vscode weapp api`（为vscode提供小程序API提示及代码片段）
+- `vscode wxml`（为Vscode提供 wxml 语法支持及代码片段）
+- `vscode-wechat`（wechat app support for vscode(version v1.6.0+)）
+- `Easy WXLESS`（为vscode提供wxss语法支持及代码片段）
 
-- <font color='orange'>小程序开发助手</font>（微信小程序标签、属性的智能补全）
+- `小程序开发助手`（微信小程序标签、属性的智能补全）
 
 
 
 {% note blue 'fas fa-fan' flat %}其他好用插件{% endnote %}
 
-- <font color='orange'>Bracket Pair Colorizer</font>（多彩括号）
-- <font color='orange'>JavaScript (ES6) code snippets</font>（ES6语法智能提示,支持js）
-- <font color='orange'>Path Intellisense</font>（自动提示文件路径）
-- <font color='orange'>Todo Tree</font>（高亮一些特定的注解，在左侧菜单快速定位到该位置）
-- <font color='orange'>background-cover</font>（背景图片设置）
-- <font color='orange'>C/C++ Compile Run</font>（按F6运行会有黑窗口，需要打开设置--扩展--Compile Run configuration
+- `Bracket Pair Colorizer`（多彩括号）
+- `JavaScript (ES6) code snippets`（ES6语法智能提示,支持js）
+- `Path Intellisense`（自动提示文件路径）
+- `Todo Tree`（高亮一些特定的注解，在左侧菜单快速定位到该位置）
+- `background-cover`（背景图片设置）
+- `C/C++ Compile Run`（按F6运行会有黑窗口，需要打开设置--扩展--Compile Run configuration
 --Run-in-external-terminal打钩）
 
 ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205301812486.jpg)
+
+- `GBKtoUTF8` (适用于Keil项目打开会乱码的情况)
 
 - 字体设置
 

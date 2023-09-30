@@ -214,7 +214,7 @@ pause
         "my.h": "c"
     },
     "C_Cpp.intelliSenseEngineFallback": "Disabled", //需要添加的
-    "C_Cpp.intelliSenseEngine": "Tag Parser",  //  需要添加的
+    "C_Cpp.intelliSenseEngine": "default",  //  需要添加的
 }
 ```
 

@@ -92,7 +92,7 @@ FreeRTOSv10.4.1
 
 
 
-## 第1讲
+## 第1讲-介绍
 
 ### FreeRTOS的启动流程
 
@@ -183,7 +183,7 @@ void Task_n()
 
 
 
-## 第2讲
+## 第2讲-打印调试
 
 ### FreeRTOS编程风格
 
@@ -360,7 +360,7 @@ unsigned long getRunTimeCounterValue(void)
 
 
 
-## 第3讲
+## 第3讲-配置讲解
 
 ### 系统配置说明
 
@@ -677,7 +677,7 @@ STM32CubeMX生成的，在 `FreeRTOSConfig.h` 有定义，而且在大量地方�
 
 
 
-## 第4讲
+## 第4讲-任务管理
 
 ### 任务的概念和状态
 
@@ -1310,7 +1310,7 @@ void HardWare_init(void)
 
 
 
-## 第5讲
+## 第5讲-任务调度
 
 ### 了解调度器
 
@@ -1542,7 +1542,7 @@ void HardFault_Handler(void)
 
 
 
-## 第6讲
+## 第6讲-中断优先级
 
 ### 中断优先级
 
@@ -1830,7 +1830,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 
 
-## 第7讲
+## 第7讲-锁
 
 ### 调度锁,中断锁，任务锁
 
@@ -1960,7 +1960,7 @@ void vLED2_TaskFunction(void const * argument)
 
 
 
-## 第8讲
+## 第8讲-时间管理
 
 ### 系统节拍
 
@@ -2152,7 +2152,7 @@ void vLED2_TaskFunction(void const * argument)
 
 
 
-## 第9讲
+## 第9讲-数据结构
 
 ### 链表的概念
 
@@ -2551,7 +2551,7 @@ void vLED1_TaskFunction(void const * argument)
 
 
 
-## 第10讲
+## 第10讲-消息队列
 
 ### 消息队列的概念
 
@@ -3163,7 +3163,7 @@ void Queue1RX_TaskFunction(void const * argument)
 
 ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230322164813.webp)
 
-## 第11讲
+## 第11讲-二值信号量
 
 ### 信号量的概念与分类
 
@@ -3626,7 +3626,7 @@ void Binarysem_Function(void const * argument)
 
 
 
-## 第12讲
+## 第12讲-计数信号量
 
 ### 计数信号量的定义与应用
 
@@ -3877,7 +3877,7 @@ void vKey_run_flag_function(void)
 
 
 
-## 第13讲
+## 第13讲-互斥信号量
 
 ### 互斥信号量的定义与应用
 
@@ -4132,7 +4132,7 @@ void vLow_Priority(void const * argument)
 
 
 
-## 第14讲
+## 第14讲-事件
 
 ### 事件的概念与应用
 
@@ -4266,7 +4266,7 @@ BaseType_t xEventGroupSetBitsFromISR( EventGroupHandle_t xEventGroup, const Even
 ```
 
 2. 函数 `xEventGroupSetBitsFromISR` 是用于中断服务程序中调用的，故不可以在任务代码中调用此函数，任务代码中使用的是  `xEventGroupSetBits`
-3. 函数 `xEventGroupSetBitsFromISR` 对事件标志组的操作是不确定性操作，因为不知道当前有多少个任务在等待此事件标志。而 FreeRTOS 不允许在中断服务程序和临界段中执行不确定性操作。 为了不在中断服务程序中执行，就通过此函数给 FreeRTOS 的 daemon 任务（就是 FreeRTOS 的定时器任务）发送消息，在 daemon 任务中执行事件标志的置位操作。 同时也为了不在临界段中执行此不确定操作，将临界段改成由调度锁来完成。这样不确定性操作在中断服务程序和临界段中执行的问题就都得到解决了。
+3. 函数 `xEventGroupSetBitsFromISR` 对事件标志组的操作是不确定性操作，因为不知道当前有多少个任务在等待此事件标志。而 FreeRTOS 不允许在中断服务程序和临界段中执行不确定性操作。 为了不在中断服务程序中执行，就通过此函数给 FreeRTOS 的 daemon 任务（就是 FreeRTOS 的定时器任务,守护进程）发送消息，在 daemon 任务中执行事件标志的置位操作。 同时也为了不在临界段中执行此不确定操作，将临界段改成由调度锁来完成。这样不确定性操作在中断服务程序和临界段中执行的问题就都得到解决了。
 4. 由于函数 `xEventGroupSetBitsFromISR` 对事件标志的置位操作是在 daemon 任务里面执行的， `如果想让置位操作立即生效，即让等此事件标志的任务能够得到及时执行，需要设置 daemon 任务的优先级高于使用此事件标志组的所有其它任务`。
 
 
@@ -4290,6 +4290,22 @@ EventBits_t xEventGroupWaitBits( EventGroupHandle_t xEventGroup, const EventBits
 2. 着重说明下这个函数的返回值，通过返回值用户可以检测是哪个事件标志位被置1了，如果由于设置的等待时间超时，函数的返回值可会有部分事件标志位被置1。如果由于指定的事件标志位被置1而返回，并且设置了这个函数的参数 `xClearOnExit` 为pdTRUE 那么此函数的返回值是清零前的事件标志组数值。
 3. 另外，调用此函数的任务在离开阻塞状态到退出函数 `xEventGroupWaitBits` 之间这段时间，如果一个高优先级的任务抢占执行了，并且修改了事件标志位，那么此函数的返回值会跟当前的事件标志组数值不同。
 
+{% note blue 'fas fa-fan' flat %}任务中获取当前事件标志组的值{% endnote %}
+
+```cpp
+//参数1：事件组句柄
+//返回值：任何值：当前事件标志组的值
+#define xEventGroupGetBits( xEventGroup ) xEventGroupClearBits( xEventGroup, 0 )
+```
+
+{% note blue 'fas fa-fan' flat %}中断中获取当前事件标志组的值{% endnote %}
+
+```cpp
+//参数1：事件组句柄
+//返回值：任何值：当前事件标志组的值
+EventBits_t xEventGroupGetBitsFromISR( EventGroupHandle_t xEventGroup ) PRIVILEGED_FUNCTION;
+```
+
 
 
 ### 任务与任务
@@ -4298,7 +4314,7 @@ EventBits_t xEventGroupWaitBits( EventGroupHandle_t xEventGroup, const EventBits
 
 ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230412113623.webp)
 
-事件组只能在代码里创建，MX里不能创建
+事件组只能在代码里创建，MX里不能创建(CMISIS v2才能在里面创建)
 
 {% note blue 'fas fa-fan' flat %}程序编写{% endnote %}
 
@@ -4508,7 +4524,7 @@ void vEvent_function(void const * argument)
 
 
 
-## 第15讲
+## 第15讲-软定时器
 
 ### 软件定时器的概念与应用
 
@@ -4925,7 +4941,7 @@ extern TimerHandle_t myTimer02Handle;
 
 ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230413105523.webp)
 
-## 第16讲
+## 第16讲-任务通知
 
 ### 任务通知的概念
 
@@ -4983,20 +4999,20 @@ FreeRTOS提供以下几种方式发送通知给任务:
 > `替代二值信号量与计数信号量`
 >
 > 发送任务通知:
-> xTaskNotifyGive()
-> vTaskNotifyGiveFromISR()
+> xTaskNotifyGive() --- 发送通知，不带通知值并且不保留接收任务的通知值，此函数会将接收任务的通知值加一
+> vTaskNotifyGiveFromISR() --- 发送通知，函数xTaskNotifyGive()的中断版本
 >
 > 获取任务通知:
-> ulTaskNotifyTake()
+> ulTaskNotifyTake() --- 获取任务通知，可以设置在退出此函数的时候将任务通知值清零或者减一。当任务通知用作二值信号量或者计数信号量的时候使用此函数来获取信号量
 
 > `替代长为1的队列与事件组`
 >
 > 发送任务通知:
-> xTaskNotify()
-> vTaskNotifyFromISR()
+> xTaskNotify() --- 带有通知值并且不保留接收任务原通知值
+> vTaskNotifyFromISR() --- 发送通知，函数xTaskNotify()的中断版本
 >
 > 获取任务通知:
-> ulTaskNotifyWait()
+> ulTaskNotifyWait() --- 等待任务通知，比ulTaskNotifyTak()更为强大，全功能版任务通知获取函数
 
 
 
@@ -5123,7 +5139,7 @@ BaseType_t xTaskNotify(TaskHandle_t xTaskToNotify, uint32_t ulValue, eNotifyActi
 
 {% note blue 'fas fa-fan' flat %}在任务中获取通知{% endnote %}
 
-`功能`：在任务中获取通知，与xTaskNotify()配套使用，用于替代长度位1的队列与事件组
+`功能`：也是在任务中获取通知，不过此函数比ulTaskNotifyTake()更为强大，与xTaskNotify()配套使用，用于替代长度位1的队列与事件组
 
 ```cpp
 //函数原型
@@ -5919,8 +5935,7 @@ void vUsart1_Protocol_Analysis(void)
 </div>
 
 
-
-## 第17讲
+## 第17讲-动态内存管理
 
 ### 动态内存管理介绍
 
@@ -6085,7 +6100,7 @@ void MX_FREERTOS_Init(void)
 
 
 
-## 第18讲
+## 第18讲-独立看门狗
 
 ### 独立看门狗IWDG概念
 
@@ -6293,7 +6308,7 @@ if(KEY.Key_Down_Buff[3])
 
 ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230415144015.webp)
 
-## 第19讲
+## 第19讲-低功耗模式
 
 ### STM32低功耗介绍
 
@@ -6476,9 +6491,11 @@ LED1亮1s然后熄灭然后亮循环...
 
 
 
-{% note blue 'fas fa-fan' flat %}HAL_Delay在FreeRTOS作用{% endnote %}
+{% note blue 'fas fa-fan' flat %}HAL_Delay，osDelay在FreeRTOS作用{% endnote %}
 
-`HAL_Delay` 函数在FreeRTOS里也可以使用，但是它不会造成阻塞，它是在那空等时间到
+`HAL_Delay` 函数在FreeRTOS里也可以使用，但是它不会造成阻塞，它是在那空等时间到，它是直接把处理器延时一段时间，会导致FreeRTOS调度失效，而且这个不能在中断里使用会造成SysTick中断失效，而且精度也受SysTick的频率和分频值影响
+
+osDelay是FreeRTOS提供的一个延时函数，参数单位是ms，内部其实也是调用 `vTaskDelay`函数(参数单位是tick)，可以把当前任务挂起指定时间，然后释放CPU，让其他任务可以执行，它只能在任务中使用，不能在ISR中使用，否则会引起死锁 `属于相对延时`
 
 
 
@@ -6595,7 +6612,7 @@ FreeRTOS 使用一种称为 `调度器` 的算法，它可以在任务之间自�
 {% note blue 'fas fa-fan' flat %}换算{% endnote %}
 
 在**16位**的系统中（比如8086微机） 1字 （word）= 2字节（byte）= 16（bit）
-在**32位**的系统中（比如win32） 1字（word）= 4字节（byte）=32（bit）
+在**32位**的系统中（比如win32） 1字（word）= 4字节（byte）=32（bit）`STM32就是这种`
 在**64位**的系统中（比如win64）1字（word）= 8字节（byte）=64（bit）
 
 
@@ -6607,6 +6624,10 @@ FreeRTOS临界区可以理解为一个特殊的区域， `只有当一个任务�
 创建任务时并不需要写进入临界区退出临界区，但是在使用临界区机制时，必须显式地进入临界区和退出临界区。
 
 
+
+{% note blue 'fas fa-fan' flat %}FreeRTOS里频率问题{% endnote %}
+
+常量 `portTICK_PERIOD_MS` 不适用于大于 1KHz 的频率（或快于 1ms 的节拍周期：500us、100us 等）；即使您使用等于或大于 1ms 的刻度周期，您也应该使用宏 `pdMS_TO_TICKS()`
 
 
 
@@ -6681,6 +6702,32 @@ __HAL_UART_ENABLE_IT(&huart1,UART_IT_IDLE);
 
 
 
+## 经验
+
+> 队列
+
+常用于接收，比如串口接收等
+
+> 二值信号量
+
+主要是同步用，比如任务与任务间，任务与中断间，任务与软件定时器间，类似裸机的Flag
+
+> 计数信号量
+
+就是对资源的数量进行管理
+
+> 任务通知
+
+它可以代替二值信号量，计数信号量和长度为1的队列，还有事件组，效率比较高，但是只能一对一
+
+> 关于初始化问题
+
+以前裸机开发初始化都是写在一个函数里面然后在主函数调用，而加了RTOS的话我一般习惯把初始化放在任务那，比较清晰
+
+
+
+
+
 ## 结语
 
-花了大概半个月熟悉了一遍基于HAL的FreeRTOS学习，感觉学到很多
+花了大概半个月熟悉了一遍基于HAL的FreeRTOS学习，感觉学到很多，后面项目用到不懂再回来这回顾
