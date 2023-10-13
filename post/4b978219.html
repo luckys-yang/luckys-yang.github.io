@@ -1,0 +1,1446 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>安装与配置软件记录 | Yangの小栈</title><meta name="author" content="Yang"><meta name="copyright" content="Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="PADS 9.5  此教程最终不行   在 D:\PADS\PADS9.5\PADS_9-5 路径下，右键管理员身份打开 PADS9.5_mib.exe            [{&quot;url&quot;:&quot;https:&#x2F;&#x2F;image-1309791158.cos.ap-guangzhou.myqcloud.com&#x2F;其他&#x2F;QQ截图20231001181403.webp&quot;,&quot;alt&quot;:&quot;&quot;},{&quot;url&quot;:&quot;ht">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安装与配置软件记录">
+<meta property="og:url" content="https://blog.yang5201314.cn/post/4b978219.html">
+<meta property="og:site_name" content="Yangの小栈">
+<meta property="og:description" content="PADS 9.5  此教程最终不行   在 D:\PADS\PADS9.5\PADS_9-5 路径下，右键管理员身份打开 PADS9.5_mib.exe            [{&quot;url&quot;:&quot;https:&#x2F;&#x2F;image-1309791158.cos.ap-guangzhou.myqcloud.com&#x2F;其他&#x2F;QQ截图20231001181403.webp&quot;,&quot;alt&quot;:&quot;&quot;},{&quot;url&quot;:&quot;ht">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.yang5201314.cn/img/num150.webp">
+<meta property="article:published_time" content="2023-10-01T06:44:36.000Z">
+<meta property="article:modified_time" content="2023-10-01T13:58:35.213Z">
+<meta property="article:author" content="Yang">
+<meta property="article:tag" content="aabbcc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.yang5201314.cn/img/num150.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20231008142657.webp"><link rel="canonical" href="https://blog.yang5201314.cn/post/4b978219.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '安装与配置软件记录',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-01 21:58:35'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/aplayer.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20231008142657.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">148</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">72</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">32</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">安装与配置软件记录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-01T06:44:36.000Z" title="发表于 2023-10-01 14:44:36">2023-10-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-01T13:58:35.213Z" title="更新于 2023-10-01 21:58:35">2023-10-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB%E4%B8%8E%E6%95%99%E7%A8%8B/">资源分享与教程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">9.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>38分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="PADS-9-5">PADS 9.5</h2>
+<blockquote>
+<p>此教程最终不行</p>
+</blockquote>
+<ol>
+<li>在 <code>D:\PADS\PADS9.5\PADS_9-5</code> 路径下，右键管理员身份打开 <code>PADS9.5_mib.exe</code></li>
+</ol>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231001181403.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231001181500.webp","alt":" "},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231001181652.webp","alt":" "},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231001181803.webp","alt":" "},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231001181857.webp","alt":" "},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231001181936.webp","alt":" "},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231001182631.webp","alt":" "}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ol start="2">
+<li>将破解文件夹里 <code>D:\PADS\PADS9.5\pads9.5安装方法\MentorEE7.9.5Crack\MentorCrack</code> 下的3个文件复制到安装路径下 <code>D:\PADS\install</code>即可，然后双击该路径下的 <code>MentorKG.exe</code>，它会产生一个txt文本，把它另存为到 <code>D:\PADS\install</code> 下</li>
+<li>打开环境变量进行配置</li>
+</ol>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231001183420.webp" style="zoom:50%;" />
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">变量名：MGLS_LICENSE_FILE
+变量值：TXT的路径</code></pre>
+<h2 id="Candence-16-6">Candence 16.6</h2>
+<p>自带orCAD</p>
+<ol>
+<li>以管理员身份打开setup.exe</li>
+</ol>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231001155217.webp","alt":" "},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231001155343.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231001155434.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<p>然后继续点下一个</p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231001161121.webp","alt":" "},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231001161319.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231001161448.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231001162008.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231001162120.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231001162153.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231001162207.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231001163042.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<p>安装完成后，点Exit退出最开始那个页面即可</p>
+<ol start="2">
+<li>以管理员身份安装补丁包 Hotfix_SPB16.60.010_wint_1of1.exe</li>
+</ol>
+<p>一路NEXT即可</p>
+<ol start="3">
+<li>
+<p>在破解前需要把安装目录下的 <code>D:\Candence\SPB_install\tools\pspice\orSimSetup.dll</code> 复制出来，待破解完成后在拷贝回去这个目录下进行覆盖(否则pspice仿真功能可能无法使用)</p>
+</li>
+<li>
+<p>打开破解文件夹，把 <code>D:\Candence\最新Cadence Allegro 16.6高速下载+破解Crack\Cadence16.6破解文件加安装步骤\Cadence16.6破解文件加安装步骤\crack\LicenseManager\</code> 下的3个文件复制到 <code>D:\Candence\install</code> 下，然后双击运行 <code>LicenseManager.bat</code></p>
+</li>
+<li>
+<p>打开破解文件夹，把 <code>D:\Candence\最新Cadence Allegro 16.6高速下载+破解Crack\Cadence16.6破解文件加安装步骤\Cadence16.6破解文件加安装步骤\crack\SPB_16.5\tools\</code> 下的3个文件复制到 <code>D:\Candence\SPB_install\tools</code> 下，然后双击运行 <code>Tools.bat</code></p>
+</li>
+<li>
+<p>打开破解文件夹，把 <code>D:\Candence\最新Cadence Allegro 16.6高速下载+破解Crack\Cadence16.6破解文件加安装步骤\Cadence16.6破解文件加安装步骤\crack</code> 下的 <code>LicGen</code> 文件夹复制到 <code>D:\Candence</code> 下，以文本方式打开 <code>src.lic</code></p>
+</li>
+</ol>
+<p>把第一行改成你的主机名称：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">this-host --&gt; LAPTOP-4Q1O804L</code></pre>
+<p>然后保存关闭</p>
+<p>然后在此路径下双击运行 <code>LicGen.bat</code></p>
+<ol start="7">
+<li>如果系统是64位的win7,10等还需要把破解文件夹里的 <code>D:\Candence\最新Cadence Allegro 16.6高速下载+破解Crack\Cadence16.6破解文件加安装步骤\Cadence16.6破解文件加安装步骤</code> 下的 <code>cdslmd.exe</code> 复制到 <code>D:\Candence\install</code> 下替换文件</li>
+<li>在桌面左下角图标找到这个服务打开</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231001165929.webp" alt=""></p>
+<p>然后选择我们的这个lic文件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231001170146.webp" alt=""></p>
+<p>然后核对一下主机名</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231001170358.webp" alt=""></p>
+<p>到这里显示成功就表示没问题了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231001170438.webp" alt=""></p>
+<ol start="9">
+<li>配置一下服务，避免下次开机又要重新破解</li>
+</ol>
+<p>还是在刚刚左下角图标那找到刚刚的文件夹下的 <code>LmTools</code>打开</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231001171011.webp" alt=""></p>
+<p>然后打开服务即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231001171214.webp" alt=""></p>
+<ol start="10">
+<li>把我们一开始复制出去的文件拷贝回去 <code>D:\Candence\SPB_install\tools\pspice</code> ，覆盖即可</li>
+</ol>
+<p>然后就可以打开软件了，如果是画原理图的话就打开 <code>Design Entry CIS</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231001171755.webp" alt=""></p>
+<ol start="11">
+<li>我们可以打开电脑自带的服务，检查看看这个有没有设置成自动然后在运行</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231001171925.webp" alt=""></p>
+<blockquote>
+<p>打开项目</p>
+</blockquote>
+<p>一般是打开orCAD，然后选择打开项目，找到 <code>obj</code> 后缀打开即可</p>
+<h2 id="source-Insight">source_Insight</h2>
+<p>按网盘步骤即可</p>
+<h2 id="vscode">vscode</h2>
+<h3 id="安装与配置vscode">安装与配置vscode</h3>
+<p>参考文章：<a href="https://juejin.cn/post/7054468187600977956">https://juejin.cn/post/7054468187600977956</a></p>
+<ul>
+<li>官网下载 <a href="https://code.visualstudio.com/">Visual Studio Code </a></li>
+<li>去下载 <a href="https://sourceforge.net/projects/mingw-w64/files/">MingG64</a>，选择 <code>x86_64-posix-seh</code>，直接解压到D盘某文件夹里即可，我的路径是 <code>D:\GW64\mingw64\bin</code></li>
+<li>配置环境变量，进去到刚刚解压的文件夹里，找到 <code>bin</code> ，复制当前路径打开环境变量在 Path里添加即可</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416124922.webp" alt=""></p>
+<ul>
+<li>打开vscode，安装中文插件还有 <code>C\C++</code> 插件，然后 <code>CTRL+SHIFT+P</code> 打开控制面板，输入 <code>C\C++</code> ，找到UI配置，进去路径选择你刚刚那个bin里面(一般已经自动检测到)，然后下面选择 <code>window-gcc-x64</code></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416124810.webp" alt=""></p>
+<ul>
+<li>然后写一个C语言测试代码点击 <code>以非调试模式运行</code></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416124039.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230416124053.webp" alt=""></p>
+<p>它会生成一个 <code>.vscode</code> 文件夹，里面有 <code>tasks.json</code>，<code>launch.json(可能没有这个需要自己创建)</code>，然后按下面修改即可</p>
+<details ><summary> tasks.json </summary>
+              <div class='content'>
+              <pre class="line-numbers language-json" data-language="json"><code class="language-json">&#123;
+    &quot;tasks&quot;: [
+        &#123;
+            &quot;type&quot;: &quot;cppbuild&quot;,
+            &quot;label&quot;: &quot;C&#x2F;C++: gcc.exe 生成活动文件&quot;,
+            &quot;command&quot;: &quot;D:\\GW64\\mingw64\\bin\\gcc.exe&quot;,	&#x2F;&#x2F;路径看你自己那改
+            &quot;args&quot;: [
+                &quot;-fdiagnostics-color&#x3D;always&quot;,
+                &quot;-g&quot;,
+                &quot;-fexec-charset&#x3D;GBK&quot;,   &#x2F;&#x2F; 处理mingw中文编码问题
+                &quot;-finput-charset&#x3D;UTF-8&quot;,&#x2F;&#x2F; 处理mingw中文编码问题
+                &quot;$&#123;file&#125;&quot;,
+                &quot;-o&quot;,
+                &quot;$&#123;fileDirname&#125;\\$&#123;fileBasenameNoExtension&#125;.exe&quot;
+            ],
+            &quot;options&quot;: &#123;
+                &quot;cwd&quot;: &quot;$&#123;fileDirname&#125;&quot;
+            &#125;,
+            &quot;problemMatcher&quot;: [
+                &quot;$gcc&quot;
+            ],
+            &quot;group&quot;: &#123;
+                &quot;kind&quot;: &quot;build&quot;,
+                &quot;isDefault&quot;: true
+            &#125;,
+            &quot;detail&quot;: &quot;调试器生成的任务。&quot;
+        &#125;
+    ],
+    &quot;version&quot;: &quot;2.0.0&quot;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> launch.json </summary>
+              <div class='content'>
+              <pre class="line-numbers language-json" data-language="json"><code class="language-json">&#123;
+    &quot;version&quot;: &quot;0.2.0&quot;,
+    &quot;configurations&quot;: [
+      &#123;
+        &quot;name&quot;: &quot;g++.exe - 生成和调试活动文件&quot;,
+        &quot;type&quot;: &quot;cppdbg&quot;,
+        &quot;request&quot;: &quot;launch&quot;,
+        &quot;program&quot;: &quot;$&#123;fileDirname&#125;\\$&#123;fileBasenameNoExtension&#125;.exe&quot;,
+        &quot;args&quot;: [],
+        &quot;stopAtEntry&quot;: false,
+        &quot;cwd&quot;: &quot;$&#123;fileDirname&#125;&quot;,
+        &quot;environment&quot;: [],
+        &quot;externalConsole&quot;: true,  &#x2F;&#x2F;打开控制台需要在程序里加 system(&quot;pause&quot;);否则控制台一闪而过
+        &quot;MIMode&quot;: &quot;gdb&quot;,
+        &quot;miDebuggerPath&quot;: &quot;D:\\GW64\\mingw64\\bin\\gdb.exe&quot;,
+        &quot;setupCommands&quot;: [
+          &#123;
+            &quot;description&quot;: &quot;为 gdb 启用整齐打印&quot;,
+            &quot;text&quot;: &quot;-enable-pretty-printing&quot;,
+            &quot;ignoreFailures&quot;: true
+          &#125;
+        ],
+        &quot;preLaunchTask&quot;: &quot;C&#x2F;C++: gcc.exe 生成活动文件&quot;
+      &#125;
+    ]
+  &#125;</code></pre>
+              </div>
+            </details>
+<h3 id="vscode安装插件">vscode安装插件</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>开发微信小程序插件</p>
+</div>
+<ul>
+<li>
+<p><code>vscode weapp api</code>（为vscode提供小程序API提示及代码片段）</p>
+</li>
+<li>
+<p><code>vscode wxml</code>（为Vscode提供 wxml 语法支持及代码片段）</p>
+</li>
+<li>
+<p><code>vscode-wechat</code>（wechat app support for vscode(version v1.6.0+)）</p>
+</li>
+<li>
+<p><code>Easy WXLESS</code>（为vscode提供wxss语法支持及代码片段）</p>
+</li>
+<li>
+<p><code>小程序开发助手</code>（微信小程序标签、属性的智能补全）</p>
+</li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>其他好用插件</p>
+</div>
+<ul>
+<li><code>Bracket Pair Colorizer</code>（多彩括号）</li>
+<li><code>JavaScript (ES6) code snippets</code>（ES6语法智能提示,支持js）</li>
+<li><code>Path Intellisense</code>（自动提示文件路径）</li>
+<li><code>Todo Tree</code>（高亮一些特定的注解，在左侧菜单快速定位到该位置）</li>
+<li><code>background-cover</code>（背景图片设置）</li>
+<li><code>C/C++ Compile Run</code>（按F6运行会有黑窗口，需要打开设置–扩展–Compile Run configuration<br>
+–Run-in-external-terminal打钩）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205301812486.jpg" alt=""></p>
+<ul>
+<li>
+<p><code>GBKtoUTF8</code> (适用于Keil项目打开会乱码的情况)</p>
+</li>
+<li>
+<p>字体设置</p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205301849751.jpg" alt=""></p>
+<p>现在我使用的字体是 <code>HarmonyOS Sans SC Light</code>，<a href="https://github.com/IKKI2000/harmonyos-fonts/blob/main/fonts/HarmonyOS_Sans/HarmonyOS_Sans_Bold.ttf">HarmonyOS</a></p>
+<ul>
+<li>主题颜色</li>
+</ul>
+<p>我使用这个插件 <code>One Dark Pro</code> 的 <code>One Dark Pro Mix</code> 主题感觉不错</p>
+<h3 id="部分快捷键">部分快捷键</h3>
+<ul>
+<li>快捷键回到上一次编辑的地方</li>
+</ul>
+<p><code>alt + &lt;-</code> 返回上一级</p>
+<p><code>alt + -&gt;</code> 回到下一级</p>
+<h3 id="vscode-Keil">vscode+Keil</h3>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>参考文章</p>
+</div>
+<p><a href="https://blog.csdn.net/hill_guo/article/details/127248239?spm=1001.2101.3001.6650.6&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-6-127248239-blog-124092622.235%5Ev29%5Epc_relevant_default_base3&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-6-127248239-blog-124092622.235%5Ev29%5Epc_relevant_default_base3&amp;utm_relevant_index=11">vscode “未定义标识符”的一种情况</a></p>
+<p><a href="https://blog.csdn.net/qq_43784626/article/details/111638186?spm=1001.2101.3001.6650.5&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-5-111638186-blog-124092622.235%5Ev29%5Epc_relevant_default_base3&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-5-111638186-blog-124092622.235%5Ev29%5Epc_relevant_default_base3&amp;utm_relevant_index=10">VS Code配置开发环境时出现“未定义标识符”</a></p>
+<div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>方法1</p>
+</div>
+<ul>
+<li>安装插件 <code>Keil V</code></li>
+<li>写UV4.exe的路径</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230419214442.webp" alt=""></p>
+<ul>
+<li>打开项目的话可以管理员身份打开vscode然后在里面直接就打开项目的根目录文件夹即可</li>
+<li>注意编写 <code>setting.json</code>，不加的话会出现宏定义下面有红色波浪线警告，但是可以跳转定义</li>
+</ul>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json">&#123;
+    &quot;files.associations&quot;: &#123;
+        &quot;my.h&quot;: &quot;c&quot;
+    &#125;,
+    &quot;C_Cpp.intelliSenseEngineFallback&quot;: &quot;Disabled&quot;, &#x2F;&#x2F;需要添加的
+    &quot;C_Cpp.intelliSenseEngine&quot;: &quot;default&quot;,  &#x2F;&#x2F;  需要添加的
+&#125;</code></pre>
+<ul>
+<li>添加 <code>c_cpp_properties.json</code></li>
+</ul>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json">&#123;
+    &quot;configurations&quot;: [
+        &#123;
+            &quot;name&quot;: &quot;Win32&quot;,
+            &quot;includePath&quot;: [
+                &quot;$&#123;workspaceFolder&#125;&#x2F;**&quot;,
+                &quot;C:&#x2F;Keil_v5&#x2F;ARM&#x2F;ARMCC&#x2F;include&quot;
+            ],
+            &quot;defines&quot;: [
+                &quot;_DEBUG&quot;,
+                &quot;UNICODE&quot;,
+                &quot;_UNICODE&quot;,
+                &quot;__CC_ARM&quot;, &#x2F;*必须加*&#x2F;
+                &quot;USE_HAL_DRIVER&quot;,   &#x2F;*看keil的宏定义*&#x2F;
+                &quot;STM32G431xx&quot;   &#x2F;*看keil的宏定义*&#x2F;
+            ],
+            &quot;compilerPath&quot;: &quot;D:\\GW64\\mingw64\\bin\\gcc.exe&quot;,
+            &quot;cStandard&quot;: &quot;c99&quot;,
+            &quot;cppStandard&quot;: &quot;c++17&quot;,
+            &quot;intelliSenseMode&quot;: &quot;windows-gcc-x64&quot;
+        &#125;
+    ],
+    &quot;version&quot;: 4
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230419215508.webp" alt=""></p>
+<ul>
+<li>vscode最好用管理员身份打开，这样不需要每次编译或者下载时需要点击弹窗</li>
+<li>MX配置完后vscode自动会刷新</li>
+</ul>
+<div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>方法2</p>
+</div>
+<p>下载插件<code>Keil Assistant</code> ，然后配置一下路径</p>
+<blockquote>
+<p>推荐下载 <code>1.6.2版本</code>，可以使用快捷键进行编译下载，新版本不行</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230508183557.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230508183754.webp" alt=""></p>
+<h2 id="Keil">Keil</h2>
+<blockquote>
+<p><a href="https://gnutoolchains.com/arm-eabi/">ARM-GCC等等其他</a></p>
+<p><a href="https://www.keil.arm.com/packs/stm32f1xx_dfp-keil/boards/">pack</a></p>
+</blockquote>
+<h3 id="配置-STM32-开发环境">配置 STM32 开发环境</h3>
+<ul>
+<li>首先到官网下载  <a href="https://www.keil.com/download/product/">keil MDK</a></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204102318148.jpg" alt=""></p>
+<ul>
+<li>
+<p>点击后会弹出需要填写信息的页面随便写就行了</p>
+</li>
+<li>
+<p>写完会弹出以下页面点击下载即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204102318878.jpg" alt=""></p>
+</li>
+<li>
+<p>下载完成安装即可，<font color='cornflowerblue'>中间无需改任何东西位置默认就行</font><font color='grey'>（由于我之前下过 keil C51 所以第一次下时我改过位置导致后面破解不了只能把 keil C51 卸了重新下 keil MDK）</font></p>
+</li>
+<li>
+<p>安装完成后右键<font color='red'> “以管理员身份打开”</font>然后打开破解工具开始破解</p>
+</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202204110859306.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202204110859284.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>
+<p>复制 ID 后打开破解工具按照下面图片步骤完成（破解工具在我书签页第一个书签）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204110904654.png" alt=""></p>
+</li>
+<li>
+<p>把复制的那串密钥粘贴到下面那个位置，点击 Add 如果成功了则上面就会显示 <font color='orange'>MDK-ARM Plus</font></p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204110906694.png" alt=""></p>
+<ul>
+<li>破解完成后还需要安装STM32的芯片包（不然你没有芯片也不能编译代码）；直接去 [MDK5 Software Packs](<a href="https://www.keil.com/dd2/Pack/#">https://www.keil.com/dd2/Pack/#</a> !# eula-container)下载，记得选择正确的型号，因为我的板子是 <font color='orange'>STM32F103RDT6</font>；所以我就下载 STM32F1系列的（保存目录最好存你 keil MDK 安装目录下）</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202204110918781.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202204110918078.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>下载完成后到目录找到这个 pack 双击它安装（安装过程一直 Next 即可）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204110921163.png" alt=""></p>
+<ul>
+<li>安装完成后打开 keil MDK 软件检查有没有这个芯片包</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202204111341088.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202204111341899.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202204111341570.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<p>这样就完成了！！！</p>
+<h3 id="配置-C51-开发环境">配置 C51 开发环境</h3>
+<p>如果还想写 51单片机代码则还想要配置 C51的密钥，首先下载 <font color='orange'>MDK-C51</font>配置（压缩包在书签第一个）</p>
+<ul>
+<li>
+<p>将 MDK-C51解压后可以看到这些文件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204111349583.png" alt=""></p>
+</li>
+<li>
+<p>然后将 C51.zip 复制到你的 Keil MDK 安装目录下然后解压（不知道安装目录的可以右键你的 Keil MDK 找到&quot;<font color='orange'>文件所在位置</font>&quot;）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204111353954.png" alt=""></p>
+</li>
+</ul>
+<p><font color='cornflowerblue'>这是解压后的部分文件截图：</font></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204111354475.png" alt=""></p>
+<ul>
+<li>然后把之前 MDK-C51解压后的 C51配置代码.txt 用记事本打开，修改 <font color='orange'>PATH</font>的路径为你 Keil MDK 的安装目录（就是刚刚的&quot;文件所在位置&quot;）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204111359847.png" alt=""></p>
+<ul>
+<li>然后打开 Keil MDK 安装目录下的 <font color='orange'>TOOLS.INI</font> 配置文件，将上面修改好路径的配置代码复制到该文件的<font color='orange'>末尾</font>然后保存即可（如果提示权限不足，建议用管理员权限打开此配置文件）</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202204111403757.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202204111403923.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>然后打开 Keil MDK，打开刚刚的 <font color='orange'>License Management</font> 复制 ID 到破解工具那生成秘钥然后激活即可</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202204111407801.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202204111408500.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>51单片机系列的选<font color='red'> AT89C52 </font>即可（头文件是：<font color='orange'># include “reg52.h”</font>）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204111412274.png" alt=""></p>
+<p>好了，现在可以愉快的敲代码了</p>
+<h3 id="美化代码界面">美化代码界面</h3>
+<p>一开始代码界面是<a href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E6%96%87%E6%9C%AC/%E9%BB%98%E8%AE%A4.prop">默认</a>的，有的人可能就不太习惯，比如我（我一开始接触C语言就是在 VS2019 上敲的，实在太舒服了）；但是 Keil 没有设置代码配色方案的 UI 支持，所有的配色方案都是在安装目录下的 <font color='orange'>/UV4/global.prop</font> 文件中定义，可以自行设计配色方案。这里分享好看的几款（下载后直接覆盖重启 Keil 即可）：</p>
+<p><a href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E6%96%87%E6%9C%AC/1.prop">global.prop（sublime风格）</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204111506994.png" alt=""></p>
+<p><a href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E6%96%87%E6%9C%AC/2.prop">global.prop（VScode风格）</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202204111545687.png" alt=""></p>
+<p><font color='red'>注意：</font>重启打开项目会出现注释乱码这需要手动修改设置，这样注释就恢复了</p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202204111547157.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202204111548471.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<h3 id="插件">插件</h3>
+<div class="btns rounded grid5">
+            <a class="button" href='https://www.aliyundrive.com/s/AVCfSjG1utZ' title='下载'><i class='fas fa-download'></i>下载</a>
+          </div>
+<ul>
+<li>CoolFormat(代码格式化2)</li>
+<li>AStyle(代码格式化1)</li>
+<li>DateTime(当前时间)</li>
+<li>FunctionComment(函数注释)</li>
+<li>FileComments(文件注释)</li>
+</ul>
+<h3 id="keil编译脚本">keil编译脚本</h3>
+<p>速度跟在软件里编译是一样的没区别</p>
+<p>放在 <code>uvprojx</code> 文件同级目录下双击<br>
+<code>UV</code> 改成你的UV4.exe路径</p>
+<pre class="line-numbers language-bat" data-language="bat"><code class="language-bat">@echo off
+
+set UV&#x3D;C:\Keil_V5\UV4\UV4.exe
+set UV_PRO_FILE&#x3D;&quot;uvprojx&quot;
+set UV_PRO_DIR&#x3D;%cd%
+
+for &#x2F;f &quot;usebackq delims&#x3D;&quot; %%j in (&#96;dir &#x2F;b &quot;%UV_PRO_DIR%&quot;\*.&quot;%UV_PRO_FILE%&quot;&#96;) do (
+if exist %%j (
+set UV_PRO_FILE_PATH&#x3D;&quot;%UV_PRO_DIR%\%%j&quot;))
+
+echo %UV%
+echo %UV_PRO_DIR%
+echo %UV_PRO_FILE_PATH%
+
+echo Init building ...
+echo .&gt;build_log.txt
+%UV% -j0 -r %UV_PRO_FILE_PATH% -o %cd%\build_log.txt
+type build_log.txt
+echo Done.
+pause</code></pre>
+<h3 id="各类报错集合">各类报错集合</h3>
+<blockquote>
+<ul>
+<li><a href="https://blog.csdn.net/qq_42926939/article/details/89502253">解决keil MDK 5 编译出现&quot;Could not open file …\output\core_cm3.o: No such file or directory&quot;的终极超简单方法</a></li>
+<li><a href="https://blog.csdn.net/chunquqiulailll/article/details/113257923">国产32冒充STM32导致daplink下载不了</a></li>
+</ul>
+</blockquote>
+<h2 id="Visual-Studio-2012">Visual Studio 2012</h2>
+<ul>
+<li>右键管理员身份双击 <code>Visual Studio 2012</code></li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230522144833.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230522144859.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>安装完成后启动，填写PJ码即可</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">YKCW6-BPFPF-BT8C9-7DCTH-QXGWC</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230522152922.webp" alt=""></p>
+<ul>
+<li>选择C#</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230522153009.webp" alt=""></p>
+<ul>
+<li>新建项目，建议选择 <code>.NET Framework 4版本</code> ， 如果选择4.5或更高的版本，设计的上位机应用程序将不能在XP系统电脑上运行。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230522153833.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230522154013.webp" alt=""></p>
+<h2 id="Android">Android</h2>
+<ul>
+<li>下载安装包之后，双击运行，傻瓜式安装即可，下一步下一步。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230318101437.webp" alt=""></p>
+<ul>
+<li>第一次运行Android Studio会提示找不到SDK目录，先不管这个，点击【Cancel】取消即可,</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230318100857.webp" alt=""></p>
+<ul>
+<li>然后再按【Next】设置SDK目录，这一步是将SDK安装到哪个目录下面。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230318105048.webp" alt=""></p>
+<ul>
+<li>下一步然后点击完成</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230318105112.webp" alt=""></p>
+<h2 id="IDEA">IDEA</h2>
+<h3 id="安装">安装</h3>
+<p>当然也可以选择另一个集成开发环境 <code>eclipse</code>，这个占内存小而且没有多余的页面</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">我的安装版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">2021.2.3</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>直接下载打开(软件在阿里云盘)，安装路径改成D盘，然后勾选这些一直NEXT即可</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230307124020.webp" alt=""></p>
+<ul>
+<li>弹出这个表示是否要导入本地设置，选择下面那个不导入即可</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230307124334.webp" alt=""></p>
+<ul>
+<li>来到这个页面表示要激活，我们直接关闭</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230307124441.webp" alt=""></p>
+<ul>
+<li>双击脚本开始PJ，PJ完打开可以看到OK了</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230307124653.webp" alt=""></p>
+<h3 id="基本配置">基本配置</h3>
+<ul>
+<li>汉化</li>
+</ul>
+<p>直接 <code>File</code> – <code>setting</code> – <code>Plugins</code> 搜索插件 <code>Chinese</code>就出来了，图标是一个 <code>汉</code> 字那个【安装完重启即可】</p>
+<ul>
+<li>项目结构/设置</li>
+</ul>
+<p>在工程里点击右边那个设置按钮即可看到，一般在这里我们做配置Project全局SDK依赖，新建模块，导入模块等动作</p>
+<ul>
+<li>Ctrl+滑轮改变字体大小</li>
+</ul>
+<p>在 <code>设置</code> — <code>编辑器</code> — <code>常规</code> 那勾选即可</p>
+<ul>
+<li>自动导包</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230307133902.webp" alt=""></p>
+<ul>
+<li>文件编码</li>
+</ul>
+<p>在设置里一般是UTF-8</p>
+<ul>
+<li>新建一个java项目</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230307140437.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230307141708.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230307142037.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230307142052.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<h3 id="git推送配置">git推送配置</h3>
+<p>首先在你的项目文件夹下打开 <code>git bash</code>，进行下面的命令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">git init
+
+git remote add origin git@github.com:luckys-yang&#x2F;javaproject.git
+
+git pull git@github.com:luckys-yang&#x2F;javaproject.git
+
+git add .
+
+git commit -m &#39;测试&#39;
+
+git push origin master</code></pre>
+<p>就推送成功了</p>
+<p>然后在IDEA里登陆然后选择git.exe</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230307154807.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230307154757.webp" alt=""></p>
+<p>点击 <code>git</code> — <code>管理远程</code>，添加ssh链接即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230307154507.webp" alt=""></p>
+<ul>
+<li>平时只需按顺序左到右点即可提交</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230307154623.webp" alt=""></p>
+<h2 id="loongide">loongide</h2>
+<ul>
+<li>首先安装 <code>01_msys2_full_install.exe</code>，默认安装在C盘不用管，安装路径：<code>C:\msys32</code></li>
+<li>安装完就配置环境变量，安装时默认已经配了只需把对应环境变量的前缀小写c改成大写C即可，环境变量：<code>C:\msys32\usr\bin</code> 和 <code>C:\msys32\mingw32\bin</code></li>
+<li>然后安装 <code>02_loongide_1.2_beta1_setup.exe</code>，安装路径默认D盘，可自己改，但是 <code>安装路径不能有中文和空格！</code></li>
+</ul>
+<p>“龙芯1x 嵌入式集成开发环境”使用 <code>SDE Lite for MIPS</code> 工具链来实现项目的编译和调试。</p>
+<p>用户可以在 LoongIDE 中安装一个或者多个工具链，使用时根据项目的实际情况来选择适用的工具链。<code>可以在设置里调成中文页面</code></p>
+<p>软件安装完成后 <code>工具链默认已经配置好</code>，如果新建工程或者编译代码有问题可以按照以下操作重新进行工具链导入：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230218121804.webp" alt=""></p>
+<p>导入成功后是这样：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230218112546.webp" alt=""></p>
+<h2 id="配置-Java-环境">配置 Java 环境</h2>
+<p>JDK（Java Development Kit，java开发者工具， Java开发包 ），其实它就是一个提供给开发者用的电脑软件，用来方便编程开发。如果你不需要进行编程开发，仅仅想运行java程序的话，那么只使用安装jre就可以了。</p>
+<ul>
+<li>首先去 JAVA SE 官网下载 JDK，下载地址：<a href="https://www.oracle.com/cn/java/technologies/java-se-glance.html">Java SE | Oracle Technology Network | Oracle 中国</a></li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205101157232.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205101157743.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205101157434.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205101157409.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205101157387.jpg","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>然后创建账户登陆后就可以下载了（同样下载路径也最好不要有中文或者符号）</li>
+<li>下载完打开所在文件夹路径点击软件开始安装</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205101204880.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205101204174.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205101204437.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205101204380.jpg","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>安装完找到安装文件夹下的【bin】文件夹点击进去然后把当前路径复制，再管理员身份打开【命令符窗口】，进到所在文件夹下，查看是否安装好</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205101215657.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205101215606.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205101215608.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205101215842.jpg","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>安装好然后就可以配置环境变量</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205101226266.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205101226094.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205101226525.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205101226870.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205101226197.jpg","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<p>然后按确定即可，再打开【命令符窗口】直接输入“java” 弹出下面内容代表环境已经配置好了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205101226311.jpg" alt=""></p>
+<h2 id="Pycharm">Pycharm</h2>
+<h3 id="安装-Pycharm-和配置环境">安装 Pycharm 和配置环境</h3>
+<ul>
+<li>去官网下载，我下载的是 2021版本</li>
+<li>安装步骤</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205251804674.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205251804318.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205251804950.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>安装完开始破解啦（书签里有工具和教程），破解完成如图：</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205251849377.jpg" alt=""></p>
+<h3 id="Python解释器安装">Python解释器安装</h3>
+<div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>注意：有两种解释器可以选择</p>
+</div>
+<p>一个是普通没有集成库（需要手动下载）的<font color='orange'> python解释器</font></p>
+<p>一个是已经集成了很多库的<font color='orange'> Anaconda 解释器</font></p>
+<p>安装哪个都可以，看选择下面都有介绍安装过程</p>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>python 解释器</p>
+</div>
+<ul>
+<li>然后去下载安装 Python 解释器 官网：<a href="https://www.python.org/">Welcome to Python.org</a></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205251911282.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205251911342.png" alt=""></p>
+<ul>
+<li>一定要选择这个不要点其他类型（他喵不然配置环境变量时你找不到 Scripts 文件夹）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252109232.png" alt=""></p>
+<ul>
+<li>按下面步骤安装</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252109605.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252109499.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252109332.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li><font color='orange'>检查环境变量配置了没</font>，但是还是谨慎点好</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252125808.png" alt=""></p>
+<p>如果没则需要去安装路径找</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252125438.png" alt=""></p>
+<ul>
+<li>打开 Pycharm</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205251949595.jpg" alt=""></p>
+<ul>
+<li>创建新项目，可以用快捷键 【ALT】+【INS】</li>
+</ul>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>Anacinda 解释器</p>
+</div>
+<p>官网：<a href="https://www.anaconda.com/">Anaconda</a></p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252216409.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205260602873.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205260607303.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205260602665.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205260602232.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>安装完成可以去 Pycharm 里替换现在这个解释器了（注意：如果安装完成没看到有 python.exe 可能就是你的盘符内存不足，刚刚安装时没装上，至少要5G以上内存）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205260622637.png" alt=""></p>
+<h3 id="好用插件-背景图片设置">好用插件+背景图片设置</h3>
+<ul>
+<li><font color='orange'>插件1：</font><font color='cornflowerblue'>Chinese</font>（汉化工具）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205251957923.jpg" alt=""></p>
+<ul>
+<li><font color='orange'>插件2：</font><font color='cornflowerblue'>Translation</font>（中英互译，看文档必备）</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252226164.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252226101.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li><font color='orange'>插件3：</font><font color='cornflowerblue'>AiXcoder Code Completer</font>（代码补全，新手建议还是自己敲）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252233359.png" alt=""></p>
+<ul>
+<li><font color='orange'>插件4：</font><font color='cornflowerblue'>Rainbow Brackets</font>（括号显示不同颜色，好分辨）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252233317.png" alt=""></p>
+<ul>
+<li><font color='orange'>插件5：</font><font color='cornflowerblue'>Indent Rainbow</font>（对于不同层级缩进的空格标注不同的颜色）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252238742.jpg" alt=""></p>
+<ul>
+<li><font color='orange'>插件6：</font><font color='cornflowerblue'>CodeGlance</font>（在<code>IDE</code>的最右侧生成一条工具栏）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252242408.jpg" alt=""></p>
+<ul>
+<li><font color='orange'>插件7：</font> <font color='cornflowerblue'>CSV</font>（用于编辑CSV/TSV/PSV文件，语法验证，结构高亮，可定制着色）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252248609.jpg" alt=""></p>
+<ul>
+<li><font color='orange'>插件8：</font><font color='cornflowerblue'>Key Promoter X</font>（学习IDE快捷键必备）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252255704.jpg" alt=""></p>
+<ul>
+<li>背景设置</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252004698.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252005952.jpg","alt":"原图"}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>这敲起代码都有劲呢！</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252004125.jpg" alt=""></p>
+<ul>
+<li>字体也可以改，找到 Pycharm安装路径，点击【<font color='orange'>jbr</font>】-&gt;【<font color='orange'>lib</font>】-&gt;【<font color='orange'>fonts</font>】文件下，把你的 <font color='cornflowerblue'>.ttf</font> 字体文件粘贴过去即可</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252019067.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252024594.jpg","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<h3 id="安装外部库">安装外部库</h3>
+<ul>
+<li>打开电脑【<font color='orange'>cmd</font>】安装即可</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252130701.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252140746.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205252140346.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>但是这种安装外部库一般都很慢，因为站点是在国外的，所以可以通过国内的镜像源站点来下载，速度杠杠的！</li>
+</ul>
+<p><font color='cornflowerblue'>清华镜像</font>：<a href="https://pypi.tuna.tsinghua.edu.cn/simple/">https://pypi.tuna.tsinghua.edu.cn/simple/</a></p>
+<p><font color='cornflowerblue'>豆瓣镜像</font>：<a href="http://pypi.douban.com/simple/">http://pypi.douban.com/simple/</a></p>
+<p><font color='cornflowerblue'>阿里云</font>：<a href="https://mirrors.aliyun.com/pypi/simple/">https://mirrors.aliyun.com/pypi/simple/</a></p>
+<p>命令格式</p>
+<pre class="line-numbers language-cmd" data-language="cmd"><code class="language-cmd">pip install 库名 -i 镜像地址</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252200167.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205252200596.png" alt=""></p>
+<h2 id="CubeIDE">CubeIDE</h2>
+<h3 id="安装与汉化">安装与汉化</h3>
+<ul>
+<li>首先到 ST 官网下载 CubelDE ，<font color='orange'>下载地址</font>：<a href="https://www.st.com/zh/development-tools/stm32cubeide.html">STM32CubeIDE</a>，版本的话可以看自己需求，我的话选择最新版（目前是1.9.0）的前一个版本 <font color='cornflowerblue'>1.8.0</font>，点击下载后会弹出来需要填写个人信息如实填写即可（<font color='red'>注意：邮箱一定要如实填写，推荐QQ邮箱</font>），填写完成提交后会弹出“<font color='gree'>注册成功</font>”的字样，并且官方把<font color='orange'>下载链接发送到你邮箱</font>，这时候登陆QQ邮箱点击即可跳转回官方，然后等待片刻安装包就会弹出来，安装即可（<font color='red'>注意：安装在没有中文的路径，不然会安装不了！！</font>）</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082215956.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082215254.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082219144.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082215775.jpg","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>安装完解压即可然后双击软件开始安装（安装过程一般不需要改一直点下一步即可）</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082236138.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082236841.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082236199.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082236729.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082236428.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082236243.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082236908.jpg","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>安装完成在桌面双击打开即可<br>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205082244250.jpg" alt=""><br>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205082244458.jpg" alt=""></li>
+<li>这样就安装好了下一步开始安装汉化补丁<br>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205082246076.jpg" alt=""></li>
+<li>汉化包下载地址：<a href="http://mirrors.ustc.edu.cn/eclipse/technology/babel/update-site/">汉化包</a>，点击网址进去按下面步骤即可</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082300342.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082300256.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082300830.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082316697.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082316290.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082316633.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082316834.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082316321.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082316847.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082316511.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082325389.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082326714.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205082326923.jpg","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>设置编码和字体</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205091253978.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205091253214.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205091259553.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205091259234.jpg","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<h2 id="CubeMX">CubeMX</h2>
+<ul>
+<li>首先到官网下载：[STM32CubeMX](<a href="https://www.st.com/zh/development-tools/stm32cubemx.html#">https://www.st.com/zh/development-tools/stm32cubemx.html#</a> get-software)</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205102247489.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205102247880.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205102247726.jpg","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/202205102247203.jpg","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<h2 id="VM安装kali">VM安装kali</h2>
+<h3 id="下载-kali-系统镜像文件">下载 kali 系统镜像文件</h3>
+<p>下载途径：</p>
+<ul>
+<li><a href="https://www.kali.org/docs/">Kali Docs | Kali Linux Documentation</a></li>
+</ul>
+<p><font color='orange'>kali 官网下载</font>（速度有点慢，毕竟服务器在国外）</p>
+<ul>
+<li><a href="https://mirrors.tuna.tsinghua.edu.cn/">清华大学开源软件镜像站 | Tsinghua Open Source Mirror</a></li>
+</ul>
+<p><font color='orange'>清华大学的开源镜像站</font></p>
+<ul>
+<li><a href="http://mirrors.ustc.edu.cn/">中科大 Open Source Software Mirror</a></li>
+</ul>
+<p><font color='orange'>中科大的开源镜像站</font></p>
+<ul>
+<li><a href="https://developer.aliyun.com/mirror/">阿里巴巴开源镜像站-OPSX镜像站-阿里云开发者社区 (aliyun.com)</a></li>
+</ul>
+<p><font color='orange'>阿里云的开源镜像站</font></p>
+<ul>
+<li><a href="http://mirrors.zju.edu.cn/">mirrors.zju.edu.cn</a></li>
+</ul>
+<p><font color='orange'>浙大的开源镜像站</font></p>
+<ul>
+<li><a href="http://old.kali.org/kali-images/kali-2020.4/">Index of /kali-images/kali-2020.4</a></li>
+</ul>
+<p><font color='orange'>这也是一个网站 (当前我下载的就是这个)</font></p>
+<h3 id="使用VM虚拟机安装-kali">使用VM虚拟机安装 kali</h3>
+<blockquote>
+<p>虚拟机配置</p>
+</blockquote>
+<ul>
+<li>打开VM虚拟机，创建新的虚拟机，选中自定义安装，点击下一步</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.ax1x.com/2022/03/16/qSFGvD.png" alt=""></p>
+<ul>
+<li>默认下一步</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.ax1x.com/2022/03/16/qSFKER.png" alt=""></p>
+<ul>
+<li>选择稍后安装</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.ax1x.com/2022/03/16/qSF8gO.png" alt=""></p>
+<ul>
+<li>操作系统选择Linux，版本这里选Debian8x64</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.ax1x.com/2022/03/16/qSF1C6.png" alt=""></p>
+<ul>
+<li>虚拟机命名，下一步</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.ax1x.com/2022/03/16/qSFeu4.png" alt=""></p>
+<ul>
+<li>默认下一步</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.ax1x.com/2022/03/16/qSFaVA.png" alt=""></p>
+<ul>
+<li>这里内存选择1024MB</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.ax1x.com/2022/03/16/qSFQ4x.png" alt=""></p>
+<ul>
+<li>默认下一步</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.ax1x.com/2022/03/16/qSFYKe.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.ax1x.com/2022/03/16/qSFmDJ.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.ax1x.com/2022/03/16/qSFMU1.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.ax1x.com/2022/03/16/qSFnb9.png" alt=""></p>
+<ul>
+<li>磁盘设置为比推荐大一些，勾选磁盘储存为单个文件</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.ax1x.com/2022/03/16/qSF38K.png" alt=""></p>
+<ul>
+<li>命名后下一步</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.ax1x.com/2022/03/16/qSFVvF.png" alt=""></p>
+<ul>
+<li>点击完成</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.ax1x.com/2022/03/16/qSFtDH.png" alt=""></p>
+<ul>
+<li>回到Kali页面，点击编辑虚拟机设置</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.ax1x.com/2022/03/16/qSFNbd.png" alt=""></p>
+<ul>
+<li>点击CD/DVD(IDE),将ISO文件路径导入，然后点击确定。之后点击开启虚拟机。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317080742.png" alt=""></p>
+<blockquote>
+<p>Kali 系统配置</p>
+</blockquote>
+<ul>
+<li>开启虚拟机后，就是这个页面，第一行按回车键继续。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220316230712.png" alt=""></p>
+<ul>
+<li>
+<p>确定系统语言，这里选择中文简体。用鼠标点击继续，进行语言设置。</p>
+</li>
+<li>
+<p>进行主机名设置。点击继续</p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220316230915.png" alt=""></p>
+<ul>
+<li>进行登陆的用户名和密码设置，中间有个域名可以随便设置。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220316231033.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220316231057.png" alt=""></p>
+<ul>
+<li>选择第一个，点击继续</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220316231133.png" alt=""></p>
+<ul>
+<li>默认第一个继续</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220316231218.png" alt=""></p>
+<ul>
+<li>默认最后一个结束分区，并继续</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220316231243.png" alt=""></p>
+<ul>
+<li>这里选择是，点击继续</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220316231313.png" alt=""></p>
+<ul>
+<li>这里选不选都可以，选上会安装附加工具，并加长大量安装时间。(但是Xfce一定要选，我当时觉得没必要就只选了最后一个其他都没选结果进去只有黑窗口没有图形化界面，然后我又得删了重新安装…)</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317081237.png" alt=""></p>
+<ul>
+<li>之后会进行长时间的安装，来到这个页面，选择是，点击继续</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317075355.png" alt=""></p>
+<ul>
+<li>这里一定要选择/dev/sda，不然会安装失败</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317075425.png" alt=""></p>
+<ul>
+<li>当出现这个页面，恭喜你安装成功，点击继续将会重启然后回车再输入用户名和密码，之后会进入系统。</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317075457.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317082707.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317082757.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<h3 id="与主机共享文件">与主机共享文件</h3>
+<blockquote>
+<p>修改成 root 权限</p>
+</blockquote>
+<p><font color='red'>注意</font>：一定要先做 <font color='orange'>3.1</font> 再看 <font color='orange'>3.2 </font>步骤 (一开始我也是做了 3.2 步骤没做这步，结果配置是配置成功了但是关机重新打开虚拟机要重新配置一遍，所以一定一定要先做这步)</p>
+<ul>
+<li>桌面右键打开终端，输入命令,输入密码，变成 <font color='orange'>root </font>状态</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo su</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo -i</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317145912.png" alt=""></p>
+<ul>
+<li>然后开始修改账号权限</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">vim &#x2F;etc&#x2F;passwd</code></pre>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317145727.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317150406.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<p>可以看到 root 的权限最高，我们自己的权限最低 (1000) ，root用户ID是<font color='red'> 0</font> 我们需要找到自己的用户名位置并且修改ID为 <font color='red'>0</font>，如果要修改内容我们需要用到 命令行插入模式的功能键 ‘<font color='orange'> i </font>’ (键盘字母 ’ i ’ )</p>
+<ul>
+<li>首先找到我们用户名位置，鼠标点击数字处再按键盘 '<font color='orange'> i </font>，此时底下会出现 “<font color='orange'>插入</font>” 两字便可以开始修改了</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317150738.png" alt=""></p>
+<p>然后 键盘 <font color='orange'>Esc</font> 退出插入模式，再快捷键 <font color='orange'>Shift+zz</font> 保存并退出，最后输入命令<font color='orange'>重启</font> Kali linux 系统</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">reboot</code></pre>
+<p>重启后可以看到我们已经是 root 状态了 (不用每次都输入密码了),不放心可以输入命令查看当前id</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">id</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317151455.png" alt=""></p>
+<blockquote>
+<p>配置共享文件</p>
+</blockquote>
+<p>点击顶部【虚拟机】，可以看到【重新安装VMware Tools】按钮是<font color='orange'>灰色</font>的，接下来就开始安装共享文件了：</p>
+<ul>
+<li>首先虚拟机处于<font color='orange'>关机状态</font>，然后点击【编辑虚拟机设置】–【选项】–【共享文件夹】–【总是启动】–【添加】(提前在你主机新建一个文件夹用于共享的文件夹) --【确定】</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317105034.png" alt=""></p>
+<ul>
+<li>还是点击【编辑虚拟机设置】–【硬件】–【CD/DVD】–【使用物理驱动器】–【自动检测】–【确定】</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317100011.png" alt=""></p>
+<ul>
+<li>启动虚拟机，点击【虚拟机】，可以看到按钮【重新安装VMware Tools】现在不是灰色了可以，点击【重新安装VMware Tools】，然后正常进入系统来到桌面</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317115135.png" alt=""></p>
+<ul>
+<li>来到桌面后，会看到一个像光盘一样的图标，并且名字是<font color='orange'>“VMware Tools”</font>，点击它，进去后会看到一个后缀是 <font color='orange'>.gz</font> 的文件，然后把它拖到桌面并解压</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317121849.png" alt=""></p>
+<ul>
+<li>解压完后接着就右键桌面打开终端，开始输入命令：</li>
+</ul>
+<p>① 直接复制这段代码回车，创建目录，为后面安装tools铺垫 (可以看到我图片多了一条重复的 ’ /etc/rc/.d/rc0.d ’ 这个不要紧复制代码过去回车就行了不用修改任何地方)</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># sudo mkdir -p &#x2F;etc&#x2F;rc.d&#x2F;rc0.d
+# sudo mkdir -p &#x2F;etc&#x2F;rc.d&#x2F;rc1.d
+# sudo mkdir -p &#x2F;etc&#x2F;rc.d&#x2F;rc2.d
+# sudo mkdir -p &#x2F;etc&#x2F;rc.d&#x2F;rc3.d
+# sudo mkdir -p &#x2F;etc&#x2F;rc.d&#x2F;rc4.d
+# sudo mkdir -p &#x2F;etc&#x2F;rc.d&#x2F;rc5.d
+# sudo mkdir -p &#x2F;etc&#x2F;rc.d&#x2F;rc6.d</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317122843.png" alt=""></p>
+<p>② 接着打开桌面那个刚刚 <font color='orange'>“.gz” </font>文件解压出来的文件，看看里面有没有 <font color='orange'>“.pl” </font>文件(有代表你离成功又进一步了！)，然后<font color='orange'>复制</font>顶部的路径到终端上面粘贴并且回车</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317122949.png" alt=""></p>
+<p>③ 接着就复制这段代码过去粘贴并且回车 (意思是运行这个文件)，然后终端开始有反应有代码在动了然后你只需按<font color='orange'>回车</font>就行，其他上面都不需要做…</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">.&#x2F;vmware-install.pl</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317123024.png" alt=""></p>
+<p>④ 看到这个这个界面代表 tools 安装成功了!!!</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317123108.png" alt=""></p>
+<p>⑤ 接着输入这条命令 (意思是查看共享目录)，回车发现这个不就是之前在VM上添加的文件名吗，没错，就是它。。如果你发现不是那就凉凉了，得看看是不是之前步骤错了</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">vmware-hgfsclient</code></pre>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317123205.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317131237.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<p>⑥ 接着又输入这条命令 (意思是新建文件夹)，<font color='red'>××× 就是你的文件名</font>，需要跟共享文件的名字保持一致，否则可能后面会有错</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">mkdir &#x2F;mnt&#x2F;hgfs&#x2F;×××&#x2F;</code></pre>
+<p>⑦ 接着再输入命令 (意思是创建共享文件夹) ，到这就完成了 (<font color='red'>记得把 ‘×××’ 换成你共享文件名</font>)</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">&#x2F;usr&#x2F;bin&#x2F;vmhgfs-fuse .host:&#x2F; &#x2F;mnt&#x2F;hgfs&#x2F;×××&#x2F; -o subtype&#x3D;vmhgfs-fuse,allow_other</code></pre>
+<p>⑧ 设置，使每次开机自动挂载共享文件夹 (这步一定要做，不做下次开机进来又得从头配置，嘻嘻)，文件<font color='orange'> /etc/fstab</font> 的末尾添加多一行 (如果你不把 3.1 步骤做了到这步你会发现修改了保存不了，因为你没权限)</p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317190435.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317190605.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<p>添加到末尾然后保存 (<font color='red'>记得把 ‘×××’ 换成你共享文件名</font>)：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">.host:&#x2F;×××  &#x2F;mnt&#x2F;hgfs&#x2F;×××  fuse.vmhgfs-fuse   allow_other   0   0</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317191339.png" alt=""></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">vmware-hgfsclient</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317132920.png" alt=""></p>
+<p>现在可以在你主机传东西到共享文件夹里了，我在Win往里面放张图片做测试</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317123605.png" alt=""></p>
+<p>回到虚拟机点击【文件系统】-- 找到【mnt】文件夹，一直点就看到Win刚刚放的图片了…</p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317123657.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317123715.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<h3 id="设置网络">设置网络</h3>
+<p>现在万事俱备只差网络了 (没网络可活不了呀，做啥都不方便…)，前提是你用 kali 打开浏览器看看能不能访问或者 <font color='green'>ping </font>一下<font color='orange'> baidu.com</font> ，如果不能则跟我一起做下面步骤 (网络没问题可以不用看)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317214759.png" alt=""></p>
+<ul>
+<li>点击【编辑】–【虚拟网络编辑器】</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317215500.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317215223.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<p>然后再点击【虚拟机】–【设置】</p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317215730.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317215840.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>现在网络就可以了，然后打开浏览器试试吧，浏览器设置中文的步骤：</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317220110.png","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317220215.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<p><font color='orange'>由于我之前就设置了所以我这会显示有</font></p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317220303.png","alt":"1"},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317220408.png","alt":"2"},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317220513.png","alt":"3"},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317220534.png","alt":"4"}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<p><font color='orange'>然后重新进入就看到已经是中文了</font></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96%2FQQ%E6%88%AA%E5%9B%BE20220317220547.png" alt=""></p>
+<h2 id="附1-PicGo上传图片问题">附1-PicGo上传图片问题</h2>
+<ol>
+<li>需要把 <code>火绒</code> 关了！！！</li>
+<li><code>设置</code>-&gt;<code>代理</code>-&gt;<code>手动设置代理</code>，选上</li>
+<li>打开 <code>DevSidecar-给开发者的边车辅助工具</code>软件<br>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205301744803.jpg" alt=""><br>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/202205301745321.jpg" alt=""></li>
+</ol>
+<h2 id="附2-vs-code-踩坑合集">附2-vs code 踩坑合集</h2>
+<ul>
+<li>编译器编码与生成EXE编码不一致</li>
+</ul>
+<blockquote>
+<p>今天用vscode打开我的一个旧项目发现代码显示中文正常，点开生成的exe文件里面中文全是乱码，我通过查看控制台属性发现是UTF-8，而我编译器是 utf-8带bom，通过网上查找许多教程终于搞好了：</p>
+<p>首先是  <code>.cpp</code> 文件需要 <code>点击下方的编码</code>–&gt; <code>通过编码重新打开</code>(选择Simplified Chinese (GBK)–&gt; <code>如果这时候代码变乱码只需 CTRL+z回退一下就正常了</code>)</p>
+<p>接着点击 <code>设置</code> --&gt; <code>搜索编码即可</code>(设置成Simplified Chinese (GBK))</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220925163416.jpg" alt=""></p>
+<p>然后打开 <code>设置</code> --&gt; <code>右上角打开json</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220925163555.jpg" alt=""></p>
+<p>添加下面的即可：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&quot;[cpp]&quot;: &#123;
+     &quot;files.encoding&quot;: &quot;gbk&quot;
+ &#125;,
+ &quot;[c]&quot;: &#123;
+     &quot;files.encoding&quot;: &quot;gbk&quot;
+ &#125;,</code></pre>
+<p>重新运行即可</p>
+</blockquote>
+<ul>
+<li>多文档编程需要注意</li>
+</ul>
+<blockquote>
+<p>在 vscode 多文档时是跟 vs2019不一样的，它不是在设置里添加路径，是到 <code>.vscode</code> 目录下的 <code>launch.json</code> 和 <code>tasks.json</code> 里改</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220925164055.jpg" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20220925164327.jpg" alt=""></p>
+<p>这样直接运行 <code>main.cpp</code> 即可生成的 <code>exe</code> 不用删除它会实时更新</p>
+</blockquote>
+<ul>
+<li>printf输出空白乱码</li>
+</ul>
+<blockquote>
+<p>需要把工程编码改成UTF-8然后撤销一下即可</p>
+</blockquote>
+<ul>
+<li>打开vscode右下角弹出 <code>Code安装似乎损坏,请重新安装</code> ，原因是因为安装了 <code>background插件</code> 导致的它可能会修改配置，解决方法：</li>
+</ul>
+<ol>
+<li>卸载这个插件</li>
+<li>安装 <code>Fix VSCode Checksums插件</code>，然后 <code>CTRL+SHIFT+P</code>打开命令面板，输入</li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Fix Checksums: Apply</code></pre>
+<p>并且点击回车，然后右下角会弹出 <code>Checksums applied. Please restart VSCode to see effect</code> 提示，此时重启vscode即可成功</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num150.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PADS-9-5"><span class="toc-number">1.</span> <span class="toc-text">PADS 9.5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Candence-16-6"><span class="toc-number">2.</span> <span class="toc-text">Candence 16.6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#source-Insight"><span class="toc-number">3.</span> <span class="toc-text">source_Insight</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vscode"><span class="toc-number">4.</span> <span class="toc-text">vscode</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEvscode"><span class="toc-number">4.1.</span> <span class="toc-text">安装与配置vscode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vscode%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text">vscode安装插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E5%88%86%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">4.3.</span> <span class="toc-text">部分快捷键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vscode-Keil"><span class="toc-number">4.4.</span> <span class="toc-text">vscode+Keil</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Keil"><span class="toc-number">5.</span> <span class="toc-text">Keil</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-STM32-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="toc-number">5.1.</span> <span class="toc-text">配置 STM32 开发环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-C51-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="toc-number">5.2.</span> <span class="toc-text">配置 C51 开发环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BE%8E%E5%8C%96%E4%BB%A3%E7%A0%81%E7%95%8C%E9%9D%A2"><span class="toc-number">5.3.</span> <span class="toc-text">美化代码界面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6"><span class="toc-number">5.4.</span> <span class="toc-text">插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#keil%E7%BC%96%E8%AF%91%E8%84%9A%E6%9C%AC"><span class="toc-number">5.5.</span> <span class="toc-text">keil编译脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%84%E7%B1%BB%E6%8A%A5%E9%94%99%E9%9B%86%E5%90%88"><span class="toc-number">5.6.</span> <span class="toc-text">各类报错集合</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Visual-Studio-2012"><span class="toc-number">6.</span> <span class="toc-text">Visual Studio 2012</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android"><span class="toc-number">7.</span> <span class="toc-text">Android</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IDEA"><span class="toc-number">8.</span> <span class="toc-text">IDEA</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">8.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="toc-number">8.2.</span> <span class="toc-text">基本配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git%E6%8E%A8%E9%80%81%E9%85%8D%E7%BD%AE"><span class="toc-number">8.3.</span> <span class="toc-text">git推送配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#loongide"><span class="toc-number">9.</span> <span class="toc-text">loongide</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-Java-%E7%8E%AF%E5%A2%83"><span class="toc-number">10.</span> <span class="toc-text">配置 Java 环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pycharm"><span class="toc-number">11.</span> <span class="toc-text">Pycharm</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Pycharm-%E5%92%8C%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83"><span class="toc-number">11.1.</span> <span class="toc-text">安装 Pycharm 和配置环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Python%E8%A7%A3%E9%87%8A%E5%99%A8%E5%AE%89%E8%A3%85"><span class="toc-number">11.2.</span> <span class="toc-text">Python解释器安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A5%BD%E7%94%A8%E6%8F%92%E4%BB%B6-%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87%E8%AE%BE%E7%BD%AE"><span class="toc-number">11.3.</span> <span class="toc-text">好用插件+背景图片设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%A4%96%E9%83%A8%E5%BA%93"><span class="toc-number">11.4.</span> <span class="toc-text">安装外部库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CubeIDE"><span class="toc-number">12.</span> <span class="toc-text">CubeIDE</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E6%B1%89%E5%8C%96"><span class="toc-number">12.1.</span> <span class="toc-text">安装与汉化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CubeMX"><span class="toc-number">13.</span> <span class="toc-text">CubeMX</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VM%E5%AE%89%E8%A3%85kali"><span class="toc-number">14.</span> <span class="toc-text">VM安装kali</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD-kali-%E7%B3%BB%E7%BB%9F%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6"><span class="toc-number">14.1.</span> <span class="toc-text">下载 kali 系统镜像文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8VM%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85-kali"><span class="toc-number">14.2.</span> <span class="toc-text">使用VM虚拟机安装 kali</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8E%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6"><span class="toc-number">14.3.</span> <span class="toc-text">与主机共享文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E7%BD%91%E7%BB%9C"><span class="toc-number">14.4.</span> <span class="toc-text">设置网络</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%841-PicGo%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E9%97%AE%E9%A2%98"><span class="toc-number">15.</span> <span class="toc-text">附1-PicGo上传图片问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%842-vs-code-%E8%B8%A9%E5%9D%91%E5%90%88%E9%9B%86"><span class="toc-number">16.</span> <span class="toc-text">附2-vs code 踩坑合集</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '键盘敲烂 月薪过万' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script defer src="/js/my_aplayer.js"></script><script defer src="/js/meting.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
