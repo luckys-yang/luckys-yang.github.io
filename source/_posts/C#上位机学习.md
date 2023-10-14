@@ -12,53 +12,10 @@ date: 2023-05-22 14:39:06
 
 ## 前言
 
-{% note blue 'fas fa-fan' flat %}参考文章/博主{% endnote %}
-
-/
-
-
-
-{% note blue 'fas fa-fan' flat %}软件{% endnote %}
-
-[VS2012安装包-提取码：AK47](https://pan.baidu.com/s/1F4mbhuLjXSmJMVTUopsnmw?pwd=AK47)
-
-
-
 {% note blue 'fas fa-fan' flat %}我的仓库{% endnote %}
 
 [GITHUB-C-](https://github.com/luckys-yang/C-)
 
-
-
-## 软件安装
-
-- 右键管理员身份双击 `Visual Studio 2012` 
-
-{% gallery %}
-
-![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230522144833.webp)
-
-![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230522144859.webp)
-
-{% endgallery %}
-
-- 安装完成后启动，填写PJ码即可
-
-```bash
-YKCW6-BPFPF-BT8C9-7DCTH-QXGWC
-```
-
-![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230522152922.webp)
-
-- 选择C#
-
-![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230522153009.webp)
-
-- 新建项目，建议选择 `.NET Framework 4版本` ， 如果选择4.5或更高的版本，设计的上位机应用程序将不能在XP系统电脑上运行。
-
-![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230522153833.webp)
-
-![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230522154013.webp)
 
 ## 工程管理器
 

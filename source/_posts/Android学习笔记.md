@@ -23,25 +23,6 @@ date: 2022-11-20 13:42:00
 
 
 
-## 环境配置
-
-- 下载安装包之后，双击运行，傻瓜式安装即可，下一步下一步。
-
-![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230318101437.webp)
-
-- 第一次运行Android Studio会提示找不到SDK目录，先不管这个，点击【Cancel】取消即可,
-
-![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230318100857.webp)
-
-- 然后再按【Next】设置SDK目录，这一步是将SDK安装到哪个目录下面。
-
-![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230318105048.webp)
-
-- 下一步然后点击完成
-
-![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230318105112.webp)
-
-
 
 ## 新建项目
 

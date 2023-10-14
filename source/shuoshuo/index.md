@@ -12,7 +12,21 @@ comments: false
 <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
         <div id="shuoshuo_content">
-            <ul class="cbp_tmtimeline">                                       
+            <ul class="cbp_tmtimeline">     
+                <li>
+                    <span class="shuoshuo_author_img">
+                    <img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/head12312.png"
+                            class="avatar avatar-48 zhuan" width="48" height="48">
+                    </span>
+                    <div class="cbp_tmlabel">
+                        <p></p>
+                        <p>不能分心，不能分心，坚持坚持！还有2个多月！冲冲冲！</p>
+                        <p></p>
+                        <p class="shuoshuo_time"><i class="fa fa-clock-o"></i>
+                            <span id="masked">2023年10月01日</span>&emsp;<i class="fas fa-mobile-alt"></i> <span id="masked">发自iPhone</span>
+                        </p>
+                    </div>
+                </li>                                              
                 <li>
                     <span class="shuoshuo_author_img">
                     <img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/head12312.png"

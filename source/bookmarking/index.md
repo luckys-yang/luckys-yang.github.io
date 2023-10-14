@@ -211,7 +211,11 @@ comments: false
     - name: ADI智库(有电子技术书)
       link: https://www.analog.com/cn/landing-pages/002/adi-zhiku.html
       avatar: ./book_image/book8.webp
-      descr:  　                                       
+      descr:  　         
+    - name: 特纳斯电子网
+      link: https://www.mcude.com/
+      avatar: ./book_image/book8.webp
+      descr:  　                                           
 - class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#dfe516;display:inline-block;"></i><span style="color:#abb4d7;">博客相关</span>
   class_desc: 
   link_list:
