@@ -162,13 +162,33 @@ STC15W401AS系列单片机也是将系统时钟在管脚 `SysClkO/P5.4` 或 `Sys
 
 <img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231009150902.webp" style="zoom:80%;" />
 
+> using
 
+```cpp
+void UART1_isr() interrupt 4 using 2
+```
+
+`using n` 是工作寄存器组切换开关，工作寄存器组与 `BANK` 是一个概念；
+
+51的工作寄存器 `R0-R7` 共有4组，分别是 `BANK0、BANK1、BANK2、BANK3`，在任何时刻，只有一个工作组生效！这4个组在RAM中的位置分别是 `[00H,07H]、[08H,0FH]、[10H,17H]、[18H,1FH]`，换句话说，RAM中的00H地址、08H地址、10H地址、18H地址，这四个地址的名字都叫R0
+
+51在上电后，PSW的RS两个位默认为0，也即 `51默认使用的工作寄存器组BANK0`
+
+在进入外部中断0的服务函数前，先入栈CPU寄存器，再把工作寄存器组由0切换成2，在退出中断服务后，先由 `BANK2` 切换回 `BANK0` ,并弹出CPU寄存器，由于 `BANK0` 和 `BANK2` 处在不同的RAM空间，互不干扰，切换回 `BANK0` 之后，就把那个普通函数的现场给恢复了
+
+Using语句不仅在中断服务函数可以使用，而且可以在一般函数中使用，其功能就是指定寄存器组。在指定了寄存器组的函数或中断服务函数， `在相互调用时，这两个函数都必须指定在同一个寄存器组!!!`。最后还有一点， `系统默认寄存器组0，因此，使用Using语句时很少显示指定Using 0；一般中断服务都指定在1、2、3组`
+
+> 注意
+
+所以两个ISR使用同一个using，只要Bank中的内容互不干扰，是可以互相嵌套的。当一个Func使用using时，如果Bank中的参数被ISR打乱，就会有问题。
+
+`所以推荐尽量不要使用using`
 
 ## PWM
 
 > 介绍
 
-![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231009231501 (1).webp)
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231022170243.webp)
 
 PCA定时器简介:
 

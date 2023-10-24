@@ -1915,3 +1915,22 @@ figure {
     content: "🎭";
 }
 /* 分类美化end */
+
+/* 外挂标签修改-tip  begin */
+
+/* 图标样式 */
+.tip.bolt:before {
+    background: linear-gradient(776deg, #2184ab, #25822c);
+    content: "\f0e7";
+    text-shadow: 0 -1px #4cf706;
+}
+
+/* 框的样式 */
+.tip.bolt {
+    background: linear-gradient(530deg, #1f251b, #789b8d);
+    content: "\f00d";
+    text-shadow: 0 -1px #4cf706;
+}
+
+
+/* end */
