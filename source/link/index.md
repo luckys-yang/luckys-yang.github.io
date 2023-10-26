@@ -34,7 +34,7 @@ comments: false
 <p style="color: red;font-size: 19px;font-weight: 700; ">友链格式 and 我的友链信息：</p>
 
 ```yml
-name: Luckys-Yangの小栈
+name: Yangの小栈
 link: https://blog.yang5201314.cn/
 avatar: https://pic1.imgdb.cn/item/646b2b31e03e90d874ca00b6.webp
 descr: 循环的圆，不循环的缘
