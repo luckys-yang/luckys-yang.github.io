@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.yang5201314.cn/img/num115.webp">
 <meta property="article:published_time" content="2023-01-31T06:51:31.250Z">
-<meta property="article:modified_time" content="2023-11-07T10:19:18.671Z">
+<meta property="article:modified_time" content="2023-11-07T14:17:02.148Z">
 <meta property="article:author" content="Yang">
 <meta property="article:tag" content="I2C">
 <meta name="twitter:card" content="summary">
@@ -57,7 +57,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-11-07 18:19:18'
+  postUpdate: '2023-11-07 22:17:02'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -174,7 +174,7 @@ window.addEventListener('load',()=> { preloader.endLoading() })
 if (true) {
   document.addEventListener('pjax:send', () => { preloader.initLoading() })
   document.addEventListener('pjax:complete', () => { preloader.endLoading() })
-}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20231008142657.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">148</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">72</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">32</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">协议通信学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-01-31T06:51:31.250Z" title="发表于 2023-01-31 14:51:31">2023-01-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-07T10:19:18.671Z" title="更新于 2023-11-07 18:19:18">2023-11-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BB%86%E5%8C%96%E5%AD%A6%E4%B9%A0/">细化学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">50.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>220分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20231008142657.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">148</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">72</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">32</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">协议通信学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-01-31T06:51:31.250Z" title="发表于 2023-01-31 14:51:31">2023-01-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-07T14:17:02.148Z" title="更新于 2023-11-07 22:17:02">2023-11-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BB%86%E5%8C%96%E5%AD%A6%E4%B9%A0/">细化学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">51.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>226分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
 <div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>参考文章/博主</p>
 </div>
 <p><a href="https://blog.csdn.net/gutie_bartholomew/article/details/128469983?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522168463400516800225565932%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=168463400516800225565932&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-3-128469983-null-null.142%5Ev87%5Econtrol_2,239%5Ev2%5Einsert_chatgpt&amp;utm_term=modbus%20CRC&amp;spm=1018.2226.3001.4187">Modbus-RTU通讯协议中CRC校验</a></p>
@@ -5023,6 +5023,11 @@ static void DS18B20_Read_Rom(OneWire_Hardware_st *dev, char *rom)
 </div>
 <p>波特率计算可以使用网站进行生成推荐值：</p>
 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231106162252.webp" style="zoom:50%;" />
+<h3 id="遥控帧">遥控帧</h3>
+<blockquote>
+<p>巧用遥控帧</p>
+</blockquote>
+<p>遥控帧发送的时候，DLC是无用的，但依然会发送出去，当我们发送遥控帧的时候，把不同的命令DLC赋不同的值，接收的时候，只要识别DLC的值就能知道接收的命令是什么，这样就能快速的传递命令，当然，发送端和接收端需事先约定好</p>
 <h3 id="CAN过滤器详解">CAN过滤器详解</h3>
 <blockquote>
 <p>以下是基于STM32F429IGT6进行分析</p>
@@ -5032,7 +5037,7 @@ static void DS18B20_Read_Rom(OneWire_Hardware_st *dev, char *rom)
 <ul>
 <li>过滤器组</li>
 </ul>
-<p>F4系列 CAN1 和 CAN2 之间共享 <code>28 个筛选器组(0~27)</code>，。每个筛选器组 x 均包含 <code>两个 32 位寄存器</code>，分别是 <code>CAN_FxR0</code> 和 <code>CAN_FxR1</code> ，过滤器组中的每个过滤器，编号(叫做过滤器号)从 <code>0</code> 开始，到某个最大数值（这时最大值并非 <code>27</code> ，而是取决于 <code>28</code> 个过滤器组的模式和位宽的设置，当全部配置为位宽为 <code>16</code>，且为标识符列表模式时，最大编号为 <code>28*4-1=111</code>）</p>
+<p>F4系列 CAN1 和 CAN2 之间共享 <code>28 个筛选器组(0~27)</code>，每个筛选器组 x 均包含 <code>两个 32 位寄存器</code>，分别是 <code>CAN_FxR0</code> 和 <code>CAN_FxR1</code> ，过滤器组中的每个过滤器，编号(叫做过滤器号)从 <code>0</code> 开始，到某个最大数值（这时最大值并非 <code>27</code> ，而是取决于 <code>28</code> 个过滤器组的模式和位宽的设置，当全部配置为位宽为 <code>16</code>，且为标识符列表模式时，最大编号为 <code>28*4-1=111</code>）</p>
 <ul>
 <li>过滤器的过滤模式</li>
 </ul>
@@ -5070,8 +5075,6 @@ static void DS18B20_Read_Rom(OneWire_Hardware_st *dev, char *rom)
 <li>过滤器位宽</li>
 </ul>
 <p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231106195014.webp" alt=""></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231104150730.webp" alt=""></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231104150749.webp" alt=""></p>
 <ul>
 <li>过滤器优先级</li>
 </ul>
@@ -5088,6 +5091,10 @@ static void DS18B20_Read_Rom(OneWire_Hardware_st *dev, char *rom)
 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231107085742.webp" style="zoom:50%;" />
 <p>于是根据模式与位宽的设置，我们共可以得出4种不同的组合： <code>32位宽的列表模式</code>， <code>16位宽的列表模式</code>， <code>32位宽掩码模式</code> ， <code>16位宽的掩码模式</code>。如下图所示：</p>
 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231104152034.webp" style="zoom:67%;" />
+<p>在使能过滤器情况下，总线上广播的报文 <code>ID</code> 与过滤器的配置都不匹配， <code>CAN</code> 控制器会丢弃该报文，不会进入到接收 <code>FIFO</code> 中</p>
+<p><code>一般来说如果你是节点一般只需要接收主机的数据，所以设置为标识符模式，如果你是主机的话一般需要接收很多节点的数据则设置为屏蔽位模式</code></p>
+<p><code>注意</code>：标识符选择位IDE和帧类型RTR需要一致，不同过滤器组的工作模式可以设置为不同</p>
+<p>凡是需要过滤 <code>扩展CAN ID</code> 的，都是需要用到 <code>32位宽</code> 的模式</p>
 <div class="note simple"><p>注意 <code>CAN_FilterTypeDef</code> 结构体成员，它跟上面图中寄存器对应关系：</p>
 <ul>
 <li>位宽为32位时</li>
@@ -5135,13 +5142,57 @@ static void DS18B20_Read_Rom(OneWire_Hardware_st *dev, char *rom)
 <li><code>16位宽的列表模式</code></li>
 </ol>
 <p>CAN_FxR1和CAN_FxR2定义一样，且各自拆成两个16位宽的寄存器，则总共可以写入4个标准CAN ID</p>
+<details ><summary> 通用.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+* @function: HAL_CAN_RxFifo1MsgPendingCallback
+* @param: None
+* @retval: None
+* @brief: 中断回调函数
+*&#x2F;
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
+&#123;
+	if (HAL_OK &#x3D;&#x3D; HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &amp;canRx, Mycan.CAN_Rx_Buffer))
+	&#123;
+		Mycan.CAN_RX_Flag &#x3D; 1;
+	&#125;
+&#125;
+
+void MyCAN_Handler(void)
+&#123;
+	if (Mycan.CAN_RX_Flag)
+	&#123;
+		HAL_GPIO_TogglePin(LED1_GPIO_Port,LED1_Pin);
+		if (CAN_ID_STD &#x3D;&#x3D; canRx.IDE)	&#x2F;&#x2F; 判断是标准帧
+		&#123;
+			printf(&quot;STD_ID:%x  &quot;,canRx.StdId);
+			for (uint8_t i &#x3D; 0; i &lt; canRx.DLC; i++)	&#x2F;&#x2F; DLC是接收的数据长度
+			&#123;
+				printf(&quot;%02x &quot;,Mycan.CAN_Rx_Buffer[i]);	&#x2F;&#x2F; 打印数据
+			&#125;
+			printf(&quot;\r\n&quot;);
+		&#125;
+		else if (CAN_ID_EXT &#x3D;&#x3D; canRx.IDE)	&#x2F;&#x2F; 判断是扩展帧
+		&#123;
+			printf(&quot;EXT_ID:%x  &quot;,canRx.ExtId);
+			for (uint8_t i &#x3D; 0; i &lt; canRx.DLC; i++)
+			&#123;
+				printf(&quot;%02x &quot;,Mycan.CAN_Rx_Buffer[i]);	&#x2F;&#x2F; 打印数据
+			&#125;
+			printf(&quot;\r\n&quot;);			
+		&#125;
+		Mycan.CAN_RX_Flag &#x3D; 0;
+	&#125;
+&#125;</code></pre>
+              </div>
+            </details>
 <div class="tip bolt"><p>32位宽的列表模式</p>
 </div>
 <p>扩展帧则需要将 <code>IDE为“1”</code>，标准帧则为 <code>IDE为“0”</code></p>
 <p>数据帧设 <code>RTR为“0”</code>，远程帧设 <code>RTR为“1”</code></p>
 <p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231107121134.webp" alt=""></p>
 <div class="note simple"><p><code>问1：</code>为什么左移5位？</p>
-<p>因为我们需要看映射，像上图，我们基本ID只有11位，那相当于只占高16位，那就是STID[10:0]，EXID[17:13]的话属于扩展帧的补0即可(不需要关心)，所以左移5位就刚刚好</p>
+<p>因为我们需要看映射，像上图，我们基本ID只有11位，那相当于只占高16位，那就是STID[10:0]，EXID[17:13]的话属于扩展帧的补0即可(不需要关心)，所以左移5位就刚刚好，高位的话不足就前面补0</p>
 <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>标准ID 0x123的二进制：1 0010 0011</mtext></mrow><annotation encoding="application/x-tex">\text{标准ID 0x123的二进制：1  0010 0011}
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">标准</span><span class="mord">ID 0x123</span><span class="mord cjk_fallback">的二进制：</span><span class="mord">1 0010 0011</span></span></span></span></span></span></p>
 <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>左移5位后：10 0100 0110 0000</mtext></mrow><annotation encoding="application/x-tex">\text{左移5位后：10 0100 0110 0000}
@@ -5149,19 +5200,148 @@ static void DS18B20_Read_Rom(OneWire_Hardware_st *dev, char *rom)
 <p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231107181747.webp" alt=""></p>
 </div>
 <blockquote>
-<p>实验</p>
+<p>【实验】</p>
+<p>内容：只接收 <code>ID为0x123</code> 和 <code>ID为0x12345678</code> 的数据，其他的丢弃</p>
 </blockquote>
 <details ><summary> my_can.c </summary>
               <div class='content'>
-              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"></code></pre>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">static void MyCAN_Filter_Config(void)
+&#123;
+	CAN_FilterTypeDef can_filterconfig;
+	uint32_t stdID &#x3D; 0x123;	&#x2F;&#x2F; 基本ID
+	uint32_t extID &#x3D; 0x12345678;	&#x2F;&#x2F; 扩展ID
+	
+    
+	can_filterconfig.FilterMode &#x3D; CAN_FILTERMODE_IDLIST;	&#x2F;&#x2F; 32位列表模式
+	can_filterconfig.FilterScale &#x3D; CAN_FILTERSCALE_32BIT;	&#x2F;&#x2F; 32位宽
+	
+	can_filterconfig.FilterIdHigh &#x3D; stdID &lt;&lt; 5;	&#x2F;&#x2F; 11位ID需要左移5位
+	can_filterconfig.FilterIdLow &#x3D; CAN_ID_STD | 0 | 0;	&#x2F;&#x2F; 标准帧|非远程帧|无用的0
+	can_filterconfig.FilterMaskIdHigh &#x3D; (extID &gt;&gt; 13) &amp; 0xFFFF;	&#x2F;&#x2F; 右移13位获取高16位
+	can_filterconfig.FilterMaskIdLow &#x3D; (extID &lt;&lt; 3) &amp; 0xFFFF | CAN_ID_EXT;	&#x2F;&#x2F; 左移3位获取低16位|为扩展帧
+	
+	can_filterconfig.FilterBank &#x3D; 0;	&#x2F;&#x2F; 过滤器0
+	can_filterconfig.FilterActivation &#x3D; CAN_FILTER_ENABLE;	&#x2F;&#x2F; 激活
+	can_filterconfig.FilterFIFOAssignment &#x3D; CAN_FILTER_FIFO0;	&#x2F;&#x2F; 绑定FIFO0
+	can_filterconfig.SlaveStartFilterBank &#x3D; 14;	&#x2F;&#x2F; 从CAN
+	
+	if (HAL_CAN_ConfigFilter(&amp;hcan1, &amp;can_filterconfig) !&#x3D; HAL_OK)
+	&#123;
+		Error_Handler();
+	&#125;	
+&#125;</code></pre>
               </div>
             </details>
-<p>举例：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231104153547.webp" alt=""></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231104153600.webp" alt=""></p>
-<p>在使能过滤器情况下，总线上广播的报文 <code>ID</code> 与过滤器的配置都不匹配， <code>CAN</code> 控制器会丢弃该报文，不会进入到接收 <code>FIFO</code> 中</p>
-<p><code>一般来说如果你是节点一般只需要接收主机的数据，所以设置为标识符模式，如果你是主机的话一般需要接收很多节点的数据则设置为屏蔽位模式</code></p>
-<p><code>注意</code>：标识符选择位IDE和帧类型RTR需要一致，不同过滤器组的工作模式可以设置为不同</p>
+<ul>
+<li>实验现象</li>
+</ul>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231107202917.webp" style="zoom: 80%;" />
+<div class="tip bolt"><p>16位宽的列表模式</p>
+</div>
+<p>扩展帧则需要将 <code>IDE为“1”</code>，标准帧则为 <code>IDE为“0”</code></p>
+<p>数据帧设 <code>RTR为“0”</code>，远程帧设 <code>RTR为“1”</code></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231107204301.webp" style="zoom:67%;" />
+<p>在16位宽的列表模式下， <code>FilterIdHigh</code>， <code>FilterIdLow</code>， <code>FilterMaskIdHigh</code>， <code>FilterMaskIdLow</code> 这4个16位变量都是用来存储一个 <code>标准CAN ID</code>，这样，就可以存放 <code>4个标准CAN ID</code>了</p>
+<blockquote>
+<p>【实验】</p>
+<p>内容：只接收ID为 <code>0x123</code> 、 <code>0x133</code> 、<code>0x143</code>、<code>0x153</code> 的数据，其他的丢弃</p>
+</blockquote>
+<details ><summary> my_can.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">static void MyCAN_Filter_Config(void)
+&#123;
+    CAN_FilterTypeDef can_filterconfig;
+
+    uint32_t stdID1 &#x3D; 0x123; &#x2F;&#x2F; 基本ID1
+    uint32_t stdID2 &#x3D; 0x133; &#x2F;&#x2F; 基本ID2
+    uint32_t stdID3 &#x3D; 0x143; &#x2F;&#x2F; 基本ID3
+    uint32_t stdID4 &#x3D; 0x153; &#x2F;&#x2F; 基本ID4
+
+    can_filterconfig.FilterMode &#x3D; CAN_FILTERMODE_IDLIST;  &#x2F;&#x2F; 16位列表模式
+    can_filterconfig.FilterScale &#x3D; CAN_FILTERSCALE_16BIT; &#x2F;&#x2F; 16位宽
+
+    can_filterconfig.FilterIdHigh &#x3D; stdID1 &lt;&lt; 5; &#x2F;&#x2F; 11位ID需要左移5位
+    can_filterconfig.FilterIdLow &#x3D; stdID2 &lt;&lt; 5;
+    can_filterconfig.FilterMaskIdHigh &#x3D; stdID3 &lt;&lt; 5;
+    can_filterconfig.FilterMaskIdLow &#x3D; stdID4 &lt;&lt; 5;
+
+    can_filterconfig.FilterBank &#x3D; 0;                          &#x2F;&#x2F; 过滤器0
+    can_filterconfig.FilterActivation &#x3D; CAN_FILTER_ENABLE;    &#x2F;&#x2F; 激活
+    can_filterconfig.FilterFIFOAssignment &#x3D; CAN_FILTER_FIFO0; &#x2F;&#x2F; 绑定FIFO0
+    can_filterconfig.SlaveStartFilterBank &#x3D; 14;               &#x2F;&#x2F; 从CAN
+
+    if (HAL_CAN_ConfigFilter(&amp;hcan1, &amp;can_filterconfig) !&#x3D; HAL_OK)
+    &#123;
+        Error_Handler();
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<ul>
+<li>实验现象</li>
+</ul>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231107205448.webp" style="zoom:67%;" />
+<div class="tip bolt"><p>32位宽掩码模式</p>
+</div>
+<p>此模式可以过滤标准CAN ID，也可以过滤扩展CAN ID，甚至两者混合一起</p>
+<p>扩展帧则需要将 <code>IDE为“1”</code>，标准帧则为 <code>IDE为“0”</code></p>
+<p>数据帧设 <code>RTR为“0”</code>，远程帧设 <code>RTR为“1”</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231107210939.webp" alt=""></p>
+<div class="note simple"><blockquote>
+<p>只针对标准CAN ID</p>
+</blockquote>
+<div class="note simple"><p><code>问1：</code>为什么 FilterMaskIdLow = 0 | CAN_RTR_REMOTE？</p>
+<p>在实际的信息接收过程中，我们既要接收数据帧，也要接收遥控帧(也叫远程帧)，遥控帧用于发送不带数据的命令，RTR位也要匹配，屏蔽器的RTR位要为0，才能保证过滤器ID的RTR位不管为0或1都能接收</p>
+</div>
+<details ><summary> mycan.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">static void MyCAN_Filter_Config(void)
+&#123;
+    CAN_FilterTypeDef can_filterconfig;
+
+    uint16_t stdID_Arr[] &#x3D; &#123;0x7E0, 0x7E1, 0x7E2, 0x7E3, 0x7E4, 0x7E5, 0x7E6, 0x7E7, 0x7E8, 0x7E9&#125;; &#x2F;&#x2F; 定义一组标准ID
+    uint16_t mask, num, tmp;
+
+    mask &#x3D; 0x7FF;	&#x2F;&#x2F; 因为标准帧最大是11位也就是0x7FF
+    num &#x3D; sizeof(stdID_Arr) &#x2F; sizeof(stdID_Arr[0]); &#x2F;&#x2F; 计算元素个数
+    for (uint8_t i &#x3D; 0; i &lt; num; i++)
+    &#123;
+        tmp &#x3D; stdID_Arr[i] ^ (~stdID_Arr[0]); &#x2F;&#x2F; 所有数组元素与元素0同或操作，找出不同位
+        mask &amp;&#x3D; tmp;	&#x2F;&#x2F; 实时更新mask值
+    &#125;
+
+    can_filterconfig.FilterMode &#x3D; CAN_FILTERMODE_IDMASK;  &#x2F;&#x2F; 32位掩码模式
+    can_filterconfig.FilterScale &#x3D; CAN_FILTERSCALE_32BIT; &#x2F;&#x2F; 32位宽
+
+    can_filterconfig.FilterIdHigh &#x3D; (stdID_Arr[0] &lt;&lt; 5); &#x2F;&#x2F; 验证码可以为数组的任意一个ID
+    can_filterconfig.FilterIdLow &#x3D; 0;
+    can_filterconfig.FilterMaskIdHigh &#x3D; (mask &lt;&lt; 5);
+    can_filterconfig.FilterMaskIdLow &#x3D; 0 | CAN_RTR_REMOTE;
+
+    can_filterconfig.FilterBank &#x3D; 0;                          &#x2F;&#x2F; 过滤器0
+    can_filterconfig.FilterActivation &#x3D; CAN_FILTER_ENABLE;    &#x2F;&#x2F; 激活
+    can_filterconfig.FilterFIFOAssignment &#x3D; CAN_FILTER_FIFO0; &#x2F;&#x2F; 绑定FIFO0
+    can_filterconfig.SlaveStartFilterBank &#x3D; 14;               &#x2F;&#x2F; 从CAN
+
+    if (HAL_CAN_ConfigFilter(&amp;hcan1, &amp;can_filterconfig) !&#x3D; HAL_OK)
+    &#123;
+        Error_Handler();
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<ul>
+<li>实验现象</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231107215726.webp" alt=""></p>
+<blockquote>
+<p>只针对扩展CAN ID</p>
+</blockquote>
+<details ><summary> mycan.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"></code></pre>
+              </div>
+            </details></div>
 <h3 id="CAN分析仪">CAN分析仪</h3>
 <p><a href="https://www.waveshare.net/wiki/USB-CAN-A">USB to CANA 资料-微雪</a></p>
 <div class="tip bolt"><p>驱动安装</p>
@@ -6900,7 +7080,7 @@ static void WIFI_TCP_SEND(char *fmt, ...)
 <blockquote>
 <p>单总线挂载多个DS18B20实验还是不太行，无法正确读出ID — 2023.11.2</p>
 </blockquote>
-</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/I2C/">I2C</a></div><div class="post_share"><div class="social-share" data-image="/img/num115.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">2.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UART"><span class="toc-number">3.</span> <span class="toc-text">UART</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SPI"><span class="toc-number">4.</span> <span class="toc-text">SPI</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SPI%E8%AF%A6%E8%A7%A3"><span class="toc-number">4.1.</span> <span class="toc-text">SPI详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B1"><span class="toc-number">4.2.</span> <span class="toc-text">编程示例1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B2"><span class="toc-number">4.3.</span> <span class="toc-text">编程示例2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I2C%E6%97%B6%E5%BA%8F%E8%AE%B2%E8%A7%A3"><span class="toc-number">5.</span> <span class="toc-text">I2C时序讲解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%B2%E8%A3%81%E6%9C%BA%E5%88%B6"><span class="toc-number">5.1.</span> <span class="toc-text">仲裁机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">5.2.</span> <span class="toc-text">基础知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9FIIC%E8%AF%A6%E8%A7%A3"><span class="toc-number">5.3.</span> <span class="toc-text">模拟IIC详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6IIC%E8%AF%A6%E8%A7%A3"><span class="toc-number">5.4.</span> <span class="toc-text">硬件IIC详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B1-2"><span class="toc-number">5.5.</span> <span class="toc-text">编程示例1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B2-2"><span class="toc-number">5.6.</span> <span class="toc-text">编程示例2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B3"><span class="toc-number">5.7.</span> <span class="toc-text">编程示例3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B4"><span class="toc-number">5.8.</span> <span class="toc-text">编程示例4</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RS-232"><span class="toc-number">6.</span> <span class="toc-text">RS-232</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RS-485"><span class="toc-number">7.</span> <span class="toc-text">RS-485</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Modbus%E5%8D%8F%E8%AE%AE"><span class="toc-number">8.</span> <span class="toc-text">Modbus协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%86%E8%A7%A3"><span class="toc-number">8.1.</span> <span class="toc-text">了解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B1-3"><span class="toc-number">8.2.</span> <span class="toc-text">编程示例1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B2-3"><span class="toc-number">8.3.</span> <span class="toc-text">编程示例2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E6%80%BB%E7%BA%BF"><span class="toc-number">9.</span> <span class="toc-text">单总线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%A6%E8%A7%A3"><span class="toc-number">9.1.</span> <span class="toc-text">详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E5%BA%8F"><span class="toc-number">9.2.</span> <span class="toc-text">时序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B1-4"><span class="toc-number">9.3.</span> <span class="toc-text">编程示例1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CAN"><span class="toc-number">10.</span> <span class="toc-text">CAN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CAN%E5%9F%BA%E7%A1%80%E8%AF%A6%E8%A7%A3"><span class="toc-number">10.1.</span> <span class="toc-text">CAN基础详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CAN%E8%BF%87%E6%BB%A4%E5%99%A8%E8%AF%A6%E8%A7%A3"><span class="toc-number">10.2.</span> <span class="toc-text">CAN过滤器详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CAN%E5%88%86%E6%9E%90%E4%BB%AA"><span class="toc-number">10.3.</span> <span class="toc-text">CAN分析仪</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-number">10.4.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B1-5"><span class="toc-number">10.5.</span> <span class="toc-text">编程示例1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B2-4"><span class="toc-number">10.6.</span> <span class="toc-text">编程示例2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WiFi"><span class="toc-number">11.</span> <span class="toc-text">WiFi</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ESP-01S"><span class="toc-number">11.1.</span> <span class="toc-text">ESP-01S</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%85%E8%A7%A3%E5%86%B3"><span class="toc-number">12.</span> <span class="toc-text">待解决</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://lib.baomitu.com/KaTeX/latest/katex.min.css"><script src="https://jsd.onmicrosoft.cn/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/I2C/">I2C</a></div><div class="post_share"><div class="social-share" data-image="/img/num115.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">2.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UART"><span class="toc-number">3.</span> <span class="toc-text">UART</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SPI"><span class="toc-number">4.</span> <span class="toc-text">SPI</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SPI%E8%AF%A6%E8%A7%A3"><span class="toc-number">4.1.</span> <span class="toc-text">SPI详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B1"><span class="toc-number">4.2.</span> <span class="toc-text">编程示例1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B2"><span class="toc-number">4.3.</span> <span class="toc-text">编程示例2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I2C%E6%97%B6%E5%BA%8F%E8%AE%B2%E8%A7%A3"><span class="toc-number">5.</span> <span class="toc-text">I2C时序讲解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%B2%E8%A3%81%E6%9C%BA%E5%88%B6"><span class="toc-number">5.1.</span> <span class="toc-text">仲裁机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">5.2.</span> <span class="toc-text">基础知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9FIIC%E8%AF%A6%E8%A7%A3"><span class="toc-number">5.3.</span> <span class="toc-text">模拟IIC详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6IIC%E8%AF%A6%E8%A7%A3"><span class="toc-number">5.4.</span> <span class="toc-text">硬件IIC详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B1-2"><span class="toc-number">5.5.</span> <span class="toc-text">编程示例1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B2-2"><span class="toc-number">5.6.</span> <span class="toc-text">编程示例2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B3"><span class="toc-number">5.7.</span> <span class="toc-text">编程示例3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B4"><span class="toc-number">5.8.</span> <span class="toc-text">编程示例4</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RS-232"><span class="toc-number">6.</span> <span class="toc-text">RS-232</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RS-485"><span class="toc-number">7.</span> <span class="toc-text">RS-485</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Modbus%E5%8D%8F%E8%AE%AE"><span class="toc-number">8.</span> <span class="toc-text">Modbus协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%86%E8%A7%A3"><span class="toc-number">8.1.</span> <span class="toc-text">了解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B1-3"><span class="toc-number">8.2.</span> <span class="toc-text">编程示例1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B2-3"><span class="toc-number">8.3.</span> <span class="toc-text">编程示例2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E6%80%BB%E7%BA%BF"><span class="toc-number">9.</span> <span class="toc-text">单总线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%A6%E8%A7%A3"><span class="toc-number">9.1.</span> <span class="toc-text">详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E5%BA%8F"><span class="toc-number">9.2.</span> <span class="toc-text">时序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B1-4"><span class="toc-number">9.3.</span> <span class="toc-text">编程示例1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CAN"><span class="toc-number">10.</span> <span class="toc-text">CAN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CAN%E5%9F%BA%E7%A1%80%E8%AF%A6%E8%A7%A3"><span class="toc-number">10.1.</span> <span class="toc-text">CAN基础详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%A5%E6%8E%A7%E5%B8%A7"><span class="toc-number">10.2.</span> <span class="toc-text">遥控帧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CAN%E8%BF%87%E6%BB%A4%E5%99%A8%E8%AF%A6%E8%A7%A3"><span class="toc-number">10.3.</span> <span class="toc-text">CAN过滤器详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CAN%E5%88%86%E6%9E%90%E4%BB%AA"><span class="toc-number">10.4.</span> <span class="toc-text">CAN分析仪</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-number">10.5.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B1-5"><span class="toc-number">10.6.</span> <span class="toc-text">编程示例1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B2-4"><span class="toc-number">10.7.</span> <span class="toc-text">编程示例2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WiFi"><span class="toc-number">11.</span> <span class="toc-text">WiFi</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ESP-01S"><span class="toc-number">11.1.</span> <span class="toc-text">ESP-01S</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%85%E8%A7%A3%E5%86%B3"><span class="toc-number">12.</span> <span class="toc-text">待解决</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://lib.baomitu.com/KaTeX/latest/katex.min.css"><script src="https://jsd.onmicrosoft.cn/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
   document.querySelectorAll('#article-container span.katex-display').forEach(item => {
     btf.wrap(item, 'div', { class: 'katex-wrap'})
   })
