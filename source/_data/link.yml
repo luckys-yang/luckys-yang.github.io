@@ -206,14 +206,14 @@
       link: https://blog.zhheo.com/
       avatar: ./touxiang/link39.webp
       descr: 分享设计与科技生活
-- class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#16e5de;display:inline-block;"></i><span style="color:#abb4d7;">朋友</span>
+- class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#16e5de;display:inline-block;"></i><span style="color:#abb4d7;">friends</span>
   class_desc: 
   link_list:
-    - name: LiangJiaXin
+    - name: ljx1104
       link: https://ljx1104.github.io/
       avatar: ./touxiang/link44.webp
       descr: 新晋大佬一个
-    - name: HuangChuXian
+    - name: 被窝理想家
       link: https://huangchux.github.io
       avatar: ./touxiang/link50.webp
       descr: Cool!

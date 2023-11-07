@@ -36,7 +36,7 @@ comments: false
 ```yml
 name: Yangの小栈
 link: https://blog.yang5201314.cn/
-avatar: https://pic1.imgdb.cn/item/646b2b31e03e90d874ca00b6.webp
-descr: 循环的圆，不循环的缘
+avatar: https://pic.imgdb.cn/item/6539b2cdc458853aef47199a.jpg
+descr: 人生苦短，至少让☕甜点
 ```
 

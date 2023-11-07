@@ -77,3 +77,17 @@ date: 2023-09-16 17:34:01
 > }
 > ```
 
+
+
+## Keil
+
+> 使用V6的话，代码含中文的话会报警告
+>
+> ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231028210140.webp)
+>
+> 则需要在魔术棒那进行添加：
+>
+> ```cpp
+> -Wno-invalid-source-encoding
+> ```
+

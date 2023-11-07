@@ -25,7 +25,7 @@ comments: false
       avatar: ./book_image/book8.webp
       descr: 　　    
     - name: XFLTD
-      link: https://xftld.org/index.php#/dashboard
+      link: https://xfltd.cc/#/dashboard
       avatar: ./book_image/book8.webp
       descr: 　　  
     - name: 腾讯云域名管理
