@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>ZigBee学习笔记 | Yangの小栈</title><meta name="author" content="Yang"><meta name="copyright" content="Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言 资源&#x2F;网站  Zigbee附加资料–百度网盘 善学坊 ZigBee 3.0 开发指南 ZigBee 3.0 CC2530 开发指南 小米Aqara资深工程师讲解-B站视频 配套资源下载–公开部分–百度网盘 环境准备 板子介绍  板子：TI CC2530F256">
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>ZigBee学习笔记 | Yangの小栈</title><meta name="author" content="Yang"><meta name="copyright" content="Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言 资源&#x2F;网站  Zigbee附加资料–百度网盘 善学坊 ZigBee 3.0 开发指南 ZigBee 3.0 CC2530 开发指南 小米Aqara资深工程师讲解-B站视频 配套资源下载–公开部分–百度网盘 使用CC2530开发板制作Zigbee温湿度传感器并接入Home Assistant cc2530 串口实验4–设置时间 环境准备  下载安装 IAR Embedded Workbench">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ZigBee学习笔记">
 <meta property="og:url" content="https://blog.yang5201314.cn/post/397579f7.html">
 <meta property="og:site_name" content="Yangの小栈">
-<meta property="og:description" content="前言 资源&#x2F;网站  Zigbee附加资料–百度网盘 善学坊 ZigBee 3.0 开发指南 ZigBee 3.0 CC2530 开发指南 小米Aqara资深工程师讲解-B站视频 配套资源下载–公开部分–百度网盘 环境准备 板子介绍  板子：TI CC2530F256">
+<meta property="og:description" content="前言 资源&#x2F;网站  Zigbee附加资料–百度网盘 善学坊 ZigBee 3.0 开发指南 ZigBee 3.0 CC2530 开发指南 小米Aqara资深工程师讲解-B站视频 配套资源下载–公开部分–百度网盘 使用CC2530开发板制作Zigbee温湿度传感器并接入Home Assistant cc2530 串口实验4–设置时间 环境准备  下载安装 IAR Embedded Workbench">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.yang5201314.cn/img/num116.webp">
 <meta property="article:published_time" content="2023-11-09T01:10:41.000Z">
-<meta property="article:modified_time" content="2023-11-09T04:47:28.535Z">
+<meta property="article:modified_time" content="2023-11-23T13:52:04.755Z">
 <meta property="article:author" content="Yang">
 <meta property="article:tag" content="aabbcc">
 <meta name="twitter:card" content="summary">
@@ -57,7 +57,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-11-09 12:47:28'
+  postUpdate: '2023-11-23 21:52:04'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -174,7 +174,7 @@ window.addEventListener('load',()=> { preloader.endLoading() })
 if (true) {
   document.addEventListener('pjax:send', () => { preloader.initLoading() })
   document.addEventListener('pjax:complete', () => { preloader.endLoading() })
-}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20231008142657.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">149</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">72</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">32</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">ZigBee学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-09T01:10:41.000Z" title="发表于 2023-11-09 09:10:41">2023-11-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-09T04:47:28.535Z" title="更新于 2023-11-09 12:47:28">2023-11-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BB%86%E5%8C%96%E5%AD%A6%E4%B9%A0/">细化学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">73</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20231008142657.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">150</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">72</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">32</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">ZigBee学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-09T01:10:41.000Z" title="发表于 2023-11-09 09:10:41">2023-11-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-23T13:52:04.755Z" title="更新于 2023-11-23 21:52:04">2023-11-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BB%86%E5%8C%96%E5%AD%A6%E4%B9%A0/">细化学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">13.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>65分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
 <div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>资源/网站</p>
 </div>
 <p><a href="https://pan.baidu.com/s/1h5wk0PBC7L1vUvHq_amQzg?pwd=2333#list/path=%2F&amp;parentPath=%2Fsharelink2199637170-1011570584614361">Zigbee附加资料–百度网盘</a></p>
@@ -182,12 +182,2475 @@ if (true) {
 <p><a href="https://z7po9bxpe4.k.topthink.com/@zigbee-dev-guide/kechengjianjie.html">ZigBee 3.0 开发指南</a></p>
 <p><a href="https://www.bilibili.com/video/BV1k34y1D7Vz/?spm_id_from=888.80997.embed_other.whitelist&amp;t=62&amp;vd_source=5fb3f08926cbdbc6d84b3f2bda38c0b1">ZigBee 3.0 CC2530 开发指南 小米Aqara资深工程师讲解-B站视频</a></p>
 <p><a href="https://z7po9bxpe4.k.topthink.com/@zigbee-dev-guide/yuandaimaxiazai.html">配套资源下载–公开部分–百度网盘</a></p>
+<p><a href="https://blog.csdn.net/qq_53006294/article/details/131791444?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=%E5%96%84%E5%AD%A6%E5%9D%8A&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~sobaiduweb~default-1-131791444.nonecase&amp;spm=1018.2226.3001.4450">使用CC2530开发板制作Zigbee温湿度传感器并接入Home Assistant</a></p>
+<p><a href="https://blog.csdn.net/shawyou/article/details/18196505?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522170039333616800185816659%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&amp;request_id=170039333616800185816659&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-1-18196505-null-null.nonecase&amp;utm_term=T3CC0%20%3D%200xFA%3B&amp;spm=1018.2226.3001.4450">cc2530 串口实验4–设置时间</a></p>
 <h2 id="环境准备">环境准备</h2>
-<h2 id="板子介绍">板子介绍</h2>
+<ul>
+<li>下载安装 <code>IAR Embedded Workbench for 8051 version 10.40.1</code></li>
+<li>下载 <code>TI Z-Stack 3.0</code></li>
+<li>下载 <code>SmartRF Flash Programmer</code></li>
+<li>下载 <code>串口助手</code>(这个居然要钱没必要，使用其他普通串口助手即可)</li>
+<li>安装 <code>SmartRF04EB</code> 驱动</li>
+<li>安装 <code>USB转串口</code> 驱动</li>
+<li>下载 <code>Xshell 7</code> (选)</li>
+<li>下载 <code>PuTTY</code> (选)</li>
+</ul>
+<h2 id="板子资源介绍">板子资源介绍</h2>
 <blockquote>
-<p>板子：TI CC2530F256</p>
+<p>板子主控：TI(德州仪器) CC2530F256</p>
 </blockquote>
-</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num116.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-number">2.</span> <span class="toc-text">环境准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%BF%E5%AD%90%E4%BB%8B%E7%BB%8D"><span class="toc-number">3.</span> <span class="toc-text">板子介绍</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+<p>Flash： <code>256KB</code></p>
+<p>RAM： <code>8KB</code></p>
+<p>内核： <code>低功耗8051微控制器内核</code></p>
+<p>通用IO数量： <code>21</code></p>
+<p>USART数量： <code>2</code></p>
+<p>12位ADC数量： <code>8</code></p>
+<p>定时器数量：<code>4</code></p>
+<p>SPI数量：<code>2</code></p>
+<blockquote>
+<p>板子其他外设/模块</p>
+</blockquote>
+<ul>
+<li>环境温度与环境湿度二合一传感器：原装正品奥松 <code>DHT11</code>，<a href="http://www.aosong.com/products-21.html">查看技术参数</a></li>
+<li>继电器：原装正品松乐继电器  <code>SRD-05VDC-SL</code>，<a href="http://www.songle.com/Product_show_id_546.htm">查看技术参数</a></li>
+<li>光照传感器： <code>SXF-GL5516</code></li>
+<li>外部存储器： <code>M25PE80 1 MB NorFlash</code>，<a href="https://gitee.com/study-j/zigbee/tree/master/%E8%AF%BE%E5%A4%96%E8%B5%84%E6%96%99%E5%8F%82%E8%80%83/M25PE80%E6%95%B0%E6%8D%AE%E6%89%8B%E5%86%8C">查看技术参数</a></li>
+<li>USB转串口芯片： <code>沁恒 CH340N</code>，<a href="https://www.wch.cn/products/CH340.html?">查看技术参数</a></li>
+<li>拨码开关： <code>原装正品KE拨码开关</code></li>
+<li>OLED： <code>0.96寸12864</code> (SSD1306驱动，SPI协议，3.3v或5v)，<a href="https://zhuanlan.zhihu.com/p/628861772">查看技术参数</a></li>
+<li>WiFI模块： <code>ESP01S</code>，<a href="https://gitee.com/study-j/wifi-esp8266/tree/master/ESP8266-01S">查看技术参数</a></li>
+<li>仿真器： <code>smart-rf04eb</code> (支持在线仿真，程序下载)</li>
+</ul>
+<blockquote>
+<p>技术参数</p>
+</blockquote>
+<ul>
+<li>型号： <code>zigbee-std-v3</code></li>
+<li>ZigBee 应用协议版本： <code>ZigBee 3.0</code></li>
+<li>ZigBee 核心协议版本： <code>ZigBee 2007 Pro</code></li>
+<li>ZigBee 底层协议： <code>IEEE 802.15.4</code></li>
+<li>ZigBee 无线通信距离： <code>相邻节点的通信距离约为150米</code>(建议通信距离为1~50m)</li>
+<li>ZigBee 无线通信速率： <code>240kb/s（理论值）</code></li>
+<li>ZigBee 电磁波频率： <code>2.4GHz</code></li>
+<li>ZigBee 无线通信时延： <code>&lt; 1秒</code></li>
+<li>供电电压： <code>4.5~5.5V</code></li>
+<li>供电电流： <code>0.5~2A</code></li>
+<li>工作温度：<code>-40°~85°</code></li>
+<li>工作湿度：<code>10%~90%</code></li>
+<li>发射电流：<code>26~31mA，28mA(4dBm)</code></li>
+<li>接收电流：<code>25~30mA，典型27mA</code></li>
+</ul>
+<h2 id="CC2530通信模组">CC2530通信模组</h2>
+<blockquote>
+<p>为什么叫通信模组，因为它不仅是单片机，还是集成无线通信功能的单片机，所以叫通信模组</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">型号</td>
+<td style="text-align:center">2530-A</td>
+</tr>
+<tr>
+<td style="text-align:center">芯片</td>
+<td style="text-align:center">CC2530F256</td>
+</tr>
+<tr>
+<td style="text-align:center">协议</td>
+<td style="text-align:center">ZigBee 3.0</td>
+</tr>
+<tr>
+<td style="text-align:center">第三方设备互通</td>
+<td style="text-align:center">支持</td>
+</tr>
+<tr>
+<td style="text-align:center">超级自组网</td>
+<td style="text-align:center">支持</td>
+</tr>
+<tr>
+<td style="text-align:center">组网数量</td>
+<td style="text-align:center">最大100个(网状网络)</td>
+</tr>
+<tr>
+<td style="text-align:center">对接方式</td>
+<td style="text-align:center">串口透传</td>
+</tr>
+<tr>
+<td style="text-align:center">通信距离</td>
+<td style="text-align:center">150m(无干扰)</td>
+</tr>
+<tr>
+<td style="text-align:center">待机功耗</td>
+<td style="text-align:center">&lt;1uA(关机)</td>
+</tr>
+<tr>
+<td style="text-align:center">供电</td>
+<td style="text-align:center">3.0~3.6V，典型3.3V</td>
+</tr>
+</tbody>
+</table>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231118135551.webp" style="zoom:67%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231118135712.webp" style="zoom:50%;" />
+<h2 id="ZigBee-3-0-介绍">ZigBee 3.0 介绍</h2>
+<p>ZigBee可以划分 <code>4</code> 个层：</p>
+<ol>
+<li>应用层 — （我们一般就是对应用层进行开发，比如1是开灯0是关灯等等）</li>
+<li>网络层 — （作用：组网）</li>
+<li>MAC层 — 使用 IEEE 802.15.4协议（作用：有序地利用物理通信资源来进行可靠通信）</li>
+<li>物理层 — 使用 IEEE 802.15.4协议（作用：一个设备产生电磁波信号发送到另一个设备，另一个设备解读电磁波并且提取数据）</li>
+</ol>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231118142830.webp" style="zoom:50%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231118142958.webp" style="zoom:50%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231118150611.webp" style="zoom:50%;" />
+<blockquote>
+<p>IEEE：电气和电子工程师协会</p>
+<p>802.15：协会里面的部门</p>
+<p>4：部门里的第4工作组开发的</p>
+<p>IEEE 802.15.4协议：低速无线个人区域网络WPAN，具有超低复杂度，超低功耗，低数据传输率</p>
+</blockquote>
+<blockquote>
+<p>自组网：当两个节点超出一定范围后断开了连接，当两个节点重新接近时会自动重新连接的功能</p>
+</blockquote>
+<ul>
+<li>技术厂商</li>
+</ul>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231118150951.webp" style="zoom:50%;" />
+<ul>
+<li>TI-ZStack</li>
+</ul>
+<p>主要由 <code>应用层(目前Z-Stack 3.0)</code> 和 <code>内核层Core(目前Core 2.7.1)</code> 组成</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231118151524.webp" style="zoom:50%;" />
+<h2 id="安装-TI-Z-Stack-3-0">安装 TI Z-Stack 3.0</h2>
+<blockquote>
+<p>可以去官网进行下载最新版：<a href="https://www.ti.com/tool/Z-STACK">https://www.ti.com/tool/Z-STACK</a></p>
+<p>此项目使用的版本为 <code>3.0.1</code></p>
+</blockquote>
+<p><code>Z-Stack 3.0</code> 就是TI根据 <code>ZigBee 3.0</code> 协议规范而编写的程序（库），开发者可以方便地调用 <code>Z-Stack 3.0</code> 中的各个API来进行基于 <code>ZigBee</code> 协议的数据通信</p>
+<div class="tip bolt"><p>安装步骤</p>
+</div>
+<ol>
+<li>管理员身份打开 <code>exe</code></li>
+<li>一直 <code>Next</code> 即可，然后安装路径可以自定义一下方便查找</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231118165710.webp" alt=""></p>
+<ol start="3">
+<li>这里需要安装这些东西，所以全部勾选，然后等待它安装完成即可</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231118165916.webp" alt=""></p>
+<h2 id="安装-SmartRF-Flash-Programmer">安装 SmartRF_Flash_Programmer</h2>
+<blockquote>
+<p>可以去官网进行下载最新版：<a href="https://www.ti.com.cn/tool/cn/FLASH-PROGRAMMER#downloads">https://www.ti.com.cn/tool/cn/FLASH-PROGRAMMER#downloads</a></p>
+<p>参考文章：<a href="https://zhuanlan.zhihu.com/p/370210691">SmartRF Flash Programmer 下载与安装</a></p>
+<p>此项目使用的版本是：<code>SmartRF Flash Programmer 1.12.8</code></p>
+</blockquote>
+<p><code>SmartRF Flash Programmer</code> 是一款编程器软件，可用于对TI的基于 <code>8051</code> 的低功耗射频无线 MCU 中的 <code>Flash</code> 进行编程</p>
+<div class="tip bolt"><p>安装步骤</p>
+</div>
+<ol>
+<li>
+<p>以管理员身份运行安装包</p>
+</li>
+<li>
+<p>正常下一步即可，安装路径也可以自定义，方便查找</p>
+</li>
+<li>
+<p>安装过程中会弹出安装驱动，点击【安装】即可</p>
+</li>
+</ol>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231118170953.webp" style="zoom:50%;" />
+<ol start="4">
+<li>安装完创建桌面快捷键即可</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231118171014.webp" alt=""></p>
+<h2 id="安装-SmartRF04EB-驱动">安装 SmartRF04EB 驱动</h2>
+<blockquote>
+<p>可以去官网进行下载最新版：<a href="https://www.ti.com/tool/download/SWRC212%E3%80%81">https://www.ti.com/tool/download/SWRC212、</a></p>
+<p>参考文章：<a href="https://zhuanlan.zhihu.com/p/370241426">SmartRF04EB 简介和驱动安装</a></p>
+</blockquote>
+<p><code>IAR EW for 8051</code> 或者 <code>SmartRF Flash Programmer</code> 还需要配合 <code>SmartRF04EB</code> 仿真器才能实现在线程序仿真或固件程序下载。在使用 <code>SmartRF04EB</code> 仿真器前，需要先安装其配套的驱动程序</p>
+<div class="tip bolt"><p>安装步骤</p>
+</div>
+<ol>
+<li>使用USB线把SmartRF04EB仿真器连接到电脑</li>
+<li>解压驱动压缩包</li>
+<li>打开电脑的设备管理器，找到其他设备那栏，看到一个带黄色感叹号的SmastRF04EB，然后选择“更新驱动程序软件”，选择“浏览我的计算机……”，单击“浏览”按钮，选择至刚刚解压的文件夹，找到你对应的机型(根据自身电脑的位数选择64位/32位)，进入该文件夹即可，并且勾选“包含子文件夹”，然后单击“下一步”按钮即可</li>
+<li>黄色感叹号消失，驱动程序安装成功</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231118172823.webp" alt=""></p>
+<h2 id="安装USB转串口驱动">安装USB转串口驱动</h2>
+<blockquote>
+<p>可以去官网进行下载最新版：<a href="https://www.wch.cn/downloads/CH341SER_EXE.html">https://www.wch.cn/downloads/CH341SER_EXE.html</a></p>
+<p>驱动精灵：<a href="https://www.drivergenius.com/">https://www.drivergenius.com/</a></p>
+</blockquote>
+<p>一般如果之前有用过USB转串口的话应该就已经有驱动了不需要安装，但是还是建议安装一下最新版的没有bug</p>
+<p>如果安装失败可以使用驱动精灵进行安装</p>
+<h2 id="新建项目">新建项目</h2>
+<div class="tip bolt"><p>工程建立与文件添加</p>
+</div>
+<ol>
+<li>打开IAR，点击【File】-&gt; 【New Workspace】，新建工作空间</li>
+<li>依次点击 【File】-&gt; 【Save Workspace As…】，保存工作空间到一个地方</li>
+<li>在刚刚保存的项目路径下创建两个文件夹，<code>APP</code> 和 <code>USER</code></li>
+<li>新建项目，点击【Project】-&gt; 【Create New Project…】，在工作空间里进行新建一个工程</li>
+<li>选择【Empty project】，新建一个空工程</li>
+<li>添加组与.c和.h</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231118180141.webp" alt=""></p>
+<p>先点击左上角 <code>New Document</code>，创建新的文件然后保存到对应的文件夹里即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231119104304.webp" alt=""></p>
+<ol start="7">
+<li>选择芯片，选择自己的芯片</li>
+</ol>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231118180801.webp" style="zoom:50%;" />
+<p><code>注意</code>：一个工作空间可以包含多个工程，他们都是互相独立的</p>
+<p>进入这里将 <code>XDATA</code> 改为 <code>0x1FF</code>，还有其他一些设置比如hex文件的输出等等</p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231118181141.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231118181301.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231118181348.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231118181400.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231118182657.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231118181617.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<div class="tip bolt"><p>程序下载</p>
+</div>
+<div class="tip bolt"><p>固件烧录</p>
+</div>
+<p>在配置并编译链接工程后，IAR 会生成一个 <code>hex</code> 文件，这个 <code>hex</code> 文件可以作为产品打包发布的固件</p>
+<p>鼠标右键点击 <code>xxx.hex</code> 文件，然后选择 【Open Containing Folder…】可以查看文件所在目录</p>
+<blockquote>
+<p>在实际的开发过程中，一般需要生成两个版本的固件：</p>
+<ul>
+<li>一个是调试用的Debug版本</li>
+<li>一个是产品正式发布的Release版本</li>
+</ul>
+<p>在创建工程时，IAR也默认存在相关的配置。依次点击【Project】和【Edit Configurations…】，选择编辑工程配置</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231118213959.webp" alt=""></p>
+</blockquote>
+<blockquote>
+<p>固件烧录步骤如下：</p>
+<ol>
+<li>把开发板通过仿真器连接到电脑上</li>
+<li>按一下仿真器的复位按键</li>
+<li>打开 <code>SmartRF Flash Programmer</code>，点击 <code>System-on-Chip</code>，可以看到识别到的仿真器。接着选中待烧录的固件、选中 <code>Erase and program</code></li>
+</ol>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231118214718.webp" style="zoom:67%;" />
+</blockquote>
+<h2 id="我的程序框架">我的程序框架</h2>
+<details ><summary> CC2530_IO_Config.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __CC2530_IO_CONFIG_H
+#define __CC2530_IO_CONFIG_H
+
+&#x2F;** @brief  CC2530 GPIO 模式 *&#x2F;
+#define CC2530_OUTPUT          0 &#x2F;&#x2F;!&lt; 输出
+#define CC2530_INPUT_PULLUP    1 &#x2F;&#x2F;!&lt; 上拉输入
+#define CC2530_INPUT_PULLDOWN  2 &#x2F;&#x2F;!&lt; 下拉输入
+#define CC2530_INPUT_TRISTATE  3 &#x2F;&#x2F;!&lt; 悬空
+
+&#x2F;** @brief  位左移 *&#x2F;
+#define CC2530_IO_CTRL_BV(x)    (1&lt;&lt;(x))
+
+&#x2F;** @brief  配置寄存器：PxSEL  端口功能选择&#x2F;端口1外设优先级控制：0---通用IO 1---外设功能*&#x2F;
+#define CC2530_REG_PxSEL(port, pin, val) do &#123;                   \
+    if (0 &#x3D;&#x3D; val) P##port##SEL &amp;&#x3D; ~CC2530_IO_CTRL_BV(pin);      \
+    else P##port##SEL |&#x3D; CC2530_IO_CTRL_BV(pin);                \
+&#125; while(0)
+
+&#x2F;** @brief  配置寄存器：PxDIR  端口方向&#x2F;端口0外设优先级控制：0---输入 1---输出*&#x2F;
+#define CC2530_REG_PxDIR(port, pin, val) do &#123;                   \
+    if (0 &#x3D;&#x3D; val) P##port##DIR &amp;&#x3D; ~CC2530_IO_CTRL_BV(pin);      \
+    else P##port##DIR |&#x3D; CC2530_IO_CTRL_BV(pin);                \
+&#125; while(0)
+
+&#x2F;** @brief  配置寄存器：PxINP  端口输入模式控制：0---上拉&#x2F;下拉 1---三态*&#x2F;
+#define CC2530_REG_PxINP(port, pin, val) do &#123;                   \
+    if (0 &#x3D;&#x3D; val) P##port##INP &amp;&#x3D; ~CC2530_IO_CTRL_BV(pin);      \
+    else P##port##INP |&#x3D; CC2530_IO_CTRL_BV(pin);                \
+&#125; while(0)
+
+&#x2F;** @brief  输出模式*&#x2F;
+#define CC2530_IO_OUTPUT(port, pin) do &#123;                        \
+    CC2530_REG_PxDIR(port, pin, 1);                             \
+    CC2530_REG_PxSEL(port, pin, 0);                             \
+&#125; while(0)
+
+&#x2F;** @brief  输入模式*&#x2F;
+#define CC2530_IO_INPUT(port, pin, mode) do &#123;                                  \
+    if (1 &#x3D;&#x3D; (port) &amp;&amp; (0 &#x3D;&#x3D; (pin) || 1 &#x3D;&#x3D; (pin))) break;                      \
+                                                                               \
+    CC2530_REG_PxDIR(port, pin, 0);                                            \
+    CC2530_REG_PxSEL(port, pin, 0);                                            \
+                                                                               \
+    if (CC2530_INPUT_TRISTATE &#x3D;&#x3D; mode) CC2530_REG_PxINP(port, pin, 1);         \
+    else &#123;                                                                     \
+         CC2530_REG_PxINP(port, pin, 0);                                       \
+         if (CC2530_INPUT_PULLUP &#x3D;&#x3D; mode) CC2530_REG_PxINP(2, (5+port), 0);    \
+         else CC2530_REG_PxINP(2, (5+port), 1);                                \
+    &#125;                                                                          \
+&#125; while(0)
+
+&#x2F;** @brief  GPIO模式
+ *  @warning  P1_0, P1_1 不能设置为输入模式
+ *&#x2F;
+#define CC2530_IO_CTRL(port, pin, mode) do &#123;                                   \
+    if (port &gt; 2 || pin &gt; 7) break;                                            \
+                                                                               \
+    if (CC2530_OUTPUT &#x3D;&#x3D; mode) CC2530_IO_OUTPUT(port, pin)                     \
+    else CC2530_IO_INPUT(port, pin, mode);                                     \
+&#125; while(0)
+
+&#x2F;** @brief    GPIO 置0&#x2F;1
+ *  @warning  GPIO 必须在输出模式
+ *&#x2F;
+#define CC2530_GPIO_SET(port, pin)      P##port##_##pin &#x3D; 1
+#define CC2530_GPIO_RESET(port, pin)    P##port##_##pin &#x3D; 0
+
+&#x2F;** @brief    获取GPIO状态
+ *&#x2F;
+#define CC2530_GPIO_READ(port, pin)     P##port##_##pin
+
+#endif</code></pre>
+              </div>
+            </details>
+<h2 id="入门">入门</h2>
+<h3 id="原理图">原理图</h3>
+<blockquote>
+<p>CC2530主控</p>
+</blockquote>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119100046.webp" style="zoom:80%;" />
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231122163438.webp" alt=""></p>
+<p>调试接口使用I/O 引脚 <code>P2.1</code> 和 <code>P2.2</code> 分别作为调试模式中的调试数据和调试时钟。当设备不在调试模式下，这些I/O 引脚只能用于通用I/O。因此调试接口不干预任何外设I/O 引脚</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231119182115.webp" alt=""></p>
+<p>外设引脚映射表(手册7.6)：</p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231120143358.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231120143413.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<h3 id="GPIO实验">GPIO实验</h3>
+<blockquote>
+<p>除了两个高驱动输出口 <code>P1.0</code> 和 <code>P1.1</code> 各具备 <code>20 mA</code> 的输出驱动能力之外，所有的输出均具备 <code>4 mA</code>的驱动能力，而且这两个引脚是没有上拉/下拉功能</p>
+</blockquote>
+<blockquote>
+<p>注意配置为外设I/O 信号的引脚没有上拉/下拉功能，即使外设功能是一个输入</p>
+</blockquote>
+<div class="tip bolt"><p>常用寄存器</p>
+</div>
+<p>【数据手册 7.11】</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">寄存器</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">P0</td>
+<td style="text-align:center">8位寄存器，8个位分别与P0_0~P0_7一一对应，分别用于设置或读取这8个IO口的电平状态</td>
+</tr>
+<tr>
+<td style="text-align:center">P0SEL</td>
+<td style="text-align:center">8位寄存器，8个位分别与P0_0~P0_7一一对应，分别配置这8个IO口的 <code>功能</code>。如果IO口对应的位为0，表示该IO口用于通用输入/输出；如果为1，表示用于特定的功能</td>
+</tr>
+<tr>
+<td style="text-align:center">P0DIR</td>
+<td style="text-align:center">8位寄存器，8个位分别与P0_0~P0_7一一对应，分别配置这8个IO口的 <code>通信方向</code>。如果IO口对应的位为0，表示该IO口处于输入信号模式；如果为1，表示处于输出信号模式</td>
+</tr>
+<tr>
+<td style="text-align:center">PERCFG</td>
+<td style="text-align:center">其中的第0位用于配置USART0的位置，值为0表示使用位置1，即使用P0_2和P0_3；值为1表示使用位置2，即使用P1_4和P1_5</td>
+</tr>
+</tbody>
+</table>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119101411.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119120408.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119120152.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119121350.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119122918.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119123431.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119123515.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231120150112.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231122140916.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231122141152.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231122173943.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<h4 id="LED">LED</h4>
+<ul>
+<li>硬件连接</li>
+</ul>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119100329.webp" style="zoom:67%;" />
+<h4 id="按键">按键</h4>
+<ul>
+<li>硬件连接</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231121174910.webp" alt=""></p>
+<ul>
+<li>程序编写</li>
+</ul>
+<h3 id="时钟">时钟</h3>
+<p>CC2530有两种时钟频率可供开发者使用： <code>32MHz</code> 和 <code>16MHz</code></p>
+<p>CC2530的默认系统时钟频率是 <code>16MHz</code>（可在数据手册里 <code>CLKCONCMD</code>寄存器里知道复位值）</p>
+<p>注意要使用 <code>RF 收发器</code>，必须选择高速且稳定的 <code>32 MHz</code> 晶振</p>
+<ul>
+<li>设备有两个高频振荡器</li>
+</ul>
+<ol>
+<li>32 MHz 外部晶振(XOSC)</li>
+<li>16 MHz 内部RC 振荡器(RCOSC)</li>
+</ol>
+<ul>
+<li>设备的两个低频振荡器(这两个32 kHz 振荡器不能同时运行)</li>
+</ul>
+<ol>
+<li>
+<p>32 kHz 外部晶振(XOSC)</p>
+</li>
+<li>
+<p>32 kHz 内部RC 振荡器(RCOSC)</p>
+</li>
+</ol>
+<div class="tip bolt"><p>常用寄存器</p>
+</div>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119163411.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119164925.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+* @function: Clock_Init
+* @param   : None
+* @retval  : None
+* @brief   : 时钟初始化(系统时钟默认是16MHz)
+*&#x2F;
+static void Clock_Init(void)
+&#123;
+    CLKCONCMD &amp;&#x3D; ~0x40; &#x2F;&#x2F; 设置系统时钟源为32MHz晶振 --- 1011 1111 &amp; 1100 1001 &#x3D; 1000 1001
+    while (CLKCONSTA &amp; 0x40);   &#x2F;&#x2F; 等待晶振稳定为32M --- 1100 1001 &amp; 0100 0000
+    CLKCONCMD &amp;&#x3D; ~0x7F; &#x2F;&#x2F; 设置系统主时钟频率为32MHz --- 1000 1001 &amp; 1000 000 &#x3D; 1000 0000
+&#125;</code></pre>
+<h3 id="中断">中断</h3>
+<p>CPU有 <code>18</code> 个中断源</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119180659.webp" style="zoom:50%;" />
+<p>中断组合成为 <code>6</code> 个中断优先组，每组的优先级通过设置寄存器 <code>IP0</code> 和 <code>IP1</code> 实现。为了给中断（也就是它所在的中断优先组）赋值优先级，需要设置 <code>IP0</code> 和 <code>IP1</code> 的对应位</p>
+<p>当同时收到几个相同优先级的中断请求时，采取轮流探测顺序来判定哪个中断优先响应：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119181124.webp" style="zoom:50%;" />
+<div class="tip bolt"><p>中断常用寄存器</p>
+</div>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119182527.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119182655.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119183759.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<p>最右边是P0端口的中断过程，其相关寄存器依次为 <code>P0</code> 、 <code>PICTL.P0ICON</code> 、 <code>P0IFG</code> 、 <code>P0IEN</code> 、 <code>P0IF</code> 、 <code>EA</code> 和 <code>IEN1.P0IE</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231122113921.webp" alt=""></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231122114259.webp" style="zoom:50%;" />
+<h3 id="定时器实验">定时器实验</h3>
+<p>CC2530有 <code>4</code> 个定时器：1个16位的(TIM1)、2个8位的(TIM3和TIM4)</p>
+<blockquote>
+<p>定时器1 是一个独立的16 位定时器，支持典型的定时/计数功能，比如输入捕获，输出比较和PWM 功能。定时器有五个独立的捕获/比较通道</p>
+</blockquote>
+<blockquote>
+<p>定时器3 和4 是两个8 位的定时器。每个定时器有两个独立的比较通道</p>
+</blockquote>
+<div class="tip bolt"><p>TIM1常用寄存器</p>
+</div>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119202858.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119203010.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119203040.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<div class="tip bolt"><p>TIM3/4常用寄存器</p>
+</div>
+<p>定时器3和4的寄存器一样的只是名字不一样，定时器1的寄存器不一样</p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119173103.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119174241.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119174358.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<div class="tip bolt"><p>TIM1/3/4共用寄存器</p>
+</div>
+<p><strong>中断未决</strong>：已经检测到了一个中断请求，但还没有被处理的中断，即发生了中断</p>
+<p><strong>无中断未决</strong>：当前没有中断需要被处理</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119174904.webp" style="zoom: 67%;" />
+<blockquote>
+<p>定时计算公式：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>(频率 单位Hz) = 系统时钟/预分频/重装载值</mtext></mrow><annotation encoding="application/x-tex">\text{(频率 单位Hz) = 系统时钟/预分频/重装载值}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">(</span><span class="mord cjk_fallback">频率</span><span class="mord"> </span><span class="mord cjk_fallback">单位</span><span class="mord">Hz) = </span><span class="mord cjk_fallback">系统时钟</span><span class="mord">/</span><span class="mord cjk_fallback">预分频</span><span class="mord">/</span><span class="mord cjk_fallback">重装载值</span></span></span></span></span></span></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>(定时时间 单位S)=1/频率</mtext></mrow><annotation encoding="application/x-tex">\text{(定时时间 单位S)=1/频率}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">(</span><span class="mord cjk_fallback">定时时间</span><span class="mord"> </span><span class="mord cjk_fallback">单位</span><span class="mord">S)=1/</span><span class="mord cjk_fallback">频率</span></span></span></span></span></span></p>
+</blockquote>
+<h4 id="计时查询触发">计时查询触发</h4>
+<blockquote>
+<p>需要手动清除标志位</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+* @function: Timer1_Init
+* @param   : None
+* @retval  : None
+* @brief   : 定时器1初始化
+*&#x2F;
+static void Timer1_Init(void)
+&#123;
+    &#x2F;*配置定时器1为1ms --- 32000000&#x2F;32&#x2F;1000 &#x3D; 1000Hz 1&#x2F;1000Hz &#x3D; 0.001s*&#x2F;
+    T1CTL &#x3D; 0x0A;   &#x2F;&#x2F; 【控制寄存器】模模式，32分频 --- 0000 1010
+    T1CC0H &#x3D; 0x03;      &#x2F;&#x2F; 定时器高8位
+    T1CC0L &#x3D; 0xE8;   &#x2F;&#x2F; 定时器低8位
+    T1CCTL0 |&#x3D; 0x04; &#x2F;&#x2F; 【捕获&#x2F;比较控制寄存器】设置模式为比较模式 --- 0100 0000 | 0000 0100
+&#125;
+
+&#x2F;&#x2F; 主循环
+in main(void)
+&#123;
+    if (T1IF)	&#x2F;&#x2F; 判断是否发生中断
+    &#123;
+        T1IF &#x3D; 0; &#x2F;&#x2F; 清除标志位
+        if (++Cnt &gt; 200)
+        &#123;
+            Cnt &#x3D; 0;
+            Led.Led_Flip();
+        &#125;        
+    &#125;
+&#125;</code></pre>
+<h4 id="计时中断触发">计时中断触发</h4>
+<blockquote>
+<p>使用T3定时1ms</p>
+</blockquote>
+<details ><summary> Timer.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+* @function: Timer_Init
+* @param   : None
+* @retval  : None
+* @brief   : 定时器初始化
+*&#x2F;
+static void Timer_Init(void)
+&#123;
+    &#x2F;*配置定时器3为1ms --- 32000000&#x2F;128&#x2F;250 &#x3D; 1000Hz 1&#x2F;1000Hz &#x3D; 0.001s*&#x2F;
+    T3CTL &#x3D; 0xFA;   &#x2F;&#x2F; 【控制寄存器】模模式，128分频，中断使能，定时器开启 --- 1111 1010
+    T3CC0 &#x3D; 0xFA;   &#x2F;&#x2F; 【捕获&#x2F;比较值寄存器】MAX是255 --- 1111 1010
+    T3CCTL0 |&#x3D; 0x04; &#x2F;&#x2F; 【捕获&#x2F;比较控制寄存器】设置模式为比较模式 --- 0100 0000 | 0000 0100
+    T3IE &#x3D; 1;   &#x2F;&#x2F; 【T3中断使能】使能T3定时器中断
+    EA &#x3D; 1;	&#x2F;&#x2F; 打开总中断
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> Callback.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+* @function: T3_CallBack
+* @param   : None
+* @retval  : None
+* @brief   : T3中断服务函数
+*&#x2F;
+#pragma vector &#x3D; T3_VECTOR
+__interrupt void T3_CallBack(void)
+&#123;
+    T3IF &#x3D; 0;   &#x2F;&#x2F; 清除中断标志位(可要可不要，硬件自动清0了)
+    
+    System.Task_Mask(); &#x2F;&#x2F; 任务标记
+&#125;</code></pre>
+              </div>
+            </details>
+<blockquote>
+<p>使用T4定时1ms</p>
+</blockquote>
+<details ><summary> Timer.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+* @function: Timer1_Init
+* @param   : None
+* @retval  : None
+* @brief   : 定时器1初始化
+*&#x2F;
+static void Timer1_Init(void)
+&#123;
+    &#x2F;*配置定时器1为1ms --- 32000000&#x2F;32&#x2F;1000 &#x3D; 1000Hz 1&#x2F;1000Hz &#x3D; 0.001s*&#x2F;
+    T1CTL &#x3D; 0x0A;   &#x2F;&#x2F; 【控制寄存器】模模式，32分频，中断使能 --- 0000 1010
+    T1CC0H &#x3D; 0x03;      &#x2F;&#x2F; 定时器高8位
+    T1CC0L &#x3D; 0xE8;   &#x2F;&#x2F; 定时器低8位
+    T1CCTL0 |&#x3D; 0x04; &#x2F;&#x2F; 【捕获&#x2F;比较控制寄存器】设置模式为比较模式 --- 0100 0000 | 0000 0100
+    T1IE &#x3D; 1;   &#x2F;&#x2F; 【T1中断使能】使能T1定时器中断
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> Callback.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#pragma vector &#x3D; T1_VECTOR
+__interrupt void T1_CallBack(void)
+&#123;
+    T1IF &#x3D; 0;   &#x2F;&#x2F; 清除中断标志位(可要可不要，硬件自动清0了)
+    
+    static uint16_t Led_Cnt &#x3D; 0;
+    
+    Led_Cnt++;
+    
+    if (Led_Cnt &gt;&#x3D; 1000)
+    &#123;
+        Led_Cnt &#x3D; 0;
+        Led.Led_Flip();
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<h4 id="看门狗">看门狗</h4>
+<p>如果一个应用不需要看门狗功能，可以配置看门狗定时器为一个间隔定时器，这样可以用于在选定的时间间隔产生中断</p>
+<p>● 四个可选的定时器间隔<br>
+● 看门狗模式<br>
+● 定时器模式<br>
+● 在定时器模式下产生中断请求</p>
+<p><code>WDT</code> 可以配置为 <code>一个看门狗定时器</code> 或 <code>一个通用的定时器</code>， <code>WDT</code> 模块的运行由 <code>WDCTL</code> 寄存器控制，看门狗定时器包括一个 <code>15</code> 位计数器，它的频率由 <code>32kHz</code> 时钟源规定</p>
+<p>在看门狗模式下， <code>WDT</code> 不会产生一个中断请求</p>
+<p><code>WDT</code> 运行在一个频率为 <code>32.768 kHz</code>（当使用32 kHz XOSC）的看门狗定时器时钟上。这个时钟频率的超时期限等于 <code>1.9ms，15.625 ms，0.25 s 和1s</code>，分别对应 <code>64，512，8192 和32768</code> 的计数值设置</p>
+<p><code>喂狗</code>：当0xA跟随0x5写到【WDCTL寄存器】bit[7:4]，定时器被清除（即加载0）。注意定时器仅写入0xA后，在1个看门狗时钟周期内写入0x5时被清除</p>
+<div class="tip bolt"><p>寄存器</p>
+</div>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231119220205.webp" style="zoom: 67%;" />
+<ul>
+<li>程序编写</li>
+</ul>
+<details ><summary> WatchDog.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __WATCHDOG_H
+#define __WATCHDOG_H
+
+typedef struct
+&#123;
+    void (*WatchDog_Init)(void);        &#x2F;&#x2F; 看门狗初始化
+    void (*WatchDog_Feet)(void);   &#x2F;&#x2F; 看门狗喂狗
+&#125; WatchDog_st;
+
+
+extern WatchDog_st WatchDog;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> WatchDog.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File          : WatchDog.c
+ * Author        : Yang
+ * Date          : 2023-11-19
+ * description   : 看门狗
+ -----------------------------------
+  
+ -----------------------------------   
+****************************************************************************&#x2F;
+#include &quot;Allhead.h&quot;
+
+&#x2F;* Private function prototypes&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void WatchDog_Init(void);
+static void WatchDog_Feet(void);
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+WatchDog_st WatchDog &#x3D; 
+&#123;
+    .WatchDog_Init &#x3D; &amp;WatchDog_Init,
+    .WatchDog_Feet &#x3D; &amp;WatchDog_Feet
+&#125;;
+
+&#x2F;*
+* @function: WatchDog_Init
+* @param   : None
+* @retval  : None
+* @brief   : 看门狗初始化
+*&#x2F;
+static void WatchDog_Init(void)
+&#123;
+    WDCTL &#x3D; 0x00;       &#x2F;&#x2F; 【看门狗定时器控制寄存器】停止看门狗
+    WDCTL &#x3D; 0x08;       &#x2F;&#x2F; 【看门狗定时器控制寄存器】开启看门狗模式，定时时间为1S(需要运行在32KHz XOSC下) --- 0000 1000
+&#125;
+
+&#x2F;*
+* @function: WatchDog_Feet
+* @param   : None
+* @retval  : None
+* @brief   : 喂狗
+*&#x2F;
+static void WatchDog_Feet(void)
+&#123;
+    &#x2F;&#x2F; 在看门狗模式下，当 0xA 后面跟着 0x5 写入 bit[7:4] (即写入寄存器高4位)时,定时器被清零
+    WDCTL |&#x3D; (0xA &lt;&lt; 4);
+    WDCTL |&#x3D; (0x5 &lt;&lt; 4);
+&#125;</code></pre>
+              </div>
+            </details>
+<h4 id="低功耗定时器">低功耗定时器</h4>
+<p>睡眠定时器的主要功能如下：</p>
+<p>●  <code>24</code> 位的定时器正计数器，运行在 <code>32kHz </code> 的时钟频率(可以是 <code>RCOSC</code> 或 <code>XOSC</code> )<br>
+●  <code>24</code> 位的比较器，具有中断和DMA 触发功能<br>
+●  <code>24</code> 位捕获</p>
+<p>注意如果电压降到 <code>2V</code> 以下同时处于 <code>PM2</code>，睡眠间隔将会受到影响</p>
+<blockquote>
+<p>CC2530有以下集中电源管理模式：</p>
+<p><strong>（1）全功能模式</strong><br>
+高频晶振（16M或者32M）和低频晶振（32.768K RCOSC/XOSC）全部工作，数字处理器模块正常工作</p>
+<p><strong>（2）空闲模式</strong><br>
+除了CPU内核停止运行之外，其他和全功能模式一样</p>
+<p><strong>（3）PM1</strong><br>
+高频晶振关闭，低频晶振正常工作，数字核心模块正常工作</p>
+<p><strong>（4）PM2</strong><br>
+低频晶振工作，数字核心模块关闭，系统通过RESET，外部中断或者休眠计数器溢出唤醒</p>
+<p><strong>（5）PM3</strong><br>
+晶振全部关闭，数字处理器核心模块关闭，系统只能通过RESET或者外部中断唤醒，此模式功耗最低</p>
+</blockquote>
+<blockquote>
+<p>由于休眠定时器工作的时钟频率是 <code>32768</code> HZ，也就是计数 <code>32768次为1秒</code></p>
+<p>配置休眠时间时，只需要把当前的计数器数值读出来，加上我们需要定时的时间计数值再重新设置到寄存器中即可</p>
+</blockquote>
+<div class="tip bolt"><p>低功耗相关寄存器</p>
+</div>
+<p><code>ST0，ST1,ST2</code> 一起组成 <code>24</code> 位睡眠计数器</p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231120093242.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231120093334.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<div class="tip bolt"><p>电源管理相关寄存器(手册4.3)</p>
+</div>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231120094745.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231120095041.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>程序编写</li>
+</ul>
+<details ><summary> LowPower.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __LOWPOWER_H
+#define __LOWPOWER_H
+
+typedef enum
+&#123;
+    POWER_MODE_IDLE &#x3D; 0x00,     &#x2F;&#x2F; 空闲模式【对应寄存器00】
+    POWER_MODE_PM1 &#x3D; 0x01,      &#x2F;&#x2F; 供电模式1【对应寄存器01】
+    POWER_MODE_PM2 &#x3D; 0x02,      &#x2F;&#x2F; 供电模式2【对应寄存器10】
+    POWER_MODE_PM3 &#x3D; 0x03,      &#x2F;&#x2F; 供电模式3【对应寄存器11】
+    POWER_MODE_ACTIVE &#x3D; 0x04,   &#x2F;&#x2F; 恢复到正常模式
+    _POWER_MODE_MAX &#x3D; POWER_MODE_ACTIVE, &#x2F;&#x2F; 最大值
+&#125; LowPower_Mode_et;
+
+typedef struct
+&#123;
+    void (*LowPower_Init)(void); &#x2F;&#x2F; 低功耗初始化
+    void (*LowPower_Set_SleepTime)(uint8_t);   &#x2F;&#x2F; 设置睡眠时间
+    void (*LowPower_Set_Mode)(LowPower_Mode_et);      &#x2F;&#x2F; 设置低功耗模式
+&#125; LowPower_st;
+
+extern LowPower_st LowPower;
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> LowPower.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File          : LowPower.c
+ * Author        : Yang
+ * Date          : 2023-11-20
+ * description   : 低功耗模式
+ -----------------------------------
+  
+ -----------------------------------   
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;* Private function prototypes&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void LowPower_Init(void);
+static void LowPower_Set_SleepTime(uint8_t sec);
+static void LowPower_Set_Mode(LowPower_Mode_et mode);
+
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+LowPower_st LowPower &#x3D; 
+&#123;
+    .LowPower_Init &#x3D; &amp;LowPower_Init,
+    .LowPower_Set_SleepTime &#x3D; &amp;LowPower_Set_SleepTime,
+    .LowPower_Set_Mode &#x3D; &amp;LowPower_Set_Mode
+&#125;;
+
+
+&#x2F;*
+* @function: LowPower_Init
+* @param   : None
+* @retval  : None
+* @brief   : 低功耗初始化
+*&#x2F;
+static void LowPower_Init(void)
+&#123;
+    ST0 &#x3D; 0;    &#x2F;&#x2F; 【休眠定时器0寄存器】 --- 清0
+    ST1 &#x3D; 0;    &#x2F;&#x2F; 【休眠定时器1寄存器】 --- 清0
+    ST2 &#x3D; 0;    &#x2F;&#x2F; 【休眠定时器2寄存器】 --- 清0
+    STIE &#x3D; 1;   &#x2F;&#x2F; 使能睡眠定时器中断
+    STIF &#x3D; 0;   &#x2F;&#x2F; 清除中断标志位   
+&#125;
+
+&#x2F;* 
+* @function: LowPower_Set_SleepTime
+* @param   : sec -&gt; 秒
+* @retval  : None
+* @brief   : 设置休眠时间
+*&#x2F;
+static void LowPower_Set_SleepTime(uint8_t sec)
+&#123;
+    uint32_t sleep_time &#x3D; 0;
+    &#x2F;*先读出计数器里的值，因为它分3个寄存器存储所以需要最后合并*&#x2F;
+    sleep_time &#x3D; (uint32_t)ST0;   &#x2F;&#x2F; 【7:0】
+    sleep_time |&#x3D; (uint32_t)ST1 &lt;&lt; 8;      &#x2F;&#x2F; 【15:8】
+    sleep_time |&#x3D; (uint32_t)ST2 &lt;&lt; 16;     &#x2F;&#x2F; 【23:16】
+
+    sleep_time +&#x3D; (uint32_t)sec * 32768;        &#x2F;&#x2F; 更新睡眠时间
+
+    &#x2F;*设置计数器*&#x2F;
+    ST2 &#x3D; (uint8_t)(sleep_time &gt;&gt; 16);    &#x2F;&#x2F; 【23:16】
+    ST1 &#x3D;(uint8_t)(sleep_time &gt;&gt; 8);      &#x2F;&#x2F; 【15:8】
+    ST0 &#x3D; (uint8_t)(sleep_time);  &#x2F;&#x2F; 【7:0】
+&#125;
+
+&#x2F;*
+* @function: LowPower_Set_Mode
+* @param   : None
+* @retval  : None
+* @brief   : 设置低功耗模式
+*&#x2F;
+static void LowPower_Set_Mode(LowPower_Mode_et mode)
+&#123;
+    if (mode &gt; _POWER_MODE_MAX)
+    &#123;
+        return;
+    &#125;
+    
+    if (POWER_MODE_ACTIVE &#x3D;&#x3D; mode)
+    &#123;
+        PCON |&#x3D; 0x00;   &#x2F;&#x2F; 不进入低功耗
+        return;
+    &#125;
+    
+    SLEEPCMD |&#x3D; mode;   &#x2F;&#x2F; 设置模式
+    PCON &#x3D; 0x01;        &#x2F;&#x2F; 【0位写1】进入低功耗
+&#125;</code></pre>
+              </div>
+            </details>
+<blockquote>
+<p>PM1，PM2进入低功耗后任务正常运行，Task里喂狗也正常</p>
+<p>PM3的话只能外部中断和复位唤醒</p>
+<p>全功能模式的话跟平时没什么区别</p>
+</blockquote>
+<h3 id="串口">串口</h3>
+<ul>
+<li>硬件连接</li>
+</ul>
+<p>板子默认使用了 <code>P0_2</code> 和 <code>P0_3</code> 作为USART0的引脚,需要把拨码开关的 <code>1,2</code> 位拨到</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231120144120.webp" alt=""></p>
+<p>CC2530有两个串口，分别是 <code>串口0</code> 和 <code>串口1</code>，它们能够分别运行于 <code>异步UART模式</code> 或者 <code>同步SPI 模式</code></p>
+<p>波特率设置是需要通过 <code>UxGCR</code> 和 <code>UxBAUD</code> 寄存器进行设置的，具体值可参考手册16.4给的推荐值：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231120154250.webp" style="zoom:67%;" />
+<div class="tip bolt"><p>相关寄存器</p>
+</div>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231120132950.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231120160245.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231120160348.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<p>串口数据接收与发送缓存寄存器是 <code>UxDBUF</code>，中文手册上面可能写出了写成 <code>UxBUF</code>，英文的正常</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231120184637.webp" alt=""></p>
+<ul>
+<li>程序编写</li>
+</ul>
+<details ><summary> USART0.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __USART0_H
+#define __USART0_H
+
+#define USART0_RX_MAX_LEN 250
+&#x2F;&#x2F; 通信协议数据长度
+#define USART0_Protocol_Len 8
+
+
+&#x2F;&#x2F; 常用波特率枚举
+typedef enum
+&#123;
+    USART_BAUD_2400 &#x3D; 0x00,
+    USART_BAUD_4800 &#x3D; 0x01,
+    USART_BAUD_9600 &#x3D; 0x02,
+    USART_BAUD_115200 &#x3D; 0x03
+&#125; USART_Baud_et;
+
+&#x2F;&#x2F; 奇偶校验枚举
+typedef enum
+&#123;
+    USART_PARITY_ODD &#x3D; 0x00,   &#x2F;&#x2F; 奇校验
+    USART_PARITY_EVEN &#x3D; 0x01    &#x2F;&#x2F; 偶校验
+&#125; USART_Check_et;
+
+&#x2F;&#x2F; 串口接收&#x2F;发送状态枚举
+typedef enum
+&#123;
+    USART_STATUS_RX &#x3D; 0x00,     &#x2F;&#x2F; 接收状态
+    USART_STATUS_TX &#x3D; 0x01,     &#x2F;&#x2F; 发送状态
+&#125; USART_Status_et;
+
+typedef struct
+&#123;
+    uint16_t Rec_Sta;    &#x2F;&#x2F; 接收数据长度&#x2F;数据接收完成标志位
+    char Rec_Byte;      &#x2F;&#x2F; 串口0接收的一个字节数据
+    char RecData_Buff[USART0_RX_MAX_LEN];       &#x2F;&#x2F; 串口0接收缓存数组
+    void (*USART0_Init)(void);  &#x2F;&#x2F; 串口0初始化
+    void (*USART0_Send)(uint8_t *data, uint8_t len);       &#x2F;&#x2F; 串口0发送数据函数
+    void (*USART0_Rec_Data_Analyze_1)(void);      &#x2F;&#x2F; 串口0接收数据解析1
+    void (*USART0_Rec_Handler_1)(void);    &#x2F;&#x2F; 串口0接收数据处理
+    void (*USART0_Protocol_Analyze_Handler)(void); &#x2F;&#x2F; 串口0协议解析
+&#125; USART0_st;
+
+extern USART0_st USART0;
+extern USART_Status_et USART0_Status;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> USART0.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File          : USART0.c
+ * Author        : Yang
+ * Date          : 2023-11-20
+ * description   : 串口0
+ -----------------------------------
+  
+ -----------------------------------   
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;* Private function prototypes&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void USART0_Init(void);
+static void USART0_Baud_Parity_Set(USART_Baud_et baud, USART_Check_et parity);     
+static void USART0_Send(uint8_t *data, uint8_t len);     
+static void USART0_Rec_Data_Analyze_1(void);
+static void USART0_Rec_Handler_1(void);
+static void USART0_Protocol_Analyze_Handler(void);
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+USART0_st USART0 &#x3D; 
+&#123;
+    .Rec_Sta &#x3D; 0,
+    .Rec_Byte &#x3D; 0,
+    .RecData_Buff &#x3D; &#123;0&#125;,
+    .USART0_Init &#x3D; &amp;USART0_Init,
+    .USART0_Send &#x3D; &amp;USART0_Send,
+    .USART0_Rec_Data_Analyze_1 &#x3D; &amp;USART0_Rec_Data_Analyze_1,
+    .USART0_Rec_Handler_1 &#x3D; &amp;USART0_Rec_Handler_1,
+    .USART0_Protocol_Analyze_Handler &#x3D; &amp;USART0_Protocol_Analyze_Handler
+&#125;;
+
+USART_Status_et USART0_Status;  &#x2F;&#x2F; 串口0状态
+
+
+&#x2F;*
+* @function: USART0_Init
+* @param   : None
+* @retval  : None
+* @brief   : 串口0初始化
+*&#x2F;
+static void USART0_Init(void)
+&#123;
+    PERCFG |&#x3D; 0x00;      &#x2F;&#x2F; 【外设控制寄存器】配置P0_2和P0_3用作串口0的TX（发送端）和RX（接收端）
+    CC2530_REG_PxSEL(0, 2, 1);  &#x2F;&#x2F; 配置P0_2为外设功能
+    CC2530_REG_PxSEL(0, 3, 1);  &#x2F;&#x2F; 配置P0_3为外设功能
+    P2DIR &amp;&#x3D; ~0xC0;     &#x2F;&#x2F; 【端口0外设优先级控制寄存器】将USART0作为第1优先级 --- xxxx xxxx &amp; 0011 1111
+
+    U0CSR |&#x3D; 0x80;      &#x2F;&#x2F; 设置USART0工作模式为UART0 --- 1000 0000
+    
+    USART0_Baud_Parity_Set(USART_BAUD_115200, USART_PARITY_ODD);   &#x2F;&#x2F; 波特率，奇偶校验设置 --- 115200,奇校验
+    UTX0IF &#x3D; 0; &#x2F;&#x2F; 清除发送中断标志位
+    URX0IE &#x3D; 1; &#x2F;&#x2F; 打开接收中断标志位
+    
+    U0CSR |&#x3D; 0x40;      &#x2F;&#x2F; 使能接收 --- 1000 0000 | 0100 0000 &#x3D; 1100 0000
+
+    USART0_Status &#x3D; USART_STATUS_RX;    &#x2F;&#x2F; 默认接收状态
+&#125;
+
+&#x2F;*
+* @function: USART0_Baud_Parity_Set
+* @param   : None
+* @retval  : None
+* @brief   : 串口波特率，奇偶校验设置
+*&#x2F;
+static void USART0_Baud_Parity_Set(USART_Baud_et baud, USART_Check_et parity)
+&#123;
+    if (USART_PARITY_ODD &#x3D;&#x3D; parity)     &#x2F;&#x2F; 奇校验
+    &#123;
+        U0UCR &amp;&#x3D; ~0x20; &#x2F;&#x2F; 【UART 控制】
+    &#125;
+    else if (USART_PARITY_EVEN &#x3D;&#x3D; parity)       &#x2F;&#x2F; 偶校验
+    &#123;
+        U0UCR |&#x3D; 0x38;
+    &#125;
+    
+    U0GCR &amp;&#x3D; ~0x1F;     &#x2F;&#x2F; 【U0通用控制寄存器】把波特率设置位清0
+    
+    switch(baud)
+    &#123;
+        case USART_BAUD_2400:
+        &#123;
+            U0BAUD &#x3D; 59;        &#x2F;&#x2F; 【U0波特率控制寄存器】，查手册表
+            U0GCR &#x3D; 6;  &#x2F;&#x2F; 【U0通用控制寄存器】，查手册表
+            break;
+        &#125;
+        case USART_BAUD_4800:
+        &#123;
+            U0BAUD &#x3D; 59;        &#x2F;&#x2F; 【U0波特率控制寄存器】，查手册表
+            U0GCR &#x3D; 7;  &#x2F;&#x2F; 【U0通用控制寄存器】，查手册表            
+            break;
+        &#125;
+        case USART_BAUD_9600:
+        &#123;
+            U0BAUD &#x3D; 59;        &#x2F;&#x2F; 【U0波特率控制寄存器】，查手册表
+            U0GCR &#x3D; 8;  &#x2F;&#x2F; 【U0通用控制寄存器】，查手册表            
+            break;
+        &#125;
+        case USART_BAUD_115200:
+        &#123;
+            U0BAUD &#x3D; 216;        &#x2F;&#x2F; 【U0波特率控制寄存器】，查手册表
+            U0GCR &#x3D; 11;  &#x2F;&#x2F; 【U0通用控制寄存器】，查手册表            
+            break;
+        &#125;
+        default:
+        &#123;
+            U0BAUD &#x3D; 59;        &#x2F;&#x2F; 【U0波特率控制寄存器】，查手册表
+            U0GCR &#x3D; 8;  &#x2F;&#x2F; 【U0通用控制寄存器】，查手册表            
+            break;
+        &#125;
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: USART0_Send
+* @param   : data -&gt; 要发送的数据 len -&gt; 发送长度
+* @retval  : None
+* @brief   : 串口0发送函数
+*&#x2F;
+static void USART0_Send(uint8_t *data, uint8_t len)
+&#123;
+    uint8_t i;
+    
+    for (i &#x3D; 0; i &lt; len; i++)
+    &#123;
+        U0DBUF &#x3D; data[i];        &#x2F;&#x2F; 数据存储到【数据缓存寄存器】
+        while (0 &#x3D;&#x3D; UTX0IF);    &#x2F;&#x2F; 等待发送完成
+        UTX0IF &#x3D; 0;     &#x2F;&#x2F; 清除中断标志位
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: USART0_Rec_Data_Analyze_1
+* @param   : None
+* @retval  : None
+* @brief   : 串口0接收数据解析1
+*&#x2F;
+static void USART0_Rec_Data_Analyze_1(void)
+&#123;
+    USART0.Rec_Byte &#x3D; U0DBUF;
+    
+    if (USART_STATUS_RX &#x3D;&#x3D; USART0_Status)       &#x2F;&#x2F; 判断是不是接收状态
+    &#123;
+        if (0 &#x3D;&#x3D; (USART0.Rec_Sta &amp; 0x8000))     &#x2F;&#x2F; 完成标志位为0则进入
+        &#123;
+            if (USART0.Rec_Sta &lt; USART0_RX_MAX_LEN)     &#x2F;&#x2F; 还可以接收数据
+            &#123;
+                if (0 &#x3D;&#x3D; USART0.Rec_Sta)
+                &#123;
+                    T4CNT &#x3D; 0; &#x2F;&#x2F; CNT清0，否则有时接收的数据会丢失！！！
+                    T4IE &#x3D; 1;   &#x2F;&#x2F; 打开定时器中断
+                    T4IF &#x3D; 0;   &#x2F;&#x2F; 清除定时器中断标志位
+                &#125;
+&#x2F;&#x2F;                if (&#39;\n&#39; &#x3D;&#x3D; USART0.Rec_Byte)    &#x2F;&#x2F; 判断结束符
+&#x2F;&#x2F;                &#123;
+&#x2F;&#x2F;                    USART0.RecData_Buff[USART0.Rec_Sta - 1] &#x3D; 0;        &#x2F;&#x2F; 去掉前面的 &#39;\r&#39;这样就不会换行了
+&#x2F;&#x2F;                    USART0.Rec_Sta |&#x3D; 0x8000;   &#x2F;&#x2F; 接收完成标志位置1
+&#x2F;&#x2F;                &#125;
+&#x2F;&#x2F;                else
+&#x2F;&#x2F;                &#123;
+                    USART0.RecData_Buff[USART0.Rec_Sta++] &#x3D; USART0.Rec_Byte;
+&#x2F;&#x2F;                &#125;
+            &#125;
+            else
+            &#123;
+                USART0.Rec_Sta |&#x3D; 0x8000;   &#x2F;&#x2F; 强制接收完成标志位置1
+            &#125;
+        &#125;
+    &#125;
+    else
+    &#123;
+        USART0.Rec_Byte &#x3D; 0;
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: USART0_Rec_Handler_1
+* @param   : None
+* @retval  : None
+* @brief   : 串口0接收数据处理1
+*&#x2F;
+static void USART0_Rec_Handler_1(void)
+&#123;
+    uint16_t rx_len &#x3D; 0;
+    
+    if (USART0.Rec_Sta &amp; 0x8000)
+    &#123;
+        rx_len &#x3D; USART0.Rec_Sta &amp; 0x7FFF;       &#x2F;&#x2F; 会算上最后的0
+        USART0.RecData_Buff[rx_len] &#x3D; 0;        &#x2F;&#x2F; 添加结束符
+        USART0_Status &#x3D; USART_STATUS_TX;        &#x2F;&#x2F; 设置为发送状态
+        USART0.USART0_Send((uint8_t*)USART0.RecData_Buff,strlen(USART0.RecData_Buff));  &#x2F;&#x2F; 发送回去
+        memset(USART0.RecData_Buff, 0, rx_len - 1);     &#x2F;&#x2F; 清空数组等待下次接收
+        USART0.Rec_Byte &#x3D; 0;    &#x2F;&#x2F; 接收的最新字节清0
+        USART0.Rec_Sta &#x3D; 0;     &#x2F;&#x2F; 接收完成标志位置0
+        USART0_Status &#x3D; USART_STATUS_RX;        &#x2F;&#x2F; 设置为接收状态
+    &#125;           
+&#125;
+
+&#x2F;*
+* @function: USART0_Protocol_Analyze_Handler
+* @param   : None
+* @retval  : None
+* @brief   : 串口0协议解析
+*&#x2F;
+static void USART0_Protocol_Analyze_Handler(void)
+&#123;
+    uint8_t temp_arr[USART0_Protocol_Len] &#x3D; &#123;0x00&#125;;
+    uint8_t i &#x3D; 0, Index &#x3D; 0, rx_len &#x3D; 0;
+ 
+    if (USART0.Rec_Sta &amp; 0x8000)
+    &#123;
+        USART0_Status &#x3D; USART_STATUS_TX;        &#x2F;&#x2F; 设置为发送状态
+        
+        rx_len &#x3D; USART0.Rec_Sta &amp; 0x7FFF;       &#x2F;&#x2F; 会算上最后的0
+
+        for (i &#x3D; 0; i &lt; rx_len; i++)
+        &#123;
+            if (0 &#x3D;&#x3D; Index)
+            &#123;
+                if (USART0.RecData_Buff[i] !&#x3D; 0xAA)
+                &#123;
+                    continue;
+                &#125;
+            &#125;
+            temp_arr[Index] &#x3D; USART0.RecData_Buff[i];
+            if (USART0_Protocol_Len &#x3D;&#x3D; Index)
+            &#123;
+                break;
+            &#125;
+            Index++;
+        &#125;
+        &#x2F;&#x2F; 数据处理
+        if (USART0_Protocol_Len &#x3D;&#x3D; Index)
+        &#123;
+            if ((0xAA &#x3D;&#x3D; temp_arr[0]) &amp;&amp; (0xBB &#x3D;&#x3D; temp_arr[7]))     &#x2F;&#x2F; 判断帧头帧尾
+            &#123;
+                if (0x01 &#x3D;&#x3D; temp_arr[1])
+                &#123;
+                    switch (temp_arr[2])
+                    &#123;
+                        case 0x01:  &#x2F;&#x2F; AA 01 01 00 00 00 00 BB
+                        &#123;
+                            Led.Led_Open();
+                            break;
+                        &#125;
+                        case 0x02:  &#x2F;&#x2F; AA 01 02 00 00 00 00 BB
+                        &#123;
+                            Led.Led_Close();
+                            break;
+                        &#125;                    
+                        default:break;
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+        memset(USART0.RecData_Buff, 0, rx_len - 1);     &#x2F;&#x2F; 清空数组等待下次接收
+        USART0.Rec_Byte &#x3D; 0;    &#x2F;&#x2F; 接收的最新字节清0
+        USART0.Rec_Sta &#x3D; 0;     &#x2F;&#x2F; 接收完成标志位置0
+        USART0_Status &#x3D; USART_STATUS_RX;        &#x2F;&#x2F; 设置为接收状态        
+    &#125;    
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> Callback.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+* @function: USART0_RX_CallBack
+* @param   : None
+* @retval  : None
+* @brief   : 串口0中断服务函数
+*&#x2F;
+#pragma vector &#x3D; URX0_VECTOR
+__interrupt void USART0_RX_CallBack(void)
+&#123;
+    URX0IF &#x3D; 0;   &#x2F;&#x2F; 清除中断标志位
+
+    USART0.USART0_Rec_Data_Analysis_1();	&#x2F;&#x2F; 数据解析
+&#125;</code></pre>
+              </div>
+            </details>
+<blockquote>
+<p>加一个定时器10ms间隔进行计数接收中断写法，在上面基础上修改或者添加</p>
+<p>这种的话很稳</p>
+<p>下面有两种定时器示例：T1和T4，T4只能最大定时1ms所以需要在中断里面进行递增10次才算10ms</p>
+</blockquote>
+<details ><summary> USART0.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+* @function: USART0_Rec_Data_Analysis_1
+* @param   : None
+* @retval  : None
+* @brief   : 串口0接收数据解析1
+*&#x2F;
+static void USART0_Rec_Data_Analysis_1(void)
+&#123;
+    USART0.Rec_Byte &#x3D; U0DBUF;
+    
+    if (USART_STATUS_RX &#x3D;&#x3D; USART0_Status)       &#x2F;&#x2F; 判断是不是接收状态
+    &#123;
+        if (0 &#x3D;&#x3D; (USART0.Rec_Sta &amp; 0x8000))     &#x2F;&#x2F; 完成标志位为0则进入
+        &#123;
+            if (USART0.Rec_Sta &lt; USART0_RX_MAX_LEN)     &#x2F;&#x2F; 还可以接收数据
+            &#123;
+                if (0 &#x3D;&#x3D; USART0.Rec_Sta)
+                &#123;
+                    T1CNTH &#x3D; 0; &#x2F;&#x2F; CNT清0，否则有时接收的数据会丢失！！！
+                    T1CNTL &#x3D; 0;
+                    T1IE &#x3D; 1;   &#x2F;&#x2F; 打开定时器中断
+                    T1IF &#x3D; 0;   &#x2F;&#x2F; 清除定时器中断标志位
+&#x2F;&#x2F;                    T4CNT &#x3D; 0; &#x2F;&#x2F; CNT清0，否则有时接收的数据会丢失！！！
+&#x2F;&#x2F;                    T4IE &#x3D; 1;   &#x2F;&#x2F; 打开定时器中断
+&#x2F;&#x2F;                    T4IF &#x3D; 0;   &#x2F;&#x2F; 清除定时器中断标志位                    
+                &#125;
+                    USART0.RecData_Buff[USART0.Rec_Sta++] &#x3D; USART0.Rec_Byte;
+            &#125;
+            else
+            &#123;
+                USART0.Rec_Sta |&#x3D; 0x8000;   &#x2F;&#x2F; 强制接收完成标志位置1
+            &#125;
+        &#125;
+    &#125;
+    else
+    &#123;
+        USART0.Rec_Byte &#x3D; 0;
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> Timer.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+* @function: Timer1_Init
+* @param   : None
+* @retval  : None
+* @brief   : 定时器1初始化
+*&#x2F;
+static void Timer1_Init(void)
+&#123;
+    &#x2F;*配置定时器1为1ms --- 32000000&#x2F;32&#x2F;10000 &#x3D; 100Hz 1&#x2F;100Hz &#x3D; 0.01s*&#x2F;
+    T1CTL &#x3D; 0x0A;   &#x2F;&#x2F; 【控制寄存器】模模式，32分频，中断使能 --- 0000 1010
+    T1CC0H &#x3D; 0x27;      &#x2F;&#x2F; 定时器高8位
+    T1CC0L &#x3D; 0x10;   &#x2F;&#x2F; 定时器低8位
+    T1CCTL0 |&#x3D; 0x04; &#x2F;&#x2F; 【捕获&#x2F;比较控制寄存器】设置模式为比较模式 --- 0100 0000 | 0000 0100
+    T1IE &#x3D; 0;   &#x2F;&#x2F; 【T1中断使能】不使能T1定时器中断
+&#125;
+
+&#x2F;&#x2F;static void Timer4_Init(void)
+&#x2F;&#x2F;&#123;
+&#x2F;&#x2F;    &#x2F;*配置定时器3为1ms --- 32000000&#x2F;128&#x2F;250 &#x3D; 1000Hz 1&#x2F;1000Hz &#x3D; 0.001s*&#x2F;
+&#x2F;&#x2F;    T4CTL &#x3D; 0xFA;   &#x2F;&#x2F; 【控制寄存器】模模式，128分频，中断使能，定时器开启 --- 1111 1010
+&#x2F;&#x2F;    T4CC0 &#x3D; 0xFA;   &#x2F;&#x2F; 【捕获&#x2F;比较值寄存器】MAX是255 --- 1111 1010
+&#x2F;&#x2F;    T4CCTL0 |&#x3D; 0x04; &#x2F;&#x2F; 【捕获&#x2F;比较控制寄存器】设置模式为比较模式 --- 0100 0000 | 0000 0100
+&#x2F;&#x2F;    T4IE &#x3D; 0;   &#x2F;&#x2F; 【T4中断使能】不使能T4定时器中断
+&#x2F;&#x2F;&#125;       </code></pre>
+              </div>
+            </details>
+<details ><summary> Callback.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+* @function: T1_CallBack
+* @param   : None
+* @retval  : None
+* @brief   : T1中断服务函数
+*&#x2F;
+#if USE_TIM1
+#pragma vector &#x3D; T1_VECTOR
+__interrupt void T1_CallBack(void)
+&#123;
+    T1IF &#x3D; 0;   &#x2F;&#x2F; 清除中断标志位(可要可不要，硬件自动清0了)
+    
+    T1IE &#x3D; 0;	&#x2F;&#x2F; 停止定时器中断
+    USART0.Rec_Sta |&#x3D; 0x8000;	&#x2F;&#x2F; 接收标志位置1
+&#125;
+
+&#x2F;&#x2F;#pragma vector &#x3D; T4_VECTOR
+&#x2F;&#x2F;__interrupt void T4_CallBack(void)
+&#x2F;&#x2F;&#123;
+&#x2F;&#x2F;    T4IF &#x3D; 0;   &#x2F;&#x2F; 清除中断标志位(可要可不要，硬件自动清0了)
+&#x2F;&#x2F;    
+&#x2F;&#x2F;    static uint8_t usart_Cnt &#x3D; 0;
+&#x2F;&#x2F;    
+&#x2F;&#x2F;    usart_Cnt++;
+&#x2F;&#x2F;    
+&#x2F;&#x2F;    if (usart_Cnt &gt;&#x3D; 10)
+&#x2F;&#x2F;    &#123;
+&#x2F;&#x2F;        usart_Cnt &#x3D; 0;
+&#x2F;&#x2F;        T4IE &#x3D; 0;
+&#x2F;&#x2F;        USART0.Rec_Sta |&#x3D; 0x8000;        
+&#x2F;&#x2F;    &#125;
+&#x2F;&#x2F;&#125;</code></pre>
+              </div>
+            </details>
+<h3 id="ADC实验">ADC实验</h3>
+<p>CC2530中内置了多个ADC采样通道，例如 <code>AIN0~AIN7</code>、 <code>VDD/3</code>、 <code>芯片内置的温度传感器</code> 等，CC2530提供了8位、10位、12位和14位的模数转换采样分辨率可供开发者使用</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231122162219.webp" style="zoom:67%;" />
+<div class="tip bolt"><p>相关寄存器</p>
+</div>
+<p>单个通道的话使用  <code>ADCCON3</code> 即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231122195303.webp" alt=""></p>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231122202644.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231122203142.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231122204534.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<h4 id="光照传感器">光照传感器</h4>
+<div class="tip bolt"><p>模块信息</p>
+</div>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231118132717.webp" style="zoom:50%;" />
+<p>其输出电压值范围是 <code>0~1.65v</code>，越亮电压越小，这是一个模拟信号值</p>
+<ul>
+<li>硬件连接</li>
+</ul>
+<p>引脚连接到 <code>P0_7</code>，需要把拨码开关打到ADC那</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231122163156.webp" style="zoom:67%;" />
+<ul>
+<li>程序编写</li>
+</ul>
+<details ><summary> bsp_ADC.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __BSP_ADC_H
+#define __BSP_ADC_H
+
+#define LightSensor_Port 0
+#define LightSensor_Pin 7
+
+
+
+typedef struct
+&#123;
+    void (*Bsp_ADC_Init)(void);
+    uint8_t (*Bsp_ADC_Get_Value)(void);  
+&#125; bsp_ADC_st;
+
+
+extern bsp_ADC_st bsp_ADC;
+
+#endif
+</code></pre>
+              </div>
+            </details>
+<details ><summary> bsp_ADC.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File          : bsp_ADC.c
+ * Author        : Yang
+ * Date          : 2023-11-22
+ * description   : ADC
+ -----------------------------------
+  
+ -----------------------------------   
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;* Private function prototypes&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void Bsp_ADC_Init(void);
+static uint8_t Bsp_ADC_Get_Value(void);     
+     
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+bsp_ADC_st bsp_ADC &#x3D; 
+&#123;
+    .Bsp_ADC_Init &#x3D; &amp;Bsp_ADC_Init,
+    .Bsp_ADC_Get_Value &#x3D; &amp;Bsp_ADC_Get_Value
+&#125;;
+
+&#x2F;*
+* @function: Bsp_ADC_Init
+* @param   : None
+* @retval  : None
+* @brief   : ADC初始化
+*&#x2F;
+static void Bsp_ADC_Init(void)
+&#123;
+    P0SEL |&#x3D; 0x80;      &#x2F;&#x2F; 【端口0功能选择寄存器】外设功能 --- 1000 0000
+    CC2530_REG_PxDIR(0, 7, 0);  &#x2F;&#x2F; 设置为输入模式,引脚复位默认已经是上拉
+    APCFG |&#x3D; 0x80;      &#x2F;&#x2F; 【模拟外设IO配置寄存器】 --- 使能ADC通道7
+&#125;
+
+&#x2F;*
+* @function: Bsp_ADC_Get_Value
+* @param   : None
+* @retval  : None
+* @brief   : 获取ADC值
+*&#x2F;
+static uint8_t Bsp_ADC_Get_Value(void)
+&#123;
+    uint16_t result;
+    
+    ADCCON3 &#x3D; 0x07; &#x2F;&#x2F; 【ADC控制3寄存器】内部参考电压，512抽取率，AIN7 --- 0011 0111
+
+    while (!(ADCCON1 &amp; 0x80));  &#x2F;&#x2F; 【ADC控制1寄存器】等待数据采集
+
+    result &#x3D; (uint16_t)ADCL;
+    result |&#x3D; (uint16_t)ADCH &lt;&lt; 8;
+    result &#x3D; result &gt;&gt; 8;
+    
+    return ((uint8_t)result);
+&#125;</code></pre>
+              </div>
+            </details>
+<h3 id="OLED">OLED</h3>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231123100438.webp" style="zoom:50%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231123100500.webp" style="zoom:67%;" />
+<table>
+<thead>
+<tr>
+<th style="text-align:center">引脚</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">GND</td>
+</tr>
+<tr>
+<td style="text-align:center">VCC <code>(2.8~5.5V)</code></td>
+</tr>
+<tr>
+<td style="text-align:center">SCL(D0)-- <code>SPI时钟</code></td>
+</tr>
+<tr>
+<td style="text-align:center">SDA(D1)-- <code>SPI数据</code></td>
+</tr>
+<tr>
+<td style="text-align:center">CS-- <code>SPI片选</code></td>
+</tr>
+<tr>
+<td style="text-align:center">RES-- <code>复位</code></td>
+</tr>
+<tr>
+<td style="text-align:center">DC-- <code>数据/命令选择</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>硬件连接</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231123105525.webp" alt=""></p>
+<div class="tip bolt"><p>硬件SPI相关寄存器</p>
+</div>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231123125022.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231123131206.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<blockquote>
+<p>使用硬件SPI</p>
+</blockquote>
+<p>需要把板子把拨码开关的 <code>第8、9和10位</code> 分别打到 <code>CLK</code>、 <code>SDI</code> 和 <code>SDO</code> 端(其实SDO可以不拨过去因为没用上)</p>
+<ul>
+<li>共用部分代码</li>
+</ul>
+<details ><summary> CC2530_SPI_Common.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __CC2530_SPI_COMMON_H
+#define __CC2530_SPI_COMMON_H
+
+&#x2F;*
+SPI参数：交替、位顺序、时钟极性、时钟相位
+*&#x2F;
+&#x2F;&#x2F; alternate
+#define SPI1_ALT2        3  &#x2F;&#x2F; CC2530 - SCK:P1_5, MISO:P1_6, MOSI:P1_7
+&#x2F;&#x2F; bit order
+#define SPI_BITORDER_MSB 0  &#x2F;&#x2F; MSB
+#define SPI_BITORDER_LSB 1  &#x2F;&#x2F; LSB
+&#x2F;&#x2F; clock polarity
+#define SPI_CPOL_LOW     0  &#x2F;&#x2F; low level
+#define SPI_CPOL_HIGH    1  &#x2F;&#x2F; high level
+&#x2F;&#x2F; clock phase
+#define SPI_CPHA_FIRST   0  &#x2F;&#x2F; sample in first edge
+#define SPI_CPHA_SECOND  1  &#x2F;&#x2F; sample in second edge
+
+&#x2F;*
+SPI引脚 --- 输出，输入，输出高、低电平，获取电平状态
+*&#x2F;
+&#x2F;&#x2F; 输出
+#define SPI_GPIO_OUTPUT(port,pin) CC2530_IO_CTRL(port,pin,CC2530_OUTPUT)
+&#x2F;&#x2F;输入
+#define SPI_GPIO_INPUT(port,pin) CC2530_IO_CTRL(port,pin,CC2530_INPUT_PULLUP)
+&#x2F;&#x2F; 输出高电平
+#define SPI_GPIO_SET(port,pin) CC2530_GPIO_SET(port,pin)
+&#x2F;&#x2F; 输出低电平
+#define SPI_GPIO_RESET(port,pin) CC2530_GPIO_RESET(port,pin)
+&#x2F;&#x2F; 获取电平
+#define SPI_GPIO_READ(port,pin) CC2530_GPIO_READ(port,pin)
+
+&#x2F;*
+SPI CS引脚初始化
+*&#x2F;
+#define SPI_CS_INIT(cs_port,cs_pin) do &#123;   \
+   SPI_GPIO_OUTPUT(cs_port,cs_pin); \
+   SPI_GPIO_SET(cs_port,cs_pin); \
+&#125; while(0)
+
+&#x2F;*
+SPI 选择&#x2F;释放SPI芯片
+*&#x2F;
+#define SPI_CS_SELECT(cs_port,cs_pin) CC2530_GPIO_RESET(cs_port,cs_pin)
+#define SPI_CS_RELEASE(cs_port,cs_pin) CC2530_GPIO_SET(cs_port,cs_pin)
+
+#endif</code></pre>
+              </div>
+            </details>
+<ul>
+<li>程序编写</li>
+</ul>
+<details ><summary> HW_SPI.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __HW_SPI_H
+#define __HW_SPI_H
+
+&#x2F;*
+硬件SPI参数：交替、位顺序、时钟极性、时钟相位
+*&#x2F;
+&#x2F;&#x2F; alternate
+#define HW_SPI1_ALT2        3  &#x2F;&#x2F; CC2530 - SCK:P1_5, MISO:P1_6, MOSI:P1_7
+&#x2F;&#x2F; bit order
+#define HW_SPI_BITORDER_MSB 0  &#x2F;&#x2F; MSB
+#define HW_SPI_BITORDER_LSB 1  &#x2F;&#x2F; LSB
+&#x2F;&#x2F; clock polarity
+#define HW_SPI_CPOL_LOW     0  &#x2F;&#x2F; low level
+#define HW_SPI_CPOL_HIGH    1  &#x2F;&#x2F; high level
+&#x2F;&#x2F; clock phase
+#define HW_SPI_CPHA_FIRST   0  &#x2F;&#x2F; sample in first edge
+#define HW_SPI_CPHA_SECOND  1  &#x2F;&#x2F; sample in second edge
+
+
+
+typedef struct
+&#123;
+    uint8_t Alternate;  &#x2F;&#x2F; 交替
+    uint8_t BitOrder;   &#x2F;&#x2F; 位顺序
+    uint8_t CPOL;       &#x2F;&#x2F; 极性
+    uint8_t CPHA;       &#x2F;&#x2F; 相位
+&#125; _HW_SPI_Parameter_st;
+
+typedef struct
+&#123;
+    void (*HW_SPI_Init)(_HW_SPI_Parameter_st *spi_device); &#x2F;&#x2F; 硬件SPI初始化
+    int (*HW_SPI_TxByte)(uint8_t alternate, uint8_t dat);  &#x2F;&#x2F; 硬件SPI发送一个字节
+    uint8_t (*HW_SPI_RxByte)(uint8_t alternate);   &#x2F;&#x2F; 硬件SPI接收一个字节
+&#125; HW_SPI_st;
+
+
+extern HW_SPI_st HW_SPI;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> HW_SPI.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File          : HW_SPI.c
+ * Author        : Yang
+ * Date          : 2023-11-23
+ * description   : 硬件SPI
+ -----------------------------------
+  OLED --- SCK:P1_5, MOSI:P1_6, MISO:P1_7
+ -----------------------------------   
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;* Private function prototypes&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void HW_SPI_Init(_HW_SPI_Parameter_st *spi_device);
+static void CC2530_SPI1_Init(uint8_t alternate, uint8_t bit_order, uint8_t cpol, uint8_t cpha);
+static int HW_SPI_TxByte(uint8_t alternate, uint8_t dat);
+static uint8_t HW_SPI_RxByte(uint8_t alternate);
+
+static int CC2530_SPI1_TxByte(uint8_t dat);
+static uint8_t CC2530_SPI1_RxByte(void);
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+HW_SPI_st HW_SPI &#x3D; 
+&#123;
+    .HW_SPI_Init &#x3D; &amp;HW_SPI_Init,
+    .HW_SPI_TxByte &#x3D; &amp;HW_SPI_TxByte,
+    .HW_SPI_RxByte &#x3D; &amp;HW_SPI_RxByte
+&#125;;
+
+&#x2F;*
+* @function: HW_SPI_Init
+* @param   : None
+* @retval  : None
+* @brief   : 硬件SPI初始化
+*&#x2F;
+static void HW_SPI_Init(_HW_SPI_Parameter_st *spi_device)
+&#123;
+    switch (spi_device-&gt;Alternate)
+    &#123;
+        case HW_SPI1_ALT2:
+        &#123;
+            CC2530_SPI1_Init(HW_SPI1_ALT2, spi_device-&gt;BitOrder, spi_device-&gt;CPOL, spi_device-&gt;CPHA);
+            break;
+        &#125;
+        default:break;
+    &#125;
+&#125;
+
+
+&#x2F;*
+* @function: CC2530_SPI1_Init
+* @param   : None
+* @retval  : None
+* @brief   : SPI1初始化
+*&#x2F;
+static void CC2530_SPI1_Init(uint8_t alternate, uint8_t bit_order, uint8_t cpol, uint8_t cpha)
+&#123;
+    U1CSR &#x3D; 0;  &#x2F;&#x2F; 模式选择 UART1 SPI 模式为主
+    U1GCR |&#x3D; 0x11;      &#x2F;&#x2F; 设置波特率
+    U1BAUD &#x3D; 0x00;
+    
+    if (HW_SPI1_ALT2 &#x3D;&#x3D; alternate)
+    &#123;
+        PERCFG |&#x3D; 0x02; &#x2F;&#x2F; 将 USART1 I&#x2F;O 设置为 P1 引脚上的备用 2 个位置 --- 0000 0010
+
+        P1SEL |&#x3D; 0xE0;  &#x2F;&#x2F; 外设功能 --- 1110 0000
+    &#125;
+    &#x2F;* 位顺序 *&#x2F;
+    if (HW_SPI_BITORDER_MSB &#x3D;&#x3D; bit_order)       
+    &#123;
+        U1GCR |&#x3D; (1 &lt;&lt; 5);      &#x2F;&#x2F; 高位先传
+    &#125;
+    else
+    &#123;
+        U1GCR &amp;&#x3D; ~(1 &lt;&lt; 5);     &#x2F;&#x2F; 低位先传
+    &#125;
+    &#x2F;*设置极性*&#x2F;
+    if (HW_SPI_CPOL_HIGH &#x3D;&#x3D; cpol)
+    &#123;
+        U1GCR |&#x3D; (1 &lt;&lt; 7);      &#x2F;&#x2F; 正时钟
+    &#125;
+    else
+    &#123;
+        U1GCR &amp;&#x3D; ~(1 &lt;&lt; 7);     &#x2F;&#x2F; 负时钟
+    &#125;
+    &#x2F;*设置相位*&#x2F;
+    if (HW_SPI_CPHA_FIRST &#x3D;&#x3D; cpha)
+    &#123;
+        U1GCR &amp;&#x3D; ~(1 &lt;&lt; 6);     
+    &#125;
+    else
+    &#123;
+        U1GCR |&#x3D; (1 &lt;&lt; 6);
+    &#125;
+    
+    P2SEL &amp;&#x3D; ~0x20;     &#x2F;&#x2F; 设置串口1优先于T3
+    U1CSR |&#x3D; 0x40;      &#x2F;&#x2F; 启动SPI
+&#125;
+
+&#x2F;*
+* @function: HW_SPI_TxByte
+* @param   : None
+* @retval  : SUCCESS: 0, Other: -1
+* @brief   : 硬件spi发送一个字节
+*&#x2F;
+static int HW_SPI_TxByte(uint8_t alternate, uint8_t dat)
+&#123;
+    int ret &#x3D; -1;
+    
+    if (HW_SPI1_ALT2 &#x3D;&#x3D; alternate)
+    &#123;
+        ret &#x3D; CC2530_SPI1_TxByte(dat);
+    &#125;
+    
+    return ret;
+&#125;
+
+&#x2F;*
+* @function: HW_SPI_RxByte
+* @param   : None
+* @retval  : 接收到的字节数据
+* @brief   : 硬件SPI接收一个字节
+*&#x2F;
+static uint8_t HW_SPI_RxByte(uint8_t alternate)
+&#123;
+    uint8_t dat &#x3D; 0x00;
+    
+    if (HW_SPI1_ALT2 &#x3D;&#x3D; alternate)
+    &#123;
+        dat &#x3D; CC2530_SPI1_RxByte();
+    &#125;
+    return dat;
+&#125;
+
+&#x2F;*
+* @function: CC2530_SPI1_TxByte
+* @param   : None
+* @retval  : SUCCESS: 0, Other: -1
+* @brief   : CC2530发送一个字节
+*&#x2F;
+static int CC2530_SPI1_TxByte(uint8_t dat)
+&#123;
+    uint16_t timeout &#x3D; 6420;    &#x2F;&#x2F; 32MHZ ~6ms, 16MHZ ~12ms
+    
+    U1CSR &amp;&#x3D; ~0x02;     &#x2F;&#x2F; 【USART1控制和状态】字节还未传输
+    U1DBUF &#x3D; dat;
+    
+    while (!(U1CSR &amp; 0x02))     &#x2F;&#x2F; 等待发送完成,发送完对应位置1
+    &#123;
+        if (0 &#x3D;&#x3D; --timeout)
+        &#123;
+            break;
+        &#125;
+    &#125;
+    
+    return (0 &#x3D;&#x3D; timeout) ? -1 : 0;
+&#125;
+
+&#x2F;*
+* @function: CC2530_SPI1_RxByte
+* @param   : None
+* @retval  : None
+* @brief   : CC2530接收一个字节
+*&#x2F;
+static uint8_t CC2530_SPI1_RxByte(void)
+&#123;
+    uint8_t dat &#x3D; U1DBUF;
+    
+    return dat;
+&#125;</code></pre>
+              </div>
+            </details>
+<ul>
+<li>软件模拟SPI</li>
+</ul>
+<details ><summary> SW_SPI.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __SW_SPI_H
+#define __SW_SPI_H
+
+
+#define SW_SPI_TX 0
+#define SW_SPI_RX 1
+
+#define SW_SPI_SCK_DELAY() do&#123;&#125;while(0)
+
+&#x2F;* 
+ *  @brief  TX a bit by SW-SPI bus:
+ *	@param  SDA_Port, SDA_Pin - SDA GPIO.
+ *	@param  bitOrder - MSB&#x2F;LSB.
+ *	@param  b - byte.
+ *&#x2F;
+#define SW_SPI_TX_BIT( SDA_Port, SDA_Pin, bitOrder, b ) do &#123;        \
+        if ((bitOrder) &#x3D;&#x3D; SPI_BITORDER_MSB) &#123;                       \
+        if (((b) &amp; 0x80) &#x3D;&#x3D; 0) SPI_GPIO_RESET(SDA_Port, SDA_Pin);   \
+        else SPI_GPIO_SET(SDA_Port, SDA_Pin);                       \
+        (b) &lt;&lt;&#x3D; 1;                                                  \
+    &#125;                                                               \
+    else&#123;                                                           \
+        if(((b) &amp; 0x01) &#x3D;&#x3D; 0) SPI_GPIO_RESET(SDA_Port, SDA_Pin);    \
+        else SPI_GPIO_SET(SDA_Port, SDA_Pin);                       \
+        (b) &gt;&gt;&#x3D; 1;                                                  \
+    &#125;                                                               \
+&#125; while(0)
+
+&#x2F;** @brief  RX a bit From SW-SPI bus:
+ *	@param  SDA_Port, SDA_Pin - SDA GPIO.
+ *	@param  bitOrder - MSB&#x2F;LSB.
+ *	@param  b - byte.
+ *&#x2F;
+#define SW_SPI_RX_BIT( SDA_Port, SDA_Pin, bitOrder, b ) do &#123;    \
+    if ((bitOrder) &#x3D;&#x3D; SPI_BITORDER_MSB) &#123;                       \
+        (b) &lt;&lt;&#x3D; 1;                                              \
+        if (SPI_GPIO_READ(SDA_Port, SDA_Pin)) (b) |&#x3D; 0x01;       \
+        else (b) &amp;&#x3D; 0xFE;                                       \
+    &#125;                                                           \
+    else &#123;                                                      \
+        (b) &gt;&gt;&#x3D; 1;                                              \
+        if(SPI_GPIO_READ(SDA_Port, SDA_Pin)) (b) |&#x3D; 0x80;        \
+        else (b) &amp;&#x3D; ~0x80;                                      \
+    &#125;                                                           \
+&#125; while(0)
+
+&#x2F;*  @brief  CPOL &#x3D; 1, CPHA &#x3D; 1; TX&#x2F;RX a byte.
+ *	@param  CLK_Port, CLK_Pin - SPI CLOCK GPIO.
+ *	@param  SDA_Port, SDA_Pin - SPI DATA GPIO.
+ *	@param  bitOrder - MSB&#x2F;LSB.
+ *	@param  opt - SW_SPI_TX_BYTE, SW_SPI_RX_BYTE.
+ *	@param  b - byte.
+ *&#x2F;
+#define SW_SPI_MODE4_BYTE(CLK_Port, CLK_Pin, SDA_Port, SDA_Pin, bitOrder, opt, b) do &#123;  \
+    for (uint8_t __SW_SPI_I &#x3D; 0; __SW_SPI_I &lt; 8; __SW_SPI_I++) &#123;                          \
+        SPI_GPIO_RESET(CLK_Port, CLK_Pin);                                              \
+        SW_SPI_SCK_DELAY();                                                             \
+        if ((opt) &#x3D;&#x3D; SW_SPI_TX) SW_SPI_TX_BIT(SDA_Port, SDA_Pin, bitOrder, b);          \
+        else SW_SPI_RX_BIT(SDA_Port, SDA_Pin, bitOrder, b);                             \
+        SPI_GPIO_SET(CLK_Port, CLK_Pin);                                                \
+        SW_SPI_SCK_DELAY();                                                             \
+    &#125;                                                                                   \
+&#125; while(0)
+
+&#x2F;*  @brief  CPOL &#x3D; 0, CPHA &#x3D; 0; TX&#x2F;RX a byte.
+ *	@param  CLK_Port, CLK_Pin - SPI CLOCK GPIO.
+ *	@param  SDA_Port, SDA_Pin - SPI DATA GPIO.
+ *	@param  bitOrder - MSB&#x2F;LSB.
+ *	@param  opt - SW_SPI_TX_BYTE, SW_SPI_RX_BYTE.
+ *	@param  b - byte.
+ *&#x2F;
+#define SW_SPI_MODE1_BYTE(CLK_Port, CLK_Pin, SDA_Port, SDA_Pin, bitOrder, opt, b) do &#123; \
+    SW_SPI_MODE4_BYTE(CLK_Port,CLK_Pin,SDA_Port,SDA_Pin, bitOrder,opt, b );	           \
+    SPI_GPIO_RESET(CLK_Port, CLK_Pin);                                                 \
+&#125; while(0)
+
+&#x2F;*  @brief  CPOL &#x3D; 0, CPHA &#x3D; 1; TX&#x2F;RX a byte.
+ *	@param  CLK_Port, CLK_Pin - SPI CLOCK GPIO.
+ *	@param  SDA_Port, SDA_Pin - SPI DATA GPIO.
+ *	@param  bitOrder - MSB&#x2F;LSB.
+ *	@param  opt - SW_SPI_TX_BYTE, SW_SPI_RX_BYTE.
+ *	@param  b - byte.
+ *&#x2F;
+#define SW_SPI_MODE2_BYTE(CLK_Port, CLK_Pin, SDA_Port, SDA_Pin, bitOrder, opt, b) do &#123; \
+    for (uint8_t __SW_SPI_I &#x3D; 0; __SW_SPI_I &lt; 8; __SW_SPI_I++) &#123;                         \
+        SPI_GPIO_SET(CLK_Port, CLK_Pin);                                               \
+        SW_SPI_SCK_DELAY();                                                            \
+        if((opt) &#x3D;&#x3D; SW_SPI_TX) SW_SPI_TX_BIT(SDA_Port, SDA_Pin, bitOrder, b);          \
+        else SW_SPI_RX_BIT(SDA_Port, SDA_Pin, bitOrder, b);                            \
+        SPI_GPIO_RESET(CLK_Port, CLK_Pin);                                             \
+        SW_SPI_SCK_DELAY();                                                            \
+    &#125;                                                                                  \
+&#125; while(0)
+
+&#x2F;*  @brief  CPOL &#x3D; 1, CPHA &#x3D; 0; TX&#x2F;RX a byte.
+ *	@param  CLK_Port, CLK_Pin - SPI CLOCK GPIO.
+ *	@param  SDA_Port, SDA_Pin - SPI DATA GPIO.
+ *	@param  bitOrder - MSB&#x2F;LSB.
+ *	@param  opt - SW_SPI_TX_BYTE, SW_SPI_RX_BYTE.
+ *	@param  b - byte.
+ *&#x2F;
+#define SW_SPI_MODE3_BYTE(CLK_Port, CLK_Pin, SDA_Port, SDA_Pin, bitOrder, opt, b ) do &#123; \
+    SW_SPI_MODE2_BYTE(CLK_Port,CLK_Pin,SDA_Port,SDA_Pin, bitOrder,opt,b);               \
+    SPI_GPIO_SET(CLK_Port, CLK_Pin);                                                    \
+&#125; while(0)
+
+&#x2F;*  @brief  Send a byte to SPI-Slave.
+ *	@param  CLK_Port, CLK_Pin - SPI CLOCK GPIO.
+ *	@param  SDA_Port, SDA_Pin - SPI DATA GPIO.
+ *	@param  bitOrder - MSB&#x2F;LSB.
+ *  @param  CPOL, CPHA - Clock polarity, Clock phase.
+ *	@param  opt - SW_SPI_TX_BYTE, SW_SPI_RX_BYTE.
+ *	@param  b - byte.
+ *&#x2F;
+#define SW_SPI_BYTE(CLK_Port, CLK_Pin, SDA_Port, SDA_Pin, bitOrder, CPOL, CPHA, opt, b) \
+    if((CPOL) &#x3D;&#x3D; SPI_CPOL_LOW &amp;&amp; (CPHA) &#x3D;&#x3D; SPI_CPHA_FIRST)                              \
+        SW_SPI_MODE1_BYTE(CLK_Port,CLK_Pin,SDA_Port,SDA_Pin,bitOrder,opt,b);            \
+    else if((CPOL) &#x3D;&#x3D; SPI_CPOL_LOW &amp;&amp; (CPHA) &#x3D;&#x3D; SPI_CPHA_SECOND)                        \
+        SW_SPI_MODE2_BYTE(CLK_Port,CLK_Pin,SDA_Port,SDA_Pin,bitOrder,opt,b);            \
+    else if((CPOL) &#x3D;&#x3D; SPI_CPOL_HIGH &amp;&amp; (CPHA) &#x3D;&#x3D; SPI_CPHA_FIRST)                        \
+        SW_SPI_MODE3_BYTE(CLK_Port,CLK_Pin,SDA_Port,SDA_Pin,bitOrder,opt,b);            \
+    else if((CPOL) &#x3D;&#x3D; SPI_CPOL_HIGH &amp;&amp; (CPHA) &#x3D;&#x3D; SPI_CPHA_SECOND)                       \
+        SW_SPI_MODE4_BYTE(CLK_Port,CLK_Pin,SDA_Port,SDA_Pin,bitOrder,opt,b)
+
+
+&#x2F;*  @brief	Initial SW-SPI Clock.
+ *&#x2F;
+#define SW_SPI_INIT_CLK(CLK_Port, CLK_Pin, CPOL) do &#123;               \
+    SPI_GPIO_OUTPUT(CLK_Port, CLK_Pin);                             \
+    if((CPOL) &#x3D;&#x3D; SPI_CPOL_LOW) SPI_GPIO_RESET(CLK_Port, CLK_Pin);   \
+    else SPI_GPIO_SET(CLK_Port, CLK_Pin);                           \
+&#125; while(0)
+
+&#x2F;*  @brief	Initial SW-SPI mode as MOSI&#x2F;MISO.
+ *&#x2F;
+#define SW_SPI_INIT_MOSI(MO_Port, MO_Pin)   SPI_GPIO_OUTPUT(MO_Port, MO_Pin)
+#define SW_SPI_INIT_MISO(MI_Port, MI_Pin)   SPI_GPIO_OUTPUT(MI_Port, MI_Pin)
+
+&#x2F;*  @brief	Init. SW-SPI bus.
+ *  @param 	CLK_Port, CLK_Pin - SPI Clock GPIO.
+ *  @param 	SDA_Port, SDA_Pin - SPI Data GPIO.
+ *  @param 	MO_Port, MO_Pin - SPI MOSI GPIO.
+ *  @param 	MI_Port, MI_Pin - SPI MISO GPIO.
+ *	@param 	CPOL - Clock polarity.
+ *&#x2F;
+#define SW_SPI_INIT(CLK_Port, CLK_Pin, MO_Port, MO_Pin, MI_Port, MI_Pin, CPOL ) do &#123; \
+    SW_SPI_INIT_CLK(CLK_Port, CLK_Pin, CPOL);                                        \
+    SW_SPI_INIT_MOSI(MO_Port, MO_Pin);                                               \
+    SW_SPI_INIT_MISO(MI_Port, MI_Pin);                                               \
+&#125; while(0)
+
+&#x2F;*  @brief	Tx a byte by SW-SPI bus.
+ *  @param  CLK_Port, CLK_Pin - SPI CLOCK GPIO.
+ *  @param  MO_Port, MO_Pin - SPI MOSI GPIO.
+ *  @param  bitOrder - MSB&#x2F;LSB.
+ *  @param  CPOL, CPHA - Clock polarity, Clock phase.
+ *  @param  b - byte.
+ *  @note	CS chosen by user.
+ *&#x2F;
+#define SwSPITxByte(CLK_Port, CLK_Pin, MO_Port, MO_Pin, bitOrder, CPOL, CPHA, b) \
+    SW_SPI_BYTE(CLK_Port, CLK_Pin, MO_Port, MO_Pin, bitOrder, CPOL, CPHA, SW_SPI_TX, b)
+
+&#x2F;*  @brief	Rx a byte by SW(Software) SPI bus.
+ *  @param  CLK_Port, CLK_Pin - SPI CLOCK GPIO.
+ *  @param  MI_Port, MI_Pin - SPI MISO GPIO.
+ *  @param  bitOrder - MSB&#x2F;LSB.
+ *  @param  CPOL, CPHA - Clock polarity, Clock phase.
+ *  @param  b - byte.
+ *  @note	CS chosen by user.
+ *&#x2F;
+#define  SwSPIRxByte(CLK_Port, CLK_Pin, MI_Port, MI_Pin, bitOrder, CPOL, CPHA, b) \
+    SW_SPI_BYTE(CLK_Port, CLK_Pin, MI_Port, MI_Pin, bitOrder, CPOL, CPHA, SW_SPI_RX, b)
+
+#endif
+</code></pre>
+              </div>
+            </details>
+<details ><summary> SW_SPI.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File          : SW_SPI.c
+ * Author        : Yang
+ * Date          : 2023-11-23
+ * description   : 软件模拟SPI
+ -----------------------------------
+  
+ -----------------------------------   
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+     
+&#x2F;* Private function prototypes&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+
+
+</code></pre>
+              </div>
+            </details>
+<ul>
+<li>OLED部分(兼容软硬件SPI)</li>
+</ul>
+<details ><summary> oled_spi.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __OLED_SPI_H
+#define __OLED_SPI_H
+
+
+&#x2F;&#x2F; 进行选择硬件SPI还是模拟SPI
+#if !defined(USE_SPI_HW) &amp;&amp; !defined(USE_SPI_SW)
+    #define USE_SPI_SW
+#endif
+
+&#x2F;&#x2F; 使用软件SPI
+#ifdef USE_SPI_SW
+
+&#x2F;* SCK *&#x2F;
+#define OLED_SPI_SCK_Port 1
+#define OLED_SPI_SCK_Pin 5
+&#x2F;* SDA *&#x2F;
+#define OLED_SPI_SDA_Port 1
+#define OLED_SPI_SDA_Pin 6
+
+#endif
+
+&#x2F;* CS *&#x2F;
+#define OLED_SPI_CS_Port 2
+#define OLED_SPI_CS_Pin 0
+&#x2F;* DC *&#x2F;
+#define OLED_SPI_DC_Port 1
+#define OLED_SPI_DC_Pin 4
+&#x2F;* RST *&#x2F;
+#define OLED_SPI_RST_Port 1
+#define OLED_SPI_RST_Pin 0
+
+typedef struct
+&#123;
+    void (*OLED_SPI_Init)(void);
+    void (*OLED_SPI_Send_CMD)(uint8_t);
+    void (*OLED_SPI_Send_Data)(uint8_t);
+&#125; OLED_SPI_st;
+
+
+extern OLED_SPI_st OLED_SPI;
+
+
+
+#endif
+</code></pre>
+              </div>
+            </details>
+<details ><summary> oled_spi.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File          : oled_spi.c
+ * Author        : Yang
+ * Date          : 2023-11-23
+ * description   : OLED SPI适配层
+ -----------------------------------
+  
+ -----------------------------------   
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+     
+&#x2F;* Private function prototypes&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void OLED_SPI_Init(void);
+static void OLED_SPI_Send_CMD(uint8_t cmd);
+static void OLED_SPI_Send_Byte(uint8_t byte);
+static void OLED_SPI_Send_Data(uint8_t data);
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+OLED_SPI_st OLED_SPI &#x3D; 
+&#123;
+    .OLED_SPI_Init &#x3D; &amp;OLED_SPI_Init,
+    .OLED_SPI_Send_CMD &#x3D; &amp;OLED_SPI_Send_CMD,
+    .OLED_SPI_Send_Data &#x3D; &amp;OLED_SPI_Send_Data
+&#125;;
+
+
+&#x2F;*
+* @function: OLED_SPI_Init
+* @param   : None
+* @retval  : None
+* @brief   : OLED SPI 初始化
+*&#x2F;
+static void OLED_SPI_Init(void)
+&#123;
+#ifdef USE_SPI_SW
+    SW_SPI_INIT_CLK(OLED_SPI_SCK_Port, OLED_SPI_SCK_Pin,SPI_CPOL_HIGH);
+    SW_SPI_INIT_MOSI(OLED_SPI_SDA_Port, OLED_SPI_SDA_Pin);
+#else
+    _HW_SPI_Parameter_st _HW_SPI_OLED &#x3D; 
+    &#123;
+        .Alternate &#x3D; HW_SPI1_ALT2,
+        .BitOrder &#x3D; HW_SPI_BITORDER_MSB,
+        .CPOL &#x3D; HW_SPI_CPOL_HIGH,
+        .CPHA &#x3D; HW_SPI_CPHA_SECOND
+    &#125;;
+    
+    HW_SPI.HW_SPI_Init(&amp;_HW_SPI_OLED);  &#x2F;&#x2F; 初始化
+#endif
+    SPI_CS_INIT(OLED_SPI_CS_Port,OLED_SPI_CS_Pin); 
+    SPI_GPIO_OUTPUT(OLED_SPI_DC_Port,OLED_SPI_DC_Pin);
+    SPI_GPIO_OUTPUT(OLED_SPI_RST_Port,OLED_SPI_RST_Pin);
+&#125;
+
+&#x2F;*
+* @function: OLED_SPI_Send_CMD
+* @param   : None
+* @retval  : None
+* @brief   : OLED SPI 发送命令
+*&#x2F;
+static void OLED_SPI_Send_CMD(uint8_t cmd)
+&#123;
+    SPI_CS_SELECT(OLED_SPI_CS_Port,OLED_SPI_CS_Pin);
+    SPI_GPIO_RESET(OLED_SPI_DC_Port,OLED_SPI_DC_Pin);
+    OLED_SPI_Send_Byte(cmd);    &#x2F;&#x2F; 发送
+    SPI_CS_RELEASE(OLED_SPI_CS_Port,OLED_SPI_CS_Pin);
+&#125;
+
+&#x2F;*
+* @function: OLED_SPI_Send_Data
+* @param   : None
+* @retval  : None
+* @brief   : OLED SPI 发送数据
+*&#x2F;
+static void OLED_SPI_Send_Data(uint8_t data)
+&#123;
+    SPI_CS_SELECT(OLED_SPI_CS_Port,OLED_SPI_CS_Pin);
+    SPI_GPIO_SET(OLED_SPI_DC_Port,OLED_SPI_DC_Pin);
+    OLED_SPI_Send_Byte(data);    &#x2F;&#x2F; 发送
+    SPI_CS_RELEASE(OLED_SPI_CS_Port,OLED_SPI_CS_Pin);    
+&#125;
+
+
+&#x2F;*
+* @function: OLED_SPI_Send_Byte
+* @param   : None
+* @retval  : None
+* @brief   : OLED SPI 发送一个字节
+*&#x2F;
+static void OLED_SPI_Send_Byte(uint8_t byte)
+&#123;
+#ifdef USE_SPI_SW
+SwSPITxByte(OLED_SPI_SCK_Port, OLED_SPI_SCK_Pin,
+            OLED_SPI_SDA_Port, OLED_SPI_SDA_Pin,
+            SPI_BITORDER_MSB,
+            SPI_CPOL_HIGH, HW_SPI_CPHA_SECOND,
+            byte);    
+#else
+    HW_SPI.HW_SPI_TxByte(HW_SPI1_ALT2,byte);
+#endif
+&#125;
+
+
+</code></pre>
+              </div>
+            </details>
+<details ><summary> OLED.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __OLED_H
+#define __OLED_H
+
+
+#define OLED12864_PAGE      8    &#x2F;&#x2F;!&lt; Total pages
+#define OLED12864_X         128  &#x2F;&#x2F;!&lt; Max X
+#define OLED12864_Y         64   &#x2F;&#x2F;!&lt; Max Y
+
+&#x2F;** @brief   Font Table Configuretion.
+ *  8x16
+ *&#x2F;
+#define FONT_TABLE_8x16           FontTable_V_8X16                &#x2F;&#x2F;!&lt; 8x16 ASCII Char.
+#define FONT_TABLE_CHINESE_16x16  FontTable_Chinese_V_16X16       &#x2F;&#x2F;!&lt; 16x16 Chinese Char.
+#define FONT_TABLE_CHINESE_SIZE   FONTTABLE_CHINESE_V_16x16_NUM   &#x2F;&#x2F;!&lt; Length of the table.
+
+typedef enum
+&#123;
+    OLED_Line1 &#x3D; 0,  
+    OLED_Line2 &#x3D; 1,
+    OLED_Line3 &#x3D; 2,
+    OLED_Line4 &#x3D; 3,
+&#125; OLED091_Line_t;
+
+typedef struct
+&#123;
+    void (*OLED_Init)(void);    &#x2F;&#x2F; OLED初始化
+    void (*OLED_Clear)(void);   &#x2F;&#x2F; OLED清屏
+    void (*OLED_Display_x16_String)(uint8_t, uint8_t, const uint8_t *); &#x2F;&#x2F; OLED显示字符串
+    void (*OLED_Display_Picture)(uint8_t, uint8_t, uint8_t, uint8_t, const uint8_t *);  &#x2F;&#x2F; OLED显示图标
+    void (*padString)(char *str, int size);
+&#125; OLED_st;
+
+
+extern OLED_st OLED;
+
+
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> OLED.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File          : OLED.c
+ * Author        : Yang
+ * Date          : 2023-11-23
+ * description   : OLED
+ -----------------------------------
+  OLED 显示8x16的话一行可以显示16个字符
+ -----------------------------------   
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+#include &quot;font_v_8x16.h&quot;
+#include &quot;font_chinese_v_16x16.h&quot;
+&#x2F;* Private function prototypes&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void OLED_Init(void);
+static void OLED_Config(void);
+static void OLED_Reset(void);
+static void OLED_Clear(void);
+static void OLED_Set_Cursor(uint8_t page, uint8_t x);
+static void OLED_Display_x16_String(uint8_t line, uint8_t column, const uint8_t *str);
+static void OLED_Display_8x16_Char(uint16_t x, uint16_t page, uint8_t ch);
+static void OLED_Display_16x16_Chinese(uint16_t x, uint16_t page,uint8_t chL, uint8_t chR);
+static void OLED_Display_Picture(uint8_t x, uint8_t y, uint8_t picWidth, uint8_t picHeight, const uint8_t *pic);
+static void padString(char *str, int size);
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+OLED_st OLED &#x3D; 
+&#123;
+    .OLED_Init &#x3D; &amp;OLED_Init,
+    .OLED_Clear &#x3D; &amp;OLED_Clear,
+    .OLED_Display_x16_String &#x3D; &amp;OLED_Display_x16_String,
+    .OLED_Display_Picture &#x3D; &amp;OLED_Display_Picture,
+    .padString &#x3D; &amp;padString
+&#125;;
+
+&#x2F;*
+* @function: OLED_Init
+* @param   : None
+* @retval  : None
+* @brief   : OLED初始化
+*&#x2F;
+static void OLED_Init(void)
+&#123;
+    OLED_SPI.OLED_SPI_Init();   &#x2F;&#x2F; SPI初始化
+    
+    OLED_Config();      &#x2F;&#x2F; OLED配置
+    OLED_Clear();       &#x2F;&#x2F; OLED清屏
+    OLED_Set_Cursor(0, 0);      &#x2F;&#x2F; 设置起始坐标
+&#125;
+
+
+&#x2F;*
+* @function: OLED_Config
+* @param   : None
+* @retval  : None
+* @brief   : OLED配置
+*&#x2F;
+static void OLED_Config(void)
+&#123;
+    OLED_Reset();       &#x2F;&#x2F; 复位
+    
+    OLED_SPI.OLED_SPI_Send_CMD(0xae);  &#x2F;&#x2F; --turn off oled panel
+    OLED_SPI.OLED_SPI_Send_CMD(0x00);  &#x2F;&#x2F; ---set low column address
+    OLED_SPI.OLED_SPI_Send_CMD(0x10);  &#x2F;&#x2F; ---set high column address
+    OLED_SPI.OLED_SPI_Send_CMD(0x40);  &#x2F;&#x2F; --set start line address  Set Mapping  
+                                    &#x2F;&#x2F;   RAM Display Start Line (0x00~0x3F)
+    OLED_SPI.OLED_SPI_Send_CMD(0x81);  &#x2F;&#x2F; --set contrast control register
+    OLED_SPI.OLED_SPI_Send_CMD(0xcf);  &#x2F;&#x2F; --Set SEG Output Current Brightness
+    OLED_SPI.OLED_SPI_Send_CMD(0xa1);  &#x2F;&#x2F; --Set SEG&#x2F;Column Mapping     
+    OLED_SPI.OLED_SPI_Send_CMD(0xc8);  &#x2F;&#x2F; --Set COM&#x2F;Row Scan Direction  
+    OLED_SPI.OLED_SPI_Send_CMD(0xa6);  &#x2F;&#x2F; --set normal display
+    OLED_SPI.OLED_SPI_Send_CMD(0xa8);  &#x2F;&#x2F; --set multiplex ratio(1 to 64)
+    OLED_SPI.OLED_SPI_Send_CMD(0x3f);  &#x2F;&#x2F; --1&#x2F;64 duty
+    OLED_SPI.OLED_SPI_Send_CMD(0xd3);  &#x2F;&#x2F; --set display offset Shift Mapping RAM 
+                                    &#x2F;&#x2F;   Counter(0x00~0x3F)
+    OLED_SPI.OLED_SPI_Send_CMD(0x00);  &#x2F;&#x2F; --not offset
+    OLED_SPI.OLED_SPI_Send_CMD(0xd5);  &#x2F;&#x2F; --set display clock divide
+                                    &#x2F;&#x2F;   ratio&#x2F;oscillator oscillator frequency
+    OLED_SPI.OLED_SPI_Send_CMD(0x80);  &#x2F;&#x2F; --set divide ratio, Set Clock as 100 
+                                    &#x2F;&#x2F;   Frames&#x2F;Sec
+    OLED_SPI.OLED_SPI_Send_CMD(0xd9);  &#x2F;&#x2F; --set pre-charge period
+    OLED_SPI.OLED_SPI_Send_CMD(0xf1);  &#x2F;&#x2F; --Set Pre-Charge as 15 Clocks &amp; Discharge 
+                                    &#x2F;&#x2F;   as 1 Clock
+    OLED_SPI.OLED_SPI_Send_CMD(0xda);  &#x2F;&#x2F; --set com pins hardware configuration
+    OLED_SPI.OLED_SPI_Send_CMD(0x12);
+    OLED_SPI.OLED_SPI_Send_CMD(0xdb);  &#x2F;&#x2F; --set vcomh
+    OLED_SPI.OLED_SPI_Send_CMD(0x40);  &#x2F;&#x2F; --Set VCOM Deselect Level
+    OLED_SPI.OLED_SPI_Send_CMD(0x20);  &#x2F;&#x2F; --Set Page Addressing Mode (0x00&#x2F;0x01&#x2F;0x02)
+    OLED_SPI.OLED_SPI_Send_CMD(0x02);  &#x2F;&#x2F;
+    OLED_SPI.OLED_SPI_Send_CMD(0x8d);  &#x2F;&#x2F; --set Charge Pump enable&#x2F;disable
+    OLED_SPI.OLED_SPI_Send_CMD(0x14);  &#x2F;&#x2F; --set(0x10) disable
+    OLED_SPI.OLED_SPI_Send_CMD(0xa4);  &#x2F;&#x2F; --Disable Entire Display On (0xa4&#x2F;0xa5)
+    OLED_SPI.OLED_SPI_Send_CMD(0xa6);  &#x2F;&#x2F; --Disable Inverse Display On (0xa6&#x2F;a7) 
+    OLED_SPI.OLED_SPI_Send_CMD(0xaf);  &#x2F;&#x2F; --turn on oled panel   
+&#125;
+
+&#x2F;*
+* @function: OLED_Reset
+* @param   : None
+* @retval  : None
+* @brief   : OLED复位
+*&#x2F;
+static void OLED_Reset(void)
+&#123;
+    SPI_GPIO_RESET(OLED_SPI_RST_Port,OLED_SPI_RST_Pin);
+    Public.Public_Delay_MS(60);
+    SPI_GPIO_SET(OLED_SPI_RST_Port,OLED_SPI_RST_Pin);
+&#125;
+
+&#x2F;*
+* @function: OLED_Clear
+* @param   : None
+* @retval  : None
+* @brief   : OLED清屏
+*&#x2F;
+static void OLED_Clear(void)
+&#123;
+    uint8_t page, x;
+    
+    for (page &#x3D; 0; page &lt; OLED12864_PAGE; page++)
+    &#123;
+        OLED_SPI.OLED_SPI_Send_CMD(0xb0 + page);
+        OLED_SPI.OLED_SPI_Send_CMD(0x01);
+        OLED_SPI.OLED_SPI_Send_CMD(0x10);
+        
+        for (x &#x3D; 0; x &lt; OLED12864_X; x++)
+        &#123;
+            OLED_SPI.OLED_SPI_Send_Data(0);
+        &#125;
+    &#125;    
+&#125;
+
+&#x2F;*
+* @function: OLED_Set_Cursor
+* @param   : None
+* @retval  : None
+* @brief   : OLED设置坐标
+*&#x2F;
+static void OLED_Set_Cursor(uint8_t page, uint8_t x)
+&#123;
+    OLED_SPI.OLED_SPI_Send_CMD( 0xb0 + page );
+    OLED_SPI.OLED_SPI_Send_CMD( ((x &amp; 0xf0)&gt;&gt;4)|0x10 );
+    OLED_SPI.OLED_SPI_Send_CMD( (x &amp; 0x0f)|0x01 );    
+&#125;
+
+&#x2F;*
+* @function: OLED_Display_x16_String
+* @param   : None
+* @retval  : None
+* @brief   : 显示ASCII码-8x16，显示中文-16x16
+*&#x2F;
+static void OLED_Display_x16_String(uint8_t line, uint8_t column, const uint8_t *str)
+&#123;
+    if (!str || line &gt; 3)
+    &#123;
+        return;
+    &#125;
+
+    uint8_t page &#x3D; line * 2;    &#x2F;&#x2F; 2 page per line
+    const uint8_t *ptext &#x3D; str; &#x2F;&#x2F; text
+
+    &#x2F;* Show text *&#x2F;
+    while (*ptext !&#x3D; 0)
+    &#123;
+        &#x2F;* ASCII Code: 0~127 *&#x2F;
+        if ((*ptext) &lt; 128)
+        &#123;
+            &#x2F;* End of line *&#x2F;
+            if ((column + 8) &gt; OLED12864_X)
+                return;
+
+            &#x2F;* Show 8x16 ASCII Char. *&#x2F;
+            OLED_Display_8x16_Char(column, page, *ptext);
+            column +&#x3D; 8;
+
+            ptext++;
+        &#125;
+        &#x2F;* Chinese 16x16 characters *&#x2F;
+        else
+        &#123;
+            &#x2F;* End of line *&#x2F;
+            if ((column + 16) &gt; OLED12864_X)
+                return;
+
+            OLED_Display_16x16_Chinese(column, page, *ptext, *(ptext + 1));
+            column +&#x3D; 16;
+
+            ptext +&#x3D; 2;
+        &#125;
+    &#125; &#x2F;* while(*ptext !&#x3D; 0) *&#x2F;
+&#125;
+
+&#x2F;*
+* @function: OLED_Display_8x16_Char
+* @param   : None
+* @retval  : None
+* @brief   : 显示8x16字符
+*&#x2F;
+static void OLED_Display_8x16_Char(uint16_t x, uint16_t page, uint8_t ch)
+&#123;
+    uint16_t charIndex;
+
+    &#x2F;* index of font table, height: 16 *&#x2F;
+    if (ch &gt; 32)
+        charIndex &#x3D; (ch - 32) * 16;
+    else
+        charIndex &#x3D; 0;
+
+    &#x2F;* Set first page *&#x2F;
+    OLED_Set_Cursor(page, x);
+    for (uint8_t j &#x3D; 0; j &lt; 8; j++)
+    &#123;
+        OLED_SPI.OLED_SPI_Send_Data(FONT_TABLE_8x16[charIndex + j]);
+    &#125;
+
+    &#x2F;* Set second page *&#x2F;
+    OLED_Set_Cursor(page + 1, x);
+    for (uint8_t j &#x3D; 0; j &lt; 8; j++)
+    &#123;
+        OLED_SPI.OLED_SPI_Send_Data(FONT_TABLE_8x16[charIndex + j + 8]);
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: OLED_Display_16x16_Chinese
+* @param   : None
+* @retval  : None
+* @brief   : 显示16x16字符
+*&#x2F;
+static void OLED_Display_16x16_Chinese(uint16_t x, uint16_t page,uint8_t chL, uint8_t chR)
+&#123;
+    for (uint16_t i &#x3D; 0; i &lt; FONT_TABLE_CHINESE_SIZE; i++)
+    &#123;
+        if (FONT_TABLE_CHINESE_16x16[i].Char16x16[0] !&#x3D; chL || FONT_TABLE_CHINESE_16x16[i].Char16x16[1] !&#x3D; chR)
+            continue;
+
+        OLED_Set_Cursor(page, x);
+        for (uint8_t j &#x3D; 0; j &lt; 16; j++)
+        &#123;
+            OLED_SPI.OLED_SPI_Send_Data(FONT_TABLE_CHINESE_16x16[i].code[j]);
+        &#125;
+
+        OLED_Set_Cursor(page + 1, x);
+        for (uint8_t j &#x3D; 0; j &lt; 16; j++)
+        &#123;
+            OLED_SPI.OLED_SPI_Send_Data(FONT_TABLE_CHINESE_16x16[i].code[j + 16]);
+        &#125;
+        break;
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: OLED_Display_Picture
+* @param   : None
+* @retval  : None
+* @brief   : OLED显示图标
+*&#x2F;
+static void OLED_Display_Picture(uint8_t x, uint8_t y, uint8_t picWidth, uint8_t picHeight, const uint8_t *pic)
+&#123;
+    if (x &gt; 127 || y &gt; 64)
+        return;
+
+    uint16_t charIndex &#x3D; 0;
+    uint8_t xs &#x3D; x, xe &#x3D; x + picWidth - 1;
+    uint8_t ys &#x3D; y &#x2F; 8, ye &#x3D; (y + picHeight - 1) &#x2F; 8;
+
+    for (uint8_t line &#x3D; ys; line &lt; ye; line++)
+    &#123;
+        OLED_Set_Cursor(line, x);
+        for (uint8_t column &#x3D; xs; column &lt; (xe + 1); column++)
+        &#123;
+            OLED_SPI.OLED_SPI_Send_Data(pic[charIndex++]);
+        &#125;
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: OLED_Display_Picture
+* @param   : None
+* @retval  : None
+* @brief   : OLED补全空格
+*&#x2F;
+static void padString(char *str, int size)
+&#123;
+    int len &#x3D; strlen(str);
+    if (len &gt;&#x3D; size)
+    &#123;
+        return; &#x2F;&#x2F; 字符串已经够长了，不需要添加空格
+    &#125;
+    for (int i &#x3D; len; i &lt; size; i++)
+    &#123;
+        if (i &lt; size - 1)
+        &#123;
+            str[i] &#x3D; &#39; &#39;; &#x2F;&#x2F; 在字符串末尾添加空格
+        &#125;
+        else
+        &#123;
+            str[i] &#x3D; &#39;\0&#39;; &#x2F;&#x2F; 添加字符串结束符
+        &#125;
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<h3 id="DHT11">DHT11</h3>
+<ul>
+<li>硬件连接</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231123215051.webp" alt=""></p>
+<ul>
+<li>程序编写</li>
+</ul>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num116.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-number">2.</span> <span class="toc-text">环境准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%BF%E5%AD%90%E8%B5%84%E6%BA%90%E4%BB%8B%E7%BB%8D"><span class="toc-number">3.</span> <span class="toc-text">板子资源介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CC2530%E9%80%9A%E4%BF%A1%E6%A8%A1%E7%BB%84"><span class="toc-number">4.</span> <span class="toc-text">CC2530通信模组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ZigBee-3-0-%E4%BB%8B%E7%BB%8D"><span class="toc-number">5.</span> <span class="toc-text">ZigBee 3.0 介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-TI-Z-Stack-3-0"><span class="toc-number">6.</span> <span class="toc-text">安装 TI Z-Stack 3.0</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-SmartRF-Flash-Programmer"><span class="toc-number">7.</span> <span class="toc-text">安装 SmartRF_Flash_Programmer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-SmartRF04EB-%E9%A9%B1%E5%8A%A8"><span class="toc-number">8.</span> <span class="toc-text">安装 SmartRF04EB 驱动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85USB%E8%BD%AC%E4%B8%B2%E5%8F%A3%E9%A9%B1%E5%8A%A8"><span class="toc-number">9.</span> <span class="toc-text">安装USB转串口驱动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="toc-number">10.</span> <span class="toc-text">新建项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E7%A8%8B%E5%BA%8F%E6%A1%86%E6%9E%B6"><span class="toc-number">11.</span> <span class="toc-text">我的程序框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A5%E9%97%A8"><span class="toc-number">12.</span> <span class="toc-text">入门</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%E5%9B%BE"><span class="toc-number">12.1.</span> <span class="toc-text">原理图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GPIO%E5%AE%9E%E9%AA%8C"><span class="toc-number">12.2.</span> <span class="toc-text">GPIO实验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LED"><span class="toc-number">12.2.1.</span> <span class="toc-text">LED</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E9%94%AE"><span class="toc-number">12.2.2.</span> <span class="toc-text">按键</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%92%9F"><span class="toc-number">12.3.</span> <span class="toc-text">时钟</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD"><span class="toc-number">12.4.</span> <span class="toc-text">中断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8%E5%AE%9E%E9%AA%8C"><span class="toc-number">12.5.</span> <span class="toc-text">定时器实验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E6%97%B6%E6%9F%A5%E8%AF%A2%E8%A7%A6%E5%8F%91"><span class="toc-number">12.5.1.</span> <span class="toc-text">计时查询触发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E6%97%B6%E4%B8%AD%E6%96%AD%E8%A7%A6%E5%8F%91"><span class="toc-number">12.5.2.</span> <span class="toc-text">计时中断触发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9C%8B%E9%97%A8%E7%8B%97"><span class="toc-number">12.5.3.</span> <span class="toc-text">看门狗</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%8E%E5%8A%9F%E8%80%97%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">12.5.4.</span> <span class="toc-text">低功耗定时器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3"><span class="toc-number">12.6.</span> <span class="toc-text">串口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ADC%E5%AE%9E%E9%AA%8C"><span class="toc-number">12.7.</span> <span class="toc-text">ADC实验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%89%E7%85%A7%E4%BC%A0%E6%84%9F%E5%99%A8"><span class="toc-number">12.7.1.</span> <span class="toc-text">光照传感器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OLED"><span class="toc-number">12.8.</span> <span class="toc-text">OLED</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DHT11"><span class="toc-number">12.9.</span> <span class="toc-text">DHT11</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
     document.body.oncopy = function () {
         iziToast.info({
             timeout: 4000, // 关闭弹窗的时间
