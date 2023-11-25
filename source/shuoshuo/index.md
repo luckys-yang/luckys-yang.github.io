@@ -19,6 +19,18 @@ comments: false
                             class="avatar avatar-48 zhuan" width="48" height="48">
                     </span>
                     <div class="cbp_tmlabel">
+                        <p>刚刚做的简历-><a href="https://github.com/luckys-yang/my_data" target="_blank">https://github.com/luckys-yang/my_data</a></p>
+                        <p class="shuoshuo_time"><i class="fa fa-clock-o"></i>
+                            <span id="masked">2023年11月24日</span>&emsp;<i class="fas fa-mobile-alt"></i> <span id="masked">发自iPhone</span>
+                        </p>
+                    </div>
+                </li>                
+                <li>
+                    <span class="shuoshuo_author_img">
+                    <img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20231008142657.webp"
+                            class="avatar avatar-48 zhuan" width="48" height="48">
+                    </span>
+                    <div class="cbp_tmlabel">
                         <p></p>
                         <p>不能分心，不能分心，坚持坚持！还有2个多月！冲冲冲！</p>
                         <p></p>
