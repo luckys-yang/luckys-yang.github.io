@@ -55,6 +55,10 @@ comments: false
 
 <img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/杨振旺_121403267.webp" style="zoom: 25%;" />
 
+<img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/圆梦杯初赛_页面_1.webp" style="zoom:25%;" />
+
+<img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/圆梦杯.webp" style="zoom: 25%;" />
+
 
 
 

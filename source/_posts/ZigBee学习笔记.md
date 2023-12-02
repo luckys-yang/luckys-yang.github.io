@@ -428,6 +428,617 @@ ZigBee可以划分 `4` 个层：
 
 
 
+### 用户代码
+
+{% folding, AllHead.h %}
+
+```cpp
+#ifndef __ALLHEAD_H
+#define __ALLHEAD_H
+
+// CC2530头文件
+#include "ioCC2530.h"
+
+// C库头文件
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdint.h>     // 用到uint8_t那些需要包含
+
+// IO配置头文件
+#include "CC2530_IO_Config.h"
+#include "CC2530_SPI_Common.h"
+
+
+// 用户头文件
+#include "Public.h"
+#include "System.h"
+#include "System_Init.h"
+#include "Callback.h"
+#include "Task.h"
+
+// 外设头文件
+#include "Led.h"
+#include "Timer.h"
+#include "WatchDog.h"
+#include "LowPower.h"
+#include "USART0.h"
+#include "Key.h"
+#include "EXTI.h"
+#include "bsp_ADC.h"
+#include "HW_SPI.h"
+#include "SW_SPI.h"
+#include "oled_spi.h"
+#include "OLED.h"
+#include "DHT11.h"
+#include "Menu.h"
+#include "flash_spi.h"
+#include "Flash.h"
+#include "Relay.h"
+
+#endif
+```
+
+{% endfolding %}
+
+{% folding, CallBack.c %}
+
+```cpp
+/***************************************************************************
+ * File          : Callback.c
+ * Author        : Yang
+ * Date          : 2023-11-19
+ * description   : 存放中断相关
+****************************************************************************/
+#include "AllHead.h"
+
+/*
+* @function: T3_CallBack
+* @param   : None
+* @retval  : None
+* @brief   : T3中断服务函数
+*/
+#if USE_TIM3
+#pragma vector = T3_VECTOR
+__interrupt void T3_CallBack(void)
+{
+    static uint8_t Key_Cnt = 0;
+    static uint8_t Key_Long_Cnt = 0;
+    
+    T3IF = 0;   // 清除中断标志位(可要可不要，硬件自动清0了)
+    
+    Key_Cnt++;
+    Key_Long_Cnt++;
+    
+    if (Key_Cnt >= 10)
+    {
+        Key_Cnt = 0;
+        Key.Key_Scan();
+    }
+    if (Key_Long_Cnt >= 100)
+    {
+        Key_Long_Cnt = 0;
+        Key.Key_Long_Count++;
+    }
+    
+    System.Task_Mask(); // 任务标记
+}
+#endif
+
+/*
+* @function: T1_CallBack
+* @param   : None
+* @retval  : None
+* @brief   : T1中断服务函数
+*/
+#if USE_TIM1
+#pragma vector = T1_VECTOR
+__interrupt void T1_CallBack(void)
+{
+    T1IF = 0;   // 清除中断标志位(可要可不要，硬件自动清0了)
+    
+    T1IE = 0;
+    USART0.Rec_Sta |= 0x8000;
+}
+#endif
+
+/*
+* @function: T4_CallBack
+* @param   : None
+* @retval  : None
+* @brief   : T4中断服务函数
+*/
+#if USE_TIM4
+#pragma vector = T4_VECTOR
+__interrupt void T4_CallBack(void)
+{
+    T4IF = 0;   // 清除中断标志位(可要可不要，硬件自动清0了)
+}
+#endif
+
+/*
+* @function: SleepTimer_CallBack
+* @param   : None
+* @retval  : None
+* @brief   : 低功耗中断服务函数(休眠定时器到时间后会中断)
+*/
+#pragma vector = ST_VECTOR
+__interrupt void SleepTimer_CallBack(void)
+{
+    STIF = 0;   // 清除中断标志位
+}
+
+/*
+* @function: USART0_RX_CallBack
+* @param   : None
+* @retval  : None
+* @brief   : 串口0中断服务函数
+*/
+#pragma vector = URX0_VECTOR
+__interrupt void USART0_RX_CallBack(void)
+{
+    URX0IF = 0;   // 清除中断标志位
+
+    USART0.USART0_Rec_Data_Analyze_1();        // 数据解析
+}
+
+/*
+* @function: P0_Exti_CallBack
+* @param   : None
+* @retval  : None
+* @brief   : P0外部中断中断服务函数
+*/
+#if USE_KEY_EXTI
+#pragma vector = P0INT_VECTOR
+__interrupt void P0_Exti_CallBack(void)
+{
+    Public.Public_Delay_MS(10);
+    Led.Led_Flip();
+    
+    P0IFG = 0;  // 清除引脚中断标志位
+    P0IF = 0;   // 清除P0中断标志位
+}
+#endif
+
+```
+
+{% endfolding %}
+
+{% folding, Public.h %}
+
+```cpp
+#ifndef __PUBLIC_H
+#define __PUBLIC_H
+
+// Bool状态枚举
+typedef enum
+{
+    TRUE = 0x01,
+    FALSE =0x00
+} Bool_Status_et;
+
+typedef struct
+{
+    void (*Public_Delay_MS)(uint16_t);       // ms延时
+    void (*Public_Delay_32MHz_US)(uint16_t);    // us延时
+} Public_st;
+
+extern Public_st Public;
+
+
+#endif
+```
+
+{% endfolding %}
+
+{% folding, Public.c %}
+
+```cpp
+/***************************************************************************
+ * File          : Public.c
+ * Author        : Yang
+ * Date          : 2023-11-19
+ * description   : 存放公共函数相关
+****************************************************************************/
+#include "AllHead.h"
+
+/* Private function prototypes===============================================*/
+static void Public_Delay_MS(uint16_t ms);
+static void Public_Delay_32MHz_US(uint16_t us);
+
+/* Public variables==========================================================*/
+Public_st Public = 
+{
+    .Public_Delay_MS = &Public_Delay_MS,
+    .Public_Delay_32MHz_US = &Public_Delay_32MHz_US
+};
+
+/*
+* @function: Public_Delay_MS
+* @param   : None
+* @retval  : None
+* @brief   : ms延时(且告诉编译器不优化)
+*/
+#pragma optimize=none
+static void Public_Delay_MS(uint16_t ms)
+{
+    uint16_t i, j, k;
+    
+    if (16 == SYS_CLOCK_FRE_MHz)
+    {
+        k = 535;
+    }
+    else if (32 == SYS_CLOCK_FRE_MHz)
+    {
+        k = 1070;
+    }
+    
+    for (i = 0; i < ms; i++)
+    {
+        // 经由实际测试可以得出执行535次循环耗时最接近1ms(16MHz下)，如果是32MHz则是1070
+        for (j = 0; j < k; j++);
+    }
+}
+
+/*
+* @function: Public_Delay_32MHz_US
+* @param   : None
+* @retval  : None
+* @brief   : us延时(且告诉编译器不优化)，只在32MHz下有用
+*/
+#pragma optimize=none
+static void Public_Delay_32MHz_US(uint16_t us)
+{
+    for (uint16_t i = 0; i < us; i++)
+    {
+        asm("NOP");
+        asm("NOP");
+        asm("NOP");
+        asm("NOP");
+        asm("NOP");
+        asm("NOP");
+        asm("NOP");
+    }
+}
+```
+
+{% endfolding %}
+
+{% folding, System.h %}
+
+```cpp
+#ifndef __SYSTEM_H
+#define __SYSTEM_H
+
+typedef struct
+{
+    void (*System_Run)(void);
+    void (*System_Error)(void);
+    void (*Task_Mask)(void);
+}System_st;
+
+extern System_st System;
+
+#endif
+```
+
+{% endfolding %}
+
+{% folding, System.c %}
+
+```cpp
+/***************************************************************************
+ * File          : System.c
+ * Author        : Yang
+ * Date          : 2023-11-19
+ * description   : 存放用户系统函数
+****************************************************************************/
+#include "AllHead.h"
+
+/* Private function prototypes===============================================*/
+static void System_Run(void);
+static void System_Error(void);
+static void Task_Mask(void);
+static void Task_Handler(void);
+
+/* Public variables==========================================================*/
+System_st System = 
+{
+    .System_Run = &System_Run,
+    .System_Error = &System_Error,
+    .Task_Mask = &Task_Mask
+};
+
+/*
+* @function: System_Run
+* @param   : None
+* @retval  : None
+* @brief   : 系统运行
+*/
+static void System_Run(void)
+{
+    Task_Handler();
+}
+
+/*
+* @function: System_Error
+* @param   : None
+* @retval  : None
+* @brief   : 系统错误
+*/
+static void System_Error(void)
+{
+    for (;;)
+    {
+        
+    }
+}
+
+/*
+* @function: Task_Mask
+* @param   : None
+* @retval  : None
+* @brief   : 任务标记
+*/
+static void Task_Mask(void)
+{
+    uint8_t i;
+    
+    for (i = 0; i < TASK_MAX; i++)
+    {
+        if (Task[i].Task_Cnt)
+        {
+            Task[i].Task_Cnt--;     // 递减
+            
+            if (0 == Task[i].Task_Cnt)
+            {
+                Task[i].Task_Cnt = Task[i].Task_Timer;      // 重装载
+                Task[i].Task_Status = TRUE; // 任务执行标志位置1
+            }
+        }
+    }
+}
+
+
+/*
+* @function: Task_Handler
+* @param   : None
+* @retval  : None
+* @brief   : 任务处理函数
+*/
+static void Task_Handler(void)
+{
+    uint8_t i;
+    
+    for (i = 0; i < TASK_MAX; i++)
+    {
+        if (Task[i].Task_Status)
+        {
+            Task[i].Task_Status = FALSE;
+            Task[i].Task_Handler();     // 执行函数
+        }
+    }
+}
+```
+
+{% endfolding %}
+
+{% folding, System_Init.h %}
+
+```cpp
+#ifndef __SYSTEM_INIT_H
+#define __SYSTEM_INIT_H
+
+// 这里定义工程使用的系统时钟频率
+#define SYS_CLOCK_FRE_MHz 32
+
+typedef struct
+{
+  void (*Hardware_Init)(void);
+} System_Init_st;
+
+extern System_Init_st System_Init;
+
+
+#endif
+```
+
+{% endfolding %}
+
+{% folding, System_Init.c %}
+
+```cpp
+/***************************************************************************
+ * File          : System_Init.c
+ * Author        : Yang
+ * Date          : 2023-11-19
+ * description   : 存放用户系统初始化相关 
+****************************************************************************/
+#include "AllHead.h"
+#include "font_v_picture.h"
+/* Private function prototypes===============================================*/
+static void Hardware_Init(void);
+static void Clock_Init(void);
+/* Public variables==========================================================*/
+System_Init_st System_Init = 
+{
+  .Hardware_Init = &Hardware_Init
+};
+
+
+/*
+* @function: Clock_Init
+* @param   : None
+* @retval  : None
+* @brief   : 时钟初始化(系统时钟默认是16MHz)
+*/
+static void Clock_Init(void)
+{
+    CLKCONCMD &= ~0x40; // 设置系统时钟源为32MHz晶振 --- 1011 1111 & 1100 1001 = 1000 1001
+    while (CLKCONSTA & 0x40);   // 等待晶振稳定为32M --- 1100 1001 & 0100 0000
+    CLKCONCMD &= ~0x7F; // 设置系统主时钟频率为32MHz --- 1000 1001 & 1000 000 = 1000 0000
+}
+
+
+/*
+* @function: Hardware_Init
+* @param   : None
+* @retval  : None
+* @brief   : 硬件初始化
+*/
+static void Hardware_Init(void)
+{
+    Clock_Init();       // 时钟初始化
+    Led.Led_Init();     // LED初始化
+    Key.Key_Init();     // 按键初始化
+
+#if USE_TIM3
+    Timer.Timer3_Init(); // 定时器3初始化
+#endif
+#if USE_TIM1    
+    Timer.Timer1_Init();        // 定时器1初始化
+#endif
+#if USE_TIM4    
+    Timer.Timer4_Init();        // 定时器4初始化
+#endif
+    
+    USART0.USART0_Init();       // 串口0初始化
+//    LowPower.LowPower_Init();       // 低功耗初始化
+    WatchDog.WatchDog_Init();   // 看门狗初始化
+
+#if USE_KEY_EXTI
+    EXTI.EXTI_Init();   // 外部中断初始化(按键)
+#endif
+    
+    bsp_ADC.Bsp_ADC_Init();     // ADC初始化(光照传感器)  
+    DHT11.DHT11_Init(); // 温湿度初始化
+
+#if USE_OELD  
+    OLED.OLED_Init();   // OLED初始化
+#endif
+    
+    Flash.Flash_Init(); // Flash初始化
+    
+    Relay.Relay_Init(); // 继电器初始化
+
+    EA = 1;     // 打开总中断
+
+    USART0.USART0_Send("Init OK\r\n", strlen("Init OK\r\n"));
+    Flash.Flash_Test(); // Flash测试
+}
+```
+
+{% endfolding %}
+
+{% folding, Task.h %}
+
+```cpp
+#ifndef __TASK_H
+#define __TASK_H
+
+typedef struct
+{
+    uint8_t Task_Status;        // 任务状态
+    uint16_t Task_Cnt;   // 任务计数
+    uint16_t Task_Timer;        // 任务重装载值
+    void (*Task_Handler)(void); // 任务函数指针
+} Task_st;
+
+extern Task_st Task[];
+extern uint8_t TASK_MAX;
+
+#endif
+```
+
+{% endfolding %}
+
+{% folding, Task.c %}
+
+```cpp
+/***************************************************************************
+ * File          : Task.c
+ * Author        : Yang
+ * Date          : 2023-11-19
+ * description   : 任务执行 
+****************************************************************************/
+#include "AllHead.h"
+
+/* Private function prototypes===============================================*/
+static void Task_Handler_5MS(void);
+static void Task_Handler_10MS(void);
+static void Task_Handler_200MS(void);
+static void Task_Handler_500MS(void);
+static void Task_Handler_1S(void);
+/* Public variables==========================================================*/
+Task_st Task[] = 
+{
+    {FALSE, 5, 5, Task_Handler_5MS},
+    {FALSE, 10, 10, Task_Handler_10MS},
+    {FALSE, 200, 200, Task_Handler_200MS},
+    {FALSE, 500, 500, Task_Handler_500MS},
+    {FALSE, 1000, 1000, Task_Handler_1S}
+};
+
+uint8_t TASK_MAX = sizeof(Task) / sizeof(Task[0]);
+
+static void Task_Handler_5MS(void)
+{
+    USART0.USART0_Protocol_Analyze_Handler();
+}
+
+static void Task_Handler_10MS(void)
+{
+    Key.Key_Handler();
+}
+
+static void Task_Handler_200MS(void)
+{
+#if USE_OELD
+    Menu.Menu_Handler();
+#endif    
+}
+
+static void Task_Handler_500MS(void)
+{
+
+    WatchDog.WatchDog_Feet();
+    Led.Led_Flip();
+}
+
+static void Task_Handler_1S(void)
+{
+
+}
+```
+
+{% endfolding %}
+
+{% folding, main.c %}
+
+```cpp
+/***************************************************************************
+ * File          : main.c
+ * Author        : Yang
+ * Date          : 2023-11-19
+ * description   : CC2530寄存器学习 
+****************************************************************************/
+#include "AllHead.h"
+
+void main()
+{
+    System_Init.Hardware_Init();
+    
+    for (;;)
+    {    
+        System.System_Run();
+    }
+}
+```
+
+{% endfolding %}
+
+
+
 
 
 ### GPIO实验
@@ -2768,4 +3379,2403 @@ static void padString(char *str, int size)
 
 
 - 程序编写
+
+{% folding, DHT11.h %}
+
+```cpp
+#ifndef __DHT11_H
+#define __DHT11_H
+
+// 端口引脚
+#define DHT11_Port 0
+#define DHT11_Pin 6
+
+typedef struct
+{
+    uint8_t DHT11_Over_Falg;    // 完成标志位
+    uint8_t Temp;       // 温度
+    uint8_t Humi;       // 湿度
+    void (*DHT11_Init)(void);   // DHT11初始化
+    void (*DHT11_Get_Data)(void);  // DHT11获取数据
+} DHT11_st;
+
+
+extern DHT11_st DHT11;
+
+#endif
+```
+
+{% endfolding %}
+
+{% folding, DHT11.c %}
+
+```cpp
+/***************************************************************************
+ * File          : DHT11.c
+ * Author        : Yang
+ * Date          : 2023-11-23
+ * description   : DHT11温湿度
+ -----------------------------------
+  
+ -----------------------------------   
+****************************************************************************/
+#include "AllHead.h"
+
+/* Private define============================================================*/
+#define DHT11_FALSE         0
+#define DHT11_TRUE          1
+
+/* DHT11 Status Code. */
+#define DHT11_SC_ERR                DHT11_FALSE
+#define DHT11_SC_OK                 DHT11_TRUE
+#define DHT11_SC_HUMI_OUTOFRANGE    0xF1
+#define DHT11_SC_TEMP_OUTOFRANGE    0xF2
+#define DHT11_SC_HT_OUTOFRANGE      0xF3
+
+/* Delay Functions. */   
+#define DHT11_DELAY_US(x)   Public.Public_Delay_32MHz_US((x))
+#define DHT11_DELAY_MS(x)   Public.Public_Delay_MS((x))
+   
+/* Set DHT11 GPIO mode. */
+#define DHT11_IO_OUTPUT()   CC2530_IO_CTRL(DHT11_Port, DHT11_Pin, CC2530_OUTPUT)
+#define DHT11_IO_INPUT()    CC2530_IO_CTRL(DHT11_Port, DHT11_Pin, CC2530_INPUT_PULLDOWN)
+
+/* Set DHT11 GPIO Level. */ 
+#define DHT11_IO_SET(port, pin, level) do { \
+  if(level) CC2530_GPIO_SET(port, pin);         \
+  else CC2530_GPIO_RESET(port, pin);            \
+} while(0)
+
+#define DHT11_IO_SET_LO()  DHT11_IO_SET(DHT11_Port, DHT11_Pin, 0)
+#define DHT11_IO_SET_HI()  DHT11_IO_SET(DHT11_Port, DHT11_Pin, 1)
+
+/*  Get DHT11 GPIO Status. */
+#define DHT11_IO_GET(port, pin) CC2530_GPIO_READ(port, pin)
+#define DHT11_IO()              DHT11_IO_GET(DHT11_Port, DHT11_Pin)
+
+/* HT11 Measurement range detection. */ 
+#define DHT11_TEMP_OK(t)    ((t) <= 50)
+#define DHT11_HUMI_OK(h)    ((h) >= 20 && (h) <= 95)
+
+
+/* Private function prototypes===============================================*/
+static void DHT11_Init(void);
+static uint8_t DHT11_Read_Byte(void);
+static uint8_t DHT11_Check_Data(uint8_t temp, uint8_t humi);
+static void DHT11_Get_Data(void);
+
+/* Public define==========================================================*/
+DHT11_st DHT11 =
+{
+    .DHT11_Over_Falg = FALSE,
+    .Temp = 0,
+    .Humi = 0,
+    .DHT11_Init = &DHT11_Init,
+    .DHT11_Get_Data = &DHT11_Get_Data
+};     
+
+
+/*
+* @function: DHT11_Init
+* @param   : None
+* @retval  : None
+* @brief   : 初始化
+*/
+static void DHT11_Init(void)
+{
+    DHT11_IO_OUTPUT();
+    DHT11_IO_SET_HI();
+}
+
+/*
+* @function: DHT11_Read_Byte
+* @param   : None
+* @retval  : 读取的字节数据
+* @brief   : DHT11读取一个字节
+*/
+static uint8_t DHT11_Read_Byte(void)
+{
+    uint8_t dat = 0;
+
+    for (uint8_t i = 0; i < 8; i++)
+    {
+        uint16_t cnt = 5350; // ~5ms
+
+        /* Busy */
+        while (!DHT11_IO() && cnt--);
+        if (!cnt)
+        {
+            break;
+        }
+
+        /* Read bit based on high-level duration:
+         *      26~28us: 0
+         *      >70us:   1
+         */
+        DHT11_DELAY_US(50);
+        if (DHT11_IO())
+        {
+            dat <<= 1;
+            dat |= 1;
+        }
+        else
+        {
+            dat <<= 1;
+            continue;
+        }
+
+        /* Waiting end */
+        cnt = 1070; // ~1ms
+        while (DHT11_IO() && cnt--);
+        if (!cnt)
+        {
+            break;
+        }
+    }
+
+    return dat;    
+}
+
+/*
+* @function: DHT11_Check_Data
+* @param   : None
+* @retval  : None
+* @brief   : DHT11校验数据
+*/
+static uint8_t DHT11_Check_Data(uint8_t temp, uint8_t humi)
+{
+    if (DHT11_HUMI_OK(humi))
+    {
+        if (DHT11_TEMP_OK(temp))
+        {
+            return DHT11_SC_OK;
+        }
+        else
+        {
+            return DHT11_SC_TEMP_OUTOFRANGE;
+        }
+    }
+
+    if (DHT11_TEMP_OK(temp))
+    {
+        return DHT11_SC_HUMI_OUTOFRANGE;
+    }
+    else
+    {
+        return DHT11_SC_HT_OUTOFRANGE;
+    }
+}
+
+/*
+* @function: DHT11_Get_Data
+* @param   : None
+* @retval  : None
+* @brief   : None
+*/
+static void DHT11_Get_Data(void)
+{
+    uint8_t HumiI, HumiF, TempI, TempF, CheckSum;
+    
+    DHT11.DHT11_Over_Falg = FALSE;
+
+    /* >18ms, keeping gpio low-level */
+    DHT11_IO_SET_LO();
+ //   DHT11_DELAY_MS(30);
+
+    DHT11_IO_SET_HI();
+
+    /* Wait 20~40us then read ACK */
+    DHT11_DELAY_US(32);
+    DHT11_IO_INPUT();
+    
+    if (!DHT11_IO())
+    {
+        uint16_t cnt = 1070; // ~1ms
+
+        /* Wait for the end of ACK */
+        while (!DHT11_IO() && cnt--);
+        if (!cnt)
+        {
+            goto Exit;
+        }
+
+        /* ~80us, DHT11 GPIO will be set after ACK */
+        cnt = 1070; // ~1ms
+        DHT11_DELAY_US(80);
+        
+        while (DHT11_IO() && cnt--);
+        if (!cnt)
+        {
+            goto Exit;
+        }
+
+        /* Read data */
+        HumiI = DHT11_Read_Byte();
+        HumiF = DHT11_Read_Byte();
+        TempI = DHT11_Read_Byte();
+        TempF = DHT11_Read_Byte();
+        CheckSum = DHT11_Read_Byte();
+
+        /* Checksum */
+        if (CheckSum == (HumiI + HumiF + TempI + TempF))
+        {
+            DHT11.Temp = TempI;
+            DHT11.Humi = HumiI;
+
+            DHT11.DHT11_Over_Falg = DHT11_Check_Data(TempI, HumiI);
+            return;
+        }
+    }
+
+Exit:
+    DHT11_Init();
+}
+```
+
+{% endfolding %}
+
+{% folding, main.c %}
+
+```cpp
+uint8_t tempStr[50], humiStr[50];
+
+DHT11.DHT11_Get_Data();
+if (DHT11.DHT11_Over_Falg)
+{
+    sprintf((char *)tempStr, "Temp: %d", DHT11.Temp);
+    sprintf((char *)humiStr, "Humi: %d", DHT11.Humi);
+}
+OLED.OLED_Display_x16_String(0, 0, tempStr);
+OLED.OLED_Display_x16_String(1, 0, humiStr);
+Public.Public_Delay_MS(1000);
+```
+
+{% endfolding %}
+
+
+
+### NOR Flash
+
+NOR Flash存储器的读取速度快、存储可靠性高、支持使用随机地址访问存储空间支持，但是存储容量小、价格贵，多用于保存电子产品的程序
+
+- M25PE80
+
+这是一款NOR Flash，其容量是 `1024KB（8M bit）`。另外，CC2530F256的内部也带有Flash存储器，其容量是 `256KB`
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231126204642.webp)
+
+- 硬件连接
+
+需要把板子的 `第8,9,10位` 拨码开关打到 `ON端`
+
+
+
+- 程序编写
+
+{% folding, flash_spi.h %}
+
+```cpp
+#ifndef __FLASH_SPI_H
+#define __FLASH_SPI_H
+
+#if !defined(FLASH_SPI_SW) && !defined(FLASH_SPI_HW)
+  #define FLASH_SPI_HW
+#endif
+   
+/*
+ *  SPI GPIOs:
+ *  SCK : P1_5, 
+ *  MOSI: P1_6,
+ *  MISO: P1_7,
+ *  CS  : P1_2,
+ *  DC  : P1_4,
+ *  RST : Don't need.
+ */   
+#ifdef HAL_FLASH_SPI_SW
+
+/* SCK */
+#define FLASH_SPI_SCK_Port 1
+#define FLASH_SPI_SCK_Pin 5
+/* MOSI */
+#define FLASH_SPI_MO_Port 1
+#define FLASH_SPI_MO_Pin 6
+/* MISO */
+#define FLASH_SPI_MI_Port 1
+#define FLASH_SPI_MI_Pin 7
+
+#endif
+
+/* CS */
+#define FLASH_SPI_CS_Port 1
+#define FLASH_SPI_CS_Pin 1
+/* RST */
+#define FLASH_SPI_RST_Port SPI_IGNORE_IO
+#define FLASH_SPI_RST_Pin SPI_IGNORE_IO
+
+/*
+SPI 选择/释放SPI芯片
+*/
+#define FLASH_SELECT()  do {                                             \
+    SPI_CS_SELECT(FLASH_SPI_CS_Port, FLASH_SPI_CS_Pin);              \
+    for(uint8_t _FLASH_CS_DELAY = 0; _FLASH_CS_DELAY < 10; _FLASH_CS_DELAY++); \
+} while(0)
+
+#define FLASH_RELEASE() SPI_CS_RELEASE(FLASH_SPI_CS_Port, FLASH_SPI_CS_Pin)
+ 
+ 
+typedef struct
+{
+    void (*Flash_SPI_Init)(void);
+    void (*Flash_SPI_Tx_Byte)(uint8_t byte);
+    uint8_t (*Flash_SPI_Rx_Byte)(void);
+} Flash_SPI_st;
+
+
+extern Flash_SPI_st Flash_SPI;
+
+#endif
+
+```
+
+{% endfolding %}
+
+{% folding, flash_spi.c %}
+
+```cpp
+/***************************************************************************
+ * File          : flash_spi.c
+ * Author        : Yang
+ * Date          : 2023-11-26
+ * description   : Flash
+ -----------------------------------
+  
+ -----------------------------------   
+****************************************************************************/
+#include "AllHead.h"
+
+/* Private function prototypes===============================================*/
+static void Flash_SPI_Init(void);
+static void Flash_SPI_Tx_Byte(uint8_t byte);     
+static uint8_t Flash_SPI_Rx_Byte(void);     
+/* Public variables==========================================================*/
+Flash_SPI_st Flash_SPI = 
+{
+    .Flash_SPI_Init = &Flash_SPI_Init,
+    .Flash_SPI_Tx_Byte = &Flash_SPI_Tx_Byte,
+    .Flash_SPI_Rx_Byte = &Flash_SPI_Rx_Byte
+};
+
+
+/*
+* @function: Flash_SPI_Init
+* @param   : None
+* @retval  : None
+* @brief   : Flash SPI 初始化
+*/
+static void Flash_SPI_Init(void)
+{
+#ifdef FALSH_SPI_SW
+    // 初始化软件SPI
+    SW_SPI_INIT(FLASH_SPI_SCK_Port, FLASH_SPI_SCK_Pin, FLASH_SPI_MO_Port, FLASH_SPI_MO_Pin, FLASH_SPI_MI_Port, FLASH_SPI_MI_Pin, SPI_CPOL_HIGH);
+#else
+    _HW_SPI_Parameter_st _HW_SPI_Flash = 
+    {
+        .Alternate = HW_SPI1_ALT2,
+        .BitOrder = HW_SPI_BITORDER_MSB,
+        .CPOL = HW_SPI_CPOL_HIGH,
+        .CPHA = HW_SPI_CPHA_SECOND
+    };
+    HW_SPI.HW_SPI_Init(&_HW_SPI_Flash);
+#endif
+    SPI_CS_INIT(FLASH_SPI_CS_Port,FLASH_SPI_CS_Pin); 
+    
+    /* Reset Flash */
+#if defined(FLASH_SPI_RST_Port) && \
+    FLASH_SPI_RST_Port != SPI_IGNORE_IO && \
+    FLASH_SPI_RST_Pin != SPI_IGNORE_IO
+
+    SPI_GPIO_OUTPUT(FLASH_SPI_RST_Port, FLASH_SPI_RST_Pin);
+    SPI_GPIO_CLEAR(FLASH_SPI_RST_Port, FLASH_SPI_RST_Pin);
+    for(uint16_t delay = 0; delay < 1070; delay++);
+    SPI_GPIO_SET(FLASH_SPI_RST_Port, FLASH_SPI_RST_Pin);
+#endif
+}
+
+/*
+* @function: Flash_SPI_Tx_Byte
+* @param   : None
+* @retval  : None
+* @brief   : Flash SPI发送一个字节
+*/
+static void Flash_SPI_Tx_Byte(uint8_t byte)
+{
+#ifdef FLASH_SPI_SW
+    SwSPITxByte(FLASH_SPI_SCK_Port, FLASH_SPI_SCK_Pin, FLASH_SPI_MO_Port, FLASH_SPI_MO_Pin, SPI_BITORDER_MSB, SPI_CPOL_HIGH, SPI_CPHA_SECOND, byte);
+#else
+    HW_SPI.HW_SPI_TxByte(HW_SPI1_ALT2, byte);
+#endif
+}
+
+/*
+* @function: Flash_SPI_Rx_Byte
+* @param   : None
+* @retval  : None
+* @brief   : Flash SPI接收一个字节
+*/
+static uint8_t Flash_SPI_Rx_Byte(void)
+{
+    uint8_t dat;
+    
+#ifdef FLASH_SPI_SW
+    SwSPIRxByte(FLASH_SPI_SCK_Port, FLASH_SPI_SCK_Pin, FLASH_SPI_MI_Port, FLASH_SPI_MI_Pin, SPI_BITORDER_MSB, SPI_CPOL_HIGH, SPI_CPHA_SECOND, dat);
+#else
+    Flash_SPI_Tx_Byte(0);       // 发送一个假的
+    dat = HW_SPI.HW_SPI_RxByte(HW_SPI1_ALT2);
+#endif 
+    
+    return dat;
+}
+
+
+```
+
+{% endfolding %}
+
+{% folding, Flash.h %}
+
+```cpp
+#ifndef __FLASH_H
+#define __FLASH_H
+
+/*
+ *  M25PExx 型号配置：USE_M25PE80、USE_M25PE40、USE_M25PE20
+ */     
+#if !defined(USE_M25PE80) && !defined(USE_M25PE40) && !defined(USE_M25PE20)
+    #define USE_M25PE80
+#endif
+
+/*
+  * M25PExx 页面大小、扇区、子扇区和页面：
+  * 1个扇区 = 16个子扇区,
+  * 1子扇区= 16页，
+  * 1 页 = 256 字节。
+  */
+#if defined(USE_M25PE80)
+    #define USE_M25PExx_PAGE_SIZE 256
+    #define USE_M25PExx_LAST_ADDR 0xFFFFF
+    #define USE_M25PExx_SECTORS 16
+    #define USE_M25PExx_SUBSECTORS 256
+    #define USE_M25PExx_PAGES 4096
+#elif defined(USE_M25PE40)
+#elif defined(USE_M25PE20)
+#endif
+      
+typedef struct
+{
+    void (*Flash_Init)(void);
+    int (*Flash_Read)(uint32_t, uint8_t *, uint16_t);
+    int (*Flash_Write)(uint32_t, uint8_t *, uint16_t);
+    int (*Flash_Check)(void);    
+    void (*Flash_Test)(void);
+} Flash_st;
+      
+extern Flash_st Flash;
+
+#endif
+```
+
+{% endfolding %}
+
+{% folding, Flash.c %}
+
+```cpp
+/***************************************************************************
+ * File          : Flash.c
+ * Author        : Yang
+ * Date          : 2023-11-26
+ * description   : Flash
+ -----------------------------------
+  
+ -----------------------------------   
+****************************************************************************/
+#include "AllHead.h"
+
+/* Private define============================================================*/
+/* M25PExx Commands. */
+#define M25PExx_CMD_READ_STU_REG    0x05  // read status register
+#define M25PExx_CMD_FAST_READ       0x0B  // read data bytes at higher speed
+#define M25PExx_CMD_WRT_EN          0x06  // write enable
+#define M25PExx_CMD_PW              0x0A  // page write
+#define M25PExx_CMD_PP              0x02  // page program
+#define M25PExx_CMD_PAGE_ER         0xDB  // page erase
+#define M25PExx_CMD_SUBSEC_ER       0x20  // subsector erase
+#define M25PExx_CMD_SEC_ER          0xD8  // sector erase
+#define M25PExx_CMD_BULK_ER         0xC7  // bulk erase
+
+/*  M25PExx Flags. */
+#define M25PExx_DUMMY               0x00 // dummy byte
+#define M25PExx_STAT_WIP            0x01 // nor flash write stat in progress
+
+
+/* Private function prototypes===============================================*/
+static void Flash_Init(void);
+static int Flash_Read(uint32_t addr, uint8_t *pBuf, uint16_t len);
+static int Flash_Write(uint32_t addr, uint8_t *pBuf, uint16_t len);
+static int Flash_Check(void);
+static void Flash_Test(void);
+/* Public variables==========================================================*/
+Flash_st Flash = 
+{
+    .Flash_Init = &Flash_Init,
+    .Flash_Read = &Flash_Read,
+    .Flash_Write = &Flash_Write,
+    .Flash_Check = &Flash_Check,
+    .Flash_Test = &Flash_Test
+};
+
+
+/*
+* @function: Flash_Init
+* @param   : None
+* @retval  : None
+* @brief   : Flash初始化
+*/
+static void Flash_Init(void)
+{
+    Flash_SPI.Flash_SPI_Init(); // SPI初始化
+}
+
+/*
+* @function: Flash_Read
+* @param   : addr -> 将要读取的数据所在的存储器地址  pBuf -> 变量指针，用于保存储器中读出来的数据  len -> 指定从存储器中读取多少个字节的数据
+* @retval  : 成功返回0，失败返回-1
+* @brief   : Flash读取数据
+*/
+static int Flash_Read(uint32_t addr, uint8_t *pBuf, uint16_t len)
+{
+    uint8_t *pData = pBuf;
+    
+    if ((addr > USE_M25PExx_LAST_ADDR) || (Flash_Check() != 0))
+    {
+        return -1;
+    }
+    FLASH_SELECT();     // 选中
+    // 在快速阅读模式下 通过添加八个“虚拟”时钟来完成的
+    Flash_SPI.Flash_SPI_Tx_Byte(M25PExx_CMD_FAST_READ);
+    Flash_SPI.Flash_SPI_Tx_Byte((uint8_t)(addr >> 16));
+    Flash_SPI.Flash_SPI_Tx_Byte((uint8_t)(addr >> 8));
+    Flash_SPI.Flash_SPI_Tx_Byte((uint8_t)(addr));
+    
+    Flash_SPI.Flash_SPI_Tx_Byte(0);
+    
+    while (len--)
+    {
+        *pData++ = Flash_SPI.Flash_SPI_Rx_Byte();
+    }
+    FLASH_RELEASE();
+    
+    return 0;
+}
+
+/*
+* @function: Flash_Write
+* @param   : addr -> 说明把数据写入到存储器的哪个地址 pBuf -> 变量指针，指向将要写入到存储器的数据  len -> 指定把多少个字节的数据写入到存储器中
+* @retval  : None
+* @brief   : Flash写数据
+*/
+static int Flash_Write(uint32_t addr, uint8_t *pBuf, uint16_t len)
+{
+    uint8_t *pData = pBuf;
+    
+    if ((addr + len) > USE_M25PExx_LAST_ADDR)
+    {
+        return -1;
+    }
+    
+    while (len)
+    {
+        if (Flash_Check() != 0)
+        {
+            return -1;
+        }
+        
+        FLASH_SELECT();     // 选中
+        Flash_SPI.Flash_SPI_Tx_Byte(M25PExx_CMD_WRT_EN);
+        FLASH_RELEASE();
+        
+        FLASH_SELECT();     // 选中
+        Flash_SPI.Flash_SPI_Tx_Byte(M25PExx_CMD_PW);
+        Flash_SPI.Flash_SPI_Tx_Byte((uint8_t)(addr >> 16));
+        Flash_SPI.Flash_SPI_Tx_Byte((uint8_t)(addr >> 8));
+        Flash_SPI.Flash_SPI_Tx_Byte((uint8_t)(addr));
+    
+        // 只能在任意一页边界内写入，因此请为下一页做好准备如果还有字节则写入
+        uint8_t cnt = 0 - (uint8_t)addr;
+    
+        if (cnt)
+        {
+            addr += cnt;
+        }
+        else
+        {
+            addr += USE_M25PExx_PAGE_SIZE;
+        }
+
+        do
+        {
+            Flash_SPI.Flash_SPI_Tx_Byte(*pData);
+
+            cnt--;
+            len--;
+            pData++;
+        } while (len && cnt);
+        
+        FLASH_RELEASE();        
+    }
+    
+    return 0;
+}
+
+/*
+* @function: Flash_Check
+* @param   : None
+* @retval  : None
+* @brief   : Flash校验
+*/
+static int Flash_Check(void)
+{
+    uint16_t delay = 0;
+    uint8_t retry = 20;
+
+    FLASH_SELECT();
+
+    do
+    {
+        while (delay--); // delay
+        delay = 1070; // 32MHZ: ~1ms
+
+        Flash_SPI.Flash_SPI_Tx_Byte(M25PExx_CMD_READ_STU_REG);
+    } while ((Flash_SPI.Flash_SPI_Rx_Byte() & M25PExx_STAT_WIP) && retry--);
+
+    FLASH_RELEASE();        
+
+    return (retry == 0) ? -1 : 0;    
+}
+
+/*
+* @function: Flash_Test
+* @param   : None
+* @retval  : None
+* @brief   : Flash测试
+*/
+static void Flash_Test(void)
+{
+    uint8_t write_val = 0;
+    uint8_t read_val = 0;
+    char str[50];
+    
+    sprintf(str, "write: %d\r\n", write_val);
+    USART0.USART0_Send((uint8_t*)str, strlen(str));
+    // 写入
+    if (Flash.Flash_Write(0x12345, &write_val, 1) != 0)
+    {
+        USART0.USART0_Send("Write error\r\n", strlen("Write error\r\n"));
+    }
+    Public.Public_Delay_MS(500);
+    // 读取
+    if (Flash.Flash_Read(0x12345, &read_val, 1) != 0)
+    {
+        USART0.USART0_Send("Read error\r\n", strlen("Read error\r\n"));
+    }
+    else
+    {
+        sprintf((char*)str, "read: %d\r\n", read_val);
+        USART0.USART0_Send((uint8_t*)str, strlen(str));
+    }
+}
+```
+
+{% endfolding %}
+
+
+
+### 继电器
+
+用螺丝刀拧开第1、2号口的螺丝，分别塞入零线后再拧紧螺丝，如图所示。此时，继电器充当了一个开关，可以控制零线的断开或者闭合，从而控制灯泡的开关
+
+- 硬件连接
+
+<img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231127085145.webp" style="zoom:67%;" />
+
+可以用来控制12V的灯带
+
+<img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231127112037.webp" style="zoom:50%;" />
+
+- 程序编写
+
+{% folding, Relay.h %}
+
+```cpp
+#ifndef __RELAY_H
+#define __RELAY_H
+
+#define RELAY_Port 0
+#define RELAY_Pin 5
+
+typedef enum
+{
+    RELAY_ON = 0,
+    RELAY_OFF = 1
+} Relay_Status_et;
+
+typedef struct
+{
+    Relay_Status_et Relay_Status;       // 当前的继电器状态
+    void (*Relay_Init)(void);   // 继电器初始化
+    void (*Relay_Open)(void);   // 打开继电器
+    void (*Relay_Close)(void);     // 关闭继电器
+    void (*Relay_Flip)(void);      // 翻转继电器
+} Relay_st;
+
+extern Relay_st Relay;
+
+#endif
+```
+
+{% endfolding %}
+
+{% folding, Relay.c %}
+
+```cpp
+/***************************************************************************
+ * File          : Relay.c
+ * Author        : Yang
+ * Date          : 2023-11-27
+ * description   : 
+ -----------------------------------
+  
+ -----------------------------------   
+****************************************************************************/
+#include "AllHead.h"
+
+/* Private function prototypes===============================================*/
+static void Relay_Init(void);
+static void Relay_Open(void);
+static void Relay_Close(void);
+static void Relay_Flip(void);
+/* Public variables==========================================================*/
+Relay_st Relay = 
+{
+    .Relay_Status = RELAY_OFF,
+    .Relay_Init = &Relay_Init,
+    .Relay_Open = &Relay_Open,
+    .Relay_Close = &Relay_Close,
+    .Relay_Flip = &Relay_Flip
+};
+
+
+/*
+* @function: Relay_Init
+* @param   : None
+* @retval  : None
+* @brief   : 继电器初始化
+*/
+static void Relay_Init(void)
+{
+    CC2530_IO_CTRL(RELAY_Port, RELAY_Pin, CC2530_OUTPUT);
+    Relay_Close();
+}
+
+/*
+* @function: Relay_Open
+* @param   : None
+* @retval  : None
+* @brief   : 打开继电器
+*/
+static void Relay_Open(void)
+{
+    CC2530_GPIO_SET(0, 5);      // 输出高电平
+    Relay.Relay_Status = RELAY_ON;      
+}
+
+/*
+* @function: Relay_Close
+* @param   : None
+* @retval  : None
+* @brief   : 关闭继电器
+*/
+static void Relay_Close(void)
+{
+    CC2530_GPIO_RESET(0, 5);      // 输出低电平
+    Relay.Relay_Status = RELAY_OFF;
+}
+
+/*
+* @function: Relay_Flip
+* @param   : None
+* @retval  : None
+* @brief   : None
+*/
+static void Relay_Flip(void)
+{
+    if (RELAY_ON == Relay.Relay_Status)
+    {
+        Relay_Close();
+    }
+    else
+    {
+        Relay_Open();
+    }
+}
+```
+
+{% endfolding %}
+
+
+
+### 问题
+
+> DHT11不能在TASK里运行，原因是中断打开的原因，导致DHT11数据采集有问题，把中断关闭就没问题 --- 待解决2023.11.25
+
+
+
+## Z-Statck 3.0详解
+
+{% gallery %} 
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231127114123.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231127124817.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231127125645.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231127125830.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231127130326.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231127130710.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231127130946.webp)
+
+{% endgallery %}
+
+
+
+### OSAL详解
+
+OSAL（Operating System Abstraction Layer，系统抽象层），可以通俗地理解为一个简化版的操作系统，为Z-Stack的正确运行提供了内存管理、中断管理和任务调度等基本功能
+
+> 打开 `\zstack\HomeAutomation\SampleSwitch\CC2530DB` 工程
+>
+> 看主函数：
+>
+> {% folding, ZMain.c %}
+>
+> ```cpp
+> int main(void)
+> {
+>     // Turn off interrupts
+>     osal_int_disable(INTS_ALL); // 关闭所有中断
+> 
+>     // Initialization for board related stuff such as LEDs
+>     HAL_BOARD_INIT(); // 初始化板载资源，比如PA、时钟源等
+> 
+>     // Make sure supply voltage is high enough to run
+>     zmain_vdd_check(); // 检测供电电压是否可以支撑芯片正常运行
+> 
+>     // Initialize board I/O
+>     InitBoard(OB_COLD); // 初始化板载I/O，比如按键配置为输入
+> 
+>     // Initialze HAL drivers
+>     HalDriverInit(); // 初始化硬件适配层，比如串口、显示器等
+> 
+>     // Initialize NV System
+>     osal_nv_init(NULL); // 初始化NV（芯片内部FLASH的一块空间）
+> 
+>     // Initialize the MAC
+>     ZMacInit(); // 初始化MAC层（数据链路层）
+> 
+>     // Determine the extended address
+>     zmain_ext_addr(); // 确定芯片的物理地址
+> 
+> #if defined ZCL_KEY_ESTABLISH
+>     // Initialize the Certicom certificate information.
+>     zmain_cert_init(); // 初始化认证信息
+> #endif
+> 
+>     // Initialize basic NV items
+>     zgInit(); // 初始化存储在NV中的协议栈全局信息，如网络启动方式等
+> 
+> #ifndef NONWK
+>     // Since the AF isn't a task, call it's initialization routine
+>     afInit(); // 初始化AF(射频)
+> #endif
+> 
+>     // Initialize the operating system
+>     osal_init_system(); // 初始化OSAL(操作系统抽象层)
+> 
+>     // Allow interrupts
+>     osal_int_enable(INTS_ALL); // 使能所有中断
+> 
+>     // Final board initialization
+>     InitBoard(OB_READY); // 初始化板载IO资源，比如按键
+> 
+>     // Display information about this device
+>     zmain_dev_info(); // 在显示器上显示设备物理地址
+> 
+>     /* Display the device info on the LCD */
+> #ifdef LCD_SUPPORTED
+>     zmain_lcd_init(); // 在显示器上显示设备信息，比如制造商等
+> #endif
+> 
+> #ifdef WDT_IN_PM1
+>     /* If WDT is used, this is a good place to enable it. */
+>     WatchDogEnable(WDTIMX); // 启动看门狗功能
+> #endif
+> 
+>     osal_start_system(); // 进入系统轮询
+> 
+>     return 0; // Shouldn't get here.
+> }
+> ```
+>
+> {% endfolding %}
+>
+> 里面有两个关键的函数调用：
+>
+> ```cpp
+> osal_init_system();	// 初始化OSAL，包括初始化任务池
+> osal_start_system();	// 轮询任务池
+> ```
+>
+> 分别就是：
+>
+> {% folding, osal_init_system %}
+>
+> ```cpp
+> uint8 osal_init_system(void)
+> {
+> #if !defined USE_ICALL && !defined OSAL_PORT2TIRTOS
+>     // Initialize the Memory Allocation System
+>     osal_mem_init(); // 初始化内存分配系统
+> #endif               /* !defined USE_ICALL && !defined OSAL_PORT2TIRTOS */
+> 
+>     // Initialize the message queue
+>     osal_qHead = NULL; // 初始化消息队列
+> 
+>     // Initialize the timers
+>     osalTimerInit(); // 初始化OSAL定时器
+> 
+>     // Initialize the Power Management System
+>     osal_pwrmgr_init(); // 初始化电源管理系统
+> 
+> #ifdef USE_ICALL
+>     /* Prepare memory space for service enrollment */
+>     osal_prepare_svc_enroll();
+> #endif /* USE_ICALL */
+> 
+>     // Initialize the system tasks.
+>     osalInitTasks(); // 初始化任务池
+> 
+> #if !defined USE_ICALL && !defined OSAL_PORT2TIRTOS
+>     // Setup efficient search for the first free block of heap.
+>     osal_mem_kick();
+> #endif /* !defined USE_ICALL && !defined OSAL_PORT2TIRTOS */
+> 
+> #ifdef USE_ICALL
+>     // Initialize variables used to track timing and provide OSAL timer service
+>     osal_last_timestamp = (uint_least32_t)ICall_getTicks();
+>     osal_tickperiod = (uint_least32_t)ICall_getTickPeriod();
+>     osal_max_msecs = (uint_least32_t)ICall_getMaxMSecs();
+>     /* Reduce ceiling considering potential latency */
+>     osal_max_msecs -= 2;
+> #endif /* USE_ICALL */
+> 
+>     return (SUCCESS);
+> }
+> ```
+>
+> {% endfolding %}
+>
+> 在以上代码中，可以找到找到一个任务池初始化函数 `osalInitTasks()`。顾名思义，它的工作内容就是 `初始化任务池`
+>
+> {% folding, osal_start_system %}
+>
+> ```cpp
+> void osal_start_system(void)
+> {
+> #ifdef USE_ICALL
+>     /* Kick off timer service in order to allocate resources upfront.
+>      * The first timeout is required to schedule next OSAL timer event
+>      * as well. */
+>     ICall_Errno errno = ICall_setTimer(1, osal_msec_timer_cback,
+>                                        (void *)osal_msec_timer_seq,
+>                                        &osal_timerid_msec_timer);
+>     if (errno != ICALL_ERRNO_SUCCESS)
+>     {
+>         ICall_abort();
+>     }
+> #endif /* USE_ICALL */
+> 
+> #if !defined(ZBIT) && !defined(UBIT)
+>     for (;;) // 主循环
+> #endif
+>     {
+>         osal_run_system(); // 系统轮询调度
+> 
+> #ifdef USE_ICALL
+>         ICall_wait(ICALL_TIMEOUT_FOREVER);
+> #endif /* USE_ICALL */
+>     }
+> }
+> ```
+>
+> {% endfolding %}
+>
+> 在 `osal_start_system()` 函数的主循环中，循环调用了 `osal_run_system()` 函数，该函数主要工作 `轮询任务池`
+>
+> {% folding, osal_run_system %}
+>
+> ```cpp
+> void osal_run_system(void)
+> {
+>     uint8 idx = 0;
+> 
+>     /* 更新时间，并整理出到期的任务。系统的时钟周期是：320us */
+>     osalTimeUpdate();
+>     Hal_ProcessPoll(); // 硬件适配层中断查询
+> 
+>     do
+>     {
+>         if (tasksEvents[idx]) // 查看是否有任务需要处理
+>         {
+>             break;
+>         }
+>     } while (++idx < tasksCnt); // 轮询整个任务池
+> 
+>     if (idx < tasksCnt) // 循环结束后，如果idx < tasksCnt表示任务池有任务需要处理
+>     {
+>         uint16 events;
+>         halIntState_t intState;
+>         HAL_ENTER_CRITICAL_SECTION(intState); // 关闭中断
+>         events = tasksEvents[idx];            // evets中保存了该任务中的待处理事件
+>         tasksEvents[idx] = 0;                 // 清空此任务中的所有待处理事件
+>         HAL_EXIT_CRITICAL_SECTION(intState);  // 恢复中断
+> 
+>         activeTaskID = idx;
+>         events = (tasksArr[idx])(idx, events); // 处理任务中的事件
+>         activeTaskID = TASK_NO_TASK;
+> 
+>         HAL_ENTER_CRITICAL_SECTION(intState); // 关闭中断
+>         tasksEvents[idx] |= events;           // 保存还没被处理的事件到任务中
+>         HAL_EXIT_CRITICAL_SECTION(intState);  // 恢复中断
+>     }
+> 
+> #if defined(POWER_SAVING) && !defined(USE_ICALL)
+>     else                             // Complete pass through all task events with no activity? {
+>         osal_pwrmgr_powerconserve(); // 如果没有任务需要处理则进入低功耗
+> }
+> #endif
+> 
+> /* Yield in case cooperative scheduling is being used. */
+> #if defined(configUSE_PREEMPTION) && (configUSE_PREEMPTION == 0) {
+> osal_task_yield();
+> }
+> #endif
+> ```
+>
+> {% endfolding %}
+>
+> 在上述代码中，重点讲解一下其中的这个 `do-while` 循环，这个循环的主要作用是轮询整个任务池，也就是看一下有没有要处理的任务。循环中只有一个条件判断，如果条件成立，那么就结束循环
+>
+> 其中的 `tasksEvents` 是一个 `uint16` 类型的数组，其中的每一个元素都表示一种类型的任务，也就是说， `tasksEvents` 就是一个任务池， `tasksCnt` 是这个任务池的大小
+
+
+
+
+
+{% tip bolt %}任务池初始化{% endtip %}
+
+Z-Stack可以被分成多个层次：
+
+1. MAC层
+2. NWK（网络层）
+3. HAL（硬件适配层）
+4. APP（应用层）
+
+每一个层次都有一个对应的任务来处理本层次的事务，例如MAC层对应一个MAC层的任务、网络层对应一个网络层的任务、HAL对应一个HAL的任务，以及应用层对应一个应用层的任务等，这些各个层次的任务构成一个任务池
+
+{% folding, osalInitTasks %}
+
+```cpp
+void osalInitTasks(void)
+{
+    uint8 taskID = 0;
+
+    tasksEvents = (uint16 *)osal_mem_alloc(sizeof(uint16) * tasksCnt);
+    osal_memset(tasksEvents, 0, (sizeof(uint16) * tasksCnt));
+
+    macTaskInit(taskID++);
+    nwk_init(taskID++);
+#if !defined(DISABLE_GREENPOWER_BASIC_PROXY) && (ZG_BUILD_RTR_TYPE)
+    gp_Init(taskID++);
+#endif
+    Hal_Init(taskID++);
+#if defined(MT_TASK)
+    MT_TaskInit(taskID++);
+#endif
+    APS_Init(taskID++);
+#if defined(ZIGBEE_FRAGMENTATION)
+    APSF_Init(taskID++);
+#endif
+    ZDApp_Init(taskID++);
+#if defined(ZIGBEE_FREQ_AGILITY) || defined(ZIGBEE_PANID_CONFLICT)
+    ZDNwkMgr_Init(taskID++);
+#endif
+// Added to include TouchLink functionality
+#if defined(INTER_PAN)
+    StubAPS_Init(taskID++);
+#endif
+// Added to include TouchLink initiator functionality
+#if defined(BDB_TL_INITIATOR)
+    touchLinkInitiator_Init(taskID++);
+#endif
+// Added to include TouchLink target functionality
+#if defined(BDB_TL_TARGET)
+    touchLinkTarget_Init(taskID++);
+#endif
+    zcl_Init(taskID++);
+    bdb_Init(taskID++);
+    zclSampleSw_Init(taskID++);
+#if (defined OTA_CLIENT) && (OTA_CLIENT == TRUE)
+    zclOTA_Init(taskID);
+#endif
+}
+```
+
+这个函数首先申请了一个任务池存储空间，也就是这个 `tasksEvents` 数组。接着调用了很多带有 `“init”` 字样的函数，这些函数的作用是初始化各个层次的任务，例如：
+
+- 调用 `macTaskInit()` 函数初始化 `MAC层` 的任务
+- 调用 `nwk_init()` 函数初始化 `网络层` 的任务
+- 调用 `zclSampleSw_Init()` 函数初始化 `应用层` 的任务
+
+{% endfolding %}
+
+
+
+{% tip bolt %}事件处理函数{% endtip %}
+
+ `OSAL_SampleSw.c` 文件中还定义了一个数组，代码如下：
+
+{% folding, OSAL_SampleSw.c %}
+
+```cpp
+// 创建一个元素类型为pTaskEventHandlerFn的数组
+const pTaskEventHandlerFn tasksArr[] = {
+    macEventLoop,   // 第1个数组元素
+    nwk_event_loop, // 第2个数组元素
+//
+// 第3个数组元素
+#if !defined(DISABLE_GREENPOWER_BASIC_PROXY) && (ZG_BUILD_RTR_TYPE)
+    gp_event_loop,
+#endif
+    //
+    // 第4个数组元素
+    Hal_ProcessEvent,
+// 第5个数组元素
+#if defined(MT_TASK)
+    MT_ProcessEvent,
+#endif
+    //
+    // 第6个数组元素
+    APS_event_loop,
+//
+// 第7个数组元素
+#if defined(ZIGBEE_FRAGMENTATION)
+    APSF_ProcessEvent,
+#endif
+    //
+    // 第8个数组元素
+    ZDApp_event_loop,
+//
+// 第9个数组元素
+#if defined(ZIGBEE_FREQ_AGILITY) || defined(ZIGBEE_PANID_CONFLICT)
+    ZDNwkMgr_event_loop,
+#endif
+//
+// 第10个数组元素
+// Added to include TouchLink functionality
+#if defined(INTER_PAN)
+    StubAPS_ProcessEvent,
+#endif
+//
+// 第11个数组元素
+// Added to include TouchLink initiator functionality
+#if defined(BDB_TL_INITIATOR)
+    touchLinkInitiator_event_loop,
+#endif
+//
+// 第12个数组元素
+// Added to include TouchLink target functionality
+#if defined(BDB_TL_TARGET)
+    touchLinkTarget_event_loop,
+#endif
+    //
+    zcl_event_loop,         // 第13个数组元素
+    bdb_event_loop,         // 第14个数组元素
+    zclSampleSw_event_loop, // 第15个数组元素
+//
+// 第16个数组元素
+#if (defined OTA_CLIENT) && (OTA_CLIENT == TRUE)
+    zclOTA_event_loop
+#endif
+
+};
+```
+
+{% endfolding %}
+
+这个数组类型变量 `pTaskEventHandlerFn` 是一个函数指针类型变量，用于指向事件对应的处理函数，因此这段代码定义了一个事件处理函数数组，这个数组中的 `每一个元素均表示某一个层次任务的事件处理函数`：
+
+- `MAC层` 任务对应的事件处理函数是 `macEventLoop()`，它专门处理 `MAC层` 任务中的事件
+- `网络层` 任务对应的事件处理函数是 `nwk_event_loop()`，它专门处理 `网络层` 任务中的事件
+- `应用层` 任务对应的事件处理函数是 `zclSampleSw_event_loop()`，它专门处理 `应用层` 任中的事件
+
+
+
+{% tip bolt %}事件的应用{% endtip %}
+
+每个层次的事件处理函数的参数都包含 `1个 task id` 和 `1个 events` 参数
+
+{% gallery %}
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231127170319.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231127170359.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231127170431.webp)
+
+{% endgallery %}
+
+> 以应用层事件处理函数为例，它的第2个参数 ` events` 表示了一个事件集合，其中包含了 `0个或多个` 待处理的事件。然而， `events` 是一个 `16位` 的变量，它是怎么样表示一个事件集合的呢？
+>
+> 答案是Z-Stack 3.0采用了 `独热码（one-hot code）`的方式对事件类型进行编码。
+
+- events的分类
+
+`events` 的最高位为 `1` 时，表示这是 `系统事件集合` ，即events中的事件全是 `系统事件`
+
+`events` 的最高位为 `0` 时，表示这是 `用户事件集合` ，即events中的事件全是 `用户事件`（用户事件可以由开发者自行定义其含义，以及相应的处理）
+
+- 独热码
+
+采用独热码的方式，把所有的**用户事件编码**列举出来，并从中分析独热码的规律
+
+<img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231127171449.webp" style="zoom: 67%;" />
+
+从这些编码中，可以得出2个规律：
+
+1. 除了用于表示系统事件或者用户事件的最高位， `其他15个比特位中，只有1位为1，其他位均为0`
+2. 使用 `15个比特位` 表示 `15种用户事件`
+
+利用规律1，可以很容易地理解为什么events可以表示一个事件集合。现在假设 `events` 的值为 `0000 0000 0101 0101`，其中的 `右起第1、3、5和7位为1`，于是可以理解为事件集合events包含了 `用户事件A、C、E和G`
+
+利用规律2，可以得到 `events` 最多可以包含 `15种用户事件`
+
+
+
+{% tip bolt %}定义用户事件{% endtip %}
+
+可以使用以下方法在 `zcl_samplesw.h` 文件中定义一个用户事件：
+
+1. 定义事件名称和对应的编码
+
+```cpp
+#define SAMPLEAPP_TEST_EVT 0x0040
+```
+
+2. 把它复制到 `zcl_samplesw.h` 文件中的如图所示位置
+
+<img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231127195531.webp" style="zoom:67%;" />
+
+
+
+{% tip bolt %}处理用户事件{% endtip %}
+
+可以在 `zcl_samplesw.c` 文件中的应用层事件处理函数中添加相关的处理
+
+> `events & SAMPLEAPP_TEST_EVT` 让事件集合参数 `events` 与预定义的事件类型 `SAMPLEAPP_TEST_EVT` 做 `与运算` ，判断 `events` 中的 `右起第3位是否为1`。如果为 `1` ，那么 `events & SAMPLEAPP_TEST_EVT` 的值为 `1` ，这表示事件集合参数 `events` 包含 `SAMPLEAPP_TEST_EVT` 这个事件，因此程序执行对应的处理代码
+
+> 利用 `events ^ SAMPLEAPP_TEST_EVT` 把 `events` 中的 `第3位清0` ，然后把这个值作为函数的返回值，表示 `events中的这个事件已经被处理了`
+
+{% folding, zcl_samplesw.c %}
+
+```cpp
+uint16 zclSampleSw_event_loop(uint8 task_id, uint16 events)
+{
+  afIncomingMSGPacket_t *MSGpkt;
+  (void)task_id; // Intentionally unreferenced parameter
+
+  // 用户事件：SAMPLESW_TOGGLE_TEST_EVT
+  if (events & SAMPLESW_TOGGLE_TEST_EVT)
+  {
+    osal_start_timerEx(zclSampleSw_TaskID, SAMPLESW_TOGGLE_TEST_EVT, 500);
+    zclGeneral_SendOnOff_CmdToggle(SAMPLESW_ENDPOINT, &zclSampleSw_DstAddr, FALSE, 0);
+
+    // 消除已经处理的事件然后返回未处理的事件
+    return (events ^ SAMPLESW_TOGGLE_TEST_EVT);
+  }
+
+  // SYS_EVENT_MSG：0x8000表示系统事件，也就是说检测uint16最高位
+  if (events & SYS_EVENT_MSG)
+  {
+    // 省略系统事件的处理代码
+    // ....
+    // 消除系统事件标识然后返回未处理的事件
+    return (events ^ SYS_EVENT_MSG);
+  }
+
+#if ZG_BUILD_ENDDEVICE_TYPE
+  // 用户事件：SAMPLEAPP_END_DEVICE_REJOIN_EVT
+  if (events & SAMPLEAPP_END_DEVICE_REJOIN_EVT)
+  {
+    bdb_ZedAttemptRecoverNwk();
+    return (events ^ SAMPLEAPP_END_DEVICE_REJOIN_EVT);
+  }
+#endif
+  // 用户事件：SAMPLEAPP_LCD_AUTO_UPDATE_EVT
+  if (events & SAMPLEAPP_LCD_AUTO_UPDATE_EVT)
+  {
+    UI_UpdateLcd();
+    return (events ^ SAMPLEAPP_LCD_AUTO_UPDATE_EVT);
+  }
+  // 用户事件：SAMPLEAPP_KEY_AUTO_REPEAT_EVT
+  if (events & SAMPLEAPP_KEY_AUTO_REPEAT_EVT)
+  {
+    UI_MainStateMachine(UI_KEY_AUTO_PRESSED);
+    return (events ^ SAMPLEAPP_KEY_AUTO_REPEAT_EVT);
+  }
+
+  // 处理刚才自己定义的用户事件：SAMPLEAPP_TEST_EVT
+  if (events & SAMPLEAPP_TEST_EVT)
+  {
+    printf("Hello World!\r\n");
+    // 消除已经处理的事件然后返回未处理的事件
+    return (events ^ SAMPLEAPP_TEST_EVT);
+  }
+
+  // Discard unknown events
+  return 0;
+}
+```
+
+{% endfolding %}
+
+
+
+{% tip bolt %}触发用户事件{% endtip %}
+
+前面已经定义好事件类型和对应的处理方式了，但是需要在 `OSAL` 中触发该事件后， `OSAL` 才会执行对应的处理代码， `OSAL` 提供了专门的API来触发事件。展开OSAL层，可以找到 `OSAL_Timers.h` 文件
+
+如果希望在触发事件的 `3s` 后处理刚才自定义的事件，可在应用层初始化函数 `zclSampleSw_Init()` 的末尾位置添加如下代码：
+
+```cpp
+osal_start_timerEx(
+    zclSampleSw_TaskID, // 标记本事件属于应用层任务
+    SAMPLEAPP_TEST_EVT, // 标记本事件的类型
+    3000);              // 表示3000ms后才处理这个事件
+
+// 其中，zclSampleSw_TaskID是一个全局变量，用于标记这个事件是属于应用层任务的
+```
+
+
+
+{% tip bolt %}使用动态内存{% endtip %}
+
+Z-Stack 3.0 中动态内存分配的API在 `OSAL_Memory.h` 文件中，一般申请完动态内存后可以调用内存操作API来使用这些内存
+
+
+
+{% tip bolt %}代码测试{% endtip %}
+
+在事件触发那写
+
+{% folding, zcl_samplesw.c %}
+
+```cpp
+uint16 zclSampleSw_event_loop(uint8 task_id, uint16 events)
+{
+  // 省略其他代码....
+
+  // 处理刚才自己定义的用户事件：SAMPLEAPP_TEST_EVT
+  if (events & SAMPLEAPP_TEST_EVT)
+  {
+    char *str = "Hello World!\r\n";
+
+    char *mem = osal_mem_alloc(32); // 动态申请32个字节的内存空间
+
+    if (mem != NULL)
+    {
+      osal_memset(mem, 0, 32);                 // 清0内存空间
+      osal_memcpy(mem, str, osal_strlen(str)); // 字符串拷贝
+      printf(mem);
+      osal_mem_free(mem);
+    }
+
+    osal_start_timerEx(zclSampleSw_TaskID, SAMPLEAPP_TEST_EVT, 3000); // 重新触发事件，3000ms后执行
+
+    // 消除已经处理的事件然后返回未处理的事件
+    return (events ^ SAMPLEAPP_TEST_EVT);
+  }
+  return 0;
+}
+```
+
+{% endfolding %}
+
+<img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231128092544.webp" style="zoom:67%;" />
+
+
+
+### HAL文件结构和工程结构
+
+首先就是打开 Z-Stack 3.0 的压缩包，打开里面的项目 `SampleSwitch`，这个就是以后我们编写程序的项目了，不需要新建工程
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231128203622.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231128204230.webp)
+
+- HAL的架构
+
+>  初始化
+
+初始化函数 `Hal_Init` 在 `hal_drivers.h` 里
+
+```cpp
+/**************************************************************************************************
+ * @fn      Hal_Init
+ *
+ * @brief   Hal Initialization function.
+ *
+ * @param   task_id - Hal TaskId
+ *
+ * @return  None
+ **************************************************************************************************/
+void Hal_Init( uint8 task_id )
+{
+  /* Register task ID */
+  Hal_TaskID = task_id;
+
+#ifdef CC2591_COMPRESSION_WORKAROUND
+  osal_start_reload_timer( Hal_TaskID, PERIOD_RSSI_RESET_EVT, PERIOD_RSSI_RESET_TIMEOUT );
+#endif
+}
+```
+
+> 驱动程序初始化
+
+在 `hal_drivers.c` 里，找到驱动初始化函数 `HalDriverInit`，这个函数主要作用是针对各种硬件外设进行初始化
+
+需要用指定的外设就定义对应宏就可以了
+
+{% folding, hal_drivers.h %}
+
+```cpp
+/**************************************************************************************************
+ * @fn      Hal_DriverInit
+ *
+ * @brief   Initialize HW - These need to be initialized before anyone.
+ *
+ * @param   task_id - Hal TaskId
+ *
+ * @return  None
+ **************************************************************************************************/
+void HalDriverInit (void)
+{
+  /* TIMER */
+// 定时器，通过设置宏定义HAL_TIMER为TRUE来使能该功能
+#if (defined HAL_TIMER) && (HAL_TIMER == TRUE)
+#endif
+
+  /* ADC */
+// 模数转换功能，通过设置宏定义HAL_ADC为TRUE来使能该功能  
+#if (defined HAL_ADC) && (HAL_ADC == TRUE)
+  HalAdcInit();
+#endif
+
+  /* DMA */
+// DMA（直接存储器访问），通过设置宏定义HAL_DMA为TRUE来使能该功能  
+#if (defined HAL_DMA) && (HAL_DMA == TRUE)
+  // Must be called before the init call to any module that uses DMA.
+  HalDmaInit();
+#endif
+
+  /* AES */
+// AES（高级加密标准），通过设置宏定义HAL_AES为TRUE来使能该功能  
+#if (defined HAL_AES) && (HAL_AES == TRUE)
+  HalAesInit();
+#endif
+
+  /* LCD */
+// 显示器，通过设置宏定义HAL_LCD为TRUE来使能该功能  
+#if (defined HAL_LCD) && (HAL_LCD == TRUE)
+  HalLcdInit();
+#endif
+
+  /* LED */
+// LED，通过设置宏定义HAL_LED为TRUE来使能该功能  
+#if (defined HAL_LED) && (HAL_LED == TRUE)
+  HalLedInit();
+#endif
+
+  /* UART */
+// 串口，通过设置宏定义HAL_UART为TRUE来使能该功能  
+#if (defined HAL_UART) && (HAL_UART == TRUE)
+  HalUARTInit();
+#endif
+
+  /* KEY */
+// 按键，通过设置宏定义HAL_KEY为TRUE来使能该功能  
+#if (defined HAL_KEY) && (HAL_KEY == TRUE)
+  HalKeyInit();
+#endif
+  
+  /* SPI */
+// SPI，通过设置宏定义HAL_SPI为TRUE来使能该功能  
+#if (defined HAL_SPI) && (HAL_SPI == TRUE)
+  HalSpiInit();
+#endif
+
+  /* HID */
+// HID（Human Interface Device），通过设置宏定义HAL_HID为TRUE来使能该功能  
+#if (defined HAL_HID) && (HAL_HID == TRUE)
+  usbHidInit();
+#endif
+}
+```
+
+{% endfolding %}
+
+
+
+> 事件处理
+
+HAL的事件处理函数 `Hal_ProcessEvent()` 在 `hal_drivers.c` 文件中，它的主要作用是处理HAL层的事件
+
+{% folding, hal_drivers.c %}
+
+```cpp
+/**************************************************************************************************
+ * @fn      Hal_ProcessEvent
+ *
+ * @brief   Hal Process Event
+ *
+ * @param   task_id - Hal TaskId
+ *          events - events
+ *
+ * @return  None
+ **************************************************************************************************/
+uint16 Hal_ProcessEvent( uint8 task_id, uint16 events )
+{
+  uint8 *msgPtr;
+
+  (void)task_id;  // Intentionally unreferenced parameter
+
+  if ( events & SYS_EVENT_MSG )
+  {
+    msgPtr = osal_msg_receive(Hal_TaskID);
+
+    while (msgPtr)
+    {
+      /* Do something here - for now, just deallocate the msg and move on */
+
+      /* De-allocate */
+      osal_msg_deallocate( msgPtr );
+      /* Next */
+      msgPtr = osal_msg_receive( Hal_TaskID );
+    }
+    return events ^ SYS_EVENT_MSG;
+  }
+// 蜂鸣器事件，需要宏定义HAL_BUZZER为TRUE才使能该事件
+#if (defined HAL_BUZZER) && (HAL_BUZZER == TRUE)
+  if (events & HAL_BUZZER_EVENT)
+  {
+    HalBuzzerStop();
+    return events ^ HAL_BUZZER_EVENT;
+  }
+#endif
+// RSSI重置事件，需要宏定义PERIOD_RSSI_RESET_EVT为TRUE才使能该事件
+#ifdef CC2591_COMPRESSION_WORKAROUND
+  if ( events & PERIOD_RSSI_RESET_EVT )
+  {
+    macRxResetRssi();
+    return (events ^ PERIOD_RSSI_RESET_EVT);
+  }
+#endif
+  // LED闪烁事件
+  if ( events & HAL_LED_BLINK_EVENT )
+  {
+#if (defined (BLINK_LEDS)) && (HAL_LED == TRUE)
+    HalLedUpdate();
+#endif /* BLINK_LEDS && HAL_LED */
+    return events ^ HAL_LED_BLINK_EVENT;
+  }
+  // 按键事件
+  if (events & HAL_KEY_EVENT)
+  {
+#if (defined HAL_KEY) && (HAL_KEY == TRUE)
+    /* Check for keys */
+    HalKeyPoll();
+
+    /* if interrupt disabled, do next polling */
+    if (!Hal_KeyIntEnable)
+    {
+      osal_start_timerEx( Hal_TaskID, HAL_KEY_EVENT, 100);
+    }
+#endif
+    return events ^ HAL_KEY_EVENT;
+  }
+// 低功耗事件，需要宏定义HAL_SLEEP_TIMER_EVENT为TRUE才使能该事件
+#if defined POWER_SAVING
+  if ( events & HAL_SLEEP_TIMER_EVENT )
+  {
+    halRestoreSleepLevel();
+    return events ^ HAL_SLEEP_TIMER_EVENT;
+  }
+
+  if ( events & HAL_PWRMGR_HOLD_EVENT )
+  {
+    (void)osal_pwrmgr_task_state(Hal_TaskID, PWRMGR_HOLD);
+
+    (void)osal_stop_timerEx(Hal_TaskID, HAL_PWRMGR_CONSERVE_EVENT);
+    (void)osal_clear_event(Hal_TaskID, HAL_PWRMGR_CONSERVE_EVENT);
+
+    return (events & ~(HAL_PWRMGR_HOLD_EVENT | HAL_PWRMGR_CONSERVE_EVENT));
+  }
+
+  if ( events & HAL_PWRMGR_CONSERVE_EVENT )
+  {
+    (void)osal_pwrmgr_task_state(Hal_TaskID, PWRMGR_CONSERVE);
+    return events ^ HAL_PWRMGR_CONSERVE_EVENT;
+  }
+#endif
+
+  return 0;
+}
+```
+
+{% endfolding %}
+
+
+
+> HAL轮询
+
+在 `hal_drivers.c` 文件中，可以找到 `Hal_ProcessPoll()` 函数，这个函数的主要作用是轮询那些需要快速处理的功能模块
+
+```cpp
+/**************************************************************************************************
+ * @fn      Hal_ProcessPoll
+ *
+ * @brief   This routine will be called by OSAL to poll UART, TIMER...
+ *
+ * @param   task_id - Hal TaskId
+ *
+ * @return  None
+ **************************************************************************************************/
+void Hal_ProcessPoll ()
+{
+// 是否进入低功耗模式  
+#if defined( POWER_SAVING )
+  /* Allow sleep before the next OSAL event loop */
+  ALLOW_SLEEP_MODE();
+#endif
+  
+  /* UART Poll */
+// 串口  
+#if (defined HAL_UART) && (HAL_UART == TRUE)
+  HalUARTPoll();
+#endif
+  
+  /* SPI Poll */
+// SPI  
+#if (defined HAL_SPI) && (HAL_SPI == TRUE)
+  HalSpiPoll();
+#endif
+
+  /* HID poll */
+// HID  
+#if (defined HAL_HID) && (HAL_HID == TRUE)
+  usbHidProcessEvents();
+#endif
+ 
+}
+```
+
+
+
+{% note red 'fas fa-fan' flat %}注意{% endnote %}
+
+在进行适配层前需要把裁剪UI步骤先完成，不然会影响到下面的实验效果！！！
+
+
+
+{% tip bolt %}裁剪应用层UI{% endtip %}
+
+需要把一些用不到的功能代码去掉，比如【APP】下的 `zcl_sampleapps_ui.c` 和 `zcl_sampleapps_ui.h`，这两个文件是针对TI的评估板而设计的UI，在产品开发过程并不需要用到，而且还会影响其他的开发工作，因此需要把它们裁剪掉，右击文件，选择 `Remove`， `zcl_samplesw.c` 文件中会调用到这些UI，也需要把其全部删除，在里面搜索 `UI_`把相关函数也删除
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231201172905.webp)
+
+
+
+
+
+### 硬件适配层-LED
+
+{% tip bolt %}常用API{% endtip %}
+
+> `void HalLedInit( void )`
+>
+> - `功能`：初始化LED
+
+> `uint8 HalLedSet( uint8 led, uint8 mode )`
+>
+> - `功能`：开关LED
+> - `led`：用于指定待设定的LED
+> - `mode`：指定工作模式
+
+> `void HalLedBlink( uint8 leds, uint8 cnt, uint8 duty, uint16 time )`
+>
+> - `功能`：闪烁LED
+> - `leds`：用于指定LED
+> - `cnt`：用于指定闪烁的次数
+> - `duty`：用于指定LED是开启状态时的占空比
+> - `time`：用于指定每次闪烁的时间周期（单位：ms）
+
+
+
+{% tip bolt %}程序编写{% endtip %}
+
+>  `hal_led.h` 进行LED引脚编号定义，默认支持4个LED
+
+> LED的物理映射
+>
+> 在调用LED API之前，需要配置好LED的物理映射定义。LED的物理映射定义在 `hal_board_cfg.h` 文件( `Components\hal\target\CC2530EB\hal_board_cfg.h` )
+
+> 需要在设置里添加宏才能使用
+>
+> ```cpp
+> HAL_LED=TRUE
+> ```
+
+
+
+{% folding, hal_board_cfg.h %}
+
+```cpp
+#define LED1_BV           BV(4)
+#define LED1_SBIT         P0_4
+#define LED1_DDR          P0DIR
+#define LED1_POLARITY     ACTIVE_HIGH
+```
+
+{% endfolding %}
+
+{% folding, zcl_samplesw.c %}
+
+```cpp
+/*========================= USER BEGIN =========================*/
+#include <stdio.h>
+/*========================== USER END ==========================*/
+
+void zclSampleSw_Init( byte task_id )
+{
+  /*========================= USER BEGIN =========================*/
+  osal_start_timerEx(zclSampleSw_TaskID, USERAPP_TEST_EVT, 0); // 定义触发事件
+  /*========================== USER END ==========================*/    
+}
+
+uint16 zclSampleSw_event_loop( uint8 task_id, uint16 events )
+{
+/*========================= USER BEGIN =========================*/
+  if (events & USERAPP_TEST_EVT)
+  {
+    printf("LED Flip!\r\n");
+    HalLedBlink(HAL_LED_1, 10, 30, 1000); // 指定第1个LED, 闪烁次数是10, 指定50%的时间LED是开启状态, 指定闪烁周期是1s
+
+    return (events ^ USERAPP_TEST_EVT);
+  }
+/*========================== USER END ==========================*/    
+}
+```
+
+{% endfolding %}
+
+
+
+{% tip bolt %}实验现象{% endtip %}
+
+LED以1s周期进行闪烁10次，亮灭各占50%(即500ms)
+
+
+
+### 硬件适配层-按键
+
+{% tip bolt %}程序编写{% endtip %}
+
+> 在 `hal_key.h` 
+>
+> ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231129104340.webp)
+
+> `hal_board_cfg.h`里进行物理引脚映射
+
+> 需要在设置里添加宏才能使用
+>
+> ```cpp
+> HAL_KEY=TRUE
+> ISR_KEYINTERRUPT
+> ```
+
+
+
+{% folding, hal_board_cfg.h %}
+
+```cpp
+/* S1 */
+#define PUSH1_BV          BV(1)
+#define PUSH1_SBIT        P0_1
+
+#if defined (HAL_BOARD_CC2530EB_REV17)
+  #define PUSH1_POLARITY    ACTIVE_LOW
+#elif defined (HAL_BOARD_CC2530EB_REV13)
+  #define PUSH1_POLARITY    ACTIVE_LOW
+#else
+  #error Unknown Board Indentifier
+#endif
+```
+
+{% endfolding %}
+
+> 按键需要在 `zclSampleSw_Init` 注册(默认已注册)： 
+>
+> ```cpp
+> RegisterForKeys( zclSampleSw_TaskID );
+> ```
+
+> 按键属于系统事件，按键处理函数是 `zclSampleSw_HandleKeys`
+
+> 在初始化函数HalKeyInit中有个地方需要说明，这个函数中有一段代码（用了快配置HAL_KEY_SW_6这个按键的引脚为输入功能）ZStack的本意是S1按键引脚P0_1可以用来驱动LED，就是和按键复用了，是否用作LED取决于宏ENABLE_LED4_DISABLE_S1是否定义，但是协议栈没有开源的那部分代码中定义了这个宏，也算是ZStack的一个Bug，所以这段代码我们需做修改，把预编译去掉（注释掉），否则按键引脚不会被配置为输入：
+>
+> ```cpp
+> void HalKeyInit( void )
+> {
+> // #if ! defined ENABLE_LED4_DISABLE_S1
+>   HAL_KEY_SW_6_DIR &= ~(HAL_KEY_SW_6_BIT);    /* Set pin direction to Input */
+> // #endif
+> }
+> ```
+
+
+
+{% folding, zcl_samplesw.c %}
+
+```cpp
+uint16 zclSampleSw_event_loop( uint8 task_id, uint16 events )
+{
+    // 省略...
+  if ( events & SYS_EVENT_MSG )
+  {
+      // 省略...
+        case KEY_CHANGE:	// 自动进入
+          zclSampleSw_HandleKeys( ((keyChange_t *)MSGpkt)->state, ((keyChange_t *)MSGpkt)->keys );
+          break;
+      // 省略...
+  }    
+}
+
+// 按键中断触发处理
+static void zclSampleSw_HandleKeys( byte shift, byte keys )
+{
+   UI_MainStateMachine(keys);
+  /*========================= USER BEGIN =========================*/
+  if (keys & HAL_KEY_SW_6)
+  {
+    HalLedBlink(HAL_LED_1, 1, 50, 1000);
+  }
+  /*========================== USER END ==========================*/
+}
+```
+
+{% endfolding %}
+
+
+
+### 硬件适配层-串口
+
+使用串口前，需要首先配置一下串口，函数写在 `zcl_samplesw.c`
+
+{% folding, zcl_samplesw.c %}
+
+```cpp
+/*========================= USER BEGIN =========================*/
+#include <stdio.h>
+
+#define UART_MAX_LEN 128  // 串口接收最大长度
+static uint8 ucUART_Rx_Buff[UART_MAX_LEN];  // 接收缓存数组
+
+static void User_UART_Init(void);
+static void UART_CallBack(uint8 port, uint8 event);
+/*========================== USER END ==========================*/
+
+void zclSampleSw_Init( byte task_id )
+{
+    // ...
+    
+  /*========================= USER BEGIN =========================*/
+  User_UART_Init();     // 串口配置初始化
+  /*========================== USER END ==========================*/
+}
+
+/*========================= USER BEGIN =========================*/
+/*
+* @function: User_UART_Init
+* @param: None
+* @retval: None
+* @brief: 串口初始化
+*/
+static void User_UART_Init(void)
+{
+    halUARTCfg_t uartConfig;
+
+    uartConfig.configured = TRUE; // 允许配置
+    uartConfig.baudRate = HAL_UART_BR_115200; // 波特率
+    uartConfig.flowControl = FALSE; // 关闭硬件流控
+    uartConfig.flowControlThreshold = 0;  // 和流控相关
+    uartConfig.rx.maxBufSize = UART_MAX_LEN;
+    uartConfig.tx.maxBufSize = 0; // 发送缓冲区大小 --- 不需要发送缓冲区，所以设置长度为0
+    uartConfig.idleTimeout = 6; // 默认超时时间
+    uartConfig.intEnable = TRUE;  // 使能中断
+    uartConfig.callBackFunc = UART_CallBack;  // 设置回调函数
+
+    HalUARTOpen(HAL_UART_PORT_0, &uartConfig);  // 打开串口0
+}
+
+/*
+* @function: UART_CallBack
+* @param: None
+* @retval: None
+* @brief: 串口中断回调函数
+*/
+static void UART_CallBack(uint8 port, uint8 event)
+{
+    uint8 rxlen = Hal_UART_RxBufLen(HAL_UART_PORT_0); // 获取当前串口接收缓冲区有多少字节的数据 
+
+    if (rxlen != 0)
+    {
+      HalUARTRead(HAL_UART_PORT_0, ucUART_Rx_Buff, rxlen);  // 从串口缓冲区中读取数据
+      HalUARTWrite(HAL_UART_PORT_0, ucUART_Rx_Buff, rxlen); // 通过串口发送数据
+    }
+}
+/*========================== USER END ==========================*/
+```
+
+{% endfolding %}
+
+> 需要在设置里添加宏才能使用
+>
+> ```cpp
+> HAL_UART=TRUE
+> INT_HEAP_LEN=2048
+> ```
+
+
+
+### 硬件适配层-显示屏
+
+{% tip bolt %}常用API{% endtip %}
+
+> `void HalLcdWriteString ( char *str, uint8 option)`
+>
+> - `功能`：在指定的行中显示字符串
+> - `str`：要显示的字符串
+> - `option`：在哪一行显示数据
+
+> `void HalLcdWriteValue ( uint32 value, const uint8 radix, uint8 option)`
+>
+> - `功能`：在指定行用指定进制显示数值
+> - `value`：待显示的数值
+> - `radix`：指定的进制
+> - `option`：在哪一行显示数据
+
+
+
+
+
+删除协议栈中的hal文件夹，把这个新的替换上去
+
+{% gallery %}
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231130215220.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231130215243.webp)
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231130215301.webp)
+
+{% endgallery %}
+
+然后添加路径：
+
+```bash
+$PROJ_DIR$\..\..\..\..\..\Components\hal\target\CC2530EB\Common
+$PROJ_DIR$\..\..\..\..\..\Components\hal\target\CC2530EB\SPI
+$PROJ_DIR$\..\..\..\..\..\Components\hal\target\CC2530EB\HW_LCD\Font
+$PROJ_DIR$\..\..\..\..\..\Components\hal\target\CC2530EB\HW_LCD\HAL_LCD_SPI
+$PROJ_DIR$\..\..\..\..\..\Components\hal\target\CC2530EB\HW_LCD\HAL_OLED
+$PROJ_DIR$\..\..\..\..\..\Components\hal\target\CC2530EB\HW_LCD\HAL_TFT
+```
+
+然后如果需要启动OLED功能，需要打开宏：
+
+```cpp
+HAL_LCD=TRUE
+HAL_LCD_OLED12864
+```
+
+如果是TFT的话则需要打开下面的宏：
+
+```cpp
+HAL_LCD=TRUE
+```
+
+
+
+### 硬件适配层-ADC
+
+{% tip bolt %}常用API{% endtip %}
+
+> `uint16 HalAdcRead ( uint8 channel, uint8 resolution )`
+>
+> - `功能`：读取ADC的值
+> - `channel`：取值范围是0 ~ 7，分别对应CC2530的P0_0 ~ P0_7引脚
+> - `resolution`：采样精度
+
+
+
+### 常用API
+
+{% tip bolt %}OSAL_Timers.h{% endtip %}
+
+> `uint8 osal_start_timerEx( uint8 task_id, uint16 event_id, uint32 timeout_value )`
+>
+> - `功能`：触发事件
+>
+> - `task_id`：任务ID，用于标记这个事件是属于哪一个层次的任务
+> - `event_id`：事件ID，用于标记这个事件的类型
+> - `timeout_value`：表示多少毫秒后才处理这个事件
+
+
+
+{% tip bolt %}OSAL_Memory.h{% endtip %}
+
+> `void *osal_mem_alloc( uint16 size )`
+>
+> - `功能`：动态申请内存空间
+> - `size`：申请多少个字节的内存空间
+> - `返回值`：返回该内存空间的指针
+
+> `void osal_mem_free( void *ptr )`
+>
+> - `功能`：动态释放内存空间
+> - `ptr`：待释放的内存空间指针
+
+
+
+{% tip bolt %}OSAL.h{% endtip %}
+
+> `void *osal_memcpy( void*, const void GENERIC *, unsigned int )`
+>
+> - `功能`：把内存空间的内容复制到另一个内存空间中
+> - `void *`：目标内存空间
+> - `void GENERIC *`：源内存空间
+> - `unsigned int`：复制多少个字节
+
+> `void *osal_memset( void *dest, uint8 value, int len )`
+>
+> - `功能`：把内存空间的值设置为指定的值
+> - `dest`：内存空间
+> - `value`：指定的值
+> - `len`：把从dest起的len个字节的存储空间的值设置为value
+
+
+
+## ZigBee 3.0网络编程
+
+### 网络原理
+
+{% tip bolt %}协议层次结构{% endtip %}
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231201101453.webp)
+
+> **IEEE 802.14.4 PHY layer**：物理层，其工作内容由IEEE 802.15.4定义，主要作用是将一个设备的数据转换为电磁波信号之后发送到另一个设备，再由另一个设备解读电磁波信号获取数据
+
+> **EE 802.14.4 MAC layer**：MAC层，其工作内容由IEEE 802.15.4定义，其主要作用是控制多个网络设备有序地利用物理通信资源电磁波来通信
+
+> **Network （NWK）layer**：网络层，负责多个设备之间的组网、数据传输以及网络安全管理等
+
+> **Application layer**：应用层，可以划分为以下两个层次：
+> （1） `Application Support（APS）Sub-Layer`：应用支持子层，是网络层到应用框架层的过渡，提供数据的收发、安全加密，以及设备地址管理等功能
+> （2） `Application Framework`：应用框架层，由一个或者多个应用端点（EndPoint）组成。应用端点是不同设备间通信的出入口，同时也是描述设备具备哪些功能的基础
+>
+> <img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231201101837.webp" style="zoom:50%;" />
+>
+> 其中的端点0为特殊端点，端点255用于向其他端点的广播，端点241~254是保留端点
+
+> **ZigBee Cluster Library（ZCL）**：ZigBee集群库，由ZigBee联盟定义，是ZigBee 3.0的基础，也是不同厂商设备能够互联互通的基础
+
+> **ZigBee Device Objects（ZDO）**：ZigBee设备对象，也就是应用端点0，它是应用层其他端点与应用子层管理实体交互的中间件，主要提供的功能如下：
+> （1）管理ZigBee设备
+> （2）创建、扫描及加入网络
+> （3）应用端点绑定、解绑
+> （4）安全管理
+
+> **Base Device Behavior（BDB）**：ZigBee基础设备行为，定义设备的行为规范，以确保不同厂商设备间的互操作性，基础设备行为规范的范围定义如下：
+> （1）基础设备所需的环境
+> （2）基础设备的初始化（initialization）过程
+> （3）基础设备的 Commissioning 过程
+> （4）基础设备的重置（reset）过程
+> （5）基础设备的安全（security）过程
+
+
+
+{% tip bolt %}IEEE 802.15.4协议{% endtip %}
+
+这个协议是专门为低速无线个人区域网络（Low-rate wireless personal area network，WPAN）而设计的，具有超低复杂度、超低功耗、低数据传输率的特点
+
+
+
+#### 物理层
+
+IEEE 802.15.4的物理层作为Zigbee协议结构的最低层，提供了最基础的服务。通常地，作为ZigBee技术的应用开发者，只需通俗地理解物理层的主要作用是将一个设备的数据转换为电磁波信号之后发送到另一个设备，再由另一个设备解读电磁波信号获取数据
+
+IEEE 802.15.4提供了基于2.4GHz、868MHz以及915MHz电磁波频带的3两种物理层协议。这3者之间存在一些差异：
+
+- **地域差异**
+  在世界各地均能使用 `2.4GHz` ，但是 `868MHz` 和 `915MHz` 只能分别在欧洲和美国中使用。因此，在中国，ZigBee协议是基于 `2.4GHz` 的
+
+- **通信速率差异**
+   `2.4GHz` 物理层支持240kb/s的数据率，而 `868MHz` 和 `915MHz` 物理层的数据率分别是20kb/s和40kb/s
+
+- **信道数量的差异**
+   `868MHz` 频段定义了一个信道， `915MHz` 频段定义了10个信道， `2.4GHz` 频段定义了16个信道
+
+`2.4GHz` 频段的信道定义在ZStack 3.0的工程文件 `Tools/f8wConfig.cfg` 中，配置文件中默认开启的是 `2.4G` 频段的 `11信道`
+
+```cpp
+/* Default channel is Channel 11 - 0x0B */
+// Channels are defined in the following:
+//         0      : 868 MHz     0x00000001
+//         1 - 10 : 915 MHz     0x000007FE
+//        11 - 26 : 2.4 GHz     0x07FFF800
+//
+//-DMAX_CHANNELS_868MHZ     0x00000001
+//-DMAX_CHANNELS_915MHZ     0x000007FE
+//-DMAX_CHANNELS_24GHZ      0x07FFF800
+//-DDEFAULT_CHANLIST=0x04000000  // 26 - 0x1A
+//-DDEFAULT_CHANLIST=0x02000000  // 25 - 0x19
+//-DDEFAULT_CHANLIST=0x01000000  // 24 - 0x18
+//-DDEFAULT_CHANLIST=0x00800000  // 23 - 0x17
+//-DDEFAULT_CHANLIST=0x00400000  // 22 - 0x16
+//-DDEFAULT_CHANLIST=0x00200000  // 21 - 0x15
+//-DDEFAULT_CHANLIST=0x00100000  // 20 - 0x14
+//-DDEFAULT_CHANLIST=0x00080000  // 19 - 0x13
+//-DDEFAULT_CHANLIST=0x00040000  // 18 - 0x12
+//-DDEFAULT_CHANLIST=0x00020000  // 17 - 0x11
+//-DDEFAULT_CHANLIST=0x00010000  // 16 - 0x10
+//-DDEFAULT_CHANLIST=0x00008000  // 15 - 0x0F
+//-DDEFAULT_CHANLIST=0x00004000  // 14 - 0x0E
+//-DDEFAULT_CHANLIST=0x00002000  // 13 - 0x0D
+//-DDEFAULT_CHANLIST=0x00001000  // 12 - 0x0C
+-DDEFAULT_CHANLIST=0x00000800  // 11 - 0x0B
+```
+
+在不同的信道中创建的ZigBee网络互不干扰，但在相同的信道下，也可以组建多个独立的ZigBee网络，那么如何区分在相同的信道下构建间的多个ZigBee网络？
+
+答案是每个ZigBee网络都会被分配一个唯一的ID号，称为 `“PanID”`，可以利用PanID来区分相同信道中的不同ZigBee网络
+
+
+
+#### MAC层
+
+如果有多个网络设备都要发送数据，那么需要怎么控制它们有序地来发送数据呢？
+
+为了解决这个问题，媒体接入 `控制层（MAC，Media Access Control）`
+
+媒体接入控制层，是建立在物理层之上，它不关心数据是怎么转换成电磁波信号、电磁波的频率是多少等，它只关心自己负责那部分，也就是：
+
+- 第1，将设备划分为协调器和普通设备
+- 第2，协调器产生并发送信标帧，普通设备根据协调器的信标帧与协调器同步
+- 第3，个域网的关联和取消关联
+- 第4，确保无线信道的通信安全
+- 第5，支持带有冲突避免的载波侦听多路访问（CSMA/CA）
+- 第6，提供时槽保障（GTS，Guaranteed Time Slot）服务
+- 第7，提供不同设备之间的MAC层的可靠传输服务
+
+`MAC地址`：ZigBee 网络的中的每一个设备都会有一个固定的MAC地址，也称为物理地址或者IEEE地址，用于标识MAC层设备的地址。MAC这是一个 `64位的二进制地址`，通常由芯片厂商在芯片生产过程固化到芯片中的
+
+
+
+#### 网络层
+
+ZigBee网络层基于IEEE 802.15.4协议之上，是ZigBee协议的核心部分，所以人们也通俗地称为“核心协议”，它主要负责以下3方面的工作:
+
+- 多设备组网
+- 数据传输
+- 网络安全管理
+
+> 多设备组网详解
+
+- 网络拓扑结构
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231201110231.webp)
+
+- Zigbee设备角色
+
+处于网络中的设备我们们可以通俗地称为 `“网络节点”`。ZigBee 网络节点有以下3种类型：
+
+**协调器**（Coordinator）：充当ZigBee网络的网关（中心节点）角色，通常负责ZigBee协议与NB-IoT、WiFi等其他协议的转换、在特定的信道组建网络等，同时具备路由器的功能
+
+**路由器**（Router）：又称为中继器，负责数据路由。所有的终端设备都需要通过协调器或者路由器加入到网络中
+
+**终端设备**（End Device）：又称为叶子节点，必须通过协调器或者路由器才能加入到ZigBee网络中。例如在智能家居场景中，终端设备通常就是是温湿度传感器、无线开关按钮或者各种生活电器等等
+
+- 组网特性
+
+ZigBee组网有3个主要特性。第1，支持构建和维护超过10,000个网络节点的网状网络，远远超过蓝牙的8个和WiFi的32个。它的好处在于：
+
+1. 一方面可以让更多设备加入到自动化控制和远程控制中，设备数量上的局限不复存在
+2. 另一方面，在网状网络中，两个网络节点之间有1条或以上的通信链路，可以提供多通道通信服务。在复杂的工业场景下，往往不能保证每条无线网络通信链路始终畅通，多通道通信能够使得当某条链路堵塞后使用其他链路来通信，确保了通信的稳定性
+3. **支持动态路由**，即根据各个网络节点的实时状态来动态计算网络中任意两个节点之间的最优通信路径。举个例子，例如在网状网络的场景下，任意两个节点之间可能有多条通信路径，通过计算各个路径的实时质量从而动态选择最优的通信路径
+4. **支持自组网**，即在网络节点被拆散开，因为超出通信范围而无法通信之后，当他们再次回到通信范围内相聚的时候，彼此之间能够自动重新构建网络来实现数据通信
+
+
+
+> 数据传输详解
+
+数据传输是指设备之间的控制指令和设备的状态信息等数据的传输。举个例子，以空调为例，这里所说的控制指令是指空调的开关、制冷温度设定、工作模式设定等指令；状态信息是指空调在某个时刻的状态，例如设定的温度是多少、室内温度是多少、工作模式是什么等
+
+
+
+> 安全管理
+
+网络安全管理是指数据的加密解密等
+
+
+
+> 网络地址
+
+处于网络中的ZigBee设备都会被分配一个用于标识的网络地址，通过这个网络地址可以找到对应的设备。ZigBee网络地址是一个16位的地址（0x0000 - 0xFFFF）。在ZStack 3.0中，有几个特殊网络地址需要了解一下：
+
+（1）协调器的网络地址为固定的 `0x0000`
+（2） `0xFFFF` - 这是一个对整个ZigBee进行广播的广播地址
+（3） `0xFFFD` - 只对打开接收的设备进行广播的地址
+（4） `0xFFFC` - 只对协调器和路由设备广播的地址
+（5） `0xFFFE` - 用作无效地址
+（6） `0xFFF8 ~0xFFFB` - 保留地址
+（7） `0x0001~0xFFF7` 被分配到ZigBee网络中的设备，作为网络地址使用
+
+
+
+### ZigBee BDB
+
+> 简介
+
+ZigBee设备在相互发送数据之前，需要先组建网络。 `BDB（Base Device Behavior，设备基本行为）` 是ZigBee 3.0 的一个新特性，为各个ZigBee设备提供了一套统一的机制，**让它们正确地组建ZigBee网络**。BDB主要包含以下3方面的内容：
+
+- **Commissioning Modes**：Commissioning模式，定义了ZigBee设备之间组网的基本规范
+- **BDB Security**：定义了一些网络安全规范
+- **Reset Methods**：开发者可以使用多个复位方法
+
+在协议栈的 `BDB` 文件夹里面可以找到BDB相关的代码文件
+
+<img src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231201113818.webp" style="zoom:50%;" />
+
+`备注`：由于BDB Security和Reset Methods这两部分，开发者一般接触的比较少，所以暂时不展开讲解。**Commissioning Modes是ZigBee组网的核心内容**
+
+
+
+> BDB Commissioning Modes
+
+BDB提供了4种主要的 `Commissioning` 模式给开发者使用，分别是 `Network Steering`、 `Network Formation`、 `Finding and Binding（F & B）`和 `Touchlink`
+
+- Network Steering
+
+定义了设备如何加入到ZigBee网络中，具体方式如下：
+
+1. 如果设备还没有在ZigBee网络中，那么它们会寻找一个合适的ZigBee网络并加入到其中
+2. 特别地，对于路由器类型的设备，在入网成功后，允许其它设备通过本设备来加入到这个ZigBee网络中
+
+所有需要加入到ZigBee网络中的设备都必须要支持Network Steering
+
+- Network Formation
+
+Network Formation 规定协调器类型的设备需要去建立一个中心信任的安全网络。这种网络的特点是所有需要加入到网络中的设备都需要经过信任中心的同意才能加入，而协调器本身就是这个信任中心
+
+类似地，对于路由器类型的设备，如果条件允许的话会创建一个分布式安全网络。这里暂时不展开讲解这种网络了
+
+所有的协调器类型设备都必须要支持 Network Formation ，而对于路由器类型的设备来说，这是可选的模式
+
+- Finding and Binding（F & B）
+
+ZigBee 3.0是使用 `Cluster（集群）` 来描述设备的功能的。每种设备都有各自的功能，都有各自的一系列 `Cluster` 。这里的发现与绑定是指ZigBee设备的 `Cluster` 之间的相互发现、相互绑定
+
+所有的ZigBee设备都必须要支持Finding and Binding（F & B）
+
+- Touchlink
+
+一般用于两个ZigBee设备之间直接进行通信
+
+> 假设现在有两个支持Toucklink的ZigBee设备：
+>
+> - 一个是无线按钮，支持通过Touchlink的方式发送一个恢复出厂设置的指令；
+> - 另一个是灯，支持接收通过Touchlink方式发来的恢复出厂设置指令并执行相应的处理
+>
+> 用户可以拿着这个按钮靠近这个灯，**让两者相距约2cm**，然后按下按钮发送指令，这个灯会收到指令并执行相应处理。
+>
+> 如果用户**把按钮拿远一些测试**，会发现灯收不到这个指令。如果用户把这个按钮拿去靠近**一个新买的相同的灯**测试，会发现这个灯也会收到这个指令
+
+> `特点`：
+>
+> - 通信距离短，约2cm。按钮向灯发送指令时，灯会通过检测按钮的网络信号强度来判断按钮的距离，从而决定是否处理该指令
+> - 设备之间可以直接通信，可以把这个按钮拿去直接跟一个新买的相同的灯通信
+
+Touchlink用得相对比较少，ZigBee设备并不一定都需要支持Touchlink，开发者可以让自己开发的设备支持或不支持这个功能
+
+
+
+在编译代码的时候可以选择不同的网络角色，从而编写不同角色的程序，可以选择待开发设备的对应的工作模式
+
+![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231202111319.webp)
+
+
+
+#### 组网实验
+
+
+
+
+
+
+
+### 常用API
+
+- 头文件 `bdb_interface.h`
+
+> `void bdb_StartCommissioning(uint8 mode)`
+>
+> `功能`：协调器组建网络/路由器或终端设备加入网络
+>
+> `mode`：模式(在bdb.h里定义了)，7种
+
+
+
+
 
