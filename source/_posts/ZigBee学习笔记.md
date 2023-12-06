@@ -5450,6 +5450,14 @@ HAL_LCD=TRUE
 
 ### 硬件适配层-ADC
 
+
+
+> 需要添加宏才能使用
+>
+> ```cpp
+> HAL_ADC=TRUE
+> ```
+
 {% tip bolt %}常用API{% endtip %}
 
 > `uint16 HalAdcRead ( uint8 channel, uint8 resolution )`
@@ -5457,6 +5465,8 @@ HAL_LCD=TRUE
 > - `功能`：读取ADC的值
 > - `channel`：取值范围是0 ~ 7，分别对应CC2530的P0_0 ~ P0_7引脚
 > - `resolution`：采样精度
+
+
 
 
 
@@ -5759,9 +5769,13 @@ Touchlink用得相对比较少，ZigBee设备并不一定都需要支持Touchlin
 
 #### 组网实验
 
+> 处理组网失败需要在 `zcl_samplesw.c` 里找到一个 `zclSampleSw_ProcessCommissioningStatus` 的函数，这个函数就是专门处理 `Commissioning` 结果的，例如协调器创建网络是否成功、设备是否成功加入到网络等
+>
+> ![](https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231202122114.webp)
 
 
 
+> mini板子充当协调器；标准板充当路由器
 
 
 
