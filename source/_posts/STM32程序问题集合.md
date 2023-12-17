@@ -77,7 +77,9 @@ date: 2023-09-16 17:34:01
 > }
 > ```
 
-
+> 参考文章：[STM32G系列 HAL串口DMA接收](https://blog.csdn.net/qinxin4/article/details/121271375?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522170196063216800182174388%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=170196063216800182174388&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-2-121271375-null-null.142^v96^control&utm_term=hal%20%E4%B8%B2%E5%8F%A3%E4%B8%8A%E6%8B%89&spm=1018.2226.3001.4187)
+>
+> 在进行4GCat模块与STM32进行串口通信时出现发送数据接收有问题，最终发现是MX默认把串口发送和接收引脚设置为浮空状态，一般我们是需要上拉的，要么就是设置PCB时外接上拉电阻，最终解决问题
 
 ## Keil
 
