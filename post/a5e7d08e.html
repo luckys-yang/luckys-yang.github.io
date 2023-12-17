@@ -1,0 +1,2272 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>其他学习 | Yangの小栈</title><meta name="author" content="Yang"><meta name="copyright" content="Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="光立方   硬件  STM32F103C8T6 4个SG90舵机 4路继电器 一个超声波   MX配置            [{&quot;url&quot;:&quot;https:&#x2F;&#x2F;image-1309791158.cos.ap-guangzhou.myqcloud.com&#x2F;其他&#x2F;QQ截图20231215161756.webp&quot;,&quot;alt&quot;:&quot;&quot;},{&quot;url&quot;:&quot;https:&#x2F;&#x2F;image-1309791158.co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="其他学习">
+<meta property="og:url" content="https://blog.yang5201314.cn/post/a5e7d08e.html">
+<meta property="og:site_name" content="Yangの小栈">
+<meta property="og:description" content="光立方   硬件  STM32F103C8T6 4个SG90舵机 4路继电器 一个超声波   MX配置            [{&quot;url&quot;:&quot;https:&#x2F;&#x2F;image-1309791158.cos.ap-guangzhou.myqcloud.com&#x2F;其他&#x2F;QQ截图20231215161756.webp&quot;,&quot;alt&quot;:&quot;&quot;},{&quot;url&quot;:&quot;https:&#x2F;&#x2F;image-1309791158.co">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.yang5201314.cn/img/num158.webp">
+<meta property="article:published_time" content="2023-12-15T07:48:27.000Z">
+<meta property="article:modified_time" content="2023-12-17T09:15:52.976Z">
+<meta property="article:author" content="Yang">
+<meta property="article:tag" content="aabbcc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.yang5201314.cn/img/num158.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20231008142657.webp"><link rel="canonical" href="https://blog.yang5201314.cn/post/a5e7d08e.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '其他学习',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-17 17:15:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/aplayer.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20231008142657.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">151</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">72</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">32</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">其他学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-12-15T07:48:27.000Z" title="发表于 2023-12-15 15:48:27">2023-12-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-12-17T09:15:52.976Z" title="更新于 2023-12-17 17:15:52">2023-12-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BB%86%E5%8C%96%E5%AD%A6%E4%B9%A0/">细化学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">8.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>47分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="光立方">光立方</h2>
+<blockquote>
+<ul>
+<li>硬件</li>
+</ul>
+<p>STM32F103C8T6</p>
+<p>4个SG90舵机</p>
+<p>4路继电器</p>
+<p>一个超声波</p>
+</blockquote>
+<ul>
+<li>MX配置</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery " data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231215161756.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231215161821.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231215161837.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231215161942.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231215162001.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231215162602.webp","alt":""},{"url":"https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231215162139.webp","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<ul>
+<li>程序编写</li>
+</ul>
+<details ><summary> AllHead.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __ALLHEAD_H
+#define __ALLHEAD_H
+#include &quot;main.h&quot;
+#include &quot;dma.h&quot;
+#include &quot;iwdg.h&quot;
+#include &quot;tim.h&quot;
+#include &quot;usart.h&quot;
+#include &quot;gpio.h&quot;
+
+#include &quot;CallBack.h&quot;
+#include &quot;Public.h&quot;
+#include &quot;System.h&quot;
+#include &quot;System_Init.h&quot;
+
+
+# include &lt;string.h&gt;
+# include &lt;stdarg.h&gt;
+# include &lt;stdlib.h&gt;
+# include &quot;stdio.h&quot;
+#include &quot;stdint.h&quot;
+#include &quot;math.h&quot;
+
+#include &quot;Steer.h&quot;
+#include &quot;ultrasound.h&quot;
+#include &quot;Pwm_Led.h&quot;
+#include &quot;IW_Dog.h&quot;
+#include &quot;Relay.h&quot;
+#include &quot;Voice.h&quot;
+#include &quot;BlueTooth.h&quot;
+
+#include &quot;Task.h&quot;
+
+#endif
+</code></pre>
+              </div>
+            </details>
+<details ><summary> Task.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: Task.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;06&#x2F;23
+ * description: 
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void TasksHandle_30MS(void);
+static void TasksHandle_50MS(void);
+static void TasksHandle_100MS(void);
+static void TasksHandle_150MS(void);
+static void TasksHandle_1S(void);
+static void TasksHandle_1500MS(void);
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+Task_t Task[] &#x3D;
+&#123;
+	&#123;FALSE, 30, 30, TasksHandle_30MS&#125;,    &#x2F;&#x2F; task Period: 10ms
+	&#123;FALSE, 50, 50, TasksHandle_50MS&#125;,    &#x2F;&#x2F; task Period: 50ms
+	&#123;FALSE, 100, 100, TasksHandle_100MS&#125;,    &#x2F;&#x2F; task Period: 100ms
+	&#123;FALSE, 150, 150, TasksHandle_150MS&#125;,    &#x2F;&#x2F; task Period: 150ms
+	&#123;FALSE, 1000, 1000, TasksHandle_1S&#125;,    &#x2F;&#x2F; task Period: 1s
+	&#123;FALSE, 1500, 1500, TasksHandle_1500MS&#125;,    &#x2F;&#x2F; task Period: 1.5s
+&#125;;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;variable definition declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+&#x2F;&#x2F; 
+uint8_t ucTasks_Max &#x3D; sizeof(Task) &#x2F; sizeof(Task[0]);
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;variable definition declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+static void TasksHandle_30MS(void)
+&#123;
+	&#x2F;&#x2F; 【呼吸灯1】
+	if (TRUE &#x3D;&#x3D; Voice.Pwm_Led_Flag_Buf[LED1])
+	&#123;
+		Pwm_Led.Pwm_Led_Breathing(LED1);
+	&#125;
+	else
+	&#123;
+		Pwm_Led.Pwm_Led_Duty_Control(LED1, 101);	&#x2F;&#x2F; 常亮
+	&#125;
+	
+	&#x2F;&#x2F; 【呼吸灯2】
+	if (TRUE &#x3D;&#x3D; Voice.Pwm_Led_Flag_Buf[LED2])
+	&#123;
+		Pwm_Led.Pwm_Led_Breathing(LED2);
+	&#125;
+	else
+	&#123;
+		Pwm_Led.Pwm_Led_Duty_Control(LED2, 101);	&#x2F;&#x2F; 常亮
+	&#125;
+
+	&#x2F;&#x2F; 【呼吸灯3】
+	if (TRUE &#x3D;&#x3D; Voice.Pwm_Led_Flag_Buf[LED3])
+	&#123;
+		Pwm_Led.Pwm_Led_Breathing(LED3);
+	&#125;
+	else
+	&#123;
+		Pwm_Led.Pwm_Led_Duty_Control(LED3, 101);	&#x2F;&#x2F; 常亮
+	&#125;	
+
+	&#x2F;&#x2F; 【呼吸灯4】
+	if (TRUE &#x3D;&#x3D; Voice.Pwm_Led_Flag_Buf[LED4])
+	&#123;
+		Pwm_Led.Pwm_Led_Breathing(LED4);
+	&#125;
+	else
+	&#123;
+		Pwm_Led.Pwm_Led_Duty_Control(LED4, 101);	&#x2F;&#x2F; 常亮
+	&#125;
+&#125;
+
+static void TasksHandle_50MS(void)
+&#123;
+	HAL_GPIO_TogglePin(SYS_LED_GPIO_Port, SYS_LED_Pin);	&#x2F;&#x2F; 系统灯运行
+&#125;
+
+static void TasksHandle_100MS(void)
+&#123;
+	ultrasound.ultrasound_Get_Value();	&#x2F;&#x2F; 超声波读取值
+&#125;
+
+static void TasksHandle_150MS(void)
+&#123;
+	if (TRUE &#x3D;&#x3D; Voice.Steer_Auto_Flag)	&#x2F;&#x2F; 启动鲜花全自动
+	&#123;	
+		ultrasound.ultrasound_Handler();	&#x2F;&#x2F; 超声波处理函数
+	&#125;
+&#125;
+
+static void TasksHandle_1S(void)
+&#123;
+	if (TRUE &#x3D;&#x3D; Voice.Steer_Auto_Flag)	&#x2F;&#x2F; 启动鲜花全自动
+	&#123;
+		Steer.Steer_Handler();	&#x2F;&#x2F; 舵机处理函数
+	&#125;
+	else
+	&#123;
+		__Steer_Reset();	&#x2F;&#x2F; 舵机复位
+	&#125;
+&#125;
+
+static void TasksHandle_1500MS(void)
+&#123;
+	IW_Dog.IW_Dog_Feed();	&#x2F;&#x2F; 喂狗
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> System_Init.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: System_Init.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;06&#x2F;23
+ * description: 存放系统初始化
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+static void Hardware_Init(void);
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+
+System_Init_t System_Init &#x3D; 
+&#123;
+    Hardware_Init
+&#125;;
+
+&#x2F;*
+* @function: Hardware_Init
+* @param: None
+* @retval: None
+* @brief: 硬件初始化
+*&#x2F;
+static void Hardware_Init(void)
+&#123;
+    IW_Dog.IW_Dog_Init();   &#x2F;&#x2F; 看门狗初始化
+    Relay.Relay_Init(); &#x2F;&#x2F; 继电器初始化
+    Steer.Steer_Init(); &#x2F;&#x2F; 舵机初始化
+    Pwm_Led.Pwm_Led_Init(); &#x2F;&#x2F; PWM灯带初始化
+    Voice.Voice_Init(); &#x2F;&#x2F; ASR初始化
+	BlueTooth.BlueTooth_Init();	&#x2F;&#x2F; 蓝牙初始化
+	HAL_TIM_Base_Start_IT(&amp;htim3);  &#x2F;&#x2F; 任务调度定时器
+    BlueTooth.BlueTooth_Send_Data((uint8_t*)&quot;Init OK\r\n&quot;, strlen(&quot;Init OK\r\n&quot;));
+&#125;
+</code></pre>
+              </div>
+            </details>
+<details ><summary> System.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: System.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;06&#x2F;23
+ * description: 
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+static void Run(void);
+static void SysTem_Func_Fail_Handler(void); 
+static void System_Assert_Fail_Handler(void);   
+static void Task_Marks_Handler(void);
+static void Task_Pro_Handler(void);
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+System_t System &#x3D; 
+&#123;
+    Run,
+    SysTem_Func_Fail_Handler,
+    System_Assert_Fail_Handler,
+    Task_Marks_Handler
+&#125;;
+
+&#x2F;*
+* @function: Run
+* @param: None
+* @retval: None
+* @brief: 
+*&#x2F;
+static void Run(void)
+&#123;
+    Task_Pro_Handler(); &#x2F;&#x2F; 
+&#125;
+
+&#x2F;*
+* @function: SysTem_Func_Fail_Handler
+* @param: None
+* @retval: None
+* @brief: 
+*&#x2F;
+static void SysTem_Func_Fail_Handler(void)
+&#123;
+    
+&#125;
+
+&#x2F;*
+* @function: System_Assert_Fail_Handler
+* @param: None
+* @retval: None
+* @brief: 
+*&#x2F;
+static void System_Assert_Fail_Handler(void)
+&#123;
+    
+&#125;
+
+&#x2F;*
+* @function: Task_Marks_Handler
+* @param: None
+* @retval: None
+* @brief: 
+*&#x2F;
+static void Task_Marks_Handler(void)
+&#123;
+    uint8_t i;
+
+    for (i &#x3D; 0; i &lt; ucTasks_Max; i++)
+    &#123;
+        if (Task[i].Task_Cnt)   &#x2F;&#x2F; 
+        &#123;
+            Task[i].Task_Cnt--; &#x2F;&#x2F; 
+            if (0 &#x3D;&#x3D; Task[i].Task_Cnt)  &#x2F;&#x2F; 
+            &#123;
+                Task[i].Task_Cnt &#x3D; Task[i].Task_Timer;  &#x2F;&#x2F; 
+                Task[i].Run_Status &#x3D; TRUE;  &#x2F;&#x2F; 
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: Task_Pro_Handler
+* @param: None
+* @retval: None
+* @brief: 
+*&#x2F;
+static void Task_Pro_Handler(void)
+&#123;
+    uint8_t i;
+
+    for (i &#x3D; 0; i &lt; ucTasks_Max; i++)
+    &#123;
+        if (Task[i].Run_Status) &#x2F;&#x2F; 
+        &#123;
+            Task[i].Run_Status &#x3D; FALSE;
+            Task[i].Task_Hook();    &#x2F;&#x2F; 
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+              </div>
+            </details>
+<details ><summary> Public.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: Public.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;06&#x2F;23
+ * description: 存放通用
+ -----------------------------------
+ 上位机通信选择USART3
+                    PB10(TX)
+                    PB11(RX)
+ -----------------------------------
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+#include &lt;stdarg.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdio.h&gt;
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+static void Memory_Clear(uint8_t*, uint16_t);   
+static void Public_Delay_ms(uint16_t);  
+static void Public_Delay_us(uint16_t);
+static void Memory_Copy(char*, const char*, uint16_t);
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+Public_t Public &#x3D; 
+&#123;
+    Memory_Clear,
+    Public_Delay_ms,
+    Public_Delay_us,
+    Memory_Copy
+&#125;;
+
+
+&#x2F;*
+* @function: Memory_Clear
+* @param: pucBuffer -&gt; 内存首地址 LEN -&gt; 内存长度
+* @retval: None
+* @brief: 描述
+*&#x2F;
+static inline void Memory_Clear(uint8_t* pucBuffer, uint16_t LEN)
+&#123;
+    uint16_t i;
+
+    for (i &#x3D; 0; i &lt; LEN; i++)
+    &#123;
+        *(pucBuffer + i) &#x3D; (uint8_t)0;
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: Public_Delay_ms
+* @param: ms -&gt; 需要延时的时间(ms)
+* @retval: None
+* @brief: 系统ms延时
+*&#x2F;
+static void Public_Delay_ms(uint16_t ms)
+&#123;
+    HAL_Delay(ms);
+&#125;
+
+&#x2F;*
+* @function: Public_Delay_us
+* @param: us -&gt; 需要延时的时间(us)
+* @retval: None
+* @brief: 系统us延时
+*&#x2F;
+static void Public_Delay_us(uint16_t us)
+&#123;
+    uint8_t i;
+    &#x2F;&#x2F; 通过示波器测量进行校准
+    while(us--)
+    &#123;
+        for (i &#x3D; 0; i &lt; 7; i++);
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: Memory_Copy
+* @param: dest -&gt; 要复制到的指针地址 src -&gt; 被复制的指针地址 count -&gt; 大小(数组用sizeof 字符串用strlen)
+* @retval: None
+* @brief: 复制固定长度数组&#x2F;字符串
+*&#x2F;
+static inline void Memory_Copy(char* dest, const char* src, uint16_t count)
+&#123;
+    uint16_t i;
+
+    for (i &#x3D; 0; i &lt; count; i++) 
+    &#123;
+        dest[i] &#x3D; src[i];
+    &#125;    
+&#125;
+
+#if 0
+&#x2F;&#x2F; 重定向
+int fputc(int ch, FILE *f)
+&#123;
+    HAL_UART_Transmit(&amp;huart1, (uint8_t*)&amp;ch, 1, 0x0A);
+
+    return ch;
+&#125;
+#endif
+
+</code></pre>
+              </div>
+            </details>
+<details ><summary> CallBack.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: CallBack.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;06&#x2F;19
+ * description: 存放中断函数
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;*
+* @function: HAL_TIM_PeriodElapsedCallback
+* @param: htim -&gt; 处理定时器的结构体指针
+* @retval: None
+* @brief: 定时器回调函数
+*&#x2F;
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+&#123;
+    if (htim-&gt;Instance &#x3D;&#x3D; htim3.Instance)
+    &#123;
+        System.Task_Marks_Handler();    &#x2F;&#x2F; 任务标记
+    &#125; 
+&#125;
+
+&#x2F;*
+* @function: xxx
+* @param: None
+* @retval: None
+* @brief: 输入捕获回调函数
+*&#x2F;
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
+&#123;
+    if (htim-&gt;Instance &#x3D;&#x3D; TIM2)
+    &#123;
+        switch(ultrasound.Run_Status)
+        &#123;
+            case 1:
+            &#123;
+                ultrasound.Timer_Cnt_Buf[0] &#x3D; TIM2-&gt;CCR1;   &#x2F;&#x2F; 获取计数值
+                __HAL_TIM_SET_CAPTUREPOLARITY(Ultrasound_Timer, Ultrasound_Channel, TIM_INPUTCHANNELPOLARITY_FALLING);   &#x2F;&#x2F; 下降沿触发
+                ultrasound.Run_Status++;
+                break;
+            &#125;
+            case 2:
+            &#123;
+                ultrasound.Timer_Cnt_Buf[1] &#x3D; TIM2-&gt;CCR1;   &#x2F;&#x2F; 获取计数值
+                HAL_TIM_IC_Stop_IT(Ultrasound_Timer, Ultrasound_Channel);   &#x2F;&#x2F; 停止捕获
+                ultrasound.Run_Status++;
+                break;
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: USART2_IRQHandler
+* @param: None
+* @retval: None
+* @brief: 串口2中断服务函数(语音)
+*&#x2F;
+void USART2_IRQHandler(void)
+&#123;
+    if (__HAL_UART_GET_FLAG(&amp;huart2, UART_FLAG_IDLE) !&#x3D; 0x00)
+    &#123;
+        __HAL_UART_CLEAR_IDLEFLAG(&amp;huart2); &#x2F;&#x2F; 清除标志位
+        Voice.Voice_Protocol(); &#x2F;&#x2F; 协议解析
+    &#125;
+    HAL_UART_IRQHandler(&amp;huart2);
+&#125;
+
+void USART3_IRQHandler(void)
+&#123;
+    if (__HAL_UART_GET_FLAG(&amp;huart3,UART_FLAG_IDLE) !&#x3D; 0x00u)   &#x2F;&#x2F; 判断是否发生空闲中断
+    &#123;
+        __HAL_UART_CLEAR_IDLEFLAG(&amp;huart3); &#x2F;&#x2F; 清除空闲中断标志位
+        HAL_UART_DMAStop(&amp;huart3);          &#x2F;&#x2F; 停止DMA接收
+        BlueTooth.BlueTooth_Analyze();  &#x2F;&#x2F; 数据解析
+    &#125;    
+    HAL_UART_IRQHandler(&amp;huart3);
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> BlueTooth.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __BLUETOOTH_H
+#define __BLUETOOTH_H
+
+&#x2F;&#x2F; 接收缓存最大值
+#define BlueTooth_REC_MAX_LEN 66
+&#x2F;&#x2F; 使用串口
+#define BLUE_TOOTH_USE_UART huart3
+
+
+typedef struct
+&#123;
+    uint8_t *BlueTooth_Rec_Buffer;          &#x2F;&#x2F; 串口3接收缓存数组指针
+    void (*BlueTooth_Init)(void);       &#x2F;&#x2F; 串口3初始化   
+    void (*BlueTooth_Send_Data)(uint8_t *, uint16_t);   &#x2F;&#x2F; 串口3发送数据函数
+    void (*BlueTooth_Analyze)(void);
+&#125; BlueTooth_st;
+
+extern BlueTooth_st BlueTooth;
+
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> BlueTooth.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: xxx.c
+ * Author: Yang
+ * Date: 2023&#x2F;11&#x2F;21
+ * description: 
+ -----------------------------------
+蓝牙接线：
+        PB10(TX) --- 蓝牙RX
+        PB11(RX) --- 蓝牙TX
+ -----------------------------------
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;* Private variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+uint8_t BlueTooth_Rec_Arr[BlueTooth_REC_MAX_LEN] &#x3D; &#123;0&#125;;   &#x2F;&#x2F; 定义一个接收数组
+
+&#x2F;* Private function prototypes&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void BlueTooth_Init(void);
+static void BlueTooth_Analyze(void);
+static void BlueTooth_Send_Data(uint8_t *str, uint16_t len);
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+BlueTooth_st BlueTooth &#x3D; 
+&#123;
+    .BlueTooth_Rec_Buffer &#x3D; BlueTooth_Rec_Arr,  
+    .BlueTooth_Init &#x3D; &amp;BlueTooth_Init,
+    .BlueTooth_Send_Data &#x3D; &amp;BlueTooth_Send_Data,
+    .BlueTooth_Analyze &#x3D; &amp;BlueTooth_Analyze
+&#125;;
+
+&#x2F;*
+* @function: BlueTooth_Init
+* @param: None
+* @retval: None
+* @brief: 串口3初始化
+*&#x2F;
+static void BlueTooth_Init(void)
+&#123;
+    __HAL_UART_ENABLE_IT(&amp;BLUE_TOOTH_USE_UART, UART_IT_IDLE);    &#x2F;&#x2F; 使能串口3空闲中断
+    HAL_UART_Receive_DMA(&amp;BLUE_TOOTH_USE_UART, BlueTooth.BlueTooth_Rec_Buffer, BlueTooth_REC_MAX_LEN);  &#x2F;&#x2F; 使能串口3DMA接收
+&#125;
+
+&#x2F;*
+* @function: BlueTooth_Send_Data
+* @param: None
+* @retval: None
+* @brief: 串口3发送数据函数
+*&#x2F;
+static void BlueTooth_Send_Data(uint8_t *str, uint16_t len)
+&#123;
+    HAL_UART_Transmit(&amp;BLUE_TOOTH_USE_UART, str, len, 0x0A);
+&#125;
+
+&#x2F;*
+* @function: BlueTooth_Analyze
+* @param: None
+* @retval: None
+* @brief: 数据解析
+*&#x2F;
+static void BlueTooth_Analyze(void)
+&#123;
+    if (strncmp((char *)BlueTooth.BlueTooth_Rec_Buffer, &quot;Ctrl_LED1&quot;, strlen(&quot;Ctrl_LED1&quot;)) &#x3D;&#x3D; 0)
+    &#123;
+        static uint8_t flag1 &#x3D; RELAY_OFF;
+        flag1 &#x3D; !flag1;
+        Relay.Relay_Control(RELAY_A, flag1);
+    &#125;
+    else if (strncmp((char *)BlueTooth.BlueTooth_Rec_Buffer, &quot;Ctrl_LED2&quot;, strlen(&quot;Ctrl_LED2&quot;)) &#x3D;&#x3D; 0)
+    &#123;
+        static uint8_t flag2 &#x3D; RELAY_OFF;
+        flag2 &#x3D; !flag2;
+        Relay.Relay_Control(RELAY_B, flag2);
+    &#125;
+    else if (strncmp((char *)BlueTooth.BlueTooth_Rec_Buffer, &quot;Ctrl_LED3&quot;, strlen(&quot;Ctrl_LED3&quot;)) &#x3D;&#x3D; 0)
+    &#123;
+        static uint8_t flag3 &#x3D; RELAY_OFF;
+        flag3 &#x3D; !flag3;        
+        Relay.Relay_Control(RELAY_C, flag3);
+    &#125;
+    else if (strncmp((char *)BlueTooth.BlueTooth_Rec_Buffer, &quot;Ctrl_LED4&quot;, strlen(&quot;Ctrl_LED4&quot;)) &#x3D;&#x3D; 0)
+    &#123;
+        static uint8_t flag4 &#x3D; RELAY_OFF;
+        flag4 &#x3D; !flag4;        
+        Relay.Relay_Control(RELAY_D, flag4);
+    &#125;        
+
+    memset(BlueTooth.BlueTooth_Rec_Buffer, 0, strlen((char*)BlueTooth.BlueTooth_Rec_Buffer));  &#x2F;&#x2F; 数组清0
+    HAL_UART_Receive_DMA(&amp;BLUE_TOOTH_USE_UART, BlueTooth.BlueTooth_Rec_Buffer, BlueTooth_REC_MAX_LEN);  &#x2F;&#x2F; 使能串口3DMA接收
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> Voice.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __VOICE_H
+#define __VOICE_H
+
+&#x2F;&#x2F; ASR串口
+#define huart_ASR	huart2
+
+&#x2F;&#x2F; 串口接收最大长度
+#define Voice_Rec_Buffer_LENGTH	(uint8_t)20
+&#x2F;&#x2F; 协议长度是4个字节
+#define Protocol_Data_LEN	(uint8_t)4
+
+&#x2F;&#x2F; 定义结构体类型
+typedef struct
+&#123;
+    uint8_t Steer_Auto_Flag;    &#x2F;&#x2F; 鲜花复位&#x2F;全自动标志位
+    uint8_t Steer_Switch_Closure_Flag; &#x2F;&#x2F; 启动&#x2F;取消自动闭合
+    uint8_t Pwm_Led_Flag_Buf[4];    &#x2F;&#x2F; 打开&#x2F;关闭呼吸灯标志位数组
+    uint8_t ucVoice_EndData[4]; &#x2F;&#x2F; 语音接收有效协议数组
+	uint8_t* pucRec_Buffer;	&#x2F;&#x2F; 接收缓存
+	void (*Voice_Init)(void);	&#x2F;&#x2F; ASR初始化
+	void (*Voice_SendString)(uint8_t*);	&#x2F;&#x2F; 发送字符串给ASR
+	void (*Voice_Protocol)(void);	&#x2F;&#x2F; 接口协议
+&#125; Voice_st;
+
+extern Voice_st Voice;
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> Voice.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: xxx.c
+ * Author: Yang
+ * Date: 2023&#x2F;11&#x2F;21
+ * description: 
+ -----------------------------------
+语音模块通信：使用USART2
+            PA2(TX) ---&gt; 模块RX(PA6)
+            PA3(RX) ---&gt; 模块TX(PA5)
+ -----------------------------------
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;* Private variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static uint8_t ucVoice_Rec_Buffer[Voice_Rec_Buffer_LENGTH] &#x3D; &#123;0x00&#125;;
+&#x2F;* Private function prototypes&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void Voice_Init(void);
+static void Voice_SendString(uint8_t *str);
+static void Voice_Protocol(void);
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+Voice_st Voice &#x3D; 
+&#123;
+    .Steer_Auto_Flag &#x3D; FALSE,
+    .Steer_Switch_Closure_Flag &#x3D; FALSE,
+    .Pwm_Led_Flag_Buf &#x3D; &#123;FALSE, FALSE, FALSE, FALSE&#125;,
+    .ucVoice_EndData &#x3D; &#123;0xFF, 0xFF, 0xFF, 0xFF&#125;,
+    .pucRec_Buffer &#x3D; ucVoice_Rec_Buffer,
+    .Voice_Init &#x3D; &amp;Voice_Init,
+    .Voice_SendString &#x3D; &amp;Voice_SendString,
+    .Voice_Protocol &#x3D; &amp;Voice_Protocol
+&#125;;
+
+&#x2F;*
+* @function: Voice_Init
+* @param: None
+* @retval: None
+* @brief: 语音初始化
+*&#x2F;
+static void Voice_Init(void)
+&#123;
+    __HAL_UART_ENABLE_IT(&amp;huart_ASR, UART_IT_IDLE); &#x2F;&#x2F; 使能串口空闲中断
+    HAL_UART_Receive_DMA(&amp;huart_ASR, Voice.pucRec_Buffer, (uint16_t)Voice_Rec_Buffer_LENGTH);   &#x2F;&#x2F; 使能DMA接收
+&#125;
+
+&#x2F;*
+* @function: Voice_SendString
+* @param: None
+* @retval: None
+* @brief: ASR发送字符串
+*&#x2F;
+static void Voice_SendString(uint8_t *str)
+&#123;
+    HAL_UART_Transmit(&amp;huart_ASR,str,strlen((const char*)str),100);
+&#125;
+
+&#x2F;*
+* @function: Voice_Protocol
+* @param: None
+* @retval: None
+* @brief: 语音协议解析
+*&#x2F;
+static void Voice_Protocol(void)
+&#123;
+    uint8_t Temp_Array[4] &#x3D; &#123;0x00&#125;;
+    uint8_t i &#x3D; 0, Index &#x3D; 0;
+
+    HAL_UART_DMAStop(&amp;huart_ASR);   &#x2F;&#x2F; 串口停止DMA接收
+
+    for (i &#x3D; 0; i &lt; Voice_Rec_Buffer_LENGTH; i++) &#x2F;&#x2F; 
+    &#123;
+        if (0 &#x3D;&#x3D; Index) &#x2F;&#x2F; 检测键值起始数据0xAA
+        &#123;
+            if (*(Voice.pucRec_Buffer + i) !&#x3D; 0xAA)
+            &#123;
+                continue;
+            &#125;
+        &#125;
+        Temp_Array[Index] &#x3D; *(Voice.pucRec_Buffer + i);
+
+        if (Protocol_Data_LEN &#x3D;&#x3D; Index) &#x2F;&#x2F; 已读取4字节
+        &#123;
+            break;
+        &#125;
+        Index++;
+    &#125;
+    HAL_UART_Receive_DMA(&amp;huart_ASR, Voice.pucRec_Buffer, (uint16_t)Voice_Rec_Buffer_LENGTH);   &#x2F;&#x2F; 使能DMA接收
+
+    &#x2F;&#x2F; 处理数据
+    if (Protocol_Data_LEN &#x3D;&#x3D; Index)
+    &#123;
+        if ((0xAA &#x3D;&#x3D; Temp_Array[0]) &amp;&amp; (0xBB &#x3D;&#x3D; Temp_Array[3])) &#x2F;&#x2F; 判断帧头、帧尾
+        &#123;
+            switch (Temp_Array[1])  &#x2F;&#x2F; 判断主指令
+            &#123;
+                case 0x01:  &#x2F;&#x2F; 【打开&#x2F;关闭灯带1】
+                &#123;
+                    if (0x00 &#x3D;&#x3D; Temp_Array[2])
+                    &#123;
+                        Relay.Relay_Control(RELAY_A, RELAY_ON);
+                    &#125;
+                    else if (0x01 &#x3D;&#x3D; Temp_Array[2])
+                    &#123;
+                        Relay.Relay_Control(RELAY_A, RELAY_OFF);
+                    &#125;
+                    break;
+                &#125;
+                case 0x02:  &#x2F;&#x2F; 【打开&#x2F;关闭灯带2】
+                &#123;
+                    if (0x00 &#x3D;&#x3D; Temp_Array[2])
+                    &#123;
+                        &#x2F;&#x2F; Relay.Relay_Control(RELAY_B, RELAY_ON);
+                    &#125;
+                    else if (0x01 &#x3D;&#x3D; Temp_Array[2])
+                    &#123;
+                        &#x2F;&#x2F; Relay.Relay_Control(RELAY_B, RELAY_OFF);
+                    &#125;
+                    break;
+                &#125;
+                case 0x03:  &#x2F;&#x2F; 【打开&#x2F;关闭灯带3】
+                &#123;
+                    if (0x00 &#x3D;&#x3D; Temp_Array[2])
+                    &#123;
+                        &#x2F;&#x2F; Relay.Relay_Control(RELAY_C, RELAY_ON);
+                    &#125;
+                    else if (0x01 &#x3D;&#x3D; Temp_Array[2])
+                    &#123;
+                        &#x2F;&#x2F; Relay.Relay_Control(RELAY_C, RELAY_OFF);
+                    &#125;
+                    break;
+                &#125;
+                case 0x04:  &#x2F;&#x2F; 【打开&#x2F;关闭灯带4】
+                &#123;
+                    if (0x00 &#x3D;&#x3D; Temp_Array[2])
+                    &#123;
+                        &#x2F;&#x2F; Relay.Relay_Control(RELAY_D, RELAY_ON);
+                    &#125;
+                    else if (0x01 &#x3D;&#x3D; Temp_Array[2])
+                    &#123;
+                        &#x2F;&#x2F; Relay.Relay_Control(RELAY_D, RELAY_OFF);
+                    &#125;
+                    break;
+                &#125;
+                case 0x05:  &#x2F;&#x2F; 【打开&#x2F;关闭呼吸灯1】
+                &#123;
+                    if (0x00 &#x3D;&#x3D; Temp_Array[2])
+                    &#123;
+                        Voice.Pwm_Led_Flag_Buf[LED1] &#x3D; TRUE;
+                    &#125;
+                    else if (0x01 &#x3D;&#x3D; Temp_Array[2])
+                    &#123;
+                        Voice.Pwm_Led_Flag_Buf[LED1] &#x3D; FALSE;
+                    &#125;
+                    break;
+                &#125;
+                case 0x06:  &#x2F;&#x2F; 【打开&#x2F;关闭呼吸灯2】
+                &#123;
+                    if (0x00 &#x3D;&#x3D; Temp_Array[2])
+                    &#123;
+                        Voice.Pwm_Led_Flag_Buf[LED2] &#x3D; TRUE;
+                    &#125;
+                    else if (0x01 &#x3D;&#x3D; Temp_Array[2])
+                    &#123;
+                        Voice.Pwm_Led_Flag_Buf[LED2] &#x3D; FALSE;
+                    &#125;
+                    break;
+                &#125;   
+                case 0x07:  &#x2F;&#x2F; 【打开&#x2F;关闭呼吸灯3】
+                &#123;
+                    if (0x00 &#x3D;&#x3D; Temp_Array[2])
+                    &#123;
+                        Voice.Pwm_Led_Flag_Buf[LED3] &#x3D; TRUE;
+                    &#125;
+                    else if (0x01 &#x3D;&#x3D; Temp_Array[2])
+                    &#123;
+                        Voice.Pwm_Led_Flag_Buf[LED3] &#x3D; FALSE;
+                    &#125;
+                    break;
+                &#125;
+                case 0x08:  &#x2F;&#x2F; 【打开&#x2F;关闭呼吸灯4】
+                &#123;
+                    if (0x00 &#x3D;&#x3D; Temp_Array[2])
+                    &#123;
+                        Voice.Pwm_Led_Flag_Buf[LED4] &#x3D; TRUE;
+                    &#125;
+                    else if (0x01 &#x3D;&#x3D; Temp_Array[2])
+                    &#123;
+                        Voice.Pwm_Led_Flag_Buf[LED4] &#x3D; FALSE;
+                    &#125;
+                    break;
+                &#125; 
+                case 0x09:  &#x2F;&#x2F; 【启动自动闭合&#x2F;取消自动闭合】
+                &#123;
+                    if (0x00 &#x3D;&#x3D; Temp_Array[2])
+                    &#123;
+                        Voice.Steer_Switch_Closure_Flag &#x3D; TRUE;
+                    &#125;
+                    else if (0x01 &#x3D;&#x3D; Temp_Array[2])
+                    &#123;
+                        Voice.Steer_Switch_Closure_Flag &#x3D; FALSE;
+                    &#125;                    
+                    break;
+                &#125;   
+                case 0x0A:  &#x2F;&#x2F; 【鲜花复位&#x2F;启动鲜花全自动】
+                &#123;
+                    if (0x00 &#x3D;&#x3D; Temp_Array[2])
+                    &#123;
+                        Voice.Steer_Auto_Flag &#x3D; FALSE;
+                    &#125;
+                    else if (0x01 &#x3D;&#x3D; Temp_Array[2])
+                    &#123;
+                        Voice.Steer_Auto_Flag &#x3D; TRUE;
+                    &#125;  
+                &#125;
+                case 0x0B:
+                &#123;
+                    if (0x00 &#x3D;&#x3D; Temp_Array[2])  &#x2F;&#x2F; 打开风扇
+                    &#123;
+                        Relay.Relay_Control(RELAY_B, RELAY_ON);
+                    &#125;
+                    else if (0x01 &#x3D;&#x3D; Temp_Array[2]) &#x2F;&#x2F; 关闭风扇
+                    &#123;
+                        Relay.Relay_Control(RELAY_B, RELAY_OFF);
+                    &#125;                     
+                    break;
+                &#125;
+                default:break;                                         
+            &#125;
+        &#125;
+        else
+        &#123;
+            return;
+        &#125;
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> Relay.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __RELAY_H
+#define __RELAY_H
+
+&#x2F;&#x2F; 打开全部继电器
+#define __Relay_All_ON() do &#123;   \
+    Relay.Relay_Control(RELAY_A, RELAY_ON); \
+    Relay.Relay_Control(RELAY_B, RELAY_ON); \
+    Relay.Relay_Control(RELAY_C, RELAY_ON); \
+    Relay.Relay_Control(RELAY_D, RELAY_ON); \
+&#125; while(0)
+&#x2F;&#x2F; 关闭全部继电器
+#define __Relay_All_OFF() do &#123;   \
+    Relay.Relay_Control(RELAY_A, RELAY_OFF); \
+    Relay.Relay_Control(RELAY_B, RELAY_OFF); \
+    Relay.Relay_Control(RELAY_C, RELAY_OFF); \
+    Relay.Relay_Control(RELAY_D, RELAY_OFF); \
+&#125; while(0)
+
+
+&#x2F;&#x2F; 继电器开关状态枚举
+typedef enum
+&#123;
+    RELAY_OFF &#x3D; 0x00,
+    RELAY_ON &#x3D; 0x01
+&#125; Relay_Switch_Status_et;
+
+&#x2F;&#x2F; 继电器数量
+typedef enum
+&#123;
+    RELAY_A &#x3D; 0x00,
+    RELAY_B &#x3D; 0x01,
+    RELAY_C &#x3D; 0x02,
+    RELAY_D &#x3D; 0x03
+&#125; Relay_Number_et;
+
+typedef struct
+&#123;
+    uint8_t ucRelay_Status_Buf[4];  &#x2F;&#x2F; 存储继电器当前状态
+    void (*Relay_Init)(void);  &#x2F;&#x2F; 继电器初始化
+    void (*Relay_Control)(Relay_Number_et, Relay_Switch_Status_et); &#x2F;&#x2F; 继电器控制
+&#125; Relay_st;
+
+extern Relay_st Relay;
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> Relay.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: xxx.c
+ * Author: Yang
+ * Date: 2023&#x2F;11&#x2F;21
+ * description: 
+ -----------------------------------
+继电器接线：
+        PA6 --- 继电器A
+        PA7 --- 继电器B
+        PB0 --- 继电器C
+        PB1 --- 继电器D
+        高电平触发, 3.3V驱动
+ -----------------------------------
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;&#x2F;* Private function prototypes&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void Relay_Init(void);
+static void Relay_Control(Relay_Number_et Relay_x, Relay_Switch_Status_et status);
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+Relay_st Relay &#x3D; 
+&#123;
+    .ucRelay_Status_Buf &#x3D; &#123;RELAY_OFF, RELAY_OFF, RELAY_OFF, RELAY_OFF&#125;,
+    .Relay_Init &#x3D; &amp;Relay_Init,
+    .Relay_Control &#x3D; &amp;Relay_Control
+&#125;;
+
+&#x2F;*
+* @function: Relay_Init
+* @param: None
+* @retval: None
+* @brief: 继电器初始化
+*&#x2F;
+static void Relay_Init(void)
+&#123;
+    __Relay_All_OFF();  &#x2F;&#x2F; 关闭全部继电器
+&#125;
+
+&#x2F;*
+* @function: Relay_Control
+* @param: None
+* @retval: None
+* @brief: 继电器控制
+*&#x2F;
+static void Relay_Control(Relay_Number_et Relay_x, Relay_Switch_Status_et status)
+&#123;
+    switch (Relay_x)
+    &#123;
+        case RELAY_A:
+        &#123;
+            if (RELAY_ON &#x3D;&#x3D; status) &#x2F;&#x2F; 打开继电器
+            &#123;
+                HAL_GPIO_WritePin(Relay_A_GPIO_Port, Relay_A_Pin, GPIO_PIN_SET);
+            &#125;
+            else    &#x2F;&#x2F; 关闭继电器
+            &#123;
+                HAL_GPIO_WritePin(Relay_A_GPIO_Port, Relay_A_Pin, GPIO_PIN_RESET);
+            &#125;
+            Relay.ucRelay_Status_Buf[RELAY_A] &#x3D; status; &#x2F;&#x2F; 更新继电器状态
+            break;
+        &#125;
+        case RELAY_B:
+        &#123;
+            if (RELAY_ON &#x3D;&#x3D; status) &#x2F;&#x2F; 打开继电器
+            &#123;
+                HAL_GPIO_WritePin(Relay_B_GPIO_Port, Relay_B_Pin, GPIO_PIN_SET);
+            &#125;
+            else    &#x2F;&#x2F; 关闭继电器
+            &#123;
+                HAL_GPIO_WritePin(Relay_B_GPIO_Port, Relay_B_Pin, GPIO_PIN_RESET);
+            &#125;
+            Relay.ucRelay_Status_Buf[RELAY_B] &#x3D; status; &#x2F;&#x2F; 更新继电器状态            
+            break;
+        &#125;
+        case RELAY_C:
+        &#123;
+            if (RELAY_ON &#x3D;&#x3D; status) &#x2F;&#x2F; 打开继电器
+            &#123;
+                HAL_GPIO_WritePin(Relay_C_GPIO_Port, Relay_C_Pin, GPIO_PIN_SET);
+            &#125;
+            else    &#x2F;&#x2F; 关闭继电器
+            &#123;
+                HAL_GPIO_WritePin(Relay_C_GPIO_Port, Relay_C_Pin, GPIO_PIN_RESET);
+            &#125;
+            Relay.ucRelay_Status_Buf[RELAY_C] &#x3D; status; &#x2F;&#x2F; 更新继电器状态            
+            break;
+        &#125;
+        case RELAY_D:
+        &#123;
+            if (RELAY_ON &#x3D;&#x3D; status) &#x2F;&#x2F; 打开继电器
+            &#123;
+                HAL_GPIO_WritePin(Relay_D_GPIO_Port, Relay_D_Pin, GPIO_PIN_SET);
+            &#125;
+            else    &#x2F;&#x2F; 关闭继电器
+            &#123;
+                HAL_GPIO_WritePin(Relay_D_GPIO_Port, Relay_D_Pin, GPIO_PIN_RESET);
+            &#125;    
+            Relay.ucRelay_Status_Buf[RELAY_D] &#x3D; status; &#x2F;&#x2F; 更新继电器状态        
+            break;
+        &#125;
+        default:break;
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> IW_Dog.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __IW_DOG_H
+#define __IW_DOG_H
+
+typedef struct
+&#123;
+    void (*IW_Dog_Init)(void);
+	void (*IW_Dog_Feed)(void);
+&#125; IW_Dog_st;
+
+extern IW_Dog_st IW_Dog;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> IW_Dog.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: xxx.c
+ * Author: Yang
+ * Date: 2023&#x2F;11&#x2F;21
+ * description: 
+ -----------------------------------
+独立看门狗，定时2S --- (1&#x2F;(40000&#x2F;64)) * x &#x3D; 2s  x &#x3D; 1250
+ -----------------------------------
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;* Private function prototypes&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void IW_Dog_Init(void);
+static void IW_Dog_Feed(void);
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+IW_Dog_st IW_Dog &#x3D; 
+&#123;
+    .IW_Dog_Init &#x3D; &amp;IW_Dog_Init,
+    .IW_Dog_Feed &#x3D; &amp;IW_Dog_Feed
+&#125;;
+
+&#x2F;*
+* @function: IW_Dog_Init
+* @param: None
+* @retval: None
+* @brief: 独立看门狗初始化
+*&#x2F;
+static void IW_Dog_Init(void)
+&#123;
+    IW_Dog_Feed();
+&#125;
+
+&#x2F;*
+* @function: IW_Dog_Feed
+* @param: None
+* @retval: None
+* @brief: 喂狗
+*&#x2F;
+static void IW_Dog_Feed(void)
+&#123;
+    HAL_IWDG_Refresh(&amp;hiwdg);   &#x2F;&#x2F; 喂狗
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> Pwm_Led.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __PWM_LED_H
+#define __PWM_LED_H
+
+&#x2F;&#x2F; LED灯带选择
+typedef enum
+&#123;
+    LED1 &#x3D; 0x00,
+    LED2 &#x3D; 0x01,
+    LED3 &#x3D; 0x02,
+    LED4 &#x3D; 0x03
+&#125; Pwm_Led_Number_et;
+
+typedef struct
+&#123;
+    void (*Pwm_Led_Init)(void); &#x2F;&#x2F; PWM灯带初始化
+    void (*Pwm_Led_Duty_Control)(Pwm_Led_Number_et, uint8_t);    &#x2F;&#x2F; PWM灯带占空比控制
+    void (*Pwm_Led_Breathing)(Pwm_Led_Number_et); &#x2F;&#x2F; 呼吸灯控制
+&#125; Pwm_Led_st;
+
+extern Pwm_Led_st Pwm_Led;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> Pwm_Led.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: xxx.c
+ * Author: Yang
+ * Date: 2023&#x2F;11&#x2F;21
+ * description: 
+ -----------------------------------
+LED灯带接线：
+    PA8(TIM1_CH1) --- LED1
+    PA9(TIM1_CH2) --- LED2
+    PA10(TIM1_CH3) --- LED3
+    PA11(TIM1_CH4) --- LED4
+    定时器频率设置为1ms,ARR为100,占空比则是0~100对应0%~100%
+ -----------------------------------
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;* Private variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static uint8_t Led_Duty[] &#x3D; &#123;0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 101, 90, 80, 70, 60, 50, 40, 30, 20, 10&#125;;
+&#x2F;* Private function prototypes&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void Pwm_Led_Init(void);
+static void Pwm_Led_Duty_Control(Pwm_Led_Number_et LEDx, uint8_t duty);
+static void Pwm_Led_Breathing(Pwm_Led_Number_et LEDx);
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+Pwm_Led_st Pwm_Led &#x3D; 
+&#123;
+    .Pwm_Led_Init &#x3D; &amp;Pwm_Led_Init,
+    .Pwm_Led_Duty_Control &#x3D; &amp;Pwm_Led_Duty_Control,
+    .Pwm_Led_Breathing &#x3D; &amp;Pwm_Led_Breathing
+&#125;;
+
+&#x2F;*
+* @function: Pwm_Led_Init
+* @param: None
+* @retval: None
+* @brief: LED灯带初始化
+*&#x2F;
+static void Pwm_Led_Init(void)
+&#123;
+    Pwm_Led_Duty_Control(LED1, 0);
+    Pwm_Led_Duty_Control(LED2, 0);
+    Pwm_Led_Duty_Control(LED3, 0);
+    Pwm_Led_Duty_Control(LED4, 0);
+	HAL_TIM_PWM_Start(&amp;htim1, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Start(&amp;htim1, TIM_CHANNEL_2);
+	HAL_TIM_PWM_Start(&amp;htim1, TIM_CHANNEL_3);
+	HAL_TIM_PWM_Start(&amp;htim1, TIM_CHANNEL_4);
+&#125;
+
+&#x2F;*
+* @function: Pwm_Led_Duty_Control
+* @param: None
+* @retval: None
+* @brief: PWM灯带占空比控制
+*&#x2F;
+static void Pwm_Led_Duty_Control(Pwm_Led_Number_et LEDx, uint8_t duty)
+&#123;
+    switch (LEDx)
+    &#123;
+        case LED1:
+        &#123;
+            TIM1-&gt;CCR1 &#x3D; duty;
+            break;
+        &#125;
+        case LED2:
+        &#123;
+            TIM1-&gt;CCR2 &#x3D; duty;
+            break;
+        &#125;
+        case LED3:
+        &#123;
+            TIM1-&gt;CCR3 &#x3D; duty;
+            break;
+        &#125;
+        case LED4:
+        &#123;
+            TIM1-&gt;CCR4 &#x3D; duty;
+            break;
+        &#125;
+        default:break;
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: Pwm_Led_Breathing
+* @param: None
+* @retval: None
+* @brief: 呼吸灯控制
+*&#x2F;
+static void Pwm_Led_Breathing(Pwm_Led_Number_et LEDx)
+&#123;
+    static uint8_t Index1 &#x3D; 0;
+    static uint8_t Index2 &#x3D; 0;
+    static uint8_t Index3 &#x3D; 0;
+    static uint8_t Index4 &#x3D; 0;
+    uint8_t len &#x3D; (sizeof(Led_Duty) &#x2F; sizeof(Led_Duty[0])) - 1;   &#x2F;&#x2F; 计算数组的长度
+
+    switch (LEDx)
+    &#123;
+        case LED1:
+        &#123;
+            Pwm_Led_Duty_Control(LED1, Led_Duty[Index1]);
+            Index1 &#x3D; (Index1 - 0 + 1) % (len - 0 + 1) + 0;            
+            break;
+        &#125;
+        case LED2:
+        &#123;
+            Pwm_Led_Duty_Control(LED2, Led_Duty[Index2]);
+            Index2 &#x3D; (Index2 - 0 + 1) % (len - 0 + 1) + 0;            
+            break;
+        &#125;
+        case LED3:
+        &#123;
+            Pwm_Led_Duty_Control(LED3, Led_Duty[Index3]);
+            Index3 &#x3D; (Index3 - 0 + 1) % (len - 0 + 1) + 0;            
+            break;
+        &#125;
+        case LED4:
+        &#123;
+            Pwm_Led_Duty_Control(LED4, Led_Duty[Index4]);
+            Index4 &#x3D; (Index4 - 0 + 1) % (len - 0 + 1) + 0;            
+            break;
+        &#125;
+        default:break;
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> ultrasound.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __ULTRASOUND_H
+#define __ULTRASOUND_H
+
+&#x2F;&#x2F; 打印调试使能
+#define Ultrasound_Debug 0
+
+&#x2F;*触发引脚*&#x2F;
+&#x2F;&#x2F; 置1
+#define SOUND_Trig_1_Set() HAL_GPIO_WritePin(Sound_Trig_1_GPIO_Port, Sound_Trig_1_Pin, GPIO_PIN_SET)
+&#x2F;&#x2F; 置0
+#define SOUND_Trig_1_RESET() HAL_GPIO_WritePin(Sound_Trig_1_GPIO_Port, Sound_Trig_1_Pin, GPIO_PIN_RESET)
+&#x2F;&#x2F; 超声波所用定时器
+#define Ultrasound_Timer &amp;htim2
+&#x2F;&#x2F; 超声波1所在通道
+#define Ultrasound_Channel TIM_CHANNEL_1
+
+typedef struct
+&#123;
+    uint16_t distance;  &#x2F;&#x2F; 测量距离
+    uint32_t Timer_Cnt_Buf[3];  &#x2F;&#x2F; 存放定时器计数数值的数组
+    uint8_t Run_Status; &#x2F;&#x2F; 运行到哪个步骤状态标志位
+    uint32_t Hight_Time;    &#x2F;&#x2F; 模块返回的高电平时间
+    void (*ultrasound_Get_Value)(void);    &#x2F;&#x2F; 超声波获取值
+    void (*ultrasound_Handler)(void);  &#x2F;&#x2F; 超声波处理函数
+&#125; ultrasound_st;
+
+extern ultrasound_st ultrasound;
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> ultrasoud.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: xxx.c
+ * Author: Yang
+ * Date: 2023&#x2F;11&#x2F;21
+ * description: 
+ -----------------------------------
+接线：
+    PA4 --- Trig
+    PA0(TIM2_CH1) --- Echo
+ -----------------------------------
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;* Private function prototypes&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void ultrasound_Get_Value(void);
+static void ultrasound_Handler(void);
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+ultrasound_st ultrasound &#x3D; 
+&#123;
+    .distance &#x3D; 0,
+    .Timer_Cnt_Buf &#x3D; &#123;0&#125;,
+    .Run_Status &#x3D; 0,
+    .Hight_Time &#x3D; 0,
+    .ultrasound_Get_Value &#x3D; &amp;ultrasound_Get_Value,
+    .ultrasound_Handler &#x3D; &amp;ultrasound_Handler
+&#125;;
+
+&#x2F;*
+* @function: ultrasound_Get_Value
+* @param: None
+* @retval: None
+* @brief: 超声波获取值
+*&#x2F;
+static void ultrasound_Get_Value(void)
+&#123;
+    switch (ultrasound.Run_Status)
+    &#123;
+        case 0:
+        &#123;
+            SOUND_Trig_1_Set();
+            Public.Public_Delay_us(30);
+            SOUND_Trig_1_RESET();
+
+            ultrasound.Run_Status++;
+            __HAL_TIM_SET_CAPTUREPOLARITY(Ultrasound_Timer, Ultrasound_Channel, TIM_INPUTCHANNELPOLARITY_RISING);   &#x2F;&#x2F; 上升沿触发
+            HAL_TIM_IC_Start_IT(Ultrasound_Timer, Ultrasound_Channel);  &#x2F;&#x2F; 输入捕获启动
+            break;
+        &#125;
+        case 3:
+        &#123;
+            ultrasound.Hight_Time &#x3D; ultrasound.Timer_Cnt_Buf[1] - ultrasound.Timer_Cnt_Buf[0];  &#x2F;&#x2F; 计算高电平时间
+            ultrasound.distance &#x3D; (ultrasound.Hight_Time * 0.034) &#x2F; 2;  &#x2F;&#x2F; 单位cm
+#if Ultrasound_Debug
+            printf(&quot;Distance:%d\r\n&quot;, ultrasound.distance); &#x2F;&#x2F; 打印距离
+#endif            
+            ultrasound.Run_Status &#x3D; 0;  &#x2F;&#x2F; 状态清0
+            TIM2-&gt;CNT &#x3D; 0;	&#x2F;&#x2F; 计数值清0
+            break;
+        &#125;
+        default:break;
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: ultrasound_Handler
+* @param: None
+* @retval: None
+* @brief: 超声波处理函数
+*&#x2F;
+static void ultrasound_Handler(void)
+&#123;
+    if (ultrasound.distance &lt; 10)   &#x2F;&#x2F; &lt;10cm
+    &#123;
+        Steer.Steer_Control(STEER_3, Angle_180);
+    &#125;
+    else
+    &#123;
+        Steer.Steer_Control(STEER_3, Angle_0);      
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> Steer.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __STEER_H
+#define __STEER_H
+
+#define TIM4_ARR 200
+&#x2F;&#x2F; 0 --- 0.5ms 2.5%
+#define Angle_0 (float)(0.025f * TIM4_ARR)
+&#x2F;&#x2F; 45 --- 1ms 5%
+#define Angle_45 (float)(0.05f * TIM4_ARR)
+&#x2F;&#x2F; 90 --- 1.5ms 7.5%
+#define Angle_90 (float)(0.075f * TIM4_ARR)
+&#x2F;&#x2F; 135 --- 2ms 10%
+#define Angle_135 (float)(0.1f * TIM4_ARR)
+&#x2F;&#x2F; 180 --- 2.5ms 12.5%
+#define Angle_180 (float)(0.125f * TIM4_ARR)
+
+&#x2F;&#x2F; 舵机复位
+#define __Steer_Reset() do &#123;    \
+    Steer.Steer_Control(STEER_1, Angle_0);    \
+    Steer.Steer_Control(STEER_2, Angle_0);    \
+    Steer.Steer_Control(STEER_3, Angle_0);    \
+    Steer.Steer_Control(STEER_4, Angle_0);    \
+&#125; while(0)
+
+typedef enum
+&#123;
+    STEER_1 &#x3D; 0x00,
+    STEER_2 &#x3D; 0x01,    
+    STEER_3 &#x3D; 0x02,
+    STEER_4 &#x3D; 0x03,        
+&#125; Steer_Number_et;
+
+typedef struct
+&#123;
+    uint8_t Steer_Switch_Flag;
+    void (*Steer_Init)(void);
+	void (*Steer_Control)(Steer_Number_et, float);
+    void (*Steer_Handler)(void);
+&#125; Steer_st;
+
+
+extern Steer_st Steer;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> Steer.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: Steer.c
+ * Author: Yang
+ * Date: 2023&#x2F;11&#x2F;21
+ * description: 
+ -----------------------------------
+舵机接线：
+        PB6(TIM4_CH1) --- 舵机1
+        PB7(TIM4_CH2) --- 舵机2
+        PB8(TIM4_CH3) --- 舵机3
+        PB9(TIM4_CH4) --- 舵机4
+ -----------------------------------
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;* Private function prototypes&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void Steer_Init(void);
+static void Steer_Control(Steer_Number_et Steer_X, float angle);
+static void Steer_Handler(void);
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+Steer_st Steer &#x3D; 
+&#123;
+    .Steer_Switch_Flag &#x3D; FALSE,
+    .Steer_Init &#x3D; &amp;Steer_Init,
+	.Steer_Control &#x3D; &amp;Steer_Control,
+    .Steer_Handler &#x3D; &amp;Steer_Handler
+&#125;;
+
+&#x2F;*
+* @function: Steer_Init
+* @param: None
+* @retval: None
+* @brief: 舵机初始化
+*&#x2F;
+static void Steer_Init(void)
+&#123;
+    HAL_TIM_Base_Start(&amp;htim4);
+	
+	Steer_Control(STEER_1, Angle_0);
+	Steer_Control(STEER_2, Angle_0);
+	Steer_Control(STEER_3, Angle_0);
+	Steer_Control(STEER_4, Angle_0);
+	
+    HAL_TIM_PWM_Start(&amp;htim4, TIM_CHANNEL_1);   &#x2F;&#x2F; 通道1
+    HAL_TIM_PWM_Start(&amp;htim4, TIM_CHANNEL_2);   &#x2F;&#x2F; 通道2
+    HAL_TIM_PWM_Start(&amp;htim4, TIM_CHANNEL_3);   &#x2F;&#x2F; 通道3
+    HAL_TIM_PWM_Start(&amp;htim4, TIM_CHANNEL_4);   &#x2F;&#x2F; 通道4
+&#125;
+
+&#x2F;*
+* @function: Steer_Control
+* @param: None
+* @retval: None
+* @brief: 舵机控制
+*&#x2F;
+static void Steer_Control(Steer_Number_et Steer_X, float angle)
+&#123;
+    switch (Steer_X)
+    &#123;
+        case STEER_1:
+        &#123;
+            TIM4-&gt;CCR1 &#x3D; angle;
+            break;
+        &#125;
+        case STEER_2:
+        &#123;
+			TIM4-&gt;CCR2 &#x3D; angle;
+            break;
+        &#125;
+        case STEER_3:
+        &#123;
+			TIM4-&gt;CCR3 &#x3D; angle;
+            break;
+        &#125;
+        case STEER_4:
+        &#123;
+			TIM4-&gt;CCR4 &#x3D; angle;
+            break;
+        &#125;
+        default:break;                        
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: Steer_Handler
+* @param: None
+* @retval: None
+* @brief: 舵机处理函数
+*&#x2F;
+static void Steer_Handler(void)
+&#123;
+    if (TRUE &#x3D;&#x3D; Voice.Steer_Switch_Closure_Flag)    &#x2F;&#x2F; 启动自动闭合
+    &#123;
+        Steer.Steer_Switch_Flag &#x3D; !Steer.Steer_Switch_Flag;
+
+        if (Steer.Steer_Switch_Flag)
+        &#123;
+            Steer_Control(STEER_1, Angle_180);
+            Steer_Control(STEER_2, Angle_180);           
+        &#125;
+        else
+        &#123;
+            Steer_Control(STEER_1, Angle_0);
+            Steer_Control(STEER_2, Angle_0);
+        &#125;        
+    &#125;
+    else    &#x2F;&#x2F; 关闭自动闭合
+    &#123;
+        Steer_Control(STEER_1, Angle_0);
+        Steer_Control(STEER_2, Angle_0);
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<h2 id="控制机械臂">控制机械臂</h2>
+<blockquote>
+<ul>
+<li>硬件</li>
+</ul>
+<p>STM32F103C8T6</p>
+<p>MG995舵机</p>
+</blockquote>
+<blockquote>
+<p>【舵机】</p>
+<ul>
+<li><strong>红色</strong>：5V</li>
+<li><strong>粽色</strong>：GND</li>
+<li><strong>橙色</strong>：PWM</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>【MG995舵机】</p>
+<p>转动方向是 <code>0°~180°</code>，周期是 <code>20ms(50Hz)</code>，<code>0°</code> 对应高电平时间是 <code>0.5ms</code>，<code>180°</code> 对应高电平时间是 <code>2.5ms</code></p>
+<p>它步进值只能是 <code>10°</code>，小于 <code>10°</code> 没反应，可以通过公式计算出角度对应的周期时间：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>比如当前需要转动到35°，则：(2.5-0.5)/180 * 35 + 0.5 = 0.88ms</mtext></mrow><annotation encoding="application/x-tex">\text{比如当前需要转动到35°，则：(2.5-0.5)/180 * 35 + 0.5 = 0.88ms}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord cjk_fallback">比如当前需要转动到</span><span class="mord">35°</span><span class="mord cjk_fallback">，则：</span><span class="mord">(2.5-0.5)/180 * 35 + 0.5 = 0.88ms</span></span></span></span></span></span></p>
+</blockquote>
+<details ><summary> Steer.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __STEER_H
+#define __STEER_H
+
+&#x2F;&#x2F; 舵机使用定时器
+#define USE_STEER_Timer htim1
+
+&#x2F;&#x2F; 定时器ARR值
+#define STEER_TIMER_ARR 200
+&#x2F;&#x2F; 最大周期(180°)
+#define STEER_MAX_CYCLE 2.5f
+&#x2F;&#x2F; 最小周期(0°)
+#define STEER_MIN_CYCLE 0.5f
+&#x2F;&#x2F; 最大可转角度
+#define STEER_MAX_ANGLE 180
+&#x2F;&#x2F; 计算角度对应所需占空比值
+#define STEER_CALCULATE_DUTY(angle) (uint8_t)((float)((STEER_MAX_CYCLE - STEER_MIN_CYCLE) &#x2F; (float)STEER_MAX_ANGLE * angle + 0.5f) &#x2F; 20 * 200)
+
+
+&#x2F;&#x2F; &#x2F;&#x2F; 0 --- 0.5ms 2.5%   0.5&#x2F;20&#x3D;0.025
+&#x2F;&#x2F; #define Angle_0 (float)(0.025f * STEER_TIMER_ARR)
+&#x2F;&#x2F; &#x2F;&#x2F; 45 --- 1ms 5%
+&#x2F;&#x2F; #define Angle_45 (float)(0.05f * STEER_TIMER_ARR)
+&#x2F;&#x2F; &#x2F;&#x2F; 90 --- 1.5ms 7.5%
+&#x2F;&#x2F; #define Angle_90 (float)(0.075f * STEER_TIMER_ARR)
+&#x2F;&#x2F; &#x2F;&#x2F; 135 --- 2ms 10%
+&#x2F;&#x2F; #define Angle_135 (float)(0.1f * STEER_TIMER_ARR)
+&#x2F;&#x2F; &#x2F;&#x2F; 180 --- 2.5ms 12.5%
+&#x2F;&#x2F; #define Angle_180 (float)(0.125f * STEER_TIMER_ARR)
+
+&#x2F;&#x2F; 舵机复位
+#define __Steer_Reset() do &#123;    \
+    Steer.Steer_Control(STEER_1, STEER_ANGLE_0);    \
+    Steer.Steer_Control(STEER_2, STEER_ANGLE_0);    \
+    Steer.Steer_Control(STEER_3, STEER_ANGLE_0);    \
+    Steer.Steer_Control(STEER_4, STEER_ANGLE_0);    \
+&#125; while(0)
+&#x2F;*
+角度--角度所需占空比值
+0.0--5
+10.0--6
+20.0--7
+30.0--8
+40.0--9
+50.0--10
+60.0--11
+70.0--12
+80.0--13
+90.0--15
+100.0--16
+110.0--17
+120.0--18
+130.0--19
+140.0--20
+150.0--21
+160.0--22
+170.0--23
+180.0--25
+*&#x2F;
+&#x2F;&#x2F; 度数对应占空比值
+typedef enum
+&#123;
+    STEER_ANGLE_0 &#x3D; (uint8_t)STEER_CALCULATE_DUTY(0),
+    STEER_ANGLE_10 &#x3D; (uint8_t)STEER_CALCULATE_DUTY(10),
+    STEER_ANGLE_20 &#x3D; (uint8_t)STEER_CALCULATE_DUTY(20),
+    STEER_ANGLE_30 &#x3D; (uint8_t)STEER_CALCULATE_DUTY(30),
+    STEER_ANGLE_40 &#x3D; (uint8_t)STEER_CALCULATE_DUTY(40),
+    STEER_ANGLE_50 &#x3D; (uint8_t)STEER_CALCULATE_DUTY(50),
+    STEER_ANGLE_60 &#x3D; (uint8_t)STEER_CALCULATE_DUTY(60),
+    STEER_ANGLE_70 &#x3D; (uint8_t)STEER_CALCULATE_DUTY(70),
+    STEER_ANGLE_80 &#x3D; (uint8_t)STEER_CALCULATE_DUTY(80),
+    STEER_ANGLE_90 &#x3D; (uint8_t)STEER_CALCULATE_DUTY(90),
+    STEER_ANGLE_100 &#x3D; (uint8_t)STEER_CALCULATE_DUTY(100),
+    STEER_ANGLE_110 &#x3D; (uint8_t)STEER_CALCULATE_DUTY(110),
+    STEER_ANGLE_120 &#x3D; (uint8_t)STEER_CALCULATE_DUTY(120),
+    STEER_ANGLE_130 &#x3D; (uint8_t)STEER_CALCULATE_DUTY(130),
+    STEER_ANGLE_140 &#x3D; (uint8_t)STEER_CALCULATE_DUTY(140),
+    STEER_ANGLE_150 &#x3D; (uint8_t)STEER_CALCULATE_DUTY(150),
+    STEER_ANGLE_160 &#x3D; (uint8_t)STEER_CALCULATE_DUTY(160),
+    STEER_ANGLE_170 &#x3D; (uint8_t)STEER_CALCULATE_DUTY(170),
+    STEER_ANGLE_180 &#x3D; (uint8_t)STEER_CALCULATE_DUTY(180)
+&#125; Steer_Angle_et;
+
+typedef enum
+&#123;
+    STEER_1 &#x3D; 0,
+    STEER_2 &#x3D; 1,    
+    STEER_3 &#x3D; 2,
+    STEER_4 &#x3D; 3,
+    MAX_STEER &#x3D;  STEER_4 + 1,       
+&#125; Steer_Number_et;
+
+typedef struct
+&#123;
+    uint8_t Now_Angle; &#x2F;&#x2F; 存储舵机当前的角度值
+    uint16_t Turn_Time;  &#x2F;&#x2F; 转动完所需时间(ms)大概2s
+    uint8_t Turn_Over_Flag; &#x2F;&#x2F; 转动计数完成标志位
+&#125; Steer_Parameter_st;
+
+typedef struct
+&#123;
+    uint8_t Steer_All_Start_Flag;   &#x2F;&#x2F; 总启动标志位
+    void (*Steer_Init)(void);
+	uint8_t (*Steer_Control)(Steer_Number_et, Steer_Angle_et);
+    void (*Steer_Test)(void);
+    void (*Steer_Turn_Judge)(void);
+&#125; Steer_st;
+
+
+extern Steer_st Steer;
+extern Steer_Parameter_st Steer_Parameter[];
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> Steer.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: Steer.c
+ * Author: Yang
+ * Date: 2023&#x2F;11&#x2F;21
+ * description: 
+ -----------------------------------
+舵机接线：
+        PA8(TIM1_CH1) --- 舵机1
+        PA9(TIM1_CH2) --- 舵机2
+        PA10(TIM1_CH3) --- 舵机3
+        PA11(TIM1_CH4) --- 舵机4
+ -----------------------------------
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;* Private function prototypes&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void Steer_Init(void);
+static uint8_t Steer_Control(Steer_Number_et Steer_X, Steer_Angle_et angle);
+static void Steer_Test(void);
+static void Steer_Turn_Judge(void);
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+Steer_Parameter_st Steer_Parameter[] &#x3D; 
+&#123;
+    &#123;STEER_ANGLE_0, 2000, FALSE&#125;,
+    &#123;STEER_ANGLE_0, 2000, FALSE&#125;,
+    &#123;STEER_ANGLE_0, 2000, FALSE&#125;,
+    &#123;STEER_ANGLE_0, 2000, FALSE&#125;
+&#125;;
+
+Steer_st Steer &#x3D; 
+&#123;
+    .Steer_All_Start_Flag &#x3D; FALSE,
+    .Steer_Init &#x3D; &amp;Steer_Init,
+	.Steer_Control &#x3D; &amp;Steer_Control,
+    .Steer_Test &#x3D; &amp;Steer_Test,
+    .Steer_Turn_Judge &#x3D; &amp;Steer_Turn_Judge
+&#125;;
+
+
+&#x2F;*
+* @function: Steer_Init
+* @param: None
+* @retval: None
+* @brief: 舵机初始化
+*&#x2F;
+static void Steer_Init(void)
+&#123;
+    HAL_TIM_Base_Start(&amp;USE_STEER_Timer);
+	
+    __Steer_Reset();    &#x2F;&#x2F; 复位
+	
+    HAL_TIM_PWM_Start(&amp;USE_STEER_Timer, TIM_CHANNEL_1);   &#x2F;&#x2F; 通道1
+    HAL_TIM_PWM_Start(&amp;USE_STEER_Timer, TIM_CHANNEL_2);   &#x2F;&#x2F; 通道2
+    HAL_TIM_PWM_Start(&amp;USE_STEER_Timer, TIM_CHANNEL_3);   &#x2F;&#x2F; 通道3
+    HAL_TIM_PWM_Start(&amp;USE_STEER_Timer, TIM_CHANNEL_4);   &#x2F;&#x2F; 通道4
+&#125;
+
+&#x2F;*
+* @function: Steer_Control
+* @param: None
+* @retval: None
+* @brief: 舵机控制
+*&#x2F;
+static uint8_t Steer_Control(Steer_Number_et Steer_X, Steer_Angle_et angle)
+&#123;
+    uint8_t res &#x3D; FALSE;
+    uint8_t i;
+
+    switch (Steer_X)
+    &#123;
+        case STEER_1:
+        &#123;
+            if (FALSE &#x3D;&#x3D; Steer_Parameter[STEER_1].Turn_Over_Flag)
+            &#123;
+                TIM1-&gt;CCR1 &#x3D; angle;
+                Steer_Parameter[STEER_1].Now_Angle &#x3D; angle;
+                Steer_Parameter[STEER_1].Turn_Over_Flag &#x3D; TRUE;
+                res &#x3D; TRUE;
+            &#125;
+            break;
+        &#125;
+        case STEER_2:
+        &#123;
+            if (FALSE &#x3D;&#x3D; Steer_Parameter[STEER_2].Turn_Over_Flag)
+            &#123;
+                TIM1-&gt;CCR2 &#x3D; angle;
+                Steer_Parameter[STEER_2].Now_Angle &#x3D; angle;
+                Steer_Parameter[STEER_2].Turn_Over_Flag &#x3D; TRUE;
+                res &#x3D; TRUE;
+            &#125;
+            break;
+        &#125;
+        case STEER_3:
+        &#123;
+            if (FALSE &#x3D;&#x3D; Steer_Parameter[STEER_3].Turn_Over_Flag)
+            &#123;
+                TIM1-&gt;CCR3 &#x3D; angle;
+                Steer_Parameter[STEER_3].Now_Angle &#x3D; angle;
+                Steer_Parameter[STEER_3].Turn_Over_Flag &#x3D; TRUE;
+                res &#x3D; TRUE;
+            &#125;
+            break;
+        &#125;
+        case STEER_4:
+        &#123;
+            if (FALSE &#x3D;&#x3D; Steer_Parameter[STEER_4].Turn_Over_Flag)
+            &#123;
+                TIM1-&gt;CCR4 &#x3D; angle;
+                Steer_Parameter[STEER_4].Now_Angle &#x3D; angle;
+                Steer_Parameter[STEER_4].Turn_Over_Flag &#x3D; TRUE;
+                res &#x3D; TRUE;
+            &#125;            
+            break;
+        &#125;
+        default:break;                        
+    &#125;
+
+    return res;
+&#125;
+
+&#x2F;*
+* @function: Steer_Test
+* @param: None
+* @retval: None
+* @brief: 舵机测试函数
+*&#x2F;
+static void Steer_Test(void)
+&#123;
+    static uint8_t step &#x3D; 0;
+    static Steer_Angle_et steer_angle_temp &#x3D; STEER_ANGLE_0;
+
+    if (!Steer.Steer_All_Start_Flag)    &#x2F;&#x2F; 强制退出
+    &#123;
+        return;
+    &#125;
+
+    switch (step)
+    &#123;
+        case 0: &#x2F;&#x2F; 0 -&gt; 180
+        &#123;
+            Steer_Parameter[STEER_1].Turn_Time &#x3D; 200; &#x2F;&#x2F; 转小的度数
+            if (steer_angle_temp !&#x3D; STEER_ANGLE_180)
+            &#123;
+                if (TRUE &#x3D;&#x3D; Steer.Steer_Control(STEER_1, steer_angle_temp))
+                &#123;
+                    steer_angle_temp++;
+                &#125;
+            &#125;
+            else
+            &#123;
+                step++;
+            &#125;
+            break;
+        &#125;
+        case 1: &#x2F;&#x2F; 180 -&gt; 0                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+        &#123;
+            if (steer_angle_temp !&#x3D; STEER_ANGLE_0)
+            &#123;
+                if (TRUE &#x3D;&#x3D; Steer.Steer_Control(STEER_1, steer_angle_temp))
+                &#123;
+                    steer_angle_temp--;
+                &#125;
+            &#125;
+            else
+            &#123;
+                step++;
+            &#125;
+            break;
+        &#125;
+        case 2: &#x2F;&#x2F; 180
+        &#123;
+            Steer_Parameter[STEER_1].Turn_Time &#x3D; 2000; &#x2F;&#x2F; 转大的度数
+            if (TRUE &#x3D;&#x3D; Steer.Steer_Control(STEER_1, STEER_ANGLE_180))
+            &#123;
+                step++;
+            &#125;
+            break;
+        &#125;
+        case 3: &#x2F;&#x2F; 180
+        &#123;
+            if (TRUE &#x3D;&#x3D; Steer.Steer_Control(STEER_1, STEER_ANGLE_0))
+            &#123;
+                step &#x3D; 0;
+            &#125;        
+            break;
+        &#125;
+        default:
+        &#123;
+            step &#x3D; 0;
+            break;
+        &#125;      
+    &#125;
+    return;
+&#125;
+
+&#x2F;*
+* @function: Steer_Turn_Judge
+* @param: None
+* @retval: None
+* @brief: 转向时间计数(1ms检测一次)
+*&#x2F;
+static void Steer_Turn_Judge(void)
+&#123;
+    uint8_t i;
+    static uint16_t Steer_Turn_Cnt[MAX_STEER] &#x3D; &#123;0&#125;;
+
+    for (i &#x3D; 0; i &lt; MAX_STEER; i++)
+    &#123;
+        if (Steer_Parameter[i].Turn_Over_Flag)  &#x2F;&#x2F; 置1
+        &#123;
+            Steer_Turn_Cnt[i]++;
+            if (Steer_Turn_Cnt[i] &gt;&#x3D; Steer_Parameter[i].Turn_Time)
+            &#123;
+                Steer_Turn_Cnt[i] &#x3D; 0;
+                Steer_Parameter[i].Turn_Over_Flag &#x3D; FALSE;
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> CallBack.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: CallBack.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;06&#x2F;19
+ * description: store interrupt function
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+extern uint8_t ucUart1_Rec_Buff[128];
+&#x2F;*
+* @function: HAL_TIM_PeriodElapsedCallback
+* @param: None
+* @retval: None
+* @brief: timer callback function
+*&#x2F;
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+&#123;
+  if (htim-&gt;Instance &#x3D;&#x3D; htim4.Instance) &#x2F;&#x2F; 1ms
+  &#123;
+    System.Task_Marks_Handler();
+    Steer.Steer_Turn_Judge(); &#x2F;&#x2F; 计数
+  &#125;
+&#125;
+
+void USART1_IRQHandler(void)
+&#123;
+	if(__HAL_UART_GET_FLAG(&amp;huart1,UART_FLAG_IDLE) !&#x3D; 0x00u)
+	&#123;
+		__HAL_UART_CLEAR_IDLEFLAG(&amp;huart1);
+    	HAL_UART_DMAStop(&amp;huart1);   &#x2F;&#x2F; 串口停止DMA接收
+		if (strstr((char*)ucUart1_Rec_Buff, (char*)&quot;DJ1_0&quot;) !&#x3D; NULL)
+		&#123;
+			Steer.Steer_Control(STEER_1, STEER_ANGLE_0);
+      printf(&quot;1\r\n&quot;);
+		&#125;
+		if (strstr((char*)ucUart1_Rec_Buff, (char*)&quot;DJ1_45&quot;) !&#x3D; NULL)
+		&#123;
+			Steer.Steer_Control(STEER_1, STEER_ANGLE_50);
+      printf(&quot;1\r\n&quot;);
+		&#125;
+		if (strstr((char*)ucUart1_Rec_Buff, (char*)&quot;DJ1_90&quot;) !&#x3D; NULL)
+		&#123;
+			Steer.Steer_Control(STEER_1, STEER_ANGLE_90);
+      printf(&quot;1\r\n&quot;);
+		&#125;
+		if (strstr((char*)ucUart1_Rec_Buff, (char*)&quot;DJ1_135&quot;) !&#x3D; NULL)
+		&#123;
+			Steer.Steer_Control(STEER_1, STEER_ANGLE_160);
+      printf(&quot;1\r\n&quot;);
+		&#125;
+		if (strstr((char*)ucUart1_Rec_Buff, (char*)&quot;DJ1_180&quot;) !&#x3D; NULL)
+		&#123;
+			Steer.Steer_Control(STEER_1, STEER_ANGLE_180);
+      printf(&quot;1\r\n&quot;);
+		&#125;  
+		if (strstr((char*)ucUart1_Rec_Buff, (char*)&quot;DJ_CLOSE&quot;) !&#x3D; NULL) 
+		&#123;
+      Steer.Steer_All_Start_Flag &#x3D; FALSE;
+		&#125;         
+		if (strstr((char*)ucUart1_Rec_Buff, (char*)&quot;DJ_OPEN&quot;) !&#x3D; NULL) 
+		&#123;
+      Steer.Steer_All_Start_Flag &#x3D; TRUE;
+		&#125;              
+    HAL_UART_Receive_DMA(&amp;huart1, ucUart1_Rec_Buff, 128);    
+	&#125;
+	
+	HAL_UART_IRQHandler(&amp;huart1);
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> Task.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">static inline void TasksHandle_200MS(void)
+&#123;
+	HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
+	Steer.Steer_Test();	&#x2F;&#x2F; 测试
+&#125;</code></pre>
+              </div>
+            </details></article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num158.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%89%E7%AB%8B%E6%96%B9"><span class="toc-number">1.</span> <span class="toc-text">光立方</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E6%9C%BA%E6%A2%B0%E8%87%82"><span class="toc-number">2.</span> <span class="toc-text">控制机械臂</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '键盘敲烂 月薪过万' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script defer src="/js/my_aplayer.js"></script><script defer src="/js/meting.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
