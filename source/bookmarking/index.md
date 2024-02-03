@@ -84,7 +84,11 @@ comments: false
       link: https://10.5.128.82/
       avatar: ./book_image/book8.webp
       descr: 物联网仿真实训教学平台      
-
+    - name: AI文档分析
+      link: https://doc.smartread.cc/#/upload/BX
+      avatar: ./book_image/book8.webp
+      descr:           　                         
+      
 - class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#dfe516;display:inline-block;"></i><span style="color:#abb4d7;">Github</span>
   class_desc: 
   link_list:
@@ -367,6 +371,14 @@ comments: false
       link: https://pixabay.com/
       avatar: ./book_image/book8.webp
       descr: 搜图                                                             
+    - name: AI万能图片编辑器
+      link: https://img.logosc.cn/
+      avatar: ./book_image/book8.webp
+      descr: 去底,证件照
+    - name: fococlipping
+      link: https://www.fococlipping.com/
+      avatar: ./book_image/book8.webp
+      descr: 免费AI去底
 
 - class_name: <i class="note-icon fas fa-fan fa-spin" style="color:#dfe516;display:inline-block;"></i><span style="color:#abb4d7;">在线小工具/其他资源网</span>
   class_desc: 
