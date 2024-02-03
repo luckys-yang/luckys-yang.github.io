@@ -1,0 +1,1292 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>QT6学习笔记-3 | Yangの小栈</title><meta name="author" content="Yang"><meta name="copyright" content="Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言 王超的独立博客 Qt-SerialDebuger Model&#x2F;View（模型&#x2F;视图）结构 Model&#x2F;View（模型&#x2F;视图）结构是 Qt 中用界面组件显示与编辑数据的一种结构，视图（View）是显示和编辑数据的界面组件，模型（Model）是视图与原始数据之间的接口 将界面组件与所编辑的数据分离开来，又通过数据源的方式连接起来，是处理界面与数据的一种较好的方式。Qt 使用 Model&#x2F;View">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QT6学习笔记-3">
+<meta property="og:url" content="https://blog.yang5201314.cn/post/df6332b9.html">
+<meta property="og:site_name" content="Yangの小栈">
+<meta property="og:description" content="前言 王超的独立博客 Qt-SerialDebuger Model&#x2F;View（模型&#x2F;视图）结构 Model&#x2F;View（模型&#x2F;视图）结构是 Qt 中用界面组件显示与编辑数据的一种结构，视图（View）是显示和编辑数据的界面组件，模型（Model）是视图与原始数据之间的接口 将界面组件与所编辑的数据分离开来，又通过数据源的方式连接起来，是处理界面与数据的一种较好的方式。Qt 使用 Model&#x2F;View">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.yang5201314.cn/img/num165.webp">
+<meta property="article:published_time" content="2024-01-08T14:43:19.000Z">
+<meta property="article:modified_time" content="2024-01-09T10:56:59.707Z">
+<meta property="article:author" content="Yang">
+<meta property="article:tag" content="aabbcc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.yang5201314.cn/img/num165.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20231008142657.webp"><link rel="canonical" href="https://blog.yang5201314.cn/post/df6332b9.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'QT6学习笔记-3',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-01-09 18:56:59'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/aplayer.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20231008142657.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">157</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">72</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">34</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">QT6学习笔记-3</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-01-08T14:43:19.000Z" title="发表于 2024-01-08 22:43:19">2024-01-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-01-09T10:56:59.707Z" title="更新于 2024-01-09 18:56:59">2024-01-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/QT/">QT</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">8.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>35分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
+<p><a href="https://www.wangchaochao.top/">王超的独立博客</a></p>
+<p><a href="https://github.com/ZhiliangMa/Qt-SerialDebuger">Qt-SerialDebuger</a></p>
+<h2 id="Model-View（模型-视图）结构">Model/View（模型/视图）结构</h2>
+<p>Model/View（模型/视图）结构是 Qt 中用界面组件显示与编辑数据的一种结构，视图（View）是显示和编辑数据的界面组件，模型（Model）是视图与原始数据之间的接口</p>
+<p>将界面组件与所编辑的数据分离开来，又通过数据源的方式连接起来，是处理界面与数据的一种较好的方式。Qt 使用 Model/View 结构来处理这种关系</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20240108225101.webp" style="zoom:67%;" />
+<p>代理功能可以让用户定制数据的界面显示和编辑方式。在标准的视图组件中，代理功能显示一个数据，当数据被编辑时，代理通过模型索引与数据模型通信，并为编辑数据提供一个编辑器，一般是一个 QLineEdit 组件</p>
+<p>模型、视图和代理之间使用信号和槽通信。当源数据发生变化时，数据模型发射信号通知视图组件；当用户在界面上操作数据时，视图组件发射信号表示这些操作信息；当编辑数据时，代理发射信号告知数据模型和视图组件编辑器的状态</p>
+<ul>
+<li>数据（Data）是实际的数据，如数据库的一个数据表或SQL查询结果，内存中的一个 StringList，或磁盘文件结构等。</li>
+<li>视图或视图组件（View）是屏幕上的界面组件，视图从数据模型获得每个数据项的模型索引（model index），通过模型索引获取数据，然后为界面组件提供显示数据。Qt 提供一些现成的数据视图组件，如 <code>QListView、QTreeView 和 QTableView</code> 等。</li>
+<li>模型或数据模型（Model）与实际数据通信，并为视图组件提供数据接口。它从原始数据提取需要的内容，用于视图组件进行显示和编辑。Qt 中有一些预定义的数据模型，如 <code>QStringListModel </code>可作为 StringList 的数据模型， <code>QSqlTableModel</code> 可以作为数据库中一个数据表的数据模型。</li>
+</ul>
+<h3 id="数据模型">数据模型</h3>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20240109082551.webp" style="zoom:67%;" />
+<table>
+<thead>
+<tr>
+<th>Model 类</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QStringListModel</td>
+<td>用于处理字符串列表数据的数据模型类</td>
+</tr>
+<tr>
+<td>QStandardltemModel</td>
+<td>标准的基于项数据的数据模型类，每个项数据可以是任何数据类型</td>
+</tr>
+<tr>
+<td>QFileSy stemModel</td>
+<td>计算机上文件系统的数据模型类</td>
+</tr>
+<tr>
+<td>QSortFilterProxyModel</td>
+<td>与其他数据模型结合，提供排序和过滤功能的数据模型类</td>
+</tr>
+<tr>
+<td>QSqlQueryModel</td>
+<td>用于数据库SQL查询结果的数据模型类</td>
+</tr>
+<tr>
+<td>QSqlTableModel</td>
+<td>用于数据库的一个数据表的数据模型类</td>
+</tr>
+<tr>
+<td>QSqlRelationalTableModel</td>
+<td>用于关系型数据表的数据模型类</td>
+</tr>
+</tbody>
+</table>
+<h3 id="视图组件">视图组件</h3>
+<p>视图组件（View）就是显示数据模型的数据的界面组件，Qt 提供的视图组件如下：</p>
+<ul>
+<li>QListView：用于显示单列的列表数据，适用于一维数据的操作。</li>
+<li>QTreeView：用于显示树状结构数据，适用于树状结构数据的操作。</li>
+<li>QTableView：用于显示表格状数据，适用于二维表格型数据的操作。</li>
+<li>QColumnView：用多个QListView显示树状层次结构，树状结构的一层用一个QListView显示。</li>
+<li>QHeaderView：提供行表头或列表头的视图组件，如QTableView的行表头和列表头。</li>
+</ul>
+<p>前面介绍了 QListWidget、QTreeWidget 和 QtableWidget 3个可用于数据编辑的组件。这 3 个类称为便利类（convenience classes），它们分别是 3 个视图类的子类</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20240108225600.webp" style="zoom:67%;" />
+<h3 id="结构的一些概念">结构的一些概念</h3>
+<p>【图1】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20240108225739.webp" style="zoom:67%;" />
+<p>上图数据模型的 3 种常见表现形式。不管数据模型的表现形式是怎么样的，数据模型中存储数据的基本单元都是项（item），每个项有一个行号、一个列号，还有一个父项。在列表和表格模式下，所有的项都有一个相同的顶层项；在树状结构中，行号、列号、父项稍微复杂一点，但是由这 3 个参数完全可以定义一个项的位置，从而存取项的数据</p>
+<h4 id="模型索引（model-index）">模型索引（model index）</h4>
+<p>为了保证数据的表示与数据存取方式隔离，数据模型中引入了模型索引的概念。通过数据模型存取的每个数据都有一个模型索引，视图组件和代理都通过模型索引来获取数据。</p>
+<p>QModelIndex 表示模型索引的类。模型索引提供数据存取的一个临时指针，用于通过数据模型提取或修改数据。因为模型内部组织数据的结构随时可能改变，所以模型索引是临时的。如果需要使用持久性的模型索引，则要使用 QPersistentModelIndex 类。</p>
+<h4 id="行号和列号">行号和列号</h4>
+<p>数据模型的基本形式是 <code>用行和列定义的表格数据</code>，但这并不意味着底层的数据是用二维数组存储的，使用行和列只是为了组件之间交互方便的一种规定。通过模型索引的行号和列号就可以存取数据。</p>
+<p>要获得一个模型索引，必须提供 3 个参数： <code>行号、列号、父项的模型索引</code>。例如，对于如图 5 中的表格数据模型中的 3 个数据项 A、B、C，获取其模型索引的代码是：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">QModelIndex indexA &#x3D; model-&gt;index(0, 0, QModelIndex());
+QModelIndex indexB &#x3D; model-&gt;index(1, 1, QModelIndex());
+QModelIndex indexC &#x3D; model-&gt;index(2, 1, QModelIndex());</code></pre>
+<p>在创建模型索引的函数中需要传递行号、列号和父项的模型索引。对于列表和表格模式的数据模型，顶层节点总是用 QModelIndex() 表示。</p>
+<h4 id="父项">父项</h4>
+<p>当数据模型是 <code>列表或表格时</code>，使用行号、列号存储数据比较直观，所有数据项的父项就是顶层项；当数据模型是树状结构时，情况比较复杂（树状结构中，项一般习惯于称为节点）， <code>一个节点可以有父节点，也可以是其他节点的父节点</code>，在构造数据项的模型索引时，必须指定正确的行号、列号和父节点。</p>
+<p>对于上面图1 中的树状数据模型，节点 A 和节点 C 的父节点是顶层节点，获取模型索引的代码是：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">QModelIndex indexA &#x3D; model-&gt;index(0, 0, QModelIndex());
+QModelIndex indexC &#x3D; model-&gt;index(2, 1, QModelIndex());</code></pre>
+<p>但是，节点 B 的父节点是节点 A，节点 B 的模型索引由下面的代码生成：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">QModelIndex indexB &#x3D; model-&gt;index(1, 0, indexA);</code></pre>
+<h4 id="项的角色">项的角色</h4>
+<p>在为数据模型的一个项设置数据时，可以赋予其不同项的角色的数据。例如，数据模型类 QStandardItemModel 的项数据类是 QStandardItem，其设置数据的函数是：</p>
+<p>void QStandardItem::setData(const QVariant &amp;value, int role= Qt::UserRole + 1)</p>
+<p>其中，value 是需要设置的数据，role 是设置数据的角色。一个项可以有不同角色的数据，用于不同的场合。</p>
+<p>role 是 <code>Qt::ItemDataRole</code> 枚举类型，有多种取值，如 <code>Qt::DisplayRole</code> 角色是在视图组件中显示的字符串，<code>Qt::ToolTipRole</code> 是鼠标提示消息，<code>Qt::UserRole</code> 可以自定义数据。项的标准角色是 <code>Qt::DisplayRole</code>。</p>
+<p>在获取一个项的数据时也需要指定角色，以获取不同角色的数据：</p>
+<p>QVariant QStandardItem::data(int role = Qt::UserRole + 1) const</p>
+<p>为一个项的不同角色定义数据，可以告知视图组件和代理组件如何显示数据。例如，在图 6 中，项的 DisplayRole 数据是显示的字符串，DecorationRole 是用于装饰显示的属性，ToolTipRole 定义了鼠标提示信息。不同的视图组件对各种角色数据的解释和显示可能不一样，也可能忽略某些角色的数据。</p>
+<h3 id="项目控件组-Item-Widgets">项目控件组(Item Widgets)</h3>
+<ul>
+<li>列表控件(ListWidgt)</li>
+<li>树型控件(TreeWidget)</li>
+<li>表格控件(TableWidget)</li>
+</ul>
+<h3 id="QListView、QStandardItemModel、QStandardItem">QListView、QStandardItemModel、QStandardItem</h3>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &lt;QApplication&gt;
+#include&lt;QWidget&gt;
+#include &quot;widget.h&quot;
+
+#include&lt;QStandardItemModel&gt;	&#x2F;&#x2F;标准的数据模型
+#include&lt;QListView&gt;				&#x2F;&#x2F;列表视图
+
+#ifdef _DEBUG
+#pragma comment(linker,&quot;&#x2F;subsystem:console &#x2F;entry:mainCRTStartup&quot;)
+#endif &#x2F;&#x2F; _DEBUG
+
+int main(int argc, char* argv[])
+&#123;
+	QApplication a(argc, argv);
+
+	&#x2F;&#x2F;1，创建模型
+	&#x2F;&#x2F; 创建一个QStandardItemModel对象，并设置其父对象为qApp（应用程序对象）
+	auto model &#x3D; new QStandardItemModel(qApp);
+
+	&#x2F;&#x2F;2，创建视图
+	&#x2F;&#x2F; 创建一个QListView对象，用于显示数据
+	QListView view;
+
+	&#x2F;&#x2F;3，把模型交给视图进行显示
+	&#x2F;&#x2F; 将模型设置到视图中，以便在视图中显示数据
+	view.setModel(model);
+	view.show();
+
+	&#x2F;&#x2F;4,给模型添加数据
+	model-&gt;appendRow(new QStandardItem(&quot;玩蛇&quot;));	&#x2F;&#x2F; 向模型的末尾添加一行
+	model-&gt;insertRow(0, new QStandardItem(&quot;莫影&quot;));	&#x2F;&#x2F; 在索引0处插入一行即
+	model-&gt;insertRow(1, new QStandardItem(&quot;mew&quot;));	&#x2F;&#x2F; 在索引1处插入一行
+
+	model-&gt;setItem(0, new QStandardItem(&quot;里奇&quot;));	&#x2F;&#x2F; 将索引0处的项目替换为一个新的QStandardItem对象
+	model-&gt;setItem(3, new QStandardItem(&quot;白榆&quot;));	&#x2F;&#x2F; 将索引3处的项目替换为一个新的QStandardItem对象
+
+	qDebug() &lt;&lt; model-&gt;rowCount() &lt;&lt; model-&gt;columnCount();		&#x2F;&#x2F; 打印 获取了模型中的行数和列数
+
+	&#x2F;&#x2F;5,删除item（从模型中移除，并释放内存）
+	&#x2F;&#x2F;model-&gt;removeRow(1);
+	&#x2F;&#x2F;model-&gt;removeRows(0, 2);	&#x2F;&#x2F; 删除行(如果越界则不会生效此操作)
+
+	&#x2F;&#x2F;6,从模型中移除item，但是不释放item 需要手动释放内存
+	auto item_list &#x3D; model-&gt;takeRow(2);
+	qDebug() &lt;&lt; item_list.size();
+	for (auto item : item_list)
+	&#123;
+		delete item;
+	&#125;
+
+	&#x2F;&#x2F;7,item索引
+	auto item &#x3D; new QStandardItem(&quot;six&quot;);
+	model-&gt;appendRow(item);	
+
+	QModelIndex idx &#x3D; model-&gt;indexFromItem(item);	&#x2F;&#x2F; 以从模型中的项目（QStandardItem）获取索引
+	qDebug() &lt;&lt; &quot;idx&quot; &lt;&lt; idx;	&#x2F;&#x2F;  QModelIndex(3,0,0x1d19f18e6c0,QStandardItemModel(0x1d19f18e8f0))
+
+	&#x2F;&#x2F;8,角色
+	model-&gt;setData(idx, &quot;6666&quot;, Qt::ItemDataRole::DisplayRole);	&#x2F;&#x2F; 将字符串 &quot;6666&quot; 设置为索引 idx 的数据 该数据是用于显示的角色
+	item-&gt;setData(QColor(245, 204, 132), Qt::ItemDataRole::DecorationRole);		&#x2F;&#x2F; 将颜色设置为 QColor(245, 204, 132)，并将其设置为项目的 DecorationRole 角色
+	item-&gt;setData(17363691111, Qt::ItemDataRole::UserRole);	&#x2F;&#x2F; 将一个 unsigned long long 类型的值（17363691111）设置为项目的 UserRole 角色
+
+	qDebug() &lt;&lt; item-&gt;data(Qt::UserRole).toULongLong();	&#x2F;&#x2F; 输出项目的 UserRole 角色所设置的数据，即上一行代码中设置的 unsigned long long 类型的值
+
+	item-&gt;setCheckable(true);	&#x2F;&#x2F; 用于设置项目是否可选中（checkable）
+
+	&#x2F;&#x2F; 连接 QListView 的 clicked 信号到一个 lambda 函数中。该信号在用户点击视图中的项目时发出。
+	QObject::connect(&amp;view, &amp;QListView::clicked, [&#x3D;](const QModelIndex&amp; idx)
+		&#123;
+			&#x2F;&#x2F; debug 输出被点击项的数据，包括 DisplayRole 和 text() 方法返回值。
+			qDebug() &lt;&lt; idx.data(Qt::DisplayRole).toString() &lt;&lt; &quot;\n&quot;
+				&lt;&lt; model-&gt;item(idx.row(), idx.column())-&gt;text(); 
+		&#125;);
+
+
+	return a.exec();
+&#125;</code></pre>
+<h3 id="示例-QQ联系人-Widget方式">示例-QQ联系人(Widget方式)</h3>
+<details ><summary> main.cpp </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &lt;QApplication&gt;
+#include&lt;QWidget&gt;
+#include &quot;widget.h&quot;
+
+#include&lt;QStandardItemModel&gt;	&#x2F;&#x2F;标准的数据模型
+#include&lt;QListView&gt;				&#x2F;&#x2F;列表视图
+#include&quot;ContactView.h&quot;
+
+#ifdef _DEBUG
+#pragma comment(linker,&quot;&#x2F;subsystem:console &#x2F;entry:mainCRTStartup&quot;)
+#endif &#x2F;&#x2F; _DEBUG
+
+int main(int argc, char* argv[])
+&#123;
+	QApplication a(argc, argv);
+
+	ContactView v;
+	v.show();
+
+	return a.exec();
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> Contact.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef CONTACT_H_    &#x2F;&#x2F; 预处理指令，防止头文件重复包含
+#define CONTACT_H_
+
+#include&lt;QString&gt;          &#x2F;&#x2F; 包含 QString 类的头文件
+#include&lt;qrandom.h&gt;       &#x2F;&#x2F; 包含 QRandomGenerator 类的头文件
+
+struct Contact
+&#123;
+    enum Type &#123; NONE, VIP, SVIP &#125;;        &#x2F;&#x2F; 定义枚举类型 Type，表示账户类型，包括 NONE、VIP、SVIP
+
+    Contact(const QString&amp; username, const QString&amp; nickname)
+        :username(username)                        &#x2F;&#x2F; 构造函数，接受用户名和昵称作为参数
+        , nickname(nickname)
+        , profilePath(&quot;:&#x2F;images&#x2F;defaultProfile.png&quot;)    &#x2F;&#x2F; 头像路径的初始化值
+        , signatrue(&quot;这人很懒，啥都没写~&quot;)                          &#x2F;&#x2F; 签名的初始化值
+        , type(QRandomGenerator::global()-&gt;bounded(3))            &#x2F;&#x2F; 随机生成账户类型的值，范围为 0-2（包括0不包括3）
+    &#123;
+
+    &#125;
+
+    QString profilePath;    &#x2F;&#x2F; 头像的路径
+    QString username;       &#x2F;&#x2F; 用户名
+    QString nickname;       &#x2F;&#x2F; 备注名
+    QString signatrue;      &#x2F;&#x2F; 签名
+    int type;               &#x2F;&#x2F; 账户类型
+&#125;;
+
+#endif &#x2F;&#x2F; !CONTACT_H_</code></pre>
+              </div>
+            </details>
+<details ><summary> ContactItem.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef CONTACTITEM_H_    &#x2F;&#x2F; 预处理指令，防止头文件重复包含
+#define CONTACTITEM_H_
+
+#include&quot;Contact.h&quot;         &#x2F;&#x2F; 包含 Contact 结构体的头文件
+#include &lt;QWidget&gt;          &#x2F;&#x2F; 包含 QWidget 类的头文件
+#include &lt;QStandardItem&gt;    &#x2F;&#x2F; 包含 QStandardItem 类的头文件
+#include&lt;QLabel&gt;
+
+&#x2F;&#x2F; ---- 可声明类也可以直接包含头文件
+class QLabel;               &#x2F;&#x2F; 前向声明 QLabel 类
+class QPushButton;         &#x2F;&#x2F; 前向声明 QPushButton 类
+
+class ContactItem : public QWidget, public QStandardItem   &#x2F;&#x2F; 定义 ContactItem 类，继承自 QWidget 和 QStandardItem
+&#123;
+public:
+    ContactItem(Contact* contact, QWidget* parent &#x3D; nullptr);   &#x2F;&#x2F; 构造函数，接受 Contact 指针和 QWidget 父类指针作为参数
+
+private:
+    void iniUi();    &#x2F;&#x2F; 初始化 UI
+    void updateContactDisplay();    &#x2F;&#x2F; 更新联系人的显示
+
+    QLabel* m_profileLab&#123;&#125;;      &#x2F;&#x2F; 头像 QLabel 控件指针
+    QLabel* m_nicknameLab&#123;&#125;;     &#x2F;&#x2F; 备注名 QLabel 控件指针
+    QLabel* m_usernameLab&#123;&#125;;     &#x2F;&#x2F; 用户名 QLabel 控件指针
+    QLabel* m_typeLab&#123;&#125;;         &#x2F;&#x2F; 账户类型 QLabel 控件指针
+    QLabel* m_signatureLab&#123;&#125;;    &#x2F;&#x2F; 签名 QLabel 控件指针
+
+    Contact* m_contact&#123;&#125;;        &#x2F;&#x2F; 指向 Contact 结构体的指针
+&#125;;
+
+#endif &#x2F;&#x2F; !CONTACTITEM_H_</code></pre>
+              </div>
+            </details>
+<details ><summary> ContactItem.cpp </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;ContactItem.h&quot;
+#include &lt;QLabel&gt;
+#include &lt;QPushButton&gt;
+#include &lt;QGridLayout&gt;
+
+ContactItem::ContactItem(Contact* contact, QWidget* parent)
+	: QWidget(parent), m_contact(contact)
+&#123;
+	this-&gt;setData(QVariant::fromValue(m_contact), Qt::UserRole);  &#x2F;&#x2F; 将 m_contact 保存到用户数据中
+	iniUi();    &#x2F;&#x2F; 初始化 UI
+	updateContactDisplay();    &#x2F;&#x2F; 更新联系人显示
+&#125;
+
+void ContactItem::iniUi()
+&#123;
+	setSizeHint(QSize(width(), 60));      &#x2F;&#x2F; 设置控件的大小提示为宽度和60像素的大小
+	setFixedHeight(60);     &#x2F;&#x2F; 设置控件的固定高度为60像素
+
+	m_profileLab &#x3D; new QLabel;      &#x2F;&#x2F; 创建头像 QLabel 控件
+	m_profileLab-&gt;setFixedSize(40, 40);   &#x2F;&#x2F; 设置头像控件的固定大小为40x40像素
+	m_profileLab-&gt;setScaledContents(true);   &#x2F;&#x2F; 设置头像控件的内容自适应缩放
+
+	m_nicknameLab &#x3D; new QLabel;   &#x2F;&#x2F; 创建备注名 QLabel 控件
+	m_usernameLab &#x3D; new QLabel;   &#x2F;&#x2F; 创建用户名 QLabel 控件
+	m_typeLab &#x3D; new QLabel;       &#x2F;&#x2F; 创建账户类型 QLabel 控件
+	m_signatureLab &#x3D; new QLabel;  &#x2F;&#x2F; 创建签名 QLabel 控件
+
+	auto hlayout &#x3D; new QHBoxLayout;   &#x2F;&#x2F; 创建水平布局管理器
+	hlayout-&gt;addWidget(m_usernameLab);   &#x2F;&#x2F; 将用户名控件添加到布局中
+	hlayout-&gt;addWidget(m_nicknameLab);   &#x2F;&#x2F; 将备注名控件添加到布局中
+	hlayout-&gt;addWidget(m_typeLab);       &#x2F;&#x2F; 将账户类型控件添加到布局中
+	hlayout-&gt;addStretch();                &#x2F;&#x2F; 添加一个可伸缩的空白部分
+
+	auto glayout &#x3D; new QGridLayout(this);   &#x2F;&#x2F; 创建网格布局管理器，并将当前控件设置为其父控件
+	glayout-&gt;addWidget(m_profileLab, 0, 0, 2, 1);   &#x2F;&#x2F; 将头像控件添加到网格布局中，并指定其在第一行第一列，占用两行一列
+	glayout-&gt;addLayout(hlayout, 0, 1);    &#x2F;&#x2F; 将水平布局添加到网格布局中，并指定其在第一行第二列
+	glayout-&gt;addWidget(m_signatureLab, 1, 1);   &#x2F;&#x2F; 将签名控件添加到网格布局中，并指定其在第二行第二列
+&#125;
+
+void ContactItem::updateContactDisplay()
+&#123;
+	if (!m_contact)
+		return;
+
+	m_profileLab-&gt;setPixmap(QPixmap(m_contact-&gt;profilePath));   &#x2F;&#x2F; 设置头像控件的图片为联系人的头像路径
+	m_usernameLab-&gt;setText(m_contact-&gt;username);   &#x2F;&#x2F; 设置用户名控件的文本为联系人的用户名
+	m_nicknameLab-&gt;setText(m_contact-&gt;nickname);   &#x2F;&#x2F; 设置备注名控件的文本为联系人的备注名
+	m_signatureLab-&gt;setText(m_contact-&gt;signatrue);  &#x2F;&#x2F; 设置签名控件的文本为联系人的签名
+
+	switch (m_contact-&gt;type)
+	&#123;
+	case Contact::NONE:
+		break;
+	case Contact::VIP:
+		m_typeLab-&gt;setPixmap(QPixmap(&quot;:&#x2F;images&#x2F;vip.png&quot;));   &#x2F;&#x2F; 设置账户类型控件的图片为 VIP 图标
+		break;
+	case Contact::SVIP:
+		m_typeLab-&gt;setPixmap(QPixmap(&quot;:&#x2F;images&#x2F;svip.png&quot;));  &#x2F;&#x2F; 设置账户类型控件的图片为 SVIP 图标
+		break;
+	default:
+		break;
+	&#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> ContactView.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef CONCATVIEW_H  &#x2F;&#x2F; 条件编译指令，防止头文件重复包含
+#define CONCATVIEW_H
+
+#include&lt;QListView&gt;  &#x2F;&#x2F; 包含 QListView 类的头文件
+#include&lt;memory&gt;  &#x2F;&#x2F; 包含内存管理相关的头文件，用于管理动态分配的对象
+#include&lt;QStandardItemModel&gt;  &#x2F;&#x2F; 包含 QStandardItemModel 类的头文件
+#include&quot;ContactItem.h&quot;  &#x2F;&#x2F; 包含 ContactItem 类的头文件
+
+class ContactView : public QListView  &#x2F;&#x2F; 定义 ContactView 类，继承自 QListView
+&#123;
+public:
+	ContactView(QWidget* parent &#x3D; nullptr);  &#x2F;&#x2F; 构造函数，接收一个 QWidget 父类指针作为参数
+public:
+	void onClicked(const QModelIndex&amp; index);  &#x2F;&#x2F; 槽函数，当用户单击某个项时触发，接收一个 QModelIndex 对象作为参数
+private:
+	void initUi();  &#x2F;&#x2F; 初始化 UI 的函数
+	std::vector&lt;std::unique_ptr&lt;Contact&gt;&gt; m_contacts;  &#x2F;&#x2F; 使用智能指针 std::unique_ptr 管理 Contact 对象的动态分配
+	QStandardItemModel* m_model&#123;&#125;;  &#x2F;&#x2F; 指向 QStandardItemModel 对象的指针，用于设置当前视图的数据模型
+&#125;;
+
+#endif &#x2F;&#x2F; !CONCATVIEW_H  &#x2F;&#x2F; 条件编译指令结束，防止头文件重复包含</code></pre>
+              </div>
+            </details>
+<details ><summary> ContactView.cpp </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;ContactView.h&quot;
+
+ContactView::ContactView(QWidget* parent)
+	:QListView(parent)  &#x2F;&#x2F; 调用父类的构造函数来初始化控件
+	, m_model(new QStandardItemModel(this))  &#x2F;&#x2F; 创建 QStandardItemModel 类型的对象，并将该对象保存到 m_model 中
+&#123;
+	setModel(m_model);  &#x2F;&#x2F; 将 QStandardItemModel 对象设置为当前视图的数据模型
+	initUi();   &#x2F;&#x2F; 初始化 UI
+	connect(this, &amp;QListView::clicked, this, &amp;ContactView::onClicked);  &#x2F;&#x2F; 建立信号与槽的连接，当用户单击某个项时触发对应的槽函数
+&#125;
+
+void ContactView::onClicked(const QModelIndex&amp; index)
+&#123;
+	Contact* c &#x3D; index.data(Qt::UserRole).value&lt;Contact*&gt;();  &#x2F;&#x2F; 获取选中项的用户数据，即 Contact 类型的指针
+	if (!c)  &#x2F;&#x2F; 如果获取失败，则输出警告信息并返回
+	&#123;
+		&#x2F;&#x2F;qWarning() &lt;&lt; &quot;联系人信息获取失败&quot;;
+		return;
+	&#125;
+
+	qDebug() &lt;&lt; c-&gt;username &lt;&lt; c-&gt;nickname &lt;&lt; c-&gt;signatrue;  &#x2F;&#x2F; 输出选中联系人的用户名、备注名和签名
+&#125;
+
+
+void ContactView::initUi()
+&#123;
+	&#x2F;&#x2F;准备联系人信息
+	m_contacts.emplace_back(new Contact(&quot;十五期 卷心菜&quot;, &quot;Hello&quot;));  &#x2F;&#x2F; 创建 Contact 对象，保存到联系人列表中
+	m_contacts.emplace_back(new Contact(&quot;十五期 余香&quot;, &quot;余香&quot;));
+	m_contacts.emplace_back(new Contact(&quot;vip10啊·哈&quot;, &quot;啊·哈&quot;));
+	m_contacts.emplace_back(new Contact(&quot;DK八期vip&quot;, &quot;Dk&quot;));
+	m_contacts.emplace_back(new Contact(&quot;man~&quot;, &quot;&quot;));
+
+	&#x2F;*
+	for (size_t i &#x3D; 0; i &lt; 20000; i++)
+	&#123;
+		m_contacts.emplace_back(new Contact(QString(&quot;man~ %1&quot;).arg(i), &quot;&quot;));
+	&#125;
+	*&#x2F;
+
+	for (auto&amp; c : m_contacts)  &#x2F;&#x2F; 遍历联系人列表
+	&#123;
+		auto itemWidget &#x3D; new ContactItem(c.get());  &#x2F;&#x2F; 创建 ContactItem 对象，并传入对应的 Contact 指针
+		m_model-&gt;appendRow(itemWidget);   &#x2F;&#x2F; 将 ContactItem 对象添加到数据模型中
+
+		this-&gt;setIndexWidget(itemWidget-&gt;index(), itemWidget);  &#x2F;&#x2F; 设置 ContactItem 对象所在项的视图部件
+	&#125;
+&#125;
+</code></pre>
+              </div>
+            </details>
+<h3 id="示例-QQ联系人-代理方式">示例-QQ联系人(代理方式)</h3>
+<p>在上面基础上修改，删除 <code>ContactItem.cpp</code>  和 <code>ContactItem.h</code></p>
+<p>ContactView.h 只需要包含头文件即可</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include&quot;Contact.h&quot;</code></pre>
+<details ><summary> ContactView.cpp </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;ContactView.h&quot;
+#include &quot;ContactDelegate.h&quot;
+
+ContactView::ContactView(QWidget* parent)
+    :QListView(parent)
+    ,m_model(new QStandardItemModel(this))
+&#123;
+    setModel(m_model);  &#x2F;&#x2F; 设置当前视图的数据模型为 m_model
+    setItemDelegate(new ContactDelegate(this));  &#x2F;&#x2F; 给每一项设置代理，用于自定义项的显示和交互
+    setEditTriggers(QListView::NoEditTriggers);  &#x2F;&#x2F; 设置编辑策略，禁止编辑
+    setMouseTracking(true);  &#x2F;&#x2F; 设置鼠标追踪，使得在鼠标移动时能够捕捉到相应事件
+    initUi();  &#x2F;&#x2F; 初始化 UI
+    connect(this, &amp;QListView::clicked, this, &amp;ContactView::onClicked);  &#x2F;&#x2F; 连接 clicked 信号和槽函数 onClicked
+    setFixedSize(340, 480);  &#x2F;&#x2F; 设置 ContactView 的固定大小为 340x480
+&#125;
+
+void ContactView::onClicked(const QModelIndex&amp; index)
+&#123;
+    Contact* c &#x3D; index.data(Qt::UserRole).value&lt;Contact*&gt;();  &#x2F;&#x2F; 获取选中项的用户数据，即 Contact 对象
+    if (!c)
+    &#123;
+        qWarning() &lt;&lt; &quot;联系人信息获取失败&quot;;
+        return;
+    &#125;
+    qDebug() &lt;&lt; c-&gt;username &lt;&lt; c-&gt;nickname &lt;&lt; c-&gt;signatrue;  &#x2F;&#x2F; 打印 Contact 对象的用户名、昵称和个性签名
+&#125;
+
+void ContactView::initUi()
+&#123;
+    &#x2F;&#x2F; 准备联系人信息
+    m_contacts.emplace_back(new Contact(&quot;十五期 卷心菜&quot;, &quot;Hello&quot;));
+    m_contacts.emplace_back(new Contact(&quot;十五期 余香&quot;, &quot;余香&quot;));
+    m_contacts.emplace_back(new Contact(&quot;vip10啊·哈&quot;, &quot;啊·哈&quot;));
+    m_contacts.emplace_back(new Contact(&quot;DK八期vip&quot;, &quot;Dk&quot;));
+    m_contacts.emplace_back(new Contact(&quot;man~&quot;, &quot;&quot;));
+
+    &#x2F;*
+    for (size_t i &#x3D; 0; i &lt; 20000; i++)
+    &#123;
+        m_contacts.emplace_back(new Contact(QString(&quot;man~ %1&quot;).arg(i), &quot;&quot;));
+    &#125;
+    *&#x2F;
+
+    &#x2F;&#x2F; 遍历联系人列表，创建并添加 QStandardItem 到数据模型 m_model 中
+    for (auto&amp; c : m_contacts)
+    &#123;
+        auto item &#x3D; new QStandardItem(c-&gt;username);  &#x2F;&#x2F; 创建 QStandardItem 对象，设置项的显示文本为联系人的用户名
+        item-&gt;setData(QVariant::fromValue(c.get()), Qt::UserRole);  &#x2F;&#x2F; 将 Contact 对象作为用户数据设置到项中
+        m_model-&gt;appendRow(item);  &#x2F;&#x2F; 将项添加到数据模型的末尾
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> ContactDelegate.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef CONTACTDELEGATE_H_
+#define CONTACTDELEGATE_H_
+
+#include &lt;QStyledItemDelegate&gt;
+#include &lt;QPoint&gt;
+
+class ContactDelegate : public QStyledItemDelegate
+&#123;
+    Q_OBJECT
+public:
+    ContactDelegate(QObject *parent &#x3D; nullptr);
+
+protected:
+    &#x2F;&#x2F; 重写 paint() 函数，用于绘制列表项
+    void paint(QPainter *painter, const QStyleOptionViewItem &amp;option, const QModelIndex &amp;index) const override;
+
+    &#x2F;&#x2F; 重写 sizeHint() 函数，用于设置列表项的大小
+    QSize sizeHint(const QStyleOptionViewItem &amp;option, const QModelIndex &amp;index) const override;
+
+    &#x2F;&#x2F; 重写 editorEvent() 函数，处理列表项的交互事件
+    bool editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &amp;option, const QModelIndex &amp;index) override;
+
+signals:
+    &#x2F;&#x2F; 当类别按钮被点击时，发送 typeClicked 信号
+    void typeClicked();
+
+private:
+    QPoint m_mousePos&#123;&#125;;  &#x2F;&#x2F; 鼠标位置信息，用于记录鼠标在列表项中的位置
+    mutable QRect m_typeRect&#123;&#125;;  &#x2F;&#x2F; 类别按钮所在的矩形区域，用于记录类别按钮的位置
+&#125;;
+
+#endif &#x2F;&#x2F; !CONTACTDELEGATE_H_</code></pre>
+              </div>
+            </details>
+<details ><summary> ContactDelegate.cpp </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;ContactDelegate.h&quot;
+#include &quot;Contact.h&quot;
+#include &lt;QStyleOptionViewItem&gt;
+#include &lt;QPainter&gt;
+#include &lt;QStaticText&gt;
+#include &lt;QEvent&gt;
+#include &lt;QMouseEvent&gt;
+
+ContactDelegate::ContactDelegate(QObject *parent)
+    : QStyledItemDelegate(parent)
+&#123;
+&#125;
+
+void ContactDelegate::paint(QPainter *painter, const QStyleOptionViewItem &amp;option, const QModelIndex &amp;index) const
+&#123;
+    &#x2F;&#x2F; 获取联系人数据
+    auto c &#x3D; index.data(Qt::UserRole).value&lt;Contact *&gt;();
+    if (!c)
+    &#123;
+        &#x2F;&#x2F; 如果数据为空，调用默认的绘制方法
+        QStyledItemDelegate::paint(painter, option, index);
+        return;
+    &#125;
+
+    &#x2F;&#x2F; 获取绘制区域
+    auto rect &#x3D; option.rect;
+
+    &#x2F;&#x2F; 设置鼠标悬停和选中时的背景颜色
+    QColor color &#x3D; Qt::white;
+    if (option.state &amp; QStyle::State_MouseOver)
+        color &#x3D; QColor(242, 242, 242);
+    if (option.state &amp; QStyle::State_Selected)
+        color &#x3D; QColor(235, 235, 235);
+
+    &#x2F;&#x2F; 填充背景颜色
+    painter-&gt;fillRect(rect, color);
+
+    &#x2F;&#x2F; 绘制头像
+    QRect profileRect &#x3D; &#123;rect.x() + 14, rect.y() + 8, 40, 40&#125;;
+    painter-&gt;drawPixmap(profileRect, QPixmap(c-&gt;profilePath));
+
+    &#x2F;&#x2F; 绘制备注
+    QRect nRect &#x3D; &#123;profileRect.right() + 10, rect.y() + 15, 0, 0&#125;;
+
+    auto fm &#x3D; painter-&gt;fontMetrics();
+    nRect.setWidth(fm.horizontalAdvance(c-&gt;username));
+    nRect.setHeight(fm.height());
+
+    &#x2F;&#x2F; 绘制用户名
+    painter-&gt;drawStaticText(nRect.topLeft(), QStaticText(c-&gt;username));
+
+    &#x2F;&#x2F; 绘制昵称
+    QRect uRect &#x3D; &#123;nRect.right() + 1, nRect.y(), 0, 0&#125;;
+    uRect.setWidth(fm.horizontalAdvance(c-&gt;nickname));
+    uRect.setHeight(fm.height());
+    painter-&gt;drawStaticText(uRect.topLeft(), QStaticText(&quot;(&quot; + c-&gt;nickname + &quot;)&quot;));
+
+    &#x2F;&#x2F; 绘制类型图标
+    QPixmap typePixmap;
+    if (c-&gt;type &#x3D;&#x3D; Contact::VIP)
+        typePixmap.load(&quot;:&#x2F;Resource&#x2F;images&#x2F;vip.png&quot;);
+    else if (c-&gt;type &#x3D;&#x3D; Contact::SVIP)
+        typePixmap.load(&quot;:&#x2F;Resource&#x2F;images&#x2F;svip.png&quot;);
+    m_typeRect &#x3D; &#123;uRect.topRight() + QPoint(10, 5), typePixmap.size()&#125;;
+    painter-&gt;drawPixmap(m_typeRect, typePixmap);
+
+    &#x2F;&#x2F; 检测鼠标是否在类型图标上方
+    if (m_typeRect.contains(m_mousePos))
+    &#123;
+        &#x2F;&#x2F; 如果鼠标在类型图标上方，绘制红色边框
+        painter-&gt;save();
+        painter-&gt;setPen(Qt::red);
+        painter-&gt;drawRect(m_typeRect);
+        painter-&gt;restore();
+    &#125;
+
+    &#x2F;&#x2F; 绘制个性签名
+    QPoint sPos &#x3D; &#123;nRect.left(), nRect.bottom() + 5&#125;;
+    painter-&gt;drawStaticText(sPos, QStaticText(c-&gt;signature));
+&#125;
+
+QSize ContactDelegate::sizeHint(const QStyleOptionViewItem &amp;option, const QModelIndex &amp;index) const
+&#123;
+    &#x2F;&#x2F; 设置列表项的大小
+    return QSize(option.rect.width(), 60);
+&#125;
+
+bool ContactDelegate::editorEvent(QEvent *ev, QAbstractItemModel *model, const QStyleOptionViewItem &amp;option, const QModelIndex &amp;index)
+&#123;
+    if (ev-&gt;type() &#x3D;&#x3D; QEvent::MouseMove)
+    &#123;
+        &#x2F;&#x2F; 处理鼠标移动事件，记录鼠标位置
+        auto mev &#x3D; static_cast&lt;QMouseEvent *&gt;(ev);
+        m_mousePos &#x3D; mev-&gt;pos();
+        return true;
+    &#125;
+    else if (ev-&gt;type() &#x3D;&#x3D; QEvent::MouseButtonRelease)
+    &#123;
+        &#x2F;&#x2F; 处理鼠标释放事件，如果鼠标在类型图标上方并且左键释放，则发送类型点击信号
+        auto mev &#x3D; static_cast&lt;QMouseEvent *&gt;(ev);
+        if (mev-&gt;button() &#x3D;&#x3D; Qt::LeftButton &amp;&amp; m_typeRect.contains(m_mousePos))
+        &#123;
+            emit typeClicked();
+        &#125;
+    &#125;
+
+    return false;
+&#125;</code></pre>
+              </div>
+            </details>
+<h3 id="文件系统模型">文件系统模型</h3>
+<p>待学</p>
+<h2 id="CMAKE简单入门">CMAKE简单入门</h2>
+<p>待学</p>
+<h2 id="多线程">多线程</h2>
+<blockquote>
+<p>Widgets 必须创建在主线程(GUI)</p>
+<p>不能在子线程中操作ui相关的东西，信号和槽(没有问题，而这也是最好的方式了)</p>
+</blockquote>
+<h3 id="三种线程创建方式">三种线程创建方式</h3>
+<h4 id="QThread-create">QThread::create</h4>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">[static] QThread *QThread::create(Function &amp;&amp;f, Args &amp;&amp;... args)	&#x2F;&#x2F;C++17</code></pre>
+<blockquote>
+<p>【注意】</p>
+<p>调用者获得返回的QThread实例的所有权。也就是说，需要自己释放线程对象</p>
+<p>不要对返回的QThread实例多次调用start(); 这样做将导致未定义的行为</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &lt;QApplication&gt;
+#include&lt;QWidget&gt;
+#include &quot;widget.h&quot;
+#include&lt;Qthread&gt;
+#include&lt;QLabel&gt;
+
+#ifdef _DEBUG
+    #pragma comment(linker,&quot;&#x2F;subsystem:console &#x2F;entry:mainCRTStartup&quot;)
+#endif &#x2F;&#x2F; _DEBUG
+
+class Test : public QWidget
+&#123;
+    Q_OBJECT
+public:
+    Test()
+        : m_lab(new QLabel(&quot;&lt;h1&gt;xxxx&lt;&#x2F;h1&gt;&quot;, this))
+    &#123;
+        resize(640, 480);
+        &#x2F;&#x2F; 两个线程
+        test_create();
+        create_1();
+    &#125;
+    void test_create()
+    &#123;
+        &#x2F;&#x2F;通过QThread::create创建线程
+        QThread *thr &#x3D;  QThread::create([ &#x3D; ]()
+        &#123;
+            int i &#x3D; 0;
+
+            while (i &lt; 1000)
+            &#123;
+                qDebug() &lt;&lt; &quot;sub thread&quot; &lt;&lt; QThread::currentThread();
+                &#x2F;&#x2F;1,不能在子线程中操作ui相关的东西
+                &#x2F;&#x2F; m_lab-&gt;setText(QString(&quot;&lt;h1&gt;%1&lt;&#x2F;h1&gt;&quot;).arg(i++));
+
+                &#x2F;&#x2F; 2. 信号和槽(没有问题，而这也是最好的方式了)
+                emit textChanged(QString(&quot;&lt;h1&gt;%1&lt;&#x2F;h1&gt;&quot;).arg(i++));
+
+                &#x2F;&#x2F; 3. 使用invoke函数来执行settext函数 -- 直连调的话也会卡死，队列调的话不会
+                &#x2F;&#x2F; if (QMetaObject::invokeMethod(m_lab, &quot;setText&quot;,
+                &#x2F;&#x2F;                               Q_ARG(QString, QString(&quot;&lt;h1&gt;%1&lt;&#x2F;h1&gt;&quot;).arg(i++))))
+                &#x2F;&#x2F; &#123;
+                &#x2F;&#x2F;     qDebug() &lt;&lt; &quot;调用成功！&quot;;
+                &#x2F;&#x2F; &#125;
+            &#125;
+        &#125;);
+        &#x2F;&#x2F;启动线程
+        thr-&gt;start();
+        &#x2F;&#x2F; 查询线程是否自动释放，答案是没有的
+        connect(thr, &amp;QThread::destroyed, []()
+        &#123;
+            qDebug() &lt;&lt; &quot;thr destroyed&quot;;
+        &#125;);
+        &#x2F;&#x2F; 判断线程完成信号，然后进行释放
+        connect(thr, &amp;QThread::finished, [ &#x3D; ] &#123;thr-&gt;deleteLater(); qDebug() &lt;&lt; &quot;thr finished&quot;; &#125;);
+        connect(this, &amp;Test::textChanged, m_lab, &amp;QLabel::setText); &#x2F;&#x2F; 连接
+    &#125;
+    void create_1()
+    &#123;
+        QThread::create(&amp;Test::worker, this)-&gt;start();  &#x2F;&#x2F; 启动
+    &#125;
+    void worker()
+    &#123;
+        while (true)
+        &#123;
+            qDebug() &lt;&lt; __FUNCTION__;
+        &#125;
+    &#125;
+signals:
+    void textChanged(const QString &amp;text);
+private:
+    QLabel *m_lab&#123;&#125;;
+&#125;;
+
+
+int main(int argc, char *argv[])
+&#123;
+    QApplication a(argc, argv);
+    Test w;
+    w.show();
+    return a.exec();
+&#125;
+
+#include &quot;main.moc&quot;
+</code></pre>
+<h4 id="继承QThread-重写run">继承QThread,重写run</h4>
+<p>QThread类中有一个virtual函数QThread::run()，要创建一个新的线程，我们只需定义一个MyThread类，让其继承QThread，然后重新实现QThread::run()。<code>把需要在线程中执行的代码全部塞到run函数中</code></p>
+<p>run函数是线程的起始点。 在调用start()之后，新创建的线程调用这个函数。 默认实现只是调用exec()，用来处理线程中的事件</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+* 必须继承QRunable类，实现run接口（把你需要在线程中处理的逻辑放到run中）
+*&#x2F;
+class Worker :public QThread 
+&#123;
+	Q_OBJECT
+protected:
+	void run() override
+	&#123;
+		quint64 sum &#x3D; 0;
+		for (size_t i &#x3D; 0; i &lt;100; i++)
+		&#123;
+			sum +&#x3D; i;
+			QThread::msleep(1);
+		&#125;
+		emit calcFinished(sum);
+	&#125;
+
+signals:
+	void calcFinished(quint64 sum);
+&#125;;
+
+int main()
+&#123;
+    Worker w;
+	&#x2F;&#x2F;1，不能手动调用run函数，否则就不是在线程里里面处理
+	&#x2F;&#x2F;w.run();
+	&#x2F;&#x2F;2，必须调用start函数，让run在线程里面跑
+	w.start();
+&#125;</code></pre>
+<h4 id="QObject-moveToThread">QObject::moveToThread</h4>
+<p>QObject 中的 <code>moveToThread()</code> 函数可以在不破坏类结构的前提下依然可以在新线程中运行</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;widget.h&quot;
+#include&lt;QApplication&gt;
+#include&lt;QWidget&gt;
+#include&lt;QPlainTextEdit&gt;
+#include&lt;qrandom.h&gt;
+#include&lt;QTextStream&gt;
+#include&lt;QBoxLayout&gt;
+#include&lt;QThread&gt;
+#include &lt;QApplication&gt;
+
+QString randText()
+&#123;
+    int length &#x3D; QRandomGenerator::global()-&gt;bounded(50, 100);
+
+    QString str;
+    QTextStream stream(&amp;str);
+    for (size_t i &#x3D; 0; i &lt; length; i++)
+    &#123;
+        if (i % 2 &#x3D;&#x3D; 0)
+        &#123;
+            stream &lt;&lt; (QRandomGenerator::global()-&gt;bounded(0, 26) + &#39;a&#39;);
+        &#125;
+        else
+        &#123;
+            stream &lt;&lt; QRandomGenerator::global()-&gt;bounded(9);
+        &#125;
+    &#125;
+    return str;
+&#125;
+
+class widget : public QWidget
+&#123;
+public:
+    widget(QWidget *parent &#x3D; nullptr)
+        : QWidget(parent)
+        , m_edit(new QPlainTextEdit(this))
+    &#123;
+        auto layout &#x3D; new QHBoxLayout(this);
+        layout-&gt;addWidget(m_edit);
+
+    &#125;
+    ~widget()
+    &#123;
+        qDebug() &lt;&lt; __FUNCTION__;
+    &#125;
+
+    void recvData()const
+    &#123;
+        for (size_t i &#x3D; 0; i &lt; 1000; i++)
+        &#123;
+            QMetaObject::invokeMethod(m_edit, &quot;insertPlainText&quot;, Q_ARG(QString, randText() + &quot;\n&quot;));
+            QThread::msleep(1);
+        &#125;
+    &#125;
+private:
+    QPlainTextEdit *m_edit&#123;&#125;;
+&#125;;
+
+int main(int argc, char *argv[])
+&#123;
+    QApplication a(argc, argv);
+    widget w;
+    w.show();
+
+    QThread thr;
+    &#x2F;&#x2F;1，把需要在线程中工作的对象移动到线程中
+    w.moveToThread(&amp;thr);	&#x2F;&#x2F;不能把Widget移动到子线程中
+    &#x2F;&#x2F;2，关联需要在线程中掉用的函数
+    QObject::connect(&amp;thr, &amp;QThread::started, &amp;w, &amp;widget::recvData);	&#x2F;&#x2F;所以此时这里在主线程中执行的
+    &#x2F;&#x2F;3,开启线程
+    thr.start();
+    return a.exec();
+&#125;
+</code></pre>
+<h3 id="线程绘图">线程绘图</h3>
+<details ><summary> main.cpp </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;mainwindow.h&quot;
+
+#include &lt;QApplication&gt;
+
+int main(int argc, char *argv[])
+&#123;
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
+    return a.exec();
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> mainwindow.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
+
+#include &lt;QMainWindow&gt;
+#include &lt;QWidget&gt;
+#include &quot;MyWorker.h&quot; &#x2F;&#x2F; 包含自定义的MyWorker类头文件
+#include &lt;QThread&gt; &#x2F;&#x2F; 包含QThread类头文件
+
+QT_BEGIN_NAMESPACE
+namespace Ui &#123;
+    class MainWindow;
+&#125;
+QT_END_NAMESPACE
+
+class MainWindow : public QMainWindow
+&#123;
+    Q_OBJECT
+
+public:
+    MainWindow(QWidget *parent &#x3D; nullptr); &#x2F;&#x2F; 构造函数，接受一个QWidget类型的父窗口参数，默认为nullptr
+    ~MainWindow(); &#x2F;&#x2F; 析构函数
+
+protected:
+    void paintEvent(QPaintEvent *ev) override; &#x2F;&#x2F; 重写paintEvent函数，用于绘制窗口的内容
+
+private:
+    Ui::MainWindow *ui; &#x2F;&#x2F; 用户界面类指针
+    MyWorker worker; &#x2F;&#x2F; 自定义的MyWorker类对象
+    QThread thr; &#x2F;&#x2F; QThread对象
+
+    QImage m_image; &#x2F;&#x2F; QImage对象，用于存储图像数据
+&#125;;
+#endif &#x2F;&#x2F; MAINWINDOW_H</code></pre>
+              </div>
+            </details>
+<details ><summary> mainwindow.cpp </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;mainwindow.h&quot; &#x2F;&#x2F; 包含自定义的MainWindow类头文件
+#include &quot;.&#x2F;ui_mainwindow.h&quot; &#x2F;&#x2F; 包含自动生成的ui文件的头文件
+#include &lt;QPushButton&gt; &#x2F;&#x2F; 包含QPushButton类头文件
+#include &lt;QPainter&gt; &#x2F;&#x2F; 包含QPainter类头文件
+
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow) &#x2F;&#x2F; 创建一个Ui::MainWindow对象，用于设置用户界面
+&#123;
+    ui-&gt;setupUi(this); &#x2F;&#x2F; 设置用户界面，将UI组件添加到主窗口中
+    auto btn &#x3D; new QPushButton(&quot;绘图&quot;, this); &#x2F;&#x2F; 创建一个名为&quot;绘图&quot;的按钮，父对象为当前窗口
+
+    &#x2F;&#x2F; 将产生图片的工作类移动到线程中
+    worker.moveToThread(&amp;thr);
+
+    &#x2F;&#x2F; 当按钮被点击时，连接到worker对象的drawImage槽函数，用于触发绘图操作
+    connect(btn, &amp;QPushButton::clicked, &amp;worker, &amp;MyWorker::drawImage);
+
+    thr.start(); &#x2F;&#x2F; 启动线程
+
+    &#x2F;&#x2F; 当worker对象发出newImage信号时，使用lambda表达式进行处理
+    connect(&amp;worker, &amp;MyWorker::newImage, [&#x3D;](const QImage &amp;img) &#123;
+        m_image &#x3D; img; &#x2F;&#x2F; 将接收到的图像赋值给成员变量m_image
+        update(); &#x2F;&#x2F; 更新窗口内容，触发paintEvent函数进行重绘
+    &#125;);
+&#125;
+
+MainWindow::~MainWindow()
+&#123;
+    delete ui; &#x2F;&#x2F; 删除ui对象
+&#125;
+
+void MainWindow::paintEvent(QPaintEvent *ev)
+&#123;
+    QPainter painter(this); &#x2F;&#x2F; 创建一个QPainter对象，用于绘制窗口内容
+    painter.drawImage(0, 0, m_image); &#x2F;&#x2F; 在窗口上绘制图像，位置为(0,0)
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> MyWorker.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef MYWORKER_H &#x2F;&#x2F; 如果未定义MYWORKER_H宏，则执行以下代码，防止重复包含头文件
+#define MYWORKER_H
+
+#include &lt;QObject&gt; &#x2F;&#x2F; 包含QObject类头文件
+
+class MyWorker : public QObject &#x2F;&#x2F; 自定义的MyWorker类继承自QObject类
+&#123;
+    Q_OBJECT &#x2F;&#x2F; 使用Q_OBJECT宏，启用信号和槽机制
+public:
+    void drawImage(); &#x2F;&#x2F; 绘制图像的函数
+
+signals:
+    void newImage(const QImage &amp;img); &#x2F;&#x2F; 定义一个名为newImage的信号，传递一个QImage对象的引用
+
+private:
+    &#x2F;&#x2F; 私有成员，可以根据需要添加私有成员变量和函数
+&#125;;
+
+#endif &#x2F;&#x2F; MYWORKER_H</code></pre>
+              </div>
+            </details>
+<details ><summary> MyWorker.cpp </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;MyWorker.h&quot; &#x2F;&#x2F; 包含自定义的MyWorker类头文件
+#include &lt;QImage&gt; &#x2F;&#x2F; 包含QImage类头文件
+#include &lt;QPainter&gt; &#x2F;&#x2F; 包含QPainter类头文件
+#include &lt;QRandomGenerator&gt; &#x2F;&#x2F; 包含QRandomGenerator类头文件
+#include &lt;QDebug&gt; &#x2F;&#x2F; 包含QDebug类头文件
+#include &lt;QThread&gt; &#x2F;&#x2F; 包含QThread类头文件
+
+#define mrand(min,max) QRandomGenerator::global()-&gt;bounded(min,max) &#x2F;&#x2F; 定义宏函数，用于产生[min,max)之间的随机数
+
+void MyWorker::drawImage() &#x2F;&#x2F; 绘制图像的函数
+&#123;
+    QImage img(640, 480, QImage::Format_RGBA8888); &#x2F;&#x2F; 创建一个大小为640x480，格式为RGBA8888的QImage对象
+
+    QPainter painter(&amp;img); &#x2F;&#x2F; 创建一个QPainter对象，用于在QImage对象上绘制图形
+    painter.setPen(QPen(QColor(mrand(0, 256), mrand(0, 256), mrand(0, 256)), 3)); &#x2F;&#x2F; 设置画笔颜色和线宽
+    painter.setBrush(QBrush(QColor(mrand(0, 256), mrand(0, 256), mrand(0, 256)), Qt::BrushStyle::Dense2Pattern)); &#x2F;&#x2F; 设置画刷颜色和填充样式
+
+    &#x2F;&#x2F; 随机生成12个点
+    QPoint pos[] &#x3D;
+    &#123;
+        QPoint(mrand(0, 640), mrand(0, 460)),
+        QPoint(mrand(0, 640), mrand(0, 460)),
+        QPoint(mrand(0, 640), mrand(0, 460)),
+        QPoint(mrand(0, 640), mrand(0, 460)),
+        QPoint(mrand(0, 640), mrand(0, 460)),
+        QPoint(mrand(0, 640), mrand(0, 460)),
+        QPoint(mrand(0, 640), mrand(0, 460)),
+        QPoint(mrand(0, 640), mrand(0, 460)),
+        QPoint(mrand(0, 640), mrand(0, 460)),
+        QPoint(mrand(0, 640), mrand(0, 460)),
+        QPoint(mrand(0, 640), mrand(0, 460)),
+        QPoint(mrand(0, 640), mrand(0, 460)),
+    &#125;;
+
+    painter.drawPolygon(pos, 12); &#x2F;&#x2F; 在QImage对象上绘制随机多边形
+
+    QThread::sleep(2); &#x2F;&#x2F; 让线程暂停2秒钟，模拟长时间的计算&#x2F;绘图操作
+    qDebug() &lt;&lt; &quot;绘图函数已经完成~&quot;; &#x2F;&#x2F; 输出调试信息
+
+    emit newImage(img); &#x2F;&#x2F; 发送newImage信号，传递绘制好的QImage对象给槽函数处理
+&#125;
+</code></pre>
+              </div>
+            </details>
+<h2 id="示例-串口助手">示例-串口助手</h2>
+<blockquote>
+<p>需要安装组件，在【开始】那找到tools即可</p>
+</blockquote>
+<h3 id="ui界面">ui界面</h3>
+<blockquote>
+<p>用到的：</p>
+<ul>
+<li>【文本框Plain Text Edit】</li>
+<li>右边放一个【Widget容器】，里面放 【标签Label】，【下拉框Combo Box】，【复选框CheckBox】,【按钮PushButton】，放一个【弹簧】</li>
+<li>下面部分放【按钮PushButton】，【文本框Plain Text Edit】，【行编辑框LineEdit】，【标签Label】，【复选框CheckBox】也用一个【Widget容器】包着</li>
+<li>然后摆好之后直接分别点击两个【widget容器】，点击栅格布局即可</li>
+<li>最后点击最外的框进行栅格布局即可</li>
+<li>修改一下细节，比如边距等</li>
+</ul>
+</blockquote>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num165.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Model-View%EF%BC%88%E6%A8%A1%E5%9E%8B-%E8%A7%86%E5%9B%BE%EF%BC%89%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">Model&#x2F;View（模型&#x2F;视图）结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.1.</span> <span class="toc-text">数据模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE%E7%BB%84%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text">视图组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E7%9A%84%E4%B8%80%E4%BA%9B%E6%A6%82%E5%BF%B5"><span class="toc-number">2.3.</span> <span class="toc-text">结构的一些概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E7%B4%A2%E5%BC%95%EF%BC%88model-index%EF%BC%89"><span class="toc-number">2.3.1.</span> <span class="toc-text">模型索引（model index）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%8C%E5%8F%B7%E5%92%8C%E5%88%97%E5%8F%B7"><span class="toc-number">2.3.2.</span> <span class="toc-text">行号和列号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%88%B6%E9%A1%B9"><span class="toc-number">2.3.3.</span> <span class="toc-text">父项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%B9%E7%9A%84%E8%A7%92%E8%89%B2"><span class="toc-number">2.3.4.</span> <span class="toc-text">项的角色</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E6%8E%A7%E4%BB%B6%E7%BB%84-Item-Widgets"><span class="toc-number">2.4.</span> <span class="toc-text">项目控件组(Item Widgets)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#QListView%E3%80%81QStandardItemModel%E3%80%81QStandardItem"><span class="toc-number">2.5.</span> <span class="toc-text">QListView、QStandardItemModel、QStandardItem</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-QQ%E8%81%94%E7%B3%BB%E4%BA%BA-Widget%E6%96%B9%E5%BC%8F"><span class="toc-number">2.6.</span> <span class="toc-text">示例-QQ联系人(Widget方式)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-QQ%E8%81%94%E7%B3%BB%E4%BA%BA-%E4%BB%A3%E7%90%86%E6%96%B9%E5%BC%8F"><span class="toc-number">2.7.</span> <span class="toc-text">示例-QQ联系人(代理方式)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.8.</span> <span class="toc-text">文件系统模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CMAKE%E7%AE%80%E5%8D%95%E5%85%A5%E9%97%A8"><span class="toc-number">3.</span> <span class="toc-text">CMAKE简单入门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="toc-number">4.</span> <span class="toc-text">多线程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E7%A7%8D%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F"><span class="toc-number">4.1.</span> <span class="toc-text">三种线程创建方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#QThread-create"><span class="toc-number">4.1.1.</span> <span class="toc-text">QThread::create</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%A7%E6%89%BFQThread-%E9%87%8D%E5%86%99run"><span class="toc-number">4.1.2.</span> <span class="toc-text">继承QThread,重写run</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#QObject-moveToThread"><span class="toc-number">4.1.3.</span> <span class="toc-text">QObject::moveToThread</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E7%BB%98%E5%9B%BE"><span class="toc-number">4.2.</span> <span class="toc-text">线程绘图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-%E4%B8%B2%E5%8F%A3%E5%8A%A9%E6%89%8B"><span class="toc-number">5.</span> <span class="toc-text">示例-串口助手</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ui%E7%95%8C%E9%9D%A2"><span class="toc-number">5.1.</span> <span class="toc-text">ui界面</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '键盘敲烂 月薪过万' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script defer src="/js/my_aplayer.js"></script><script defer src="/js/meting.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>

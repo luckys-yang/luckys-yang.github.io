@@ -1,0 +1,3646 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>QT6学习笔记--2 | Yangの小栈</title><meta name="author" content="Yang"><meta name="copyright" content="Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言 css颜色表 QWidget详解 QWidget QWidget类是所有可视控件的基类，控件是用户界面的最小元素，用于接受各种事件(如：鼠标、键盘等)并且绘制出来给用户观看 每个控件都是 矩形的，他们按照 Z轴顺序排列 如果控件没有父控件，则称之为窗口，窗口会被一个框架包裹(包含标题栏，边框等)，可以通过某些函数来修改边框属性 QDialog 话框窗口是一个顶级窗口，主要用于短期任务和与用户">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QT6学习笔记--2">
+<meta property="og:url" content="https://blog.yang5201314.cn/post/7cf6e9c8.html">
+<meta property="og:site_name" content="Yangの小栈">
+<meta property="og:description" content="前言 css颜色表 QWidget详解 QWidget QWidget类是所有可视控件的基类，控件是用户界面的最小元素，用于接受各种事件(如：鼠标、键盘等)并且绘制出来给用户观看 每个控件都是 矩形的，他们按照 Z轴顺序排列 如果控件没有父控件，则称之为窗口，窗口会被一个框架包裹(包含标题栏，边框等)，可以通过某些函数来修改边框属性 QDialog 话框窗口是一个顶级窗口，主要用于短期任务和与用户">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.yang5201314.cn/img/num163.webp">
+<meta property="article:published_time" content="2024-01-04T05:54:57.000Z">
+<meta property="article:modified_time" content="2024-02-03T02:15:58.822Z">
+<meta property="article:author" content="Yang">
+<meta property="article:tag" content="aabbcc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.yang5201314.cn/img/num163.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20231008142657.webp"><link rel="canonical" href="https://blog.yang5201314.cn/post/7cf6e9c8.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'QT6学习笔记--2',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-03 10:15:58'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/aplayer.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20231008142657.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">157</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">72</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">34</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">QT6学习笔记--2</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-01-04T05:54:57.000Z" title="发表于 2024-01-04 13:54:57">2024-01-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-02-03T02:15:58.822Z" title="更新于 2024-02-03 10:15:58">2024-02-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/QT/">QT</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">21.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>91分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
+<p><a href="https://www.w3.org/TR/SVG11/types.html#ColorKeywords">css颜色表</a></p>
+<h2 id="QWidget详解">QWidget详解</h2>
+<h3 id="QWidget">QWidget</h3>
+<p>QWidget类是所有可视控件的基类，控件是用户界面的最小元素，用于接受各种事件(如：鼠标、键盘等)并且绘制出来给用户观看</p>
+<p>每个控件都是 <code>矩形的</code>，他们按照 <code>Z轴顺序排列</code></p>
+<p><code>如果控件没有父控件，则称之为窗口</code>，窗口会被一个框架包裹(包含标题栏，边框等)，可以通过某些函数来修改边框属性</p>
+<h3 id="QDialog">QDialog</h3>
+<p>话框窗口是一个顶级窗口，主要用于短期任务和与用户的简短通信。对话框可以是模态的也可以是非模态的。QDialog可以提供返回值，并且它们可以具有默认按钮</p>
+<p>注意QDialog(以及任何其他Qt::Dialog类型的小部件)使用父小部件与Qt中的其他类略有不同。 <code>对话框始终是顶级小部件</code>，但如果它有父部件， 它的默认位置将位于父部件的顶级小部件的顶部中心。它还将共享父任务栏条目(也就是说不会出现在任务栏)</p>
+<p>对话框有两种模式： <code>模态对话框</code>、 <code>非模态对话框</code></p>
+<h4 id="模态对话框">模态对话框</h4>
+<p>模态对话框是阻止输入到同一应用程序中其他可见窗口的对话框，直到对话框被关闭</p>
+<p>当打开应用程序模态对话框时，用户必须完成与对话框的交互并关闭它，然后才能访问应用程序中的任何其他窗口</p>
+<p>显示模态对话框最常用的方法是调用它的 <code>exec()</code> 函数。当用户关闭对话框时， <code>exec()</code> 将提供一个有用的返回值。要关闭对话框并返回适当的值，必须连接一个默认按钮， <code>例如，一个OK按钮连接到accept()槽，一个Cancel按钮连接到reject()槽。或者，您可以使用Accepted或Rejected调用done()槽</code></p>
+<p>使用 <code>open()</code> 函数，以窗口模式显示对话框。窗口模式的对话框会阻塞窗口的响应，但是不会影响后续代码的执行</p>
+<h4 id="非模态对话框">非模态对话框</h4>
+<p>非模态对话框是在同一应用程序中独立于其他窗口运行的对话框。文字处理程序中的查找和替换对话框通常是非模态的，允许用户与应用程序的主窗口和对话框进行交互</p>
+<p>非模态对话框使用 <code>show()</code> 显示，它会立即将控制权返回给调用者</p>
+<h4 id="默认按钮">默认按钮</h4>
+<p>对话框的默认按钮是用户按 <code>Enter(返回)</code> 键时按下的按钮。此按钮用于表示用户接受对话框的设置并希望关闭对话框。使用 <code>QPushButton::setDefault()</code>，  <code>QPushButton::isDefault()</code> 和 <code>QPushButton::autoDefault()</code> 来设置和控制对话框的默认按钮</p>
+<h4 id="ESC键">ESC键</h4>
+<p>如果用户在对话框中按Esc键， <code>QDialog::reject()</code> 将被调用。这将导致 <code>窗口关闭</code>: 关闭事件不能被忽略</p>
+<h4 id="展开性">展开性</h4>
+<p>可扩展性是以两种方式显示对话框的能力: 显示最常用选项的部分对话框和显示所有选项的完整对话框。通常，可扩展的对话框最初会以部分对话框的形式出现，但带有More切换按钮。如果用户按下More按钮，对话框将展开</p>
+<details ><summary> main.cpp【测试】 </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; #include &quot;widget.h&quot;
+#include &lt;QApplication&gt; &#x2F;&#x2F; 包含一个应用程序类的头文件
+#include &lt;QtGlobal&gt;
+#include &lt;QObject&gt;
+#include &lt;QWidget&gt;
+#include &lt;QDir&gt; &#x2F;&#x2F; 路径头文件
+#include &lt;QPushButton&gt;
+#include &lt;QPointer&gt;
+#include &lt;QDialog&gt;  &#x2F;&#x2F; 添加头文件模态对话框
+
+class Dialog : public QDialog
+&#123;
+
+public:
+    Dialog(QWidget *parent &#x3D; nullptr)
+        : QDialog(parent)
+        , m_btn1(new QPushButton(&quot;确认&quot;, this))
+        , m_btn2(new QPushButton(&quot;取消&quot;, this))
+    &#123;
+        m_btn1-&gt;move(160, 0);
+        m_btn1-&gt;setDefault(false);   &#x2F;&#x2F; 设置按钮默认值  false则默认取消
+
+        connect(m_btn1, &amp;QPushButton::clicked, [ &#x3D; ]()  &#x2F;&#x2F; 接受
+        &#123;
+            &#x2F;&#x2F; 方式1
+            &#x2F;&#x2F; accept();
+            &#x2F;&#x2F; 方式2--通过返回值
+            done(QDialog::Accepted);
+        &#125;);
+
+        connect(m_btn2, &amp;QPushButton::clicked, [ &#x3D; ]()  &#x2F;&#x2F; 取消
+        &#123;
+            &#x2F;&#x2F; rejected(); &#x2F;&#x2F; 取消不一定关闭窗口，所以需要手动关闭
+            &#x2F;&#x2F; close();
+            done(QDialog::Rejected);
+            m_data &#x3D; &quot;hello&quot;;
+        &#125;);
+    &#125;
+    QString getDataStr()
+    &#123;
+        return m_data;
+    &#125;
+private:
+    QPushButton *m_btn1&#123;&#125;;
+    QPushButton *m_btn2&#123;&#125;;
+    QString m_data;
+&#125;;
+
+&#x2F;*
+* @class: Widget
+* @brief:
+*&#x2F;
+class widget : public QWidget
+&#123;
+
+public:
+    widget(QWidget *parent &#x3D; nullptr):
+        QWidget(parent),
+        m_btn(new QPushButton(&quot;显示模态对话框&quot;, this)),
+        m_btn1(new QPushButton(&quot;显示非模态对话框&quot;, this)),
+        m_btn2(new QPushButton(&quot;显示半模态对话框&quot;, this))
+    &#123;
+        m_btn1-&gt;move(0, 50);
+        m_btn2-&gt;move(0, 100);
+
+        connect(m_btn, &amp;QPushButton::clicked, []()
+        &#123;
+            &#x2F;&#x2F; 显示模态对话框
+            Dialog loginDlg;
+            &#x2F;&#x2F; 阻塞程序执行
+            int ret &#x3D; loginDlg.exec();
+
+            if (ret &#x3D;&#x3D; QDialog::Accepted)
+            &#123;
+                qDebug() &lt;&lt; &quot;accepted&quot; &lt;&lt; loginDlg.getDataStr();
+            &#125;
+            else
+            &#123;
+                qDebug() &lt;&lt; &quot;rejected&quot; &lt;&lt; loginDlg.getDataStr();
+            &#125;
+            qDebug() &lt;&lt; &quot;exec&quot;;
+        &#125;);
+        connect(m_btn1, &amp;QPushButton::clicked, [ &#x3D; ]()
+        &#123;
+            &#x2F;&#x2F; 显示非模态对话框
+            &#x2F;&#x2F; 不阻塞
+            loginDlg.show();
+        &#125;);
+        connect(m_btn2, &amp;QPushButton::clicked, [ &#x3D; ]()
+        &#123;
+            &#x2F;&#x2F; 显示半模态对话框
+
+            &#x2F;&#x2F; 不会阻塞程序执行，但是会阻塞窗口的消息
+            loginDlg.open();
+            qDebug() &lt;&lt; &quot;m_btn2&quot;;
+        &#125;);
+    &#125;
+protected:
+private:
+    QPushButton *m_btn&#123;&#125;;
+    QPushButton *m_btn1&#123;&#125;;
+    QPushButton *m_btn2&#123;&#125;;
+    QDialog loginDlg;
+&#125;;
+
+
+
+int main(int argc, char *argv[])
+&#123;
+    QApplication a(argc, argv);
+
+    widget w;
+
+    w.show();
+
+    return a.exec();
+
+&#125;</code></pre>
+              </div>
+            </details>
+<h3 id="窗口相关">窗口相关</h3>
+<blockquote>
+<p>在窗口没有创建完成之前获取的坐标总是0</p>
+<p>注意电脑的屏幕是不是100%缩放，如果不是则会影响</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240104164645.webp" alt=""></p>
+<details ><summary> main.cpp【测试】 </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; #include &quot;widget.h&quot;
+#include &lt;QApplication&gt; &#x2F;&#x2F; 包含一个应用程序类的头文件
+#include &lt;QtGlobal&gt;
+#include &lt;QObject&gt;
+#include &lt;QWidget&gt;
+#include &lt;QDir&gt; &#x2F;&#x2F; 路径头文件
+#include &lt;QPushButton&gt;
+#include &lt;QPointer&gt;
+
+class widget : public QWidget
+&#123;
+public:
+    widget(QWidget *parent &#x3D; nullptr)
+        : QWidget(parent),
+          m_btn(new QPushButton(&quot;点我&quot;, this)),
+          m_btn2(new QPushButton(&quot;最小&quot;, this)),
+          m_btn3(new QPushButton(&quot;最大&quot;, this)),
+          m_btn4(new QPushButton(&quot;关闭&quot;, this)),
+          m_btn5(new QPushButton(&quot;全屏&quot;, this)),
+          subwidget(new QWidget)
+    &#123;
+        &#x2F;&#x2F; 设置按钮大小
+        m_btn-&gt;setFixedSize(32, 32);
+        m_btn2-&gt;setFixedSize(32, 32);
+        m_btn3-&gt;setFixedSize(32, 32);
+        m_btn4-&gt;setFixedSize(32, 32);
+        m_btn5-&gt;setFixedSize(32, 32);
+
+        &#x2F;&#x2F; 移动位置
+        m_btn4-&gt;move(width() - m_btn4-&gt;width(), 0);
+        m_btn3-&gt;move(width() - m_btn4-&gt;width() * 2, 0);
+        m_btn2-&gt;move(width() - m_btn4-&gt;width() * 3, 0);
+        m_btn5-&gt;move(width() - m_btn4-&gt;width() * 4, 0);
+
+        subwidget-&gt;show();   &#x2F;&#x2F; 显示子窗口
+
+        &#x2F;&#x2F; 信号触发
+        connect(m_btn4, &amp;QPushButton::clicked, [ &#x3D; ]()
+        &#123;
+            close();    &#x2F;&#x2F; 关闭
+        &#125;);
+        connect(m_btn3, &amp;QPushButton::clicked, [ &#x3D; ]()
+        &#123;
+            &#x2F;&#x2F; 判断窗口是最大化的话，恢复原样
+            if (isMaximized())
+            &#123;
+                showNormal();   &#x2F;&#x2F; 正常显示
+            &#125;
+            &#x2F;&#x2F; 如果窗口不是最大化的话，则最大化
+            else
+            &#123;
+                showMaximized();    &#x2F;&#x2F; 最大化
+            &#125;
+        &#125;);
+        connect(m_btn2, &amp;QPushButton::clicked, [ &#x3D; ]()
+        &#123;
+            showMinimized();    &#x2F;&#x2F; 最小化
+        &#125;);
+        connect(m_btn5, &amp;QPushButton::clicked, [ &#x3D; ]()
+        &#123;
+            showFullScreen();   &#x2F;&#x2F; 全屏
+        &#125;);
+
+        connect(m_btn, &amp;QPushButton::clicked, [ &#x3D; ]()
+        &#123;
+
+
+            if (subwidget)
+            &#123;
+                &#x2F;&#x2F; subwidget.deleteLater();    &#x2F;&#x2F; 调用这个才是销毁
+                subwidget-&gt;close();  &#x2F;&#x2F; 如果程序有多个窗口，关闭一个窗口并不会销毁窗口这是隐藏了
+            &#125;
+            else    &#x2F;&#x2F; 使用智能指针且关闭删除窗口才会触发这个
+            &#123;
+                qDebug() &lt;&lt; &quot;subwidget is null&quot;;
+            &#125;
+
+
+            &#x2F;&#x2F; 显示和隐藏
+
+            &#x2F;&#x2F; if (subwidget.isHidden())
+            &#x2F;&#x2F; &#123;
+            &#x2F;&#x2F;     &#x2F;&#x2F; 方式1
+            &#x2F;&#x2F;     &#x2F;&#x2F; subwidget.show();   &#x2F;&#x2F; 显示
+            &#x2F;&#x2F;     &#x2F;&#x2F; 方式2
+            &#x2F;&#x2F;     &#x2F;&#x2F; subwidget.setHidden(false);
+            &#x2F;&#x2F;     &#x2F;&#x2F; 方式3 --- 仅对控件生效
+            &#x2F;&#x2F;     &#x2F;&#x2F; subwidget.setVisible(false);
+            &#x2F;&#x2F; &#125;
+            &#x2F;&#x2F; else
+            &#x2F;&#x2F; &#123;
+            &#x2F;&#x2F;     &#x2F;&#x2F; 方式1
+            &#x2F;&#x2F;     &#x2F;&#x2F; subwidget.hide();    &#x2F;&#x2F; 隐藏
+            &#x2F;&#x2F;     &#x2F;&#x2F; 方式2
+            &#x2F;&#x2F;     &#x2F;&#x2F; subwidget.setHidden(true);
+            &#x2F;&#x2F;     &#x2F;&#x2F; 方式3 --- 仅对控件生效
+            &#x2F;&#x2F;     &#x2F;&#x2F; subwidget.setVisible(true);
+            &#x2F;&#x2F; &#125;
+        &#125;);
+        &#x2F;&#x2F; 因为不会销毁窗口所以此函数不会触发
+        connect(subwidget, &amp;QWidget::destroyed, [ &#x3D; ]()
+        &#123;
+            qDebug() &lt;&lt; &quot;destroyed&quot;;
+        &#125;);
+
+        &#x2F;&#x2F; 设置属性，让窗口调用close时自动销毁
+        subwidget-&gt;setAttribute(Qt::WA_DeleteOnClose);
+
+
+
+        &#x2F;&#x2F; &#x2F;&#x2F; 设置窗口的标题
+        &#x2F;&#x2F; this-&gt;setWindowTitle(&quot;我的第一个窗口&quot;);
+
+        &#x2F;&#x2F; &#x2F;&#x2F; 输出当前项目的路径
+        &#x2F;&#x2F; qDebug() &lt;&lt; QDir::currentPath();
+        &#x2F;&#x2F; &#x2F;&#x2F; 资源文件
+        &#x2F;&#x2F; setWindowIcon(QIcon(&quot;:Resource&#x2F;zay.png&quot;));
+        &#x2F;&#x2F; &#x2F;&#x2F; 窗口大小，位置
+        &#x2F;&#x2F; qDebug() &lt;&lt; width() &lt;&lt; height() &lt;&lt; size();  &#x2F;&#x2F; 默认 640 480 QSize(640, 480)
+        &#x2F;&#x2F; &#x2F;&#x2F; 几何  因为窗口没创建完成所以获取的坐标总是0
+        &#x2F;&#x2F; qDebug() &lt;&lt; geometry() &lt;&lt; frameGeometry() &lt;&lt; rect();    &#x2F;&#x2F; QRect(0,0 640x480) QRect(0,0 640x480) QRect(0,0 640x480)
+
+        &#x2F;&#x2F; &#x2F;&#x2F; move(0, 0); &#x2F;&#x2F; 设置窗口坐标，这样的话标题栏会贴紧屏幕左上角(它是以标题栏区左上角为起点的)
+        &#x2F;&#x2F; &#x2F;&#x2F; resize(640, 480);   &#x2F;&#x2F; 设置窗口大小
+        &#x2F;&#x2F; setFixedSize(640, 480); &#x2F;&#x2F; 设置固定大小(这样的话就不能被拉大或者拉小)
+
+        &#x2F;&#x2F; &#x2F;&#x2F; 设置最大，最小大小(这样就不能拉出这个范围)
+        &#x2F;&#x2F; setMinimumSize(250, 250);
+        &#x2F;&#x2F; setMaximumSize(640, 480);
+
+        &#x2F;&#x2F; &#x2F;&#x2F; 设置几何 --- 它是以用户区左上角为起点的
+        &#x2F;&#x2F; setGeometry(50, 50, 150, 150);
+
+        &#x2F;&#x2F; connect(m_btn, &amp;QPushButton::clicked, [ &#x3D; ]()
+        &#x2F;&#x2F; &#123;
+        &#x2F;&#x2F;     &#x2F;&#x2F; rect -&gt; 128x30是标题栏的宽度x高度
+        &#x2F;&#x2F;     qDebug() &lt;&lt; geometry() &lt;&lt; frameGeometry() &lt;&lt; rect();   &#x2F;&#x2F; QRect(-1279,280 128x30) QRect(-1279,249 128x61) QRect(0,0 128x30)
+        &#x2F;&#x2F; &#125;);
+
+
+    &#125;
+
+private:
+    QPushButton *m_btn&#123;&#125;;
+    QPushButton *m_btn2&#123;&#125;;
+    QPushButton *m_btn3&#123;&#125;;
+    QPushButton *m_btn4&#123;&#125;;
+    QPushButton *m_btn5&#123;&#125;;
+    QPointer&lt;QWidget&gt; subwidget;
+&#125;;
+
+
+int main(int argc, char *argv[])
+&#123;
+    QApplication a(argc, argv);
+
+    widget w;
+
+    w.show();
+
+    return a.exec();
+
+&#125;</code></pre>
+              </div>
+            </details>
+<h2 id="QT事件系统">QT事件系统</h2>
+<h3 id="事件系统">事件系统</h3>
+<p>在Qt中，事件是派生自抽象 <code>QEvent类</code> 的对象，它表示应用程序内发生的事情或应用程序需要知道的外部活动的结果。事件可以由QObject子类的任何实例接收和处理，但它们与小部件尤其相关</p>
+<p>Qt程序需要在main()函数创建一个 <code>QApplication对象</code> ，然后调用它的 <code>exec()</code> 函数。这个函数就是开始Qt的事件循环。在执行exec()函数之后，程序将进入事件循环来监听应用程序的事件，当事件发生时，Qt将创建一个<strong>事件对象</strong></p>
+<blockquote>
+<p>事件类型</p>
+</blockquote>
+<p>大多数事件类型都有特殊的类，特别是 <code>QResizeEvent、QPaintEvent、QMouseEvent、QKeyEvent和QCloseEvent</code>。每个类都是QEvent的子类，并添加特定于事件的函数。例如， <code>QResizeEvent</code> 添加了 <code>size()</code> 和 <code>oldSize()</code>，以使小部件能够发现它们的尺寸是如何被更改的</p>
+<p>有些类支持多个实际事件类型。 <code>QMouseEvent</code> 支持按下鼠标按钮、双击、移动和其他相关操作</p>
+<p>每个事件都有一个关联的类型，在 <code>QEvent:: type</code> 中定义，这可以用作运行时类型信息的方便来源，以快速确定给定事件对象是从哪个子类构建的</p>
+<p>由于程序需要以各种复杂的方式进行响应，Qt的事件传递机制非常灵活</p>
+<h3 id="事件处理">事件处理</h3>
+<p>传递事件的通常方式是调用虚函数，这个虚函数负责进行适当的响应，通常是重新绘制小部件。如果在虚函数的实现中不执行所有必要的工作，则可以调用基类的实现</p>
+<ul>
+<li>虚函数查找</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240104220628.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240104220724.webp" alt=""></p>
+<h4 id="鼠标事件">鼠标事件</h4>
+<ul>
+<li>鼠标按下</li>
+<li>鼠标释放</li>
+<li>鼠标移动</li>
+</ul>
+<p>如果关闭了鼠标跟踪，则只有在移动鼠标时按下鼠标按钮时才会发生鼠标移动事件。如果打开了鼠标跟踪，即使没有按下鼠标按钮，也会发生鼠标移动事件</p>
+<ul>
+<li>鼠标滚轮</li>
+</ul>
+<p>返回轮子旋转的相对量，单位为八分之一度。正值表示转轮向前旋转，远离用户；负值表示转轮向后向用户旋转</p>
+<p>大多数鼠标类型的工作步长为15度，在这种情况下，delta值是120的倍数；即 <code>120单位* 1/8 = 15度</code></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;【测试】
+#include &lt;QWidget&gt;
+#include &lt;QApplication&gt;
+#include &lt;iostream&gt;
+#include &lt;QPushButton&gt;
+#include&lt;QMouseEvent&gt;
+
+class Button : public QPushButton
+&#123;
+public:
+	Button(QWidget* parent &#x3D; nullptr)
+		:QPushButton(parent)
+	&#123;
+		
+	&#125;
+protected:
+	&#x2F;&#x2F;重写了父类的虚函数，我不再使用父类的实现，而是由我来实现
+	&#x2F;&#x2F;按钮的点击信号，是在mousePressEvent函数里面触发的
+	void mousePressEvent(QMouseEvent* ev) override
+	&#123;
+		if (ev-&gt;button() &#x3D;&#x3D; Qt::LeftButton)
+		&#123;
+			qDebug() &lt;&lt; &quot;pressed&quot;;
+		&#125;
+
+		&#x2F;&#x2F;剩下的交给父类处理 则会执行【鼠标点击事件1】如果不写这个则不会执行
+		QPushButton::mousePressEvent(ev);
+	&#125;
+&#125;;
+
+class widget : public QWidget
+&#123;
+public:
+	QPushButton* m_btn&#123;&#125;;
+	widget(QWidget* parent &#x3D; nullptr)
+		:QWidget(parent)
+		, m_btn(new QPushButton(&quot;X&quot;, this))
+	&#123;
+		&#x2F;&#x2F;m_btn-&gt;setFixedSize(32, 32);
+		auto btn &#x3D; new Button(this);
+		btn-&gt;setText(&quot;hello&quot;);
+
+		&#x2F;&#x2F; 鼠标点击事件1
+		connect(btn, &amp;Button::clicked, [&#x3D;]
+			&#123;
+				qDebug() &lt;&lt; &quot;clicked&quot;;
+				isPress &#x3D; true;
+			&#125;
+		);
+		setMouseTracking(true);	&#x2F;&#x2F;设置鼠标追踪 这样就不需要按直接移动就能触发 【mouseMoveEvent事件】
+	&#125;
+	&#x2F;&#x2F; 处理一下鼠标点击事件
+	&#x2F;&#x2F; 重写虚函数即可！函数的原型必须和父类中的虚函数完全一致！
+	&#x2F;&#x2F; 鼠标点击事件处理函数~
+	void mousePressEvent(QMouseEvent* ev) override
+	&#123;
+		&#x2F;&#x2F; 判断一下是那个键按下了？左键 中间 右键 侧键
+		if (ev-&gt;button() &#x3D;&#x3D; Qt::MouseButton::LeftButton)
+		&#123;
+			qDebug() &lt;&lt; &quot;left button&quot; &lt;&lt; ev-&gt;pos() &lt;&lt; ev-&gt;globalPos() &lt;&lt; ev-&gt;scenePosition();
+		&#125;
+	&#125;
+	&#x2F;&#x2F; 鼠标释放事件
+	void mouseReleaseEvent(QMouseEvent* ev) override
+	&#123;
+		if (ev-&gt;button() &#x3D;&#x3D; Qt::LeftButton)
+		&#123;
+			isPress &#x3D; false;
+		&#125;
+	&#125;
+	&#x2F;&#x2F; 鼠标移动事件
+	void mouseMoveEvent(QMouseEvent* ev) override
+	&#123;
+		&#x2F;&#x2F;如果鼠标左键按下，并且移动了鼠标....
+		if (isPress)
+		&#123;
+			qDebug() &lt;&lt; &quot;left button and move&quot;;
+		&#125;
+		&#x2F;&#x2F;鼠标右键按下了 1 | 2
+		if (ev-&gt;buttons() &amp; Qt::RightButton)
+		&#123;
+			qDebug() &lt;&lt; &quot;right button and move&quot;;
+		&#125;
+		qDebug() &lt;&lt; &quot;move&quot;;
+	&#125;
+	&#x2F;&#x2F; 鼠标双击事件
+	void mouseDoubleClickEvent(QMouseEvent* ev)override
+	&#123;
+		qDebug() &lt;&lt; &quot;double click&quot;;
+	&#125;
+	&#x2F;&#x2F; 滚轮事件
+	void wheelEvent(QWheelEvent* ev) override
+	&#123;
+		&#x2F;&#x2F; 判断滚轮的方向
+		qDebug() &lt;&lt; ev-&gt;angleDelta().y() &#x2F; 8 &lt;&lt; ev-&gt;angleDelta().x() &#x2F; 8;
+	&#125;
+protected:
+private:
+	bool isPress &#x3D; false;
+&#125;;
+
+
+int main(int argc, char* argv[])
+&#123;
+
+	QApplication a(argc, argv);
+	widget w;
+
+	w.show();
+
+	return a.exec();
+&#125;</code></pre>
+<h4 id="键盘事件">键盘事件</h4>
+<ul>
+<li>按键按下</li>
+<li>按键释放</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 【测试】
+
+for (size_t i &#x3D; 0; i &lt; 70; i++)
+&#123;
+    &#x2F;&#x2F; 打印键
+    &#x2F;&#x2F;qDebug()&lt;&lt;QKeySequence::StandardKey(i)&lt;&lt;&quot;    &quot; &lt;&lt; QKeySequence::keyBindings(QKeySequence::StandardKey(i));
+&#125;
+
+
+&#x2F;&#x2F; ----------------键盘事件
+	&#x2F;&#x2F; 按键事件
+	void keyPressEvent(QKeyEvent* ev) override
+	&#123;
+		&#x2F;&#x2F;当前是什么键按下的（上下左右没有）
+		qDebug() &lt;&lt; Qt::Key(ev-&gt;key());	&#x2F;&#x2F; 构造成枚举类型才能输出对应按键否则输出数值
+
+		&#x2F;&#x2F;描述键 Ctrl shift alt ...
+		if (ev-&gt;modifiers() &amp; Qt::KeyboardModifier::ControlModifier &amp;&amp; ev-&gt;key() &#x3D;&#x3D; Qt::Key_A)
+		&#123;
+			qDebug() &lt;&lt; &quot;全选&quot;;
+		&#125;
+
+		if (ev-&gt;matches(QKeySequence::StandardKey::Save))
+		&#123;
+			qDebug() &lt;&lt; &quot;保存&quot;;
+		&#125;
+	&#125;</code></pre>
+<h4 id="窗口事件">窗口事件</h4>
+<ul>
+<li>
+<p>窗口关闭</p>
+</li>
+<li>
+<p>窗口隐藏，显示</p>
+</li>
+<li>
+<p>窗口移动</p>
+</li>
+<li>
+<p>窗口大小改变</p>
+</li>
+<li>
+<p>窗口焦点</p>
+</li>
+<li>
+<p>右键菜单</p>
+</li>
+<li>
+<p>程序状态发生改变</p>
+</li>
+</ul>
+<p>如果需要检测程序中，某些东西是否发生了改变，可以通过<code>void QWidget::changeEvent(QEvent *event)</code>来检测</p>
+<p>以下是常用事件：</p>
+<ol>
+<li>
+<p>QEvent::FontChange</p>
+</li>
+<li>
+<p>QEvent::WindowTitleChange</p>
+</li>
+<li>
+<p>QEvent::IconTextChange</p>
+</li>
+<li>
+<p>QEvent::ModifiedChange</p>
+</li>
+<li>
+<p>QEvent::MouseTrackingChange</p>
+</li>
+<li>
+<p>QEvent::WindowStateChange</p>
+</li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 【测试】
+#include&lt;QMouseEvent&gt;
+#include&lt;QMessageBox&gt;	&#x2F;&#x2F; 消息盒头文件
+
+m_btn-&gt;setFixedSize(32, 32);
+&#x2F;&#x2F; 鼠标点击事件1
+connect(m_btn, &amp;Button::clicked, [ &#x3D; ]
+&#123;
+    setWindowTitle(&quot;maya&quot;);
+&#125;
+       );
+
+
+&#x2F;&#x2F; ----------------窗口事件
+	&#x2F;&#x2F;窗口关闭事件处理
+	void closeEvent(QCloseEvent* ev) override
+	&#123;
+		&#x2F;&#x2F; 弹出消息盒子
+		auto ret &#x3D; QMessageBox::question(this, &quot;关闭窗口？&quot;, &quot;有未保存的文件，是否退出并保存？&quot;);
+		qDebug() &lt;&lt; ret;
+		&#x2F;&#x2F; 判断返回值
+		if (ret &#x3D;&#x3D; QMessageBox::StandardButton::Yes)
+		&#123;
+			&#x2F;&#x2F;保存并退出，接受事件
+			&#x2F;&#x2F;save();...
+			ev-&gt;accept();
+		&#125;
+		else
+		&#123;
+			&#x2F;&#x2F;啥也不干，忽略关闭事件
+			ev-&gt;ignore();
+		&#125;
+	&#125;
+	&#x2F;&#x2F; 窗口显示事件
+	void showEvent(QShowEvent* ev)override
+	&#123;
+		qInfo() &lt;&lt; &quot;我显示啦~&quot;;
+	&#125;
+	&#x2F;&#x2F; 窗口隐藏事件
+	void hideEvent(QHideEvent* ev)override
+	&#123;
+		qInfo() &lt;&lt; &quot;我隐藏啦~&quot;;
+	&#125;
+	&#x2F;&#x2F; 窗口移动事件
+	void moveEvent(QMoveEvent* ev)override
+	&#123;
+		qInfo() &lt;&lt; &quot;Widget moved&quot; &lt;&lt; &quot;oldPos&quot; &lt;&lt; ev-&gt;oldPos() &lt;&lt; &quot;newPos&quot; &lt;&lt; ev-&gt;pos();
+	&#125;
+	&#x2F;&#x2F; 窗口大小改变
+	void  resizeEvent(QResizeEvent* ev)override
+	&#123;
+		&#x2F;&#x2F; 按钮的位置保持不变
+		m_btn-&gt;move(ev-&gt;size().width() - m_btn-&gt;width(), 0);
+	&#125;
+	&#x2F;&#x2F; 右键菜单
+	void  contextMenuEvent(QContextMenuEvent* ev)
+	&#123;
+		qInfo() &lt;&lt; &quot;报告长官，请求弹出上下文菜单，也就是右键菜单！&quot;
+			&lt;&lt; &quot;请弹出在\n&quot;
+			&lt;&lt; &quot;全局坐标:&quot; &lt;&lt; ev-&gt;globalPos()
+			&lt;&lt; &quot;局部坐标:&quot; &lt;&lt; ev-&gt;pos() &lt;&lt; &quot;位置&quot;;
+	&#125;
+	&#x2F;&#x2F; 程序状态发生改变
+	void changeEvent(QEvent* ev)override
+	&#123;
+		switch (ev-&gt;type())
+		&#123;
+		case QEvent::Type::WindowTitleChange:	&#x2F;&#x2F; 窗口标题发送改变时触发
+			qDebug() &lt;&lt; &quot;windowtitlechagne&quot; &lt;&lt; this-&gt;windowTitle();
+			break;
+		default:
+			break;
+		&#125;
+	&#125;</code></pre>
+<h4 id="定时器事件">定时器事件</h4>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 【测试】
+#include&lt;QTimer&gt;
+
+class SWidget : public QWidget
+&#123;
+public:
+	SWidget(QWidget* parent &#x3D; nullptr)
+		:QWidget(parent)
+	&#123;
+		&#x2F;&#x2F;两种定时器，周期性的处理
+		&#x2F;&#x2F;1,----------------------QTimer
+		auto timer &#x3D; new QTimer(this);
+		&#x2F;&#x2F;	timer-&gt;callOnTimeout([]
+		&#x2F;&#x2F;		&#123;
+		&#x2F;&#x2F;			qDebug() &lt;&lt; &quot;update&quot;;
+		&#x2F;&#x2F;		&#125;);
+
+		&#x2F;&#x2F;	timer-&gt;callOnTimeout(this, &amp;SWidget::game_update);
+
+		&#x2F;&#x2F;	connect(timer, &amp;QTimer::timeout, this, &amp;SWidget::game_update);		&#x2F;&#x2F; QT4写法
+
+		timer-&gt;start(1000 &#x2F; 60);	&#x2F;&#x2F; 开启定时器。多少ms触发一次
+		
+		QTimer::singleShot(1000, [] &#123;qDebug() &lt;&lt; &quot;once&quot;; &#125;);	&#x2F;&#x2F; 延时多少ms后触发一次
+
+
+		&#x2F;&#x2F;2,--------------------定时器事件
+		&#x2F;&#x2F;开启定时器,通过返回值可以知道是哪个定时器
+		timer_id1 &#x3D; startTimer(500);
+		timer_id2 &#x3D; startTimer(200);
+	&#125;
+
+	&#x2F;&#x2F; 定时器事件
+	void timerEvent(QTimerEvent* ev)override
+	&#123;
+		static int i &#x3D; 0;
+		if (i &#x3D;&#x3D; 3)
+		&#123;
+			&#x2F;&#x2F;killTimer(ev-&gt;timerId());	&#x2F;&#x2F;杀死定时器
+			
+		&#125;
+		if (ev-&gt;timerId() &#x3D;&#x3D; timer_id1)
+		&#123;
+			qDebug() &lt;&lt; ev-&gt;timerId() &lt;&lt; __FUNCTION__;
+
+		&#125;
+		else if (ev-&gt;timerId() &#x3D;&#x3D; timer_id2)
+		&#123;
+			qDebug() &lt;&lt; ev-&gt;timerId() &lt;&lt; __FUNCTION__;
+
+		&#125;
+		i++;
+	&#125;
+
+	void game_update()
+	&#123;
+		qDebug() &lt;&lt; __FUNCTION__;
+	&#125;
+
+	int timer_id1;
+	int timer_id2;
+&#125;;
+
+int main(int argc, char* argv[])
+&#123;
+
+	QApplication a(argc, argv);
+	SWidget w;
+
+	w.show();
+
+	return a.exec();
+&#125;</code></pre>
+<h3 id="事件分发">事件分发</h3>
+<p>传递事件的通常方式是调用虚函数。 <code>例如，QMouseEvent 通过调用 QWidget::mousePressEvent() 来传递</code>。这个虚函数负责进行适当的响应，通常是处理鼠标点击，并发出对应的信号。如果在虚函数的实现中不执行所有必要的工作，则可能需要调用基类的实现</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 【测试】
+class MWidget : public QWidget
+&#123;
+public:
+	MWidget(QWidget* parent &#x3D; nullptr)
+		:QWidget(parent)
+	&#123;
+
+	&#125;
+	&#x2F;&#x2F;所有的事件处理函数都是从event()事件派发函数调用的
+	bool event(QEvent* ev)override
+	&#123;
+		switch (ev-&gt;type())
+		&#123;
+		case QEvent::MouseButtonPress:
+				&#x2F;&#x2F;mousePressEvent(dynamic_cast&lt;QMouseEvent*&gt;(ev));	&#x2F;&#x2F; 父类转子类
+			break;
+		default:
+			break;
+		&#125;
+
+		&#x2F;&#x2F;return QObject::event(ev);
+		return QWidget::event(ev);	&#x2F;&#x2F; 交给父类即可这样就不需要上面的mousePressEvent传递
+	&#125;
+	void mousePressEvent(QMouseEvent* ev)override
+	&#123;
+		qDebug() &lt;&lt; ev-&gt;button();
+	&#125;
+&#125;;
+
+int main(int argc, char* argv[])
+&#123;
+
+	QApplication a(argc, argv);
+	MWidget w;
+
+	w.show();
+
+	return a.exec();
+&#125;</code></pre>
+<h3 id="发送事件">发送事件</h3>
+<p>许多应用程序都希望创建和发送它们自己的事件。通过构造合适的事件对象并使用 <code>QCoreApplication::sendEvent()</code> 和 <code>QCoreApplication::postEvent()</code> 发送事件，您可以以与Qt自己的事件循环完全相同的方式发送事件</p>
+<p><strong>sendEvent()</strong> 立即处理事件。当它返回时，事件过滤器和/或对象本身已经处理了该事件。对于许多事件类，都有一个名为isAccepted()的函数，它告诉您事件是被最后一个调用的处理程序接受还是拒绝的。</p>
+<p><strong>postEvent()</strong> 将事件发送到队列中，以便稍后进行分派。下次Qt的主事件循环运行时，它会分发所有发布的事件，并进行一些优化。例如，如果有几个调整大小事件，它们将被压缩为一个。同样适用于绘制事件: <code>QWidget::update()</code> 调用 <code>postEvent()</code>，它通过避免多次重绘来消除闪烁并提高速度</p>
+<h4 id="自定义事件">自定义事件</h4>
+<p>要创建自定义类型的事件，需要定义一个事件号， <code>该事件号必须大于QEvent::User</code> ， <code>并且可能需要继承QEvent的子类</code>，以便传递关于自定义事件的特定信息</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240105144306.webp" alt=""></p>
+<p>主要涉及到两个函数：</p>
+<ol>
+<li>sendEvent</li>
+</ol>
+<p>sendEvent会让接受事件的对象立即处理事件，处理完成之后函数返回<br>
+—对于栈区的事件会自动释放(超出作用域释放)<br>
+—对于堆区的事件需要函数返回之后自己释放 (超出作用域，也不会自动释放)</p>
+<ol start="2">
+<li>postEvent</li>
+</ol>
+<p>postEvent是把事件提交到事件队列，不管有没有处理事件，都立即返回<br>
+—必须把事件放在堆区，处理完毕之后自动释放</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 【测试】
+&#x2F;*自定义事件*&#x2F;
+class CustomEvent : public QEvent
+&#123;
+public:
+	enum Type &#123; Custom &#x3D; QEvent::User &#125;;
+	CustomEvent(const QString&amp; data)
+		:QEvent(static_cast&lt;QEvent::Type&gt;(Custom))
+		, m_data(data)
+	&#123;
+
+	&#125;
+	~CustomEvent() &#123; qDebug() &lt;&lt; __FUNCTION__; &#125;
+	QString data()const &#123; return m_data; &#125;
+
+	QString m_data;
+&#125;;
+
+class MWidget : public QWidget
+&#123;
+public:
+	MWidget(QWidget* parent &#x3D; nullptr)
+		:QWidget(parent)
+	&#123;
+
+	&#125;
+	&#x2F;&#x2F;所有的事件处理函数都是从event()事件派发函数调用的
+	bool event(QEvent* ev)override
+	&#123;
+		switch (ev-&gt;type())
+		&#123;
+		case QEvent::MouseButtonPress:
+				&#x2F;&#x2F;mousePressEvent(dynamic_cast&lt;QMouseEvent*&gt;(ev));	&#x2F;&#x2F; 父类转子类
+			break;
+		default:
+			break;
+		&#125;
+
+		&#x2F;&#x2F;return QObject::event(ev);
+		return QWidget::event(ev);	&#x2F;&#x2F; 交给父类即可这样就不需要上面的mousePressEvent传递
+	&#125;
+	void mousePressEvent(QMouseEvent* ev)override
+	&#123;
+		if (ev-&gt;button() &#x3D;&#x3D; Qt::RightButton)
+		&#123;
+#if 0
+			&#x2F;&#x2F;向指定的对象发送事件
+			&#x2F;&#x2F;1,sendEvent 发送栈区的事件，直到事件处理完成后，才会返回(函数是阻塞的)
+			
+			&#x2F;&#x2F; ---方式1
+			&#x2F;&#x2F;CustomEvent *evv &#x3D; new CustomEvent(&quot;sendEvent customEvent&quot;);
+			&#x2F;&#x2F;qApp-&gt;sendEvent(this, evv);	&#x2F;&#x2F; 发送事件
+			&#x2F;&#x2F;delete evv;	&#x2F;&#x2F;堆区的要手动释放
+			&#x2F;&#x2F; ---方式2
+			CustomEvent evv(&quot;sendEvent customEvent&quot;);
+			qApp-&gt;sendEvent(this, &amp;evv);	&#x2F;&#x2F; 发送事件
+#else
+			&#x2F;&#x2F; 2,postEvent 只能发送堆区的对象，一旦发送，直接返回，不需要等事件处理完成，一旦事件处理完成，会自动释放
+
+			&#x2F;&#x2F; ---方式1  右键则直接报错！！！因为这边不需要等待发送完所以直接销毁了所以相当于发送了个空的过去
+			&#x2F;&#x2F;CustomEvent ev(&quot;sendEvent customEvent&quot;);
+			&#x2F;&#x2F;qApp-&gt;postEvent(this, &amp;ev);
+			&#x2F;&#x2F; ---方式2  不需要手动delete会自动释放
+			CustomEvent* ev &#x3D; new CustomEvent(&quot;sendEvent customEvent&quot;);
+			qApp-&gt;postEvent(this, ev);
+#endif
+		&#125;
+		qDebug() &lt;&lt; ev-&gt;button();
+	&#125;
+	&#x2F;&#x2F;专门处理自定义事件的处理函数
+	void customEvent(QEvent* ev)override
+	&#123;
+		if (ev-&gt;type() &#x3D;&#x3D; CustomEvent::Custom)
+		&#123;
+			auto cev &#x3D; dynamic_cast&lt;CustomEvent*&gt;(ev);	&#x2F;&#x2F; 父类转子类
+			if (ev)
+			&#123;
+				qDebug() &lt;&lt; __FUNCTION__ &lt;&lt; cev-&gt;data();
+			&#125;
+		&#125;
+	&#125;
+&#125;;
+
+int main(int argc, char* argv[])
+&#123;
+
+	QApplication a(argc, argv);
+	MWidget w;
+
+	w.show();
+
+	return a.exec();
+&#125;</code></pre>
+<h3 id="事件传播机制">事件传播机制</h3>
+<h4 id="事件接受和忽略">事件接受和忽略</h4>
+<p>当控件忽略事件时，事件会继续往上传播，这里的传播是指<strong>传播给父组件</strong></p>
+<p>QEvent有 <code>accept()</code>函数 和<code> ignore()</code>函数：</p>
+<ul>
+<li>
+<p>**accept()：**本组件处理该事件，这个事件就不会被继续传播给其父组件；</p>
+</li>
+<li>
+<p>**ignore()：**本组件不想要处理这个事件，这个事件会被继续传播给其父组件；</p>
+</li>
+<li>
+<p>值得注意的是所有的事件默认都是接受的</p>
+</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 【测试】
+#include &lt;QWidget&gt;
+#include &lt;QApplication&gt;
+#include &lt;iostream&gt;
+#include &lt;QPushButton&gt;
+#include &lt;QMouseEvent&gt;
+#include &lt;QMessageBox&gt;	&#x2F;&#x2F; 消息盒头文件
+#include&lt;QTimer&gt;
+
+
+class Button : public QPushButton
+&#123;
+public:
+	Button(const QString&amp; text, QWidget* parent &#x3D; nullptr)
+		:QPushButton(text, parent)
+	&#123;
+
+	&#125;
+protected:
+	bool event(QEvent* ev)override
+	&#123;
+		if (ev-&gt;type() &#x3D;&#x3D; QEvent::Type::KeyPress)
+		&#123;
+			QKeyEvent* kev &#x3D; dynamic_cast&lt;QKeyEvent*&gt;(ev);
+			qDebug() &lt;&lt; Qt::Key(kev-&gt;key());
+			&#x2F;&#x2F; 这里return true或false都可以主要是为了不执行QPushButton::event(ev)
+			return false;		&#x2F;&#x2F; 这里我们忽略了按钮作为默认按钮时，回车键按下的事件，不会触发clicked信号
+		&#125;
+
+		return QPushButton::event(ev);	&#x2F;&#x2F;返回true表示事件已经处理完成，否则表示忽略
+	&#125;
+	void mousePressEvent(QMouseEvent* ev)override
+	&#123;
+		qDebug() &lt;&lt; __FUNCSIG__;	&#x2F;&#x2F; 输出函数全名(微软特有的)
+		&#x2F;&#x2F;ev-&gt;accept();	&#x2F;&#x2F;默认调用的	&#x2F;&#x2F; 相当于打印当前
+		ev-&gt;ignore();	&#x2F;&#x2F;忽略事件处理，事件将传播到父组件 --- 相当于打印两个
+	&#125;
+&#125;;
+
+class widget : public QWidget
+&#123;
+public:
+	widget(QWidget* parent &#x3D; nullptr)
+		:QWidget(parent)
+	&#123;
+		auto btn &#x3D; new Button(&quot;Button&quot;, this);
+
+		btn-&gt;setDefault(true);
+
+		connect(btn, &amp;Button::clicked, []
+			&#123;
+				qDebug() &lt;&lt; &quot;clicked&quot;;
+			&#125;);
+	&#125;
+protected:
+	void mousePressEvent(QMouseEvent* ev)override
+	&#123;
+		qDebug() &lt;&lt; __FUNCSIG__;	&#x2F;&#x2F; 输出函数全名(微软特有的)
+	&#125;
+&#125;;
+
+int main(int argc, char* argv[])
+&#123;
+
+	QApplication a(argc, argv);
+
+	widget w;
+	w.show();
+
+	return a.exec();
+&#125;
+</code></pre>
+<h4 id="事件分发-2">事件分发</h4>
+<p>Qt的事件产生之后，不是直接传递给了对象的，需要经过一系列的过程</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 【测试】
+#include &lt;QWidget&gt;			&#x2F;&#x2F; QWidget 类的头文件
+#include &lt;QApplication&gt;		&#x2F;&#x2F; QApplication 类的头文件
+#include &lt;iostream&gt;			&#x2F;&#x2F; 标准输入输出流的头文件
+#include &lt;QPushButton&gt;		&#x2F;&#x2F; QPushButton 类的头文件
+#include &lt;QMouseEvent&gt;		&#x2F;&#x2F; QMouseEvent 类的头文件
+#include &lt;QMessageBox&gt;		&#x2F;&#x2F; QMessageBox 类的头文件
+#include&lt;QTimer&gt;			&#x2F;&#x2F; QTimer 类的头文件
+
+#define myApp static_cast&lt;MyApp*&gt;(qApp)	&#x2F;&#x2F; 定义宏，用于访问应用程序类的实例
+
+&#x2F;&#x2F; 应用程序类
+class MyApp : public QApplication
+&#123;
+public:
+	using QApplication::QApplication;	&#x2F;&#x2F; 使用基类 QApplication 的构造函数
+	void addValue(const QString&amp; key, const QVariant&amp; v)	&#x2F;&#x2F; 添加配置项
+	&#123;
+		m_config.insert(key, v);	&#x2F;&#x2F; 将 key 和 v 插入到 QMap 集合中
+	&#125;
+	QVariant value(const QString&amp; key)	&#x2F;&#x2F; 获取配置项
+	&#123;
+		return m_config.value(key);		&#x2F;&#x2F; 从 QMap 集合中获取 key 对应的值
+	&#125;
+private:
+	QMap&lt;QString, QVariant&gt; m_config;	&#x2F;&#x2F; 保存配置项的 QMap 集合
+&#125;;
+
+&#x2F;&#x2F; 自定义窗口类
+class widget : public QWidget
+&#123;
+public:
+	widget(QWidget* parent &#x3D; nullptr)	&#x2F;&#x2F; 构造函数
+		:QWidget(parent)				&#x2F;&#x2F; 调用父类构造函数
+		, btn(new QPushButton(&quot;按钮&quot;, this))	&#x2F;&#x2F; 创建按钮控件
+	&#123;
+		btn-&gt;setDefault(true);			&#x2F;&#x2F; 将按钮设置为默认按钮
+
+		connect(btn, &amp;QPushButton::clicked, []	&#x2F;&#x2F; 连接按钮的 clicked 信号
+			&#123;
+				qDebug() &lt;&lt; &quot;clicked&quot;;	&#x2F;&#x2F; 输出调试信息
+				qDebug() &lt;&lt; myApp-&gt;value(&quot;appName&quot;) &lt;&lt; myApp-&gt;value(&quot;mobile&quot;);	&#x2F;&#x2F; 获取配置项的值并输出
+			&#125;);
+	&#125;
+protected:
+	void mousePressEvent(QMouseEvent* ev)override	&#x2F;&#x2F; 重写鼠标按下事件处理函数
+	&#123;
+		qDebug() &lt;&lt; __FUNCSIG__;	&#x2F;&#x2F; 输出调试信息
+	&#125;
+private:
+	QPushButton* btn&#123;&#125;;	&#x2F;&#x2F; 按钮控件指针
+&#125;;
+
+&#x2F;&#x2F; 主函数
+int main(int argc, char* argv[])
+&#123;
+	MyApp a(argc, argv);	&#x2F;&#x2F; 创建应用程序类实例
+	a.addValue(&quot;appName&quot;, &quot;day08_event&quot;);	&#x2F;&#x2F; 添加配置项
+	a.addValue(&quot;version&quot;, &quot;1.0&quot;);			&#x2F;&#x2F; 添加配置项
+	a.addValue(&quot;mobile&quot;, 123456789);		&#x2F;&#x2F; 添加配置项
+
+	widget w;	&#x2F;&#x2F; 创建窗口对象
+	w.show();	&#x2F;&#x2F; 显示窗口
+
+	return a.exec();	&#x2F;&#x2F; 运行应用程序的主事件循环，直到退出
+&#125;</code></pre>
+<h4 id="事件过滤">事件过滤</h4>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;安装事件过滤器
+installEventFilter(this);
+
+&#x2F;&#x2F; 取消安装事件过滤器的话就是置空即可
+installEventFilter(nullptr);
+
+&#x2F;&#x2F; 需要重写， 在里面进行处理
+bool eventFilter(QObject* watched, QEvent* event)override
+&#123;
+    
+&#125;</code></pre>
+<h4 id="示例–无边框窗口拖动">示例–无边框窗口拖动</h4>
+<p>就是把标题栏去掉，只留下最小化，最大化，关闭等</p>
+<details ><summary> SEventFilterObject.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __SEVENTFILTEROBJECT_H
+#define __SEVENTFILTEROBJECT_H
+#include &quot;AllHead.h&quot;
+
+class SEventFilterObject : public QObject
+&#123;
+public:
+	SEventFilterObject(QObject* parent &#x3D; nullptr);
+	bool eventFilter(QObject* watched, QEvent* event)override;
+
+private:
+	QPoint m_pos;
+&#125;;
+
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> SEventFilterObject.cpp </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;SEventFilterObject.h&quot;
+
+SEventFilterObject::SEventFilterObject(QObject* parent)
+&#123;
+
+&#125;
+
+bool SEventFilterObject::eventFilter(QObject* watched, QEvent* event)
+&#123;
+	QWidget* w &#x3D; dynamic_cast&lt;QWidget*&gt;(watched);		&#x2F;&#x2F; 转换
+	&#x2F;&#x2F; 如果窗口没有边框，才能让他点击窗口客户区移动窗口
+	if (w-&gt;windowFlags() &amp; Qt::FramelessWindowHint)
+	&#123;
+		QMouseEvent* ev &#x3D; dynamic_cast&lt;QMouseEvent*&gt;(event);
+
+		&#x2F;&#x2F; 鼠标点击触发+左键
+		if (event-&gt;type() &#x3D;&#x3D; QEvent::MouseButtonPress &amp;&amp; ev-&gt;button() &#x3D;&#x3D; Qt::MouseButton::LeftButton)
+		&#123;
+			m_pos &#x3D; ev-&gt;pos();
+		&#125;
+		&#x2F;&#x2F; 鼠标松开触发+左键  MouseButton::可省略
+		else if (event-&gt;type() &#x3D;&#x3D; QEvent::MouseButtonRelease &amp;&amp; ev-&gt;button() &#x3D;&#x3D; Qt::LeftButton)
+		&#123;
+			m_pos &#x3D; &#123; 0, 0 &#125;;
+		&#125;
+		&#x2F;&#x2F; 鼠标移动触发+左键同时
+		else if (event-&gt;type() &#x3D;&#x3D; QEvent::MouseMove &amp;&amp; ev-&gt;buttons() &#x3D;&#x3D; Qt::LeftButton)
+		&#123;
+			w-&gt;move(ev-&gt;globalPos() - m_pos);	&#x2F;&#x2F; 全局坐标减去当前位置坐标
+		&#125;
+	&#125;
+	return false;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> main.cpp </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;AllHead.h&quot;
+
+class widget : public QWidget
+&#123;
+public:
+	widget(QWidget* parent &#x3D; nullptr)
+		: QWidget(parent)
+	&#123;
+		&#x2F;&#x2F; 去掉窗口的边框
+		setWindowFlag(Qt::FramelessWindowHint);
+		setMouseTracking(true);	&#x2F;&#x2F; 鼠标跟踪
+		&#x2F;&#x2F; 安装事件过滤器
+		installEventFilter(new SEventFilterObject(this));
+		
+		&#x2F;&#x2F; 取消安装事件过滤器
+		&#x2F;&#x2F;installEventFilter(nullptr);
+	&#125;
+protected:
+private:
+&#125;;
+
+
+&#x2F;&#x2F; 主函数
+int main(int argc, char* argv[])
+&#123;
+	QApplication a(argc, argv);	&#x2F;&#x2F; 创建应用程序类实例
+
+	widget w;
+	w.show();
+
+	return a.exec();	&#x2F;&#x2F; 运行应用程序的主事件循环，直到退出
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> AllHead.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __ALLHEAD_H
+#define __ALLHEAD_H
+
+#include &lt;QApplication&gt;		&#x2F;&#x2F; QApplication 类的头文件
+#include &lt;QWidget&gt;			&#x2F;&#x2F; QWidget 类的头文件
+#include &quot;SEventFilterObject.h&quot;
+#include &lt;QMouseEvent&gt;
+#include &lt;QPoint&gt;
+#include &lt;QEvent&gt;
+
+#endif</code></pre>
+              </div>
+            </details>
+<h3 id="事件和信号的区别">事件和信号的区别</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>事件（QEvent）</th>
+<th>信号（SIGNAL）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>与QObject的关系</td>
+<td>由具体对象<strong>进行处理</strong></td>
+<td>由具体对象<strong>主动产生</strong></td>
+</tr>
+<tr>
+<td>对程序影响</td>
+<td><strong>改写事件处理函数可能导致</strong>程序行为发生改变</td>
+<td>信号<strong>是否存在对应的槽函数不会改变</strong>程序行为</td>
+</tr>
+<tr>
+<td>两者的联系</td>
+<td>一般而言，信号在具体的事件处理函数中产生</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>信号和事件是两个不同层面的东西，发出者不同，作用不同。Qt中，所有的QObject的子类实例均可对事件接收和处理！</p>
+<h3 id="事件类型">事件类型</h3>
+<p>在文档助手有</p>
+<ul>
+<li><code>QEvent::Type</code></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240105154301.webp" alt=""></p>
+<h2 id="绘图">绘图</h2>
+<h3 id="基础">基础</h3>
+<p>Qt的绘制系统支持在屏幕和打印设备上使用相同的API进行绘制，主要基于 <code>QPainter、QPaintDevice和QPaintEngine</code> 类</p>
+<p><code>QPainter</code> 用于执行绘图操作， <code>QPaintDevice</code> 是二维空间的抽象，可以使用 <code>QPainter</code> 在其上绘图，而 <code>QPaintEngine</code> 提供了绘图器用于在不同类型的设备上绘图的接口。 <code>QPaintEngine</code> 类在内部由 <code>QPainter</code> 和 <code>QPaintDevice</code> 使用，并且对应用程序程序员隐藏，除非他们创建自己的设备类型</p>
+<blockquote>
+<p>可以看到 <code>QWidget</code> 父类也是一个画图设备</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240105204820.webp" alt=""></p>
+</blockquote>
+<h3 id="基本绘制和填充">基本绘制和填充</h3>
+<p><code>QPainter</code> 中提供了一些便捷函数来绘制常用的图形，还可以设置线条、边框的<strong>画笔</strong>以及进行填充的<strong>画刷</strong></p>
+<p>所有对控件的绘图操作都要放进函数 <code>paintEvent()</code> 中，否则绘图无法显示</p>
+<ul>
+<li>绘制图形</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 【测试】
+class widget : public QWidget
+&#123;
+public:
+	widget(QWidget* parent &#x3D; nullptr)
+		: QWidget(parent)
+	&#123;
+
+	&#125;
+protected:
+	&#x2F;&#x2F;所有在Widget上面的绘制，必须放到paintEvent函数里面，paintevent在需要绘图时自动调用
+	void paintEvent(QPaintEvent*)
+	&#123;
+		qDebug() &lt;&lt; __FUNCTION__;
+
+		&#x2F;&#x2F;1,创建一个画家
+		QPainter painter;	&#x2F;&#x2F; 也可以使用构造函数QPainter painter(this);这样就不需要下面的begin和end了
+		&#x2F;&#x2F;QPainter painter(this);
+		&#x2F;&#x2F;设置绘图设备(绘制到哪里)
+		&#x2F;&#x2F; 所有代码必须放在begin()和end()之间
+		painter.begin(this);
+
+		&#x2F;&#x2F;painter.drawLine(0, 0, width(), height());	&#x2F;&#x2F; 画一条线在左上角到右下角，而且会随窗口变化而变化(重新绘制)
+		
+		&#x2F;&#x2F; 画一个三角形在中间(QPointF类型相当于坐标点&#123;x,y&#125;,而且必须是小数)
+		QList&lt;QPointF&gt; points &#x3D;
+		&#123;
+			&#123;width() &#x2F; 2.,height() &#x2F; 4.&#125;,
+			&#123;width() * 3 &#x2F; 4.0,height() * 3 &#x2F; 4.0&#125;,
+			&#123;width() * 1 &#x2F; 4.0,height() * 3 &#x2F; 4.0&#125;,
+			&#x2F;&#x2F;&#123;width() &#x2F; 2.,height() &#x2F; 4.&#125;
+		&#125;;
+		&#x2F;&#x2F;painter.drawLines(points);	&#x2F;&#x2F; 它不会把两个点连起来
+		&#x2F;&#x2F;painter.drawPolyline(points.data(), points.size());	&#x2F;&#x2F; 会把4个点连起来闭合(需要打开注释第4个点)
+		painter.drawPolygon(points.data(), points.size());	&#x2F;&#x2F; 画图形直接3个坐标即可连起来
+		&#x2F;&#x2F;让画家离开绘图设备
+		painter.end();
+	&#125;
+private:
+&#125;;</code></pre>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>drawArc</td>
+<td>绘制圆弧</td>
+<td>drawPoint</td>
+<td>绘制点</td>
+</tr>
+<tr>
+<td>drawChord</td>
+<td>绘制弦</td>
+<td>drawPolygon</td>
+<td>绘制多边形</td>
+</tr>
+<tr>
+<td>drawConvexPolygon</td>
+<td>绘制凸多边形</td>
+<td>drawPolyline</td>
+<td>绘制折线</td>
+</tr>
+<tr>
+<td>drawElipse</td>
+<td>绘制椭圆</td>
+<td>drawRect</td>
+<td>绘制矩形</td>
+</tr>
+<tr>
+<td>drawLine</td>
+<td>绘制线条</td>
+<td>drawRoundedRect</td>
+<td>绘制圆角矩形</td>
+</tr>
+<tr>
+<td>drawPie</td>
+<td>绘制扇形</td>
+<td>fillRect</td>
+<td>绘制填充矩形</td>
+</tr>
+</tbody>
+</table>
+<h3 id="使用画笔（QPen）">使用画笔（QPen）</h3>
+<p>如果需要对绘制的线条设置不同的颜色，那么我们就需要给painter设置一个画笔QPen</p>
+<p>Pen有 <code>样式(style)，宽度(width)， 颜色(brush)， 笔帽样式(capStyle)，(连接样式)joinStyle</code></p>
+<ol>
+<li>
+<p>style使用 <code>Qt::PenStyle</code> 定义线条类型。默认是 <code>Qt::PenStyle::SolidLine</code></p>
+</li>
+<li>
+<p>brush用于填充画笔笔生成的笔触。 使用 <code>QBrush类</code> 来指定画笔的颜色</p>
+</li>
+<li>
+<p>capStyle帽样式决定了可以使用 <code>QPainter</code> 绘制的线结束帽</p>
+</li>
+<li>
+<p>joinStyle连接样式描述了如何绘制两条线之间的连接</p>
+</li>
+</ol>
+<blockquote>
+<p>注意，当改变画笔的属性时，画家的画笔必须重置 <code>setPen</code> 函数</p>
+</blockquote>
+<ul>
+<li>线条样式</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240105214805.webp" alt=""></p>
+<ul>
+<li>笔帽样式</li>
+</ul>
+<p>capStyle帽样式决定了可以使用QPainter绘制的线结束帽</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240105214747.webp" alt=""></p>
+<ul>
+<li>连接样式</li>
+</ul>
+<p>joinStyle连接样式描述了如何绘制两条线之间的连接</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240105214728.webp" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 【测试】
+#include &quot;AllHead.h&quot;
+
+class widget : public QWidget
+&#123;
+public:
+	widget(QWidget* parent &#x3D; nullptr)
+		: QWidget(parent)
+	&#123;
+
+	&#125;
+protected:
+	&#x2F;&#x2F;所有在Widget上面的绘制，必须放到paintEvent函数里面，paintevent在需要绘图时自动调用
+	void paintEvent(QPaintEvent*)
+	&#123;
+		penStyle();
+		&#x2F;&#x2F;capStyle();
+		&#x2F;&#x2F;joinSytle();
+	&#125;
+	void penStyle()
+	&#123;
+		QPainter painter(this);
+		&#x2F;&#x2F; 设置渲染提示，Antialiasing高质量渲染(反锯齿)
+		painter.setRenderHint(QPainter::RenderHint::Antialiasing);
+
+		for (int i &#x3D; 0; i &lt; 6; i++)
+		&#123;
+			painter.setPen(QPen(Qt::red, 5, Qt::PenStyle(i)));
+			painter.drawLine(i * 50, 0, i * 50 + 100, 200);
+		&#125;
+	&#125;
+	void capStyle()
+	&#123;
+		QPainter painter(this);
+		painter.setRenderHint(QPainter::RenderHint::Antialiasing);
+
+		painter.setPen(QPen(QBrush(Qt::red), 5, Qt::PenStyle::DotLine, Qt::PenCapStyle::FlatCap));
+		painter.drawLine(0, 0, 100, 200);
+
+		painter.setPen(QPen(QBrush(Qt::red), 5, Qt::PenStyle::DotLine, Qt::PenCapStyle::MPenCapStyle));
+		painter.drawLine(100, 0, 100 + 100, 200);
+
+		painter.setPen(QPen(QBrush(Qt::red), 5, Qt::PenStyle::DotLine, Qt::PenCapStyle::RoundCap));
+		painter.drawLine(200, 0, 100 + 200, 200);
+
+		painter.setPen(QPen(QBrush(Qt::red), 5, Qt::PenStyle::DotLine, Qt::PenCapStyle::SquareCap));
+		painter.drawLine(300, 0, 100 + 300, 200);
+	&#125;
+	void joinSytle()
+	&#123;
+		QPainter painter(this);
+		painter.setRenderHint(QPainter::RenderHint::Antialiasing);
+
+		int s[] &#x3D; &#123; Qt::MiterJoin, Qt::BevelJoin, Qt::RoundJoin , Qt::SvgMiterJoin, Qt::MPenJoinStyle &#125;;
+		for (int i &#x3D; 0; i &lt; 5; i++)
+		&#123;
+			painter.setPen(QPen(QBrush(Qt::red), 5, Qt::SolidLine, Qt::PenCapStyle::SquareCap, Qt::PenJoinStyle(s[i])));
+			QPoint points[] &#x3D; &#123; &#123;20 + i * 100,30&#125;,&#123;50 + i * 100,60&#125;,&#123;100 + i * 100,10&#125; &#125;;
+			painter.drawPolygon(points, 3);
+		&#125;
+	&#125;
+
+private:
+&#125;;
+
+
+&#x2F;&#x2F; 主函数
+int main(int argc, char* argv[])
+&#123;
+	QApplication a(argc, argv);	&#x2F;&#x2F; 创建应用程序类实例
+
+	widget w;
+	w.show();
+
+	return a.exec();	&#x2F;&#x2F; 运行应用程序的主事件循环，直到退出
+&#125;</code></pre>
+<h3 id="画刷（QBrush）">画刷（QBrush）</h3>
+<p>QBrush类提供了画刷来对图形进行填充，一个画刷使用它的颜色和风格(比如它的填充模式)来定义</p>
+<p>Brush有 <code>样式(style)、颜色(color)、渐变gradient、纹理(texture)</code></p>
+<p>style使用 <code>Qt::BrushStyle</code> 定义填充模式。 默认的笔刷样式是 <code>Qt::NoBrush</code></p>
+<p>color定义填充图形的颜色</p>
+<p><code>gradient()</code> 定义当前样式为 <code>Qt::LinearGradientPattern</code>,  <code>Qt::RadialGradientPattern</code> 或 <code>Qt::ConicalGradientPattern</code> 时使用的渐变填充。 当创建QBrush时，通过给QGradient作为构造函数参数来创建渐变笔刷。 Qt提供三个不同的梯度: <code>QLinearGradient, QConicalGradient，和QRadialGradient -所有继承QGradient</code></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">setBrush</code></pre>
+<ul>
+<li>填充样式</li>
+</ul>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20240105220306.webp" style="zoom:67%;" />
+<ul>
+<li>颜色填充</li>
+</ul>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20240105220515.webp" style="zoom:67%;" />
+<ul>
+<li>纹理填充</li>
+</ul>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20240105222059.webp" style="zoom:50%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20240105222143.webp" style="zoom:50%;" />
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 【测试】
+class widget : public QWidget
+&#123;
+public:
+	widget(QWidget* parent &#x3D; nullptr)
+		: QWidget(parent)
+	&#123;
+
+	&#125;
+protected:
+	&#x2F;&#x2F;所有在Widget上面的绘制，必须放到paintEvent函数里面，paintevent在需要绘图时自动调用
+	void paintEvent(QPaintEvent*)
+	&#123;
+		&#x2F;&#x2F;brushStyle();
+		&#x2F;&#x2F;brushStyle2();
+		brushStyle3();
+	&#125;
+	&#x2F;&#x2F; 样式填充
+	void brushStyle()
+	&#123;
+		QPainter painter(this);
+		painter.setBrush(Qt::red);	&#x2F;&#x2F; 设置画刷颜色
+
+		int w &#x3D; 150;
+		int h &#x3D; 150;
+		for (int r &#x3D; 0; r &lt; 3; r++)
+		&#123;
+			for (int c &#x3D; 0; c &lt; 5; c++)
+			&#123;
+				painter.setBrush(Qt::BrushStyle(r * 5 + c));
+				painter.drawRect(c * w, r * h, w, h);
+			&#125;
+		&#125;
+	&#125;
+	&#x2F;&#x2F; 颜色填充
+	void brushStyle2()
+	&#123;
+		QPainter painter(this);
+		painter.setBrush(Qt::red);
+
+		int w &#x3D; 150;
+		int h &#x3D; 150;
+		for (int r &#x3D; 0; r &lt; 3; r++)
+		&#123;
+			for (int c &#x3D; 0; c &lt; 5; c++)
+			&#123;
+				painter.setBrush(QBrush(QColor(58, 118, 198), Qt::BrushStyle(r * 5 + c)));
+				painter.drawRect(c * w, r * h, w, h);
+			&#125;
+		&#125;
+	&#125;
+	&#x2F;&#x2F; 纹理填充
+	void brushStyle3()
+	&#123;
+		QPainter painter(this);
+		painter.setBrush(Qt::red);
+		painter.setPen(Qt::PenStyle::NoPen);	&#x2F;&#x2F; 去掉画笔
+		painter.setBrush(QBrush(QPixmap(&quot;:&#x2F;images&#x2F;snowball.jpg&quot;)));
+		int w &#x3D; 150;
+		int h &#x3D; 150;
+		for (int r &#x3D; 0; r &lt; 3; r++)
+		&#123;
+			for (int c &#x3D; 0; c &lt; 5; c++)
+			&#123;
+				painter.drawRect(c * (w + 10), r * h, w, h);
+			&#125;
+		&#125;
+	&#125;
+
+private:
+&#125;;</code></pre>
+<ul>
+<li>渐变填充</li>
+</ul>
+<p>Qt目前支持三种类型的渐变填充:</p>
+<ol>
+<li>
+<p>**线性渐变(QLinearGradient)**在开始点和结束点之间插入颜色</p>
+</li>
+<li>
+<p>**径向渐变(QRadialGradient)**在围绕它的圆上的焦点和端点之间插入颜色</p>
+</li>
+<li>
+<p>**锥形渐变(QConicalGradient)**在中心点周围插值颜色</p>
+</li>
+</ol>
+<p>可以使用type()函数检索渐变的类型。 每一种类型都由QGradient的一个子类表示</p>
+<blockquote>
+<p>线性渐变(QLinearGradient)</p>
+<p>QLinearGradient 显示从起点到终点的渐变</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 【测试】
+class widget : public QWidget
+&#123;
+public:
+	widget(QWidget* parent &#x3D; nullptr)
+		: QWidget(parent)
+	&#123;
+
+	&#125;
+protected:
+	&#x2F;&#x2F;所有在Widget上面的绘制，必须放到paintEvent函数里面，paintevent在需要绘图时自动调用
+	void paintEvent(QPaintEvent*)
+	&#123;
+		linearGradient();
+	&#125;
+	&#x2F;&#x2F; 线性渐变
+	void linearGradient()
+	&#123;
+#if 0   &#x2F;&#x2F;效果1 --- 定义线性渐变(慢慢变红)
+		QLinearGradient lgra(0, 0, 100, 100);
+		lgra.setColorAt(0, Qt::blue);
+		lgra.setColorAt(1, Qt::red);
+
+		QPainter painter(this);
+		&#x2F;&#x2F;把渐变色设置给画刷
+		painter.setBrush(lgra); painter.setBrush(lgra);
+		&#x2F;&#x2F;绘制矩形，观察渐变区域之外的区域的填充
+		painter.drawRect(50, 50, 500, 500);
+		&#x2F;&#x2F;绘制圆形(这里一般和开始点和结束点的坐标对应)
+		painter.drawEllipse(0, 0, 100, 100);
+#endif
+
+#if 1   &#x2F;&#x2F; 效果2
+		int cx &#x3D; width() &#x2F; 2;
+		int cy &#x3D; height() &#x2F; 2;
+
+		QPainter painter(this);
+		QLinearGradient lgra(cx - 50, cy - 50, cx + 50, cy + 50);
+		lgra.setColorAt(0, Qt::blue);
+		lgra.setColorAt(0.5, Qt::yellow);
+		lgra.setColorAt(1, Qt::red);
+
+		painter.setBrush(lgra);
+
+#if 0
+		&#x2F;&#x2F;绘制矩形，观察渐变区域之外的区域的填充 
+		painter.drawRect(cx, cy, cx, cy);
+		painter.drawRect(0, 0, cx, cy);
+#else
+		painter.drawRect(rect());
+#endif
+		&#x2F;&#x2F;绘制圆形(这里一般和开始点和结束点的坐标对应)
+		painter.drawEllipse(cx - 50, cy - 50, 100, 100);
+#endif
+
+	&#125; 
+
+private:
+&#125;;</code></pre>
+</blockquote>
+<blockquote>
+<p>径向渐变(QRadialGradient)</p>
+</blockquote>
+<p>待学</p>
+<blockquote>
+<p>锥形渐变(QConicalGradient)</p>
+</blockquote>
+<p>待学</p>
+<h3 id="坐标变换">坐标变换</h3>
+<p><code>QTransform</code> 用于指定坐标系的  <code>2D 转换 - 平移、缩放、扭曲（剪切）、旋转或投影坐标系</code>。通常在渲染现图形时使用</p>
+<p>可以使用 <code>setMatrix()、scale()、rotate()、translate()</code> 和 <code>shear()</code> 函数来构建 <code>QTransform</code> 对象。或者，也可以通过应用基本的矩阵操作来构建它。矩阵也可以在构造时定义，并且可以使用 <code>reset()</code> 函数将其重置为单位矩阵(默认值)</p>
+<p><code>QPainter</code> 具有平移、缩放、剪切和旋转坐标系统的功能，无需使用 <code>QTransform</code></p>
+<ul>
+<li>平移</li>
+</ul>
+<p><code>translate(qreal dx, qreal dy)</code>：平移 - 对坐标系沿着 x 轴移动 dx、沿 y 轴移动 dy</p>
+<blockquote>
+<p>这里，将坐标原点由 (0, 0) 变为 (50, 50)</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">painter-&gt;translate(50, 50);
+painter-&gt;drawPixmap(0, 0, QPixmap(&quot;:&#x2F;images&#x2F;snowball.jpg&quot;));	&#x2F;&#x2F; 显示一张图片在&#123;0,0&#125;</code></pre>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20240105225904.webp" style="zoom:50%;" />
+</blockquote>
+<ul>
+<li>缩放</li>
+</ul>
+<p><code>scale(qreal sx, qreal sy)</code>：缩放 - 通过水平的 sx 和垂直的 sy 缩放坐标系</p>
+<p>使绘制的图像缩小到原来的1.3倍</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240106080653.webp" alt=""></p>
+<ul>
+<li>旋转</li>
+</ul>
+<p><code>rotate(qreal angle, Qt::Axis axis = Qt::ZAxis)</code>：旋转 - 对指定的轴用给定的角度逆时针旋转坐标系统</p>
+<ul>
+<li>错切</li>
+</ul>
+<p>图像错切变换也称为图像剪切、错位或错移变换。</p>
+<p><code>shear(qreal sh, qreal sv)</code>：错切 - 通过水平的 sh 和垂直的 sv 扭曲坐标系，前面的参数实现横向变形，后面的参数实现纵向变形。当它们的值为 0 时，表示不扭曲</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 【测试】
+class widget : public QWidget
+&#123;
+public:
+	widget(QWidget* parent &#x3D; nullptr)
+		: QWidget(parent)
+	&#123;
+		auto timer &#x3D; new QTimer(this);
+		timer-&gt;callOnTimeout([&#x3D;] &#123;
+			&#x2F;&#x2F; 如果需要更新绘图，不能手动调用paintEvent
+			&#x2F;&#x2F; 必须调用update函数来更新绘图
+			this-&gt;update();
+			&#125;);
+		timer-&gt;start(1000 &#x2F; 60);	&#x2F;&#x2F; 启动定时器
+	&#125;
+protected:
+	&#x2F;&#x2F;所有在Widget上面的绘制，必须放到paintEvent函数里面，paintevent在需要绘图时自动调用
+	void paintEvent(QPaintEvent*)
+	&#123;
+		QPainter painter(this);
+		&#x2F;&#x2F;transform(&amp;painter);
+		&#x2F;&#x2F;ZoomTest(&amp;painter);
+		&#x2F;&#x2F;rotateTest(&amp;painter);
+		wrong_cut_Test(&amp;painter);
+	&#125;
+	&#x2F;&#x2F; 平移
+	void transform(QPainter* painter)
+	&#123;
+		painter-&gt;translate(50, 50);
+		painter-&gt;drawPixmap(0, 0, QPixmap(&quot;:&#x2F;images&#x2F;snowball.jpg&quot;));	&#x2F;&#x2F; 显示一张图片在&#123;0,0&#125;
+	&#125;
+	&#x2F;&#x2F; 缩小
+	void ZoomTest(QPainter* painter)
+	&#123;
+		painter-&gt;setRenderHint(QPainter::RenderHint::Antialiasing);
+		&#x2F;&#x2F;平移
+		painter-&gt;translate(120, 50);
+		&#x2F;&#x2F;缩放
+		painter-&gt;scale(1.3, 1.3);
+
+		painter-&gt;drawPixmap(QPoint(0, 0), QPixmap(&quot;:&#x2F;images&#x2F;snowball.jpg&quot;).scaled(150, 150));
+	&#125;
+	&#x2F;&#x2F; 旋转
+	void rotateTest(QPainter* painter)
+	&#123;
+		&#x2F;&#x2F; 平移必须在其他变换之前被设置
+
+		painter-&gt;setRenderHint(QPainter::RenderHint::Antialiasing);	&#x2F;&#x2F; 开启抗锯齿效果
+		static double angle &#x3D; 0;
+		QTransform transform;	&#x2F;&#x2F; 创建了一个用于变换的 QTransform 对象
+		&#x2F;&#x2F;平移
+		transform.translate(width() &#x2F; 2, height() &#x2F; 2);
+		&#x2F;&#x2F;缩放
+		transform.scale(0.5, 0.5);
+
+#if 0	&#x2F;&#x2F; 旋转x度 --- 相当于围绕z轴
+		&#x2F;&#x2F; 旋转x度 旋转是以图片左上角的点绕的
+		transform.rotate(angle);	&#x2F;&#x2F; 旋转45度
+		angle++;
+#elif 0	&#x2F;&#x2F; 围绕x轴转
+		transform.rotate(angle++, Qt::Axis::XAxis);
+		painter-&gt;setTransform(transform);
+#elif 0	&#x2F;&#x2F; 围绕y轴转
+		transform.rotate(angle--, Qt::Axis::YAxis);
+		painter-&gt;setTransform(transform);
+#elif 0 &#x2F;&#x2F; 围绕z轴转
+		transform.rotate(angle++, Qt::Axis::ZAxis);
+		painter-&gt;setTransform(transform);
+#elif 1 &#x2F;&#x2F; 中心旋转1 --- 必须先平移再变换调换顺序的话可能有不同现象
+		transform.rotate(angle++, Qt::Axis::ZAxis);	&#x2F;&#x2F; 旋转
+		painter-&gt;setTransform(transform);
+		QPixmap pixmap &#x3D; QPixmap(&quot;:&#x2F;images&#x2F;snowball.jpg&quot;);
+		painter-&gt;drawPixmap(0 - pixmap.width() &#x2F; 2, 0 - pixmap.height() &#x2F; 2, pixmap);
+#endif
+	&#125;
+	void wrong_cut_Test(QPainter* painter)
+	&#123;
+		painter-&gt;setRenderHint(QPainter::RenderHint::Antialiasing);	&#x2F;&#x2F; 设置渲染提示，开启抗锯齿效果
+
+		QTransform transform;
+		&#x2F;&#x2F;平移
+		transform.translate(120, 50);		&#x2F;&#x2F; 平移变换，将坐标原点平移到 (120, 50)
+
+		transform.shear(0.5, 0);	&#x2F;&#x2F; 剪切变换，使得 x 坐标向 y 坐标方向倾斜
+
+		painter-&gt;setTransform(transform);	&#x2F;&#x2F; 应用变换矩阵到 painter 上
+
+		painter-&gt;drawPixmap(QPoint(0, 0), QPixmap(&quot;:&#x2F;images&#x2F;snowball.jpg&quot;).scaled(150, 150));	&#x2F;&#x2F; 绘制图像
+	&#125;
+private:
+&#125;;</code></pre>
+<h3 id="绘图函数">绘图函数</h3>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240106085159.webp" alt=""></p>
+<blockquote>
+<p>【QPixmap、QImage、QBitmap和QPicture的区别】</p>
+<p>Qt提供了四种处理图像数据的类: <code>QImage, QPixmap, QBitmap和QPicture</code></p>
+<p><strong>QImage</strong> 是为I/O和直接像素访问和操作而设计和优化的</p>
+<p><strong>QPixmap</strong> 是为在屏幕上显示图像而设计和优化的</p>
+<p><strong>QBitmap</strong> 只是一个继承了QPixmap的方便类，确保深度为1。 如果QPixmap对象是位图，则isQBitmap()函数返回true，否则返回false</p>
+<p><strong>QPicture</strong> 是一个记录和回放QPainter命令的绘图设备</p>
+</blockquote>
+<ul>
+<li>测试</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 【测试】
+#include &quot;AllHead.h&quot;
+
+class widget : public QWidget
+&#123;
+public:
+	QImage m_image;
+	widget(QWidget* parent &#x3D; nullptr)
+		: QWidget(parent)
+		, m_image(200, 200, QImage::Format_RGBA8888)
+	&#123;
+		QPainter painter(&amp;m_image);
+		painter.fillRect(m_image.rect(), QGradient::WinterNeva);	&#x2F;&#x2F; 渐变色
+	&#125;
+protected:
+	&#x2F;&#x2F;所有在Widget上面的绘制，必须放到paintEvent函数里面，paintevent在需要绘图时自动调用
+	void paintEvent(QPaintEvent*)
+	&#123;
+		QPainter painter(this);
+		&#x2F;&#x2F;pixmapTest(&amp;painter);
+		&#x2F;&#x2F;imageTest(&amp;painter);
+		pictureTest(&amp;painter);
+	&#125;
+	&#x2F;&#x2F; pixmap
+	void pixmapTest(QPainter * painter)
+	&#123;
+#if 0	&#x2F;&#x2F; 把图片绘制到矩形中
+		QPixmap pix(&quot;:&#x2F;images&#x2F;snowball.jpg&quot;);
+		painter-&gt;drawPixmap(QRect(0, 0, 50, 50), pix);
+#elif 1
+		QPixmap pix(&quot;:&#x2F;images&#x2F;snowball.jpg&quot;);
+		painter-&gt;drawPixmap(0, 50, pix, 0, 0, 100, 50);	&#x2F;&#x2F; 把图片的宽100高50部分印在坐标&#123;0, 50&#125; 中
+#endif
+	&#125;
+	&#x2F;&#x2F; image
+	void imageTest(QPainter* painter)
+	&#123;
+		painter-&gt;drawImage(0, 0, m_image);
+	&#125;
+	void pictureTest(QPainter* painter)
+	&#123;
+#if 0	&#x2F;&#x2F; 显示天空颜色矩形
+		painter-&gt;drawLine(0, 200, width(), height());
+		painter-&gt;fillRect(100, 400, 150, 35, QGradient::Preset::SkyGlider);
+#elif 0
+		QPicture pic;
+		&#123;
+			QPainter pt(&amp;pic);
+			pt.drawLine(0, 200, width(), height());
+			pt.fillRect(100, 400, 150, 35, QGradient::Preset::SkyGlider);
+		&#125;
+		&#x2F;&#x2F; 必须要把pt和pic取消关联才能保存，最简单方法就是加&#123;&#125;作用域
+		pic.save(&quot;txt.pic&quot;);	&#x2F;&#x2F; 保存到文件
+
+		&#x2F;&#x2F; 用的话直接读取即可
+		QPicture picc;
+		picc.load(&quot;txt.pic&quot;);
+		&#x2F;&#x2F;painter-&gt;drawPicture(0, 0, picc);
+		picc.play(painter);	&#x2F;&#x2F; 跟上面一样效果
+#elif 1
+		QImage img(250, 250, QImage::Format_RGBA8888);
+		&#123;
+			QPainter pt(&amp;img);
+			pt.drawLine(0, 0, width(), height());
+			pt.fillRect(100, 200, 150, 35, QGradient::Preset::SkyGlider);
+		&#125;
+		img.save(&quot;test.png&quot;);		&#x2F;&#x2F; 保存
+
+		&#x2F;&#x2F; 重新显示
+		painter-&gt;drawImage(0, 0, img);
+#endif
+	&#125;
+private:
+&#125;;
+
+
+&#x2F;&#x2F; 主函数
+int main(int argc, char* argv[])
+&#123;
+	QApplication a(argc, argv);	&#x2F;&#x2F; 创建应用程序类实例
+
+	widget w;
+	w.show();
+
+	return a.exec();	&#x2F;&#x2F; 运行应用程序的主事件循环，直到退出
+&#125;</code></pre>
+<h2 id="示例-QGame">示例-QGame</h2>
+<p>待写</p>
+<h2 id="布局">布局</h2>
+<h3 id="盒子布局">盒子布局</h3>
+<p>QBoxLayout可以在水平方向或垂直方向上排列控件，分别派生了 <code>QHBoxLayout</code>、 <code>QVBoxLayout</code> 子类</p>
+<ul>
+<li><code>QHBoxLayout</code>：水平布局，在水平方向上排列控件，即：左右排列</li>
+<li><code>QVBoxLayout</code>：垂直布局，在垂直方向上排列控件，即：上下排列</li>
+</ul>
+<p>水平布局、垂直布局除了构造时的方向（LeftToRight、TopToBottom）不同外，其它均相同</p>
+<blockquote>
+<p>公有函数</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">序号</th>
+<th>函数&amp;描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td><code>void addLayout(QLayout* layout,int stretch = 0)</code><br>将layout添加到框的末端，使用连续拉伸因子拉伸。</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td><code>void addSpacerItem(QSpacerItem * spacerItem)</code><br>将spaceeritem添加到该盒子布局的末尾，通常不使用这个函数，请使用addSpacing(int size)</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td><code>void addSpacing(int size)</code><br>添加一个大小为size的不可伸缩空间(QSpacerItem)到这个框布局的末尾</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td><code>void addStretch(int stretch = 0)</code><br>添加一个可伸缩空间(一个QSpacerItem)，最小尺寸为零，拉伸因子stretch到这个框布局的末尾。</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td><code>void addStrut(int size)</code><br>限制盒子的垂直尺寸最小为size</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td><code>void addWidget(QWidget* widget,int stretch = 0,Qt::Alignment alignment = 0)</code><br>将小部件添加到此框布局的末尾，并使用拉伸因子拉伸和对齐对齐。</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td><code>void setDirection(QBoxLayout::Direction direction)</code><br>设置此布局的方向为direction。</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td><code>void setSpacing(int spacing)</code><br>设置小部件之间的间距</td>
+</tr>
+<tr>
+<td style="text-align:center">9</td>
+<td><code>void setStretch(int index,int stretch)</code><br>给index位置的控件设置拉伸因子stretch</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td><code>bool setStretchFactor(QWidget* widget,int stretch)</code><br><code>bool setStretchFactor(QWidget* widget,int stretch)</code><br>设置小部件的拉伸因子，如果在布局中发现小部件(不包括子布局)，则返回true; 否则返回false</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>简单布局</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 【测试】
+class widget : public QWidget
+&#123;
+public:
+	QImage m_image;
+	widget(QWidget* parent &#x3D; nullptr)
+		: QWidget(parent)
+	&#123;
+		boxLayout();
+	&#125;
+	void boxLayout()
+	&#123;
+		&#x2F;&#x2F; 创建控件
+		auto tipLab &#x3D; new QLabel(&quot;用户名&quot;);
+		auto usernameEdit &#x3D; new QLineEdit;
+
+		&#x2F;&#x2F; 创建布局
+		auto hlayout &#x3D; new QHBoxLayout;
+
+		&#x2F;&#x2F; 把控件添加到布局里面(按顺序)
+		hlayout-&gt;addWidget(tipLab);
+		hlayout-&gt;addWidget(usernameEdit);
+
+		&#x2F;&#x2F; 把布局交给窗口(布局应用在谁上面)
+		setLayout(hlayout);
+	&#125;
+protected:
+private:
+&#125;;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240106111340.webp" alt=""></p>
+<blockquote>
+<p>布局嵌套</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 【测试】
+void boxLayout()
+&#123;
+    &#x2F;&#x2F;姓名
+    QLabel *nameLabel &#x3D; new QLabel(&quot;Name&quot;);	&#x2F;&#x2F; 创建标签控件，用于显示“姓名”
+    QLineEdit *nameEdit &#x3D; new QLineEdit;	&#x2F;&#x2F; 创建文本框控件，用于输入姓名
+
+    QBoxLayout *nameHlayout &#x3D; new QBoxLayout(QBoxLayout::Direction::LeftToRight);	&#x2F;&#x2F; 创建水平布局 其方向设置为从左到右
+    nameHlayout-&gt;addWidget(nameLabel);	&#x2F;&#x2F; 将“姓名”标签控件添加到水平布局中
+    nameHlayout-&gt;addWidget(nameEdit);	&#x2F;&#x2F; 将姓名文本框控件添加到水平布局中
+    &#x2F;&#x2F;电话
+    QLabel *phoneLabel &#x3D; new QLabel(&quot;Phone&quot;);
+    QLineEdit *phoneEdit &#x3D; new QLineEdit;
+
+    QBoxLayout *phoneHlayout &#x3D; new QBoxLayout(QBoxLayout::Direction::LeftToRight);	&#x2F;&#x2F; 创建水平布局 其方向设置为从左到右
+    phoneHlayout-&gt;addWidget(phoneLabel);
+    phoneHlayout-&gt;addWidget(phoneEdit);
+
+    &#x2F;&#x2F;布局嵌套
+    QBoxLayout *mainlayout &#x3D; new QBoxLayout(QBoxLayout::Direction::TopToBottom);	&#x2F;&#x2F; 创建垂直布局 其方向设置为从上到下
+    mainlayout-&gt;addLayout(nameHlayout);	&#x2F;&#x2F; 将姓名的水平布局添加到垂直布局中
+    mainlayout-&gt;addLayout(phoneHlayout);	&#x2F;&#x2F; 将电话号码的水平布局添加到垂直布局中
+    this-&gt;setLayout(mainlayout);	&#x2F;&#x2F; 设置窗口的主布局为垂直布局
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240106113317.webp" alt=""></p>
+<blockquote>
+<p>基本使用</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 【测试】
+void boxLayout2()
+&#123;
+    QPushButton *btn1 &#x3D; new QPushButton(&quot;One&quot;);
+    QPushButton *btn2 &#x3D; new QPushButton(&quot;Two&quot;);
+    QPushButton *btn3 &#x3D; new QPushButton(&quot;Three&quot;);
+    QPushButton *btn4 &#x3D; new QPushButton(&quot;Four&quot;);
+    QPushButton *btn5 &#x3D; new QPushButton(&quot;Five&quot;);
+
+    QHBoxLayout *hlayout &#x3D; new QHBoxLayout();	&#x2F;&#x2F; QHBoxLayout---水平布局
+    hlayout-&gt;addWidget(btn1);
+    hlayout-&gt;addWidget(btn2);
+    hlayout-&gt;addWidget(btn3);
+    hlayout-&gt;addWidget(btn4);
+    hlayout-&gt;addWidget(btn5);
+
+    this-&gt;setLayout(hlayout);	&#x2F;&#x2F; 水平布局设置为当前窗口的主布局，以实现水平排列的按钮布局效果
+&#125;</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240106113328.webp" alt=""></p>
+<blockquote>
+<p>设置边距</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 设置边距
+hlayout-&gt;setContentsMargins(0, 0, 0, 0);</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240106114512.webp" alt=""></p>
+<blockquote>
+<p>设置间距</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 设置间距
+hlayout-&gt;setSpacing(0);</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240106114801.webp" alt=""></p>
+<blockquote>
+<p>添加拉伸空间(QSpacerItem)</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">hlayout-&gt;addStretch();	&#x2F;&#x2F; 添加弹簧
+&#x2F;&#x2F; 可添加弹簧系数</code></pre>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20240106115154.webp" style="zoom:67%;" />
+<blockquote>
+<p>添加控件addWidget</p>
+</blockquote>
+<ol>
+<li>设置控件大小</li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">btn3-&gt;setFixedHeight(50);	&#x2F;&#x2F; 控件高度</code></pre>
+<h3 id="网格布局">网格布局</h3>
+<p>网格布局也叫格栅布局(多行多列)</p>
+<p><code>QGridLayout</code>占用它可用的空间(通过它的父布局或parentWidget())，将它分成行和列，并将它管理的每个小部件放入正确的单元格中</p>
+<p>列和行表现相同; 我们将讨论列，但行也有等价的函数</p>
+<p>每一列都有一个最小宽度和一个拉伸因子。 最小宽度是使用 <code>setColumnMinimumWidth()</code> 设置的最大宽度和该列中每个小部件的最小宽度。 拉伸因子使用 <code>setColumnStretch()</code> 设置，并确定列将获得的可用空间超过或超过必要的最小空间的多少</p>
+<blockquote>
+<p>公有函数</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">序号</th>
+<th>函数&amp;描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">2</td>
+<td><code>void addLayout(QLayout *layout, int row, int column, Qt::Alignment alignment = 0)</code><br><code>void addLayout(QLayout *layout, int row, int column, int rowSpan, int columnSpan, Qt::Alignment alignment = 0)</code><br>将layout放置在网格中的位置(row、column)。 左上角的位置是(0,0)。<br>跨越多行/多列。 该单元格将从跨rowSpan行和columnSpan列的行、列开始。</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td><code>void addWidget(QWidget *widget, int row, int column, Qt::Alignment alignment = 0)</code><br><code>void addWidget(QWidget *widget, int fromRow, int fromColumn, int rowSpan, int columnSpan, Qt::Alignment alignment = 0)</code><br>同上</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td><code>void setRowStretch(int row, int stretch)</code><br>将row的拉伸因子设置为stretch</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td><code>void setColumnStretch(int column, int stretch)</code><br>将column的拉伸因子设置为stretch</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td><code>void setRowMinimumHeight(int row, int minSize)</code><br>将行的最小宽度设置为minSize像素。</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td><code>void setColumnMinimumWidth(int column, int minSize)</code><br><span style="font-size:13px">将列的最小宽度设置为minSize像素。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>测试案例</p>
+</blockquote>
+<p>脑子需要有一个行列思想，大概分成下面这样</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240106142700.webp" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 【测试】
+	void gridLayout()
+	&#123;
+		&#x2F;&#x2F; 类型名称也可以使用auto
+		QLabel* imageLabel &#x3D; new QLabel; &#x2F;&#x2F; 创建一个 QLabel 对象用于显示图片
+		QLineEdit* userNamaeEdit &#x3D; new QLineEdit; &#x2F;&#x2F; 创建一个 QLineEdit 对象用于输入用户名
+		QLineEdit* passwdEdit &#x3D; new QLineEdit; &#x2F;&#x2F; 创建一个 QLineEdit 对象用于输入密码
+		QCheckBox* rememberCheckBox &#x3D; new QCheckBox; &#x2F;&#x2F; 创建一个 QCheckBox 对象用于记住密码
+		QCheckBox* autoLoginCheckBox &#x3D; new QCheckBox; &#x2F;&#x2F; 创建一个 QCheckBox 对象用于自动登录
+		QPushButton* registerBtn &#x3D; new QPushButton; &#x2F;&#x2F; 创建一个 QPushButton 对象用于注册账号按钮
+		QPushButton* forgetBtn &#x3D; new QPushButton; &#x2F;&#x2F; 创建一个 QPushButton 对象用于找回密码按钮
+		QPushButton* loginBtn &#x3D; new QPushButton; &#x2F;&#x2F; 创建一个 QPushButton 对象用于登录按钮
+
+		&#x2F;&#x2F; 设置图片
+		imageLabel-&gt;setFixedSize(90, 90); &#x2F;&#x2F; 设置图片标签的固定大小
+		imageLabel-&gt;setPixmap(QPixmap(&quot;:&#x2F;images&#x2F;snowball.jpg&quot;)); &#x2F;&#x2F; 设置图片标签的图片
+		imageLabel-&gt;setScaledContents(true); &#x2F;&#x2F; 设置图片自适应大小
+
+		&#x2F;&#x2F; 设置输入框
+		userNamaeEdit-&gt;setPlaceholderText(&quot;QQ号码&#x2F;手机&#x2F;邮箱&quot;); &#x2F;&#x2F; 设置用户名输入框的占位文本
+		passwdEdit-&gt;setPlaceholderText(&quot;密码&quot;); &#x2F;&#x2F; 设置密码输入框的占位文本
+
+		&#x2F;&#x2F; 设置复选框
+		rememberCheckBox-&gt;setText(&quot;记住密码&quot;); &#x2F;&#x2F; 设置记住密码复选框的文本
+		autoLoginCheckBox-&gt;setText(&quot;自动登录&quot;); &#x2F;&#x2F; 设置自动登录复选框的文本
+		&#x2F;&#x2F; 默认选中
+		rememberCheckBox-&gt;setChecked(true);
+
+
+
+		&#x2F;&#x2F; 设置按钮
+		registerBtn-&gt;setText(&quot;注册账号&quot;); &#x2F;&#x2F; 设置注册账号按钮的文本
+		forgetBtn-&gt;setText(&quot;找回密码&quot;); &#x2F;&#x2F; 设置找回密码按钮的文本
+		loginBtn-&gt;setText(&quot;登录&quot;); &#x2F;&#x2F; 设置登录按钮的文本
+
+		QGridLayout* layout &#x3D; new QGridLayout; &#x2F;&#x2F; 创建一个网格布局对象
+
+		&#x2F;&#x2F; 将控件添加到布局中
+		layout-&gt;addWidget(imageLabel, 0, 0, 3, 1); &#x2F;&#x2F; 放第0行第0列 图片标签占据第一列，并跨越三行
+		layout-&gt;addWidget(userNamaeEdit, 0, 1, 1, 2); &#x2F;&#x2F; 放第0行第1列 用户名输入框占据第二列，并跨越一行两列
+		layout-&gt;addWidget(registerBtn, 0, 3); &#x2F;&#x2F; 放第0行第3列 注册账号按钮占据第四列
+		layout-&gt;addWidget(passwdEdit, 1, 1, 1, 2); &#x2F;&#x2F; 放第1行第1列 密码输入框占据第二列，并跨越一行两列
+		layout-&gt;addWidget(forgetBtn, 1, 3); &#x2F;&#x2F; 放第1行第3列 找回密码按钮占据第四列
+		layout-&gt;addWidget(rememberCheckBox, 2, 1); &#x2F;&#x2F; 放第2行第1列 记住密码复选框占据第二列
+		layout-&gt;addWidget(autoLoginCheckBox, 2, 2); &#x2F;&#x2F; 放第2行第2列 自动登录复选框占据第三列
+		layout-&gt;addWidget(loginBtn, 3, 1, 1, 2); &#x2F;&#x2F; 放第3行第1列 登录按钮占据第二列，并跨越一行两列
+
+		layout-&gt;setHorizontalSpacing(10); &#x2F;&#x2F; 设置水平间距为10
+		layout-&gt;setVerticalSpacing(10); &#x2F;&#x2F; 设置垂直间距为10
+		layout-&gt;setContentsMargins(20, 20, 20, 20); &#x2F;&#x2F; 设置布局的边距
+
+		this-&gt;setLayout(layout); &#x2F;&#x2F; 将布局设置给当前窗口
+	&#125;</code></pre>
+<h3 id="表单布局">表单布局</h3>
+<p><code>QFormLayout</code> 类管理输入小部件的表单及其关联的标签</p>
+<p><code>QFormLayout</code> 是一个方便的布局类，它以两列形式布置其子项。 左列由标签组成，右列由“字段”小部件（行编辑器、旋转框等）组成。 传统上，这种两列表单布局是使用 QGridLayout 实现的。</p>
+<p><code>QFormLayout</code> 是一种更高级别的替代方案，具有以下优点：</p>
+<ul>
+<li>
+<p><strong>遵守不同平台的外观和感觉准则</strong><br>
+例如，macOS Aqua 和 KDE 指南指定标签应该右对齐，而 Windows 和 GNOME 应用程序通常使用左对齐。</p>
+</li>
+<li>
+<p><strong>支持长行换行</strong></p>
+<p>对于显示较小的设备，QFormLayout可以设置为对长行进行换行，甚至对所有行进行换行。</p>
+</li>
+<li>
+<p><strong>创建标签-字段对，有非常方便的API</strong><br>
+我们可以通过addRow(const QString &amp;labelText, QWidget *field)来创建一个带有给定文本的QLabel及QWidget控件行，它们可以自动的设置为伙伴关系。</p>
+</li>
+</ul>
+<blockquote>
+<p>公有函数</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">序号</th>
+<th>函数&amp;描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td><code>void addRow(QWidget* label,QWidget* field)</code><br> <code>void addRow(QWidget* label,QLayout* field)</code><br>使用给定的label和field在此表单布局的底部添加新行</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td><code>void addRow(const QString &amp;labelText, QWidget* field)</code><br> <code>void addRow(const QString &amp;labelText, QLayout* field)</code><br>这个重载会在后台自动创建一个以labelText作为文本的QLabel。 field被设置为新的QLabel的伙伴</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td><code>void addRow(QWidget *widget)</code><br> <code>void addRow(QLayout* layout)</code><br>在表单布局的末尾添加指定的小部件。 这个小部件横跨两列</td>
+</tr>
+<tr>
+<td style="text-align:center">9</td>
+<td><code>void setRowWrapPolicy(QFormLayout::RowWrapPolicy policy)</code><br>设置行换行策略</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td><code>void setSpacing(int spacing)</code><br>将垂直和水平间距设置为spacing。</td>
+</tr>
+<tr>
+<td style="text-align:center">11</td>
+<td><code>void setVerticalSpacing(int spacing)</code><br>将垂直间距设置为spacing</td>
+</tr>
+<tr>
+<td style="text-align:center">12</td>
+<td><code>void setWidget(int row, QFormLayout::ItemRole role, QWidget *widget)</code><br>将给定的row中的role设置为widget，必要时使用空行扩展布局。  如果单元格已被占用，则不插入小部件，并将错误消息发送到控制台。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>测试</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 测试
+void formLayout()
+&#123;
+    QLineEdit *userEdit &#x3D; new QLineEdit;
+    QLineEdit *passwdEdit &#x3D; new QLineEdit;
+    QPushButton *loginBtn &#x3D; new QPushButton(&quot;确定&quot;);
+
+    QFormLayout *fromLayout &#x3D; new QFormLayout;
+    fromLayout-&gt;addRow(&quot;userName:&quot;, userEdit);
+    fromLayout-&gt;addRow(&quot;password:&quot;, passwdEdit);
+    fromLayout-&gt;addWidget(loginBtn);
+
+    this-&gt;setLayout(fromLayout);
+&#125;</code></pre>
+<blockquote>
+<p>换行策略</p>
+</blockquote>
+<p>使用函数 <code>void setRowWrapPolicy(QFormLayout::RowWrapPolicy policy)</code></p>
+<table>
+<thead>
+<tr>
+<th>枚举</th>
+<th>描述</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QFormLayout::DontWrapRows</td>
+<td>字段总是放在它们的标签旁边(默认样式)</td>
+<td></td>
+</tr>
+<tr>
+<td>QFormLayout::WrapLongRows</td>
+<td>标签有足够的空间适应，如果字段对的最小大小大于可用空间，输入框会被换到下一行</td>
+<td></td>
+</tr>
+<tr>
+<td>QFormLayout::WrapAllRows</td>
+<td>字段总是在它们的标签下面。</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 【测试】
+void formLayout()
+&#123;
+	QLineEdit* userEdit &#x3D; new QLineEdit;
+	QLineEdit* passwdEdit &#x3D; new QLineEdit;
+	QPushButton* loginBtn &#x3D; new QPushButton(&quot;确定&quot;);
+
+	QFormLayout* fromLayout &#x3D; new QFormLayout;
+
+	&#x2F;&#x2F;fromLayout-&gt;setRowWrapPolicy(QFormLayout::RowWrapPolicy::DontWrapRows);	&#x2F;&#x2F; 设置字段总是放在它们的标签旁边
+	&#x2F;&#x2F;fromLayout-&gt;setRowWrapPolicy(QFormLayout::RowWrapPolicy::WrapLongRows);	&#x2F;&#x2F; 字段对的最小大小大于可用空间，输入框会被换到下一行
+	fromLayout-&gt;setRowWrapPolicy(QFormLayout::RowWrapPolicy::WrapAllRows);	&#x2F;&#x2F; 总是换行
+	fromLayout-&gt;addRow(&quot;userName:&quot;, userEdit);
+	fromLayout-&gt;addRow(&quot;password:&quot;, passwdEdit);
+	fromLayout-&gt;addWidget(loginBtn);
+
+	this-&gt;setLayout(fromLayout);
+&#125;</code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 【测试】
+void formLayout()
+&#123;
+    QLineEdit *userEdit &#x3D; new QLineEdit;
+    QLineEdit *passwdEdit &#x3D; new QLineEdit;
+    QPushButton *loginBtn &#x3D; new QPushButton(&quot;确定&quot;);
+
+    &#x2F;&#x2F; 下拉框
+    auto provinceCmb &#x3D; new QComboBox;
+    for (size_t i &#x3D; 0; i &lt; 20; i++)
+    &#123;
+        provinceCmb-&gt;addItem(&quot;中国&quot; + QString::number(i), i);	&#x2F;&#x2F; 相当于把对应城市绑定了一个数值i
+    &#125;
+
+    connect(provinceCmb, &amp;QComboBox::currentTextChanged, [ &#x3D; ](const QString &amp; text)
+    &#123;
+        qDebug() &lt;&lt; text &lt;&lt; provinceCmb-&gt;currentData().toInt();	&#x2F;&#x2F; 获取城市名称和对应绑定的键值
+    &#125;);
+
+
+
+    QFormLayout *fromLayout &#x3D; new QFormLayout;
+
+    &#x2F;&#x2F;fromLayout-&gt;setRowWrapPolicy(QFormLayout::RowWrapPolicy::DontWrapRows);	&#x2F;&#x2F; 设置字段总是放在它们的标签旁边
+    &#x2F;&#x2F;fromLayout-&gt;setRowWrapPolicy(QFormLayout::RowWrapPolicy::WrapLongRows);	&#x2F;&#x2F; 字段对的最小大小大于可用空间，输入框会被换到下一行
+    fromLayout-&gt;setRowWrapPolicy(QFormLayout::RowWrapPolicy::WrapAllRows);	&#x2F;&#x2F; 总是换行
+    &#x2F;&#x2F; &lt;font color &#x3D; red size &#x3D; 3&gt;&lt;&#x2F;font&gt;  设置文本样式
+    fromLayout-&gt;addRow(&quot;&lt;font color &#x3D; red size &#x3D; 5&gt;*&lt;&#x2F;font&gt;userName:&quot;, userEdit);
+
+    &#x2F;&#x2F; 添加部件
+    fromLayout-&gt;addWidget(new QLabel(&quot;中文 英文 特殊字符&quot;));
+
+    &#x2F;&#x2F; 下拉框
+    fromLayout-&gt;addRow(&quot;住址&quot;, provinceCmb);
+
+    fromLayout-&gt;addRow(&quot;&lt;font color &#x3D; red&gt;*&lt;&#x2F;font&gt;password:&quot;, passwdEdit);
+    fromLayout-&gt;addWidget(loginBtn);
+
+    this-&gt;setLayout(fromLayout);
+&#125;</code></pre>
+<h3 id="堆栈布局">堆栈布局</h3>
+<p><code>QStackedLayout</code> 继承自 <code>QLayout</code></p>
+<p><code>QStackedLayout</code> 类提供了多页面切换的布局，一次只能看到一个界面。</p>
+<p><code>QStackedLayout</code> 可用于创建类似于 <code>QTabWidget</code> 提供的用户界面。也有建立在 <code>QStackedLayout</code> 之上的便利类QStackedWidget</p>
+<h3 id="分割器">分割器</h3>
+<p>QSplitter类实现了一个分离小部件。 splitter允许用户通过拖动子部件之间的边界来控制它们的大小。 任何数量的小部件都可以由单个拆分器控制。QSplitter的典型用法是创建几个小部件并使用 insertWidget()或addWidget()添加它们</p>
+<p>待写</p>
+<h3 id="示例-登陆窗口">示例-登陆窗口</h3>
+<h2 id="QMainWindow">QMainWindow</h2>
+<p>默认结构最复杂的标准窗口</p>
+<ul>
+<li>提供了<code>菜单栏</code>, <code>工具栏</code>, <code>状态栏</code>, <code>停靠窗口</code></li>
+<li>菜单栏: 只能有一个, 创建的最上方</li>
+<li>工具栏: 可以有多个, 默认提供了一个, 窗口的上下左右都可以停靠</li>
+<li>状态栏: 只能有一个, 窗口最下方</li>
+<li>停靠窗口: 可以有多个, 默认没有提供, 窗口的上下左右都可以停靠</li>
+</ul>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20240106155109.webp" style="zoom:67%;" />
+<h3 id="菜单栏">菜单栏</h3>
+<ul>
+<li>创建MenuBar</li>
+</ul>
+<h2 id="Ui界面Qt-Designer">Ui界面Qt Designer</h2>
+<blockquote>
+<p>菜单栏添加项的话如果需要输入中文只能粘贴，直接打中文是不行的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240106165546.webp" alt=""></p>
+</blockquote>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20240106170428.webp" style="zoom:67%;" />
+<h3 id="转到槽">转到槽</h3>
+<p>递归搜索给定对象的所有子对象，并将来自它们的匹配信号连接到遵循以下形式的对象槽：</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">void on_&lt;object name&gt;_&lt;signal name&gt;(&lt;signal parameters&gt;);</code></pre>
+<p>让我们假设我们的对象有一个 QPushButton 类型的子对象，对象名为 button1。 捕捉按钮的 clicked() 信号的插槽是：</p>
+   <pre class="line-numbers language-css" data-language="css"><code class="language-css">void on_button1_clicked();</code></pre>
+<p>如果对象本身具有正确设置的对象名称，则其自身的信号也连接到其各自的插槽</p>
+<h3 id="关联ui界面中对象的信号">关联ui界面中对象的信号</h3>
+<blockquote>
+<p>控件需要设置最小和最大值，不然可能没效果会恢复原样</p>
+<p>右键控件可以选择跳转槽，然后会生成槽函数</p>
+</blockquote>
+<blockquote>
+<p>Ui界面里面的对象可以通过 <code>ui</code> 指针去访问</p>
+</blockquote>
+<h3 id="注意点">注意点</h3>
+<blockquote>
+<p>拉了一个控件过去后如果想复制多个，可以按住 <code>Ctrl</code> 键然后拖即可</p>
+</blockquote>
+<blockquote>
+<p>做界面布局整体思路：</p>
+<p>（1）画界面时，先不要考虑任何布局，直接先把控件拖拉到相应的位置</p>
+<p>（2）先从最内层开始布局。也就是说从内到外，从小到大的顺序开始布局</p>
+<p>（3）内部的、小的控件布局完成后，再把这些布局作为控件考虑，完成外面的布局</p>
+<p>（4）最后调整layout的参数，和控件的大小、位置</p>
+</blockquote>
+<h3 id="自定义控件">自定义控件</h3>
+<p>自定义控件又有两种方法</p>
+<ol>
+<li>提升法</li>
+<li>插件法</li>
+</ol>
+<blockquote>
+<p>提升法 — 1</p>
+</blockquote>
+<ol>
+<li>新建界面类</li>
+</ol>
+<ul>
+<li>先创建一个带界面文件的项目，然后右击项目名称，【添加新文件…】</li>
+<li>选择 【Qt】-&gt;【Qt设计师界面类】</li>
+<li>界面模板选择【Widget】，并修改好类名为 <code>Scheckbox</code>，点击下一步，直至完成</li>
+<li>将创建的界面类的文件添加到【CMakeLists.txt】中，并保存</li>
+<li>这边我要自定义的是一个开关控件，所以选择了在ui界面上添加了一个label，修改控件名称并调整合适大小</li>
+</ul>
+<ol start="2">
+<li>初始化界面样式</li>
+</ol>
+<ul>
+<li>
+<p>将下面两种图片添加到，资源文件中(资源文件要添加到CMakeLists.txt文件中)</p>
+</li>
+<li>
+<p>回到 <code>scheckbox.ui</code> 文件，选中【lable】，找到属性中的【styleSheet】，添加资源，选择【image】，点击【OK】</p>
+</li>
+<li>
+<p>这里将label的文本置空，同时修改控件的objectName，可以调整一下大小</p>
+</li>
+</ul>
+<ol start="3">
+<li>主界面进行提升</li>
+</ol>
+<ul>
+<li>回到widget.ui，界面中添加一个widget控件，修改名称后选中控件，右键提升为…</li>
+<li>新建提升的类，这里输入前面添加的ui界面设计师类名，点击添加</li>
+<li>勾选中刚刚添加的ImageSwitch类，选择提升</li>
+<li>编译运行（可能会出现头文件包含错误，解决方法见附录）</li>
+</ul>
+<p><code>注意</code>：没有UI界面文件的类也可以提升</p>
+<blockquote>
+<p>提升法 — 2</p>
+</blockquote>
+<ol>
+<li>只需要创建自定义控件的 .cpp  和 .h</li>
+<li>在工程ui里面进行添加一个控件(这个看你自定义控件类继承于哪个，一般是继承于QWidget，那就拖一个【widget】进来)</li>
+<li>然后右键提升，这里输入前面添加的自定义控件的类名，点击添加(可以不需要全局，全局区别是 <code>&quot; &quot;</code>  和 <code>&lt;&gt;</code>)，名字也可以改一下，这个控件是透明的，相当于占位，可以拉大拉小来调整大小</li>
+<li>然后出现头文件报错的话看附录解决方法</li>
+</ol>
+<p>【程序示例】</p>
+<p>需要去ui界面添加对应的控件，这里直接拖12个widget改名称即可</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20240108115818.webp" style="zoom:67%;" />
+<details ><summary> widget.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef WIDGET_H
+#define WIDGET_H
+
+#include &lt;QWidget&gt;
+
+QT_BEGIN_NAMESPACE
+namespace Ui
+&#123;
+    class Widget;
+&#125;
+QT_END_NAMESPACE
+
+class Widget : public QWidget
+&#123;
+    Q_OBJECT
+
+public:
+    Widget(QWidget *parent &#x3D; nullptr);
+    ~Widget();
+
+private slots:
+    void initForm();
+    void initBtn1();
+    void initBtn2();
+    void initBtn3();
+
+private:
+    Ui::Widget *ui;
+&#125;;
+#endif &#x2F;&#x2F; WIDGET_H
+</code></pre>
+              </div>
+            </details>
+<details ><summary> widget.cpp </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;widget.h&quot;
+#include &quot;.&#x2F;ui_widget.h&quot;
+
+#define color1 QColor(34, 163, 169)
+#define color2 QColor(162, 121, 197)
+#define color3 QColor(255, 107, 107)
+#define color4 QColor(72, 103, 149)
+
+Widget::Widget(QWidget *parent)
+    : QWidget(parent)
+    , ui(new Ui::Widget)
+&#123;
+    ui-&gt;setupUi(this);
+    this-&gt;initForm();
+&#125;
+
+Widget::~Widget()
+&#123;
+    delete ui;
+&#125;
+
+void Widget::initForm()
+&#123;
+    this-&gt;initBtn1();
+    this-&gt;initBtn2();
+    this-&gt;initBtn3();
+&#125;
+
+void Widget::initBtn1()
+&#123;
+    ui-&gt;switchButton11-&gt;setBgColorOn(color1);
+    ui-&gt;switchButton12-&gt;setBgColorOn(color2);
+    ui-&gt;switchButton13-&gt;setBgColorOn(color3);
+    ui-&gt;switchButton14-&gt;setBgColorOn(color4);
+
+    ui-&gt;switchButton11-&gt;setShowText(false);
+    ui-&gt;switchButton12-&gt;setShowText(false);
+    ui-&gt;switchButton13-&gt;setShowText(true);
+    ui-&gt;switchButton14-&gt;setShowText(true);
+    ui-&gt;switchButton12-&gt;setShowCircle(true);
+    ui-&gt;switchButton14-&gt;setAnimation(true);
+    ui-&gt;switchButton12-&gt;setChecked(true);
+    ui-&gt;switchButton14-&gt;setChecked(true);
+
+    ui-&gt;switchButton13-&gt;setTextOff(&quot;停止&quot;);
+    ui-&gt;switchButton13-&gt;setTextOn(&quot;启动&quot;);
+    ui-&gt;switchButton14-&gt;setTextOff(&quot;禁用&quot;);
+    ui-&gt;switchButton14-&gt;setTextOn(&quot;启用&quot;);
+&#125;
+
+void Widget::initBtn2()
+&#123;
+    ui-&gt;switchButton21-&gt;setButtonStyle(SwitchButton::ButtonStyle_Rect);
+    ui-&gt;switchButton22-&gt;setButtonStyle(SwitchButton::ButtonStyle_Rect);
+    ui-&gt;switchButton23-&gt;setButtonStyle(SwitchButton::ButtonStyle_Rect);
+    ui-&gt;switchButton24-&gt;setButtonStyle(SwitchButton::ButtonStyle_Rect);
+
+    ui-&gt;switchButton21-&gt;setBgColorOn(color1);
+    ui-&gt;switchButton22-&gt;setBgColorOn(color2);
+    ui-&gt;switchButton23-&gt;setBgColorOn(color3);
+    ui-&gt;switchButton24-&gt;setBgColorOn(color4);
+
+    ui-&gt;switchButton21-&gt;setShowText(false);
+    ui-&gt;switchButton22-&gt;setShowText(false);
+    ui-&gt;switchButton23-&gt;setShowText(true);
+    ui-&gt;switchButton24-&gt;setShowText(true);
+    ui-&gt;switchButton22-&gt;setShowCircle(true);
+    ui-&gt;switchButton24-&gt;setAnimation(true);
+    ui-&gt;switchButton22-&gt;setChecked(true);
+    ui-&gt;switchButton24-&gt;setChecked(true);
+
+    ui-&gt;switchButton23-&gt;setTextOff(&quot;停止&quot;);
+    ui-&gt;switchButton23-&gt;setTextOn(&quot;启动&quot;);
+    ui-&gt;switchButton24-&gt;setTextOff(&quot;禁用&quot;);
+    ui-&gt;switchButton24-&gt;setTextOn(&quot;启用&quot;);
+&#125;
+
+void Widget::initBtn3()
+&#123;
+    ui-&gt;switchButton31-&gt;setButtonStyle(SwitchButton::ButtonStyle_CircleOut);
+    ui-&gt;switchButton32-&gt;setButtonStyle(SwitchButton::ButtonStyle_CircleOut);
+    ui-&gt;switchButton33-&gt;setButtonStyle(SwitchButton::ButtonStyle_CircleOut);
+    ui-&gt;switchButton34-&gt;setButtonStyle(SwitchButton::ButtonStyle_CircleOut);
+
+    int space &#x3D; 8;
+    ui-&gt;switchButton31-&gt;setSpace(space);
+    ui-&gt;switchButton32-&gt;setSpace(space);
+    ui-&gt;switchButton33-&gt;setSpace(space);
+    ui-&gt;switchButton34-&gt;setSpace(space);
+
+    int radius &#x3D; 8;
+    ui-&gt;switchButton31-&gt;setRectRadius(radius);
+    ui-&gt;switchButton32-&gt;setRectRadius(radius);
+    ui-&gt;switchButton33-&gt;setRectRadius(radius);
+    ui-&gt;switchButton34-&gt;setRectRadius(radius);
+
+    ui-&gt;switchButton31-&gt;setBgColorOn(color1);
+    ui-&gt;switchButton32-&gt;setBgColorOn(color2);
+    ui-&gt;switchButton33-&gt;setBgColorOn(color3);
+    ui-&gt;switchButton34-&gt;setBgColorOn(color4);
+
+    ui-&gt;switchButton31-&gt;setSliderColorOn(color1);
+    ui-&gt;switchButton32-&gt;setSliderColorOn(color2);
+    ui-&gt;switchButton33-&gt;setSliderColorOn(color3);
+    ui-&gt;switchButton34-&gt;setSliderColorOn(color4);
+
+    ui-&gt;switchButton31-&gt;setShowText(false);
+    ui-&gt;switchButton32-&gt;setShowText(false);
+    ui-&gt;switchButton33-&gt;setShowText(true);
+    ui-&gt;switchButton34-&gt;setShowText(true);
+    ui-&gt;switchButton34-&gt;setAnimation(true);
+    ui-&gt;switchButton32-&gt;setChecked(true);
+    ui-&gt;switchButton34-&gt;setChecked(true);
+&#125;</code></pre>
+              </div>
+            </details>
+<h3 id="用Ui文件生成头文件">用Ui文件生成头文件</h3>
+<p>有时候只有一个 ui文件，那怎么用呢？</p>
+<ol>
+<li>打开终端，并切换工作目录到.ui文件所在的目录</li>
+<li>输入下面命令(xxx表示你的ui名称)，输入完就会生成.h了</li>
+</ol>
+<p>里面的类名也可以修改，不过文件名也要对应（反正搜索一下几处地方有这个就全部替换）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240108125927.webp" alt=""></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">uic xxx.ui -o ui_xxx.h</code></pre>
+<ol start="3">
+<li>如何使用头文件？</li>
+</ol>
+<p>只要能设法调用Ui_xxx类的setupUi函数就行了</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*widget.h*&#x2F;
+
+&#x2F;&#x2F; 1. 前置声明
+namespace Ui 
+&#123;
+    class widget;
+&#125;
+
+&#x2F;&#x2F; 2. 类中定义
+private:
+    Ui::widget* ui;
+
+
+&#x2F;*widget.cpp*&#x2F;
+
+&#x2F;&#x2F;  3. 申请内存，设置ui
+Widget::Widget(QWidget *parent)
+    : QWidget(parent)
+    ,ui(new Ui::widget)	&#x2F;&#x2F;给ui指针分配内存
+&#123;
+        ui-&gt;setupUi(this);	&#x2F;&#x2F;给当前窗口this，设置ui界面
+&#125;</code></pre>
+<h2 id="QSS样式表">QSS样式表</h2>
+<blockquote>
+<p>翻看Qt官方文档，所有控件都有案例：在索引栏输入<code>Qt Style Sheets</code></p>
+</blockquote>
+<h3 id="盒子模型">盒子模型</h3>
+<p>盒子模型是qss技术所使用的一种思维模型。盒子模型是指将界面设计页面中的内容元素看作一个个装了东西的矩形盒子。每个矩形盒子包括： <code>内容(content)、内边距(padding)、边框(border)、外边距(margin)</code></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20240108151807.webp" style="zoom:67%;" />
+<ul>
+<li><strong>内容(Content)</strong>
+<ul>
+<li>内容区是盒子模型的中心，它呈现了盒子的主要信息内容，这些内容可以是文本、图片等多种类型</li>
+</ul>
+</li>
+<li><strong>内边距/填充(Padding)</strong>
+<ul>
+<li><strong>内边距</strong>是<strong>内容区</strong>和<strong>边框</strong>之间的空间。填充的属性有五种 ，即 <code>padding -top、padding -bottom、padding -left、padding-right</code> 以及综合了以上四种方向的快捷填充属性 <code>padding</code>。使用这五种属性可以指定内容区信息内容与各方向边框间的距离</li>
+</ul>
+</li>
+<li><strong>边框(Border)</strong>
+<ul>
+<li>边框是环绕内容区和填充的边界。边框的属性有 <code>border-style、border-width和border-color</code> 以及综合了以上三类属性的快捷边框属性 <code>border</code>。</li>
+<li>border-style 属性是边框最重要的属性，如果没有指定边框样式，其他的边框属性都会被忽略，边框将不存在。qss规定了dotted（点线）、dashed（虚线）、solid(实线)等十一种边框样式</li>
+<li>使用border-width属性可以指定边框的宽度</li>
+<li>使用border-color属性可以为边框指定相应的颜色，其属性值可以是RGB值，也可以是CSS 规定的<a href="https://www.w3.org/TR/SVG11/types.html#ColorKeywords">颜色名</a></li>
+</ul>
+</li>
+<li><strong>外边距(Margin)</strong>
+<ul>
+<li>空白边位于盒子的最外围，是添加在边框外周围的空间。空白边使盒子之间不会紧凑地连接在一起，是CSS 布局的一个重要手段。空白边的属性有五种 ，即 <code>margin-top、margin-bottom、margin- left、margin-right</code> 以及综合了以上四种方向的快捷空白边属性 <code>margin</code>，其具体的设置和使用与填充属性类似。对于两个相邻的（水平或垂直方向 ）且设置有空白边值的盒子，他们邻近部分的空白边将不是二者空白边的相加，而是二者的并集。若二者邻近的空白边值大小不等，则取二者中较大的值。同时，CSS 容许给空白边属性指定负数值，当指定负空白边值时，整个盒子将向指定负值方向的相反方向移动，以此可以产生盒子的重叠效果。采用指定空白边正负值的方法可以移动网页中的元素</li>
+</ul>
+</li>
+</ul>
+<h3 id="选择器">选择器</h3>
+<p>QT样式表支持<a href="https://www.runoob.com/css/css-tutorial.html">CSS2</a>定义的所有选择器</p>
+<blockquote>
+<p>选择器类型</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">选择器</th>
+<th style="text-align:center">示例</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">通用选择器</td>
+<td style="text-align:center">*</td>
+<td style="text-align:center">匹配所有控件</td>
+</tr>
+<tr>
+<td style="text-align:center">类型选择器</td>
+<td style="text-align:center">QPushButton</td>
+<td style="text-align:center">匹配给定类型控件，包括子类</td>
+</tr>
+<tr>
+<td style="text-align:center">类选择器</td>
+<td style="text-align:center">.QPushButton</td>
+<td style="text-align:center">匹配给定类型控件，不包括子类</td>
+</tr>
+<tr>
+<td style="text-align:center">属性选择器</td>
+<td style="text-align:center">QPushButton[flat=“false”]</td>
+<td style="text-align:center">匹配给定类型控件中符合[属性]的控件</td>
+</tr>
+<tr>
+<td style="text-align:center">ID选择器</td>
+<td style="text-align:center">QPushButton#closeBtn</td>
+<td style="text-align:center">匹配给定类型，且对象名为closeBtn的控件</td>
+</tr>
+<tr>
+<td style="text-align:center">子孙对象选择器</td>
+<td style="text-align:center">QDialog QPushButton</td>
+<td style="text-align:center">匹配给定类型的子孙控件</td>
+</tr>
+<tr>
+<td style="text-align:center">子对象选择器</td>
+<td style="text-align:center">QDialog&gt;QPushButton</td>
+<td style="text-align:center">匹配给定类型的直接子控件</td>
+</tr>
+<tr>
+<td style="text-align:center">辅助(子控件)选择器</td>
+<td style="text-align:center">QComboBox::drop-down</td>
+<td style="text-align:center">复杂对象的子控件</td>
+</tr>
+<tr>
+<td style="text-align:center">伪状态选择器</td>
+<td style="text-align:center">QPushButton:hover</td>
+<td style="text-align:center">控件的特定状态下的样式</td>
+</tr>
+<tr>
+<td style="text-align:center">并集选择器</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>伪状态选择器</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>:disabled</td>
+<td>控件禁用</td>
+</tr>
+<tr>
+<td>:enabled</td>
+<td>控件启用</td>
+</tr>
+<tr>
+<td>:focus</td>
+<td>控件获取输入焦点</td>
+</tr>
+<tr>
+<td>:hover</td>
+<td>鼠标在空间上悬停</td>
+</tr>
+<tr>
+<td>:pressed</td>
+<td>鼠标按下</td>
+</tr>
+<tr>
+<td>:checked</td>
+<td>控件被选中</td>
+</tr>
+<tr>
+<td>:unchecked</td>
+<td>控件没有选中</td>
+</tr>
+<tr>
+<td>:indeterminate</td>
+<td>控件部分被选中</td>
+</tr>
+<tr>
+<td>:open</td>
+<td>控件</td>
+</tr>
+<tr>
+<td>:closed</td>
+<td>空间关闭</td>
+</tr>
+<tr>
+<td>:on</td>
+<td>控件可以切换，且处于on状态</td>
+</tr>
+<tr>
+<td>:off</td>
+<td>控件可以切换，且处于off状态</td>
+</tr>
+<tr>
+<td>!</td>
+<td>对以上状态的否定</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CSS方式">CSS方式</h3>
+<p>创建一个css文件，在里面进行编写样式代码，然后把这个文件放入QRC里，然后通过文件读取的方式读取即可</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include&lt;QFile&gt;
+
+&#x2F;&#x2F; 从文件加载，然后设置样式表
+QFile file(&quot;:&#x2F;QSS&#x2F;style.css&quot;);
+if (file.open(QIODevice::ReadOnly))
+&#123;
+    setStyleSheet(file.readAll());
+&#125;</code></pre>
+<h3 id="控件示例">控件示例</h3>
+<h4 id="QLable标签">QLable标签</h4>
+<ul>
+<li>设置字体样式</li>
+</ul>
+<p><strong>font-family</strong> 为设置字体类型，标准形式需要加双引号，不加也可能会生效，具体看系统是否支持，中英文都支持，但要保证字体编码支持，一般程序编码为&quot;utf-8&quot;时没问题。</p>
+<p><strong>font-size</strong> 为设置字体大小，单位一般使用 px 像素</p>
+<p><strong>font-style</strong> 为设置字体斜体样式，italic 为斜体， normal 为不斜体</p>
+<p><strong>font-weight</strong> 为设置字体加粗样式，bold 为加粗， normal 为不加粗</p>
+<p><strong>font</strong> 为同时设置字体 style weight size family 的样式，但是 style 和 weight 必须出现在开头，size 和 family 在后面，而且 size 必须在 family 之前，否则样式将不生效，font 中不能设置颜色，可以单独设置 style weight 和 size，不能单独设置 family</p>
+<p><strong>color</strong> 为设置字体颜色，可以使用十六进制数表示颜色，也可以使用某些特殊的字体颜色：red, green, blue 等，或者使用 rgb(r,g,b) 和 rgba(r,g,b,a) 来设置，其中 r、g、b、a 值为0~255，如果想不显示颜色可以设置值为透明 transparent</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void Widget::test_qss()
+&#123;
+	auto btn &#x3D; new QPushButton(&quot;啊啊啊，你好野&quot;, this);
+	auto lab &#x3D; new QLabel(&quot;hello,我是杨&quot;, this);
+	auto lab0 &#x3D; new QLabel(&quot;好的，你的&quot;, this);
+
+	&#x2F;&#x2F; 设置大小
+	lab-&gt;resize(100, 100);
+	&#x2F;&#x2F; 设置位置，大小
+	lab0-&gt;setGeometry(0, 250, 200, 150);
+#if 0
+	&#x2F;&#x2F;直接给label设置样式(太麻烦)
+	lab-&gt;setStyleSheet(&quot;font-family:&#39;楷体&#39;; font-size:26px; font-style:italic; font-weight:bold; color:rgb(27,115,27); background-color:#F5CC84;&quot;);
+	lab0-&gt;setStyleSheet(&quot;font-family:&#39;楷体&#39;; font-size:26px; font-style:italic; font-weight:bold; color:rgb(27,115,27); background-color:#F5CC84;&quot;);
+#elif 0
+	&#x2F;&#x2F; 给所有的控件设置样式
+	this-&gt;setStyleSheet(&quot;font-family: &#39;楷体&#39;; font-size: 11px;&quot;);
+	&#x2F;&#x2F; 单独给一个控件类型加样式  &quot;QLabel&#123;....&#125;&quot;
+	this-&gt;setStyleSheet(R&quot;(QLabel
+    &#123;
+        font-family: &#39;楷体&#39;;
+        font-size: 26px;
+        color:red;
+    &#125;)&quot;);
+#elif 1
+	&#x2F;&#x2F; 从文件加载，然后设置样式表
+	QFile file(&quot;:&#x2F;QSS&#x2F;style.css&quot;);
+	if (file.open(QIODevice::ReadOnly))
+	&#123;
+		setStyleSheet(file.readAll());
+	&#125;
+#endif
+&#125;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">QLable
+&#123;
+	    &#x2F;*---------------设置字体样式--------------------*&#x2F;
+    &#x2F;*分开设置*&#x2F;
+    &#x2F;*font-family: &quot;楷体&quot;;
+    font-size: 20px;
+    font-style: italic;
+    font-weight:bold ;
+    &#x2F;*快捷设置*&#x2F;
+    font: bold italic 18px &quot;微软雅黑&quot;;
+    color: cornflowerblue;    
+&#125;</code></pre>
+<ul>
+<li>文字位置</li>
+</ul>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">QLable
+&#123;
+    &#x2F;*---------------文字位置--------------------*&#x2F;
+    padding-left: 10px;
+    padding-top: 8px;
+    padding-right: 7px;
+    padding-bottom: 9px;
+&#125;</code></pre>
+<ul>
+<li>边框样式</li>
+</ul>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">QLable
+&#123;
+       &#x2F;*---------------边框样式--整体设置--------------------*&#x2F;
+   &#x2F;*分开设置*&#x2F;
+   &#x2F;*    border-style: solid;
+   border-width: 2px;
+   border-color: darkgoldenrod;*&#x2F;
+   &#x2F;*快捷设置*&#x2F;
+   &#x2F;*    border: 2px solid red;*&#x2F;
+   &#x2F;*---------------边框样式--单独设置某条边框的样式--------------------*&#x2F;
+   &#x2F;*    border-left: 2px solid red;
+   border-top: 2px solid black;
+   border-right: 2px solid blue;
+   border-bottom-color: transparent; 下边框透明，不显示*&#x2F;
+   &#x2F;*---------------边框样式--设置边框半径(圆角)--------------------*&#x2F;
+   &#x2F;*    border-left: 2px solid red;
+   border-top: 2px solid black;
+   border-right: 2px solid blue;
+   border-bottom: 2px solid yellow;
+   border-top-left-radius: 20px;
+   border-top-right-radius: 15px;
+   border-bottom-left-radius: 10px;
+   border-bottom-right-radius: 5px;*&#x2F;
+   &#x2F;*border-radius: 20px;*&#x2F;
+&#125;</code></pre>
+<ul>
+<li>背景样式</li>
+</ul>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">QLable
+&#123;
+    &#x2F;*---------------背景样式--------------------*&#x2F;
+	background-color: #2E3648;
+    background-image: url(&quot;.&#x2F;image.png&quot;);
+    background-repeat: no-repeat;
+    background-position: left center;
+    &#x2F;*background: url(&quot;.&#x2F;image.png&quot;) no-repeat left center #2E3648;*&#x2F;
+&#125;</code></pre>
+<h4 id="QPushButton按钮">QPushButton按钮</h4>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;widget.h&quot;
+#include &quot;ui_widget.h&quot;
+#include&lt;QLabel&gt;
+#include&lt;QPushbutton&gt;
+#include&lt;QFile&gt;
+
+Widget::Widget(QWidget* parent)
+	: QWidget(parent)
+	, ui(new Ui::Widget)
+&#123;
+	ui-&gt;setupUi(this);
+
+	test_qss();
+&#125;
+
+Widget::~Widget()
+&#123;
+	delete ui;
+&#125;
+
+void Widget::test_qss()
+&#123;
+	auto btn &#x3D; new QPushButton(&quot;你好呀&quot;, this);
+
+	btn-&gt;setObjectName(&quot;btn&quot;);	&#x2F;&#x2F; 设置对象名称
+
+	&#x2F;&#x2F; 从文件加载，然后设置样式表
+	QFile file(&quot;:&#x2F;QSS&#x2F;style.css&quot;);
+	if (file.open(QIODevice::ReadOnly))
+	&#123;
+		setStyleSheet(file.readAll());
+	&#125;
+	else
+	&#123;
+		qDebug() &lt;&lt; &quot;error&quot;;
+	&#125;
+&#125;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">QPushButton#btn &#123;
+    &#x2F;*1*&#x2F;
+    border: none; &#x2F;*去掉边框*&#x2F;
+    border-radius: 10px;
+    &#x2F;*1，添加图片*&#x2F;
+&#x2F;*    background-image: url(:&#x2F;images&#x2F;quit.png);*&#x2F;
+    background-repeat: none;
+    background-position: center;
+    &#x2F;*3，把图片作为边框，会自动铺满背景*&#x2F;
+&#x2F;*    border-image: url(:&#x2F;images&#x2F;quit.png);*&#x2F;
+&#125;
+&#x2F;*鼠标悬停*&#x2F;
+QPushButton:hover &#123;
+    background-color: rgba(102,205,227,255);
+&#125;
+
+&#x2F;*鼠标按下*&#x2F;
+QPushButton:pressed &#123;
+    background-color: rgb(255, 106, 0);
+&#125;</code></pre>
+<h4 id="QCheckBox复选框、QRadioButton单选按钮">QCheckBox复选框、QRadioButton单选按钮</h4>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;widget.h&quot;
+#include &quot;ui_widget.h&quot;
+#include&lt;QLabel&gt;
+#include&lt;QPushbutton&gt;
+#include&lt;QFile&gt;
+#include&lt;QCheckbox&gt;
+#include&lt;QRadiobutton&gt;
+
+Widget::Widget(QWidget* parent)
+	: QWidget(parent)
+	, ui(new Ui::Widget)
+&#123;
+	ui-&gt;setupUi(this);
+
+	test_qss();
+&#125;
+
+Widget::~Widget()
+&#123;
+	delete ui;
+&#125;
+
+void Widget::test_qss()
+&#123;
+	auto box &#x3D; new QCheckBox(&quot;选我&quot;, this);
+	auto button &#x3D; new QRadioButton(&quot;点我&quot;, this);
+
+	box-&gt;move(50, 50);
+
+	box-&gt;setObjectName(&quot;box&quot;);
+	button-&gt;setObjectName(&quot;button&quot;);
+
+	&#x2F;&#x2F; 从文件加载，然后设置样式表
+	QFile file(&quot;:&#x2F;QSS&#x2F;style.css&quot;);
+	if (file.open(QIODevice::ReadOnly))
+	&#123;
+		setStyleSheet(file.readAll());
+	&#125;
+	else
+	&#123;
+		qDebug() &lt;&lt; &quot;error&quot;;
+	&#125;
+&#125;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">QCheckBox#box &#123;
+    color: red;
+&#125;
+    &#x2F;*定义 QCheckBox 中复选框的样式*&#x2F;
+    QCheckBox#box::indicator &#123;
+        width: 20px;
+        height: 20px;
+        &#x2F;*填充那个复选框内*&#x2F;
+        border-image: url(:&#x2F;images&#x2F;zzz.jpg);
+    &#125;
+&#x2F;*定义复选框被选中时的样式*&#x2F;
+QCheckBox#boxQCheckBox#box::indicator:checked &#123;
+    &#x2F;*    border-image: url(:&#x2F;images&#x2F;checkbox-checked.png);*&#x2F;
+&#125;
+
+&#x2F;*当复选框未选中且鼠标悬停在上面时应用的样式*&#x2F;
+QCheckBox#box::indicator:unchecked:hover &#123;
+    &#x2F;*    border-image: url(:&#x2F;images&#x2F;checkbox-unchecked-hover.png);*&#x2F;
+&#125;
+
+&#x2F;*当复选框被选中且鼠标悬停在上面时应用的样式*&#x2F;
+QCheckBox#box::indicator:checked:hover &#123;
+    &#x2F;*    border-image: url(:&#x2F;images&#x2F;checkbox-checked-hover.png);*&#x2F;
+&#125;</code></pre>
+<h4 id="QGroupBox组合框">QGroupBox组合框</h4>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;widget.h&quot;
+#include &quot;ui_widget.h&quot;
+#include&lt;QLabel&gt;
+#include&lt;QPushbutton&gt;
+#include&lt;QFile&gt;
+#include&lt;QCheckbox&gt;
+#include&lt;QRadiobutton&gt;
+#include&lt;QGroupbox&gt;
+
+
+Widget::Widget(QWidget* parent)
+	: QWidget(parent)
+	, ui(new Ui::Widget)
+&#123;
+	ui-&gt;setupUi(this);
+
+	test_qss();
+&#125;
+
+Widget::~Widget()
+&#123;
+	delete ui;
+&#125;
+
+void Widget::test_qss()
+&#123;
+	auto gbox &#x3D; new QGroupBox(&quot;选我&quot;, this);
+
+	gbox-&gt;move(50, 50);
+
+	gbox-&gt;setObjectName(&quot;gbox&quot;);
+
+	&#x2F;&#x2F; 从文件加载，然后设置样式表
+	QFile file(&quot;:&#x2F;QSS&#x2F;style.css&quot;);
+	if (file.open(QIODevice::ReadOnly))
+	&#123;
+		setStyleSheet(file.readAll());
+	&#125;
+	else
+	&#123;
+		qDebug() &lt;&lt; &quot;error&quot;;
+	&#125;
+&#125;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;* 设置组合框的背景渐变色和边框样式 *&#x2F;
+QGroupBox#gbox &#123;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #E0E0E0, stop: 1 #EEEEEE); &#x2F;* 设置背景渐变色 *&#x2F;
+    border: 2px solid gray; &#x2F;* 设置边框样式 *&#x2F;
+    border-radius: 5px; &#x2F;* 设置边框圆角 *&#x2F;
+    margin-top: 10px; &#x2F;* 在顶部留出空间给标题 *&#x2F;
+&#125;
+
+    &#x2F;* 设置组合框标题的样式 *&#x2F;
+    QGroupBox#gbox::title &#123;
+        subcontrol-origin: margin;
+        subcontrol-position: top center; &#x2F;* 位于顶部中间位置 *&#x2F;
+        padding: 2px 3px;
+        color: white; &#x2F;* 设置标题文字颜色 *&#x2F;
+        margin-top: 2px;
+        background-color: gray; &#x2F;* 设置标题背景色 *&#x2F;
+        border-radius: 3px; &#x2F;* 设置标题背景圆角 *&#x2F;
+        spacing: 5px; &#x2F;* 设置标题内部控件之间的间距 *&#x2F;
+    &#125;
+
+    &#x2F;* 设置组合框指示器的样式 *&#x2F;
+    QGroupBox#gbox::indicator &#123;
+        width: 13px;
+        height: 13px;
+        border: 1px solid black; &#x2F;* 设置指示器边框样式 *&#x2F;
+        background: white; &#x2F;* 设置指示器背景色 *&#x2F;
+    &#125;
+
+        &#x2F;* 设置选中状态下组合框指示器的样式 *&#x2F;
+        QGroupBox#gbox::indicator:checked &#123;
+            background: yellow; &#x2F;* 设置选中状态下指示器的背景色 *&#x2F;
+        &#125;</code></pre>
+<h4 id="QComboBox下拉框">QComboBox下拉框</h4>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;widget.h&quot;
+#include &quot;ui_widget.h&quot;
+#include&lt;QLabel&gt;
+#include&lt;QPushbutton&gt;
+#include&lt;QFile&gt;
+#include&lt;QCheckbox&gt;
+#include&lt;QRadiobutton&gt;
+#include&lt;QGroupbox&gt;
+#include&lt;QComboBox&gt;
+
+
+Widget::Widget(QWidget* parent)
+	: QWidget(parent)
+	, ui(new Ui::Widget)
+&#123;
+	ui-&gt;setupUi(this);
+
+	test_qss();
+&#125;
+
+Widget::~Widget()
+&#123;
+	delete ui;
+&#125;
+
+void Widget::test_qss()
+&#123;
+	auto gbox &#x3D; new QComboBox(this);
+
+	gbox-&gt;move(50, 50);
+	gbox-&gt;setObjectName(&quot;gbox&quot;);
+	&#x2F;&#x2F; 添加选项
+	gbox-&gt;addItem(&quot;Option 1&quot;);
+	gbox-&gt;addItem(&quot;Option 2&quot;);
+	gbox-&gt;addItem(&quot;Option 3&quot;);
+
+	&#x2F;&#x2F; 从文件加载，然后设置样式表
+	QFile file(&quot;:&#x2F;QSS&#x2F;style.css&quot;);
+	if (file.open(QIODevice::ReadOnly))
+	&#123;
+		setStyleSheet(file.readAll());
+	&#125;
+	else
+	&#123;
+		qDebug() &lt;&lt; &quot;error&quot;;
+	&#125;
+&#125;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;* 设置 QComboBox 样式 *&#x2F;
+QComboBox#gbox &#123;
+    color: black; &#x2F;* 文字颜色为黑色 *&#x2F;
+    border: 1px solid black; &#x2F;* 边框为 1 像素的黑色实线 *&#x2F;
+    border-radius: 5px; &#x2F;* 边框圆角半径为 5 像素 *&#x2F;
+    padding: 1px; &#x2F;* 内边距为 1 像素（上、右、下、左） *&#x2F;
+&#125;
+
+    &#x2F;* 设置下拉按钮样式 *&#x2F;
+    QComboBox#gbox::drop-down &#123;
+        width: 25px; &#x2F;* 下拉按钮宽度为 25 像素 *&#x2F;
+    &#125;
+
+        QComboBox#gbox::drop-down:hover &#123;
+            border-image: url(:&#x2F;images&#x2F;zzz.jpg); &#x2F;* 鼠标悬停时显示自定义背景图片 *&#x2F;
+        &#125;
+
+        QComboBox#gbox::drop-down:checked &#123;
+            &#x2F;*    border-image: url(:&#x2F;images&#x2F;comboBox&#x2F;drop-down-on.png); *&#x2F; &#x2F;* 当下拉按钮被选中时显示自定义背景图片 *&#x2F;
+        &#125;
+
+            QComboBox#gbox::drop-down:checked:hover &#123;
+                &#x2F;* border-image: url(:&#x2F;images&#x2F;comboBox&#x2F;drop-down-on-hover.png); *&#x2F; &#x2F;* 当下拉按钮被选中且鼠标悬停时显示自定义背景图片 *&#x2F;
+            &#125;
+
+    &#x2F;* 设置下拉菜单样式 *&#x2F;
+    QComboBox#gbox QAbstractItemView &#123;
+        border: none; &#x2F;* 下拉菜单无边框 *&#x2F;
+        background-color: rgb(255, 255, 255); &#x2F;* 背景颜色为纯白色 *&#x2F;
+        outline: 0px; &#x2F;* 去除轮廓线 *&#x2F;
+    &#125;
+
+        &#x2F;* 设置下拉菜单每一项样式 *&#x2F;
+        QComboBox#gbox QAbstractItemView::item &#123;
+            height: 50px; &#x2F;* 每一项高度为 50 像素 *&#x2F;
+            &#x2F;* 设置高度不生效，需要给 QComboBox 设置如下属性（二选一） *&#x2F;
+            &#x2F;* 
+    1. usernameEdit-&gt;setItemDelegate(new QStyledItemDelegate);
+    2. usernameEdit-&gt;setView(new QListView);
+    *&#x2F;
+        &#125;</code></pre>
+<h4 id="QSpinBox数值调节框、QTimeEdit时间编辑框、QDateEdit日期编辑框、QDateTimeEdit日期时间编辑框">QSpinBox数值调节框、QTimeEdit时间编辑框、QDateEdit日期编辑框、QDateTimeEdit日期时间编辑框</h4>
+<ul>
+<li>up-button 显示在 QSpinBox 里，它的 subcontrol-origin 是相对于 QSpinBox的</li>
+<li>down-button 显示在 QSpinBox 里，它的 subcontrol-origin 是相对于 QSpinBox的</li>
+<li>up-arrow 显示在 up-button 里，它的 subcontrol-origin 是相对于 up-button 的</li>
+<li>down-arrwo 显示在 down-button 里，它的 subcontrol-origin 是相对于 down-button 的</li>
+</ul>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;* 设置 QSpinBox 样式 *&#x2F;
+QSpinBox &#123;
+    border: 1px solid black; &#x2F;* 边框为 1 像素的黑色实线 *&#x2F;
+    border-radius: 5px; &#x2F;* 边框圆角半径为 5 像素 *&#x2F;
+&#125;
+
+    &#x2F;* 设置按钮样式 *&#x2F;
+    QSpinBox:down-button,
+    QSpinBox:up-button &#123;
+        width: 16px; &#x2F;* 按钮宽度为 16 像素 *&#x2F;
+        height: 15px; &#x2F;* 按钮高度为 15 像素 *&#x2F;
+        subcontrol-origin: padding; &#x2F;* 子控件原点为 padding *&#x2F;
+        background: white; &#x2F;* 背景颜色为白色 *&#x2F;
+        border: 2px solid rgb(217, 217, 217); &#x2F;* 边框为 2 像素的 rgb(217, 217, 217) 实线 *&#x2F;
+        border-radius: 5px; &#x2F;* 边框圆角半径为 5 像素 *&#x2F;
+    &#125;
+
+    QSpinBox:down-button &#123;
+        subcontrol-position: left center; &#x2F;* 子控件位置为左侧居中 *&#x2F;
+    &#125;
+
+    QSpinBox:up-button &#123;
+        subcontrol-position: right center; &#x2F;* 子控件位置为右侧居中 *&#x2F;
+    &#125;
+
+        QSpinBox:down-button:hover,
+        QSpinBox:up-button:hover &#123;
+            border: 2px solid rgb(138, 138, 138); &#x2F;* 鼠标悬停时边框为 2 像素的 rgb(138, 138, 138) 实线 *&#x2F;
+        &#125;
+
+    &#x2F;* 设置箭头样式 *&#x2F;
+    QSpinBox:down-arrow &#123;
+        border-image: url(:&#x2F;images&#x2F;spinBox&#x2F;down-arrow.png); &#x2F;* 下降箭头使用自定义边框图片 *&#x2F;
+    &#125;
+
+    QSpinBox:up-arrow &#123;
+        border-image: url(:&#x2F;images&#x2F;spinBox&#x2F;up-arrow.png); &#x2F;* 上升箭头使用自定义边框图片 *&#x2F;
+    &#125;
+
+    QSpinBox:down-arrow:hover &#123;
+        border-image: url(:&#x2F;images&#x2F;spinBox&#x2F;down-arrow-hover.png); &#x2F;* 鼠标悬停时下降箭头使用自定义边框图片 *&#x2F;
+    &#125;
+
+    QSpinBox:up-arrow:hover &#123;
+        border-image: url(:&#x2F;images&#x2F;spinBox&#x2F;up-arrow-hover.png); &#x2F;* 鼠标悬停时上升箭头使用自定义边框图片 *&#x2F;
+    &#125;
+</code></pre>
+<h4 id="QSlider滑块">QSlider滑块</h4>
+<p>QSlider 的 subcontrol 有 <code>::groove</code>（槽），<code>::handle</code>，<code>::add-page</code> 和 <code>::sub-page</code>。</p>
+<ul>
+<li>groove 显示在 QSlider 里，它的 subcontrol-origin 是相对于 QSlider 的</li>
+<li>handle 显示在 groove 里，它的 subcontrol-origin 是相对于 groove 的</li>
+<li>sub-page 显示在 groove 里，它的 subcontrol-origin 是相对于 groove 的</li>
+<li>add-page 显示在 groove 里，它的 subcontrol-origin 是相对于 groove 的</li>
+<li>handle, sub-page, add-page 虽然都显示在 groove 里，但是都可以把它们扩展到 groove 外</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;widget.h&quot;
+#include &quot;ui_widget.h&quot;
+#include&lt;QLabel&gt;
+#include&lt;QPushbutton&gt;
+#include&lt;QFile&gt;
+#include&lt;QCheckbox&gt;
+#include&lt;QRadiobutton&gt;
+#include&lt;QGroupbox&gt;
+#include&lt;QComboBox&gt;
+#include&lt;QSpinbox&gt;
+#include&lt;QSlider&gt;
+
+
+Widget::Widget(QWidget* parent)
+	: QWidget(parent)
+	, ui(new Ui::Widget)
+&#123;
+	ui-&gt;setupUi(this);
+
+	test_qss();
+&#125;
+
+Widget::~Widget()
+&#123;
+	delete ui;
+&#125;
+
+void Widget::test_qss()
+&#123;
+	&#x2F;&#x2F; 创建滑块控件
+	QSlider* slider &#x3D; new QSlider(Qt::Horizontal, this);
+	&#x2F;&#x2F; 设置滑块范围和初始值
+	slider-&gt;setMinimum(0);
+	slider-&gt;setMaximum(100);
+	slider-&gt;setValue(50);
+
+	&#x2F;&#x2F; 从文件加载，然后设置样式表
+	QFile file(&quot;:&#x2F;QSS&#x2F;style.css&quot;);
+	if (file.open(QIODevice::ReadOnly))
+	&#123;
+		setStyleSheet(file.readAll());
+	&#125;
+	else
+	&#123;
+		qDebug() &lt;&lt; &quot;error&quot;;
+	&#125;
+&#125;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">QSlider::groove:horizontal &#123;
+    &#x2F;* 滑块轨道的样式 *&#x2F;
+    border: 1px solid skyblue; &#x2F;* 边框样式 *&#x2F;
+    background-color: skyblue; &#x2F;* 背景颜色 *&#x2F;
+    height: 10px; &#x2F;* 高度 *&#x2F;
+    border-radius: 5px; &#x2F;* 边框圆角 *&#x2F;
+&#125;
+
+QSlider::handle:horizontal &#123;
+    &#x2F;* 滑块的样式 *&#x2F;
+    background: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.7 white,stop:0.8 rgb(143,212,255)); &#x2F;* 背景渐变 *&#x2F;
+    width: 20px; &#x2F;* 宽度 *&#x2F;
+    border-radius: 10px; &#x2F;* 边框圆角 *&#x2F;
+    margin-top: -5px; &#x2F;* 顶部外边距 *&#x2F;
+    margin-bottom: -5px; &#x2F;* 底部外边距 *&#x2F;
+&#125;
+
+QSlider::sub-page:horizontal &#123;
+    &#x2F;* 已选择部分的样式 *&#x2F;
+    background: #999; &#x2F;* 背景颜色 *&#x2F;
+    margin: 5px; &#x2F;* 外边距 *&#x2F;
+    border-radius: 5px; &#x2F;* 边框圆角 *&#x2F;
+&#125;
+
+QSlider::add-page:horizontal &#123;
+    &#x2F;* 未选择部分的样式 *&#x2F;
+    background: #666; &#x2F;* 背景颜色 *&#x2F;
+    margin: 5px; &#x2F;* 外边距 *&#x2F;
+    border-radius: 5px; &#x2F;* 边框圆角 *&#x2F;
+&#125;</code></pre>
+<h4 id="QProgressBar进度条">QProgressBar进度条</h4>
+<p>对于 QProgressBar 的 QSS，大多数都是想把 chunk 定义为圆角矩形的样子，但是当它的 value 比较小时，chunk 的圆角会变成直角，即使使用图片都不行，效果很不理想，所以如果要修改 QProgressBar 的外观的话，推荐继承 QProgressBar 自己绘制或者使用 QStyle</p>
+<ul>
+<li>样式1</li>
+</ul>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;* 边框样式 *&#x2F;
+QProgressBar &#123;
+    border: 1px solid skyblue; &#x2F;* 边框样式 *&#x2F;
+    border-radius: 5px; &#x2F;* 边框圆角 *&#x2F;
+    height: 10px; &#x2F;* 高度 *&#x2F;
+    text-align: center; &#x2F;* 文本对齐方式 *&#x2F;
+&#125;
+
+    &#x2F;* 进度条样式 *&#x2F;
+    QProgressBar::chunk &#123;
+        background-color: steelblue; &#x2F;* 背景颜色 *&#x2F;
+        border-radius: 5px; &#x2F;* 圆角 *&#x2F;
+    &#125;
+</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240108220616.webp" alt=""></p>
+<ul>
+<li>样式2</li>
+</ul>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;* 进度条样式 *&#x2F;
+QProgressBar &#123;
+    border-color: 1px solid blue; &#x2F;* 边框颜色 *&#x2F;
+    border-radius: 5px; &#x2F;* 边框圆角 *&#x2F;
+    text-align: center; &#x2F;* 文本对齐方式 *&#x2F;
+&#125;
+
+&#x2F;* 进度块样式 *&#x2F;
+QProgressBar::chunk &#123;
+    background-color: aqua; &#x2F;* 设置进度块的颜色 *&#x2F;
+    width: 5px; &#x2F;* 进度块的宽度 *&#x2F;
+    margin: 0.5px; &#x2F;* 进度块之间的间隔 *&#x2F;
+&#125;</code></pre>
+<ul>
+<li>样式3</li>
+</ul>
+<p>会显示繁忙一直移动</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;widget.h&quot;
+#include &quot;ui_widget.h&quot;
+#include&lt;QLabel&gt;
+#include&lt;QPushbutton&gt;
+#include&lt;QFile&gt;
+#include&lt;QCheckbox&gt;
+#include&lt;QRadiobutton&gt;
+#include&lt;QGroupbox&gt;
+#include&lt;QComboBox&gt;
+#include&lt;QSpinbox&gt;
+#include&lt;QSlider&gt;
+#include &lt;QProgressBar&gt;
+
+Widget::Widget(QWidget* parent)
+	: QWidget(parent)
+	, ui(new Ui::Widget)
+&#123;
+	ui-&gt;setupUi(this);
+
+	test_qss();
+&#125;
+
+Widget::~Widget()
+&#123;
+	delete ui;
+&#125;
+
+void Widget::test_qss()
+&#123;
+	QProgressBar* progressBar &#x3D; new QProgressBar(this); &#x2F;&#x2F; 创建一个进度条控件
+	progressBar-&gt;move(20, 20);
+	progressBar-&gt;setMinimum(0); &#x2F;&#x2F; 设置最小值
+	progressBar-&gt;setMaximum(100); &#x2F;&#x2F; 设置最大值
+	progressBar-&gt;setValue(50); &#x2F;&#x2F; 设置当前值
+	&#x2F;&#x2F;progressBar-&gt;setRange(0, 0);	&#x2F;&#x2F; 显示繁忙一直移动
+
+	&#x2F;&#x2F; 从文件加载，然后设置样式表
+	QFile file(&quot;:&#x2F;QSS&#x2F;style.css&quot;);
+	if (file.open(QIODevice::ReadOnly))
+	&#123;
+		setStyleSheet(file.readAll());
+	&#125;
+	else
+	&#123;
+		qDebug() &lt;&lt; &quot;error&quot;;
+	&#125;
+&#125;</code></pre>
+<h4 id="QToolTip工具提示">QToolTip工具提示</h4>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240108221510.webp" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;widget.h&quot;
+#include &quot;ui_widget.h&quot;
+#include&lt;QLabel&gt;
+#include&lt;QPushbutton&gt;
+#include&lt;QFile&gt;
+#include&lt;QCheckbox&gt;
+#include&lt;QRadiobutton&gt;
+#include&lt;QGroupbox&gt;
+#include&lt;QComboBox&gt;
+#include&lt;QSpinbox&gt;
+#include&lt;QSlider&gt;
+#include &lt;QProgressBar&gt;
+#include&lt;QTooltip&gt;
+
+Widget::Widget(QWidget* parent)
+	: QWidget(parent)
+	, ui(new Ui::Widget)
+&#123;
+	ui-&gt;setupUi(this);
+
+	test_qss();
+&#125;
+
+Widget::~Widget()
+&#123;
+	delete ui;
+&#125;
+
+void Widget::test_qss()
+&#123;
+	QPushButton* button &#x3D; new QPushButton(&quot;Button&quot;, this);
+	button-&gt;setToolTip(&quot;This is a tooltip&quot;); &#x2F;&#x2F; 设置工具提示文本
+
+	&#x2F;&#x2F; 从文件加载，然后设置样式表
+	QFile file(&quot;:&#x2F;QSS&#x2F;style.css&quot;);
+	if (file.open(QIODevice::ReadOnly))
+	&#123;
+		setStyleSheet(file.readAll());
+	&#125;
+	else
+	&#123;
+		qDebug() &lt;&lt; &quot;error&quot;;
+	&#125;
+&#125;</code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;* 工具提示样式 *&#x2F;
+QToolTip &#123;
+    border: 1px solid black; &#x2F;* 边框样式 *&#x2F;
+    background-color: #ffa02f; &#x2F;* 背景颜色 *&#x2F;
+    padding: 1px; &#x2F;* 内边距 *&#x2F;
+    border-radius: 3px; &#x2F;* 边框圆角 *&#x2F;
+&#125;</code></pre>
+<h3 id="细节、注意事项">细节、注意事项</h3>
+<ul>
+<li>继承自QWidget的类，设置qss样式表没有效果</li>
+</ul>
+<blockquote>
+<p>定义一个类STitleBar，继承自QWidget，使用样式表设置背景颜色之后，发现没有任何效果</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">QWidget#titleBar&#123;
+    background-color:rgb(52,52,52);
+&#125;</code></pre>
+</blockquote>
+<blockquote>
+<p>解决方法也很简单，使用 <code>style()-&gt;drawPrimitive(QStyle::PE_Widget...)</code>，也就是画一个最简单最原始的QWidget，不要牵扯其它这么多东西</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void STitleBar::paintEvent(QPaintEvent* ev)
+&#123;
+    &#x2F;&#x2F; 初始化样式选项
+	QStyleOption op;
+	op.initFrom(this);
+	&#x2F;&#x2F; 创建绘图对象
+	QPainter painter(this);
+    &#x2F;&#x2F; 使用样式绘制小部件（即窗口标题栏）
+	style()-&gt;drawPrimitive(QStyle::PE_Widget, &amp;op, &amp;painter,this);
+&#125;</code></pre>
+</blockquote>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num163.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#QWidget%E8%AF%A6%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text">QWidget详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#QWidget"><span class="toc-number">2.1.</span> <span class="toc-text">QWidget</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#QDialog"><span class="toc-number">2.2.</span> <span class="toc-text">QDialog</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E6%80%81%E5%AF%B9%E8%AF%9D%E6%A1%86"><span class="toc-number">2.2.1.</span> <span class="toc-text">模态对话框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E6%A8%A1%E6%80%81%E5%AF%B9%E8%AF%9D%E6%A1%86"><span class="toc-number">2.2.2.</span> <span class="toc-text">非模态对话框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E6%8C%89%E9%92%AE"><span class="toc-number">2.2.3.</span> <span class="toc-text">默认按钮</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ESC%E9%94%AE"><span class="toc-number">2.2.4.</span> <span class="toc-text">ESC键</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%95%E5%BC%80%E6%80%A7"><span class="toc-number">2.2.5.</span> <span class="toc-text">展开性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AA%97%E5%8F%A3%E7%9B%B8%E5%85%B3"><span class="toc-number">2.3.</span> <span class="toc-text">窗口相关</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#QT%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.</span> <span class="toc-text">QT事件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.1.</span> <span class="toc-text">事件系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86"><span class="toc-number">3.2.</span> <span class="toc-text">事件处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6"><span class="toc-number">3.2.1.</span> <span class="toc-text">鼠标事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6"><span class="toc-number">3.2.2.</span> <span class="toc-text">键盘事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AA%97%E5%8F%A3%E4%BA%8B%E4%BB%B6"><span class="toc-number">3.2.3.</span> <span class="toc-text">窗口事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8%E4%BA%8B%E4%BB%B6"><span class="toc-number">3.2.4.</span> <span class="toc-text">定时器事件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91"><span class="toc-number">3.3.</span> <span class="toc-text">事件分发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E9%80%81%E4%BA%8B%E4%BB%B6"><span class="toc-number">3.4.</span> <span class="toc-text">发送事件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6"><span class="toc-number">3.4.1.</span> <span class="toc-text">自定义事件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E4%BC%A0%E6%92%AD%E6%9C%BA%E5%88%B6"><span class="toc-number">3.5.</span> <span class="toc-text">事件传播机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E6%8E%A5%E5%8F%97%E5%92%8C%E5%BF%BD%E7%95%A5"><span class="toc-number">3.5.1.</span> <span class="toc-text">事件接受和忽略</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91-2"><span class="toc-number">3.5.2.</span> <span class="toc-text">事件分发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E8%BF%87%E6%BB%A4"><span class="toc-number">3.5.3.</span> <span class="toc-text">事件过滤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E2%80%93%E6%97%A0%E8%BE%B9%E6%A1%86%E7%AA%97%E5%8F%A3%E6%8B%96%E5%8A%A8"><span class="toc-number">3.5.4.</span> <span class="toc-text">示例–无边框窗口拖动</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%92%8C%E4%BF%A1%E5%8F%B7%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">3.6.</span> <span class="toc-text">事件和信号的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.7.</span> <span class="toc-text">事件类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%98%E5%9B%BE"><span class="toc-number">4.</span> <span class="toc-text">绘图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80"><span class="toc-number">4.1.</span> <span class="toc-text">基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%BB%98%E5%88%B6%E5%92%8C%E5%A1%AB%E5%85%85"><span class="toc-number">4.2.</span> <span class="toc-text">基本绘制和填充</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%94%BB%E7%AC%94%EF%BC%88QPen%EF%BC%89"><span class="toc-number">4.3.</span> <span class="toc-text">使用画笔（QPen）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%BB%E5%88%B7%EF%BC%88QBrush%EF%BC%89"><span class="toc-number">4.4.</span> <span class="toc-text">画刷（QBrush）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2"><span class="toc-number">4.5.</span> <span class="toc-text">坐标变换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%98%E5%9B%BE%E5%87%BD%E6%95%B0"><span class="toc-number">4.6.</span> <span class="toc-text">绘图函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-QGame"><span class="toc-number">5.</span> <span class="toc-text">示例-QGame</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%83%E5%B1%80"><span class="toc-number">6.</span> <span class="toc-text">布局</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%92%E5%AD%90%E5%B8%83%E5%B1%80"><span class="toc-number">6.1.</span> <span class="toc-text">盒子布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E6%A0%BC%E5%B8%83%E5%B1%80"><span class="toc-number">6.2.</span> <span class="toc-text">网格布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E5%8D%95%E5%B8%83%E5%B1%80"><span class="toc-number">6.3.</span> <span class="toc-text">表单布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86%E6%A0%88%E5%B8%83%E5%B1%80"><span class="toc-number">6.4.</span> <span class="toc-text">堆栈布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%89%B2%E5%99%A8"><span class="toc-number">6.5.</span> <span class="toc-text">分割器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-%E7%99%BB%E9%99%86%E7%AA%97%E5%8F%A3"><span class="toc-number">6.6.</span> <span class="toc-text">示例-登陆窗口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#QMainWindow"><span class="toc-number">7.</span> <span class="toc-text">QMainWindow</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8F%9C%E5%8D%95%E6%A0%8F"><span class="toc-number">7.1.</span> <span class="toc-text">菜单栏</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ui%E7%95%8C%E9%9D%A2Qt-Designer"><span class="toc-number">8.</span> <span class="toc-text">Ui界面Qt Designer</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AC%E5%88%B0%E6%A7%BD"><span class="toc-number">8.1.</span> <span class="toc-text">转到槽</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E8%81%94ui%E7%95%8C%E9%9D%A2%E4%B8%AD%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%BF%A1%E5%8F%B7"><span class="toc-number">8.2.</span> <span class="toc-text">关联ui界面中对象的信号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="toc-number">8.3.</span> <span class="toc-text">注意点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%A7%E4%BB%B6"><span class="toc-number">8.4.</span> <span class="toc-text">自定义控件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8Ui%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="toc-number">8.5.</span> <span class="toc-text">用Ui文件生成头文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#QSS%E6%A0%B7%E5%BC%8F%E8%A1%A8"><span class="toc-number">9.</span> <span class="toc-text">QSS样式表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B"><span class="toc-number">9.1.</span> <span class="toc-text">盒子模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">9.2.</span> <span class="toc-text">选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS%E6%96%B9%E5%BC%8F"><span class="toc-number">9.3.</span> <span class="toc-text">CSS方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A7%E4%BB%B6%E7%A4%BA%E4%BE%8B"><span class="toc-number">9.4.</span> <span class="toc-text">控件示例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#QLable%E6%A0%87%E7%AD%BE"><span class="toc-number">9.4.1.</span> <span class="toc-text">QLable标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#QPushButton%E6%8C%89%E9%92%AE"><span class="toc-number">9.4.2.</span> <span class="toc-text">QPushButton按钮</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#QCheckBox%E5%A4%8D%E9%80%89%E6%A1%86%E3%80%81QRadioButton%E5%8D%95%E9%80%89%E6%8C%89%E9%92%AE"><span class="toc-number">9.4.3.</span> <span class="toc-text">QCheckBox复选框、QRadioButton单选按钮</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#QGroupBox%E7%BB%84%E5%90%88%E6%A1%86"><span class="toc-number">9.4.4.</span> <span class="toc-text">QGroupBox组合框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#QComboBox%E4%B8%8B%E6%8B%89%E6%A1%86"><span class="toc-number">9.4.5.</span> <span class="toc-text">QComboBox下拉框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#QSpinBox%E6%95%B0%E5%80%BC%E8%B0%83%E8%8A%82%E6%A1%86%E3%80%81QTimeEdit%E6%97%B6%E9%97%B4%E7%BC%96%E8%BE%91%E6%A1%86%E3%80%81QDateEdit%E6%97%A5%E6%9C%9F%E7%BC%96%E8%BE%91%E6%A1%86%E3%80%81QDateTimeEdit%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%BC%96%E8%BE%91%E6%A1%86"><span class="toc-number">9.4.6.</span> <span class="toc-text">QSpinBox数值调节框、QTimeEdit时间编辑框、QDateEdit日期编辑框、QDateTimeEdit日期时间编辑框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#QSlider%E6%BB%91%E5%9D%97"><span class="toc-number">9.4.7.</span> <span class="toc-text">QSlider滑块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#QProgressBar%E8%BF%9B%E5%BA%A6%E6%9D%A1"><span class="toc-number">9.4.8.</span> <span class="toc-text">QProgressBar进度条</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#QToolTip%E5%B7%A5%E5%85%B7%E6%8F%90%E7%A4%BA"><span class="toc-number">9.4.9.</span> <span class="toc-text">QToolTip工具提示</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%86%E8%8A%82%E3%80%81%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">9.5.</span> <span class="toc-text">细节、注意事项</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '键盘敲烂 月薪过万' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script defer src="/js/my_aplayer.js"></script><script defer src="/js/meting.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>

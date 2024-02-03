@@ -1914,6 +1914,31 @@ figure {
 #page .category-lists .category-list li.category-list-item:nth-child(32) a.category-list-link::before {
     content: "🎭";
 }
+
+#page .category-lists .category-list li.category-list-item:nth-child(33) a.category-list-link::before {
+    content: "📝";
+}
+
+#page .category-lists .category-list li.category-list-item:nth-child(33) {
+    background: -webkit-linear-gradient(left, #f12711, #f5af19);
+    background: -moz-linear-gradient(left, #f12711, #f5af19);
+    background: -o-linear-gradient(left, #f12711, #f5af19);
+    background: -ms-linear-gradient(left, #f12711, #f5af19);
+    background: linear-gradient(to right, #f12711, #f5af19);
+}
+
+#page .category-lists .category-list li.category-list-item:nth-child(34) a.category-list-link::before {
+    content: "🎨";
+}
+
+#page .category-lists .category-list li.category-list-item:nth-child(34) {
+    background: -webkit-linear-gradient(left, #009ad6, #1b315e);
+    background: -moz-linear-gradient(left, #009ad6, #1b315e);
+    background: -o-linear-gradient(left, #009ad6, #1b315e);
+    background: -ms-linear-gradient(left, #009ad6, #1b315e);
+    background: linear-gradient(to right, #009ad6, #1b315e);
+}
+
 /* 分类美化end */
 
 /* 外挂标签修改-tip  begin */

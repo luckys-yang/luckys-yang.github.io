@@ -1,0 +1,2889 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>QT上位机项目-云台 | Yangの小栈</title><meta name="author" content="Yang"><meta name="copyright" content="Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言  参考博客  屁股大象的QTdemo-gitee Qt控件的使用-csdn详细 Qt应用开发串口助手-csdn Qt自定义控件和模板分享 uiverse-好看UI QTextEdit 控件禁止鼠标选中文本方法 错误 C2653 “QtCharts”: 不是类或命名空间名称 在QT中使用QtChart Qt中，在另一cpp文件操作ui界面的相关控件 Qt 在其他 cpp 文件中调用主工程下文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QT上位机项目-云台">
+<meta property="og:url" content="https://blog.yang5201314.cn/post/ac29a05e.html">
+<meta property="og:site_name" content="Yangの小栈">
+<meta property="og:description" content="前言  参考博客  屁股大象的QTdemo-gitee Qt控件的使用-csdn详细 Qt应用开发串口助手-csdn Qt自定义控件和模板分享 uiverse-好看UI QTextEdit 控件禁止鼠标选中文本方法 错误 C2653 “QtCharts”: 不是类或命名空间名称 在QT中使用QtChart Qt中，在另一cpp文件操作ui界面的相关控件 Qt 在其他 cpp 文件中调用主工程下文件">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.yang5201314.cn/img/num164.webp">
+<meta property="article:published_time" content="2024-01-04T05:56:20.000Z">
+<meta property="article:modified_time" content="2024-02-02T14:05:21.388Z">
+<meta property="article:author" content="Yang">
+<meta property="article:tag" content="aabbcc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.yang5201314.cn/img/num164.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20231008142657.webp"><link rel="canonical" href="https://blog.yang5201314.cn/post/ac29a05e.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'QT上位机项目-云台',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-02 22:05:21'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/aplayer.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20231008142657.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">157</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">72</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">34</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">QT上位机项目-云台</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-01-04T05:56:20.000Z" title="发表于 2024-01-04 13:56:20">2024-01-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-02-02T14:05:21.388Z" title="更新于 2024-02-02 22:05:21">2024-02-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/QT/">QT</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">14.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>56分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
+<blockquote>
+<p>参考博客</p>
+</blockquote>
+<p><a href="https://gitee.com/chen_xuyuan">屁股大象的QTdemo-gitee</a></p>
+<p><a href="https://blog.csdn.net/pzs0221/article/details/119745243?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=qt%20%E9%A1%B9%E7%9B%AE%20%E6%8E%A7%E4%BB%B6&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~sobaiduweb~default-9-119745243.nonecase&amp;spm=1018.2226.3001.4450">Qt控件的使用-csdn详细</a></p>
+<p><a href="https://blog.csdn.net/mark_md/category_10481194.html">Qt应用开发串口助手-csdn</a></p>
+<p><a href="https://blog.csdn.net/t13506920069/article/details/126067756?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522170488281816800211592607%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&amp;request_id=170488281816800211592607&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-6-126067756-null-null.nonecase&amp;utm_term=qt%20%E9%A1%B9%E7%9B%AE%20%E6%8E%A7%E4%BB%B6&amp;spm=1018.2226.3001.4450">Qt自定义控件和模板分享</a></p>
+<p><a href="https://uiverse.io/elements">uiverse-好看UI</a></p>
+<p><a href="https://blog.csdn.net/qq_41633442/article/details/103202177">QTextEdit 控件禁止鼠标选中文本方法</a></p>
+<p><a href="https://blog.csdn.net/weixin_36815313/article/details/131346283">错误 C2653 “QtCharts”: 不是类或命名空间名称</a></p>
+<p><a href="https://www.jianshu.com/p/b3bdd88f490c">在QT中使用QtChart</a></p>
+<p><a href="https://blog.csdn.net/lml521lml927/article/details/119520635">Qt中，在另一cpp文件操作ui界面的相关控件</a></p>
+<p><a href="https://zhaojichao.blog.csdn.net/article/details/131820932">Qt 在其他 cpp 文件中调用主工程下文件中的函数</a></p>
+<p><a href="https://blog.csdn.net/ken2232/article/details/130251742?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-1-130251742-blog-133030346.235%5Ev40%5Epc_relevant_anti_t3_base&amp;spm=1001.2101.3001.4242.2&amp;utm_relevant_index=4">QTextCodec 默认编码 与 编码转换</a></p>
+<p><a href="https://blog.csdn.net/yf18283144008/article/details/131721156">QSerialPort的waitForReadyRead()函数一直返回false</a></p>
+<blockquote>
+<p>参考开源项目</p>
+</blockquote>
+<p><a href="https://github.com/BFEMCC/Qt-widget-Fancy_UI/tree/main">Qt-widget-Fancy_UI - github</a></p>
+<blockquote>
+<p>我的Github仓库</p>
+</blockquote>
+<p><a href="https://github.com/luckys-yang/work-AC-PTZ.git">work-AC-PTZ</a></p>
+<h2 id="开发日志">开发日志</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">时间</th>
+<th style="text-align:center">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>2024.1.10</code></td>
+<td style="text-align:center">搞一个登录页面(LoginView.h，LoginView.cpp)</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>2024.1.13</code></td>
+<td style="text-align:center">完成登陆界面的布局，剩下数据库部分后面有时间再写，开始搞主页面</td>
+</tr>
+</tbody>
+</table>
+<h2 id="自定义库">自定义库</h2>
+<blockquote>
+<p>项目里面已添加的</p>
+</blockquote>
+<ul>
+<li>HintMessage(信息提示框)</li>
+<li>NavBar导航栏</li>
+</ul>
+<p>需要拖个 <code>Widget</code></p>
+<ul>
+<li>Progresswait加载中控件</li>
+<li>Bsp_ComBoBox下拉框控件</li>
+</ul>
+<p>需要拖个 <code>Combo Box</code></p>
+<ul>
+<li>HoverFillButton波纹按钮</li>
+</ul>
+<p>需要拖个 <code>PushButton</code></p>
+<ul>
+<li>Panelitem标题栏控件</li>
+</ul>
+<p>需要拖个  <code>Widget</code></p>
+<ul>
+<li>LcdDateTime当前时间控件</li>
+</ul>
+<p>需要拖个 <code>widget</code>，可以通过CSS改样式</p>
+<ul>
+<li>FlatUI 控件</li>
+</ul>
+<p>不需要提升，直接拖对应的即可，然后只需要调用函数重新设置样式即可</p>
+<ol>
+<li>
+<p>QPushButton按钮</p>
+</li>
+<li>
+<p>QLineEdit单行文本编辑框</p>
+</li>
+<li>
+<p>QProgressBar进度条</p>
+</li>
+<li>
+<p>QSlider滑块</p>
+</li>
+<li>
+<p>QRadioButton单选按钮</p>
+</li>
+<li>
+<p>QCheckBox复选框</p>
+</li>
+<li>
+<p>QScrollBar滚动条</p>
+</li>
+<li>
+<p>QLabel标签</p>
+</li>
+</ol>
+<ul>
+<li>NavProgress导航进度条(暂时没用到)</li>
+</ul>
+<p>需要拖一个 <code>widget</code></p>
+<ul>
+<li>NavLabel标签控件</li>
+</ul>
+<p>需要拖一个 <code>QLabel</code></p>
+<ul>
+<li>SaveLog调试输出控件</li>
+</ul>
+<p>不需要提升，直接在 TextEdit控件上用即可</p>
+<ul>
+<li>TextMoveWidget字体滚动控件(暂时没用到)</li>
+</ul>
+<p>需要拖个  <code>widget</code></p>
+<ul>
+<li>progresscolor进度条控件</li>
+</ul>
+<p>拖个 <code>widget</code></p>
+<ul>
+<li>ImageAnimation图片动画控件</li>
+</ul>
+<p>拖个 <code>widget</code> 即可</p>
+<ul>
+<li>ProgressPercent加载控件</li>
+</ul>
+<p>拖个 <code>widget</code> 即可</p>
+<blockquote>
+<p>使用图标字体</p>
+</blockquote>
+<p>可以使用图标字体，然后找对应的索引即可</p>
+<h3 id="登陆界面">登陆界面</h3>
+<h4 id="注意">注意</h4>
+<blockquote>
+<p>如果想要主窗口边框圆角，方法是定义一个父窗口(在main)，然后再定义一个窗口继承于父类，大小一样，然后把父类的窗口设置为无边框，透明背景即可</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">setWindowFlags(windowFlags() | Qt::FramelessWindowHint);  &#x2F;&#x2F; 去掉窗口边框
+this-&gt;setAttribute(Qt::WA_TranslucentBackground);&#x2F;&#x2F;设置窗口背景透明</code></pre>
+</blockquote>
+<blockquote>
+<p>注意设置大小或者什么的一定要指定对象，不然不生效</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">this-&gt;setFixedSize(TOOL_WINDOW_W, TOOL_WINDOW_H);	&#x2F;&#x2F; 指定当前窗口大小
+close_btn-&gt;setFixedSize(42, 42);	&#x2F;&#x2F; 指定按钮的大小
+
+&#x2F;&#x2F; 不能直接这样(不推荐！！！！)
+setFixedSize(TOOL_WINDOW_W, TOOL_WINDOW_H);
+setFixedSize(42, 42);</code></pre>
+</blockquote>
+<blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">const SignInView* GetSignInView() const;	&#x2F;&#x2F; 该函数不会修改成员变量的值，并且该函数可以在常量对象上调用,可以用来获取 SignUpView 对象的状态，但不能修改其状态
+SignInView* GetSignInView() const;	&#x2F;&#x2F; 该函数不会修改成员变量的值，并且该函数可以在常量对象上调用,可以用来获取或修改 LoginOverlay 对象的状态</code></pre>
+</blockquote>
+<blockquote>
+<p>使用了非 ASCII 字符集中的字符（例如 Unicode 字符）, <code>isalpha()</code> 和 <code>isdigit()</code> 函数可能无法正确地处理这些字符，从而导致断言失败</p>
+<p>使用 Qt 的 <code>QString</code> 类代替 <code>std::string</code>，以便正确处理 Unicode 字符。您可以将输入字符串转换为 QString 对象，然后使用 <code>QChar</code> 类的 <code>isLetter()</code> 和 <code>isDigit()</code> 函数来检查字符串中的字母和数字(2024.1.14 — 这种写法不要了换成别的)</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">bool PublicClass::Letter_Number_isValid(const std::string&amp; str)
+&#123;
+	
+	QString qstr &#x3D; QString::fromStdString(str);
+
+	int nCount &#x3D; qstr.count();
+
+	for (int i &#x3D; 0; i &lt; nCount; i++)
+	&#123;
+		QChar cha &#x3D; qstr.at(i);
+		ushort uni &#x3D; cha.unicode();
+		if (uni &gt;&#x3D; 0x4E00 &amp;&amp; uni &lt;&#x3D; 0x9FA5)
+		&#123;
+			&#x2F;&#x2F;这个字符是中文
+			return false;
+		&#125;
+	&#125;
+	return true;
+&#125;</code></pre>
+</blockquote>
+<h4 id="旧缓存区">旧缓存区</h4>
+<details ><summary> LoginView </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; .h
+
+&#x2F;*装载 LoginCard 的主窗口-------------------------------------------------------------------------------*&#x2F;
+
+class LoginView : public QWidget
+&#123;
+    Q_OBJECT
+public:
+    explicit LoginView(QWidget* parent &#x3D; nullptr);
+    ~LoginView();
+    &#x2F;&#x2F; 获取 SignInView 对象指针的常量版本
+    const SignInView* GetSignInView() const;
+    &#x2F;&#x2F; 获取 SignUpView 对象指针的常量版本
+    const SignUpView* GetSignUpView() const; 
+protected:
+    &#x2F;&#x2F; 初始化窗口内容
+    void Init(); 
+    &#x2F;&#x2F; 绘制事件(override)
+    void paintEvent(QPaintEvent* event) override;
+    &#x2F;&#x2F; 登录函数
+    void SignIn(const QString user, const QString pwd); 
+    &#x2F;&#x2F; 注册函数
+    void SignUp(const QString nickName, const QString user, const QString pwd); 
+private:
+    LoginCard* m_pLoginCard; &#x2F;&#x2F; LoginCard 对象指针
+    QPixmap m_backgroundPixmap; &#x2F;&#x2F; 背景图像
+&#125;;
+
+
+&#x2F;&#x2F; .cpp
+
+&#x2F;*装载 LoginCard 的主窗口-----------------------------------------------------------------------------------------------------------------------*&#x2F;
+
+
+LoginView::LoginView(QWidget *parent)
+    : QWidget(parent)
+&#123;
+    LoginviewParameter.screenWidth &#x3D; QApplication::primaryScreen()-&gt;geometry().width();  &#x2F;&#x2F; 获取屏幕宽度
+    LoginviewParameter.screenHeight &#x3D; QApplication::primaryScreen()-&gt;geometry().height();  &#x2F;&#x2F; 获取屏幕高度
+    &#x2F;&#x2F;setFixedSize(LoginviewParameter.screenWidth, LoginviewParameter.screenHeight);    &#x2F;&#x2F; 固定窗口大小为屏幕大小
+
+    &#x2F;&#x2F; 读取css样式
+    QFile file(&quot;:&#x2F;Loginview&#x2F;Resource&#x2F;CSS&#x2F;Loginview.css&quot;);
+    if (true &#x3D;&#x3D; file.open(QFile::ReadOnly))
+    &#123;
+        LoginviewParameter.qss &#x3D; file.readAll();
+        file.close();	&#x2F;&#x2F; 关闭文件
+#ifdef QT_Loginview_DEBUG
+        qDebug() &lt;&lt; LoginviewParameter.qss &lt;&lt; Qt::endl;
+        qDebug() &lt;&lt; &quot;屏幕宽度:&quot; &lt;&lt; LoginviewParameter.screenWidth &lt;&lt; &quot;屏幕高度:&quot; &lt;&lt; LoginviewParameter.screenHeight &lt;&lt; Qt::endl;
+#endif
+    &#125;
+    else
+    &#123;
+#ifdef QT_Loginview_DEBUG
+        qDebug() &lt;&lt; &quot;open file error&quot;;
+#endif
+    &#125;
+
+    &#x2F;&#x2F;setWindowFlags(windowFlags() | Qt::FramelessWindowHint);  &#x2F;&#x2F; 去掉窗口边框
+    LoginView::Init();
+&#125;
+
+LoginView::~LoginView()
+&#123;
+#ifdef QT_Loginview_DEBUG
+    qDebug() &lt;&lt; &quot;delete LoginView&quot;;
+#endif
+&#125;
+
+const SignInView *LoginView::GetSignInView() const
+&#123;
+    return m_pLoginCard-&gt;GetSignInView();	&#x2F;&#x2F; 返回 LoginCard 中的 SignInView
+&#125;
+
+const SignUpView *LoginView::GetSignUpView() const
+&#123;
+    return m_pLoginCard-&gt;GetSignUpView();  &#x2F;&#x2F; 返回 LoginCard 中的 SignUpView
+&#125;
+
+void LoginView::Init()
+&#123;
+    setObjectName(QStringLiteral(&quot;login_view&quot;));	&#x2F;&#x2F; 给窗口设置对象名
+    &#x2F;&#x2F;setStyleSheet(LoginviewParameter.qss);	&#x2F;&#x2F; 设置窗口样式
+    &#x2F;&#x2F; 加载图片
+    &#x2F;&#x2F;m_backgroundPixmap.load(&quot;:&#x2F;Loginview&#x2F;Resource&#x2F;Images&#x2F;AC_logo.png&quot;);
+    &#x2F;&#x2F; 缩放背景图片以适应屏幕
+    &#x2F;&#x2F;m_backgroundPixmap &#x3D; m_backgroundPixmap.scaled(LoginviewParameter.screenWidth, LoginviewParameter.screenHeight, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    &#x2F;&#x2F; 创建 LoginCard 窗口
+    m_pLoginCard &#x3D; new LoginCard(this);
+    &#x2F;&#x2F; 将背景图片设置到 LoginCard 的 Overlay 中
+    m_pLoginCard-&gt;GetOverlay()-&gt;SetPixmap(m_backgroundPixmap);
+    &#x2F;&#x2F; 将 LoginCard 窗口移动到屏幕中央
+    m_pLoginCard-&gt;move((width() - m_pLoginCard-&gt;width()) &#x2F; 2,  (height() - m_pLoginCard-&gt;height()) &#x2F; 2);
+
+    &#x2F;&#x2F; 连接 SignInView 的 Submitted 信号和 LoginView 的 SignIn 槽函数
+    connect(GetSignInView(), &amp;SignInView::Submitted, this, &amp;LoginView::SignIn);
+    &#x2F;&#x2F; 连接 SignUpView 的 Submitted 信号和 LoginView 的 SignUp 槽函数
+    connect(GetSignUpView(), &amp;SignUpView::Submitted, this, &amp;LoginView::SignUp);
+
+    &#x2F;&#x2F; 全屏展示窗口
+    &#x2F;&#x2F;showFullScreen();
+&#125;
+
+void LoginView::paintEvent(QPaintEvent *event)
+&#123;
+    &#x2F;&#x2F; QStyleOption ---- Qt 绘图元素的各种选项的类
+    QStyleOption opt;
+    &#x2F;&#x2F; 初始化(Qt5是用init函数)
+    opt.initFrom(this);
+
+    QPainter p(this);
+    &#x2F;&#x2F; 设置渲染提示 --- 开启反锯齿  开启平滑像素变换
+    p.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+    &#x2F;&#x2F; 使用当前样式（QStyle）绘制一个窗口小部件(widget)
+    style()-&gt;drawPrimitive(QStyle::PE_Widget, &amp;opt, &amp;p, this);
+    &#x2F;&#x2F; 绘制背景图片
+    p.drawPixmap(0, 0, m_backgroundPixmap);
+    QWidget::paintEvent(event);	&#x2F;&#x2F; 调用基类 QWidget 的 paintEvent 函数
+&#125;
+
+void LoginView::SignIn(const QString user, const QString pwd)
+&#123;
+    &#x2F;&#x2F; 执行登陆操作
+&#125;
+
+void LoginView::SignUp(const QString nickName, const QString user, const QString pwd)
+&#123;
+    &#x2F;&#x2F; 执行注册操作
+&#125;</code></pre>
+              </div>
+            </details>
+<blockquote>
+<p>设置阴影</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*添加阴影效果*&#x2F;
+&#x2F;&#x2F;创建了一个 QGraphicsDropShadowEffect 对象，并将它设置为当前窗口小部件（widget）的图形效果
+QGraphicsDropShadowEffect *shadow &#x3D; new QGraphicsDropShadowEffect(this);
+&#x2F;&#x2F; 设置阴影的偏移量。在这里，阴影的偏移量为 (0, 0)，表示没有偏移
+shadow-&gt;setOffset(0, 0);
+&#x2F;&#x2F; 设置阴影的颜色为灰色
+shadow-&gt;setColor(Qt::red);
+&#x2F;&#x2F; 设置阴影的模糊半径。这里设置为30
+shadow-&gt;setBlurRadius(1);
+&#x2F;&#x2F; 将 QGraphicsDropShadowEffect 对象设置为当前窗口小部件的图形效果，从而应用阴影效果
+setGraphicsEffect(shadow);
+&#x2F;&#x2F; 设置当前窗口小部件的内容边距
+setContentsMargins(1, 1, 1, 1);</code></pre>
+</blockquote>
+<blockquote>
+<p>设置渐变矩形</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 在paintEvent函数里面写即可
+
+&#x2F;&#x2F;从左上角填充到右下角
+QLinearGradient linearGradient(100, 100, 300, 300);
+&#x2F;&#x2F;填充过程中插入的颜色
+linearGradient.setColorAt(0, QColor(133, 132, 76));
+linearGradient.setColorAt(0.5, QColor(122, 32, 57));
+linearGradient.setColorAt(1, QColor(12, 32, 157));
+QBrush brush(linearGradient);
+p.setPen(Qt::NoPen);
+p.setBrush(brush);
+p.drawRect(100, 100, 200, 200);</code></pre>
+</blockquote>
+<blockquote>
+<p>绘制一下自己新加的内容，然后再调用基类的绘制事件</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">QWidget::paintEvent(even);	&#x2F;&#x2F; 调用基类 QWidget 的 paintEvent 函数</code></pre>
+</blockquote>
+<blockquote>
+<p>QT的刷新机制，有时会不刷新的bug解决办法</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void showEvent(QShowEvent *e)
+
+&#123;
+    this-&gt;setAttribute(Qt::WA_Mapped);	&#x2F;&#x2F; 告诉系统界面已经显示出来了
+    QWidget::showEvent(e);	
+&#125; </code></pre>
+</blockquote>
+<blockquote>
+<p>信号与槽旧版本写法：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">connect(ui-&gt;left_navBar, SIGNAL(currentItemChanged(int, QString)), this, SLOT(currentItemChanged(int, QString)));</code></pre>
+</blockquote>
+<blockquote>
+<p>【使用window的API，无法跨平台】</p>
+<p>窗口置顶</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &lt;Windows.h&gt;
+&#x2F;*
+1. 将 Qt 的窗口标识符（winId() 函数返回的值）转换为 Windows 窗口句柄 HWND。HWND 是 Windows 窗口的句柄类型
+2. 表示将窗口置于所有非顶层窗口之上，即置顶。如果使用 HWND_NOTOPMOST，则表示取消窗口置顶
+3. 表示窗口的新位置，这里设置为 (0, 0)，即保持原有位置
+4. 表示窗口的新大小，这里设置为 (0, 0)，即保持原有大小
+5. SWP_NOMOVE 表示不改变窗口的位置，SWP_NOSIZE 表示不改变窗口的大小
+*&#x2F;
+SetWindowPos(reinterpret_cast&lt;HWND&gt;(winId()), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);</code></pre>
+<p>禁止捕获</p>
+<p>禁止捕获窗口的情况通常与隐私、安全性或应用程序设计的特定需求有关</p>
+<p>禁止捕获窗口并不总是可行的，因为一些窗口管理器或桌面环境可能允许全局捕获屏幕的权限。此外，禁止捕获可能会影响用户体验，并应该谨慎使用</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">SetWindowDisplayAffinity(reinterpret_cast&lt;HWND&gt;(winId()), WDA_EXCLUDEFROMCAPTURE);&#x2F;&#x2F;禁止捕获
+
+SetWindowDisplayAffinity(reinterpret_cast&lt;HWND&gt;(winId()), WDA_NONE);&#x2F;&#x2F;恢复</code></pre>
+</blockquote>
+<blockquote>
+<p>设置字体大小：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">font.setPixelSize(40); &#x2F;&#x2F; 设置字体大小</code></pre>
+</blockquote>
+<h4 id="闲谈">闲谈</h4>
+<ol>
+<li>登陆成功的话直接禁用登陆窗口上面的控件还有切换登陆和注册的那个按钮，然后显示加载控件</li>
+<li>加载控件计数到100%发送信号，发送信号，main函数里面进行信号连接，判断到这个信号然后进行关闭登陆窗口，显示主窗口(存在问题，不能释放登录窗口，只能关闭，调用释放会卡死，也尝试在登陆窗口那在析构函数里面进行信号的断开也没用)</li>
+</ol>
+<h3 id="主页面">主页面</h3>
+<blockquote>
+<p>整体命名</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">变量</th>
+<th style="text-align:center">中文</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Pitch</td>
+<td style="text-align:center">俯仰角(Y轴)</td>
+</tr>
+<tr>
+<td style="text-align:center">Roll</td>
+<td style="text-align:center">横滚角(X轴)</td>
+</tr>
+<tr>
+<td style="text-align:center">Yaw</td>
+<td style="text-align:center">航向角(Z轴)</td>
+</tr>
+</tbody>
+</table>
+<p>命名规则是大到小，就是 <code>父类名_部件名</code>，套就完了</p>
+<h4 id="闲谈-2">闲谈</h4>
+<ol>
+<li>主页面左边使用自定义控件 <code>NavBar</code> 布局，右边使用 <code>Stacked Widget</code> 控件</li>
+</ol>
+<p>需要注意导航栏建立连接后需要手动emit一次，不然的话虽然界面选中的是索引0，但是显示的对应页面是不会刷新的(可能对应页面显示的是索引1)</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">ui-&gt;left_navBar-&gt;setItems(&quot;云台中控;参数设置;固件更新;云台测试;串口调试助手;波形显示&quot;);
+ui-&gt;left_navBar-&gt;setTextFont(QFont(MainwindowParameter.System_Font_Id, 11));	&#x2F;&#x2F; 设置字体和大小
+emit ui-&gt;left_navBar-&gt;NavBar_Signals_CurrentItemChanged(0, &quot;云台中控&quot;);	&#x2F;&#x2F; 手动触发一次</code></pre>
+<ol start="2">
+<li>主函数需要重写显示事件，然后使用定时器延时100ms触发显示事件这样才能保证打开软件会刷新一次页面，如果不加的话索引0是不会刷新的(首次)，需要点一下其他项再回去才正常</li>
+</ol>
+<ul>
+<li>
+<p>有弊端，就是每次最小化再打开都会因为这个而自动回到索引0的页面，所以改成另一个方法就是在主窗口初始化后使用一个定时器定时100ms后触发刷新索引 — 修改1</p>
+</li>
+<li>
+<p>上面的还有弊端，把登陆窗口也打开后，发现登陆完成后show主窗口不会刷新，因为主窗口在main函数时就初始化一次了，解决方法是加一个标志位，把屏蔽的重写函数打开，保证标志位只执行一次就不会发生【2】的问题</p>
+</li>
+<li>
+<p>还是有问题，发现把窗口设置为无边框后左边导航栏没有选择索引0(没有填充ui颜色)，原因可能是因为设置无边框后触发 <code>showevent</code> 进去执行了跳转到所以0函数，然后标志位置true就不会再进去了，所以解决方法是设置为延时500ms触发跳转到索引，一开始是100ms可能太快了</p>
+</li>
+</ul>
+<ol start="3">
+<li>添加自定义字体，鸿蒙开源字体，把ttf存储在qrc里面然后调用函数设置即可</li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">int fontId &#x3D; QFontDatabase::addApplicationFont(&quot;G:\\my_code\\win_qt_code\\AC\\AC_PTZ_V1\\Resource\\HarmonyOS_Sans_Bold.ttf&quot;);
+QStringList fontFamilies &#x3D; QFontDatabase::applicationFontFamilies(fontId);
+if (fontFamilies.size() &gt; 0)
+&#123;
+    QFont font;
+    font.setFamily(fontFamilies[0]);
+    qApp-&gt;setFont(font);
+&#125;
+#ifdef QT_Mainwindow_DEBUG
+qDebug() &lt;&lt; fontFamilies;
+#endif</code></pre>
+<ol start="4">
+<li>窗口是否可移动是通过判断水平线，水平线下则鼠标不能让窗口移动，水平线上则鼠标可以使窗口移动</li>
+</ol>
+<ul>
+<li>bug：在多个屏幕之间拖的话会有显示不全的情况，除非最小化再打开则变正常，原因是移动到新位置后没有手动刷新，所以需要在移动到新位置则调用更新函数 <code>update()</code>(但是转换会导致页面卡顿一会)</li>
+<li>不能使用安装过滤器方式，也不重写 <code>eventFilter</code>函数，不然这样导致父窗口上的其他子窗口也能触发事件进行拖动而不是只能父窗口才能拖动，解决方法是重写鼠标点击和松开事件，使用定时器触发然后进行拖动即可(放弃这种，因为这个使用定时器，在拖的过程中会造成里面控件卡顿阻塞)</li>
+<li>还是使用原来的那个重写3个鼠标函数，不使用定时器，但是需要在鼠标松开时刷新页面不然会显示不全(副屏拖到主屏时)，但是这刷新也会造成页面卡顿一会</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void Mainwindow::mousePressEvent(QMouseEvent* event)
+&#123;
+	&#x2F;&#x2F; 只处理主窗口上小于 Line_H 的区域
+	if (event-&gt;y() &lt; Line_H)
+	&#123;
+		if (event-&gt;button() &#x3D;&#x3D; Qt::LeftButton)
+		&#123;
+			MainwindowParameter.m_click &#x3D; event-&gt;pos();
+			dragTimer-&gt;start();
+		&#125;
+	&#125;
+
+	&#x2F;&#x2F; 其他处理
+	QWidget::mousePressEvent(event);
+&#125;
+
+void Mainwindow::mouseReleaseEvent(QMouseEvent* event)
+&#123;
+	&#x2F;&#x2F; 只处理主窗口上小于 Line_H 的区域
+	if (event-&gt;y() &lt; Line_H &amp;&amp; event-&gt;button() &#x3D;&#x3D; Qt::LeftButton)
+	&#123;
+		dragTimer-&gt;stop();
+		MainwindowParameter.m_click &#x3D; &#123; 0, 0 &#125;;
+	&#125;
+
+	&#x2F;&#x2F; 其他处理
+	QWidget::mousePressEvent(event);
+&#125;
+
+
+&#x2F;&#x2F; 定时器槽函数，处理窗口的移动
+void Mainwindow::onDragTimerTimeout()
+&#123;
+	QPoint currentPos &#x3D; mapFromGlobal(QCursor::pos());
+	this-&gt;move(this-&gt;pos() + currentPos - MainwindowParameter.m_click);
+	this-&gt;update();
+&#125;</code></pre>
+<ol start="5">
+<li>最小化和关闭使用信号方式触发，还要考虑一个问题就是鼠标按下但是是在超出这个按钮的范围外松开则需要把此次操作无效，通过获取松开时全局坐标是否在矩形内即可，大概是下面这样，需要判断 <code>clicked</code>，不能判断 <code>released</code>，不然还是不行</li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*关闭按钮点击后释放触发*&#x2F;
+connect(ui-&gt;closeBtn, &amp;QPushButton::clicked, this, [ &#x3D; ]()
+&#123;
+    &#x2F;&#x2F; 获取了全局鼠标位置
+    QPoint mousePos &#x3D; QCursor::pos();
+    QPoint localPos &#x3D; this-&gt;mapFromGlobal(mousePos);
+
+    if (this-&gt;rect().contains(localPos))    &#x2F;&#x2F; 检查局部坐标是否在窗口的矩形区域内
+    &#123;
+        this-&gt;close();
+    &#125;
+&#125;);</code></pre>
+<ol start="6">
+<li>
+<p>注意一个问题就是建立连接的顺序会影响实际操作的，比如如果先建立连接再初始化鼠标拖动就不生效，需要初始化完界面再建立连接，然后如果有些控件不生效的话可以在建立连接后手动触发一次信号</p>
+</li>
+<li>
+<p>遇到一个奇怪的问题，这里要么就不传参，然后Lambda就可以使用 <code>[&amp;]</code>，要么就传参，但是Lambda就只能是 <code>[=]</code>，否则触发信号就会产生异常</p>
+</li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void Mainwindow::UI_Test_Init(Ui::MainwindowClass* ui)
+&#123;
+		connect(btn1, &amp;HoverFillButton::HoverFillButton_Signals_mose_isRelease, this, [&#x3D;]() &#123;
+		qDebug() &lt;&lt; ui-&gt;left_navBar-&gt;getCurrentIndex();
+		ui-&gt;step_1-&gt;setStatusMode(StepProgress::ColorMode_Finish);
+		this-&gt;update();	&#x2F;&#x2F; 手动更新
+		&#125;);
+&#125;</code></pre>
+<ol start="8">
+<li>如何在别的cpp文件调用主ui操作页面控件？</li>
+</ol>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20240120111739.webp" style="zoom: 80%;" />
+<ol start="9">
+<li>常用的正则表达式我放在 <code>PublicClasss</code> 了，函数使用 <code>static</code> 这样直接通过类名去调用即可</li>
+</ol>
+<h4 id="底部">底部</h4>
+<ul>
+<li>校准进度的框大小</li>
+</ul>
+<p>高固定40，字体大小10，字间距2</p>
+<ol>
+<li>4个中文的占80宽</li>
+<li>3个英文的占50</li>
+<li>2个英文的占40</li>
+<li>5个中文占95</li>
+<li>2个中文占50</li>
+</ol>
+<ul>
+<li>调试框使用 <code>Text Edit</code> 这个支持 <code>HTML</code> ，使用 <code>Plain Text Edit</code> 则不支持，然后滚动条的样式最好不要用自带的，先把自带的屏蔽掉，然后拖一个滚动条放过去即可，在程序里再重新指定文本框的滚动条，滚动条样式在CSS里添加即可</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240117173109.webp" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">ui-&gt;Debug_TextEdit-&gt;setVerticalScrollBar(ui-&gt;verticalScrollBar);</code></pre>
+<h3 id="Bug-未解决">Bug/未解决</h3>
+<blockquote>
+<p>LineEdit控件设置了只读但是还是可以进行输入中文(只是输入了不能删除，只能选择再输入就会覆盖)，其他的正常不能输入，也试了换正则表达式限制全部不能输入但是会显示一个光标，而且只要程序里面进行修改这个控件的文本然后还是可以进行删除，而且只读和正则表达式共存的话不行(2024.1.17)</p>
+<p><s>【暂时的解决方法】：可以不使能这个控件但是这样的话显示不太好看，目前还是直接只读模式</s></p>
+<p>【解决方法】：有个属性修改就可以了，<code>focusPolicy</code> 选择 <code>NoFocus</code>，用于设置控件的焦点策略。您可以将焦点策略设置为 <code>Qt::NoFocus</code> 以禁用控件的焦点</p>
+</blockquote>
+<blockquote>
+<p>【报错 C2653 “QtCharts”: 不是类或命名空间名称】</p>
+<p>解决方法是：</p>
+<p>在ui界面把 <code>QtCharts::QChartView</code> 改成 <code>QChartView</code></p>
+</blockquote>
+<blockquote>
+<p>不能在勾选【保存日志】状态下关闭窗口否则关闭后显示异常，解决方法是在主窗口关闭前取消勾选，重写主窗口的关闭函数即可</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void Mainwindow::closeEvent(QCloseEvent* event)
+&#123;
+	&#x2F;&#x2F; 检查复选框是否被勾选，如果是，则取消勾选
+	if (ui-&gt;Debug_SaveLog_CheckBox-&gt;isChecked())
+	&#123;
+		ui-&gt;Debug_SaveLog_CheckBox-&gt;setChecked(false);
+	&#125;
+	&#x2F;&#x2F; 调用父类的 closeEvent 函数
+	QWidget::closeEvent(event);
+&#125;</code></pre>
+</blockquote>
+<blockquote>
+<p>不能在主线程里直接操作UI，需要通过信号与槽进行操作，把UI控制放在槽函数里，线程通过信号去触发即可</p>
+</blockquote>
+<blockquote>
+<p>串口接收 waitForReadyRead 函数 一直返回timeout</p>
+<p><s>解决方案是使用waitForReadyRead延时一段时间，不判断返回结果，直接realAll可以读到数据</s>【不行这样会如果关闭串口则报异常，只能现在是不用这个延时了】</p>
+<p>readyRead信号适用于异步；<br>
+waitForReadyRead适用于同步</p>
+<p>信号不要同时使用，必然触发超时错误</p>
+</blockquote>
+<blockquote>
+<p>串口发送框如果先写好内容再点击【16进制发送】的话转为16进制正常，但是再按一次转回去的话虽然转成功但是待会点击发送时是会把显示的当做字符串发送的【待解决】</p>
+</blockquote>
+<blockquote>
+<p>发现一个就是如果连接了设备后，不拔连接电脑那端的串口线而是拔了连接设备那端的串口线，那上位机不会检测到设备断开还是正常处于连接状态，这个正常，但是版本信息它不会消失，而且连接另一台设备后版本信息不会更新，因为串口没有断开，它不会重新发送版本查询，这个暂时不管，只能从用户自己去解决，断开设备连接别的设备后需要重新打开串口才能正常获取版本信息，软件当然也可以一直去定时查询版本号但是没必要</p>
+</blockquote>
+<blockquote>
+<p>主线程需要发送数据包的话最好通过信号与槽进行发送，还有就是需要注意串口的初始化<s>一定要全局的不要在函数里面进行初始化否则会出现野指针，也就是没有初始化就用，今天遇到就是串口new放在打开串口按钮那，只有打开串口才new，然后我没打开串口就点击按钮进行发送操作就报错异常</s>，还是可以放在函数里面，只需要其他地方发送前先进行判断串口是否打开就不会造成异常，不推荐放全局因为这样会导致就是打开的第一个串口很正常但是关闭重新打开另一个串口就会出现警告串口不能创建在别的线程也导致丢包率大大提高</p>
+</blockquote>
+<h3 id="软件工作流程">软件工作流程</h3>
+<p>打开串口后，上位机间隔1s发送一次【版本查询0x50】，直到有收到回复后，然后再间隔100ms交替发送【系统状态查询0x51】和 【姿态查询0x10】</p>
+<h3 id="串口">串口</h3>
+<p>参考：</p>
+<p><a href="https://github.com/SantaJiang/ModbusDebuger/tree/master">Modbus协议串口调试软件</a></p>
+<p><a href="https://github.com/lynnllh/SerialAssistance/tree/master">SerialAssistance</a></p>
+<p><a href="https://github.com/XuhengChai/QtSerialPort">Qt串口</a></p>
+<p><a href="https://blog.csdn.net/weixin_45817947/article/details/132795563?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=qt%E4%B8%B2%E5%8F%A3%E5%8F%91%E9%80%81&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~sobaiduweb~default-4-132795563.nonecase&amp;spm=1018.2226.3001.4450">Qt串口基本设置与协议收发、波形显示</a></p>
+<p><a href="https://blog.csdn.net/yimuta9538/article/details/103769756?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522170636391316777224459709%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&amp;request_id=170636391316777224459709&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-11-103769756-null-null.nonecase&amp;utm_term=qt%E4%B8%B2%E5%8F%A3%E5%8F%91%E9%80%81&amp;spm=1018.2226.3001.4450">QT串口发送结果比预期多字节问题</a></p>
+<ul>
+<li>串口参数要设置对，不然会打开失败，显示 <code>系统找不到指定文件</code>，如果其他参数都正确，那大概率就是端口号选错或者端口名设置错误，串口名字不能带有描述信息，必须是 <code>COMx</code> 格式</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">MainPage5_ui-&gt;Top_SerialPort_comboBox-&gt;addItem(info.portName().append(&quot;: &quot;).append(info.description()), info.portName());	&#x2F;&#x2F; 添加可用的串口端口号和描述信息</code></pre>
+<p>可以这样写，第二个参数就是端口号数据，到时候读取直接读取即可</p>
+<ul>
+<li>串口列表检测</li>
+</ul>
+<p>检测的话分为</p>
+<ol>
+<li>串口打开状态下，检测到列表有变化，但是不是正在当前使用的端口，【方法是如果正在使用时列表发生了改变则等关闭串口时就直接进行更新】</li>
+<li>串口关闭状态下，检测到列表有变化，【方法是直接发送更新信号】</li>
+<li>串口打开状态下，检测到列表有变化而且是当前正在使用的端口，【方法是直接强制断开串口然后更新】</li>
+</ol>
+<ul>
+<li>串口数据接收的槽函数需要做唯一标识，即在连接函数参数最后加一个，这样保证了信号与槽函数是唯一的，如果再次尝试使用相同的信号和槽进行连接，连接操作将被忽略</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">connect(_serialPort, &amp;QSerialPort::readyRead, this, &amp;SerialThread::Serial_Thread_Data_Receive, Qt::UniqueConnection);</code></pre>
+<ul>
+<li>文本框限制输入</li>
+</ul>
+<blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void MainPage5::Slots_Page5_SerialSend_textEdit_TextChanged()
+&#123;
+	&#x2F;&#x2F; 勾选了十六进制发送
+	if (AppSettings::Status_Enable &#x3D;&#x3D; AppSettings::Instance()-&gt;get_pSerialCommunicationParameter()-&gt;HexSend_Status)
+	&#123;
+		QString strData &#x3D; MainPage5_ui-&gt;Page5_SerialSend_textEdit-&gt;toPlainText();
+		&#x2F;&#x2F; 使用正则表达式匹配十六进制数和空格
+		QRegularExpression hexRegex(&quot;^[0-9A-Fa-f ]+$&quot;);
+		if (!hexRegex.match(strData).hasMatch())
+		&#123;
+			 emit MainPage5_Signals_PromptMsg(MessageType::MESSAGE_TYPE_ERROR, QString(&quot;只能输入十六进制或空格!&quot;));
+			MainPage5_ui-&gt;Page5_SerialSend_textEdit-&gt;blockSignals(true);
+			MainPage5_ui-&gt;Page5_SerialSend_textEdit-&gt;setText(&quot;&quot;);	&#x2F;&#x2F; 清除输入框
+			MainPage5_ui-&gt;Page5_SerialSend_textEdit-&gt;blockSignals(false);
+		&#125;
+	&#125;
+&#125;</code></pre>
+<p>上面如果不加 <code>MainPage5_ui-&gt;Page5_SerialSend_textEdit-&gt;blockSignals</code> 限制的话会造成死循环导致异常</p>
+<p>设置为true时，QObject对象[子类]不会发出信号</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">例如：
+
+QComboBox动态添加item的时候，它会发出xxxChanged信号，但是初始情况下我们不希望其发出，待初始化完成后再发出。
+
+则可以：
+
+先设置blockSignals(true)；&#x2F;&#x2F;阻塞信号
+
+添加item；
+
+设置blockSignals(false);&#x2F;&#x2F;取消信号阻塞</code></pre>
+</blockquote>
+<p>还有就是起点问题，如果删除键删除到文本框起点位置也会触发一次正则表达式，方法是检测光标的位置，光标为0则不进入if触发错误处理</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">int cursorPosition &#x3D; MainPage5_ui-&gt;Page5_SerialSend_textEdit-&gt;textCursor().position();</code></pre>
+<ul>
+<li>编码问题</li>
+</ul>
+<p>串口助手我默认都是 <code>UTF-8</code>，所以中文的十六进制跟GBK编码是不一样的</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; UTF-8的 &quot;你好&quot;
+E4 BD A0 E5 A5 BD
+&#x2F;&#x2F; GBK的 &quot;你好&quot;
+C4 E3 BA C3</code></pre>
+<ul>
+<li>定时器的话必须在同一个线程打开或者关闭，最好初始化为 <code>nullptr</code>，然后放函数里面的话为了防止重复连接最好先解除连接再进行连接</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void SerialThread::Serial_Thread_TimingSend_Control(int time)
+&#123;
+	&#x2F;&#x2F; 如果之前已经创建了定时器，则先解除定时器与槽函数的连接否则定时器停不下来
+	if (TimingSend_timer !&#x3D; nullptr)
+	&#123;
+		disconnect(TimingSend_timer, &amp;QTimer::timeout, this, nullptr);
+		TimingSend_timer-&gt;stop();
+		TimingSend_timer &#x3D; nullptr;
+	&#125;
+	TimingSend_timer &#x3D; new QTimer(this);
+	connect(TimingSend_timer, &amp;QTimer::timeout, this, [&#x3D;]()
+		&#123;
+			&#x2F;&#x2F; 发送数据信号
+			emit SerialThread_Signals_StartSendData();
+		&#125;);
+
+	if (AppSettings::Status_Enable &#x3D;&#x3D; AppSettings::Instance()-&gt;get_pSerialCommunicationParameter()-&gt;TimingSend_Status)
+	&#123;
+		&#x2F;&#x2F; 启动定时器
+		TimingSend_timer-&gt;start(time);
+	&#125;
+	else if (AppSettings::Status_Disable &#x3D;&#x3D; AppSettings::Instance()-&gt;get_pSerialCommunicationParameter()-&gt;TimingSend_Status)
+	&#123;
+		TimingSend_timer-&gt;stop();
+	&#125;
+&#125;</code></pre>
+<ul>
+<li>
+<p>串口发送的话去掉发送完成显示在上位机这个部分，因为发现会很卡，直接发送即可不显示，这个的原因找到了，是因为使用了插入，得使用 <code>append</code> 才不会卡</p>
+</li>
+<li>
+<p>串口接收文本框十六进制显示一行可以显示30个十六进制数</p>
+</li>
+<li>
+<p>串口接收使用队列+定时器定时去解析里面的数据方法</p>
+</li>
+<li>
+<p>解析数据的话暂时有两种方法</p>
+</li>
+</ul>
+<ol>
+<li>使用了 <code>QByteArray</code> 和 <code>QString</code> 类的一些方法来获取和解析数据</li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 示例
+
+&#x2F;*数据解析*&#x2F;
+&#x2F;&#x2F; 使用constData函数获取data字节数组的指向数据的常量指针 将常量指针转换为const uchar*类型 将从小端模式表示的字节序列解析为指定类型的值
+quint16 mainVersion &#x3D; qFromLittleEndian&lt;quint16&gt;(reinterpret_cast&lt;const uchar *&gt;(array.constData()));	&#x2F;&#x2F; 固件版本(0~1)
+quint16 rackVersion &#x3D; qFromLittleEndian&lt;quint16&gt;(reinterpret_cast&lt;const uchar *&gt;(array.constData() + 2));	&#x2F;&#x2F; 机架编号(2~3)
+quint16 configVersion &#x3D; qFromLittleEndian&lt;quint16&gt;(reinterpret_cast&lt;const uchar *&gt;(array.constData() + 4));	&#x2F;&#x2F; 配置版本1(4~5)
+&#x2F;&#x2F; 机架描述
+QByteArray rackDescriptionBytes &#x3D; array.mid(6, 32);	&#x2F;&#x2F; mid 获取字节数组中指定位置和长度的子字节数组 第 6 个位置开始，取出长度为 32 的子字节数组
+QString rackDescription &#x3D; QString::fromUtf8(rackDescriptionBytes.constData()).trimmed();	&#x2F;&#x2F; 需要转UTF-8  trimmed用于移除字符串两端的空白字符
+&#x2F;&#x2F; 编译时间
+QByteArray compileDateBytes &#x3D; array.mid(38, 16);
+QString compileDate &#x3D; QString::fromUtf8(compileDateBytes.constData()).trimmed();
+&#x2F;&#x2F; ID
+QByteArray id &#x3D; array.mid(54, 12).toHex().toUpper();
+
+&#x2F;*UI更新*&#x2F;
+if (AppSettings::Instance()-&gt;getSerial_isOpen())
+&#123;
+    ui-&gt;Top_ICVersion_lineEdit-&gt;setText(QString::number(mainVersion));
+    ui-&gt;Top_ICID_lineEdit-&gt;setText(id);
+    ui-&gt;Bottom__RackNumber_lineEdit-&gt;setText(QString(&quot;%1: %2&quot;).arg(QString::number(rackVersion)).arg(rackDescription));
+    ui-&gt;Bottom__CompileTime_lineEdit-&gt;setText(compileDate);
+    ui-&gt;Bottom__ConfigVersion1_lineEdit-&gt;setText(QString::number(configVersion));
+&#125;</code></pre>
+<ol start="2">
+<li>直接使用 <code>QDataStream</code> 进行二进制解析，直接对字节进行解析，并且可以指定字节顺序，而不需要进行多次数组截取、字符串转换等操作，效率高推荐！</li>
+</ol>
+<blockquote>
+<p><code>readRawData</code> 从数据流中读取原始数据并将其存储到指定的缓冲区，接受两个参数：缓冲区的指针和要读取的字节数</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 示例
+
+&#x2F;*数据解析*&#x2F;
+&#x2F;&#x2F; 将字节数组转换为数据流
+QDataStream stream(array);
+&#x2F;&#x2F; 设置字节序为小端模式，与协议说明中一致
+stream.setByteOrder(QDataStream::LittleEndian);
+
+qint16 roll, pitch, yaw;	&#x2F;&#x2F; 姿态
+qint16 motorRoll, motorPitch, motorYaw;	&#x2F;&#x2F; 电机位置
+qint16 targetRoll, targetPitch, targetYaw;	&#x2F;&#x2F; 目标姿态
+qint16 motionSpeedRoll, motionSpeedPitch, motionSpeedYaw;	&#x2F;&#x2F; 运动速度辐值
+
+&#x2F;&#x2F; 从数据流中读取数据，并存入上述定义的变量中
+stream &gt;&gt; roll;	&#x2F;&#x2F;姿态 - 横滚 俯仰 航向
+stream &gt;&gt; pitch;
+stream &gt;&gt; yaw;
+
+stream &gt;&gt; motorRoll;	&#x2F;&#x2F;电机位置 - 横滚 俯仰 航向
+stream &gt;&gt; motorPitch;
+stream &gt;&gt; motorYaw;
+
+stream &gt;&gt; targetRoll;	&#x2F;&#x2F;目标姿态 - 横滚 俯仰 航向
+stream &gt;&gt; targetPitch;
+stream &gt;&gt; targetYaw;
+
+stream &gt;&gt; motionSpeedRoll;	&#x2F;&#x2F;运动速度辐值 - 横滚 俯仰 航向
+stream &gt;&gt; motionSpeedPitch;
+stream &gt;&gt; motionSpeedYaw;
+
+&#x2F;&#x2F; 将读取的数据转换为浮点数值
+float rollValue &#x3D; static_cast&lt;float&gt;(roll) &#x2F; 100.0;
+float pitchValue &#x3D; static_cast&lt;float&gt;(pitch) &#x2F; 100.0;
+float yawValue &#x3D; static_cast&lt;float&gt;(yaw) &#x2F; 100.0;
+
+float motorRollValue &#x3D; static_cast&lt;float&gt;(motorRoll) &#x2F; 100.0;
+float motorPitchValue &#x3D; static_cast&lt;float&gt;(motorPitch) &#x2F; 100.0;
+float motorYawValue &#x3D; static_cast&lt;float&gt;(motorYaw) &#x2F; 100.0;
+
+float targetRollValue &#x3D; static_cast&lt;float&gt;(targetRoll) &#x2F; 100.0;
+float targetPitchValue &#x3D; static_cast&lt;float&gt;(targetPitch) &#x2F; 100.0;
+float targetYawValue &#x3D; static_cast&lt;float&gt;(targetYaw) &#x2F; 100.0;
+
+float motionSpeedRollValue &#x3D; static_cast&lt;float&gt;(motionSpeedRoll) &#x2F; 100.0;
+float motionSpeedPitchValue &#x3D; static_cast&lt;float&gt;(motionSpeedPitch) &#x2F; 100.0;
+float motionSpeedYawValue &#x3D; static_cast&lt;float&gt;(motionSpeedYaw) &#x2F; 100.0;
+
+&#x2F;*Ui更新*&#x2F;
+&#x2F;&#x2F; 运动速度辐值
+ui-&gt;Page1_Pane1_Pitch_lineEdit-&gt;setText(QString::number(motionSpeedPitchValue, &#39;f&#39;, 2));
+ui-&gt;Page1_Pane1_Roll_lineEdit-&gt;setText(QString::number(motionSpeedRollValue, &#39;f&#39;, 2));
+ui-&gt;Page1_Pane1_Yaw_lineEdit-&gt;setText(QString::number(motionSpeedYawValue, &#39;f&#39;, 2));
+&#x2F;&#x2F; 姿态角
+ui-&gt;Page1_Pane2_Pitch_lineEdit-&gt;setText(QString::number(pitchValue, &#39;f&#39;, 2));
+ui-&gt;Page1_Pane2_Roll_lineEdit-&gt;setText(QString::number(rollValue, &#39;f&#39;, 2));
+ui-&gt;Page1_Pane2_Yaw_lineEdit-&gt;setText(QString::number(yawValue, &#39;f&#39;, 2));
+&#x2F;&#x2F; 电机位置
+ui-&gt;Page1_Pane3_Pitch_lineEdit-&gt;setText(QString::number(motorPitchValue, &#39;f&#39;, 2));
+ui-&gt;Page1_Pane3_Roll_lineEdit-&gt;setText(QString::number(motorRollValue, &#39;f&#39;, 2));
+ui-&gt;Page1_Pane3_Yaw_lineEdit-&gt;setText(QString::number(motorYawValue, &#39;f&#39;, 2));
+&#x2F;&#x2F; 目标姿态
+ui-&gt;Page1_Pane4_Pitch_lineEdit-&gt;setText(QString::number(targetPitchValue, &#39;f&#39;, 2));
+ui-&gt;Page1_Pane4_Roll_lineEdit-&gt;setText(QString::number(targetRollValue, &#39;f&#39;, 2));
+ui-&gt;Page1_Pane4_Yaw_lineEdit-&gt;setText(QString::number(targetYawValue, &#39;f&#39;, 2));</code></pre>
+<ul>
+<li>
+<p>协议里某些涉及到位功能，所以可以使用位域结构体来存储，注意大小端问题还有跨平台下字节对齐，如果跨平台的话还是用位运算好点</p>
+</li>
+<li>
+<p>协议解析那全部使用 <code>QByteArray</code> 类型进行存储与解析，之前是转为 <code>QString</code> 类型再进行数据解析结果是经常丢包，改成这个后大大降低了丢包率</p>
+</li>
+</ul>
+<p>旧方案：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">QString SerialThread::Serial_Thread_OldProtocol1_CRC(QByteArray array)
+&#123;
+	quint16 temp &#x3D; 0;
+	quint8 sum &#x3D; 0;
+
+	QDataStream out(&amp;array, QIODevice::ReadWrite); &#x2F;&#x2F; 将字节组读入
+	while (!out.atEnd())
+	&#123;
+		qint8 outchar &#x3D; 0;
+		out &gt;&gt; outchar; &#x2F;&#x2F; 每字节填充一次，直到结束
+		temp +&#x3D; (qint16)(outchar &amp; 0xff);
+	&#125;
+
+	sum &#x3D; temp &amp; 0xFF;	&#x2F;&#x2F; 只要低8位
+
+	QString crc &#x3D; QString(&quot;%1&quot;).arg(sum &amp; 0xFF, 2, 16, QLatin1Char(&#39;0&#39;)).toUpper();
+#if 0
+	qDebug() &lt;&lt; &quot;crc:&quot; &lt;&lt; sum &lt;&lt; Qt::endl;
+#endif
+	return crc;
+&#125;
+
+void SerialThread::Serial_Thread_OldProtocol1_DataGetCheck(QByteArray&amp; recvBuff)
+&#123;
+	QString crc;        &#x2F;&#x2F; 接收到的CRC
+
+	QDataStream out(&amp;recvBuff, QIODevice::ReadWrite);      &#x2F;&#x2F; 创建QDataStream对象，用于读取QByteArray
+
+	while (!out.atEnd())    &#x2F;&#x2F; 如果未读取到QByteArray结尾
+	&#123;
+		qint8 outChar &#x3D; 0;  &#x2F;&#x2F; 定义一个字节类型的变量，初始化为0
+		out &gt;&gt; outChar;     &#x2F;&#x2F; 从QByteArray中读取一个字节，并放入outChar中
+
+		&#x2F;&#x2F; 将读取到的字节转换为十六进制字符串
+		QString byte &#x3D; QString(&quot;%1&quot;).arg(outChar &amp; 0xFF, 2, 16, QLatin1Char(&#39;0&#39;)).toUpper();
+
+		switch (OldProtocol1_Parameter-&gt;state_machine)
+		&#123;
+		case HeaderState:
+		&#123;
+			&#x2F;&#x2F; 判断帧头
+			if (PROTOCOL1_HEAD &#x3D;&#x3D; byte)
+			&#123;
+				OldProtocol1_Parameter-&gt;state_machine &#x3D; SourceAddressState;
+			&#125;
+			break;
+		&#125;
+		case SourceAddressState:
+		&#123;
+			&#x2F;&#x2F; 判断目的地
+			if (PROTOCOL1_SRC_GATE2 &#x3D;&#x3D; byte)
+			&#123;
+				OldProtocol1_Parameter-&gt;checkData_str +&#x3D; byte;
+				OldProtocol1_Parameter-&gt;state_machine &#x3D; DestinationAddressStatus;
+			&#125;
+			else
+			&#123;
+				OldProtocol1_Parameter-&gt;checkData_str.clear();
+				OldProtocol1_Parameter-&gt;state_machine &#x3D; HeaderState;
+			&#125;
+			break;
+		&#125;
+		case DestinationAddressStatus:
+		&#123;
+			&#x2F;&#x2F; 判断来源地址
+			if ((PROTOCOL1_SRC_PITCH &#x3D;&#x3D; byte) || (PROTOCOL1_SRC_ROLL &#x3D;&#x3D; byte) || (PROTOCOL1_SRC_YAW &#x3D;&#x3D; byte) || (PROTOCOL1_SRC_HANDLE &#x3D;&#x3D; byte) || (PROTOCOL1_SRC_GATE1 &#x3D;&#x3D; byte) || (PROTOCOL1_SRC_GATE2 &#x3D;&#x3D; byte))
+			&#123;
+				OldProtocol1_Parameter-&gt;checkData_str +&#x3D; byte;
+				OldProtocol1_Parameter-&gt;state_machine &#x3D; FunctionCodeStatus;
+			&#125;
+			else
+			&#123;
+				OldProtocol1_Parameter-&gt;checkData_str.clear();
+				OldProtocol1_Parameter-&gt;state_machine &#x3D; HeaderState;
+			&#125;
+			break;
+		&#125;
+		case FunctionCodeStatus:
+		&#123;
+			&#x2F;&#x2F; 功能码
+			OldProtocol1_Parameter-&gt;functionCode &#x3D; byte;
+			OldProtocol1_Parameter-&gt;checkData_str +&#x3D; byte;
+			OldProtocol1_Parameter-&gt;state_machine &#x3D; DataLen1Status;
+			break;
+		&#125;
+		case DataLen1Status:
+		&#123;
+			&#x2F;&#x2F; 数据长度1和2是一样的
+			OldProtocol1_Parameter-&gt;bufferdatalen &#x3D; byte;
+			OldProtocol1_Parameter-&gt;state_machine &#x3D; DataLen2Status;
+			break;
+		&#125;
+		case DataLen2Status:
+		&#123;
+			&#x2F;&#x2F; 数据长度1和2是一样的，故转换为实际长度只需要拿其中一个即可
+			OldProtocol1_Parameter-&gt;bufferdatalen +&#x3D; byte;
+			OldProtocol1_Parameter-&gt;checkData_str +&#x3D; OldProtocol1_Parameter-&gt;bufferdatalen;
+			OldProtocol1_Parameter-&gt;dataLen_Cnt &#x3D; 0;
+			OldProtocol1_Parameter-&gt;dataLen &#x3D; byte.toInt(&amp;OldProtocol1_Parameter-&gt;ok, 16);	&#x2F;&#x2F; 16进制字符串转换为10进制数字
+			&#x2F;&#x2F; 数据长度为0则直接跳到CRC即可
+			if (PROTOCOL1_NONE_DATALEN &#x3D;&#x3D; OldProtocol1_Parameter-&gt;bufferdatalen)
+			&#123;
+				OldProtocol1_Parameter-&gt;state_machine &#x3D; ChecksumState;
+			&#125;
+			else
+			&#123;
+				OldProtocol1_Parameter-&gt;state_machine &#x3D; ReceiveDataBlockState;
+			&#125;
+			break;
+		&#125;
+		case ReceiveDataBlockState:
+		case LastReceiveDataBlockState:
+		&#123;
+			OldProtocol1_Parameter-&gt;validData_str +&#x3D; byte;	&#x2F;&#x2F; 接收的有效数据
+			OldProtocol1_Parameter-&gt;checkData_str +&#x3D; byte;
+			if (OldProtocol1_Parameter-&gt;dataLen_Cnt &#x3D;&#x3D; (OldProtocol1_Parameter-&gt;dataLen - 1))		&#x2F;&#x2F; 接收够数据(0~69相当于70个所以dataLen需要-1)
+			&#123;
+				OldProtocol1_Parameter-&gt;state_machine &#x3D; ChecksumState;
+			&#125;
+			else	&#x2F;&#x2F; 未接收完
+			&#123;
+				OldProtocol1_Parameter-&gt;state_machine &#x3D; LastReceiveDataBlockState;
+				++OldProtocol1_Parameter-&gt;dataLen_Cnt;	&#x2F;&#x2F; 计数++
+			&#125;
+			break;
+		&#125;
+		case ChecksumState:
+		&#123;
+			&#x2F;&#x2F; CRC校验
+			crc &#x3D; byte;
+			QByteArray temp &#x3D; QByteArray::fromHex(OldProtocol1_Parameter-&gt;checkData_str.toLatin1().data());	&#x2F;&#x2F; 数据为字符串，需要转换成16进制
+#if 0
+			qDebug() &lt;&lt; &quot;有效数据个数:&quot; &lt;&lt; OldProtocol1_Parameter-&gt;dataLen_Cnt &lt;&lt; &quot;OldProtocol1_Parameter-&gt;dataLen:&quot; &lt;&lt; OldProtocol1_Parameter-&gt;dataLen &lt;&lt; Qt::endl;
+#endif
+			QString strSum &#x3D; Serial_Thread_OldProtocol1_CRC(temp);
+
+			if (crc &#x3D;&#x3D; strSum)
+			&#123;
+				&#x2F;&#x2F; 校验成功
+				OldProtocol1_Parameter-&gt;dataCheck_Flag &#x3D; true;
+#if 0	&#x2F;&#x2F; 解析数据不使用unsigned char* 故屏蔽
+				&#x2F;&#x2F; 把数据保存
+				for (int i &#x3D; 0, j &#x3D; 0; i &lt; OldProtocol1_Parameter-&gt;validData_str.length(); i +&#x3D; 2, j++)
+				&#123;
+					OldProtocol1_Parameter-&gt;finalData[j] &#x3D; OldProtocol1_Parameter-&gt;validData_str.mid(i, 2).toInt(&amp;OldProtocol1_Parameter-&gt;ok, 16);
+				&#125;
+#endif
+				QByteArray hexData &#x3D; QByteArray::fromHex(OldProtocol1_Parameter-&gt;validData_str.toUtf8());	&#x2F;&#x2F; 将一个十六进制字符串转换为对应的字节数组
+				&#x2F;&#x2F; 串口数据解析
+				Serial_Thread_OldProtocol1_Data_Analyze(OldProtocol1_Parameter-&gt;functionCode, hexData, OldProtocol1_Parameter-&gt;dataLen);
+			&#125;
+			else
+			&#123;
+				&#x2F;&#x2F; 校验失败
+				OldProtocol1_Parameter-&gt;dataCheck_Flag &#x3D; false;
+			&#125;
+			strSum.clear();	&#x2F;&#x2F; 清除
+			OldProtocol1_Parameter-&gt;functionCode &#x3D; &quot;XX&quot;;
+			OldProtocol1_Parameter-&gt;validData_str.clear();	&#x2F;&#x2F; 有效数据清0
+			OldProtocol1_Parameter-&gt;checkData_str.clear();	&#x2F;&#x2F; 校验数据清0
+			OldProtocol1_Parameter-&gt;state_machine &#x3D; HeaderState;
+			break;
+		&#125;
+		default:break;
+		&#125;
+		&#125;
+#if 0	&#x2F;&#x2F; 打印
+	qDebug() &lt;&lt; &quot;除了帧头以外的数据:&quot; &lt;&lt; buffer &lt;&lt; Qt::endl;
+#endif
+	&#125;
+
+void SerialThread::Serial_Thread_OldProtocol1_Data_Analyze(QString code, const QByteArray&amp; array, int data_len)
+&#123;
+	switch (code.toInt(&amp;OldProtocol1_Parameter-&gt;ok, 16))
+	&#123;
+	case PRO1_FUNC_PostureQuery:	&#x2F;&#x2F; 姿态查询
+	&#123;
+		emit Pro1_Signals_PostureQuery(array, data_len);
+		break;
+	&#125;
+	case PRO1_FUNC_VersionQuery:	&#x2F;&#x2F; 版本查询
+	&#123;
+		emit Pro1_Signals_VersionQuery(array, data_len);
+		OldProtocol1_Parameter-&gt;ConnectDevice_Flag &#x3D; true;
+		break;
+	&#125;
+	case PRO1_FUNC_SystemStatusQuery:	&#x2F;&#x2F; 系统状态查询
+	&#123;
+		emit Pro1_Signals_SystemStatusQuery(array, data_len);
+		break;
+	&#125;
+	default:
+	&#123;
+		qDebug() &lt;&lt; &quot;功能码错误&quot;;
+		return;
+	&#125;
+	&#125;
+	AppSettings::Instance()-&gt;ParsePack_Count++;	&#x2F;&#x2F; 解包数++
+	emit SerialThread_Signals_PackCountToUi();	&#x2F;&#x2F; 发送信号更新显示
+&#125;</code></pre>
+<ul>
+<li>分割符问题</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 获取轨迹点
+QString input_text &#x3D; ui-&gt;Page1_Pane6_TrackPoint_lineEdit-&gt;text();
+
+QStringList points &#x3D; input_text.trimmed().split(&#39;;&#39;, Qt::SkipEmptyParts);	&#x2F;&#x2F; 如果只有一个轨迹点时，在进行字符串分割时，会得到两个元素：&quot;12,111&quot; 和 &quot;&quot;（空字符串） 因为分隔符 &quot;;&quot; 出现在字符串的末尾，所以最后一个元素就是空字符串返回的是分割后的字符串数组中的元素数量，即 2 这是因为分割后的数组中包含了一个非空元素和一个空字符串元素 如果你想要避免这种情况，可以在进行字符串分割之前，先使用 trimmed() 方法删去字符串两端的空格，或者在进行字符串分割时，使用 QString::SkipEmptyParts 标记来跳过空字符串</code></pre>
+<ul>
+<li>QByteArray相关</li>
+</ul>
+<blockquote>
+<p>方法 <code>prepend</code> 把元素插在头部</p>
+</blockquote>
+<h2 id="常用控件">常用控件</h2>
+<h3 id="滚动条">滚动条</h3>
+<ul>
+<li>setValue函数</li>
+</ul>
+<p>可以设置滚动条位置，可以设置到最大值 <code>maximum()</code> 的位置</p>
+<h3 id="复选框">复选框</h3>
+<ul>
+<li>通过状态改变信号 <code>stateChanged</code> 可以知道有没有勾，它有返回值，勾了是 <code>2</code> ，没勾是 <code>0</code></li>
+<li>通过判断 <code>checkState</code> 可以获取勾选状态</li>
+<li>方法<code>setCheckState</code> 可以设置勾不勾选</li>
+</ul>
+<h3 id="下拉框">下拉框</h3>
+<ul>
+<li>设置显示内容的同时绑定对应的数据</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">MainPage2_ui-&gt;Page2_Pane1_PCAddr_comboBox-&gt;addItem(&quot;12&quot;, AppSettings::PCAddr_12);	&#x2F;&#x2F; 显示12,绑定对应的数据是枚举类型的</code></pre>
+<p>下拉框的选项默认下标是从第一个选项开始是0，以此递增，所以获取当前所选项的下标是</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">int current &#x3D; MainPage2_ui-&gt;Page2_Pane1_Model_comboBox-&gt;currentIndex();</code></pre>
+<p>获取下标对应的绑定数据(返回类型是QVaariant类型需要用 <code>static_cast</code> 转换为对应想要的类型)，也可以使用方法 <code>currentData</code></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">qDebug() &lt;&lt; MainPage2_ui-&gt;Page2_Pane1_PCAddr_comboBox-&gt;itemData(index);
+
+auto current_data &#x3D; MainPage2_ui-&gt;Page2_Pane1_Model_comboBox-&gt;itemData(current).value&lt;AppSettings::Model_et&gt;();	&#x2F;&#x2F; 获取当前下标对应的绑定数据(需要类型转换)
+qDebug() &lt;&lt; current_data;
+
+&#x2F;&#x2F; 另一种方法(推荐)
+auto checkBit_current_data &#x3D; MainPage5_ui-&gt;Page5_SerialCheckBit_comboBox-&gt;currentData().value&lt;AppSettings::SerialCheckBit_et&gt;();&#x2F;&#x2F; 获取当前下标对应的绑定数据(需要类型转换)</code></pre>
+<p>通过数据寻找对应下标是</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">qDebug() &lt;&lt; MainPage2_ui-&gt;Page2_Pane1_PCAddr_comboBox-&gt;findData(static_cast&lt;int&gt;(AppSettings::PCAddr_11));</code></pre>
+<h3 id="文本框">文本框</h3>
+<ul>
+<li>默认是数据超出文本框自动换行的，可以通过Ui界面修改， 把  <code>lineWrapMode</code> 模式设置为 <code>QTextOption::NoWrap</code>，则不会自动换行就会水平一直写入</li>
+<li>追加文本的话使用 <code>append</code> 会自动在末尾添加换行符，使用 <code>insertPlainText</code> 则不会添加换行符</li>
+<li><code>toPlainText</code> 是以纯文本方式获取框里的内容</li>
+<li>没有正则表达式方法 <code>setValidator</code></li>
+</ul>
+<h2 id="旧协议1">旧协议1</h2>
+<h3 id="S07">S07</h3>
+<p>中间的是俯仰，上面是横滚X，下面是航向</p>
+<blockquote>
+<p>功能</p>
+<ol>
+<li>POV模式下表示旋转按钮会旋转横滚轴电机，相当于解锁横滚</li>
+<li>PF模式下表示旋转左右按钮会旋转航向轴电机，旋转上下会旋转俯仰</li>
+<li>F模式</li>
+<li>L模式</li>
+<li>任意模式下长按不放就是FG模式，此模式下电机回来力度变大，松开则退出FG模式变成普通模式</li>
+<li>双击红点切换横竖屏</li>
+<li>点击电源则打开补光灯，有3档</li>
+</ol>
+</blockquote>
+<h3 id="总体">总体</h3>
+<p>一个设备有唯一的配置：</p>
+<ol>
+<li>串口波特率</li>
+<li>校验位</li>
+<li>停止位</li>
+<li>数据位</li>
+<li>机型</li>
+<li>PC地址</li>
+<li>是否等待空闲帧</li>
+</ol>
+<h3 id="协议">协议</h3>
+<h4 id="初始">初始</h4>
+<blockquote>
+<p>定义 <code>控制设备为通信主机，即上位机</code>， <code>云台为通信从机，即下位机</code></p>
+<p>数据从云台发往控制设备： <code>数据上行</code></p>
+<p>数据从控制设备发往云台： <code>数据下行</code></p>
+</blockquote>
+<blockquote>
+<p>通信模式：<code>采用问答式通信模式即：主机问 – 从机答</code></p>
+</blockquote>
+<blockquote>
+<p>基本规则：</p>
+<ol>
+<li>主机的设置/命令类功能吗，在从机无需数据返回的情况下，都以 <code>确认/否认帧</code> 返回</li>
+<li>未特别说明，所有数据均采用 <code>小端模式</code>，即 <code>低位字节在前,高位字节在后</code></li>
+<li>延后命令返回问题，对于校准等命令，结果无法马上返回，主机应该在命令执行过程中 <code>反复查询状态</code>，校准返回命令也将在校准结束后遇到查询命令返回</li>
+</ol>
+</blockquote>
+<ul>
+<li>设备正常可识别配置</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">机型</th>
+<th style="text-align:center">串口波特率</th>
+<th style="text-align:center">PC地址</th>
+<th style="text-align:center">是否等待空闲帧</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">V5+新按键板</td>
+<td style="text-align:center">9600</td>
+<td style="text-align:center">12</td>
+<td style="text-align:center">否</td>
+</tr>
+</tbody>
+</table>
+<h4 id="协议部分">协议部分</h4>
+<blockquote>
+<p>【协议格式】</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度（byte）</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">帧头</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">固定值：0x55</td>
+</tr>
+<tr>
+<td style="text-align:center">目的地址</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">备用：0</td>
+</tr>
+<tr>
+<td style="text-align:center">源地址</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">备用：0</td>
+</tr>
+<tr>
+<td style="text-align:center">功能码</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">用户数据长度1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">N</td>
+</tr>
+<tr>
+<td style="text-align:center">用户数据长度2</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">N</td>
+</tr>
+<tr>
+<td style="text-align:center">用户数据(UD)</td>
+<td style="text-align:center">N</td>
+<td style="text-align:center">用户数据可以为空</td>
+</tr>
+<tr>
+<td style="text-align:center">校验</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">和校验：从目的地址开始的字节和</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<blockquote>
+<p>【地址规划】</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">地址空间</th>
+<th style="text-align:center">地址</th>
+<th style="text-align:center">模块</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">俯仰/云台</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">横滚</td>
+<td style="text-align:center">仅Bootloader 状态有效</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">航向</td>
+<td style="text-align:center">仅Bootloader 状态有效</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">手柄/网关</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center">11</td>
+<td style="text-align:center">网关1号端口</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center">12</td>
+<td style="text-align:center">网关2号端口</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center">13</td>
+<td style="text-align:center">摄像头</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center">14</td>
+<td style="text-align:center">遥控器</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h3 id="【确认】0x00">【确认】0x00</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 46 04 04 01 01 96 14 08</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">命令ID</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">确认的命令</td>
+</tr>
+<tr>
+<td style="text-align:center">备用</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 00 02 02 46 00 58</p>
+</blockquote>
+<h3 id="【否认】0x01">【否认】0x01</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">命令ID</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">否认的命令</td>
+</tr>
+<tr>
+<td style="text-align:center">备用</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">原因</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">否认的原因</td>
+</tr>
+</tbody>
+</table>
+<h3 id="【调试信息】0x02">【调试信息】0x02</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<p>电机校准过程中会发送给上位机，字符串形式，包含了x次校准的值</p>
+<blockquote>
+<p><code>下位机回复</code>：55 0c 02 02 17 17 32 e6 ac a1 e6 a0 a1 e5 87 86 3a 31 30 31 39 20 20 20 32 35 35 39 34 2a</p>
+</blockquote>
+<h3 id="【输入-六面下一步】0x03">【输入-六面下一步】0x03</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 03 04 04 01 00 00 00 1A</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">值1</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">值2</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【命令输入】0x04">【命令输入】0x04</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 04 0B 0B 70 72 69 6E 74 5F 73 74 61 74 65 D5 （print_state）</p>
+<p><code>上位机发送</code>：55 02 0C 04 0F 0F 70 72 69 6E 74 5F 6D 6F 74 6F 72 5F 63 61 6C 7C （print_motor_cal）</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 04 0B 0B 70 72 69 6E 74 5F 73 74 61 74 65 D5</p>
+<p><code>下位机回复</code>：55 0C 02 04 0F 0F 70 72 69 6E 74 5F 6D 6F 74 6F 72 5F 63 61 6C 7C</p>
+</blockquote>
+<h3 id="【姿态查询】0x10">【姿态查询】0x10</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 10 00 00 1E</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">姿态-横滚</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">±180度 X 100</td>
+</tr>
+<tr>
+<td style="text-align:center">姿态-俯仰</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">±180度 X 100</td>
+</tr>
+<tr>
+<td style="text-align:center">姿态-航向</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">±180度 X 100</td>
+</tr>
+<tr>
+<td style="text-align:center">电机位置-横滚</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">±180度 X 100</td>
+</tr>
+<tr>
+<td style="text-align:center">电机位置-俯仰</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">±180度 X 100</td>
+</tr>
+<tr>
+<td style="text-align:center">电机位置-航向</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">±180度 X 100</td>
+</tr>
+<tr>
+<td style="text-align:center">目标姿态-横滚</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">±180度 X 100</td>
+</tr>
+<tr>
+<td style="text-align:center">目标姿态-俯仰</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">±180度 X 100</td>
+</tr>
+<tr>
+<td style="text-align:center">目标姿态-航向</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">±180度 X 100</td>
+</tr>
+<tr>
+<td style="text-align:center">运动速度辐值-横滚</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">运动速度辐值-俯仰</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">运动速度辐值-航向</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>下位机回复示例</code>：55 0C 02 10 18 18 AF F5 67 DD DA C1 67 03 C3 DB 33 E5 00 00 50 DD 7B 3E 0B 00 0A 00 20 00 0C</p>
+</blockquote>
+<h3 id="【姿态设置】0x11">【姿态设置】0x11</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 11 06 06 10 27 20 4E 30 75 75</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">姿态-横滚</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">±180度 X 100 如果为±32768表示该设置无效（以下类同）</td>
+</tr>
+<tr>
+<td style="text-align:center">姿态-俯仰</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">±180度 X 100</td>
+</tr>
+<tr>
+<td style="text-align:center">姿态-航向</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">±180度 X 100</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 00 02 02 11 00 23(确认)</p>
+</blockquote>
+<h3 id="【扩展模式通知】0x12">【扩展模式通知】0x12</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【匀速运动速度设置】0x13">【匀速运动速度设置】0x13</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 13 06 06 00 00 0C 00 21 00 5A</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度(Byte)</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">横滚速度</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">度/s，0为停止</td>
+</tr>
+<tr>
+<td style="text-align:center">俯仰速度</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">度/s</td>
+</tr>
+<tr>
+<td style="text-align:center">航向速度</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">度/s</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 00 02 02 13 00 25(确认)</p>
+</blockquote>
+<h3 id="【跟随设置】0x14">【跟随设置】0x14</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【初始姿态（姿态微调）读取】0x15">【初始姿态（姿态微调）读取】0x15</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 15 00 00 23</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度(Byte)</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">横滚</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">弧度x1000</td>
+</tr>
+<tr>
+<td style="text-align:center">俯仰</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">弧度x1000</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 15 04 04 00 00 00 00 2B</p>
+</blockquote>
+<h3 id="【初始姿态（姿态微调）设置】0x16">【初始姿态（姿态微调）设置】0x16</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 16 04 04 37 00 64 00 C7</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度(Byte)</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">横滚</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">弧度x1000</td>
+</tr>
+<tr>
+<td style="text-align:center">俯仰</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">弧度x1000</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 00 02 02 16 00 28(确认)</p>
+</blockquote>
+<h3 id="【跟随参数读取】0x17">【跟随参数读取】0x17</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 17 00 00 25</p>
+</blockquote>
+<p>参考 跟随参数设置</p>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 17 08 08 00 00 0F 00 3C 00 3C 00 BC</p>
+</blockquote>
+<h3 id="【模式设置】0x18">【模式设置】0x18</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 18 02 02 02 00 2C （快速跟随就是进入FG模式）</p>
+<p><code>上位机发送</code>：55 02 0C 18 02 02 00 00 2A （退出快速跟随）</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 00 02 02 18 00 2A（确认）</p>
+</blockquote>
+<h3 id="【跟随参数设置】0x19">【跟随参数设置】0x19</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 19 08 08 57 04 6F 00 57 04 57 04 B7</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度(Byte)</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">航向死区</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">度</td>
+</tr>
+<tr>
+<td style="text-align:center">俯仰死区</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">度</td>
+</tr>
+<tr>
+<td style="text-align:center">航向速度</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1-255级别</td>
+</tr>
+<tr>
+<td style="text-align:center">俯仰速度</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1-255级别</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 00 02 02 19 00 2B</p>
+</blockquote>
+<h3 id="【控制参数读取】0x1A">【控制参数读取】0x1A</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 1A 00 00 28</p>
+</blockquote>
+<p>参考控制参数设置</p>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 1A 06 06 00 00 00 1E 0A 0C 68</p>
+</blockquote>
+<h3 id="【控制参数设置】0x1B">【控制参数设置】0x1B</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 1B 06 06 00 00 00 00 00 00 35 （无勾选）</p>
+<p><code>上位机发送</code>：55 02 0C 1B 06 06 00 01 00 00 00 00 36 （勾选俯仰摇杆反向）</p>
+<p><code>上位机发送</code>：55 02 0C 1B 06 06 00 00 01 00 00 00 36 (勾选航向摇杆反向)</p>
+<p><code>上位机发送</code>：55 02 0C 1B 06 06 00 01 01 00 00 00 37 （两个都勾选）</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度(Byte)</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">横滚摇杆方向</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0：正向<br>1：反向</td>
+</tr>
+<tr>
+<td style="text-align:center">俯仰摇杆方向</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0：正向<br/>1：反向</td>
+</tr>
+<tr>
+<td style="text-align:center">航向摇杆方向</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0：正向<br/>1：反向</td>
+</tr>
+<tr>
+<td style="text-align:center">横滚摇杆速度</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1-255级别</td>
+</tr>
+<tr>
+<td style="text-align:center">俯仰摇杆速度</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1-255级别</td>
+</tr>
+<tr>
+<td style="text-align:center">航向摇杆速度</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1-255级别</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 00 02 02 1B 00 2D</p>
+</blockquote>
+<h3 id="【电机围栏查询】0x1C">【电机围栏查询】0x1C</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【电机围栏设置】0x1D">【电机围栏设置】0x1D</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【匀速运动速度查询】0x1E">【匀速运动速度查询】0x1E</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 1E 00 00 2C</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度(Byte)</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">横滚速度</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">度/s</td>
+</tr>
+<tr>
+<td style="text-align:center">俯仰速度</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">度/s</td>
+</tr>
+<tr>
+<td style="text-align:center">航向速度</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">度/s</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 1E 06 06 00 00 00 00 00 00 38</p>
+</blockquote>
+<h3 id="【默认参数缺省设置】0x1F">【默认参数缺省设置】0x1F</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 1F 01 01 00 2F （跟随模式参数 - 缺省）</p>
+<p><code>上位机发送</code>：55 02 0C 1F 01 01 01 30 （控制参数 - 缺省）</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 00 02 02 1F 00 31</p>
+</blockquote>
+<h3 id="【无】0x20">【无】0x20</h3>
+<h3 id="【姿态位移命令】0x21">【姿态位移命令】0x21</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【轨迹模式命令】0x22">【轨迹模式命令】0x22</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 22 01 01 01 33 (轨迹开始)</p>
+<p><code>上位机发送</code>：55 02 0C 22 0C 0C 02 02 64 00 20 D1 50 46 E0 2E 00 00 45 （轨迹执行）</p>
+<p><code>上位机发送</code>：55 02 0C 22 01 01 00 32 （轨迹退出）</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度(Byte)</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">类型</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0：退出轨迹模式<br>1：进入轨迹准备阶段<br>2：轨迹执行阶段</td>
+</tr>
+<tr>
+<td style="text-align:center">轨迹点个数</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">(2~12) x 4 字节（仅轨迹执行模式有效）</td>
+</tr>
+<tr>
+<td style="text-align:center">轨迹时间</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">秒</td>
+</tr>
+<tr>
+<td style="text-align:center">轨迹点1</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">航向坐标x100，俯仰坐标x100</td>
+</tr>
+<tr>
+<td style="text-align:center">轨迹点2</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">同上</td>
+</tr>
+<tr>
+<td style="text-align:center">轨迹点n</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">2 &lt;= n &lt;= 12</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 00 02 02 22 00 34 （确认）</p>
+<p><code>上位机回复</code>：55 0C 02 00 02 02 22 00 34 （确认）55 0C 02 10 18 18 02 00 18 00 D0 FF 03 01 0E 01 CE FF 00 00 E6 13 20 D1 18 00 D4 00 CF 01 BD （调试信息）</p>
+<p><code>下位机回复</code>：55 0C 02 00 02 02 22 00 34 （确认）</p>
+</blockquote>
+<h3 id="【中心跟随命令】0x23">【中心跟随命令】0x23</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【输出控制】0x24">【输出控制】0x24</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【HV横竖切换命令】0x25">【HV横竖切换命令】0x25</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 25 01 01 01 36</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 00 02 02 25 00 37（确认）</p>
+</blockquote>
+<h3 id="【遥控接口-左右无控命令】0x26">【遥控接口-左右无控命令】0x26</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 26 01 01 06 3C （左控）</p>
+<p><code>上位机发送</code>：55 02 0C 26 01 01 07 3D （右控）</p>
+<p><code>上位机发送</code>：55 02 0C 26 01 01 08 3E （无控）</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【电机零位置微调查询】0x27">【电机零位置微调查询】0x27</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 27 00 00 35</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度(Byte)</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">横滚</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0xFFFF/0</td>
+</tr>
+<tr>
+<td style="text-align:center">俯仰</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0xFFFF/0</td>
+</tr>
+<tr>
+<td style="text-align:center">航向</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">角度x100</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 27 06 06 00 00 00 00 00 00 41</p>
+</blockquote>
+<h3 id="【电机零位置微调设置】0x28">【电机零位置微调设置】0x28</h3>
+<p>FF FF 固定，发送时x100凑整</p>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 28 06 06 FF FF BB 04 DC 02 DD</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度(Byte)</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">横滚</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0xFFFF</td>
+</tr>
+<tr>
+<td style="text-align:center">俯仰</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0xFFFF</td>
+</tr>
+<tr>
+<td style="text-align:center">航向</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">角度x100（0XFFFF无效设置值）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【运动控制命令-回中-】0x30">【运动控制命令(回中)】0x30</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 30 01 01 00 40 （回中）</p>
+<p><code>上位机发送</code>：55 02 0C 30 01 01 02 42 (自拍)</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 00 02 02 30 00 42（确认）</p>
+</blockquote>
+<h3 id="【过程运动控制-全景命令】0x31">【过程运动控制-全景命令】0x31</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 31 03 03 02 00 24 6B （开始全景）</p>
+<p><code>上位机发送</code>：55 02 0C 31 02 02 02 01 46 （执行全景）</p>
+<p><code>上位机发送</code>：55 02 0C 31 02 02 02 FF 44 （退出全景）</p>
+<p><code>上位机发送</code>：55 02 0C 31 02 02 00 64 A7 （盗梦）</p>
+<p><code>上位机发送</code>：55 02 0C 31 02 02 01 00 44 （dm1启）</p>
+<p><code>上位机发送</code>：55 02 0C 31 03 03 01 01 00 47 （dm1执行）</p>
+<p><code>上位机发送</code>：55 02 0C 31 02 02 01 02 46 （dm1退）</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 00 02 02 31 00 43</p>
+</blockquote>
+<h3 id="【电机测试-力矩命令】0x40">【电机测试-力矩命令】0x40</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 40 06 06 0B 00 0C 00 0D 00 7E(正常设置)</p>
+<p><code>上位机发送</code>：55 02 0C 40 06 06 FF FF FF FF FF FF 54(关闭力矩)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度(Byte)</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">横滚</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">±1800</td>
+</tr>
+<tr>
+<td style="text-align:center">俯仰</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">±1800</td>
+</tr>
+<tr>
+<td style="text-align:center">航向</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">±1800</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 00 02 02 40 00 52(确认)</p>
+</blockquote>
+<h3 id="【PID控制调试命令-横滚-】0x41">【PID控制调试命令(横滚)】0x41</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【PID控制调试命令-俯仰-】0x42">【PID控制调试命令(俯仰)】0x42</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【PID控制调试命令-航向-】0x43">【PID控制调试命令(航向)】0x43</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【陀螺仪数据查询】0x44">【陀螺仪数据查询】0x44</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【控制板重启】0x45">【控制板重启】0x45</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 45 02 02 FF 00 56</p>
+<p><code>上位机发送</code>：55 02 0C 45 02 02 FF CC 22（校准清除）</p>
+</blockquote>
+<p>重启后会回复字符串调试信息：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">&#x2F;&#x2F; auto_ad_ps&#x3D;0
+55 0c 02 02 0c 0c 61 75 74 6F 5F 61 64 5F 70 73 3D 30 b4</code></pre>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 00 02 02 45 00 57</p>
+</blockquote>
+<h3 id="【临时命令】0x46">【临时命令】0x46</h3>
+<ul>
+<li>声音</li>
+</ul>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 46 04 04 01 01 96 14 08</p>
+</blockquote>
+<p>第7个字节固定0x01</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度（字节）</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">音量频率</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">范围0~255</td>
+</tr>
+<tr>
+<td style="text-align:center">音量大小</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">范围0~255</td>
+</tr>
+<tr>
+<td style="text-align:center">音量持续时间</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">范围0~255</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 00 02 02 46 00 58 (确认)</p>
+</blockquote>
+<ul>
+<li>辨识采样</li>
+</ul>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 46 01 01 00 56</p>
+</blockquote>
+<h3 id="【读取内存数据】0x47">【读取内存数据】0x47</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【电机角度数据】0x48">【电机角度数据】0x48</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【补光灯控制】0x49">【补光灯控制】0x49</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 49 03 03 00 00 00 5D(灭)</p>
+<p><code>上位机发送</code>：55 02 0C 49 03 03 01 00 00 5E （亮）</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 00 02 02 49 00 5B(确认)</p>
+</blockquote>
+<h3 id="【用户数据UD读】0x4A">【用户数据UD读】0x4A</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 4A 02 02 01 01 5E</p>
+</blockquote>
+<ul>
+<li>上位机发送</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度（字节）</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">起始地址</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">目前只支持1</td>
+</tr>
+<tr>
+<td style="text-align:center">数据长度</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">字数量（非字节）目前只支持1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>下位机回复</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度（字节）</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">起始地址</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">目前只支持1</td>
+</tr>
+<tr>
+<td style="text-align:center">数据长度</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">字数量（非字节）目前只支持1</td>
+</tr>
+<tr>
+<td style="text-align:center">数据1</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 4A 04 04 01 01 01 00 63</p>
+</blockquote>
+<h3 id="【用户数据写】0x4B">【用户数据写】0x4B</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 4B 04 04 01 01 05 00 68</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度（字节）</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">起始地址</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">目前只支持1</td>
+</tr>
+<tr>
+<td style="text-align:center">数据长度</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">字数量（非字节）目前只支持1</td>
+</tr>
+<tr>
+<td style="text-align:center">数据1</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 00 02 02 4B 00 5D (确认)</p>
+</blockquote>
+<h3 id="【云台测试噪声】0x4C">【云台测试噪声】0x4C</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 4C 01 01 02 5E （IMU噪声测试）</p>
+<p><code>上位机发送</code>：55 02 0C 4C 01 01 03 5F （航向漂移速度测试）大概8s后发送查询命令回传</p>
+<p><code>上位机发送</code>：55 02 0C 4C 01 01 04 60 （IMU零偏测试）大概5s后发送查询命令回传</p>
+<p><code>上位机发送</code>：55 02 0C 4C 01 01 01 5D （一键体检）大概10s后发送查询命令回传</p>
+<p><code>上位机发送</code>：55 02 0C 4C 01 01 00 5C （查询结果）</p>
+</blockquote>
+<p>噪声测试的话，可以通过内部状态去判断测试完没有，它测完的话，X,Y,Z电机静止标志会短时间变成0然后恢复为1的，判断到就直接发送一个查询结果命令即可</p>
+<ul>
+<li>查询命令回传</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度（字节）</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">测试命令</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">就是上位机发送的命令</td>
+</tr>
+<tr>
+<td style="text-align:center">测试结果</td>
+<td style="text-align:center">n</td>
+<td style="text-align:center">IMU噪声测试：XYZ噪声，各占1字节，需要结果除以100<br>IMU零偏测试：校准后数据XYZ,原始数据XYZ,各占1个字节，结果需要除以100</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 00 02 02 4C 00 5E</p>
+<p><code>下位机回复</code>：查询结果：55 0C 02 4C 04 04 02 4F 61 55 69（IMU噪声测试）</p>
+<p><code>下位机回复</code>：查询结果：55 0C 02 4C 07 07 04 07 2A 00 4F 2C 04 1C（IMU零偏测试）从左到右是校准后零偏，原始零偏</p>
+<p><code>下位机回复</code>：查询结果：55 0C 02 4C 11 11 01 00 02 01 00 02 00 03 00 04 01 05 01 06 01 07 00 9E （一键体检）格式是【检查项 检测结果】从左到后分别是00编码器磁场强度，01IMU温度补偿范围，02陀螺仪校准，03加速度计校准，04卡位校准，05IMU噪声，06校准后零偏，07原始零偏，结果是0则成功，其他则表示失败</p>
+</blockquote>
+<h3 id="【补光灯控制】0x4D">【补光灯控制】0x4D</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【版本查询】0x50">【版本查询】0x50</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 50 00 00 5E</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度（字节）</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">版本号</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">主程序版本</td>
+</tr>
+<tr>
+<td style="text-align:center">机架版本</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">十进制机架编号</td>
+</tr>
+<tr>
+<td style="text-align:center">配置版本1</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">X. X. X. X. X 新手柄协议.0.0.0</td>
+</tr>
+<tr>
+<td style="text-align:center">机架描述</td>
+<td style="text-align:center">32</td>
+<td style="text-align:center">描述字符串UTF-8</td>
+</tr>
+<tr>
+<td style="text-align:center">编译日期</td>
+<td style="text-align:center">16</td>
+<td style="text-align:center">字符串UTF-8</td>
+</tr>
+<tr>
+<td style="text-align:center">ID</td>
+<td style="text-align:center">16</td>
+<td style="text-align:center">ID二进制值，96位有效(也就是相当于12位，后面4位无效)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 50 46 46 29 0C D2 00 74 27 E5 A4 AE E6 9E 9C 2D 53 37 5F 41 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 32 30 32 33 31 32 32 32 31 36 34 30 00 00 00 00 93 8A 48 00 00 40 65 58 22 37 71 04 00 00 00 00 C3</p>
+</blockquote>
+<ul>
+<li>读手柄版本</li>
+</ul>
+<p>跟上面一样，源地址不同</p>
+<blockquote>
+<p><code>上位机发送</code>：55 04 0C 50 00 00 60</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 04 50 46 46 76 08 CD 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 32 30 32 33 31 32 33 30 31 31 32 38 35 34 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 F9</p>
+</blockquote>
+<p>对应：手柄版本:2166 硬件版本:205 编译时间:20231230112854</p>
+<h3 id="【系统状态查询】0x51">【系统状态查询】0x51</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 51 00 00 5F</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度(字节)</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">运行时间</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">单位s</td>
+</tr>
+<tr>
+<td style="text-align:center">系统状态</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">见下表1</td>
+</tr>
+<tr>
+<td style="text-align:center">扩展状态</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">见下表2</td>
+</tr>
+<tr>
+<td style="text-align:center">横滚温度</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">摄氏度(为0正常)</td>
+</tr>
+<tr>
+<td style="text-align:center">俯仰温度</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">摄氏度(主控)</td>
+</tr>
+<tr>
+<td style="text-align:center">航向温度</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">摄氏度(为0正常)</td>
+</tr>
+<tr>
+<td style="text-align:center">内部状态</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">见下表3</td>
+</tr>
+<tr>
+<td style="text-align:center">震动幅度(这个应该是没用到)</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">X轴震动幅度（2字节 幅度X100）<br>Y轴震动幅度（2字节 幅度X100）<br>Z轴震动幅度（2字节 幅度X100）</td>
+</tr>
+<tr>
+<td style="text-align:center">IO输入</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">16位IO输入</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>表1</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240128192433.webp" alt=""></p>
+<ul>
+<li>表2</li>
+</ul>
+<p>例如：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>12 -&gt; 0000 0000 0000 0000 0000 0000 0000 1100 -&gt; 轨迹执行阶段 + 轨迹运动已到达开始位置</mtext></mrow><annotation encoding="application/x-tex">\text{12 -&gt; 0000 0000 0000 0000 0000 0000 0000 1100 -&gt; 轨迹执行阶段 + 轨迹运动已到达开始位置}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord text"><span class="mord">12 -&gt; 0000 0000 0000 0000 0000 0000 0000 1100 -&gt; </span><span class="mord cjk_fallback">轨迹执行阶段</span><span class="mord"> + </span><span class="mord cjk_fallback">轨迹运动已到达开始位置</span></span></span></span></span></span></p>
+<p>1.0.2.4版本协议工作模式的4DV移到应用模式下为7DV，旧的1.0.2.0是下面的样子，故按照新的来</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240129101656.webp" alt=""></p>
+<ul>
+<li>表3</li>
+</ul>
+<p>1.0.2.4版本协议新增 ai位在 Bit17</p>
+<p>可能无用位它是随机数0或者1这个需要注意</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20240129101951.webp" alt=""></p>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 51 13 13 4C 02 60 18 00 90 00 04 00 00 00 1E 00 07 10 00 09 00 00 1D</p>
+</blockquote>
+<p>下位机发送的只有19个字节数据</p>
+<h3 id="【开-关机命令】0x52">【开/关机命令】0x52</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 52 01 01 01 63</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：直接关机</p>
+</blockquote>
+<h3 id="【电机校准】0x53">【电机校准】0x53</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 53 00 00 61</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 00 02 02 53 00 65(确认)</p>
+</blockquote>
+<h3 id="【姿态校准】0x54">【姿态校准】0x54</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 54 01 01 00 64</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度（字节）</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">校准项</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0：所有<br>1：电机零角度<br>2：陀螺仪</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 00 02 02 54 00 66 (确认)</p>
+</blockquote>
+<h3 id="【姿态校准数据查询】0x55">【姿态校准数据查询】0x55</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【控制PID设置】0x56">【控制PID设置】0x56</h3>
+<p>这个是临时的，关机重启后失效，发送时x10000</p>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 56 12 12 10 27 20 4E 30 75 40 9C 50 C3 60 EA 70 11 80 38 91 5F 34 55 02 0C 51 00 00 5F</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度（字节）</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Roll_KP</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">x10000</td>
+</tr>
+<tr>
+<td style="text-align:center">Roll_KI</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">同上</td>
+</tr>
+<tr>
+<td style="text-align:center">Roll_KD</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">同上</td>
+</tr>
+<tr>
+<td style="text-align:center">Pitch_KP</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">同上</td>
+</tr>
+<tr>
+<td style="text-align:center">Pitch _KI</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">同上</td>
+</tr>
+<tr>
+<td style="text-align:center">Pitch _KD</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">同上</td>
+</tr>
+<tr>
+<td style="text-align:center">Yaw_KP</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">同上</td>
+</tr>
+<tr>
+<td style="text-align:center">Yaw _KI</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">同上</td>
+</tr>
+<tr>
+<td style="text-align:center">Yaw _KD</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">同上</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 00 02 02 56 00 68</p>
+</blockquote>
+<h3 id="【控制PID-查询】0x57">【控制PID 查询】0x57</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 57 00 00 65</p>
+</blockquote>
+<p>接收后需要除以10000</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度（字节）</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Roll_KP</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">x10000</td>
+</tr>
+<tr>
+<td style="text-align:center">Roll_KI</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">同上</td>
+</tr>
+<tr>
+<td style="text-align:center">Roll_KD</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">同上</td>
+</tr>
+<tr>
+<td style="text-align:center">Pitch_KP</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">同上</td>
+</tr>
+<tr>
+<td style="text-align:center">Pitch _KI</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">同上</td>
+</tr>
+<tr>
+<td style="text-align:center">Pitch _KD</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">同上</td>
+</tr>
+<tr>
+<td style="text-align:center">Yaw_KP</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">同上</td>
+</tr>
+<tr>
+<td style="text-align:center">Yaw _KI</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">同上</td>
+</tr>
+<tr>
+<td style="text-align:center">Yaw _KD</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">同上</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 57 12 12 DC 05 00 00 A0 00 E8 03 00 00 A0 00 E8 03 00 00 A0 00 20</p>
+</blockquote>
+<h3 id="【加速度计-六面-校准】0x58">【加速度计(六面)校准】0x58</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C 58 00 00 66</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">长度（字节）</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">校准结果</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0：校准完成<br>1：校准错误<br>2：校准超时</td>
+</tr>
+<tr>
+<td style="text-align:center">错误码</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">无错误时为0</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【电机围栏检测】0x59">【电机围栏检测】0x59</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【空闲命令】0x60">【空闲命令】0x60</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【模式数据】0x61">【模式数据】0x61</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【固件升级准备命令】0x71">【固件升级准备命令】0x71</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【固件升级开始】0x72">【固件升级开始】0x72</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【固件升级完成】0x74">【固件升级完成】0x74</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【加密固件升级数据】0x75">【加密固件升级数据】0x75</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【机架版本查询】0x76">【机架版本查询】0x76</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【查询手柄剩余电量】0x81">【查询手柄剩余电量】0x81</h3>
+<blockquote>
+<p><code>上位机发送</code>：</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：</p>
+</blockquote>
+<h3 id="【无】0x82">【无】0x82</h3>
+<h3 id="【无】0x83">【无】0x83</h3>
+<h3 id="【按钮事件】0x84">【按钮事件】0x84</h3>
+<h3 id="【无】0x85">【无】0x85</h3>
+<h3 id="【焦距-对焦设置】0x86">【焦距/对焦设置】0x86</h3>
+<h3 id="【焦距-对焦设置】0x87">【焦距/对焦设置】0x87</h3>
+<h3 id="【无】0x88">【无】0x88</h3>
+<h3 id="【无】0x89">【无】0x89</h3>
+<h3 id="【查询按键板蓝牙mac地址】0x90">【查询按键板蓝牙mac地址】0x90</h3>
+<h3 id="【无】0x91">【无】0x91</h3>
+<h3 id="【无】0x92">【无】0x92</h3>
+<h3 id="【无】0x93">【无】0x93</h3>
+<h3 id="【无】0x94">【无】0x94</h3>
+<h3 id="【霍尔值读取】0xA1">【霍尔值读取】0xA1</h3>
+<blockquote>
+<p><code>上位机发送</code>：55 02 0C A1 00 00 AF</p>
+</blockquote>
+<blockquote>
+<p><code>下位机回复</code>：55 0C 02 A1 0C 0C F6 04 78 09 6C 08 12 0B 1C 09 88 05 85</p>
+</blockquote>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num164.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97"><span class="toc-number">2.</span> <span class="toc-text">开发日志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BA%93"><span class="toc-number">3.</span> <span class="toc-text">自定义库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BB%E9%99%86%E7%95%8C%E9%9D%A2"><span class="toc-number">3.1.</span> <span class="toc-text">登陆界面</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">3.1.1.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A7%E7%BC%93%E5%AD%98%E5%8C%BA"><span class="toc-number">3.1.2.</span> <span class="toc-text">旧缓存区</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%B2%E8%B0%88"><span class="toc-number">3.1.3.</span> <span class="toc-text">闲谈</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E9%A1%B5%E9%9D%A2"><span class="toc-number">3.2.</span> <span class="toc-text">主页面</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%B2%E8%B0%88-2"><span class="toc-number">3.2.1.</span> <span class="toc-text">闲谈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%95%E9%83%A8"><span class="toc-number">3.2.2.</span> <span class="toc-text">底部</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bug-%E6%9C%AA%E8%A7%A3%E5%86%B3"><span class="toc-number">3.3.</span> <span class="toc-text">Bug&#x2F;未解决</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">3.4.</span> <span class="toc-text">软件工作流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3"><span class="toc-number">3.5.</span> <span class="toc-text">串口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%8E%A7%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">常用控件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BB%9A%E5%8A%A8%E6%9D%A1"><span class="toc-number">4.1.</span> <span class="toc-text">滚动条</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E9%80%89%E6%A1%86"><span class="toc-number">4.2.</span> <span class="toc-text">复选框</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E6%8B%89%E6%A1%86"><span class="toc-number">4.3.</span> <span class="toc-text">下拉框</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E6%A1%86"><span class="toc-number">4.4.</span> <span class="toc-text">文本框</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A7%E5%8D%8F%E8%AE%AE1"><span class="toc-number">5.</span> <span class="toc-text">旧协议1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#S07"><span class="toc-number">5.1.</span> <span class="toc-text">S07</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E4%BD%93"><span class="toc-number">5.2.</span> <span class="toc-text">总体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE"><span class="toc-number">5.3.</span> <span class="toc-text">协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B"><span class="toc-number">5.3.1.</span> <span class="toc-text">初始</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E9%83%A8%E5%88%86"><span class="toc-number">5.3.2.</span> <span class="toc-text">协议部分</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E7%A1%AE%E8%AE%A4%E3%80%910x00"><span class="toc-number">5.4.</span> <span class="toc-text">【确认】0x00</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E5%90%A6%E8%AE%A4%E3%80%910x01"><span class="toc-number">5.5.</span> <span class="toc-text">【否认】0x01</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E8%B0%83%E8%AF%95%E4%BF%A1%E6%81%AF%E3%80%910x02"><span class="toc-number">5.6.</span> <span class="toc-text">【调试信息】0x02</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E8%BE%93%E5%85%A5-%E5%85%AD%E9%9D%A2%E4%B8%8B%E4%B8%80%E6%AD%A5%E3%80%910x03"><span class="toc-number">5.7.</span> <span class="toc-text">【输入-六面下一步】0x03</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E5%91%BD%E4%BB%A4%E8%BE%93%E5%85%A5%E3%80%910x04"><span class="toc-number">5.8.</span> <span class="toc-text">【命令输入】0x04</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E5%A7%BF%E6%80%81%E6%9F%A5%E8%AF%A2%E3%80%910x10"><span class="toc-number">5.9.</span> <span class="toc-text">【姿态查询】0x10</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E5%A7%BF%E6%80%81%E8%AE%BE%E7%BD%AE%E3%80%910x11"><span class="toc-number">5.10.</span> <span class="toc-text">【姿态设置】0x11</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E6%89%A9%E5%B1%95%E6%A8%A1%E5%BC%8F%E9%80%9A%E7%9F%A5%E3%80%910x12"><span class="toc-number">5.11.</span> <span class="toc-text">【扩展模式通知】0x12</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E5%8C%80%E9%80%9F%E8%BF%90%E5%8A%A8%E9%80%9F%E5%BA%A6%E8%AE%BE%E7%BD%AE%E3%80%910x13"><span class="toc-number">5.12.</span> <span class="toc-text">【匀速运动速度设置】0x13</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E8%B7%9F%E9%9A%8F%E8%AE%BE%E7%BD%AE%E3%80%910x14"><span class="toc-number">5.13.</span> <span class="toc-text">【跟随设置】0x14</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E5%88%9D%E5%A7%8B%E5%A7%BF%E6%80%81%EF%BC%88%E5%A7%BF%E6%80%81%E5%BE%AE%E8%B0%83%EF%BC%89%E8%AF%BB%E5%8F%96%E3%80%910x15"><span class="toc-number">5.14.</span> <span class="toc-text">【初始姿态（姿态微调）读取】0x15</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E5%88%9D%E5%A7%8B%E5%A7%BF%E6%80%81%EF%BC%88%E5%A7%BF%E6%80%81%E5%BE%AE%E8%B0%83%EF%BC%89%E8%AE%BE%E7%BD%AE%E3%80%910x16"><span class="toc-number">5.15.</span> <span class="toc-text">【初始姿态（姿态微调）设置】0x16</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E8%B7%9F%E9%9A%8F%E5%8F%82%E6%95%B0%E8%AF%BB%E5%8F%96%E3%80%910x17"><span class="toc-number">5.16.</span> <span class="toc-text">【跟随参数读取】0x17</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E6%A8%A1%E5%BC%8F%E8%AE%BE%E7%BD%AE%E3%80%910x18"><span class="toc-number">5.17.</span> <span class="toc-text">【模式设置】0x18</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E8%B7%9F%E9%9A%8F%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE%E3%80%910x19"><span class="toc-number">5.18.</span> <span class="toc-text">【跟随参数设置】0x19</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E6%8E%A7%E5%88%B6%E5%8F%82%E6%95%B0%E8%AF%BB%E5%8F%96%E3%80%910x1A"><span class="toc-number">5.19.</span> <span class="toc-text">【控制参数读取】0x1A</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E6%8E%A7%E5%88%B6%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE%E3%80%910x1B"><span class="toc-number">5.20.</span> <span class="toc-text">【控制参数设置】0x1B</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E7%94%B5%E6%9C%BA%E5%9B%B4%E6%A0%8F%E6%9F%A5%E8%AF%A2%E3%80%910x1C"><span class="toc-number">5.21.</span> <span class="toc-text">【电机围栏查询】0x1C</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E7%94%B5%E6%9C%BA%E5%9B%B4%E6%A0%8F%E8%AE%BE%E7%BD%AE%E3%80%910x1D"><span class="toc-number">5.22.</span> <span class="toc-text">【电机围栏设置】0x1D</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E5%8C%80%E9%80%9F%E8%BF%90%E5%8A%A8%E9%80%9F%E5%BA%A6%E6%9F%A5%E8%AF%A2%E3%80%910x1E"><span class="toc-number">5.23.</span> <span class="toc-text">【匀速运动速度查询】0x1E</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E7%BC%BA%E7%9C%81%E8%AE%BE%E7%BD%AE%E3%80%910x1F"><span class="toc-number">5.24.</span> <span class="toc-text">【默认参数缺省设置】0x1F</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E6%97%A0%E3%80%910x20"><span class="toc-number">5.25.</span> <span class="toc-text">【无】0x20</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E5%A7%BF%E6%80%81%E4%BD%8D%E7%A7%BB%E5%91%BD%E4%BB%A4%E3%80%910x21"><span class="toc-number">5.26.</span> <span class="toc-text">【姿态位移命令】0x21</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E8%BD%A8%E8%BF%B9%E6%A8%A1%E5%BC%8F%E5%91%BD%E4%BB%A4%E3%80%910x22"><span class="toc-number">5.27.</span> <span class="toc-text">【轨迹模式命令】0x22</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E4%B8%AD%E5%BF%83%E8%B7%9F%E9%9A%8F%E5%91%BD%E4%BB%A4%E3%80%910x23"><span class="toc-number">5.28.</span> <span class="toc-text">【中心跟随命令】0x23</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E8%BE%93%E5%87%BA%E6%8E%A7%E5%88%B6%E3%80%910x24"><span class="toc-number">5.29.</span> <span class="toc-text">【输出控制】0x24</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90HV%E6%A8%AA%E7%AB%96%E5%88%87%E6%8D%A2%E5%91%BD%E4%BB%A4%E3%80%910x25"><span class="toc-number">5.30.</span> <span class="toc-text">【HV横竖切换命令】0x25</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E9%81%A5%E6%8E%A7%E6%8E%A5%E5%8F%A3-%E5%B7%A6%E5%8F%B3%E6%97%A0%E6%8E%A7%E5%91%BD%E4%BB%A4%E3%80%910x26"><span class="toc-number">5.31.</span> <span class="toc-text">【遥控接口-左右无控命令】0x26</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E7%94%B5%E6%9C%BA%E9%9B%B6%E4%BD%8D%E7%BD%AE%E5%BE%AE%E8%B0%83%E6%9F%A5%E8%AF%A2%E3%80%910x27"><span class="toc-number">5.32.</span> <span class="toc-text">【电机零位置微调查询】0x27</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E7%94%B5%E6%9C%BA%E9%9B%B6%E4%BD%8D%E7%BD%AE%E5%BE%AE%E8%B0%83%E8%AE%BE%E7%BD%AE%E3%80%910x28"><span class="toc-number">5.33.</span> <span class="toc-text">【电机零位置微调设置】0x28</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E8%BF%90%E5%8A%A8%E6%8E%A7%E5%88%B6%E5%91%BD%E4%BB%A4-%E5%9B%9E%E4%B8%AD-%E3%80%910x30"><span class="toc-number">5.34.</span> <span class="toc-text">【运动控制命令(回中)】0x30</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E8%BF%87%E7%A8%8B%E8%BF%90%E5%8A%A8%E6%8E%A7%E5%88%B6-%E5%85%A8%E6%99%AF%E5%91%BD%E4%BB%A4%E3%80%910x31"><span class="toc-number">5.35.</span> <span class="toc-text">【过程运动控制-全景命令】0x31</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E7%94%B5%E6%9C%BA%E6%B5%8B%E8%AF%95-%E5%8A%9B%E7%9F%A9%E5%91%BD%E4%BB%A4%E3%80%910x40"><span class="toc-number">5.36.</span> <span class="toc-text">【电机测试-力矩命令】0x40</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90PID%E6%8E%A7%E5%88%B6%E8%B0%83%E8%AF%95%E5%91%BD%E4%BB%A4-%E6%A8%AA%E6%BB%9A-%E3%80%910x41"><span class="toc-number">5.37.</span> <span class="toc-text">【PID控制调试命令(横滚)】0x41</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90PID%E6%8E%A7%E5%88%B6%E8%B0%83%E8%AF%95%E5%91%BD%E4%BB%A4-%E4%BF%AF%E4%BB%B0-%E3%80%910x42"><span class="toc-number">5.38.</span> <span class="toc-text">【PID控制调试命令(俯仰)】0x42</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90PID%E6%8E%A7%E5%88%B6%E8%B0%83%E8%AF%95%E5%91%BD%E4%BB%A4-%E8%88%AA%E5%90%91-%E3%80%910x43"><span class="toc-number">5.39.</span> <span class="toc-text">【PID控制调试命令(航向)】0x43</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E9%99%80%E8%9E%BA%E4%BB%AA%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E3%80%910x44"><span class="toc-number">5.40.</span> <span class="toc-text">【陀螺仪数据查询】0x44</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E6%8E%A7%E5%88%B6%E6%9D%BF%E9%87%8D%E5%90%AF%E3%80%910x45"><span class="toc-number">5.41.</span> <span class="toc-text">【控制板重启】0x45</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E4%B8%B4%E6%97%B6%E5%91%BD%E4%BB%A4%E3%80%910x46"><span class="toc-number">5.42.</span> <span class="toc-text">【临时命令】0x46</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E8%AF%BB%E5%8F%96%E5%86%85%E5%AD%98%E6%95%B0%E6%8D%AE%E3%80%910x47"><span class="toc-number">5.43.</span> <span class="toc-text">【读取内存数据】0x47</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E7%94%B5%E6%9C%BA%E8%A7%92%E5%BA%A6%E6%95%B0%E6%8D%AE%E3%80%910x48"><span class="toc-number">5.44.</span> <span class="toc-text">【电机角度数据】0x48</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E8%A1%A5%E5%85%89%E7%81%AF%E6%8E%A7%E5%88%B6%E3%80%910x49"><span class="toc-number">5.45.</span> <span class="toc-text">【补光灯控制】0x49</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AEUD%E8%AF%BB%E3%80%910x4A"><span class="toc-number">5.46.</span> <span class="toc-text">【用户数据UD读】0x4A</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE%E5%86%99%E3%80%910x4B"><span class="toc-number">5.47.</span> <span class="toc-text">【用户数据写】0x4B</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E4%BA%91%E5%8F%B0%E6%B5%8B%E8%AF%95%E5%99%AA%E5%A3%B0%E3%80%910x4C"><span class="toc-number">5.48.</span> <span class="toc-text">【云台测试噪声】0x4C</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E8%A1%A5%E5%85%89%E7%81%AF%E6%8E%A7%E5%88%B6%E3%80%910x4D"><span class="toc-number">5.49.</span> <span class="toc-text">【补光灯控制】0x4D</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E7%89%88%E6%9C%AC%E6%9F%A5%E8%AF%A2%E3%80%910x50"><span class="toc-number">5.50.</span> <span class="toc-text">【版本查询】0x50</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E7%B3%BB%E7%BB%9F%E7%8A%B6%E6%80%81%E6%9F%A5%E8%AF%A2%E3%80%910x51"><span class="toc-number">5.51.</span> <span class="toc-text">【系统状态查询】0x51</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E5%BC%80-%E5%85%B3%E6%9C%BA%E5%91%BD%E4%BB%A4%E3%80%910x52"><span class="toc-number">5.52.</span> <span class="toc-text">【开&#x2F;关机命令】0x52</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E7%94%B5%E6%9C%BA%E6%A0%A1%E5%87%86%E3%80%910x53"><span class="toc-number">5.53.</span> <span class="toc-text">【电机校准】0x53</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E5%A7%BF%E6%80%81%E6%A0%A1%E5%87%86%E3%80%910x54"><span class="toc-number">5.54.</span> <span class="toc-text">【姿态校准】0x54</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E5%A7%BF%E6%80%81%E6%A0%A1%E5%87%86%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E3%80%910x55"><span class="toc-number">5.55.</span> <span class="toc-text">【姿态校准数据查询】0x55</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E6%8E%A7%E5%88%B6PID%E8%AE%BE%E7%BD%AE%E3%80%910x56"><span class="toc-number">5.56.</span> <span class="toc-text">【控制PID设置】0x56</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E6%8E%A7%E5%88%B6PID-%E6%9F%A5%E8%AF%A2%E3%80%910x57"><span class="toc-number">5.57.</span> <span class="toc-text">【控制PID 查询】0x57</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E5%8A%A0%E9%80%9F%E5%BA%A6%E8%AE%A1-%E5%85%AD%E9%9D%A2-%E6%A0%A1%E5%87%86%E3%80%910x58"><span class="toc-number">5.58.</span> <span class="toc-text">【加速度计(六面)校准】0x58</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E7%94%B5%E6%9C%BA%E5%9B%B4%E6%A0%8F%E6%A3%80%E6%B5%8B%E3%80%910x59"><span class="toc-number">5.59.</span> <span class="toc-text">【电机围栏检测】0x59</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E7%A9%BA%E9%97%B2%E5%91%BD%E4%BB%A4%E3%80%910x60"><span class="toc-number">5.60.</span> <span class="toc-text">【空闲命令】0x60</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E6%A8%A1%E5%BC%8F%E6%95%B0%E6%8D%AE%E3%80%910x61"><span class="toc-number">5.61.</span> <span class="toc-text">【模式数据】0x61</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E5%9B%BA%E4%BB%B6%E5%8D%87%E7%BA%A7%E5%87%86%E5%A4%87%E5%91%BD%E4%BB%A4%E3%80%910x71"><span class="toc-number">5.62.</span> <span class="toc-text">【固件升级准备命令】0x71</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E5%9B%BA%E4%BB%B6%E5%8D%87%E7%BA%A7%E5%BC%80%E5%A7%8B%E3%80%910x72"><span class="toc-number">5.63.</span> <span class="toc-text">【固件升级开始】0x72</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E5%9B%BA%E4%BB%B6%E5%8D%87%E7%BA%A7%E5%AE%8C%E6%88%90%E3%80%910x74"><span class="toc-number">5.64.</span> <span class="toc-text">【固件升级完成】0x74</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E5%8A%A0%E5%AF%86%E5%9B%BA%E4%BB%B6%E5%8D%87%E7%BA%A7%E6%95%B0%E6%8D%AE%E3%80%910x75"><span class="toc-number">5.65.</span> <span class="toc-text">【加密固件升级数据】0x75</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E6%9C%BA%E6%9E%B6%E7%89%88%E6%9C%AC%E6%9F%A5%E8%AF%A2%E3%80%910x76"><span class="toc-number">5.66.</span> <span class="toc-text">【机架版本查询】0x76</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E6%9F%A5%E8%AF%A2%E6%89%8B%E6%9F%84%E5%89%A9%E4%BD%99%E7%94%B5%E9%87%8F%E3%80%910x81"><span class="toc-number">5.67.</span> <span class="toc-text">【查询手柄剩余电量】0x81</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E6%97%A0%E3%80%910x82"><span class="toc-number">5.68.</span> <span class="toc-text">【无】0x82</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E6%97%A0%E3%80%910x83"><span class="toc-number">5.69.</span> <span class="toc-text">【无】0x83</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E6%8C%89%E9%92%AE%E4%BA%8B%E4%BB%B6%E3%80%910x84"><span class="toc-number">5.70.</span> <span class="toc-text">【按钮事件】0x84</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E6%97%A0%E3%80%910x85"><span class="toc-number">5.71.</span> <span class="toc-text">【无】0x85</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E7%84%A6%E8%B7%9D-%E5%AF%B9%E7%84%A6%E8%AE%BE%E7%BD%AE%E3%80%910x86"><span class="toc-number">5.72.</span> <span class="toc-text">【焦距&#x2F;对焦设置】0x86</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E7%84%A6%E8%B7%9D-%E5%AF%B9%E7%84%A6%E8%AE%BE%E7%BD%AE%E3%80%910x87"><span class="toc-number">5.73.</span> <span class="toc-text">【焦距&#x2F;对焦设置】0x87</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E6%97%A0%E3%80%910x88"><span class="toc-number">5.74.</span> <span class="toc-text">【无】0x88</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E6%97%A0%E3%80%910x89"><span class="toc-number">5.75.</span> <span class="toc-text">【无】0x89</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E6%9F%A5%E8%AF%A2%E6%8C%89%E9%94%AE%E6%9D%BF%E8%93%9D%E7%89%99mac%E5%9C%B0%E5%9D%80%E3%80%910x90"><span class="toc-number">5.76.</span> <span class="toc-text">【查询按键板蓝牙mac地址】0x90</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E6%97%A0%E3%80%910x91"><span class="toc-number">5.77.</span> <span class="toc-text">【无】0x91</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E6%97%A0%E3%80%910x92"><span class="toc-number">5.78.</span> <span class="toc-text">【无】0x92</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E6%97%A0%E3%80%910x93"><span class="toc-number">5.79.</span> <span class="toc-text">【无】0x93</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E6%97%A0%E3%80%910x94"><span class="toc-number">5.80.</span> <span class="toc-text">【无】0x94</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E9%9C%8D%E5%B0%94%E5%80%BC%E8%AF%BB%E5%8F%96%E3%80%910xA1"><span class="toc-number">5.81.</span> <span class="toc-text">【霍尔值读取】0xA1</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://bed.attainment.cn/img/40.png" style="float:left;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://lib.baomitu.com/KaTeX/latest/katex.min.css"><script src="https://jsd.onmicrosoft.cn/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '键盘敲烂 月薪过万' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script defer src="/js/my_aplayer.js"></script><script defer src="/js/meting.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
