@@ -1,0 +1,1075 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>通信协议学习-SPI | Yangの小栈</title><meta name="author" content="Yang"><meta name="copyright" content="Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言 参考文章&#x2F;博主  SPI 参考： SPI协议介绍 理解SPI&#x2F;Dual SPI&#x2F;Quad SPI&#x2F;QPI之间的区别 SPI详解  SPI是一个同步，全双工，高速的通信总线，SPI接口主要应用在 EEPROM， FLASH， 实时时钟， AD转换器 ， 还有 数字信号处理器和数字信号解码器之间  SPI分类   标准SPI Dual SPI(双线串行外设接口)  单向数据传输速度上是标准SPI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通信协议学习-SPI">
+<meta property="og:url" content="https://blog.yang5201314.cn/post/e0a9e10b.html">
+<meta property="og:site_name" content="Yangの小栈">
+<meta property="og:description" content="前言 参考文章&#x2F;博主  SPI 参考： SPI协议介绍 理解SPI&#x2F;Dual SPI&#x2F;Quad SPI&#x2F;QPI之间的区别 SPI详解  SPI是一个同步，全双工，高速的通信总线，SPI接口主要应用在 EEPROM， FLASH， 实时时钟， AD转换器 ， 还有 数字信号处理器和数字信号解码器之间  SPI分类   标准SPI Dual SPI(双线串行外设接口)  单向数据传输速度上是标准SPI">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.yang5201314.cn/img/num173.webp">
+<meta property="article:published_time" content="2024-02-20T06:05:14.000Z">
+<meta property="article:modified_time" content="2024-02-20T07:02:39.745Z">
+<meta property="article:author" content="Yang">
+<meta property="article:tag" content="aabbcc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.yang5201314.cn/img/num173.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20231008142657.webp"><link rel="canonical" href="https://blog.yang5201314.cn/post/e0a9e10b.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '通信协议学习-SPI',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-20 15:02:39'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/aplayer.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20231008142657.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">167</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">72</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">34</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">通信协议学习-SPI</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-02-20T06:05:14.000Z" title="发表于 2024-02-20 14:05:14">2024-02-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-02-20T07:02:39.745Z" title="更新于 2024-02-20 15:02:39">2024-02-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BB%86%E5%8C%96%E5%AD%A6%E4%B9%A0/">细化学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>25分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>参考文章/博主</p>
+</div>
+<h2 id="SPI">SPI</h2>
+<p>参考：</p>
+<p><a href="https://www.cnblogs.com/amxiang/p/15529412.html">SPI协议介绍</a></p>
+<p><a href="https://blog.csdn.net/tianizimark/article/details/124608851?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522170840790516800192294280%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=170840790516800192294280&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-1-124608851-null-null.142%5Ev99%5Econtrol&amp;utm_term=quad%20spi%E5%92%8Cspi%E5%8C%BA%E5%88%AB&amp;spm=1018.2226.3001.4187">理解SPI/Dual SPI/Quad SPI/QPI之间的区别</a></p>
+<h3 id="SPI详解">SPI详解</h3>
+<blockquote>
+<p><code>SPI</code>是一个同步，全双工，高速的通信总线，SPI接口主要应用在 <code>EEPROM</code>， <code>FLASH</code>， <code>实时时钟</code>， <code>AD转换器</code> ， 还有 <code>数字信号处理器和数字信号解码器</code>之间</p>
+</blockquote>
+<div class="tip bolt"><p>SPI分类</p>
+</div>
+<ol>
+<li>标准SPI</li>
+<li>Dual SPI(双线串行外设接口)</li>
+</ol>
+<p>单向数据传输速度上是标准SPI的双倍，一般情况下用于半双工通信</p>
+<ol start="3">
+<li>Quad SPI(四线SPI,即数据线最多可以使用4根)</li>
+</ol>
+<p>一般情况下用于半双工通信</p>
+<div class="tip bolt"><p>SPI特点</p>
+</div>
+<ul>
+<li><strong>采用主-从(Master-Slave)的控制方式</strong></li>
+</ul>
+<blockquote>
+<p>规定了在SPI通信中，有一个 <code>主设备</code>（通常是微控制器或主板）来控制一个或多个 <code>从设备</code>（通常是外围设备，如传感器或存储器）， <code>主设备</code> 负责发送和接收数据，而 <code>从设备</code> 只是响应 <code>主设备</code> 的命令，如果没有时钟则 <code>从设备</code> 则不会工作</p>
+<p>SPI的通信是同步的，这意味着 <code>主设备</code> 生成时钟信号（称为SCK），并且 <code>从设备</code> 必须根据这个时钟来传输数据。 <code>从设备</code> 不能自己控制或者产生时钟，它们只能响应 <code>主设备</code> 提供的时钟信号</p>
+<p><code>主设备</code> 还使用一个片选信号（通常称为SS或CS）来选择要与之通信的特定 <code>从设备</code>。当 <code>主设备</code>要与某个 <code>从设备</code> 通信时，它将该 <code>从设备</code> 的片选信号置为有效状态，以表明正在与该 <code>从设备</code> 进行通信，而其他 <code>从设备</code> 将处于非活动状态</p>
+</blockquote>
+<ul>
+<li><strong>采用同步方式(Synchronous)传输数据</strong></li>
+</ul>
+<blockquote>
+<p><code>主设备</code> 会根据将要交换的数据来产生相应的时钟脉冲(Clock Pulse)， 时钟脉冲组成了时钟信号(Clock Signal) , 时钟信号通过 <code>时钟极性 (CPOL) </code>和 <code>时钟相位 (CPHA) </code>控制着两个 SPI 设备间何时数据交换以及何时对接收到的数据进行采样, 来保证数据在两个设备之间是同步传输的</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231030152313.webp" alt=""></p>
+<ul>
+<li><strong>数据交换(Data Exchanges)</strong></li>
+</ul>
+<p>SPI 设备间的数据传输之所以又被称为数据交换, 是因为 SPI 协议规定一个 SPI 设备不能在数据通信过程中仅仅只充当一个  <code>&quot;发送者(Transmitter)&quot;</code> 或者  <code>&quot;接收者(Receiver)&quot;</code>。 在每个 Clock 周期内, SPI 设备都会 <code>发送并接收</code> 一个 bit 大小的数据(不管主设备好还是从设备), 相当于该设备有一个 bit 大小的数据被交换了。一个 <code>从设备</code> 要想能够接收到 <code>主设备</code> 发过来的控制信号, 必须在此之前能够被 <code>主设备</code> 进行访问。所以, <code>主设备</code> 必须首先通过 <code>SS/CS</code> pin 对 <code>从设备</code> 进行片选, 把想要访问的 <code>从设备</code> 选上. 在数据传输的过程中, 每次接收到的数据必须在下一次数据传输之前被采样. 如果之前接收到的数据没有被读取, 那么这些已经接收完成的数据将有可能会被丢弃, 导致 SPI 物理模块最终失效。 <code>因此, 在程序中一般都会在 SPI 传输完数据后, 去读取 SPI 设备里的数据, 即使这些数据在我们的程序里是无用的(虽然发送后紧接着的读取是无意义的，但仍然需要从寄存器中读出来)</code></p>
+<ul>
+<li>
+<p><strong>SPI有四种传输模式</strong></p>
+</li>
+<li>
+<p><strong>SPI只有主模式和从模式之分</strong></p>
+</li>
+</ul>
+<p>没有读和写的说法，因为实质上每次SPI是主从设备在交换数据。 <code>也就是说，你发一个数据必然会收到一个数据；你要收一个数据必须也要先发一个数据</code></p>
+<div class="tip bolt"><p>工作机制</p>
+</div>
+<p>SPI 设备间通信的一个简单的描述：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231030163309.webp" style="zoom:67%;" />
+<p>SPI 设备在进行通信的过程中,  <code>Master</code> 设备和  <code>Slave</code> 设备之间会产生一个数据链路回环(Data Loop), 就像上图所画的那样, 通过 <code>SDO</code> 和 <code>SDI</code> 管脚,  <code>SSPSR</code> 控制数据移入移出 <code>SSPBUF</code>, <code>Controller</code> 确定 SPI 总线的通信模式, <code>SCK</code> 传输时钟信号</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">组件</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>SSPBUF</code></td>
+<td style="text-align:center">泛指 SPI 设备里面的内部缓冲区, 一般在物理上是以 FIFO(先进先出) 的形式, 保存传输过程中的临时数据</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>SSPSR</code></td>
+<td style="text-align:center">泛指 SPI 设备里面的移位寄存器, 它的作用是根据设置好的数据位宽把数据移入或者移出 SSPBUF</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>Controller</code></td>
+<td style="text-align:center">泛指 SPI 设备里面的控制寄存器, 可以通过配置它们来设置 SPI 总线的传输模式</td>
+</tr>
+</tbody>
+</table>
+<p>通常情况下, 我们只需要对上图所描述的四个管脚(pin) 进行编程即可控制整个 SPI 设备之间的数据通信:</p>
+<p><code>SDI/MISO</code>：Master input slave output — 从-&gt;主，在 Master 上面也被称为 Rx-Channel，作为数据的入口, 主要用于SPI 设备接收数据</p>
+<p><code>SDO/MOSI</code>：Master output slave input— 主-&gt;从， 在 Master 上面也被称为 Tx-Channel，作为数据的出口, 主要用于 SPI 设备发送数据</p>
+<p><code>SCK/SCLK</code> ： 串行时钟信号，由主机产生发送给从机， 控制数据交换的时机以及速率</p>
+<p><code>SS/CS</code>：片选信号，由主机发送，以控制与哪个从机通信(一般是低电平有效，具体看手册)</p>
+<blockquote>
+<p>SSPSR</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231031094314.webp" alt=""></p>
+<p><code>SSPSR</code> 是 SPI 设备内部的移位寄存器(Shift Register). 它的主要作用是根据 SPI 时钟信号状态, 往 <code>SSPBUF</code> 里移入或者移出数据, 每次移动的数据大小由 <code>Bus-Width</code> 以及 <code>Channel-Width</code> 所决定</p>
+<p><code>Bus-Width</code> 的作用是指定地址总线到 <code>Master</code> 设备之间数据传输的单位</p>
+<p>例如, 我们想要往 <code>Master</code> 设备里面的 <code>SSPBUF</code> 写入 <code>16 Byte</code> 大小的数据: 首先, 给 <code>Master</code> 设备的配置寄存器设置 <code>Bus-Width</code> 为 <code>Byte</code>; 然后往 <code>Master</code> 设备的 <code>Tx-Data</code> 移位寄存器在地址总线的入口写入数据, 每次写入 <code>1 Byte</code> 大小的数据(使用 writeb 函数); 写完 <code>1 Byte</code> 数据之后, <code>Master</code> 设备里面的 <code>Tx-Data</code> 移位寄存器会自动把从地址总线传来的 <code>1 Byte</code> 数据移入  <code>SSPBUF</code> 里; 上述动作一共需要重复执行 <code>16</code> 次</p>
+<p><code>Channel-Width</code> 的作用是指定 <code>Master</code> 设备与 <code>Slave</code> 设备之间数据传输的单位。与 <code>Bus-Width</code> 相似,  <code>Master</code> 设备内部的移位寄存器会依据 <code>Channel-Width</code> 自动地把数据从 <code>Master-SSPBUF</code> 里通过 <code>Master-SDO</code> 管脚搬运到 <code>Slave</code> 设备里的 <code>Slave-SDI</code> 引脚, <code>Slave－SSPSR</code> 再把每次接收的数据移入 <code>Slave-SSPBUF</code>里。通常情况下,  <code>Bus-Width</code> 总是会大于或等于 <code>Channel-Width</code>, 这样能保证不会出现因 <code>Master</code> 与 <code>Slave</code> 之间数据交换的频率比地址总线与 <code>Master</code> 之间的数据交换频率要快, 导致 <code>SSPBUF</code> 里面存放的数据为无效数据这样的情况</p>
+<blockquote>
+<p>SSPBUF</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231031094330.webp" alt=""></p>
+<p>在每个时钟周期内, <code>Master</code> 与 <code>Slave</code> 之间交换的数据其实都是 SPI 内部移位寄存器从 <code>SSPBUF </code> 里面拷贝的. 我们可以通过往 <code>SSPBUF</code> 对应的寄存器 (Tx-Data / Rx-Data register) 里读写数据, 间接地操控 SPI 设备内部的 <code>SSPBUF</code></p>
+<p>例如, 在发送数据之前, 我们应该先往 <code>Master</code> 的 <code>Tx-Data</code> 寄存器写入将要发送出去的数据, 这些数据会被 <code>Master-SSPSR</code> 移位寄存器根据 <code>Bus-Width</code> 自动移入 <code>Master-SSPBUF</code> 里, 然后这些数据又会被 <code>Master-SSPSR</code> 根据 <code>Channel-Width</code> 从 <code>Master-SSPBUF</code> 中移出, 通过 <code>Master-SDO</code> 管脚传给 <code>Slave-SDI</code> 管脚, <code>Slave-SSPSR</code> 则把从 <code>Slave-SDI</code> 接收到的数据移入 <code>Slave-SSPBUF</code> 里.。与此同时, <code>Slave-SSPBUF</code> 里面的数据根据每次接收数据的大小(Channel-Width), 通过 <code>Slave-SDO</code> 发往 <code>Master-SDI</code>, <code>Master-SSPSR</code> 再把从 <code>Master-SDI</code> 接收的数据移入 <code>Master-SSPBUF</code>。在单次数据传输完成之后, 用户程序可以通过从 <code>Master</code> 设备的 <code>Rx-Data</code> 寄存器读取 <code>Master</code> 设备数据交换得到的数据</p>
+<blockquote>
+<p>Controller</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231031101049.webp" alt=""></p>
+<p><code>Master</code> 设备里面的 <code>Controller</code> 主要通过时钟信号(Clock Signal)以及片选信号(Slave Select Signal)来控制 <code>Slave</code> 设备。 <code>Slave</code> 设备会一直等待, 直到接收到 <code>Master</code> 设备发过来的片选信号, 然后根据时钟信号来工作</p>
+<p><code>Master</code> 设备的片选操作必须由程序所实现。例如: 由程序把 <code>SS/CS</code> 管脚的时钟信号拉低电平, 完成 SPI 设备数据通信的前期工作; 当程序想让 SPI 设备结束数据通信时, 再把 <code>SS/CS</code> 管脚上的时钟信号拉高电平</p>
+<div class="tip bolt"><p>Timing</p>
+</div>
+<p>下图通过 <code>Master</code> 设备与 <code>Slave</code> 设备之间交换 <code>1 Byte</code> 数据来说明 SPI 协议的工作机制：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231030173543.webp" alt=""></p>
+<blockquote>
+<p>SPI相关的缩写或说法</p>
+</blockquote>
+<p><code>CKPOL/CPOL/POL/Polariity</code>：(时钟)极性</p>
+<p><code>CKPHA/CPHA/PHA/Phase</code>：(时钟)相位</p>
+<p><code>Edge</code>：边沿，即时钟电平变化的时刻，即上升沿(rising edge) 或 下降沿(falling edge)</p>
+<p>对于一个时钟周期内，有两个edge，分别称为：</p>
+<ol>
+<li><code>Leading edge = 前一个边沿 = 第一个边沿</code>，对于开始电压是1，那么就是1变成0的时候，对于开始电压是0，那么就是0变成1的时候</li>
+<li><code>Trailing edge = 后一个边沿 = 第二个边沿</code>，对于开始电压是1，那么就是0变成1的时候（即在第一次1变成0之后，才可能有后面的0变成1），对于开始电压是0，那么就是1变成0的时候</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231031082651.webp" alt=""></p>
+<blockquote>
+<p>SPI的相位和极性</p>
+</blockquote>
+<p>CPOL和CPHA，分别都可以是0或时1，对应的四种组合就是：</p>
+<ul>
+<li><code>Mode 0</code> CPOL=0, CPHA=0</li>
+<li><code>Mode 1</code> CPOL=0, CPHA=1</li>
+<li><code>Mode 2</code> CPOL=1, CPHA=0</li>
+<li><code>Mode 3</code> CPOL=1, CPHA=1</li>
+</ul>
+<blockquote>
+<p>CPOL极性</p>
+</blockquote>
+<p>先说什么是SCLK时钟的空闲时刻，其就是当SCLK在发送8个bit比特数据之前和之后的状态，于此对应的，SCLK在发送数据的时候，就是正常的工作的时候，有效active的时刻了</p>
+<p>SPI的CPOL，表示当SCLK空闲的时候，其电平的值是低电平0还是高电平1：</p>
+<ul>
+<li><code>CPOL=0</code>，时钟空闲时候的电平是低电平，所以当SCLK有效的时候，就是高电平，就是所谓的 <code>active-high</code></li>
+<li><code>CPOL=1</code>，时钟空闲时候的电平是高电平，所以当SCLK有效的时候，就是低电平，就是所谓的 <code>active-low</code></li>
+</ul>
+<blockquote>
+<p>CPHA 相位</p>
+</blockquote>
+<p>相位，对应着数据采样是在第几个边沿（edge），是第一个边沿还是第二个边沿， <code>0</code> 对应着第一个边沿， <code>1</code> 对应着第二个边沿</p>
+<p><code>CPHA=0</code>，表示第一个边沿：</p>
+<ul>
+<li>对于 <code>CPOL=0</code>，idle时候的是低电平，第一个边沿就是从低变到高，所以是上升沿</li>
+<li>对于 <code>CPOL=1</code>，idle时候的是高电平，第一个边沿就是从高变到低，所以是下降沿</li>
+</ul>
+<p><code>CPHA=1</code>，表示第二个边沿：</p>
+<ul>
+<li>对于 <code>CPOL=0</code>，idle时候的是低电平，第二个边沿就是从高变到低，所以是下降沿</li>
+<li>对于 <code>CPOL=1</code>，idle时候的是高电平，第一个边沿就是从低变到高，所以是上升沿</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231031085730.webp" alt=""></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230518195013.webp" style="zoom:67%;" />
+<blockquote>
+<p>软件中如何设置SPI的极性和相位</p>
+</blockquote>
+<p>SPI分 <code>主设备</code> 和 <code>从设备</code>，两者通过SPI协议通讯</p>
+<p>而设置SPI的模式，是 <code>从设备</code> 的模式，决定了 <code>主设备</code> 的模式</p>
+<p>所以要先去搞懂 <code>从设备</code> 的SPI是何种模式，然后再将 <code>主设备</code> 的SPI的模式，设置和 <code>从设备</code> 相同的模式，即可正常通讯</p>
+<p>对于 <code>从设备</code> 的SPI是什么模式，有两种：</p>
+<ul>
+<li>固定的，由SPI从设备硬件决定的</li>
+</ul>
+<p>SPI从设备，具体是什么模式，相关的datasheet中会有描述，需要自己去datasheet中找到相关的描述，即：</p>
+<p>关于SPI从设备，在空闲的时候，是高电平还是低电平，即决定了 <code>CPOL是0还是1</code></p>
+<p>然后再找到关于设备是在上升沿还是下降沿去采样数据，这样就是， <code>在定了CPOL的值的前提下，对应着可以推算出CPHA是0还是1了</code></p>
+<ul>
+<li>可配置的，由软件自己设定</li>
+</ul>
+<p>从设备也是一个SPI控制器，4种模式都支持，此时只要自己设置为某种模式即可</p>
+<p>然后知道了从设备的模式后，再去将SPI主设备的模式，设置为和从设备模式一样即可</p>
+<p>对于如何配置SPI的CPOL和CPHA的话，不多细说，多数都是直接去写对应的SPI控制器中对应寄存器中的CPOL和CPHA那两位，写0或写1即可</p>
+<div class="tip bolt"><p>注意</p>
+</div>
+<blockquote>
+<p>数据发送是先发高再发低</p>
+</blockquote>
+<blockquote>
+<p><code>注意</code>：一般来说模式0和模式3是匹配(都是上升沿采集下降沿数据变化)，模式1和模式2是匹配的(都是下降沿采集上升沿数据变化)，如果不匹配的话通讯就会出问题</p>
+<p><code>注意</code>：MOSI和MISO不能交叉连接</p>
+</blockquote>
+<h3 id="编程示例1">编程示例1</h3>
+<p><code>介绍</code>：基于STM32F103ZET6，采用SPI，Flash型号采用 <code>W25Q64JV</code></p>
+<ul>
+<li>硬件连接</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230522084355.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230522090219.webp" alt=""></p>
+<ul>
+<li>芯片手册阅读</li>
+</ul>
+<blockquote>
+<p>基本信息：芯片的工作电压在2.7V到3.6V的电源上，电流消耗地至断电1uA，每个页面256字节，一次最多可编程256字节</p>
+</blockquote>
+<blockquote>
+<p>只能1变0，不能0变1，所以需要擦除才能0变1</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230522083108.webp" alt=""></p>
+<blockquote>
+<p>常用指令集：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">指令</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0x06</td>
+<td style="text-align:center">写使能</td>
+</tr>
+<tr>
+<td style="text-align:center">0x04</td>
+<td style="text-align:center">写禁止</td>
+</tr>
+<tr>
+<td style="text-align:center">0x05</td>
+<td style="text-align:center">读状态寄存器1，可判断芯片是否准备接收下一条指令</td>
+</tr>
+<tr>
+<td style="text-align:center">0x03</td>
+<td style="text-align:center">读数据</td>
+</tr>
+<tr>
+<td style="text-align:center">0x02</td>
+<td style="text-align:center">页编程</td>
+</tr>
+<tr>
+<td style="text-align:center">0x20</td>
+<td style="text-align:center">扇区擦除</td>
+</tr>
+<tr>
+<td style="text-align:center">0xC7</td>
+<td style="text-align:center">芯片擦除</td>
+</tr>
+<tr>
+<td style="text-align:center">0x9F</td>
+<td style="text-align:center">读设备ID信息</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<blockquote>
+<p><code>这里需要注意</code>，STM32自带有硬件SPI接口，但硬件的SPI接口CS引脚在传输完数据之后并不会自动拉高，一直是低电平，这不符合W25Q64JV芯片的时序要求，所以在初始化时，不使用硬件SPI的CS引脚，使用普通的GPIO口功能驱动W25Q64JV的CS引脚，通过编程拉低或者拉高CS引脚，达到芯片的时序要求，W25Q64JV的CS引脚是接到32单片机的SPI3_NSS引脚的，只是不使用这个NSS功能，用普通IO口</p>
+</blockquote>
+<blockquote>
+<p>内部框图：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/37f50a7e3685418f9fd97a68443e1d18.webp" alt=""></p>
+</blockquote>
+<blockquote>
+<p>用到的时序：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230522092351.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230522092432.webp" alt=""></p>
+</blockquote>
+<blockquote>
+<p>这个可以判断是否写完，执行写操作时是1，写完执行完后变0</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230522093255.webp" alt=""></p>
+</blockquote>
+<ul>
+<li>MX配置</li>
+</ul>
+<blockquote>
+<ol>
+<li>需要注意的是这里硬件NSS必须要禁止，因为一旦使能它只输出低电平，但是这个芯片它CS引脚需要有时间高电平，所以我们这里使用软件模拟CS，即PA15，默认是高电平的(总线空闲状态)</li>
+<li>因为这个芯片支持最大100MHz，这个SPI3是挂载在APB1下是36MHz，所以需要分频，一般选择2分频即可</li>
+</ol>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230522085613.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230522090634.webp" alt=""></p>
+<ul>
+<li>程序编写</li>
+</ul>
+<details ><summary> Myinit.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void vHardware_Init(void)
+&#123;
+    &#x2F;&#x2F; 启动定时器6
+    Timer6.Timer6_Start_IT();
+    &#x2F;&#x2F; 读取Flash芯片ID
+    SPI_Flash.ReadJedecID();
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> SPI_Flash.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __SPI_FLASH_H
+#define __SPI_FLASH_H
+#include &quot;AllHead.h&quot;
+
+&#x2F;&#x2F;定义CS引脚
+#define SET_SPI_Flash_CS    HAL_GPIO_WritePin(GPIOA,GPIO_PIN_15,GPIO_PIN_SET)
+#define CLR_SPI_Flash_CS    HAL_GPIO_WritePin(GPIOA,GPIO_PIN_15,GPIO_PIN_RESET)
+
+&#x2F;&#x2F;指令宏定义
+#define     W25X_WriteEnable        0x06        &#x2F;&#x2F;写使能
+#define     W25X_WriteDisable       0x04        &#x2F;&#x2F;写禁止
+#define     W25X_ReadStatusRg1      0x05        &#x2F;&#x2F;读状态寄存器1
+#define     W25X_ReadData           0x03        &#x2F;&#x2F;读数据
+#define     W25X_PageProgram        0x02 	    &#x2F;&#x2F;页编程
+#define  	W25X_SectorErase		0x20 		&#x2F;&#x2F;扇区擦除
+#define  	W25X_ChipErase			0xC7 		&#x2F;&#x2F;芯片擦除
+#define  	W25X_ReadJedecID        0x9F 		 &#x2F;&#x2F;读设备ID
+
+#define     SPI_FLASH_PageSize      256         &#x2F;&#x2F;页面最大字节长度
+#define     Flash_Status1_BUSY      1        	&#x2F;&#x2F;忙碌标志位
+#define     Dummy_Byte              0xFF        &#x2F;&#x2F;假数据
+
+typedef struct
+&#123;
+    uint32_t jedecID;	&#x2F;&#x2F; 设备标志符-&gt;制造商+内存类型+容量
+    void (*ReadjedecID)(void);	&#x2F;&#x2F; 读取设备标志符
+    void (*EraseSector)(uint32_t);	&#x2F;&#x2F; 擦除扇区(4KB)
+    void (*EraseTotal)(void);	&#x2F;&#x2F; 擦除全部
+    void (*WritePage)(uint8_t*,uint32_t,uint16_t);	&#x2F;&#x2F; 写入页(256字节，写入长度不超过256字节)
+    void (*WriteUnfixed)(uint8_t*,uint32_t,uint32_t);	&#x2F;&#x2F; 写入不固定长度数据
+    void (*ReadUnfixed)(uint8_t*,uint32_t,uint32_t);	&#x2F;&#x2F; 读取不固定长度数据
+&#125;SPI_Flash_t;
+
+
+extern SPI_Flash_t SPI_Flash; 
+
+#endif</code></pre>
+              </div>
+            </details>
+<blockquote>
+<p>读取ID的时序：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230522102807.webp" alt=""></p>
+</blockquote>
+<details ><summary> SPI_Flash.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;AllHead.h&quot;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;静态内部变量&#x2F;函数声明区 BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void SPI_Flash_ReadFlashID(void);
+static void SPI_Flash_EraseSector(uint32_t);
+static void SPI_Flash_EraseTotal(void);
+static void SPI_Flash_WritePage(uint8_t*,uint32_t,uint16_t);
+static void SPI_Flash_WriteUnfixed(uint8_t*,uint32_t,uint32_t);
+static void SPI_Flash_ReadUnfixed(uint8_t*,uint32_t,uint32_t);
+
+static uint8_t SPI_Flash_ReadByte(void);	&#x2F;&#x2F; 从Flash读一个字节
+static void SPI_Flash_WriteByte(uint8_t);	&#x2F;&#x2F; 给Flash写一个字节
+static void SPI_Flash_WriteEnable(void);	&#x2F;&#x2F; Flash使能
+static void SPI_Flash_WaitForWriteEnd(void);	&#x2F;&#x2F; 等待Flash写入完成
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;静态内部变量&#x2F;函数声明区    END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;变量区 BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+SPI_Flash_t SPI_Flash &#x3D; 
+&#123;
+   .0,
+   .SPI_Flash_ReadFlashID,
+   .SPI_Flash_EraseSector,
+   .SPI_Flash_EraseTotal,
+   .SPI_Flash_WritePage,
+   .SPI_Flash_WriteUnfixed,
+   .SPI_Flash_ReadUnfixed
+&#125;;
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;变量区    END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+&#x2F;*
+* @name   SPI_Flash_ReadByte
+* @brief  从Flash读取一个字节
+* @param  None
+* @retval 返回读到的字节   
+*&#x2F;
+static uint8_t SPI_Flash_ReadByte()
+&#123;
+    uint8_t ReceiveByte;
+    &#x2F;&#x2F;等待模式读取一个字节，并判断函数执行是否正确，正确则返回读取到的字节，错误则返回错误数据
+    if(HAL_SPI_Receive(&amp;hspi3,&amp;ReceiveByte,1,0x0A) !&#x3D; HAL_OK)
+    &#123;
+        ReceiveByte &#x3D; Dummy_Byte;       &#x2F;&#x2F;错误数据 
+    &#125;
+    return ReceiveByte;
+&#125;
+
+&#x2F;*
+* @name   SPI_Flash_WriteByte
+* @brief  Flash写入一个字节
+* @param  None
+* @retval None   
+*&#x2F;
+static void SPI_Flash_WriteByte(uint8_t Byte)
+&#123;
+    uint8_t SendByte &#x3D; Byte;
+    &#x2F;&#x2F;等待模式写入一个字节
+    HAL_SPI_Transmit(&amp;hspi3,&amp;SendByte,1,0x0A);
+&#125;
+
+&#x2F;*
+* @name   SPI_Flash_WriteEnable
+* @brief  Flash写使能
+* @param  None
+* @retval None   
+*&#x2F;
+static void SPI_Flash_WriteEnable()
+&#123;
+    &#x2F;&#x2F;选择Flash芯片：CS引脚输出低电平
+    CLR_SPI_Flash_CS;
+    &#x2F;&#x2F;发送命令：写使能0x06
+    SPI_Flash_WriteByte(W25X_WriteEnable);
+    &#x2F;&#x2F;禁用Flash芯片：CS引脚输出高电平
+    SET_SPI_Flash_CS;
+&#125;
+
+&#x2F;*
+* @name   SPI_Flash_WaitForWriteEnd
+* @brief  等待SPI写入完成
+* @param  None
+* @retval None   
+*&#x2F;
+static void SPI_Flash_WaitForWriteEnd()
+&#123;
+    uint8_t Flash_Status &#x3D; 0;
+    &#x2F;&#x2F;选择Flash芯片：CS引脚输出低电平
+    CLR_SPI_Flash_CS;
+    &#x2F;&#x2F;写入命令：读取状态寄存器1
+    SPI_Flash_WriteByte(W25X_ReadStatusRg1);
+    &#x2F;&#x2F;等待数据写入完成，不断读取BUSY位状态，如果为1，则继续读，如果为0，则退出
+    Timer6.usDelay_Timer &#x3D; 0;
+    do
+    &#123;
+        Flash_Status &#x3D; SPI_Flash_ReadByte();
+		&#x2F;&#x2F; 超时机制
+        if(Timer6.usDelay_Timer &gt;&#x3D; TIMER_10s)
+        &#123;
+            break;
+        &#125;
+    &#125; while((Flash_Status&amp;Flash_Status1_BUSY) &#x3D;&#x3D; Flash_Status1_BUSY);
+    
+    &#x2F;&#x2F;禁用Flash芯片：CS引脚输出高电平
+    SET_SPI_Flash_CS;
+&#125;
+
+static void SPI_Flash_ReadFlashID(void)
+&#123;
+	uint8_t buf[3];
+
+	&#x2F;&#x2F; 选择Flash芯片：CS输出低电平
+	CLR_SPI_Flash_CS;
+	&#x2F;&#x2F; 发送命令
+	SPI_Flash_WriteByte(W25X_ReadjedecID);
+	buf[0] &#x3D; SPI_Flash_ReadByte();
+	buf[1] &#x3D; SPI_Flash_ReadByte();
+	buf[2] &#x3D; SPI_Flash_ReadByte();
+	&#x2F;&#x2F; 禁用Flash：CS输出高电平
+	SET_SPI_Flash_CS;
+	SPI_Flash.JedecID &#x3D; (buf[0]&lt;&lt; 16) + (buf[1] &lt;&lt; 8) + buf[2];
+	printf(&quot;ID:0x%.6X\r\n&quot;,SPI_Flash.JedecID);
+&#125;
+
+&#x2F;*
+* @name   SPI_Flash_EraseSector
+* @brief  扇区擦除
+* @param  SectorAddr：待擦除的地址,要求为4K的倍数
+* @retval None   
+*&#x2F;
+static void SPI_Flash_EraseSector(uint32_t SectorAddr)
+&#123;
+    &#x2F;&#x2F;检测Flash是否处于忙碌状态
+    SPI_Flash_WaitForWriteEnd();
+
+    &#x2F;&#x2F;Flash写使能，允许擦除
+    SPI_Flash_WriteEnable();
+
+    &#x2F;&#x2F;选择Flash芯片：CS引脚输出低电平
+    CLR_SPI_Flash_CS;
+
+    &#x2F;&#x2F;发送扇区擦除指令
+    SPI_Flash_WriteByte(W25X_SectorErase);
+    &#x2F;&#x2F;发送擦除扇区地址的高字节
+    SPI_Flash_WriteByte((SectorAddr &amp; 0xFF0000) &gt;&gt; 16);
+    &#x2F;&#x2F;发送擦除扇区地址的中字节
+    SPI_Flash_WriteByte((SectorAddr &amp; 0x00FF00) &gt;&gt; 8);
+    &#x2F;&#x2F;发送擦除扇区地址的低字节
+    SPI_Flash_WriteByte((SectorAddr &amp; 0x0000FF));
+
+    &#x2F;&#x2F;禁用Flash芯片：CS引脚输出高电平
+    SET_SPI_Flash_CS;
+
+    &#x2F;&#x2F;等待擦除完毕
+    SPI_Flash_WaitForWriteEnd();
+    printf(&quot;扇区擦除成功!\r\n&quot;);
+&#125;
+
+&#x2F;&#x2F; 擦除全部
+static void SPI_Flash_EraseTotal(void)
+&#123;
+	&#x2F;&#x2F; Flash使能
+	SPI_Flash_WriteEnable();
+	&#x2F;&#x2F; 擦整片
+	CLR_SPI_Flash_CS;
+	SPI_Flash_WriteByte(W25X_ChipErase);
+	SET_SPI_Flash_CS;
+	SPI_Flash_WaitForWriteEnd();
+&#125;
+
+&#x2F;*
+* @name   SPI_Flash_ReadUnfixed
+* @brief  读取不固定长度数据
+* @param  pWriteBuffer：存放读取数据的缓存指针
+            WriteAddr：待读取的地址
+            WriteLength：读取数据的长度
+* @retval None   
+*&#x2F;
+static void SPI_Flash_ReadUnfixed(uint8_t* pReadBuffer,uint32_t ReadAddr,uint32_t ReadLength)
+&#123;
+    &#x2F;&#x2F;检测Flash是否处于忙碌状态
+    SPI_Flash_WaitForWriteEnd();
+
+    &#x2F;&#x2F;选择Flash芯片：CS引脚输出低电平
+    CLR_SPI_Flash_CS;
+
+    &#x2F;&#x2F;发送命令，读取数据
+    SPI_Flash_WriteByte(W25X_ReadData);
+
+    &#x2F;&#x2F;发送24位地址
+    SPI_Flash_WriteByte((ReadAddr &amp; 0xFF0000) &gt;&gt; 16);
+    SPI_Flash_WriteByte((ReadAddr &amp; 0x00FF00) &gt;&gt; 8);
+    SPI_Flash_WriteByte((ReadAddr &amp; 0x0000FF));
+
+    &#x2F;&#x2F;开始读取数据
+    while(ReadLength--)
+    &#123;
+        &#x2F;&#x2F;读取一个字节
+        *pReadBuffer &#x3D; SPI_Flash_ReadByte();
+        &#x2F;&#x2F;指向下一个字节缓冲区
+        pReadBuffer++;
+    &#125;
+    &#x2F;&#x2F;禁用Flash芯片：CS引脚输出高电平
+    SET_SPI_Flash_CS;
+&#125;
+
+&#x2F;&#x2F; 页写入--有风险
+static void SPI_Flash_WritePage(uint8_t* pWriteBuffer,uint32_t WriteAddr,uint16_t WriteLength)
+&#123;
+	SPI_Flash_WriteEnable();
+	CLR_SPI_Flash_CS;
+	SPI_Flash_WriteByte(W25X_PageProgram);
+	&#x2F;&#x2F; 发送地址高字节
+	SPI_Flash_WriteByte((WriteAddr &amp; 0xFF0000) &gt;&gt; 16);
+	&#x2F;&#x2F; 发送地址中字节
+	SPI_Flash_WriteByte((WriteAddr &amp; 0x00FF00) &gt;&gt; 8);
+	&#x2F;&#x2F; 发送地址低字节
+	SPI_Flash_WriteByte(WriteAddr &amp; 0xFF);
+
+	if(WriteLength &gt; SPI_Flash_PageSize)
+	&#123;
+		WriteLength &#x3D; SPI_Flash_PageSize;
+		printf(&quot;Error\r\n&quot;);
+	&#125;
+	&#x2F;&#x2F; 开始写入数据
+	while(WriteLength--)
+	&#123;
+		&#x2F;&#x2F; 读取一个字节
+		SPI_Flash_WriteByte(*pWriteBuffer);
+		&#x2F;&#x2F; 指向下一个字节缓冲区
+		pWriteBuffer++;
+	&#125;
+	SET_SPI_Flash_CS;
+	SPI_Flash_WaitForWriteEnd();
+&#125;
+
+&#x2F;&#x2F; 写入不固定长度数据
+static void SPI_Flash_WriteUnfixed(uint8_t *pWriteBuffer, uint32_t WriteAddr, uint32_t WriteLength)
+&#123;
+	uint32_t PageNumofWriteLength &#x3D; WriteLength &#x2F; SPI_FLASH_PageSize;			 &#x2F;&#x2F; 待写入页数
+	uint8_t NotEnoughNumofPage &#x3D; WriteLength % SPI_FLASH_PageSize;				 &#x2F;&#x2F; 不足一页的数量
+	uint8_t WriteAddrPageAlignment &#x3D; WriteAddr % SPI_FLASH_PageSize;			 &#x2F;&#x2F; 如果取余为0，则地址页对齐，可以写
+	uint8_t NotAlignmentNumofPage &#x3D; SPI_FLASH_PageSize - WriteAddrPageAlignment; &#x2F;&#x2F; 地址不对齐部分，最多可以写入的字节数量
+
+	&#x2F;&#x2F; 写入地址页对齐
+	if (0 &#x3D;&#x3D; WriteAddrPageAlignment)
+	&#123;
+		&#x2F;&#x2F; 待待写入数据不足一页
+		if (0 &#x3D;&#x3D; PageNumofWriteLength)
+		&#123;
+			SPI_Flash_WritePage(pWriteBuffer, WriteAddr, WriteLength);
+		&#125;
+		&#x2F;&#x2F; 代写入数据超过一页
+		else
+		&#123;
+			&#x2F;&#x2F; 先写入整页
+			while (PageNumofWriteLength--)
+			&#123;
+				SPI_Flash_WritePage(pWriteBuffer, WriteAddr, SPI_FLASH_PageSize);
+				pWriteBuffer +&#x3D; SPI_FLASH_PageSize;
+				WriteAddr +&#x3D; SPI_FLASH_PageSize;
+			&#125;
+			&#x2F;&#x2F; 再写入不足一页的数据
+			if (NotEnoughNumofPage &gt; 0)
+			&#123;
+				SPI_Flash_WritePage(pWriteBuffer, WriteAddr, NotEnoughNumofPage);
+			&#125;
+		&#125;
+	&#125;
+	&#x2F;&#x2F; 写入地址与页不对齐
+	else
+	&#123;
+		&#x2F;&#x2F; 待写入数据不足一页
+		if (0 &#x3D;&#x3D; PageNumofWriteLength)
+		&#123;
+			&#x2F;&#x2F; 不足一页的数据&lt;&#x3D;地址不对齐部分
+			if (NotEnoughNumofPage &lt;&#x3D; NotAlignmentNumofPage)
+			&#123;
+				SPI_Flash_WritePage(pWriteBuffer, WriteAddr, WriteLength);
+			&#125;
+			&#x2F;&#x2F; 不足一页的数据 &gt; 地址不对齐部分
+			else
+			&#123;
+				&#x2F;&#x2F; 先写地址不对齐部分允许写入的最大长度
+				SPI_Flash_WritePage(pWriteBuffer, WriteAddr, NotAlignmentNumofPage);
+				pWriteBuffer +&#x3D; NotAlignmentNumofPage;
+				WriteAddr +&#x3D; NotAlignmentNumofPage;
+				&#x2F;&#x2F; 再写没写完的数据
+				SPI_Flash_WritePage(pWriteBuffer, WriteAddr, NotEnoughNumofPage - NotAlignmentNumofPage);
+			&#125;
+		&#125;
+		&#x2F;&#x2F; 待写数据超过一页
+		else
+		&#123;
+			&#x2F;&#x2F; 先写地址不对齐部分允许写入的最大长度，此时地址对齐了
+			SPI_Flash_WritePage(pWriteBuffer, WriteAddr, NotAlignmentNumofPage);
+			pWriteBuffer +&#x3D; NotAlignmentNumofPage;
+			WriteAddr +&#x3D; NotAlignmentNumofPage;
+			&#x2F;&#x2F; 地址对齐后，重新计算写入页数与不足一页的数量
+			WriteLength -&#x3D; NotAlignmentNumofPage;
+			PageNumofWriteLength &#x3D; WriteLength &#x2F; SPI_FLASH_PageSize;
+			NotEnoughNumofPage &#x3D; WriteLength % SPI_FLASH_PageSize;
+			&#x2F;&#x2F; 先写入整页
+			while (PageNumofWriteLength--)
+			&#123;
+				SPI_Flash_WritePage(pWriteBuffer, WriteAddr, SPI_FLASH_PageSize);
+				pWriteBuffer +&#x3D; SPI_FLASH_PageSize;
+				WriteAddr +&#x3D; SPI_FLASH_PageSize;
+			&#125;
+			&#x2F;&#x2F; 再写入不足一页的数据
+			if (NotEnoughNumofPage &gt; 0)
+			&#123;
+				SPI_Flash_WritePage(pWriteBuffer, WriteAddr, NotEnoughNumofPage);
+			&#125;
+		&#125;
+	&#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> main.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">uint8_t Tx_Buffer[] &#x3D; &quot;嵌入式-培养人才，加油！Yang&quot;;
+const uint8_t BufferSize &#x3D; sizeof(Tx_Buffer)&#x2F;sizeof(Tx_Buffer[0]);
+uint8_t Rx_Buffer[BufferSize];
+
+&#x2F;&#x2F;芯片测试
+
+&#x2F;&#x2F;擦除扇区
+SPI_Flash.EraseSector(0x00000000);
+&#x2F;&#x2F; 写入不定长数据
+SPI_Flash.WriteUnfixed(Tx_Buffer,0x00000088,BufferSize);
+&#x2F;&#x2F; 读出不定长数据
+SPI_Flash.ReadUnfixed(Rx_Buffer,0x00000088,BufferSize);
+printf(&quot;读出的数据为：%s\r\n&quot;,Rx_Buffer);</code></pre>
+              </div>
+            </details>
+<h3 id="编程示例2">编程示例2</h3>
+<blockquote>
+<p>模拟SPI</p>
+</blockquote>
+<ul>
+<li>接线</li>
+</ul>
+<div class="note simple"><p>单片机GND   ----  屏幕GND<br>
+单片机3.3V  ----  屏幕VCC<br>
+单片机PB11   ----  屏幕CS【片选CS】<br>
+单片机PB10   ----  屏幕AO【寄存器/数据选择】<br>
+单片机PB12  ----  屏幕RESET【复位】<br>
+单片机PA8   ----  屏幕LED【背光】<br>
+单片机PB13   ----  屏幕SCK【总线时钟】<br>
+单片机PC3  ----  屏幕SDA【总线写数据信号MOSI】</p>
+</div>
+<p><code>介绍</code>：基于STM32F407VET6，软件模拟SPI驱动 ST7735S LCD屏幕</p>
+<div class="tip bolt"><p>时序</p>
+</div>
+<p>可以看到SCL在低电平时数据是可以改变的，也就是SCL低电平空闲，极性就是 <code>CPOL=0</code>，SDA数据是在SCL第一个沿稳定，第二沿时才可以被改变，所以相当于第一个沿采样数据，也就是相位是 <code>CPAL=0</code>，也就是SPI模式 <code>0</code></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231031180126.webp" style="zoom:67%;" />
+<div class="tip bolt"><p>模拟SPI的引脚操作</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 置1操作(bit set&#x2F;reset register)
+#define	LCD_SCL_SET  	HAL_GPIO_WritePin(LCD_SCK_GPIO_Port,LCD_SCK_Pin,GPIO_PIN_SET)
+#define	LCD_SDA_SET  	HAL_GPIO_WritePin(LCD_SDA_GPIO_Port,LCD_SDA_Pin,GPIO_PIN_SET)
+#define	LCD_CS_SET  	HAL_GPIO_WritePin(LCD_CS_GPIO_Port,LCD_CS_Pin,GPIO_PIN_SET)
+#define	LCD_DC_SET  	HAL_GPIO_WritePin(LCD_AO_GPIO_Port,LCD_AO_Pin,GPIO_PIN_SET)
+#define	LCD_RES_SET  	HAL_GPIO_WritePin(LCD_RESET_GPIO_Port,LCD_RESET_Pin,GPIO_PIN_SET)
+&#x2F;&#x2F; 置0操作(bit reset register)
+#define	LCD_SCL_CLR  	HAL_GPIO_WritePin(LCD_SCK_GPIO_Port,LCD_SCK_Pin,GPIO_PIN_RESET)
+#define	LCD_SDA_CLR  	HAL_GPIO_WritePin(LCD_SDA_GPIO_Port,LCD_SDA_Pin,GPIO_PIN_RESET)
+#define	LCD_CS_CLR  	HAL_GPIO_WritePin(LCD_CS_GPIO_Port,LCD_CS_Pin,GPIO_PIN_RESET)
+#define	LCD_DC_CLR  	HAL_GPIO_WritePin(LCD_AO_GPIO_Port,LCD_AO_Pin,GPIO_PIN_RESET)
+#define	LCD_RES_CLR  	HAL_GPIO_WritePin(LCD_RESET_GPIO_Port,LCD_RESET_Pin,GPIO_PIN_RESET)</code></pre>
+<div class="tip bolt"><p>向SPI总线发送一个字节数据</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">static void SPI_ST7735_Write_Data(uint8_t Data)
+&#123;
+    uint8_t i;
+
+    for(i &#x3D; 0; i &lt; 8; i++)
+    &#123;
+        if (Data &amp; 0x80)
+        &#123;
+            LCD_SDA_SET;    &#x2F;&#x2F; 输出数据
+        &#125;
+        else
+        &#123;
+            LCD_SDA_CLR;    
+        &#125;
+        LCD_SCL_CLR;
+        LCD_SCL_SET;	&#x2F;&#x2F; 表示SCL时钟信号处于上升沿，开始一位数据传送
+        Data &lt;&lt;&#x3D; 1;
+    &#125;
+&#125;</code></pre>
+<div class="tip bolt"><p>发送数据/命令函数</p>
+</div>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+* @function: ST7735_Write_CMD
+* @param: CMD -&gt; 待写入命令
+* @retval: None
+* @brief: 向液晶屏写一个字节命令
+*&#x2F;
+static void ST7735_Write_CMD(uint8_t CMD)
+&#123;
+    &#x2F;&#x2F; CS拉低通信开始，CS拉高通信结束
+    LCD_CS_CLR;
+    LCD_DC_CLR;
+    SPI_ST7735_Write_Data(CMD);
+    LCD_CS_SET;
+&#125;
+
+&#x2F;*
+* @function: ST7735_Write_DATA_8BIT
+* @param: DATA -&gt; 待写入数据
+* @retval: None
+* @brief: 向液晶屏写1个字节数据
+*&#x2F;
+static void ST7735_Write_DATA_8BIT(uint8_t DATA)
+&#123;
+    LCD_CS_CLR;
+    LCD_DC_SET;
+    SPI_ST7735_Write_Data(DATA);
+    LCD_CS_SET;    
+&#125;
+
+&#x2F;*
+* @function: ST7735_Write_DATA_16BIT
+* @param: DATA -&gt; 待写入数据
+* @retval: None
+* @brief: 向液晶屏写2个字节数据
+*&#x2F;
+static void ST7735_Write_DATA_16BIT(uint16_t DATA)
+&#123;
+    LCD_CS_CLR;
+    LCD_DC_SET;
+    SPI_ST7735_Write_Data(DATA &gt;&gt; 8);   &#x2F;&#x2F; 先高再低
+    SPI_ST7735_Write_Data(DATA);
+    LCD_CS_SET;    
+&#125;</code></pre>
+<blockquote>
+<p>硬件SPI</p>
+</blockquote>
+<p>基于上面，只是把SCL和SDA引脚用硬件SPI代替，修改一下发送单字节数据函数即可</p>
+<ul>
+<li>MX配置</li>
+</ul>
+<p>这里Mode选择这几个都可以</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231031202357.webp" alt=""></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231031185925.webp" style="zoom:67%;" />
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231031185941.webp" alt=""></p>
+<ul>
+<li>程序</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+* @function: SPI_ST7735_Write_Data
+* @param: Data -&gt; 一个字节数据
+* @retval: None
+* @brief: 向SPI总线传输一个字节数据
+*&#x2F;
+static void SPI_ST7735_Write_Data(uint8_t Data)
+&#123;
+	HAL_SPI_Transmit(&amp;hspi2,&amp;Data,sizeof(Data),HAL_MAX_DELAY);
+&#125;</code></pre>
+<p>如果加DMA的话，直接MX打开即可，配置默认，需要打开DMA中断和SPI中断(程序里不需要处理)，然后把发送函数改成：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">HAL_SPI_Transmit_DMA(&amp;hspi2,&amp;Data,sizeof(Data));</code></pre></article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num173.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SPI"><span class="toc-number">2.</span> <span class="toc-text">SPI</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SPI%E8%AF%A6%E8%A7%A3"><span class="toc-number">2.1.</span> <span class="toc-text">SPI详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B1"><span class="toc-number">2.2.</span> <span class="toc-text">编程示例1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B2"><span class="toc-number">2.3.</span> <span class="toc-text">编程示例2</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/beian34234242222.webp" style="float:left;zoom:80%;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://lib.baomitu.com/KaTeX/latest/katex.min.css"><script src="https://jsd.onmicrosoft.cn/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '键盘敲烂 月薪过万' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script defer src="/js/my_aplayer.js"></script><script defer src="/js/meting.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>

@@ -1,0 +1,1861 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>通信协议学习-CAN | Yangの小栈</title><meta name="author" content="Yang"><meta name="copyright" content="Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言 参考文章&#x2F;博主  CAN 参考手册：can入门教程 CAN波特率计算 CAN基础详解 介绍  CAN 是控制器局域网络（Controller Area Network） 的缩写，是 ISO 国际标准化的 串行通信 协议，为了满足汽车产业的 “减少线束的数量”，&quot;通过多个LAN，进行大量数据的高速通信&quot;的需求  ISO发布CAN标准 ISO11898(高速CAN) 以及 I">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通信协议学习-CAN">
+<meta property="og:url" content="https://blog.yang5201314.cn/post/3132f4c8.html">
+<meta property="og:site_name" content="Yangの小栈">
+<meta property="og:description" content="前言 参考文章&#x2F;博主  CAN 参考手册：can入门教程 CAN波特率计算 CAN基础详解 介绍  CAN 是控制器局域网络（Controller Area Network） 的缩写，是 ISO 国际标准化的 串行通信 协议，为了满足汽车产业的 “减少线束的数量”，&quot;通过多个LAN，进行大量数据的高速通信&quot;的需求  ISO发布CAN标准 ISO11898(高速CAN) 以及 I">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.yang5201314.cn/img/num170.webp">
+<meta property="article:published_time" content="2024-02-20T06:06:34.239Z">
+<meta property="article:modified_time" content="2024-02-20T06:58:48.029Z">
+<meta property="article:author" content="Yang">
+<meta property="article:tag" content="aabbcc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.yang5201314.cn/img/num170.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20231008142657.webp"><link rel="canonical" href="https://blog.yang5201314.cn/post/3132f4c8.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '通信协议学习-CAN',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-20 14:58:48'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/aplayer.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20231008142657.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">167</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">72</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">34</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">通信协议学习-CAN</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-02-20T06:06:34.239Z" title="发表于 2024-02-20 14:06:34">2024-02-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-02-20T06:58:48.029Z" title="更新于 2024-02-20 14:58:48">2024-02-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BB%86%E5%8C%96%E5%AD%A6%E4%B9%A0/">细化学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">12.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>48分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>参考文章/博主</p>
+</div>
+<h2 id="CAN">CAN</h2>
+<p>参考手册：can入门教程</p>
+<p><a href="http://www.bittiming.can-wiki.info/#bxCAN">CAN波特率计算</a></p>
+<h3 id="CAN基础详解">CAN基础详解</h3>
+<div class="tip bolt"><p>介绍</p>
+</div>
+<p>CAN 是控制器局域网络（Controller Area Network） 的缩写，是 ISO 国际标准化的 <code>串行通信</code> 协议，为了满足汽车产业的 “减少线束的数量”，&quot;通过多个LAN，进行大量数据的高速通信&quot;的需求</p>
+<blockquote>
+<p>ISO发布CAN标准 <code>ISO11898(高速CAN)</code> 以及 <code>ISO11519(低速CAN)</code></p>
+<p><code>低速CAN</code>：通信速率10~125Kbps，总线长度可达1000米</p>
+<p><code>高速CAN(经典CAN)</code>：通信速率125Kbps~1Mbps，总线长度&lt;=40米</p>
+<p><code>CAN FD</code>：通信速率可达5Mbps，并且兼容经典CAN，遵循ISO 11898-1 做数据收发</p>
+</blockquote>
+<div class="tip bolt"><p>CAN总线拓扑</p>
+</div>
+<p><code>终端电阻</code>：用于阻抗匹配，以减少回波反射</p>
+<ul>
+<li>闭环总线网络</li>
+</ul>
+<p>总线的两端各要求有一个 <code>“120 欧”</code> 的电阻，允许挂载多个设备节点(一般最大30个)</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231102145117.webp" style="zoom:67%;" />
+<ul>
+<li>开环总线网络</li>
+</ul>
+<p>两根总线是独立的、不形成闭环，要求每根总线上各串联有一个 <code>“2.2千欧”</code> 的电阻，允许挂载多个设备节点(一般最大20个)</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231102145149.webp" style="zoom:67%;" />
+<div class="tip bolt"><p>特点</p>
+</div>
+<p><code>(1) 多主控制</code></p>
+<p>在总线空闲时，所有的单元都可开始发送消息（多主控制），最先访问总线的单元可获得发送权（CSMA/CA 方式），多个单元同时开始发送时，发送高优先级 ID 消息的单元可获得发送权</p>
+<p><code>(2) 消息的发送</code></p>
+<p>在 CAN 协议中，所有的消息都以固定的格式发送。总线空闲时，所有与总线相连的单元都可以开始发送新消息。两个以上的单元同时开始发送消息时，根据标识符（Identifier 以下称为 ID）决定优先级。ID 并不是表示发送的目的地址，而是表示访问总线的消息的优先级。两个以上的单元同时开始发送消息时，对各消息 ID 的每个位进行逐个仲裁比较。仲裁获胜（被判定为优先级最高）的单元可继续发送消息，仲裁失利的单元则立刻停止发送而进行接收工作</p>
+<p><code>(3) 系统的柔软性</code></p>
+<p>与总线相连的单元没有类似于“地址”的信息。因此在总线上增加单元时，连接在总线上的其它单元的软硬件及应用层都不需要改变</p>
+<p><code>(4) 通信速度</code></p>
+<p>根据整个网络的规模，可设定适合的通信速度，在同一网络中，所有单元必须设定成统一的通信速度，即使有一个单元的通信速度与其它的不一样，此单元也会输出错误信号，妨碍整个网络的通信，不同网络间则可以有不同的通信速度</p>
+<p><code>(5) 远程数据请求</code></p>
+<p>可通过发送“遥控帧” 请求其他单元发送数据</p>
+<p><code>(6) 错误检测功能·错误通知功能·错误恢复功能</code></p>
+<p>所有的单元都可以检测错误（错误检测功能），检测出错误的单元会立即同时通知其他所有单元（错误通知功能），正在发送消息的单元一旦检测出错误，会强制结束当前的发送。强制结束发送的单元会不断反复地重新发送此消息直到成功发送为止（错误恢复功能）</p>
+<p><code>(7) 故障封闭</code></p>
+<p>CAN 可以判断出错误的类型是总线上暂时的数据错误（如外部噪声等）还是持续的数据错误（如单元内部故障、驱动器故障、断线等）。由此功能，当总线上发生持续数据错误时，可将引起此故障的单元从总线上隔离出去</p>
+<p><code>(8) 连接</code></p>
+<p>CAN 总线是可同时连接多个单元的总线。可连接的单元总数理论上是没有限制的。但实际上可连接的单元数受总线上的时间延迟及电气负载的限制。降低通信速度，可连接的单元数增加；提高通信速度，则可连接的单元数减少</p>
+<div class="tip bolt"><p>CAN物理层</p>
+</div>
+<p>CAN 通讯并不是以时钟信号来进行同步的，它是一种 <code>异步</code> 通讯，只具有 <code>CAN_H</code> 和  <code>CAN_L</code> 两条信号线，共同构成一组差分信号线，以 <code>差分信号</code> 的形式进行通讯 ( <code>根据CAN_H和CAN_L上的电位差来判断总线电平</code>)</p>
+<p>总线电平分为 <code>显性电平(逻辑0)</code> 和 <code>隐性电平(逻辑1)</code>，而且必须处于这两个其中一个状态</p>
+<p><code>显性电平具有优先权</code>，发送方通过使总线电平发送变化，将消息发送给接收方</p>
+<p><code>CAN 协议</code> 中对它使用的 <code>CAN_H</code> 及 <code>CAN_L</code> 表示的差分信号做了规定：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231102151527.webp" style="zoom:67%;" />
+<p>以高速 CAN 协议为例，当表示 <code>逻辑 1 时(隐性电平)</code>， <code>CAN_H</code> 和 <code>CAN_L</code> 线上的电压均为 <code>2.5v</code>，即它们的电压差为 <code>VH - VL = 0V</code>；而表示 <code>逻辑 0 时(显性电平)</code>， <code>CAN_H</code> 的电平为  <code>3.5V</code>， <code>CAN_L</code> 线的电平为 <code>1.5V</code>，即它们的电压差为 <code>VH - VL = 2V</code></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231102152431.webp" style="zoom:67%;" />
+<ul>
+<li>CAN 控制器</li>
+</ul>
+<p>一般单片机自带，如STM32的 bxCAN</p>
+<ul>
+<li>CAN收发器芯片</li>
+</ul>
+<p><code>TJA1050</code>， <code>TJA11042</code>， <code>SIT1050T</code> 等等</p>
+<blockquote>
+<p>TJA1050</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231102160058.webp" alt=""></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231102160017.webp" style="zoom:67%;" />
+<blockquote>
+<p>TJA1040T</p>
+</blockquote>
+<p><code>TJA1040T</code> 芯片负责将单片机的TTL逻辑电平转换为CAN总线的通讯电平，芯片的TXD引脚接到单片机的CAN_TX引脚，RXD引脚接到单片机的CAN_RX引脚，STB引脚可接单片机的一个普通IO口，TJA1040T芯片就是CAN收发器，单片机内部的CAN外设就是CAN控制器</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230522151110.webp" alt=""></p>
+<div class="tip bolt"><p>CAN协议层</p>
+</div>
+<p>CAN总线以 <code>帧</code> 形式进行通信。CAN协议定义了5种类型的帧：<code>数据帧</code>，<code>遥控帧</code>，<code>错误帧</code>，<code>过载帧</code>，<code>过载帧</code>，<code>间隔帧</code>，其中数据帧最为常用</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231102161941.webp" alt=""></p>
+<blockquote>
+<p>数据帧</p>
+</blockquote>
+<p>数据帧由 <code>7</code> 段组成，数据帧又分 <code>标准帧(CAN2.0A)</code> 和 <code>扩展帧(CAN2.0B)</code>，主要体现在仲裁帧和控制帧</p>
+<p><code>数据帧发送的是接收方的ID，遥控帧因为要要求别人发送信息过来，所以发送的是发送方的ID</code></p>
+<p>数据帧的构成主要由 <code>帧起始、仲裁段、控制段、数据段、CRC段、ACK段和帧结束</code> 组成，这里 <code>0~64Bit</code> 也就是 <code>8</code> 个字节</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231104230203.webp" style="zoom:67%;" />
+<ul>
+<li>帧起始</li>
+</ul>
+<p><code>SOF</code>，一开始总线上是隐性电平，为 <code>逻辑1</code>，当电平由隐性变为显性，即由 <code>1变为0</code>，则表示帧起始</p>
+<ul>
+<li>仲裁段</li>
+</ul>
+<p><code>ID</code>，表示该帧优先级的段，优先级，也叫标识符位， <code>11</code> 位</p>
+<p><code>RTR</code> 表示远程发送请求位， <code>0数据帧，1遥控帧</code></p>
+<p>扩展数据帧的话 <code>ID</code> 部分一样，而且还增加了 <code>18</code> 位扩展ID，也就是仲裁段的 <code>ID</code> 位数是 <code>29</code>位。后面的 <code>SRR</code> 其实就是代替标准帧的 <code>RTR</code></p>
+<div class="note simple"><p>那怎么分辨哪个是标准帧哪个是扩展帧？比如扩展帧 <code>0x1800F001</code></p>
+<p>扩展格式中 <code>ID0~ID17</code> 为扩展ID，而 <code>ID18~ID28</code> 为 <code>基本ID</code>:</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>二进制：0001 1000 0000 0000 1111 0000 0000 0001</mtext></mrow><annotation encoding="application/x-tex">\text{二进制：0001 1000 0000 0000   1111 0000 0000 0001}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">二进制：</span><span class="mord">0001 1000 0000 0000 1111 0000 0000 0001</span></span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>红色部分为扩展ID，蓝色部分为基本ID：</mtext></mrow><annotation encoding="application/x-tex">\text{红色部分为扩展ID，蓝色部分为基本ID：}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">红色部分为扩展</span><span class="mord">ID</span><span class="mord cjk_fallback">，蓝色部分为基本</span><span class="mord">ID</span><span class="mord cjk_fallback">：</span></span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>000</mn><mstyle mathcolor="red"><mo stretchy="false">[</mo><mn>1</mn><mtext> </mtext><mn>1000</mn><mtext> </mtext><mn>0000</mn><mtext> </mtext><mn>00</mn><mo stretchy="false">]</mo></mstyle><mstyle mathcolor="blue"><mo stretchy="false">[</mo><mn>00</mn><mtext> </mtext><mn>1111</mn><mtext> </mtext><mn>0000</mn><mtext> </mtext><mn>0000</mn><mtext> </mtext><mn>0001</mn><mo stretchy="false">]</mo></mstyle></mrow><annotation encoding="application/x-tex">000\textcolor{red}{[1\ 1000\ 0000\ 00]}\textcolor{blue}{[00\    1111\ 0000\ 0000\ 0001]}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">000</span><span class="mopen" style="color:red;">[</span><span class="mord" style="color:red;">1</span><span class="mspace" style="color:red;"><span style="color:red;"> </span></span><span class="mord" style="color:red;">1000</span><span class="mspace" style="color:red;"><span style="color:red;"> </span></span><span class="mord" style="color:red;">0000</span><span class="mspace" style="color:red;"><span style="color:red;"> </span></span><span class="mord" style="color:red;">00</span><span class="mclose" style="color:red;">]</span><span class="mopen" style="color:blue;">[</span><span class="mord" style="color:blue;">00</span><span class="mspace" style="color:blue;"><span style="color:blue;"> </span></span><span class="mord" style="color:blue;">1111</span><span class="mspace" style="color:blue;"><span style="color:blue;"> </span></span><span class="mord" style="color:blue;">0000</span><span class="mspace" style="color:blue;"><span style="color:blue;"> </span></span><span class="mord" style="color:blue;">0000</span><span class="mspace" style="color:blue;"><span style="color:blue;"> </span></span><span class="mord" style="color:blue;">0001</span><span class="mclose" style="color:blue;">]</span></span></span></span></p>
+</div>
+<div class="note simple"><p>标准ID一般 <code>&lt;=0x7FF(11位)</code>，只包含基本ID</p>
+<p>对于扩展CAN的 <code>低18位为扩展ID</code>， <code>高11位为基本ID</code></p>
+</div>
+<ul>
+<li>控制段</li>
+</ul>
+<p>表示数据的字节数及保留位的段</p>
+<p><code>IDE</code> 用于区分 <code>标准格式</code> 与 <code>扩展格式</code>，当它为 <code>显性电平时(0)</code> 表示标准格式， <code>隐性电平时(1)</code>表示扩展格式</p>
+<p><code>DLC</code> 是数据长度编码位，决定了数据段的长度</p>
+<p><code>R0，R1</code> 为保留位，默认设置为 <code>显性位(0)</code></p>
+<ul>
+<li>数据段</li>
+</ul>
+<p>数据的内容，一帧可以发 <code>0~64 bit</code>，也就是 <code>0~8 Byte</code> 的数据量</p>
+<ul>
+<li>CRC段</li>
+</ul>
+<p>检查帧的传输错误的段</p>
+<p><code>CRC</code> 部分的计算一般由 <code>CAN 控制器</code> 硬件完成，出错时的处理则由 <code>软件</code> 控制最大重发数</p>
+<p><code>DEL</code> 是一个界定符，它为 <code>隐性位(1)</code>，主要作用是把 <code>CRC</code> 校验码与后面的 <code>ACK</code> 段间隔起来</p>
+<ul>
+<li>ACK段</li>
+</ul>
+<p>ACK 段包括一个 ACK 槽位，和 ACK 界定符位，类似IIC的应答信号，在 ACK 槽位中，发送节点发送的是  <code>隐性位(1)</code>，而接收节点则在这一位中发送 <code>显性位(0)</code> 以示应答，在 ACK 槽和帧结束之间由 ACK 界定符间隔开</p>
+<ul>
+<li>帧结束</li>
+</ul>
+<p>帧结束段由发送节点发送的 <code>7</code> 个 <code>隐性位(1)</code> 表示结束</p>
+<blockquote>
+<p>CAN位时序介绍</p>
+</blockquote>
+<p>CAN总线以 “位同步” 机制，实现对电平的正确采样。位数据都由四段组成：<code>同步段(SS)</code>， <code>传播时间段(PTS)</code>，<code>相位缓冲段1(PBS1)</code> 和 <code>相位缓冲段2(PBS2)</code>，每段又由多个位时序 <code>Tq(最小时间单位)</code> 组成</p>
+<p><code>1</code> 位由多少个 <code>Tq</code> 构成、每个段又由多少个 <code>Tq</code> 构成等，可以任意设定位时序。通过设定位时序，多个单元可同时采样，也可任意设定采样点</p>
+<p>根据位时序就可以计算出CAN通信的波特率</p>
+<p>限定了 <code>SWJ</code> 值后，再同步时，不能增加限定长度的 <code>SJW</code> 值。 <code>SWJ</code> 值较大时，吸收误差能力更强，但是通讯速度会下降，采样点一般设置在电平变化后的 <code>50% ~ 80%</code> 的区间，这个区间采集的电平就比较稳定</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230522190732.webp" style="zoom: 50%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231103164256.webp" style="zoom:67%;" />
+<blockquote>
+<p>数据同步过程</p>
+</blockquote>
+<p>时钟频率误差及传输路径上的（电缆、驱动器等）相位延迟会引起同步偏差，因此接收单元通过 <code>硬件同步</code> 或者 <code>再同步</code> 的方法调整时序进行接收</p>
+<ul>
+<li>硬件同步</li>
+</ul>
+<p>接收单元在 <code>总线空闲状态</code> 检测出 <code>帧起始时</code> 进行的同步调整</p>
+<p>在检测出边沿的地方不考虑 <code>SJW(再同步补偿宽度)</code> 的值而认为是 <code>SS</code> 段</p>
+<p>节点通过 <code>CAN</code> 总线发送数据，一开始发送帧起始信号。总线上其他节点会检测帧起始信号在不在位数据的 <code>SS</code> 段内，判断内部时序与总线是否同步</p>
+<p>假如不在 <code>SS</code> 段内，这种情况下，采样点获得的电平状态是不正确的。所以，节点会使用硬件同步方式调整，把自己的 <code>SS</code> 段平移到检测到边沿的地方，获得同步，同步情况下，采样点获得的电平状态才是正确的</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231104124155.webp" style="zoom:67%;" />
+<ul>
+<li>再同步</li>
+</ul>
+<p>再同步利用普通数据位的 <code>边沿信号</code>（帧起始信号是 <code>特殊</code> 的边沿信号)进行同步。再同步的方式分为两种情况： <code>超前</code> 和 <code>滞后</code> ，即 <code>边沿信号</code> 与 <code>SS</code> 段的 <code>相对位置</code></p>
+<p>每当检测出边沿时，根据 <code>SJW</code> 值通过加长 <code>PBS1</code> 段，或缩短 <code>PBS2</code> 段，以调整同步。但如果发生了超出 <code>SJW</code> 值的误差时，最大调整量不能超过 <code>SJW</code> 值</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231104124848.webp" style="zoom:67%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231104125152.webp" style="zoom:67%;" />
+<blockquote>
+<p>CAN总线仲裁(优先级决定)</p>
+</blockquote>
+<p>在总线空闲态，最先开始发送消息的单元获得发送权</p>
+<p>多个单元同时开始发送时，各发送单元从 <code>仲裁段(报文ID)</code> 的 <code>第一位</code> 开始进行仲裁。 <code>连续输出显性电平(0)</code>最多的单元可继续发送(<code>换句话就是ID越小优先级越高</code>)，即 <code>首先出现隐性电平的单元失去对总线的占有权变为接收</code>，竞争失败单元，会自动检测总线空闲，在第一时间再次尝试发送</p>
+<p>当然还有另一种情况就是单元检测到是 <code>0</code>，但是总线上检测到的是 <code>1</code>，那就是出现错误了</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231104131246.webp" style="zoom:67%;" />
+<div class="tip bolt"><p>CAN控制器</p>
+</div>
+<blockquote>
+<p>CAN控制器介绍</p>
+</blockquote>
+<p>STM32 CAN控制器( <code>bxCAN(STM32F1,F4,F7系列)</code> )，支持 <code>CAN 2.0A</code> 和 <code>CAN 2.0B Active</code> 版本协议，<code>STM32H7 的是FDCAN</code></p>
+<p><code>CAN 2.0A</code>：只能处理标准数据帧且扩展帧的内容会识别错误</p>
+<p><code>CAN 2.0B Active</code>：可以处理标准数据帧和扩展数据帧</p>
+<p><code>CAN 2.0B Passive</code>：只能处理标准数据帧且扩展帧的内容会忽略</p>
+<ul>
+<li>特点</li>
+</ul>
+<p>波特率最高可达 <code>1Mbps</code></p>
+<p>支持时间触发通信( <code>CAN</code> 的硬件内部定时器可以在 <code>Tx/Rx</code>  的帧起始位的采样点位置生成时间戳)</p>
+<p>具有 <code>3级</code> 发送邮箱</p>
+<p>具有 <code>3级</code> 深度的 <code>2个</code> 接收 <code>FIFO</code></p>
+<p>可变的过滤组( <code>F4/F7最多28个,F1最多14个</code> )，它还有别的叫法：滤波器，筛选器</p>
+<blockquote>
+<p>CAN控制器模式</p>
+</blockquote>
+<p>CAN控制器的工作模式有三种：</p>
+<ol>
+<li>初始化模式 – 需要配置寄存器时</li>
+<li>正常模式 – CAN总线同步，开始接收和发送</li>
+<li>睡眠模式 – 降低功耗</li>
+</ol>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231104141749.webp" style="zoom:67%;" />
+<p>CAN控制器的测试模式有三种：</p>
+<ol>
+<li>静默模式</li>
+<li>环回模式</li>
+<li>环回静默模式</li>
+</ol>
+<p><code>注</code>：这三种模式都是在初始化模式下进行配置的</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231104143009.webp" style="zoom:67%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231104143115.webp" style="zoom:67%;" />
+<blockquote>
+<p>CAN控制器框图</p>
+</blockquote>
+<p><code>CAN1</code> 是主， <code>CAN2</code> 是从</p>
+<ol>
+<li><code>CAN内核</code></li>
+</ol>
+<p>包含各种控制寄存器/状态/配置寄存器，可以配置模式，波特率等</p>
+<ol start="2">
+<li><code>发送邮箱</code></li>
+</ol>
+<p>用来缓存待发送的报文，最多可以缓存3个报文</p>
+<ol start="3">
+<li><code>接收FIFO</code></li>
+</ol>
+<p>缓存接收到的有效报文</p>
+<ol start="4">
+<li><code>接收过滤器</code></li>
+</ol>
+<p>筛选有效报文</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231104144553.webp" alt=""></p>
+<blockquote>
+<p>发送处理</p>
+</blockquote>
+<p>发送优先级由邮箱中报文的标识符决定，标识符数值越低优先级越高，如果标识符相同，则邮箱小的先被发送</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231104145202.webp" alt=""></p>
+<blockquote>
+<p>接收处理</p>
+</blockquote>
+<p>有效报文是指(数据帧直到EOF段的最后一位都没有错误)，且通过过滤器组对标识符过滤</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231104145608.webp" alt=""></p>
+<p>当FIFO处于挂号_3状态(即FIFO的3个邮箱都是满的)，下一个有效的报文就会导致溢出，并且一个报文会丢失。至于哪个报文会被丢弃，取决于对FIFO的设置：</p>
+<ol>
+<li>如果 <code>禁用了FIFO锁定功能</code>(CAN_MCR寄存器的RFLM位被清’0’)，那么FIFO中最后收到的报文就被新报文所覆盖。这样，最新收到的报文不会被丢弃掉</li>
+<li>如果 <code>启用了FIFO锁定功能</code>(CAN_MCR寄存器的RFLM位被置’1’)，那么新收到的报文就被丢弃，软件可以读到FIFO中最早收到的3个报文</li>
+</ol>
+<blockquote>
+<p>CAN控制器位时序</p>
+</blockquote>
+<p>STM32的CAN外设位时序分为三段：<code>同步段SYNC_SEG</code>，<code>时间段1 BS1(相当于PTS+PBS1)</code>，<code>时间段2 BS2</code></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231104154840.webp" style="zoom:67%;" />
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>波特率=</mtext><mfrac><mn>1</mn><mrow><mn>1</mn><mi>t</mi><mi>q</mi><mo>+</mo><mi>t</mi><mi>q</mi><mo>∗</mo><mo stretchy="false">(</mo><mi>T</mi><mi>S</mi><mn>1</mn><mo stretchy="false">[</mo><mn>3</mn><mo>:</mo><mn>0</mn><mo stretchy="false">]</mo><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo>+</mo><mi>t</mi><mi>q</mi><mo>∗</mo><mo stretchy="false">(</mo><mi>T</mi><mi>S</mi><mn>2</mn><mo stretchy="false">[</mo><mn>2</mn><mo>:</mo><mn>0</mn><mo stretchy="false">]</mo><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\text{波特率=}\frac{1}{1tq + tq * (TS1[3:0] + 1) + tq * (TS2[2:0] + 1)}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.2574em;vertical-align:-0.936em;"></span><span class="mord text"><span class="mord cjk_fallback">波特率</span><span class="mord">=</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mord mathnormal" style="margin-right:0.03588em;">tq</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">tq</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05764em;">TS</span><span class="mord">1</span><span class="mopen">[</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">0</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">tq</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05764em;">TS</span><span class="mord">2</span><span class="mopen">[</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">0</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>t</mi><mi>q</mi><mo>=</mo><mi>t</mi><mi>p</mi><mi>c</mi><mi>k</mi><mo>×</mo><mo stretchy="false">(</mo><mi>B</mi><mi>R</mi><mi>P</mi><mo stretchy="false">[</mo><mn>9</mn><mo>:</mo><mn>0</mn><mo stretchy="false">]</mo><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">tq = tpck\times(BRP[9:0] + 1)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8095em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">tq</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">tp</span><span class="mord mathnormal">c</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.13889em;">BRP</span><span class="mopen">[</span><span class="mord">9</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">0</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span></span></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>t</mi><mi>p</mi><mi>c</mi><mi>k</mi><mo>=</mo><mn>42</mn><mi>M</mi><mi>H</mi><mi>z</mi><mo stretchy="false">(</mo><mtext>对于F407系列来说，挂载在APB1上</mtext><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">tpck=42MHz(\text{对于F407系列来说，挂载在APB1上})
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">tp</span><span class="mord mathnormal">c</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">42</span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mord mathnormal" style="margin-right:0.04398em;">Hz</span><span class="mopen">(</span><span class="mord text"><span class="mord cjk_fallback">对于</span><span class="mord">F407</span><span class="mord cjk_fallback">系列来说，挂载在</span><span class="mord">APB1</span><span class="mord cjk_fallback">上</span></span><span class="mclose">)</span></span></span></span></span></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231104155606.webp" style="zoom:67%;" />
+<div class="note simple"><p>STM32F103，设 <code>TS1=8</code>、 <code>TS2=7</code> 、 <code>BRP=3</code></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>波特率</mtext><mo>=</mo><mfrac><mn>36000</mn><mrow><mo stretchy="false">[</mo><mo stretchy="false">(</mo><mn>9</mn><mo>+</mo><mn>8</mn><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo>∗</mo><mn>4</mn><mo stretchy="false">]</mo></mrow></mfrac><mo>=</mo><mn>500</mn><mi>K</mi><mi>b</mi><mi>p</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">\text{波特率}=\frac{36000}{[(9+8+1)*4]} = 500Kbps
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">波特率</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2574em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">[(</span><span class="mord">9</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">8</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">4</span><span class="mclose">]</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">36000</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">500</span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mord mathnormal">b</span><span class="mord mathnormal">p</span><span class="mord mathnormal">s</span></span></span></span></span></p>
+<p>STM32F407，设 <code>TS1=6</code>、 <code>TS2=5</code>、 <code>BRP=5</code></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>波特率</mtext><mo>=</mo><mfrac><mn>42000</mn><mrow><mo stretchy="false">[</mo><mo stretchy="false">(</mo><mn>7</mn><mo>+</mo><mn>6</mn><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo>∗</mo><mn>6</mn><mo stretchy="false">]</mo></mrow></mfrac><mo>=</mo><mn>500</mn><mi>K</mi><mi>b</mi><mi>p</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">\text{波特率}=\frac{42000}{[(7+6+1)*6]} = 500Kbps
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">波特率</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2574em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">[(</span><span class="mord">7</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">6</span><span class="mclose">]</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">42000</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">500</span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mord mathnormal">b</span><span class="mord mathnormal">p</span><span class="mord mathnormal">s</span></span></span></span></span></p>
+<p>需要注意的是通信双方波特率要设置为一样才能通信成功</p>
+</div>
+<blockquote>
+<p>CAN相关寄存器</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">寄存器</th>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">CAN_MCR</td>
+<td style="text-align:center">CAN主控制寄存器</td>
+<td style="text-align:center">主要负责CAN工作模式的配置</td>
+</tr>
+<tr>
+<td style="text-align:center">CAN_BTR</td>
+<td style="text-align:center">位时序寄存器</td>
+<td style="text-align:center">用来设置分频<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi>B</mi><mi>S</mi><mn>1</mn></mrow></msub><mi mathvariant="normal">/</mi><msub><mi>T</mi><mrow><mi>B</mi><mi>S</mi><mn>2</mn></mrow></msub><mi mathvariant="normal">/</mi><msub><mi>T</mi><mrow><mi>S</mi><mi>W</mi><mi>J</mi></mrow></msub></mrow><annotation encoding="application/x-tex">T_{BS1}/T_{BS2}/T_{SWJ}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05764em;">BS</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">/</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05764em;">BS</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">/</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05764em;">S</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">W</span><span class="mord mathnormal mtight" style="margin-right:0.09618em;">J</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>等参数，设置测试模式，只有 CAN 硬件处于初始化模式时，才能由软件访问此寄存器</td>
+</tr>
+<tr>
+<td style="text-align:center">CAN_(T/R)lxR</td>
+<td style="text-align:center">标识符寄存器</td>
+<td style="text-align:center">存放(待发送/接收)的 <code>报文ID、扩展ID、IDE位及RTR位</code></td>
+</tr>
+<tr>
+<td style="text-align:center">CAN_(T/R)DTxR</td>
+<td style="text-align:center">数据长度和时间戳寄存器</td>
+<td style="text-align:center">存放(待发送/接收)报文的 <code>DLC</code> 段</td>
+</tr>
+<tr>
+<td style="text-align:center">CAN_(T/R)DLxR</td>
+<td style="text-align:center">低位数据寄存器</td>
+<td style="text-align:center">存放(待发送/接收)报文数据段的 <code>Data0~Data3</code> 的内容</td>
+</tr>
+<tr>
+<td style="text-align:center">CAN_(T/R)DHxR</td>
+<td style="text-align:center">高位数据寄存器</td>
+<td style="text-align:center">存放(待发送/接收)报文数据段的 <code>Data4~Data7</code> 的内容</td>
+</tr>
+<tr>
+<td style="text-align:center">CAN_FM1R</td>
+<td style="text-align:center">过滤器模式寄存器</td>
+<td style="text-align:center">用于设置各过滤器组的工作模式，只能使用有的过滤器组，不能使用没有的</td>
+</tr>
+<tr>
+<td style="text-align:center">CAN_FS1R</td>
+<td style="text-align:center">过滤器位宽寄存器</td>
+<td style="text-align:center">用于设置各过滤器组的位宽</td>
+</tr>
+<tr>
+<td style="text-align:center">CAN_FFA1R</td>
+<td style="text-align:center">FIFO关联寄存器</td>
+<td style="text-align:center">用于设置报文通过过滤器后，被存入的FIFO</td>
+</tr>
+<tr>
+<td style="text-align:center">CAN_FA1R</td>
+<td style="text-align:center">过滤器激活寄存器</td>
+<td style="text-align:center">用于开启对应的过滤器组</td>
+</tr>
+<tr>
+<td style="text-align:center">CAN_FxR(1/2)</td>
+<td style="text-align:center">过滤器组x寄存器</td>
+<td style="text-align:center">根据位宽和模式设置不同， <code>CAN_FxR1</code> 和 <code>FxR2</code>功能不同</td>
+</tr>
+</tbody>
+</table>
+<div class="tip bolt"><p>CAN相关HAL库驱动介绍</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">驱动函数</th>
+<th style="text-align:center">关联寄存器</th>
+<th style="text-align:center">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>__HAL_RCC_CANx_CLK_ENABLE(...)</code></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">使能CAN时钟</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>HAL_CAN_Init(...)</code></td>
+<td style="text-align:center">MCR/BTR</td>
+<td style="text-align:center">初始化CAN</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>HAL_CAN_ConfigFilter(...)</code></td>
+<td style="text-align:center">过滤器寄存器</td>
+<td style="text-align:center">配置CAN接收过滤器</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>HAL_CAN_Start(...)</code></td>
+<td style="text-align:center">MCR/MSR</td>
+<td style="text-align:center">启动CAN设备</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>HAL_CAN_ActivateNotification(...)</code></td>
+<td style="text-align:center">IER</td>
+<td style="text-align:center">使能中断</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>__HAL_CAN_ENABLE_IT(...)</code></td>
+<td style="text-align:center">IER</td>
+<td style="text-align:center">使能CAN中断允许</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>HAL_CAN_AddTxMessage(...)</code></td>
+<td style="text-align:center">TSR/TIxR/TDTxR/TDLxR/TDHxR</td>
+<td style="text-align:center">发送消息</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>HAL_CAN_GetTxMailboxesFreeLevel(...)</code></td>
+<td style="text-align:center">TSR</td>
+<td style="text-align:center">等待发送完成</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>HAL_CAN_GetRxFifoFillLevel(...)</code></td>
+<td style="text-align:center">RF0R/RF1R</td>
+<td style="text-align:center">等待接收完成</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>HAL_CAN_GetRxMessage(...)</code></td>
+<td style="text-align:center">RF0R/RFF1R/RDLxR/RDHxR</td>
+<td style="text-align:center">接收消息</td>
+</tr>
+</tbody>
+</table>
+<p>CAN外设相关重要结构体：<code>CAN_InitTypeDef</code>、<code>CAN_FilterTypeDef</code>、<code>CAN_(T/R)xHeaderTypeDef</code></p>
+<div class="note simple"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231104222859.webp" style="zoom:67%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231104223028.webp" style="zoom:67%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231105125034.webp" style="zoom:67%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231105125109.webp" style="zoom:67%;" />
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231104224015.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231104224151.webp" alt=""></p>
+<p>举例：</p>
+<p>假设现在扩展帧是0x99，那怎么赋值32位标识符列表模式？</p>
+<p>首先把32位宽砍一半，分成左边高16位和右边低16位，然后：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">0x99&gt;&gt;13&amp;0xFFFF ----- 获取ID高16位
+0x99&lt;&lt;3&amp;0xFFFF -----  获取ID低16位  
+# 因为扩展帧最大是29位，所以右移13位就是取高16位，然后剩下13位不足16位就需要左移3位了    </code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231105124144.webp" alt=""></p>
+</div>
+<div class="tip bolt"><p>CAN基本驱动步骤</p>
+</div>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231105130522.webp" style="zoom: 50%;" />
+<div class="tip bolt"><p>附</p>
+</div>
+<p>波特率计算可以使用网站进行生成推荐值：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231106162252.webp" style="zoom:50%;" />
+<h3 id="遥控帧">遥控帧</h3>
+<blockquote>
+<p>巧用遥控帧</p>
+</blockquote>
+<p>遥控帧发送的时候，DLC是无用的，但依然会发送出去，当我们发送遥控帧的时候，把不同的命令DLC赋不同的值，接收的时候，只要识别DLC的值就能知道接收的命令是什么，这样就能快速的传递命令，当然，发送端和接收端需事先约定好</p>
+<h3 id="CAN过滤器详解">CAN过滤器详解</h3>
+<p>参考：</p>
+<p><a href="https://blog.csdn.net/flydream0/article/details/52317532?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169926234116800211583021%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=169926234116800211583021&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~top_positive~default-1-52317532-null-null.nonecase&amp;utm_term=CAN%E8%BF%87%E6%BB%A4%E5%99%A8&amp;spm=1018.2226.3001.4450">再谈STM32的CAN过滤器-bxCAN的过滤器的4种工作模式以及使用方法总结</a></p>
+<blockquote>
+<p>以下是基于STM32F429IGT6进行分析</p>
+</blockquote>
+<div class="tip bolt"><p>STM32F429IGT6相关</p>
+</div>
+<ul>
+<li>过滤器组</li>
+</ul>
+<p>F4系列 CAN1 和 CAN2 之间共享 <code>28 个筛选器组(0~27)</code>，每个筛选器组 x 均包含 <code>两个 32 位寄存器</code>，分别是 <code>CAN_FxR0</code> 和 <code>CAN_FxR1</code> ，过滤器组中的每个过滤器，编号(叫做过滤器号)从 <code>0</code> 开始，到某个最大数值（这时最大值并非 <code>27</code> ，而是取决于 <code>28</code> 个过滤器组的模式和位宽的设置，当全部配置为位宽为 <code>16</code>，且为标识符列表模式时，最大编号为 <code>28*4-1=111</code>）</p>
+<ul>
+<li>过滤器的过滤模式</li>
+</ul>
+<p>选择模式可设置 <code>屏蔽位(掩码)模式</code> 或 <code>标识符列表模式</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">模式</th>
+<th style="text-align:center">优点</th>
+<th style="text-align:center">缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">列表模式</td>
+<td style="text-align:center">能精确地过滤每个指定的CAN ID</td>
+<td style="text-align:center">有数量限制</td>
+</tr>
+<tr>
+<td style="text-align:center">掩码模式</td>
+<td style="text-align:center">取决于屏蔽码，有时无法完全精确到每一个CAN ID，部分不期望的CAN ID有时也会收到</td>
+<td style="text-align:center">数量取决于屏蔽码，最多无上限</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>屏蔽位模式</li>
+</ol>
+<p>在这种模式下，你为每个过滤器 <code>指定一个ID和一个掩码</code>。只有与这个ID匹配的消息才会被接收。掩码允许你定义 <code>哪些位是重要的(即需要匹配的)</code> 和 <code>哪些位可以忽略</code>， <code>例如，一个掩码0xFF0表示你只关心ID的高8位，而不关心低4位</code></p>
+<ol start="2">
+<li>标识符列表模式</li>
+</ol>
+<p>在这种模式下，你可以为每个过滤器 <code>指定一个或多个ID</code>。只有与这些ID匹配的消息才会被接收</p>
+<ul>
+<li>过滤器位宽</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231106195014.webp" alt=""></p>
+<ul>
+<li>过滤器优先级</li>
+</ul>
+<p>根据过滤器的不同配置，有可能一个报文标识符能通过多个过滤器的过滤；在这种情况下，存放在接收邮箱中的过滤器匹配序号，根据下列优先级规则来确定：</p>
+<p>● 位宽为32位的过滤器，优先级高于位宽为16位的过滤器</p>
+<p>● 对于位宽相同的过滤器，标识符列表模式的优先级高于屏蔽位模式</p>
+<p>● 位宽和模式都相同的过滤器，优先级由过滤器号决定，过滤器号小的优先级高</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20230523174613.webp" style="zoom:50%;" />
+<ul>
+<li>过滤器寄存器</li>
+</ul>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231107085226.webp" style="zoom: 50%;" />
+<p>对于标准的CAN ID来说，我们有一个16位的寄存器来处理他足够了，相应地，扩展CAN ID，我们就必须使用32位的寄存器来处理它</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231107085742.webp" style="zoom:50%;" />
+<p>这个是屏蔽位寄存器</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231108092139.webp" style="zoom:50%;" />
+<p>于是根据模式与位宽的设置，我们共可以得出4种不同的组合： <code>32位宽的列表模式</code>， <code>16位宽的列表模式</code>， <code>32位宽掩码模式</code> ， <code>16位宽的掩码模式</code>。如下图所示：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231104152034.webp" style="zoom:67%;" />
+<p>在使能过滤器情况下，总线上广播的报文 <code>ID</code> 与过滤器的配置都不匹配， <code>CAN</code> 控制器会丢弃该报文，不会进入到接收 <code>FIFO</code> 中</p>
+<p><code>一般来说如果你是节点一般只需要接收主机的数据，所以设置为标识符模式，如果你是主机的话一般需要接收很多节点的数据则设置为屏蔽位模式</code></p>
+<p><code>注意</code>：标识符选择位IDE和帧类型RTR需要一致，不同过滤器组的工作模式可以设置为不同</p>
+<p>凡是需要过滤 <code>扩展CAN ID</code> 的，都是需要用到 <code>32位宽</code> 的模式</p>
+<div class="note simple"><p>注意 <code>CAN_FilterTypeDef</code> 结构体成员，它跟上面图中寄存器对应关系：</p>
+<ul>
+<li>位宽为32位时</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">结构体成员</th>
+<th style="text-align:center">寄存器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">FilterIdHigh</td>
+<td style="text-align:center">FxR1</td>
+</tr>
+<tr>
+<td style="text-align:center">FilterIdLow</td>
+<td style="text-align:center">FxR1</td>
+</tr>
+<tr>
+<td style="text-align:center">FilterMaskIdHigh</td>
+<td style="text-align:center">FxR2</td>
+</tr>
+<tr>
+<td style="text-align:center">FilterMaskIdLow</td>
+<td style="text-align:center">FxR2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li><code>32位宽的列表模式</code></li>
+</ol>
+<p>这两个寄存器的各位定义都是一样的，都用来存储某个具体的期望通过的CAN ID，这样就可以存入2个期望通过的CAN ID(标准CAN ID和扩展CAN ID均可)</p>
+<ol start="2">
+<li><code>32位宽掩码模式</code></li>
+</ol>
+<p>CAN_FxR1 用做32位宽的验证码，而 CAN_FxR2 则用作32位宽的屏蔽码</p>
+<ol start="3">
+<li><code>16位宽的掩码模式</code></li>
+</ol>
+<p>可以当做2对验证码+屏蔽码组合来用，但它只能对标准CAN ID进行过滤</p>
+<ol start="4">
+<li><code>16位宽的列表模式</code></li>
+</ol>
+<p>CAN_FxR1和CAN_FxR2定义一样，且各自拆成两个16位宽的寄存器，则总共可以写入4个标准CAN ID</p>
+<details ><summary> 通用.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;*
+* @function: HAL_CAN_RxFifo1MsgPendingCallback
+* @param: None
+* @retval: None
+* @brief: 中断回调函数
+*&#x2F;
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
+&#123;
+	if (HAL_OK &#x3D;&#x3D; HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &amp;canRx, Mycan.CAN_Rx_Buffer))
+	&#123;
+		Mycan.CAN_RX_Flag &#x3D; 1;
+	&#125;
+&#125;
+
+void MyCAN_Handler(void)
+&#123;
+	if (Mycan.CAN_RX_Flag)
+	&#123;
+		HAL_GPIO_TogglePin(LED1_GPIO_Port,LED1_Pin);
+		if (CAN_ID_STD &#x3D;&#x3D; canRx.IDE)	&#x2F;&#x2F; 判断是标准帧
+		&#123;
+			printf(&quot;STD_ID:%x  &quot;,canRx.StdId);
+			for (uint8_t i &#x3D; 0; i &lt; canRx.DLC; i++)	&#x2F;&#x2F; DLC是接收的数据长度
+			&#123;
+				printf(&quot;%02x &quot;,Mycan.CAN_Rx_Buffer[i]);	&#x2F;&#x2F; 打印数据
+			&#125;
+			printf(&quot;\r\n&quot;);
+		&#125;
+		else if (CAN_ID_EXT &#x3D;&#x3D; canRx.IDE)	&#x2F;&#x2F; 判断是扩展帧
+		&#123;
+			printf(&quot;EXT_ID:%x  &quot;,canRx.ExtId);
+			for (uint8_t i &#x3D; 0; i &lt; canRx.DLC; i++)
+			&#123;
+				printf(&quot;%02x &quot;,Mycan.CAN_Rx_Buffer[i]);	&#x2F;&#x2F; 打印数据
+			&#125;
+			printf(&quot;\r\n&quot;);			
+		&#125;
+		Mycan.CAN_RX_Flag &#x3D; 0;
+	&#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<div class="tip bolt"><p>32位宽的列表模式</p>
+</div>
+<p>扩展帧则需要将 <code>IDE为“1”</code>，标准帧则为 <code>IDE为“0”</code></p>
+<p>数据帧设 <code>RTR为“0”</code>，远程帧设 <code>RTR为“1”</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231107121134.webp" alt=""></p>
+<div class="note simple"><p><code>问1：</code>为什么左移5位？</p>
+<p>因为我们需要看映射，像上图，我们基本ID只有11位，那相当于只占高16位，那就是STID[10:0]，EXID[17:13]的话属于扩展帧的补0即可(不需要关心)，所以左移5位就刚刚好，高位的话不足就前面补0</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>标准ID 0x123的二进制：1 0010 0011</mtext></mrow><annotation encoding="application/x-tex">\text{标准ID 0x123的二进制：1  0010 0011}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">标准</span><span class="mord">ID 0x123</span><span class="mord cjk_fallback">的二进制：</span><span class="mord">1 0010 0011</span></span></span></span></span></span></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>左移5位后：10 0100 0110 0000</mtext></mrow><annotation encoding="application/x-tex">\text{左移5位后：10 0100 0110 0000}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">左移</span><span class="mord">5</span><span class="mord cjk_fallback">位后：</span><span class="mord">10 0100 0110 0000</span></span></span></span></span></span></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231107181747.webp" alt=""></p>
+</div>
+<blockquote>
+<p>【实验】</p>
+<p>内容：只接收 <code>ID为0x123</code> 和 <code>ID为0x12345678</code> 的数据，其他的丢弃</p>
+</blockquote>
+<details ><summary> my_can.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">static void MyCAN_Filter_Config(void)
+&#123;
+	CAN_FilterTypeDef can_filterconfig;
+	uint32_t stdID &#x3D; 0x123;	&#x2F;&#x2F; 基本ID
+	uint32_t extID &#x3D; 0x12345678;	&#x2F;&#x2F; 扩展ID
+	
+    
+	can_filterconfig.FilterMode &#x3D; CAN_FILTERMODE_IDLIST;	&#x2F;&#x2F; 32位列表模式
+	can_filterconfig.FilterScale &#x3D; CAN_FILTERSCALE_32BIT;	&#x2F;&#x2F; 32位宽
+	
+	can_filterconfig.FilterIdHigh &#x3D; stdID &lt;&lt; 5;	&#x2F;&#x2F; 11位ID需要左移5位
+	can_filterconfig.FilterIdLow &#x3D; CAN_ID_STD | 0 | 0;	&#x2F;&#x2F; 标准帧|数据帧|无用的0
+	can_filterconfig.FilterMaskIdHigh &#x3D; (extID &gt;&gt; 13) &amp; 0xFFFF;	&#x2F;&#x2F; 右移13位获取高16位
+	can_filterconfig.FilterMaskIdLow &#x3D; (extID &lt;&lt; 3) &amp; 0xFFFF | CAN_ID_EXT;	&#x2F;&#x2F; 左移3位获取低16位|为扩展帧
+	
+	can_filterconfig.FilterBank &#x3D; 0;	&#x2F;&#x2F; 过滤器0
+	can_filterconfig.FilterActivation &#x3D; CAN_FILTER_ENABLE;	&#x2F;&#x2F; 激活
+	can_filterconfig.FilterFIFOAssignment &#x3D; CAN_FILTER_FIFO0;	&#x2F;&#x2F; 绑定FIFO0
+	can_filterconfig.SlaveStartFilterBank &#x3D; 14;	&#x2F;&#x2F; 从CAN
+	
+	if (HAL_CAN_ConfigFilter(&amp;hcan1, &amp;can_filterconfig) !&#x3D; HAL_OK)
+	&#123;
+		Error_Handler();
+	&#125;	
+&#125;</code></pre>
+              </div>
+            </details>
+<ul>
+<li>实验现象</li>
+</ul>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231107202917.webp" style="zoom: 80%;" />
+<div class="tip bolt"><p>16位宽的列表模式</p>
+</div>
+<p>扩展帧则需要将 <code>IDE为“1”</code>，标准帧则为 <code>IDE为“0”</code></p>
+<p>数据帧设 <code>RTR为“0”</code>，远程帧设 <code>RTR为“1”</code></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231107204301.webp" style="zoom:67%;" />
+<p>在16位宽的列表模式下， <code>FilterIdHigh</code>， <code>FilterIdLow</code>， <code>FilterMaskIdHigh</code>， <code>FilterMaskIdLow</code> 这4个16位变量都是用来存储一个 <code>标准CAN ID</code>，这样，就可以存放 <code>4个标准CAN ID</code>了</p>
+<blockquote>
+<p>【实验】</p>
+<p>内容：只接收ID为 <code>0x123</code> 、 <code>0x133</code> 、<code>0x143</code>、<code>0x153</code> 的数据，其他的丢弃</p>
+</blockquote>
+<details ><summary> my_can.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">static void MyCAN_Filter_Config(void)
+&#123;
+    CAN_FilterTypeDef can_filterconfig;
+
+    uint32_t stdID1 &#x3D; 0x123; &#x2F;&#x2F; 基本ID1
+    uint32_t stdID2 &#x3D; 0x133; &#x2F;&#x2F; 基本ID2
+    uint32_t stdID3 &#x3D; 0x143; &#x2F;&#x2F; 基本ID3
+    uint32_t stdID4 &#x3D; 0x153; &#x2F;&#x2F; 基本ID4
+
+    can_filterconfig.FilterMode &#x3D; CAN_FILTERMODE_IDLIST;  &#x2F;&#x2F; 16位列表模式
+    can_filterconfig.FilterScale &#x3D; CAN_FILTERSCALE_16BIT; &#x2F;&#x2F; 16位宽
+
+    can_filterconfig.FilterIdHigh &#x3D; stdID1 &lt;&lt; 5; &#x2F;&#x2F; 11位ID需要左移5位
+    can_filterconfig.FilterIdLow &#x3D; stdID2 &lt;&lt; 5;
+    can_filterconfig.FilterMaskIdHigh &#x3D; stdID3 &lt;&lt; 5;
+    can_filterconfig.FilterMaskIdLow &#x3D; stdID4 &lt;&lt; 5;
+
+    can_filterconfig.FilterBank &#x3D; 0;                          &#x2F;&#x2F; 过滤器0
+    can_filterconfig.FilterActivation &#x3D; CAN_FILTER_ENABLE;    &#x2F;&#x2F; 激活
+    can_filterconfig.FilterFIFOAssignment &#x3D; CAN_FILTER_FIFO0; &#x2F;&#x2F; 绑定FIFO0
+    can_filterconfig.SlaveStartFilterBank &#x3D; 14;               &#x2F;&#x2F; 从CAN
+
+    if (HAL_CAN_ConfigFilter(&amp;hcan1, &amp;can_filterconfig) !&#x3D; HAL_OK)
+    &#123;
+        Error_Handler();
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<ul>
+<li>实验现象</li>
+</ul>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231107205448.webp" style="zoom:67%;" />
+<div class="tip bolt"><p>32位宽掩码模式</p>
+</div>
+<p>此模式可以过滤标准CAN ID，也可以过滤扩展CAN ID，甚至两者混合一起</p>
+<p>扩展帧则需要将 <code>IDE为“1”</code>，标准帧则为 <code>IDE为“0”</code></p>
+<p>数据帧设 <code>RTR为“0”</code>，远程帧设 <code>RTR为“1”</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231107210939.webp" alt=""></p>
+<div class="note simple"><blockquote>
+<p>只针对标准CAN ID</p>
+</blockquote>
+<div class="note simple"><p><code>问1：</code>为什么 FilterMaskIdLow = 0 | CAN_RTR_REMOTE？</p>
+<p>在实际的信息接收过程中，我们既要接收数据帧，也要接收遥控帧(也叫远程帧)，遥控帧用于发送不带数据的命令，RTR位也要匹配，屏蔽器的RTR位要为0，才能保证过滤器ID的RTR位不管为0或1都能接收，但是上面这样的写法是只接收数据帧不接收遥控帧</p>
+</div>
+<details ><summary> mycan.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">static void MyCAN_Filter_Config(void)
+&#123;
+    CAN_FilterTypeDef can_filterconfig;
+
+    uint16_t stdID_Arr[] &#x3D; &#123;0x7E0, 0x7E1, 0x7E2, 0x7E3, 0x7E4, 0x7E5, 0x7E6, 0x7E7, 0x7E8, 0x7E9&#125;; &#x2F;&#x2F; 定义一组标准ID
+    uint16_t mask, num, tmp;
+
+    mask &#x3D; 0x7FF;	&#x2F;&#x2F; 因为标准帧最大是11位也就是0x7FF
+    num &#x3D; sizeof(stdID_Arr) &#x2F; sizeof(stdID_Arr[0]); &#x2F;&#x2F; 计算元素个数
+    for (uint8_t i &#x3D; 0; i &lt; num; i++)
+    &#123;
+        tmp &#x3D; stdID_Arr[i] ^ (~stdID_Arr[0]); &#x2F;&#x2F; 所有数组元素与元素0同或操作，找出不同位
+        mask &amp;&#x3D; tmp;	&#x2F;&#x2F; 实时更新mask值
+    &#125;
+
+    can_filterconfig.FilterMode &#x3D; CAN_FILTERMODE_IDMASK;  &#x2F;&#x2F; 32位掩码模式
+    can_filterconfig.FilterScale &#x3D; CAN_FILTERSCALE_32BIT; &#x2F;&#x2F; 32位宽
+
+    can_filterconfig.FilterIdHigh &#x3D; (stdID_Arr[0] &lt;&lt; 5); &#x2F;&#x2F; 验证码可以为数组的任意一个ID
+    can_filterconfig.FilterIdLow &#x3D; 0;
+    can_filterconfig.FilterMaskIdHigh &#x3D; (mask &lt;&lt; 5);
+    can_filterconfig.FilterMaskIdLow &#x3D; 0 | CAN_RTR_REMOTE;	&#x2F;&#x2F; 只接收数据帧不接收遥控帧
+
+    can_filterconfig.FilterBank &#x3D; 0;                          &#x2F;&#x2F; 过滤器0
+    can_filterconfig.FilterActivation &#x3D; CAN_FILTER_ENABLE;    &#x2F;&#x2F; 激活
+    can_filterconfig.FilterFIFOAssignment &#x3D; CAN_FILTER_FIFO0; &#x2F;&#x2F; 绑定FIFO0
+    can_filterconfig.SlaveStartFilterBank &#x3D; 14;               &#x2F;&#x2F; 从CAN
+
+    if (HAL_CAN_ConfigFilter(&amp;hcan1, &amp;can_filterconfig) !&#x3D; HAL_OK)
+    &#123;
+        Error_Handler();
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<ul>
+<li>实验现象</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231107215726.webp" alt=""></p>
+<blockquote>
+<p>只针对扩展CAN ID</p>
+</blockquote>
+<p>为 <code>1</code> 的位就是不可变的，为 <code>0</code> 的位就是可变的，这里结果相当于程序里最终算出的mask</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231108101124.webp" alt=""></p>
+<details ><summary> mycan.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">static void MyCAN_Filter_Config(void)
+&#123;
+    CAN_FilterTypeDef can_filterconfig;
+
+    uint32_t extID_Arr[] &#x3D; &#123;0x18201010, 0x18201021, 0x18201012, 0x18201033, 0x18301011&#125;; &#x2F;&#x2F; 定义一组扩展ID
+    uint32_t mask, num, tmp;
+
+    mask &#x3D; 0x1FFFFFFF;                              &#x2F;&#x2F; 扩展帧是29位
+    num &#x3D; sizeof(extID_Arr) &#x2F; sizeof(extID_Arr[0]); &#x2F;&#x2F; 计算元素个数
+    for (uint8_t i &#x3D; 0; i &lt; num; i++)
+    &#123;
+        tmp &#x3D; extID_Arr[i] ^ (~extID_Arr[0]); &#x2F;&#x2F; 所有数组元素与元素0同或操作，找出不同位
+        mask &amp;&#x3D; tmp;
+    &#125;
+    
+    can_filterconfig.FilterMode &#x3D; CAN_FILTERMODE_IDMASK;  &#x2F;&#x2F; 32位掩码模式
+    can_filterconfig.FilterScale &#x3D; CAN_FILTERSCALE_32BIT; &#x2F;&#x2F; 32位宽
+
+    can_filterconfig.FilterIdHigh &#x3D; (extID_Arr[0] &gt;&gt; 13) &amp; 0xFFFF;                    &#x2F;&#x2F; 数组任意一个成员都可以作为验证码
+    can_filterconfig.FilterIdLow &#x3D; (extID_Arr[0] &lt;&lt; 3) &amp; 0xFFFF | CAN_ID_EXT | 0 | 0; &#x2F;&#x2F; 低16位扩展帧|扩展帧|数据帧|无用的0
+    can_filterconfig.FilterMaskIdHigh &#x3D; (mask &gt;&gt; 13) &amp; 0xFFFF;                        &#x2F;&#x2F; 屏蔽位高16位
+    can_filterconfig.FilterMaskIdLow &#x3D; (mask &lt;&lt; 3) &amp; 0xFFFF | CAN_RTR_REMOTE;         &#x2F;&#x2F; 接收数据帧不接收遥控帧
+
+    can_filterconfig.FilterBank &#x3D; 0;                          &#x2F;&#x2F; 过滤器0
+    can_filterconfig.FilterActivation &#x3D; CAN_FILTER_ENABLE;    &#x2F;&#x2F; 激活
+    can_filterconfig.FilterFIFOAssignment &#x3D; CAN_FILTER_FIFO0; &#x2F;&#x2F; 绑定FIFO0
+    can_filterconfig.SlaveStartFilterBank &#x3D; 14;               &#x2F;&#x2F; 从CAN
+
+    if (HAL_CAN_ConfigFilter(&amp;hcan1, &amp;can_filterconfig) !&#x3D; HAL_OK)
+    &#123;
+        Error_Handler();
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<ul>
+<li>实验现象</li>
+</ul>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231108102533.webp" style="zoom:67%;" />
+<blockquote>
+<p>标准CAN ID与扩展CAN ID混合过滤</p>
+</blockquote>
+<details ><summary> mycan.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">static void MyCAN_Filter_Config(void)
+&#123;
+    CAN_FilterTypeDef can_filterconfig;
+
+    uint32_t stdID_Arr[] &#x3D; &#123;0x711, 0x712, 0x71A, 0x710, 0x715&#125;; 
+    uint32_t extID_Arr[] &#x3D; &#123;0x18201010, 0x18201021, 0x18201012, 0x18201033, 0x18301011&#125;; &#x2F;&#x2F; 定义一组扩展ID
+    uint32_t mask, num, tmp, std_mask, ext_mask, min_mask;
+
+&#x2F;&#x2F; ********************  标准帧计算  ********************
+    std_mask &#x3D; 0x7FF;                             
+    num &#x3D; sizeof(stdID_Arr) &#x2F; sizeof(stdID_Arr[0]);
+    for (uint8_t i &#x3D; 0; i &lt; num; i++)
+    &#123;
+        tmp &#x3D; stdID_Arr[i] ^ (~stdID_Arr[0]); 
+        std_mask &amp;&#x3D; tmp;
+    &#125;
+&#x2F;&#x2F; ********************  扩展帧计算  ********************
+    ext_mask &#x3D; 0x1FFFFFFF;
+    num &#x3D; sizeof(extID_Arr) &#x2F; sizeof(extID_Arr[0]);
+    for (uint8_t i &#x3D; 0; i &lt; num; i++)
+    &#123;
+        tmp &#x3D; extID_Arr[i] ^ (~extID_Arr[0]); 
+        ext_mask &amp;&#x3D; tmp;
+    &#125;    
+&#x2F;&#x2F; ********************  综合计算  ********************
+    min_mask &#x3D; (stdID_Arr[0] &lt;&lt; 18) ^ (~extID_Arr[0]);  &#x2F;&#x2F; 计算标准CAN ID与扩展CAN ID混合的屏蔽码
+    mask &#x3D; (std_mask &lt;&lt; 18) &amp; ext_mask &amp; min_mask;  &#x2F;&#x2F; 计算最终的屏蔽码
+
+    can_filterconfig.FilterMode &#x3D; CAN_FILTERMODE_IDMASK;  &#x2F;&#x2F; 32位掩码模式
+    can_filterconfig.FilterScale &#x3D; CAN_FILTERSCALE_32BIT; &#x2F;&#x2F; 32位宽
+
+    &#x2F;&#x2F; can_filterconfig.FilterIdHigh &#x3D; (extID_Arr[0] &gt;&gt; 13) &amp; 0xFFFF; &#x2F;&#x2F; 扩展帧数组任意一个成员都可以作为验证码
+    &#x2F;&#x2F; can_filterconfig.FilterIdLow &#x3D; (extID_Arr[0] &lt;&lt; 3) &amp; 0xFFFF | CAN_ID_EXT | 0 | 0; &#x2F;&#x2F; 扩展帧低16位扩展帧|扩展帧|数据帧|无用的0
+    &#x2F;&#x2F; 这里也可以这样设置
+    can_filterconfig.FilterIdHigh &#x3D; stdID_Arr[0] &lt;&lt; 5; &#x2F;&#x2F; 标准帧数组任意一个成员都可以作为验证码
+    can_filterconfig.FilterIdLow &#x3D; 0 | CAN_ID_STD | 0 | 0; &#x2F;&#x2F; 标准帧低16位扩展帧|标准帧|数据帧|无用的0  
+
+    can_filterconfig.FilterMaskIdHigh &#x3D; (mask &gt;&gt; 13) &amp; 0xFFFF;                        &#x2F;&#x2F; 屏蔽位高16位
+    can_filterconfig.FilterMaskIdLow &#x3D; (mask &lt;&lt; 3) &amp; 0xFFFF | CAN_RTR_REMOTE;         &#x2F;&#x2F; 接收数据帧，不接收遥控帧
+
+    can_filterconfig.FilterBank &#x3D; 0;                          &#x2F;&#x2F; 过滤器0
+    can_filterconfig.FilterActivation &#x3D; CAN_FILTER_ENABLE;    &#x2F;&#x2F; 激活
+    can_filterconfig.FilterFIFOAssignment &#x3D; CAN_FILTER_FIFO0; &#x2F;&#x2F; 绑定FIFO0
+    can_filterconfig.SlaveStartFilterBank &#x3D; 14;               &#x2F;&#x2F; 从CAN
+
+    if (HAL_CAN_ConfigFilter(&amp;hcan1, &amp;can_filterconfig) !&#x3D; HAL_OK)
+    &#123;
+        Error_Handler();
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<ul>
+<li>实验现象</li>
+</ul>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231108110321.webp" style="zoom:67%;" />
+<blockquote>
+<p>16位宽掩码模式</p>
+</blockquote>
+<p>High放Arr1或Arr2标准帧都可以，反正跟掩码对应就行</p>
+<details ><summary> mycan.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">static void MyCAN_Filter_Config(void)
+&#123;
+    CAN_FilterTypeDef can_filterconfig;
+
+    uint16_t stdID_Arr1[] &#x3D; &#123;0x711, 0x712, 0x71A, 0x710, 0x715&#125;; 
+    uint16_t stdID_Arr2[] &#x3D; &#123;0x7D1, 0x7D2, 0x7D3, 0x7D4, 0x7D5&#125;;
+    uint16_t mask1, mask2, num, tmp;
+
+&#x2F;&#x2F; ********************  标准帧计算  ********************
+    mask1 &#x3D; 0x7FF;
+    num &#x3D; sizeof(stdID_Arr1) &#x2F; sizeof(stdID_Arr1[0]);   &#x2F;&#x2F; 计算元素大小
+    for (uint8_t i &#x3D; 0; i &lt; num; i++)
+    &#123;
+        tmp &#x3D; stdID_Arr1[i] ^ (~stdID_Arr1[0]);
+        mask1 &amp;&#x3D; tmp;
+    &#125;
+    mask2 &#x3D; 0x7FF;
+    num &#x3D; sizeof(stdID_Arr2) &#x2F; sizeof(stdID_Arr2[0]);   &#x2F;&#x2F; 计算元素大小
+    for (uint8_t i &#x3D; 0; i &lt; num; i++)
+    &#123;
+        tmp &#x3D; stdID_Arr2[i] ^ (~stdID_Arr2[0]);
+        mask2 &amp;&#x3D; tmp;
+    &#125;    
+
+    can_filterconfig.FilterMode &#x3D; CAN_FILTERMODE_IDMASK;  &#x2F;&#x2F; 16位掩码模式
+    can_filterconfig.FilterScale &#x3D; CAN_FILTERSCALE_16BIT; &#x2F;&#x2F; 16位宽
+
+    can_filterconfig.FilterIdHigh &#x3D; stdID_Arr1[0] &lt;&lt; 5; &#x2F;&#x2F; 设置第1个验证码
+    can_filterconfig.FilterIdLow &#x3D; stdID_Arr2[0] &lt;&lt; 5; &#x2F;&#x2F; 设置第2个验证码
+
+    can_filterconfig.FilterMaskIdHigh &#x3D; (mask1 &lt;&lt; 5) | 0x10;    &#x2F;&#x2F; 设置第1个掩码 --- 只接收数据帧
+    can_filterconfig.FilterMaskIdLow &#x3D; (mask2 &lt;&lt; 5) | 0x10;    &#x2F;&#x2F; 设置第2个掩码 --- 只接收数据帧
+
+    can_filterconfig.FilterBank &#x3D; 0;                   &#x2F;&#x2F; 过滤器0
+    can_filterconfig.FilterActivation &#x3D; CAN_FILTER_ENABLE;    &#x2F;&#x2F; 激活
+    can_filterconfig.FilterFIFOAssignment &#x3D; CAN_FILTER_FIFO0; &#x2F;&#x2F; 绑定FIFO0
+    can_filterconfig.SlaveStartFilterBank &#x3D; 14;               &#x2F;&#x2F; 从CAN
+
+    if (HAL_CAN_ConfigFilter(&amp;hcan1, &amp;can_filterconfig) !&#x3D; HAL_OK)
+    &#123;
+        Error_Handler();
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<ul>
+<li>实验现象</li>
+</ul>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231108212129.webp" style="zoom:67%;" /></div>
+<h3 id="CAN分析仪">CAN分析仪</h3>
+<p><a href="https://www.waveshare.net/wiki/USB-CAN-A">USB to CANA 资料-微雪</a></p>
+<div class="tip bolt"><p>驱动安装</p>
+</div>
+<p>下载 <code>CH341SER</code> 驱动，双击 <code>CH341SER.EXE</code> 文件，点击安装，出现驱动安装成功后，点击确定完成驱动安装(要先把分析仪插上电脑先！)</p>
+<div class="tip bolt"><p>CAN分析仪上位机UCANV2.0</p>
+</div>
+<p><code>2M</code> 波特率能兼容大部分 <code>CAN</code> 速率（串口波特率大约对应CAN 速率的2倍），一般情况默认 <code>2M</code>波特率就可以，将 <code>CAN</code> 速率改为和外接CAN设备对应的速率（最高支持1M）即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231106111145.webp" alt=""></p>
+<div class="tip bolt"><p>硬件连接</p>
+</div>
+<p>双绞线(所在找不到可以使用杜邦线代替，把杜邦线像扭麻花那样绕一起就行了)</p>
+<p>CAN波特率要双方一致</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">USB to CAN</th>
+<th style="text-align:center">STM32</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">CAN_H</td>
+<td style="text-align:center">CAN_H</td>
+</tr>
+<tr>
+<td style="text-align:center">CAN_L</td>
+<td style="text-align:center">CAN_L</td>
+</tr>
+<tr>
+<td style="text-align:center">GND</td>
+<td style="text-align:center">可接可不接</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>那这个GND的作用是什么？</p>
+</blockquote>
+<p>如果在长距离的通信中，由于电缆长度或其他因素导致VCC和GND的电位差异较大，这样会导致信号传输变得不稳定，可能会出现数据误码等问题，虽然使用差分信号可以解决这个问题，但是不能完全消除这个问题</p>
+<p>虽然CAN通信只需要使用H和L两个差分信号线进行数据传输，但是为了确保CAN总线的稳定性和可靠性，建议将CAN节点的地线连接在一起，如果CAN节点之间存在较大的电位差，可能会导致CAN节点之间的电压偏移过大，并且可能会使CAN总线出现不稳定的工作情况</p>
+<h3 id="问题">问题</h3>
+<blockquote>
+<p>在使能CAN2时钟之前，需要先使能CAN1的时钟</p>
+<p>CAN2筛选器组从14开始，范围是 <code>14~27</code>，CAN1的范围是 <code>0~13</code></p>
+</blockquote>
+<blockquote>
+<p>需要注意中断函数名称，FIFO0和FIFO1他们不一样，如果用错会造车CAN卡死</p>
+</blockquote>
+<h3 id="编程示例1">编程示例1</h3>
+<blockquote>
+<p>测试模式 — 环回模式（自发自收）</p>
+</blockquote>
+<ul>
+<li>MX配置</li>
+</ul>
+<p>最关键主要配置如下三个参数，分频数我这里配置 <code>45(也就是对应寄存器BRP)</code>，下面的 <code>tq</code> 值就会自动计算出来。因为can时钟是 <code>45MHz</code> 经过 <code>45</code> 分频后，一个单位时间就是 <code>1us=1000ns</code></p>
+<p>因为我想要 <code>100k</code> 波特率，然后填写下面的 <code>Time segment1(简称 Tbs1 )</code> 和 <code>Time segment2 (简称 Tbs2)</code> 为 <code>5</code> 和 <code>4</code></p>
+<p><code>jump width</code> 这个时间参数是作为补偿时间的上限，当时间有偏差的时候，就会自动补偿，最长时间不能超过该参数设定值</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231105142933.webp" alt=""></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231105153242.webp" style="zoom:67%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231105153119.webp" style="zoom:67%;" />
+<div class="tip bolt"><p>初始化源码分析</p>
+</div>
+<details ><summary> can.c(系统) </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; CAN参数初始化
+void MX_CAN1_Init(void)
+&#123;
+    hcan1.Instance &#x3D; CAN1; 
+    hcan1.Init.Prescaler &#x3D; 45;  &#x2F;&#x2F; 分频系数(BRP)
+    hcan1.Init.Mode &#x3D; CAN_MODE_LOOPBACK;    &#x2F;&#x2F; 工作模式设置-环回模式：自发自收
+    hcan1.Init.SyncJumpWidth &#x3D; CAN_SJW_1TQ; &#x2F;&#x2F; 重新同步跳跃宽度
+    hcan1.Init.TimeSeg1 &#x3D; CAN_BS1_5TQ;  &#x2F;&#x2F; 时间段1
+    hcan1.Init.TimeSeg2 &#x3D; CAN_BS2_4TQ;  &#x2F;&#x2F; 时间段2
+    hcan1.Init.TimeTriggeredMode &#x3D; DISABLE; &#x2F;&#x2F; 禁止时间触发通信模式
+    hcan1.Init.AutoBusOff &#x3D; DISABLE;    &#x2F;&#x2F; 禁止自动离线管理
+    hcan1.Init.AutoWakeUp &#x3D; DISABLE;    &#x2F;&#x2F; 禁止自动唤醒
+    hcan1.Init.AutoRetransmission &#x3D; DISABLE;    &#x2F;&#x2F; 禁止自动重发
+    hcan1.Init.ReceiveFifoLocked &#x3D; DISABLE; &#x2F;&#x2F; 禁止接收FIFO锁定
+    hcan1.Init.TransmitFifoPriority &#x3D; DISABLE;  &#x2F;&#x2F; 禁止发送FIFO优先级
+
+    if (HAL_CAN_Init(&amp;hcan1) !&#x3D; HAL_OK)
+    &#123;
+        Error_Handler();
+    &#125;
+&#125;
+
+&#x2F;&#x2F; GPIO初始化
+void HAL_CAN_MspInit(CAN_HandleTypeDef *canHandle)
+&#123;
+    GPIO_InitTypeDef GPIO_InitStruct &#x3D; &#123;0&#125;;
+    if (canHandle-&gt;Instance &#x3D;&#x3D; CAN1)
+    &#123;
+        &#x2F;* CAN1 clock enable *&#x2F;
+        __HAL_RCC_CAN1_CLK_ENABLE();
+
+        __HAL_RCC_GPIOA_CLK_ENABLE();
+        &#x2F;**CAN1 GPIO Configuration
+        PA11     ------&gt; CAN1_RX
+        PA12     ------&gt; CAN1_TX
+        *&#x2F;
+        GPIO_InitStruct.Pin &#x3D; GPIO_PIN_11 | GPIO_PIN_12;
+        GPIO_InitStruct.Mode &#x3D; GPIO_MODE_AF_PP;
+        GPIO_InitStruct.Pull &#x3D; GPIO_NOPULL;
+        GPIO_InitStruct.Speed &#x3D; GPIO_SPEED_FREQ_VERY_HIGH;
+        GPIO_InitStruct.Alternate &#x3D; GPIO_AF9_CAN1;	&#x2F;&#x2F; 设置引脚的复用功能为CAN1
+        HAL_GPIO_Init(GPIOA, &amp;GPIO_InitStruct);
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<div class="tip bolt"><p>用户添加代码</p>
+</div>
+<details ><summary> my_can.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __MY_CAN_H
+#define __MY_CAN_H
+#include &quot;main.h&quot;
+#include &quot;can.h&quot;
+#include &quot;tim.h&quot;
+#include &quot;usart.h&quot;
+#include &quot;gpio.h&quot;
+#include &lt;stdio.h&gt;
+
+typedef struct
+&#123;
+    void (*MyCAN_Init)(void);   &#x2F;&#x2F; CAN用户初始化
+    void (*MyCAN_Send_Message)(uint32_t, uint8_t *, uint16_t);  &#x2F;&#x2F; 发送消息数据函数
+    uint8_t (*MyCAN_Rec_Message)(uint8_t *);    &#x2F;&#x2F; 接收消息数据函数
+&#125; MyCAN_st;
+
+extern MyCAN_st Mycan;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> my_can.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;my_can.h&quot;
+
+&#x2F;* Private variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+CAN_TxHeaderTypeDef canTx;  &#x2F;&#x2F; CAN发送结构体
+CAN_RxHeaderTypeDef canRx;  &#x2F;&#x2F; CAN接收结构体
+
+&#x2F;* Private function prototypes&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void MyCAN_Init(void);
+static void MyCAN_Filter_Config(void);
+static void MyCAN_Send_Message(uint32_t, uint8_t *, uint16_t);
+static uint8_t MyCAN_Rec_Message(uint8_t *);
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+MyCAN_st Mycan &#x3D; 
+&#123;
+    .MyCAN_Init &#x3D; &amp;MyCAN_Init,
+    .MyCAN_Send_Message &#x3D; &amp;MyCAN_Send_Message,
+    .MyCAN_Rec_Message &#x3D; &amp;MyCAN_Rec_Message
+&#125;;
+
+&#x2F;*
+* @function: MyCAN_Init
+* @param: None
+* @retval: None
+* @brief: CAN用户初始化
+*&#x2F;
+static void MyCAN_Init(void)
+&#123;
+    MyCAN_Filter_Config();  &#x2F;&#x2F; CAN过滤器配置
+    HAL_CAN_Start(&amp;hcan1);  &#x2F;&#x2F; 启动CAN
+&#125;
+
+&#x2F;*
+* @function: MyCAN_Filter_Config
+* @param: None
+* @retval: None
+* @brief: CAN过滤器配置
+*&#x2F;
+static void MyCAN_Filter_Config(void)
+&#123;
+    CAN_FilterTypeDef can_filterconfig;
+
+    &#x2F;&#x2F; 过滤器是接收所有报文，不筛选
+    can_filterconfig.FilterMode &#x3D; CAN_FILTERMODE_IDMASK;    &#x2F;&#x2F; 过滤器模式 --- 屏蔽位模式
+    can_filterconfig.FilterScale &#x3D; CAN_FILTERSCALE_32BIT;   &#x2F;&#x2F; 位宽 --- 32位
+	&#x2F;&#x2F; 默认 0 即全部通过
+    can_filterconfig.FilterIdHigh &#x3D; 0;  &#x2F;&#x2F; ID高字节
+    can_filterconfig.FilterIdLow &#x3D; 0;   &#x2F;&#x2F; ID低字节
+    can_filterconfig.FilterMaskIdHigh &#x3D; 0;  &#x2F;&#x2F; 掩码高字节
+    can_filterconfig.FilterMaskIdLow &#x3D; 0;   &#x2F;&#x2F; 掩码低字节
+
+    can_filterconfig.FilterBank &#x3D; 0;    &#x2F;&#x2F; 过滤器组(0~27)
+    can_filterconfig.FilterFIFOAssignment &#x3D; CAN_FilterFIFO0;    &#x2F;&#x2F; 过滤器关联FIFO
+    can_filterconfig.FilterActivation &#x3D; CAN_FILTER_ENABLE;  &#x2F;&#x2F; 激活过滤器
+    can_filterconfig.SlaveStartFilterBank &#x3D; 27;    &#x2F;&#x2F; 从CAN选择启动过滤器组
+    &#x2F;&#x2F; 过滤器组初始化
+    HAL_CAN_ConfigFilter(&amp;hcan1, &amp;can_filterconfig);
+&#125;
+
+&#x2F;*
+* @function: MyCAN_Send_Message
+* @param: None
+* @retval: None
+* @brief: 发送消息数据函数
+*&#x2F;
+static void MyCAN_Send_Message(uint32_t id, uint8_t *buff, uint16_t len)
+&#123;
+    uint32_t tx_mail &#x3D; CAN_TX_MAILBOX0; &#x2F;&#x2F; 发送邮箱0
+
+    canTx.ExtId &#x3D; id;   &#x2F;&#x2F; 扩展帧id
+    &#x2F;&#x2F; canTx.StdId &#x3D; id;   &#x2F;&#x2F; 扩展帧下这个成员无效(此成员为标准帧，只能和上面二选1)
+    canTx.DLC &#x3D; len;    &#x2F;&#x2F; 数据长度
+    canTx.IDE &#x3D; CAN_ID_EXT; &#x2F;&#x2F; 帧格式 --- 扩展帧
+    canTx.RTR &#x3D; CAN_RTR_DATA;   &#x2F;&#x2F; 帧类型 --- 数据帧
+
+    HAL_CAN_AddTxMessage(&amp;hcan1, &amp;canTx, buff, &amp;tx_mail);   &#x2F;&#x2F; 发送消息
+
+    while(HAL_CAN_GetTxMailboxesFreeLevel(&amp;hcan1) !&#x3D; 3);    &#x2F;&#x2F; 等待全部邮箱发送完成(即空闲邮箱&#x3D;3)
+&#125;
+
+&#x2F;*
+* @function: MyCAN_Rec_Message
+* @param: None
+* @retval: None
+* @brief: 接收消息数据函数
+*&#x2F;
+static uint8_t MyCAN_Rec_Message(uint8_t *buff)
+&#123;
+    if (0 &#x3D;&#x3D; HAL_CAN_GetRxFifoFillLevel(&amp;hcan1, CAN_RX_FIFO0))  &#x2F;&#x2F; 没有接收到数据
+    &#123;
+        return 0;
+    &#125;
+    HAL_CAN_GetRxMessage(&amp;hcan1, CAN_RX_FIFO0, &amp;canRx, buff);   &#x2F;&#x2F; 接收消息
+
+    return canRx.DLC;   &#x2F;&#x2F; 返回接收到的消息数据长度
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> Key.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">uint8_t arr[8] &#x3D; &#123;0&#125;;
+static uint8_t n &#x3D; 0;
+if (Key.Key_Status_Arr[0])
+&#123;
+    Key.Key_Status_Arr[0] &#x3D; 0;
+    for (uint8_t i &#x3D; 0; i &lt; 8; i++)
+    &#123;
+        arr[i] &#x3D; n + i;
+    &#125;
+    n++;
+    Mycan.MyCAN_Send_Message(0x12345678, arr, 8);
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> main.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">int main(void)
+&#123;
+    Mycan.MyCAN_Init();
+    
+    while(1)
+    &#123;
+        rx_len &#x3D; Mycan.MyCAN_Rec_Message(rx_buf);
+        if (rx_len)
+        &#123;
+          for (uint8_t i &#x3D; 0; i &lt; rx_len; i++)
+          &#123;
+            printf(&quot;%x &quot;, rx_buf[i]);
+          &#125;
+          printf(&quot;\r\n&quot;);
+        &#125;        
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<ul>
+<li>实验现象</li>
+</ul>
+<p>自发自收，通过串口打印到上位机，然后其他总线也能监测(接收)到数据，但是其他的节点只能在 <code>正常模式</code> 或者 <code>静默模式</code> 下才能接收到其数据</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231106125320.webp" style="zoom: 50%;" />
+<h3 id="编程示例2">编程示例2</h3>
+<blockquote>
+<p>测试模式 — 环回模式（自发自收）</p>
+</blockquote>
+<ul>
+<li>硬件连接</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230522151110.webp" alt=""></p>
+<ul>
+<li>MX配置</li>
+</ul>
+<p>bxCAN是挂载在APB1总线上的，APB1总线的时钟为36M</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230523214509.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230523214251.webp" alt=""></p>
+<ul>
+<li>配置位时间参数</li>
+</ul>
+<p>根据STM32参考手册里位时间特性的介绍，来配置最小时间单位Tq</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230523215015.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230523220046.webp" alt=""></p>
+<blockquote>
+<p>在位时间参数里可以配置分频系数，这个系数没有下拉列表，需要自己写，APB1 36MHz时钟来到这里经过分频再给后面使用，根据实际通信速度来配置，例如可以设置为4分频，那 <code>36MHz/4 = 9MHz</code></p>
+<p>同步段因为固定为1个时间单元，所以不用配置</p>
+<p>根据采样点最好在一个位的50% ~ 80%位置采样，所以 <code>时间段1可以配置长一点</code>，其范围为1到16个时间单元，这里可根据下拉列表选择11个时间单元</p>
+<p>时间段2的设置就要 <code>注意不要让总和超过最大Tq数，因为同步段+时间段1+时间段2的Tq数范围是8 ~ 25个</code>，不过配置工具已经把参数规定好了，所以不用担心超出的问题，这里可以设置为6个时间单元，则会自动计算出一个位占用的时间（Time for one Bit）为 <code>2000ns</code></p>
+<p>计算过程：</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>36</mn><mi>M</mi><mi>H</mi><mi>z</mi><mi mathvariant="normal">/</mi><mn>4</mn><mo>=</mo><mn>9</mn><mi>M</mi><mi>H</mi><mi>z</mi></mrow><annotation encoding="application/x-tex">36MHz/4 = 9MHz</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">36</span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mord mathnormal" style="margin-right:0.04398em;">Hz</span><span class="mord">/4</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">9</span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mord mathnormal" style="margin-right:0.04398em;">Hz</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>同步段（1个Tq）</mtext><mo>+</mo><mtext>时间段1（11个Tq）</mtext><mo>+</mo><mtext>时间段2（6个Tq）</mtext><mo>=</mo><mtext>18个Tq</mtext></mrow><annotation encoding="application/x-tex">\text{同步段（1个Tq）} + \text{时间段1（11个Tq）} + \text{时间段2（6个Tq）} = \text{18个Tq}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord cjk_fallback">同步段（</span><span class="mord">1</span><span class="mord cjk_fallback">个</span><span class="mord">Tq</span><span class="mord cjk_fallback">）</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord cjk_fallback">时间段</span><span class="mord">1</span><span class="mord cjk_fallback">（</span><span class="mord">11</span><span class="mord cjk_fallback">个</span><span class="mord">Tq</span><span class="mord cjk_fallback">）</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord cjk_fallback">时间段</span><span class="mord">2</span><span class="mord cjk_fallback">（</span><span class="mord">6</span><span class="mord cjk_fallback">个</span><span class="mord">Tq</span><span class="mord cjk_fallback">）</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">18</span><span class="mord cjk_fallback">个</span><span class="mord">Tq</span></span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>9</mn><mi>M</mi><mi>H</mi><mi>z</mi><mi mathvariant="normal">/</mi><mn>18</mn><mo>=</mo><mn>0.5</mn><mi>M</mi><mi>H</mi><mi>z</mi></mrow><annotation encoding="application/x-tex">9MHz/18 = 0.5MHz</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">9</span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mord mathnormal" style="margin-right:0.04398em;">Hz</span><span class="mord">/18</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">0.5</span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mord mathnormal" style="margin-right:0.04398em;">Hz</span></span></span></span></p>
+<p>即：即每一个Tq的频率就是0.5MHz，转为时间就为  <code>1/0.5MHz = 1/500000Hz = 0.000002s = 2us = 2000ns</code></p>
+<p>重新同步跳跃宽度（SJW）可设置范围是1 ~ 4个时间单元，这里可以选择2</p>
+</blockquote>
+<ul>
+<li>配置基础参数</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230523220813.webp" alt=""></p>
+<blockquote>
+<p>接收FIFO锁定模式：选择Enable（锁定）时，当接收FIFO满时，新接收到的报文就丢弃，软件可以读到FIFO中最早收到的3个报文。</p>
+<p>选择Disable（不锁定）时，那么FIFO中最后收到的报文就被新报文所覆盖。这样，最新收到的报文不会被丢弃掉。</p>
+<p>发送FIFO优先级：未使能就按邮箱序号进行发送</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230523221021.webp" alt=""></p>
+<blockquote>
+<p>正常模式就需要两个或更多的实验板来进行通信</p>
+<p>环回模式就只使用一个实验板就可以测试通信</p>
+<p>本次实验使用环回模式</p>
+</blockquote>
+<ul>
+<li>NVIC</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230523221158.webp" alt=""></p>
+<blockquote>
+<p>CAN发送使用轮询的方式，接收就用RX0中断方式</p>
+</blockquote>
+<ul>
+<li>GPIO</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20230523222056.webp" alt=""></p>
+<blockquote>
+<p>推挽输出即可(虽然不知道有什么用)</p>
+</blockquote>
+<ul>
+<li>程序编写</li>
+</ul>
+<details ><summary> Myinit.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void vHardware_Init(void)
+&#123;
+    CAN_TEST.svCAN_Config();
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> System.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __System_H
+#define __System_H
+
+&#x2F;&#x2F;定义结构体类型
+typedef struct
+&#123;
+	void (*Run)(void);
+	void (*Error_Handler)(void);
+	void (*Assert_Failed)(void);
+&#125; System_t;
+
+extern System_t  System;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> System.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;AllHead.h&quot;
+
+static void Run(void); 
+static void Error_Handler(void);
+static void Assert_Failed(void);
+	
+&#x2F;* Public variables-----------------------------------------------------------*&#x2F;
+System_t System &#x3D; 
+&#123;
+	Run,
+	Error_Handler,
+	Assert_Failed
+&#125;;
+
+&#x2F;* Private function prototypes------------------------------------------------*&#x2F; 
+
+&#x2F;*
+	* @name   Run
+	* @brief  系统运行
+	* @param  None
+	* @retval None      
+*&#x2F;
+static void Run()
+&#123;
+	
+&#125;
+
+&#x2F;*
+	* @name   Error_Handler
+	* @brief  系统错误处理
+	* @param  None
+	* @retval None      
+*&#x2F;
+static void Error_Handler()
+&#123;
+	&#x2F;* User can add his own implementation to report the HAL error return state *&#x2F;
+&#125;
+
+&#x2F;*
+	* @name   Assert_Failed
+	* @brief  函数参数错误处理
+	* @param  None
+	* @retval None      
+*&#x2F;
+static void Assert_Failed()
+&#123;
+	&#x2F;* User can add his own implementation to report the file name and line number,
+     tex: printf(&quot;Wrong parameters value: file %s on line %d\r\n&quot;, file, line) *&#x2F;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> Timer6.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __Timer6_H
+#define __Timer6_H
+
+#include &quot;AllHead.h&quot;
+
+&#x2F;&#x2F;定义枚举类型
+typedef enum
+&#123;
+	TIMER6_10mS  	&#x3D; (uint16_t)2,
+	TIMER6_50mS  	&#x3D; (uint16_t)10,
+	TIMER6_100mS	&#x3D; (uint16_t)20,
+	TIMER6_200mS	&#x3D; (uint16_t)40,
+	TIMER6_500mS	&#x3D; (uint16_t)100,
+	TIMER6_1S     &#x3D; (uint16_t)200,
+	TIMER6_2S     &#x3D; (uint16_t)400,
+	TIMER6_3S     &#x3D; (uint16_t)600,
+	TIMER6_5S     &#x3D; (uint16_t)1000,
+	TIMER6_10S    &#x3D; (uint16_t)2000,
+	TIMER6_3min   &#x3D; (uint16_t)36000,
+&#125;TIMER6_Value_t;
+
+&#x2F;&#x2F;定义结构体类型
+typedef struct
+&#123;
+	uint16_t volatile usDelay_Timer;    &#x2F;&#x2F;延时定时器
+	uint16_t volatile SHT30_Measure_Timeout;	&#x2F;&#x2F; 温湿度延时时间
+	
+	void (*Timer6_Start_IT)(void);      &#x2F;&#x2F;定时器6以中断模式启动
+&#125; Timer6_t;
+
+extern Timer6_t  Timer6;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> Timer6.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;AllHead.h&quot;
+    
+static void Timer6_Start_IT(void);  &#x2F;&#x2F;定时器6以中断模式启动
+	
+Timer6_t  Timer6 &#x3D; 
+&#123;
+	0,
+	0,
+	
+	Timer6_Start_IT     
+&#125;;
+
+&#x2F;*
+	* @name   Timer6_Start_IT
+	* @brief  定时器6以中断模式启动
+	* @param  None
+	* @retval None      
+*&#x2F;
+static void Timer6_Start_IT(void)
+&#123;
+	HAL_TIM_Base_Start_IT(&amp;htim6); &#x2F;&#x2F;启动定时器6
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> CAN_TEST.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __CAN_TEST_H
+#define __CAN_TEST_H
+#include &quot;AllHead.h&quot;
+
+&#x2F;&#x2F; 宏定义
+#define CAN_SEND_OK     (uint8_t)0
+#define CAN_SEND_FAIL   (uint8_t)1  
+
+#define CAN_REC_OK      (uint8_t)0
+#define CAN_REC_FAIL    (uint8_t)1
+
+typedef struct 
+&#123;
+    &#x2F;&#x2F; 操作模式
+    uint32_t Operate_Mode;
+    void (*svCAN_Init)(void);
+    void (*svCAN_Config)(void);
+    &#x2F;&#x2F; 发送缓存
+    uint8_t Send_Buf[8];
+    &#x2F;&#x2F; 接收缓存
+    uint8_t Rec_Buf[8];
+    uint8_t (*CAN_Send_Msg)(uint8_t*,uint8_t);
+    uint8_t (*CAN_Rec_Msg)(uint8_t*);
+    &#x2F;&#x2F; 接收标志位
+    uint8_t volatile Rec_Flag;
+&#125;CAN_TEST_t;
+
+extern CAN_TEST_t CAN_TEST;
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> CAN_TEST.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include &quot;AllHead.h&quot;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;静态内部变量&#x2F;函数声明区 BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void svCAN_Init(void);	&#x2F;&#x2F; 初始化
+static void svCAN_Config(void);	&#x2F;&#x2F; 配置
+static uint8_t CAN_Send_Msg(uint8_t*,uint8_t);	&#x2F;&#x2F; 发送信息
+static uint8_t CAN_Rec_Msg(uint8_t*);	&#x2F;&#x2F; 接收信息
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;静态内部变量&#x2F;函数声明区    END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;变量区 BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+CAN_TEST_t CAN_TEST &#x3D; 
+&#123;
+	&#x2F;&#x2F; 正常模式
+	CAN_MODE_NORMAL,
+	svCAN_Init,
+	svCAN_Init,
+	&#123;0&#125;,
+	&#123;0&#125;,
+	CAN_Send_Msg,
+	CAN_Rec_Msg,
+	FALSE
+&#125;
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;变量区    END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+void svCAN_Init(void)
+&#123;
+	&#x2F;&#x2F; 自行编写如果需要切换模式则需要重新初始化
+&#125;
+
+static void svCAN_Init(void)
+&#123;
+	&#x2F;&#x2F; CAN过滤器参数配置
+	CAN_FilterTypeDef CAN_FilterTypeDefSture;
+
+	CAN_FilterTypeDefSture.FilterBank &#x3D; 0;						&#x2F;&#x2F; 配置过滤器0（F1共有14个，0-13）
+	CAN_FilterTypeDefSture.FilterScale &#x3D; CAN_FILTERSCALE_16BIT; &#x2F;&#x2F; 配置为16位过滤器
+	CAN_FilterTypeDefSture.FilterMode &#x3D; CAN_FILTERMODE_IDMASK;	&#x2F;&#x2F; 屏蔽位模式
+	&#x2F;&#x2F; ID号为0x00，屏蔽位为0x00，说明任何ID都接收
+	CAN_FilterTypeDefSture.FilterIdLow &#x3D; 0x00; &#x2F;&#x2F; FR1
+	CAN_FilterTypeDefSture.FilterMaskIdLow &#x3D; 0x00;
+	CAN_FilterTypeDefSture.FilterIdHigh &#x3D; 0x00; &#x2F;&#x2F; FR2
+	CAN_FilterTypeDefSture.FilterMaskIdHigh &#x3D; 0x00;
+	CAN_FilterTypeDefSture.FilterFIFOAssignment &#x3D; CAN_FILTER_FIFO0; &#x2F;&#x2F; 过滤器0关联到FIFO0
+	CAN_FilterTypeDefSture.FilterActivation &#x3D; ENABLE;				&#x2F;&#x2F; 激活过滤器0
+	CAN_FilterTypeDefSture.SlaveStartFilterBank &#x3D; 14;
+
+	&#x2F;&#x2F; 启动过滤器
+	if (HAL_CAN_ConfigFilter(&amp;hcan, &amp;CAN_FilterTypeDefSture) !&#x3D; HAL_OK)
+	&#123;
+		printf(&quot;CAN配置函数：配置过滤器!&quot;);
+		System.Error_Handler();
+	&#125;
+
+	&#x2F;&#x2F; 使能FIFO0接收到一个新报文中断，具体为FIFO0的挂起中断
+	if (HAL_CAN_ActivateNotification(&amp;hcan, CAN_IT_RX_FIFO0_MSG_PENDING) !&#x3D; HAL_OK)
+	&#123;
+		printf(&quot;CAN配置函数：使能FIFO0接收到一个新报文中断!&quot;);
+		System.Error_Handler();
+	&#125;
+
+	&#x2F;&#x2F; 启动CAN
+	if (HAL_CAN_Start(&amp;hcan) !&#x3D; HAL_OK)
+	&#123;
+		printf(&quot;CAN配置函数：CAN启动失败!&quot;);
+		System.Error_Handler();
+	&#125;
+
+	printf(&quot;配置成功,CAN成功启动!\r\n&quot;);
+&#125;
+
+static uint8_t CAN_Send_Msg(uint8_t *pSend_Buf, uint8_t LEN)
+&#123;
+	uint8_t i &#x3D; 0;
+	static uint8_t ucTestData &#x3D; 0;
+	uint32_t uiTxMailBox; &#x2F;&#x2F; 接收CAN发送数据成功时返回的邮箱号（0-2）
+
+	&#x2F;&#x2F; 定义CAN TX消息头参数
+	CAN_TxHeaderTypeDef CAN_TxHeaderTypeDefStrue &#x3D;
+		&#123;
+			0x88,		  &#x2F;&#x2F; 标准标识符-11位
+			0x00,		  &#x2F;&#x2F; 拓展标识符-29位
+			CAN_ID_STD,	  &#x2F;&#x2F; 设置为标准格式
+			CAN_RTR_DATA, &#x2F;&#x2F; 设置为数据帧
+			8,			  &#x2F;&#x2F; 发送数据的长度 0 ~ 8
+			DISABLE		  &#x2F;&#x2F; 不使用捕获时间戳计数器
+		&#125;;
+
+	&#x2F;&#x2F; 判断工作模式
+	if (CAN_Test.uiOperate_Mode &#x3D;&#x3D; CAN_MODE_LOOPBACK)
+	&#123;
+		printf(&quot;\r\nCAN工作在环回模式，使用一块实验板来测试\r\n&quot;);
+	&#125;
+	else
+	&#123;
+		printf(&quot;\r\nCAN工作在正常模式，需要两块以上的实验板才能测试\r\n&quot;);
+	&#125;
+
+	&#x2F;&#x2F; 设置要发送的报文(测试数据，每次+1)
+	printf(&quot;CAN要发送的报文如下：\r\n&quot;);
+	for (i &#x3D; 0; i &lt; 8; i++)
+	&#123;
+		printf(&quot;%#.2x &quot;, ucTestData);
+		CAN_Test.ucSend_Buf[i] &#x3D; ucTestData++;
+	&#125;
+	printf(&quot;\r\n&quot;);
+
+	&#x2F;&#x2F; 将消息添加到第一个空闲的Tx邮箱并激活相应的传输要求
+	if (HAL_CAN_AddTxMessage(&amp;hcan, &amp;CAN_TxHeaderTypeDefStrue, pSend_Buf, &amp;uiTxMailBox) !&#x3D; HAL_OK)
+	&#123;
+		return CAN_SEND_FAIL;
+	&#125;
+
+	&#x2F;&#x2F; 通过检查空闲邮箱个数确认是否发送完成
+	Timer6.usDelay_Timer &#x3D; 0;
+	do
+	&#123;
+		&#x2F;&#x2F; 超时处理
+		if (Timer6.usDelay_Timer &gt;&#x3D; TIMER_1s)
+		&#123;
+			printf(&quot;CAN发送超时\r\n&quot;);
+			return CAN_SEND_FAIL;
+		&#125;
+	&#125; while (HAL_CAN_GetTxMailboxesFreeLevel(&amp;hcan) !&#x3D; 3); &#x2F;&#x2F; 如果3个发送邮箱都不是空闲的话，就说明数据还在发送，等于3表示所有三个发送邮箱都为空闲，可以进行发送数据
+
+	&#x2F;&#x2F; 发送成功
+	return CAN_SEND_OK;
+&#125;
+
+&#x2F;&#x2F; CAN的FIFO0挂号中断 回调函数
+&#x2F;&#x2F;这里参数需要加_，可能是Bug
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef * hcan_)
+&#123;
+	&#x2F;&#x2F; 定义CAN Rx消息头参数
+	CAN_RxHeaderTypeDef CAN_RxHeader;
+	&#x2F;&#x2F; CAN接收消息
+	if(HAL_CAN_GetRxMessage(&amp;hcan,CAN_RX_FIFO0,&amp;CAN_RxHeader,CAN_TEST.Rec_Buf) &#x3D;&#x3D; HAL_OK)
+	&#123;
+		CAN_TEST.Rec_Flag &#x3D; TRUE;
+	&#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> main.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void Test(void)
+&#123;
+    &#x2F;&#x2F; 计数
+    static uint16_t CAN_Send_Ok_Cnt &#x3D; 0;
+    static uint16_t CAN_Send_Fail_Cnt &#x3D; 0;
+    static uint16_t CAN_Rec_Ok_Cnt &#x3D; 0;
+    
+    &#x2F;&#x2F; CAN发送数据
+    if(KEY1)
+    &#123;
+        KEY1 &#x3D; 0;
+        if(CAN_TEST.CAN_Send_Msg(CAN_TEST.Send_Buf,8) &#x3D;&#x3D; CAN_SEND_OK)
+        &#123;
+            printf(&quot;CAN发送成功次数：%u\r\n&quot;,++CAN_Send_Ok_Cnt);
+        &#125;
+        else
+        &#123;
+            printf(&quot;CAN发送失败次数：%u\r\n&quot;,++CAN_Send_Fail_Cnt);
+        &#125;
+    &#125;
+    &#x2F;&#x2F; CAN接收数据
+    if(CAN_TEST.Rec_Flag &#x3D;&#x3D; TRUE)
+    &#123;
+        CAN_TEST.Rec_Flag &#x3D; FALSE;
+        printf(&quot;CAN接收成功次数：%u\r\n&quot;,++CAN_Rec_Ok_Cnt);
+        CAN_TEST.CAN_Rec_Msg(CAN_TEST.Rec_Buf);
+    &#125;
+&#125;</code></pre>
+              </div>
+            </details></article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num170.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CAN"><span class="toc-number">2.</span> <span class="toc-text">CAN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CAN%E5%9F%BA%E7%A1%80%E8%AF%A6%E8%A7%A3"><span class="toc-number">2.1.</span> <span class="toc-text">CAN基础详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%A5%E6%8E%A7%E5%B8%A7"><span class="toc-number">2.2.</span> <span class="toc-text">遥控帧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CAN%E8%BF%87%E6%BB%A4%E5%99%A8%E8%AF%A6%E8%A7%A3"><span class="toc-number">2.3.</span> <span class="toc-text">CAN过滤器详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CAN%E5%88%86%E6%9E%90%E4%BB%AA"><span class="toc-number">2.4.</span> <span class="toc-text">CAN分析仪</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-number">2.5.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B1"><span class="toc-number">2.6.</span> <span class="toc-text">编程示例1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E7%A4%BA%E4%BE%8B2"><span class="toc-number">2.7.</span> <span class="toc-text">编程示例2</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/beian34234242222.webp" style="float:left;zoom:80%;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://lib.baomitu.com/KaTeX/latest/katex.min.css"><script src="https://jsd.onmicrosoft.cn/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '键盘敲烂 月薪过万' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script defer src="/js/my_aplayer.js"></script><script defer src="/js/meting.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>

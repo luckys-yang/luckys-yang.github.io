@@ -1,0 +1,3019 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>通信协议学习-NBloT | Yangの小栈</title><meta name="author" content="Yang"><meta name="copyright" content="Yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言 参考文章&#x2F;博主  NB-loT 硬件  【NB-IoT模组】  型号： 移远BC260Y-CN，链接：移远 网络类型：支持中国移动、中国联通和中国电信的NB-IoT网络。电信 &amp; 联通的NB-IoT卡由于限制多，故需要实际测试，不保证100%支持 通信速率： Single Tone: 25.5 (DL)&#x2F;16.7 (UL)   Multi Tone: 25.5 (DL)&#x2F;62.5 (">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通信协议学习-NBloT">
+<meta property="og:url" content="https://blog.yang5201314.cn/post/a7a553da.html">
+<meta property="og:site_name" content="Yangの小栈">
+<meta property="og:description" content="前言 参考文章&#x2F;博主  NB-loT 硬件  【NB-IoT模组】  型号： 移远BC260Y-CN，链接：移远 网络类型：支持中国移动、中国联通和中国电信的NB-IoT网络。电信 &amp; 联通的NB-IoT卡由于限制多，故需要实际测试，不保证100%支持 通信速率： Single Tone: 25.5 (DL)&#x2F;16.7 (UL)   Multi Tone: 25.5 (DL)&#x2F;62.5 (">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.yang5201314.cn/img/num115.webp">
+<meta property="article:published_time" content="2024-02-20T06:07:54.000Z">
+<meta property="article:modified_time" content="2024-02-20T07:06:46.619Z">
+<meta property="article:author" content="Yang">
+<meta property="article:tag" content="aabbcc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.yang5201314.cn/img/num115.webp"><link rel="shortcut icon" href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20231008142657.webp"><link rel="canonical" href="https://blog.yang5201314.cn/post/a7a553da.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"MSZRRKNRKT","apiKey":"71e2a5ac35435ee76602cd55d727e5ff","indexName":"aaa","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '通信协议学习-NBloT',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-20 15:06:46'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css" media="all" onload="this.media='all'"><link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="shortcut icon" href="#"><link href="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/my.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css" ><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/css/iziToast.min.css" media="all" onload="this.media='all'"><link rel="stylesheet" href="/css/aplayer.css" media="all" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://jsd.onmicrosoft.cn/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><style>css-doodle {--color: @p(#51eaea, #fffde1, #ff9d76, #FB3569);--rule: (:doodle {@grid: 30x1 / 18vmin;--deg: @p(-180deg, 180deg);}:container {perspective: 30vmin;}:after, :before {content: '';background: var(--color); @place-cell: @r(100%) @r(100%); @size: @r(6px); @shape: heart;} @place-cell: center; @size: 100%;box-shadow: @m2(0 0 50px var(--color));background: @m100(radial-gradient(var(--color) 50%, transparent 0)@r(-20%, 120%) @r(-20%, 100%) / 1px 1px no-repeat); will-change: transform, opacity; animation: scale-up 12s linear infinite; animation-delay: calc(-12s / @I * @i); @keyframes scale-up { 0%, 95.01%, 100% {transform: translateZ(0) rotate(0);opacity: 0;}10% {opacity: 1;}95% {transform: translateZ(35vmin) rotateZ(@var(--deg));}})}</style><css-doodle use="var(--rule)"></css-doodle><script async="async" src="https://cdn.bootcdn.net/ajax/libs/css-doodle/0.32.2/css-doodle.min.js"></script></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/微信图片_20231008142657.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">167</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">72</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">34</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="fixed" id="nav"><span id="blog-info"><a href="/" title="Yangの小栈"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/light.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-list-alt"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bookmarking/"><i class="fa-fw fas fa-star"></i><span> 收藏</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-pen"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-info-circle"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">通信协议学习-NBloT</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-02-20T06:07:54.000Z" title="发表于 2024-02-20 14:07:54">2024-02-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-02-20T07:06:46.619Z" title="更新于 2024-02-20 15:06:46">2024-02-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BB%86%E5%8C%96%E5%AD%A6%E4%B9%A0/">细化学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">13.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>71分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
+<div class="note blue icon-padding flat"><i class="note-icon fas fa-fan"></i><p>参考文章/博主</p>
+</div>
+<h2 id="NB-loT">NB-loT</h2>
+<h3 id="硬件">硬件</h3>
+<blockquote>
+<p>【NB-IoT模组】</p>
+<ul>
+<li>型号： <code>移远BC260Y-CN</code>，链接：<a href="https://www.quectel.com.cn/">移远</a></li>
+<li>网络类型：支持中国移动、中国联通和中国电信的NB-IoT网络。电信 &amp; 联通的NB-IoT卡由于限制多，故需要实际测试，不保证100%支持</li>
+<li>通信速率： <code>Single Tone</code>: 25.5 (DL)/16.7 (UL)   <code>Multi Tone</code>: 25.5 (DL)/62.5 (UL)，或者Max. 127(DL)/158.5(UL)</li>
+<li>支持的通信协议： <code>UDP/ TCP/ LwM2M/ MQTT/ SNTP/TLS/ SSL/ PPP/ HTTP/ HTTPS/CoAP</code></li>
+<li>耗流：</li>
+</ul>
+<p>0.8μA @PSM</p>
+<p>0.038mA @ 空闲模式 (eDRX=40.96s)</p>
+<p>0.11mA @ 空闲模式 (DRX=2.56s)</p>
+</blockquote>
+<blockquote>
+<p>【物联网卡】</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231214133703.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231214133711.webp" alt=""></p>
+<p>（1）默认配套：<strong>中国移动</strong> NB-IoT上网卡<br>
+（2）300M/年，可用1年，满足测试需求</p>
+<p>开发板支持中国移动NB-IoT卡</p>
+<p>NB-IoT卡属于物联网卡的一种，但<strong>NB-IoT卡≠物联网卡</strong>，故物联网卡并非都可用于本模块</p>
+<p>中国电信 &amp; 联通卡的NB-IoT卡由于限制条件多，故非100%支持</p>
+<p>卡激活后，<strong>只能在所激活的省份内使用</strong></p>
+<p>NB-IoT卡一旦激活后，就<strong>不能拔出来插入其它设备</strong>，否则卡会锁定</p>
+</blockquote>
+<blockquote>
+<p>【硬件】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231214134703.webp" style="zoom:67%;" />
+</blockquote>
+<h3 id="简介">简介</h3>
+<blockquote>
+<p>平常所讲的2G、3G、4G中的G其实是Generation的意思，例如2G是指第二代移动通信技术。每一代移动通信技术都有对应的网络制式：</p>
+<ol>
+<li><strong>中国移动</strong>：</li>
+</ol>
+<ul>
+<li>2G -&gt; GSM</li>
+<li>3G -&gt; TD-SCDMA</li>
+<li>4G -&gt; TD-LTE</li>
+</ul>
+<ol start="2">
+<li><strong>中国联通</strong>：</li>
+</ol>
+<ul>
+<li>2G -&gt; GSM</li>
+<li>3G -&gt; WCDMA</li>
+<li>4G -&gt; TD-LTE、FDD-LTE</li>
+</ul>
+<ol start="3">
+<li><strong>中国电信</strong>：</li>
+</ol>
+<ul>
+<li>2G -&gt; CDMA1X</li>
+<li>3G -&gt; CDMA2000</li>
+<li>4G -&gt; TD-LTE、FDD-LTE</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>WPAN</strong><br>
+WPAN的全称是Low-rate wireless personal area network（低速无线个人区域网络），典型的代表有 <code>ZigBee、蓝牙</code> 等，其特点是低复杂度、低功耗、低速率、低成本</p>
+<p><strong>LPWA</strong><br>
+LPWA的全称是Low Power Wide Area（低速无线广域网），典型的代表有 <code>NB-IoT、eMTC、Lora和SigFox</code> 等，具有广覆盖、低功耗、低成本和大连接的特点</p>
+</blockquote>
+<blockquote>
+<p>NB-IoT是基于LTE制式的一种移动通信技术，也就是说，<strong>它是4G技术的一种</strong></p>
+<p>下图是LTE制式通信技术的各个分支对比：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231214135521.webp" style="zoom:67%;" />
+<p>LTE Cat-NB即NB-IoT，是基于LTE网络制式而设计的一种 <code>具有低功耗、低速率、上行通信时延低和下行通信时延较高（相对）</code> 特点的通信技术，满足对低功耗要求高但是对通信速率要求低的应用场景。上图中，我们还可以看到LTE Cat-M，它支持的通信速率比NB-IoT更高，可以应用于对通信速率要求更高的应用场景，应用场景：</p>
+<ul>
+<li>环境温湿度、光照度、气体成分等信息的采集上报</li>
+<li>火灾、煤气泄漏、水浸等环境异常状态监控与报警场景</li>
+<li>外部设备状态信息采集与上报场景，例如远程抄表</li>
+</ul>
+<p><code>NB-IoT的下行通信时延较高，约15秒左右（需要以实际测试为准），所以如果把NB-IoT用于下发指令或数据给终端设备，需要考虑这个时延问题。如需对下行通信速率有更快速的要求，可以采用eMTC或CATn等技术</code></p>
+</blockquote>
+<h3 id="模块常用指令测试">模块常用指令测试</h3>
+<blockquote>
+<p>需要打开 <code>ATCmdsTool V5.2.0</code> 软件，模块使用 USB转串口进行连接，4根线即可，3.3V供电</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231214145715.webp" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231214145731.webp" alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">AT指令</th>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">返回值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">AT+QSCLK=<n></td>
+<td style="text-align:center"><n> 整型。 <br>0 禁用休眠模式。 <br>1 启用轻休眠（Light Sleep）和深休眠（Deep Sleep），并通过 PSM_EINT（下降沿）唤醒深休眠<br>2 仅启用轻休眠，并通过主串口唤醒</td>
+<td style="text-align:center">OK</td>
+<td><strong>配置休眠模式</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">ATI</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">Quectel_Ltd(模块制造商)<br>Quectel_BC260Y-CN(模块型号)<br>Revision: BC260YCNAAR02A02(制造商修订信息)</td>
+<td><strong>读取模块完整信息</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">AT+CGMM</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">Quectel_BC260Y-CN<br><br>OK</td>
+<td><strong>读取制造商模块号</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">AT+CGMR</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">Revision: BC260YCNAAR02A02<br><br>OK</td>
+<td><strong>读取制造商修订信息</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">AT+CGSN=<snt></td>
+<td style="text-align:center">snt: 要读取产品的哪种序列号<br>0:  唯一码<br>1:  国际移动设备识别码<br>2:  国际移动设备识别码的软件版本号<br>3:  软件版本号</td>
+<td style="text-align:center">MP823G70607252204<br><br>OK</td>
+<td><strong>读取模块唯一码</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">同上</td>
+<td style="text-align:center">同上</td>
+<td style="text-align:center">+CGSN: 862745063975087<br><br>OK</td>
+<td><strong>查询IMEI</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">同上</td>
+<td style="text-align:center">同上</td>
+<td style="text-align:center">+CGSN: 8627450639750802<br><br>OK</td>
+<td><strong>查询识别码和软件版本号</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">同上</td>
+<td style="text-align:center">同上</td>
+<td style="text-align:center">+CGSN: 02<br><br>OK</td>
+<td><strong>查询软件版本号</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">AT+CSCON?</td>
+<td style="text-align:center">第二个返回数值代表状态，1：连接，0：空闲状态；如果没有数据交互，连接状态持续20秒，之后进入到空闲状态中，如果仍然没有数据交互，10秒后从空闲状态进入到PSM睡眠模式，这时候模块不再接收如何下行数据，模块只有在连接和空闲的状态下才能交互数据！</td>
+<td style="text-align:center">+CSCON: 0,0<br><br>OK</td>
+<td><strong>读取信令连接状态</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">AT+CEREG?</td>
+<td style="text-align:center">+CEREG:<n>,<stat>[…]<br><stat> Integer type, indicates the EPS registration status<br>1 - Registered, home network<br>其他数值 - 注册不成功</td>
+<td style="text-align:center">+CEREG: 0,1<br><br>OK</td>
+<td><strong>读取网络注册状态</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">AT+CGATT?</td>
+<td style="text-align:center">0：没有附着<br>1：附着成功</td>
+<td style="text-align:center">+CGATT: 1<br><br>OK</td>
+<td><strong>读取网络附着状态</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">AT+CGPADDR?</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">+CGPADDR: 0,“100.67.249.195”<br><br>OK</td>
+<td><strong>读取设备IP地址</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">AT+CSQ</td>
+<td style="text-align:center">模块返回的第1个参数表示强度,越大表示信号越好<br>0：<code>-113dBm 或更低</code><br>1：``-111dBm<code>&lt;br&gt;2~30： </code>-109dBm~-53dBm`<br>31：-51dBm 或更高<br>99：未知或无法检测</td>
+<td style="text-align:center">+CSQ: 8,0<br><br>OK</td>
+<td><strong>读取信号强度</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">AT+QBAND?</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">+QBAND: 5,8,3<br><br>OK</td>
+<td><strong>查询模块的工作频段</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">AT+QBAND=n</td>
+<td style="text-align:center">根据NB-IoT所属的营运商选择对应的频段<br>3: 中国联通 5: 中国电信 8: 中国移动</td>
+<td style="text-align:center">OK</td>
+<td><strong>设置模块的工作频段</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">AT+CCLK?</td>
+<td style="text-align:center"><code>+CCLK:[&lt;yy/MM/dd,hh:mm:ss&gt;[&lt;±zz&gt;]</code><br>格式： 年月日, 时分秒, 时区</td>
+<td style="text-align:center">+CCLK: “2023/12/14,09:01:13+32”<br><br>OK</td>
+<td><strong>获取当前时间</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">AT+QRST=1</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">OK<br><br>RDY<br><br>+CFUN: 1<br><br>+CPIN: READY<br><br>+IP: 100.85.29.214</td>
+<td><strong>重启模块</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="程序">程序</h3>
+<blockquote>
+<p>结合上面，有上传和下发</p>
+</blockquote>
+<ul>
+<li>MX配置</li>
+</ul>
+<p>串口2打开，中断打开，DMA中断不打开，DMA接收循环模式，注意要上拉！</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231213212555.webp" alt=""></p>
+<ul>
+<li>程序编写</li>
+</ul>
+<details ><summary> AllHead.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __ALLHEAD_H
+#define __ALLHEAD_H
+#include &quot;main.h&quot;
+#include &quot;tim.h&quot;
+#include &quot;usart.h&quot;
+#include &quot;gpio.h&quot;
+
+#include &quot;CallBack.h&quot;
+#include &quot;Public.h&quot;
+#include &quot;System.h&quot;
+#include &quot;System_Init.h&quot;
+#include &quot;Task.h&quot;
+
+# include &lt;string.h&gt;
+# include &lt;stdarg.h&gt;
+# include &lt;stdlib.h&gt;
+# include &quot;stdio.h&quot;
+#include &quot;stdint.h&quot;
+#include &quot;math.h&quot;
+
+#include &quot;bsp_4GCat_uart.h&quot;
+#include &quot;bsp_4GCat.h&quot;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> CallBack.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: CallBack.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;06&#x2F;19
+ * description: store interrupt function
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+extern uint8_t ucUart1_Rec_Buff[128];
+char AT_String[255];
+extern const char *TOPIC_PROPERTY_SUB;
+&#x2F;*
+* @function: HAL_TIM_PeriodElapsedCallback
+* @param: None
+* @retval: None
+* @brief: timer callback function
+*&#x2F;
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+&#123;
+  if (htim-&gt;Instance &#x3D;&#x3D; htim6.Instance) &#x2F;&#x2F; 1ms
+  &#123;
+    static uint8_t cat_uart_rx &#x3D; 0;
+    static uint16_t cat_reset_cnt &#x3D; 0;  &#x2F;&#x2F; 模块复位所需时间计数
+
+    cat_uart_rx++;
+
+    if (cat_uart_rx &gt;&#x3D; 50)  &#x2F;&#x2F; 串口接收回传校验
+    &#123;
+      cat_uart_rx &#x3D; 0;
+      bsp_4GCat_uart.Bsp_4GCat_Uart_Handler();
+    &#125;
+    if (bsp_4GCat.Reset_Status !&#x3D; RESET_OVER) &#x2F;&#x2F; 复位计数
+    &#123;
+      cat_reset_cnt++;
+
+      if (cat_reset_cnt &gt;&#x3D; BSP_4GCAT_RESET_TIME)
+      &#123;
+        cat_reset_cnt &#x3D; 0;
+        bsp_4GCat.Reset_Status &#x3D; RESET_OVER;  &#x2F;&#x2F; 复位完成
+      &#125;
+    &#125;
+
+    System.Task_Marks_Handler();
+  &#125;
+&#125;
+
+void USART2_IRQHandler(void)
+&#123;
+	if(__HAL_UART_GET_FLAG(&amp;huart2,UART_FLAG_IDLE) !&#x3D; 0x00u)
+	&#123;
+		bsp_4GCat_uart.Bsp_4GCat_Uart_Data_Parse();
+		__HAL_UART_CLEAR_IDLEFLAG(&amp;huart2);
+	&#125;		
+  HAL_UART_IRQHandler(&amp;huart2);
+&#125;
+
+void USART1_IRQHandler(void)
+&#123;
+	if(__HAL_UART_GET_FLAG(&amp;huart1,UART_FLAG_IDLE) !&#x3D; 0x00u)
+	&#123;
+		__HAL_UART_CLEAR_IDLEFLAG(&amp;huart1);
+    HAL_UART_DMAStop(&amp;huart1);   &#x2F;&#x2F; 串口停止DMA接收
+		if (strstr((char*)ucUart1_Rec_Buff, (char*)&quot;MQTT_DISABLE&quot;) !&#x3D; NULL) &#x2F;&#x2F; 断开MQTT连接
+		&#123;
+			bsp_4GCat.bsp_4GCat_Step_Status &#x3D; TASK_CIOT_MQTT_DISCONN; &#x2F;&#x2F; 断开
+		&#125;
+    if (strstr((char*)ucUart1_Rec_Buff, (char*)&quot;GPS_GET&quot;) !&#x3D; NULL)
+    &#123;
+      bsp_4GCat_uart.Bsp_4GCat_Uart_Send_String((const uint8_t *)&quot;AT+CGPSINFO\r\n&quot;);
+    &#125;
+    if (strstr((char*)ucUart1_Rec_Buff, (char*)&quot;CLOSE_SUB&quot;) !&#x3D; NULL)  &#x2F;&#x2F; 退订
+    &#123;
+      sprintf(AT_String, &quot;AT+CMQTTUNSUB&#x3D;&#x3D;0,%d,9\r\n&quot;, strlen(TOPIC_PROPERTY_SUB));           
+      bsp_4GCat_uart.Bsp_4GCat_Uart_Send_String((const uint8_t *)AT_String);
+    &#125;
+    if (strstr((char*)ucUart1_Rec_Buff, (char*)&quot;CLOSE_SUB_Theme&quot;) !&#x3D; NULL)  &#x2F;&#x2F; 退订
+    &#123;       
+      bsp_4GCat_uart.Bsp_4GCat_Uart_Send_String((const uint8_t *)TOPIC_PROPERTY_SUB);
+    &#125;
+    HAL_UART_Receive_DMA(&amp;huart1, ucUart1_Rec_Buff, 128);    
+	&#125;
+	
+	HAL_UART_IRQHandler(&amp;huart1);
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> System_Init.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: System_Init.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;06&#x2F;23
+ * description: 存放系统初始化
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void Hardware_Init(void);
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+System_Init_t System_Init &#x3D; 
+&#123;
+    .Hardware_Init &#x3D; &amp;Hardware_Init
+&#125;;
+
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+uint8_t ucUart1_Rec_Buff[128] &#x3D; &#123;0&#125;;    &#x2F;&#x2F; 串口1接收缓存数组
+
+
+
+&#x2F;*
+* @function: Hardware_Init
+* @param: None
+* @retval: None
+* @brief: 硬件模块初始化
+*&#x2F;
+static void Hardware_Init(void)
+&#123;
+#if 1	&#x2F;&#x2F; 串口1空闲中断+DMA
+    __HAL_UART_ENABLE_IT(&amp;huart1, UART_IT_IDLE); &#x2F;&#x2F; 使能串口空闲中断
+    HAL_UART_Receive_DMA(&amp;huart1, ucUart1_Rec_Buff, 128);	
+#endif	
+    bsp_4GCat_uart.Bsp_4GCat_Uart_Init();   &#x2F;&#x2F; 模块串口初始化
+    printf(&quot;Hello\r\n&quot;);
+
+	HAL_TIM_Base_Start_IT(&amp;htim6);
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> Task.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: Task.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;06&#x2F;23
+ * description: 
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+extern const char *TOPIC_PROPERTY_SUB;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void TasksHandle_200MS(void);
+static void TasksHandle_1S(void);
+static void TasksHandle_2S(void);
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+Task_t Task[] &#x3D;
+&#123;
+				&#123;FALSE, 200, 200, TasksHandle_200MS&#125;, &#x2F;&#x2F; task Period: 200ms
+				&#123;FALSE, 1000, 1000, TasksHandle_1S&#125;,	&#x2F;&#x2F; task Period: 1s
+				&#123;FALSE, 2000, 2000, TasksHandle_2S&#125;,	&#x2F;&#x2F; task Period: 2s
+&#125;;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;variable definition declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+uint8_t ucTasks_Max &#x3D; sizeof(Task) &#x2F; sizeof(Task[0]);
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;variable definition declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+static inline void TasksHandle_200MS(void)
+&#123;
+	bsp_4GCat.bsp_4GCat_Running();
+	bsp_4GCat.bsp_4GCat_Sub_Theme(TOPIC_PROPERTY_SUB);
+&#125;
+
+static inline void TasksHandle_1S(void)
+&#123;
+	bsp_4GCat.bsp_4GCat_Data_Upload_1();
+&#125;
+
+static inline void TasksHandle_2S(void)
+&#123; 
+	bsp_4GCat.bsp_4GCat_GPS_Handler();
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> bsp_4GCat.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __BSP_4GCAT_H
+#define __BSP_4GCAT_H
+
+&#x2F;&#x2F; 使用调试打印(可以打印发送与接收回传数据到上位机串口助手)
+#define USE_Debug_Print 0
+&#x2F;&#x2F; 使用正常打印
+#define USE_Normal_Print 1
+&#x2F;&#x2F; 模块复位完成所需时间(大概10s)
+#define BSP_4GCAT_RESET_TIME (uint16_t)10000
+&#x2F;&#x2F; 等待回传的计数值(测试发现大概正常情况下收到回传是330000左右，所以需要设置比它大几倍即可)
+#define BSP_4GCAT_WAIT_COUNT 2000000
+&#x2F;&#x2F; 全自动模式(断开连接后自动重新复位连接)
+#define BSP_4GCAT_AUTO_CONNNECT_MODE 1
+
+&#x2F;* CAT1模块工作步骤列表 *&#x2F;
+typedef enum
+&#123;
+    TASK_CIOT_AT_TEST &#x3D; 0,  &#x2F;&#x2F; 【AT】测试模块是否正常
+    TASK_CIOT_AT_TEST_RSP,
+
+    TASK_CIOT_CLOSE_ECHO,   &#x2F;&#x2F; 【ATE0】关闭命令回显
+    TASK_CIOT_CLOSE_ECHO_RSP,
+
+    TASK_CIOT_CGATT,    &#x2F;&#x2F; 【AT+CGATT?】查询网络附着状态  0--未附着 1--已附着成功
+    TASK_CIOT_CGATT_RSP,
+
+    TASK_CIOT_CGREG,    &#x2F;&#x2F; 【AT+CGREG?】查询网络注册状态  0,1--已注册本地网络 0,5--已注册，但是处于漫游状态
+    TASK_CIOT_CGREG_RSP,
+
+    TASK_GPS_START, &#x2F;&#x2F; 【AT+CGNSSPWR&#x3D;1】 启动GPS
+    TASK_GPS_START_RSP,
+
+    TASK_CIOT_MQTT_START,   &#x2F;&#x2F; 【AT+CMQTTSTART】启动MQTT功能
+    TASK_CIOT_MQTT_START_RSP,
+
+    TASK_CIOT_MQTT_OPEN,    &#x2F;&#x2F; 【AT+CMQTTACCQ&#x3D;0,[CLIENT_ID],0】打开MQTT连接，CLIENT_ID是上面定义的那个
+    TASK_CIOT_MQTT_OPEN_RSP,
+
+    TASK_CIOT_MQTT_CONNECT, &#x2F;&#x2F; 【AT+CMQTTCONNECT&#x3D;0,[DOMAIN],60,1,[USERNAME],[PASSWORD]】连接MQTT服务器
+    TASK_CIOT_MQTT_CONNECT_RSP,
+
+    TASK_CONNECT_SUCCESS,   &#x2F;&#x2F; 连接MQTT服务器成功(结束)
+
+    TASK_CIOT_MQTT_DISCONN, &#x2F;&#x2F; 【AT+CMQTTDISC&#x3D;0,120】断开MQTT连接
+    TASK_CIOT_MQTT_DISCONN_RSP,
+
+    TASK_CIOT_MQTT_CLOSE,   &#x2F;&#x2F; 【AT+CMQTTREL&#x3D;0】释放MQTT相关的资源
+    TASK_CIOT_MQTT_CLOSE_RSP,
+
+    TASK_CIOT_MQTT_STOP,    &#x2F;&#x2F; 【AT+CMQTTSTOP】关闭MQTT功能
+    TASK_CIOT_MQTT_STOP_RSP,
+
+    TASK_CIOT_RESET,    &#x2F;&#x2F; 【AT+CRESET】 模块复位
+    TASK_CIOT_RESET_RSP,
+
+    TASK_IDLE,  &#x2F;&#x2F; 空闲状态(空转)
+&#125; bsp_4GCat_Mode_Steps_et;
+
+&#x2F;&#x2F; 返回状态枚举
+typedef enum
+&#123;
+    RET_PASS &#x3D; -1,    &#x2F;&#x2F; 成功
+    RET_FAIL &#x3D; 0    &#x2F;&#x2F; 失败
+&#125; bsp_4GCat_Return_Status_et;
+
+&#x2F;&#x2F; 复位状态枚举
+typedef enum
+&#123;
+    RESET_NOT &#x3D; 0,   &#x2F;&#x2F; 未复位
+    RESET_OVER &#x3D; 1,  &#x2F;&#x2F; 复位完成
+&#125; bsp_4GCat_Reset_Status_et;
+
+&#x2F;&#x2F; 模块接收状态
+typedef enum
+&#123;
+    Rec_Status_None &#x3D; 0, &#x2F;&#x2F; 不接收
+    Rec_Status_CheckCmd_Plan1 &#x3D; 1, &#x2F;&#x2F; 校验指令回传 --- &quot;OK&quot;
+    Rec_Status_CheckCmd_Plan2 &#x3D; 2, &#x2F;&#x2F; 校验指令回传 --- &quot;+CGATT: 1&quot;
+    Rec_Status_CheckCmd_Plan3 &#x3D; 3, &#x2F;&#x2F; 校验指令回传 --- &quot;+CGREG: 0,1 &#x2F; +CGREG: 0,5&quot;
+    Rec_Status_CheckCmd_Plan4 &#x3D; 4, &#x2F;&#x2F; 校验指令回传 --- &quot;+CMQTTCONNECT: 0,0&quot;
+    Rec_Status_CheckCmd_Plan5 &#x3D; 5, &#x2F;&#x2F; 校验指令回传 --- &quot;&gt;&quot;
+    Rec_Status_CheckCmd_Plan6 &#x3D; 6, &#x2F;&#x2F; 校验指令回传 --- &quot;+CGNSSPWR：READY!&quot;
+    Rec_Status_CheckCmd_Plan7 &#x3D; 7, &#x2F;&#x2F; GPS数据
+    Rec_Status_CheckCmd_Plan8 &#x3D; 8, &#x2F;&#x2F; 订阅主题成功 --- &quot;+CMQTTSUB: 0,0&quot;
+    Rec_Status_MAX &#x3D; Rec_Status_CheckCmd_Plan8 + 1,     &#x2F;&#x2F; 枚举成员数量(当做数组的大小)
+&#125; bsp_4GCat_Rec_Status_et;
+
+&#x2F;&#x2F; GNSS信息结构体
+typedef struct
+&#123;
+    float latitude; &#x2F;&#x2F; 存储纬度信息
+    char NS;        &#x2F;&#x2F; 纬度方向（北纬或南纬）
+
+    float longitude; &#x2F;&#x2F; 存储经度信息
+    char EW;         &#x2F;&#x2F; 经度方向（东经或西经）
+
+#if 1 &#x2F;* Ignores *&#x2F;
+    struct
+    &#123;
+        uint16_t year;        &#x2F;&#x2F; 年份
+        uint8_t month;        &#x2F;&#x2F; 月份
+        uint8_t day;          &#x2F;&#x2F; 日期
+        uint8_t hour;         &#x2F;&#x2F; 小时
+        uint8_t minute;       &#x2F;&#x2F; 分钟
+        uint8_t second;       &#x2F;&#x2F; 秒
+        uint16_t millisecond; &#x2F;&#x2F; 毫秒
+    &#125; UTC;                    &#x2F;&#x2F; 存储协调世界时（UTC）时间信息
+#endif
+
+    float altitude; &#x2F;&#x2F; 存储海拔信息
+
+    float speedOverGround; &#x2F;&#x2F; 存储地面速度信息
+&#125; GNSSInfo_t;
+
+typedef struct
+&#123;
+    uint8_t bsp_GPS_Relay_Flag; &#x2F;&#x2F; GPS装备完成标志位
+    float Latitude;  &#x2F;&#x2F; 纬度
+    float Longitude; &#x2F;&#x2F; 经度
+&#125; bsp_GPS_st;
+
+typedef struct
+&#123;
+    uint8_t bsp_4GCat_Sub_Pass_Flag; &#x2F;&#x2F; 订阅主题成功标志位
+    bsp_4GCat_Reset_Status_et Reset_Status; &#x2F;&#x2F; 复位状态
+    uint8_t bsp_4GCat_MQTT_Connect_Flag;    &#x2F;&#x2F; 连接MQTT服务器标志位
+    int8_t bsp_4GCat_Ret_Status_buf[Rec_Status_MAX];    &#x2F;&#x2F; 存储返回值数组
+    bsp_4GCat_Rec_Status_et bsp_4GCat_Rec_Status;   &#x2F;&#x2F; 模块接收状态
+    int16_t bsp_4GCat_Step_Status;  &#x2F;&#x2F; AT模块工作步骤标记状态
+
+    uint8_t bsp_4GCat_Pub_Buf[254]; &#x2F;&#x2F; MQTT数据上报存储数组
+    uint8_t bsp_4GCat_Pub_Len;  &#x2F;&#x2F; MQTT数据上报长度
+
+    void (*bsp_4GCat_Running)(void);   &#x2F;&#x2F; 模块运行
+    void (*bsp_4GCat_Data_Upload_1)(void); &#x2F;&#x2F; 数据上传1
+    int8_t (*bsp_4GCat_GPS_Get_Data)(uint8_t*);   &#x2F;&#x2F; 获取GPS数据
+    void (*bsp_4GCat_GPS_Handler)(void);   &#x2F;&#x2F; GPS处理函数
+    void (*bsp_4GCat_Sub_Theme)(const char*);   &#x2F;&#x2F; 订阅主题
+    void (*bsp_4GCat_Sub_Data_Analyze)(uint8_t *);    &#x2F;&#x2F; 订阅主题数据解析
+&#125; bsp_4GCat_st;
+
+extern bsp_4GCat_st bsp_4GCat;
+extern bsp_GPS_st bsp_GPS;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> bsp_4GCat.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: bsp_4GCat.c
+ * Author: Yang
+ * Date: 2023&#x2F;12&#x2F;06
+ * description: 
+ -----------------------------------
+通过使能宏【BSP_4GCAT_AUTO_CONNNECT_MODE】决定是否要复位后或者&#x2F;断开MQTT后重新进行连接
+如果开启了MQTT功能需要关闭后下一次才能正常进行连接到MQTT服务器，不能直接复位!!!!
+ -----------------------------------
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;* Private variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+&#x2F;* 腾讯云MQTT服务器信息 *&#x2F;
+&#x2F;&#x2F; 域名与端口
+static const char *DOMAIN &#x3D; &quot;tcp:&#x2F;&#x2F;J7X2YMW6IU.iotcloud.tencentdevices.com:1883&quot;;
+&#x2F;&#x2F; 客户端ID
+static const char *CLIENT_ID &#x3D; &quot;J7X2YMW6IU&quot;;
+&#x2F;&#x2F; 用户名
+static const char *USERNAME &#x3D; &quot;J7X2YMW6IUTH_Sensor_Test;12010126;0M3Y7;1992171084&quot;;
+&#x2F;&#x2F; 密码
+static const char *PASSWORD &#x3D; &quot;a88fc461af8202b6933524ec9b5c9d2fac226a35cbc09b9d4150a1d00000406f;hmacsha256&quot;;
+&#x2F;&#x2F; 属性发布主题
+static const char *TOPIC_PROPERTY_PUB &#x3D; &quot;$thing&#x2F;up&#x2F;property&#x2F;J7X2YMW6IU&#x2F;TH_Sensor_Test&quot;;
+&#x2F;&#x2F; 订阅MQTT主题
+const char *TOPIC_PROPERTY_SUB &#x3D; &quot;$thing&#x2F;down&#x2F;property&#x2F;J7X2YMW6IU&#x2F;TH_Sensor_Test&quot;;
+&#x2F;&#x2F; 模块超时计数
+int16_t bsp_4GCat_Timeout_Count;    
+&#x2F;&#x2F; 模块AT指令字符串
+char bsp_4GCat_AT_String[255];  
+
+&#x2F;* Private function prototypes&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void bsp_4GCat_Running(void);
+static void bsp_4GCat_Data_Upload_1(void);
+
+static void bsp_4GCat_Ret_Check(int8_t ret_status);
+static void bsp_4GCat_BeforeSending_Parameter_Init(bsp_4GCat_Rec_Status_et rec_status, uint8_t* str);
+static void bsp_4GCat_Moduel_Reset(void);
+static void bsp_4GCat_Upload_Data_To_Pub(const char* pub_string, const char* pub_data_string);
+static void bsp_4GCat_Sub_Theme(const char* sub_string);
+static void bsp_4GCat_Sub_Data_Analyze(uint8_t * rec_data);
+
+static void bsp_4GCat_GPS_Handler(void);
+static int8_t bsp_4GCat_GPS_Get_Data(uint8_t* data_Str);
+static int8_t bsp_4GCat_GPS_Data_Analyze(const char *format, GNSSInfo_t *info);
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+bsp_GPS_st bsp_GPS &#x3D; 
+&#123;
+    .bsp_GPS_Relay_Flag &#x3D; FALSE,
+    .Latitude &#x3D; 0.0,
+    .Longitude &#x3D; 0.0
+&#125;;
+
+bsp_4GCat_st bsp_4GCat &#x3D; 
+&#123;
+    .bsp_4GCat_Sub_Pass_Flag &#x3D; FALSE,
+    .Reset_Status &#x3D; RESET_NOT,
+    .bsp_4GCat_MQTT_Connect_Flag &#x3D; FALSE,
+    .bsp_4GCat_Ret_Status_buf &#x3D; &#123;RET_FAIL&#125;,
+    .bsp_4GCat_Rec_Status &#x3D; Rec_Status_None,
+    .bsp_4GCat_Step_Status &#x3D; TASK_CIOT_AT_TEST,
+
+    .bsp_4GCat_Pub_Buf &#x3D; &#123;0&#125;,
+    .bsp_4GCat_Pub_Len &#x3D; 0,
+    
+    .bsp_4GCat_Running &#x3D; &amp;bsp_4GCat_Running,
+    .bsp_4GCat_Data_Upload_1 &#x3D; &amp;bsp_4GCat_Data_Upload_1,
+    .bsp_4GCat_GPS_Get_Data &#x3D; &amp;bsp_4GCat_GPS_Get_Data,
+    .bsp_4GCat_GPS_Handler &#x3D; &amp;bsp_4GCat_GPS_Handler,
+    .bsp_4GCat_Sub_Theme &#x3D; &amp;bsp_4GCat_Sub_Theme,
+    .bsp_4GCat_Sub_Data_Analyze &#x3D; &amp;bsp_4GCat_Sub_Data_Analyze
+&#125;;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 应用层函数 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+&#x2F;*
+ * @function: bsp_4GCat_Running
+ * @param: None
+ * @retval: None
+ * @brief: 模块运行
+ *&#x2F;
+static void bsp_4GCat_Running(void)
+&#123;
+    &#x2F;&#x2F; 未复位成功则退出
+    if (bsp_4GCat.Reset_Status !&#x3D; RESET_OVER)
+    &#123;
+        return;
+    &#125;
+    switch (bsp_4GCat.bsp_4GCat_Step_Status)
+    &#123;
+    case TASK_CIOT_AT_TEST:	&#x2F;&#x2F; 【发送AT测试是否正常】
+    &#123;
+        &#x2F;*状态复位*&#x2F;
+        bsp_4GCat_BeforeSending_Parameter_Init(Rec_Status_CheckCmd_Plan1, (uint8_t *)&quot;AT\r\n&quot;);    
+        break;
+    &#125;
+    case TASK_CIOT_AT_TEST_RSP:	&#x2F;&#x2F; 【判断回传--- &quot;OK&quot;】
+    &#123;
+        bsp_4GCat_Ret_Check(bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan1]);
+        break;
+    &#125;
+    case TASK_CIOT_CLOSE_ECHO:  &#x2F;&#x2F; 【关闭命令回显】
+    &#123;
+        &#x2F;*状态复位*&#x2F;
+        bsp_4GCat_BeforeSending_Parameter_Init(Rec_Status_CheckCmd_Plan1, (uint8_t *)&quot;ATE0\r\n&quot;);     
+        break;
+    &#125;
+    case TASK_CIOT_CLOSE_ECHO_RSP: &#x2F;&#x2F; 【判断回传--- &quot;OK&quot;】
+    &#123;
+        bsp_4GCat_Ret_Check(bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan1]);        
+        break;
+    &#125;
+    case TASK_CIOT_CGATT:   &#x2F;&#x2F; 【查询网络附着状态】
+    &#123;
+        &#x2F;*状态复位*&#x2F;
+        bsp_4GCat_BeforeSending_Parameter_Init(Rec_Status_CheckCmd_Plan2, (uint8_t *)&quot;AT+CGATT?\r\n&quot;);       
+        break;
+    &#125;
+    case TASK_CIOT_CGATT_RSP:   &#x2F;&#x2F; 【判断回传--- &quot;+CGATT: 1&quot;】
+    &#123;
+        bsp_4GCat_Ret_Check(bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan2]);       
+        break;
+    &#125;
+    case TASK_CIOT_CGREG:   &#x2F;&#x2F; 【查询网络注册状态】
+    &#123;
+        &#x2F;*状态复位*&#x2F;
+        bsp_4GCat_BeforeSending_Parameter_Init(Rec_Status_CheckCmd_Plan3, (uint8_t *)&quot;AT+CGREG?\r\n&quot;);             
+        break;
+    &#125;
+    case TASK_CIOT_CGREG_RSP:   &#x2F;&#x2F; 【判断回传--- &quot;+CGREG: 0,1&quot;&#x2F;&quot;+CGREG: 0,5&quot;】
+    &#123;
+        bsp_4GCat_Ret_Check(bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan3]);        
+        break;
+    &#125;
+    case TASK_GPS_START:    &#x2F;&#x2F; 启动GPS
+    &#123;
+        &#x2F;*状态复位*&#x2F;
+        bsp_4GCat_BeforeSending_Parameter_Init(Rec_Status_CheckCmd_Plan6, (uint8_t *)&quot;AT+CGNSSPWR&#x3D;1\r\n&quot;);        
+        break;
+    &#125;
+    case TASK_GPS_START_RSP:    &#x2F;&#x2F; 【判断回传--- &quot;+CGNSSPWR：READY!&quot;,这里需要等久点大概10s,而且不能直接单片机复位，需要断电再上电或者模块复位才能有RELAY】
+    &#123;
+        if (RET_PASS &#x3D;&#x3D; bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan6])
+        &#123;
+            bsp_GPS.bsp_GPS_Relay_Flag &#x3D; TRUE;
+            bsp_4GCat.bsp_4GCat_Rec_Status &#x3D; Rec_Status_None;
+            bsp_4GCat.bsp_4GCat_Step_Status++;
+        &#125;
+        else
+        &#123;
+            ++bsp_4GCat_Timeout_Count;
+
+            if (bsp_4GCat_Timeout_Count &gt;&#x3D; 50)
+            &#123;
+#if USE_Normal_Print
+                printf(&quot;GPS OPEN ERROR\r\n&quot;);
+#endif          
+                bsp_GPS.bsp_GPS_Relay_Flag &#x3D; FALSE;      
+                bsp_4GCat.bsp_4GCat_Step_Status++;  &#x2F;&#x2F; 强制跳过
+            &#125;
+        &#125;
+        break;
+    &#125;
+    case TASK_CIOT_MQTT_START:  &#x2F;&#x2F; 【启动MQTT】
+    &#123;
+        &#x2F;*状态复位*&#x2F;
+        bsp_4GCat_BeforeSending_Parameter_Init(Rec_Status_CheckCmd_Plan1, (uint8_t *)&quot;AT+CMQTTSTART\r\n&quot;);
+        break;
+    &#125;
+    case TASK_CIOT_MQTT_START_RSP:   &#x2F;&#x2F; 【判断回传--- &quot;OK&quot;】
+    &#123;
+        if (RET_PASS &#x3D;&#x3D; bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan1])
+        &#123;
+            bsp_4GCat.bsp_4GCat_Rec_Status &#x3D; Rec_Status_None;
+            bsp_4GCat.bsp_4GCat_Step_Status++;
+        &#125;
+        else
+        &#123;
+            ++bsp_4GCat_Timeout_Count;
+
+            if (bsp_4GCat_Timeout_Count &gt;&#x3D; 5)
+            &#123;
+                bsp_4GCat_Timeout_Count &#x3D; 0;
+                &#x2F;&#x2F; 直接复位(重发不生效)
+                bsp_4GCat_Moduel_Reset();    &#x2F;&#x2F; 复位
+            &#125;
+        &#125;        
+        break;
+    &#125;
+    case TASK_CIOT_MQTT_OPEN:   &#x2F;&#x2F; 【打开MQTT连接】
+    &#123;
+        &#x2F;*状态复位*&#x2F;
+        Public.Memory_Clear((uint8_t*)bsp_4GCat_AT_String, strlen((char*)bsp_4GCat_AT_String)); &#x2F;&#x2F; 清0
+        sprintf(bsp_4GCat_AT_String,&quot;AT+CMQTTACCQ&#x3D;0,\&quot;%s\&quot;,0\r\n&quot;,CLIENT_ID);
+        bsp_4GCat_BeforeSending_Parameter_Init(Rec_Status_CheckCmd_Plan1, (uint8_t *)bsp_4GCat_AT_String);
+        break;
+    &#125;
+    case TASK_CIOT_MQTT_OPEN_RSP:   &#x2F;&#x2F; 【判断回传--- &quot;OK&quot;】
+    &#123;
+        bsp_4GCat_Ret_Check(bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan1]);       
+        break;
+    &#125;
+    case TASK_CIOT_MQTT_CONNECT:    &#x2F;&#x2F; 【连接MQTT服务器】
+    &#123;
+        &#x2F;*状态复位*&#x2F;
+        Public.Memory_Clear((uint8_t*)bsp_4GCat_AT_String, strlen((char*)bsp_4GCat_AT_String)); &#x2F;&#x2F; 清0
+        sprintf(bsp_4GCat_AT_String,&quot;AT+CMQTTCONNECT&#x3D;0,\&quot;%s\&quot;,60,1,\&quot;%s\&quot;,\&quot;%s\&quot;\r\n&quot;,DOMAIN,USERNAME,PASSWORD);
+        bsp_4GCat_BeforeSending_Parameter_Init(Rec_Status_CheckCmd_Plan4, (uint8_t *)bsp_4GCat_AT_String);        
+        break;
+    &#125;
+    case TASK_CIOT_MQTT_CONNECT_RSP:    &#x2F;&#x2F; 【判断回传--- &quot;+CMQTTCONNECT: 0,0&quot;】
+    &#123;
+        if (RET_PASS &#x3D;&#x3D; bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan4])
+        &#123;
+            bsp_4GCat.bsp_4GCat_Rec_Status &#x3D; Rec_Status_None;
+            bsp_4GCat.bsp_4GCat_Step_Status++;
+        &#125;
+        else
+        &#123;
+            ++bsp_4GCat_Timeout_Count;
+
+            if (bsp_4GCat_Timeout_Count &gt;&#x3D; 5)
+            &#123;
+                bsp_4GCat_Timeout_Count &#x3D; 0;
+                &#x2F;&#x2F; +(重发不生效)
+                bsp_4GCat_Moduel_Reset();    &#x2F;&#x2F; 复位
+            &#125;
+        &#125;         
+    &#125;
+    case TASK_CONNECT_SUCCESS:  &#x2F;&#x2F; 连接MQTT服务器成功
+    &#123;
+        bsp_4GCat.bsp_4GCat_MQTT_Connect_Flag &#x3D; TRUE;
+        bsp_4GCat.bsp_4GCat_Step_Status &#x3D; TASK_IDLE;
+#if USE_Normal_Print
+        printf(&quot;MQTT CONNECT SUCCESS\r\n&quot;);
+#endif        
+        break;
+    &#125;
+    case TASK_IDLE: &#x2F;&#x2F; 空闲状态
+    &#123;
+        break;
+    &#125;
+    case TASK_CIOT_MQTT_DISCONN:   &#x2F;&#x2F; 【断开MQTT连接】
+    &#123;
+        bsp_4GCat.bsp_4GCat_MQTT_Connect_Flag &#x3D; FALSE;
+        bsp_4GCat.bsp_4GCat_Sub_Pass_Flag &#x3D; FALSE;
+        bsp_4GCat_BeforeSending_Parameter_Init(Rec_Status_CheckCmd_Plan1, (uint8_t *)&quot;AT+CMQTTDISC&#x3D;0,120\r\n&quot;);
+        break;
+    &#125;
+    case TASK_CIOT_MQTT_DISCONN_RSP:    &#x2F;&#x2F; 【判断回传---&quot;OK&quot;】
+    &#123;
+        bsp_4GCat_Ret_Check(bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan1]);
+        break;
+    &#125;
+    case TASK_CIOT_MQTT_CLOSE:  &#x2F;&#x2F; 【释放MQTT相关的资源】
+    &#123;
+        bsp_4GCat_BeforeSending_Parameter_Init(Rec_Status_CheckCmd_Plan1, (uint8_t *)&quot;AT+CMQTTREL&#x3D;0\r\n&quot;);
+        break;
+    &#125;
+    case TASK_CIOT_MQTT_CLOSE_RSP:  &#x2F;&#x2F; 【判断回传---&quot;OK&quot;】
+    &#123;
+        bsp_4GCat_Ret_Check(bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan1]);
+        break;
+    &#125;
+    case TASK_CIOT_MQTT_STOP:   &#x2F;&#x2F; 【关闭MQTT功能】
+    &#123;
+        bsp_4GCat_BeforeSending_Parameter_Init(Rec_Status_CheckCmd_Plan1, (uint8_t *)&quot;AT+CMQTTSTOP\r\n&quot;);
+        break;
+    &#125;
+    case TASK_CIOT_MQTT_STOP_RSP:   &#x2F;&#x2F; 【判断回传---&quot;OK&quot;】
+    &#123;
+        bsp_4GCat_Ret_Check(bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan1]);
+        break;
+    &#125;
+    default:break;
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: bsp_4GCat_Data_Upload_1
+* @param: None
+* @retval: None
+* @brief: 数据上传1
+*&#x2F;
+static void bsp_4GCat_Data_Upload_1(void)
+&#123;
+    static float a &#x3D; 0,b &#x3D; 0,c &#x3D; 0,d &#x3D; 0;
+    Public.Memory_Clear((uint8_t*)bsp_4GCat.bsp_4GCat_Pub_Buf, strlen((char*)bsp_4GCat.bsp_4GCat_Pub_Buf));
+    sprintf((char *)bsp_4GCat.bsp_4GCat_Pub_Buf, &quot;&#123;\&quot;method\&quot;:\&quot;report\&quot;,\&quot;params\&quot;:&#123;\&quot;temp\&quot;:%.1f,\&quot;humi\&quot;:%.1f,\&quot;longitude\&quot;:%f,\&quot;latitude\&quot;:%f&#125;&#125;&quot;, ++a, ++b, ++c, ++d);
+    bsp_4GCat_Upload_Data_To_Pub(TOPIC_PROPERTY_PUB, (char*)bsp_4GCat.bsp_4GCat_Pub_Buf);
+&#125;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 中间层函数 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+&#x2F;*
+* @function: bsp_4GCat_Ret_Check
+* @param: None
+* @retval: None
+* @brief: 回传结果检测
+*&#x2F;
+static void bsp_4GCat_Ret_Check(int8_t ret_status)
+&#123;
+    if (RET_PASS &#x3D;&#x3D; ret_status)
+    &#123;
+        bsp_4GCat.bsp_4GCat_Rec_Status &#x3D; Rec_Status_None;
+        bsp_4GCat.bsp_4GCat_Step_Status++;
+    &#125;
+    else
+    &#123;
+        ++bsp_4GCat_Timeout_Count;
+
+        if (bsp_4GCat_Timeout_Count &gt;&#x3D; 8)
+        &#123;
+            bsp_4GCat.bsp_4GCat_Step_Status--;
+        &#125;
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: bsp_4GCat_BeforeSending_Parameter_Init
+* @param: None
+* @retval: None
+* @brief: 参数初始化且发送
+*&#x2F;
+static void bsp_4GCat_BeforeSending_Parameter_Init(bsp_4GCat_Rec_Status_et rec_status, uint8_t* str)
+&#123;
+        &#x2F;*状态复位*&#x2F;
+        bsp_4GCat.bsp_4GCat_Rec_Status &#x3D; rec_status;
+        bsp_4GCat.bsp_4GCat_Ret_Status_buf[rec_status] &#x3D; RET_FAIL;
+        bsp_4GCat_Timeout_Count &#x3D; 0;
+
+        bsp_4GCat_uart.Bsp_4GCat_Uart_Send_String((uint8_t *)str);
+        bsp_4GCat.bsp_4GCat_Step_Status++;
+&#125;
+
+&#x2F;*
+* @function: bsp_4GCat_Moduel_Reset
+* @param: None
+* @retval: None
+* @brief: 模块复位
+*&#x2F;
+static void bsp_4GCat_Moduel_Reset(void)
+&#123;
+    bsp_4GCat.bsp_4GCat_MQTT_Connect_Flag &#x3D; FALSE; &#x2F;&#x2F; 标志位置0
+    bsp_4GCat.Reset_Status &#x3D; RESET_NOT; &#x2F;&#x2F; 未复位
+    bsp_4GCat.bsp_4GCat_Sub_Pass_Flag &#x3D; FALSE;  &#x2F;&#x2F; 订阅主题完成标志位置0
+    bsp_4GCat_uart.Bsp_4GCat_Uart_Send_String((uint8_t *)&quot;AT+CRESET\r\n&quot;);
+#if BSP_4GCAT_AUTO_CONNNECT_MODE
+    bsp_4GCat.bsp_4GCat_Step_Status &#x3D; TASK_CIOT_AT_TEST;    &#x2F;&#x2F; AT模式
+#endif
+#if USE_Normal_Print
+        printf(&quot;RESET...\r\n&quot;);
+#endif
+&#125;
+
+&#x2F;*
+* @function: bsp_4GCat_Upload_Data_To_Pub
+* @param: pub_string -&gt; 发送到的目的地主题 pub_data_string -&gt; 要上传到主题的数据内容
+* @retval: None
+* @brief: 上传数据到MQTT主题
+*&#x2F;
+static void bsp_4GCat_Upload_Data_To_Pub(const char* pub_string, const char* pub_data_string)
+&#123;
+    uint8_t step &#x3D; 0;    &#x2F;&#x2F; 运行到哪步计数
+    uint32_t timeout &#x3D; 0; &#x2F;&#x2F; 重发超时时间计数
+    static uint16_t error_count &#x3D; 0; &#x2F;&#x2F; 错误计数(复位)
+
+    if (bsp_4GCat.bsp_4GCat_MQTT_Connect_Flag)
+    &#123;
+        switch (step)
+        &#123;
+        case 0: &#x2F;&#x2F; 设置待发布的主题的字符串长度(回车后会出现一个尖括号)
+        &#123;
+            timeout &#x3D; 0;
+            bsp_4GCat.bsp_4GCat_Rec_Status &#x3D; Rec_Status_CheckCmd_Plan5;
+            bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan5] &#x3D; RET_FAIL;
+            Public.Memory_Clear((uint8_t*)bsp_4GCat_AT_String, strlen((char*)bsp_4GCat_AT_String)); &#x2F;&#x2F; 清0
+
+            &#x2F;&#x2F; 设置待发布的主题的字符串长度
+            sprintf(bsp_4GCat_AT_String, &quot;AT+CMQTTTOPIC&#x3D;0,%d\r\n&quot;, strlen(pub_string));
+            bsp_4GCat_uart.Bsp_4GCat_Uart_Send_String((uint8_t *)bsp_4GCat_AT_String);
+
+            step++;
+        &#125;
+        case 1: &#x2F;&#x2F; 判断&quot;&gt;&quot; 后输入主题(不能有回车),会返回 &quot;OK&quot;
+        &#123;
+            &#x2F;&#x2F; 超时等待
+            while (1)
+            &#123;
+                if (RET_PASS &#x3D;&#x3D; bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan5])
+                &#123;
+                    &#x2F;&#x2F; 发送目的地主题
+#if 0                    
+                    printf(&quot;-----%d------\r\n&quot;,timeout);
+#endif                    
+                    error_count &#x3D; 0;
+                    timeout &#x3D; 0;
+
+                    bsp_4GCat.bsp_4GCat_Rec_Status &#x3D; Rec_Status_CheckCmd_Plan1;
+                    bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan1] &#x3D; RET_FAIL; 
+
+                    bsp_4GCat_uart.Bsp_4GCat_Uart_Send_String((const uint8_t *)pub_string);
+                    
+                    step++;
+                    break;  &#x2F;&#x2F; 退出循环
+                &#125;
+
+                timeout++;
+                if (timeout &gt;&#x3D; BSP_4GCAT_WAIT_COUNT)
+                &#123;
+                    error_count++;
+                    goto error_handling;
+                &#125;                
+            &#125;
+        &#125;
+        case 2: &#x2F;&#x2F; 发送完成判断回传 &quot;OK&quot; 再继续操作
+        &#123;
+            while (1)
+            &#123;
+                if (RET_PASS &#x3D;&#x3D; bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan1])
+                &#123;
+                    timeout &#x3D; 0;
+                    bsp_4GCat.bsp_4GCat_Rec_Status &#x3D; Rec_Status_None;
+
+                    step++;
+                    break;
+                &#125;
+
+                timeout++;
+                if (timeout &gt;&#x3D; BSP_4GCAT_WAIT_COUNT)
+                &#123;
+                    error_count++;
+                    goto error_handling;
+                &#125;                
+            &#125;
+        &#125;
+        case 3: &#x2F;&#x2F; 设置要发送的数据长度(会出现一个尖括号)
+        &#123;
+            timeout &#x3D; 0;
+            bsp_4GCat.bsp_4GCat_Rec_Status &#x3D; Rec_Status_CheckCmd_Plan5;
+            bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan5] &#x3D; RET_FAIL;
+            Public.Memory_Clear((uint8_t*)bsp_4GCat_AT_String, strlen((char*)bsp_4GCat_AT_String)); &#x2F;&#x2F; 清0
+
+            &#x2F;&#x2F; 设置要发送的数据长度
+            sprintf(bsp_4GCat_AT_String, &quot;AT+CMQTTPAYLOAD&#x3D;0,%d\r\n&quot;, strlen(pub_data_string));
+            bsp_4GCat_uart.Bsp_4GCat_Uart_Send_String((uint8_t *)bsp_4GCat_AT_String);
+
+            step++;
+        &#125;
+        case 4: &#x2F;&#x2F; 判断 &quot;&gt;&quot; 后将要发送的消息(不需要回车),会返回 &quot;OK&quot;
+        &#123;
+            &#x2F;&#x2F; 超时等待
+            while (1)
+            &#123;
+                if (RET_PASS &#x3D;&#x3D; bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan5])
+                &#123;
+                    &#x2F;&#x2F; 发送目的地主题
+                    error_count &#x3D; 0;
+                    timeout &#x3D; 0;
+
+                    bsp_4GCat.bsp_4GCat_Rec_Status &#x3D; Rec_Status_CheckCmd_Plan1;
+                    bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan1] &#x3D; RET_FAIL;
+
+                    bsp_4GCat_uart.Bsp_4GCat_Uart_Send_String((const uint8_t *)pub_data_string);
+
+                    step++;
+                    break;  &#x2F;&#x2F; 退出循环
+                &#125;
+
+                timeout++;
+                if (timeout &gt;&#x3D; BSP_4GCAT_WAIT_COUNT)
+                &#123;
+                    error_count++;
+                    goto error_handling;
+                &#125;                 
+            &#125;            
+        &#125;
+        case 5: &#x2F;&#x2F; 发送完成判断回传 &quot;OK&quot; 再继续操作
+        &#123;
+            while (1)
+            &#123;
+                if (RET_PASS &#x3D;&#x3D; bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan1])
+                &#123;
+                    timeout &#x3D; 0;
+                    bsp_4GCat.bsp_4GCat_Rec_Status &#x3D; Rec_Status_None;
+
+                    step++;
+                    break;
+                &#125;
+                
+                timeout++;
+                if (timeout &gt;&#x3D; BSP_4GCAT_WAIT_COUNT)
+                &#123;
+                    error_count++;
+                    goto error_handling;
+                &#125;                
+            &#125;            
+        &#125;
+        case 6: &#x2F;&#x2F; 发送数据到指定主题，会返回 &quot;OK&quot;
+        &#123;
+            &#x2F;&#x2F; 向指定的主题发布消息
+            bsp_4GCat_uart.Bsp_4GCat_Uart_Send_String((uint8_t *)&quot;AT+CMQTTPUB&#x3D;0,1,60\r\n&quot;);            
+            break;
+        &#125;
+        default:
+            break;
+        &#125;
+    &#125;
+    &#x2F;&#x2F; 错误处理
+    error_handling:
+    &#123;
+        if (error_count &gt;&#x3D; 10) &#x2F;&#x2F; 长时间发送失败
+        &#123;
+            error_count &#x3D; 0;
+            bsp_4GCat_Moduel_Reset();   &#x2F;&#x2F; 复位
+        &#125;
+        return;
+    &#125;    
+&#125;
+
+&#x2F;*
+* @function: bsp_4GCat_Sub_Theme
+* @param: sub_string -&gt; 待订阅的主题
+* @retval: None
+* @brief: 订阅主题
+*&#x2F;
+static void bsp_4GCat_Sub_Theme(const char* sub_string)
+&#123;
+    uint8_t step &#x3D; 0;    &#x2F;&#x2F; 运行到哪步计数
+    uint32_t timeout &#x3D; 0; &#x2F;&#x2F; 重发超时时间计数
+    static uint16_t error_count &#x3D; 0; &#x2F;&#x2F; 错误计数(复位)
+
+    if (bsp_4GCat.bsp_4GCat_MQTT_Connect_Flag)
+    &#123;
+        if (FALSE &#x3D;&#x3D; bsp_4GCat.bsp_4GCat_Sub_Pass_Flag) &#x2F;&#x2F; 未订阅主题则进行订阅
+        &#123;
+            switch (step)
+            &#123;
+                case 0: &#x2F;&#x2F; 配置订阅的主题(回车后会返回一个 &quot;&gt;&quot;)
+                &#123;
+                    &#x2F;*状态复位*&#x2F;
+                    timeout &#x3D; 0;
+                    bsp_4GCat.bsp_4GCat_Rec_Status &#x3D; Rec_Status_CheckCmd_Plan5;
+                    bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan5] &#x3D; RET_FAIL;    
+                    Public.Memory_Clear((uint8_t*)bsp_4GCat_AT_String, strlen((char*)bsp_4GCat_AT_String)); &#x2F;&#x2F; 清0
+
+                    sprintf(bsp_4GCat_AT_String, &quot;AT+CMQTTSUBTOPIC&#x3D;0,%d,1\r\n&quot;, strlen(sub_string));           
+                    bsp_4GCat_uart.Bsp_4GCat_Uart_Send_String((uint8_t *)bsp_4GCat_AT_String);
+                    step++;
+                &#125;
+                case 1: &#x2F;&#x2F; 等待 &quot;&gt;&quot; 然后发送需要订阅的主题
+                &#123;
+                    &#x2F;&#x2F; 超时等待
+                    while (1)
+                    &#123;
+                        if (RET_PASS &#x3D;&#x3D; bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan5])
+                        &#123;       
+                            error_count &#x3D; 0;
+                            timeout &#x3D; 0;
+
+                            bsp_4GCat.bsp_4GCat_Rec_Status &#x3D; Rec_Status_CheckCmd_Plan1;
+                            bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan1] &#x3D; RET_FAIL; 
+
+                            bsp_4GCat_uart.Bsp_4GCat_Uart_Send_String((const uint8_t *)sub_string);
+                            
+                            step++;
+                            break;  &#x2F;&#x2F; 退出循环
+                        &#125;
+
+                        timeout++;
+                        if (timeout &gt;&#x3D; BSP_4GCAT_WAIT_COUNT)
+                        &#123;
+                            timeout &#x3D; 0;
+                            error_count++;
+                            goto error_handling;
+                        &#125;                
+                    &#125;                    
+                &#125;
+                case 2: &#x2F;&#x2F; 返回 &quot;OK&quot;
+                &#123;
+                    while (1)
+                    &#123;
+                        if (RET_PASS &#x3D;&#x3D; bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan1])
+                        &#123;
+                            timeout &#x3D; 0;
+                            bsp_4GCat.bsp_4GCat_Rec_Status &#x3D; Rec_Status_None;
+
+                            step++;
+                            break;
+                        &#125;
+                        
+                        timeout++;
+                        if (timeout &gt;&#x3D; BSP_4GCAT_WAIT_COUNT)
+                        &#123;
+                            timeout &#x3D; 0;
+                            error_count++;
+                            goto error_handling;
+                        &#125;                
+                    &#125;  
+                &#125;
+                case 3: &#x2F;&#x2F; 订阅主题【返回&quot;+CMQTTSUB: 0,0&quot;】
+                &#123;
+                    bsp_4GCat.bsp_4GCat_Rec_Status &#x3D; Rec_Status_CheckCmd_Plan8;
+                    bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan8] &#x3D; RET_FAIL;                    
+                    bsp_4GCat_uart.Bsp_4GCat_Uart_Send_String((const uint8_t *)&quot;AT+CMQTTSUB&#x3D;0\r\n&quot;);
+                    step++;
+                &#125;
+                case 4: &#x2F;&#x2F; 判断回传 &quot;+CMQTTSUB: 0,0&quot;
+                &#123;
+                    while (1)
+                    &#123;
+                        if (RET_PASS &#x3D;&#x3D; bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan8])
+                        &#123;
+                            timeout &#x3D; 0;
+                            error_count &#x3D; 0;
+                            bsp_4GCat.bsp_4GCat_Sub_Pass_Flag &#x3D; TRUE;
+                            bsp_4GCat.bsp_4GCat_Rec_Status &#x3D; Rec_Status_None;
+                            break;
+                        &#125;
+
+                        timeout++;
+                        if (timeout &gt;&#x3D; BSP_4GCAT_WAIT_COUNT)
+                        &#123;
+                            timeout &#x3D; 0;
+                            error_count++;
+                            break;
+                        &#125;                 
+                    &#125;                    
+                    break;
+                &#125;
+                default:break;
+            &#125;           
+        &#125;
+    &#125;  
+    error_handling:
+    &#123;
+        if (error_count &gt;&#x3D; 10) &#x2F;&#x2F; 长时间发送失败
+        &#123;
+            error_count &#x3D; 0;
+            bsp_4GCat_Moduel_Reset();   &#x2F;&#x2F; 复位
+        &#125;
+        return;    
+    &#125;       
+&#125;
+
+&#x2F;*
+* @function: bsp_4GCat_Sub_Data_Analyze
+* @param: rec_data -&gt; 接收的数据
+* @retval: None
+* @brief: 订阅主题的数据解析
+*&#x2F;
+static void bsp_4GCat_Sub_Data_Analyze(uint8_t * rec_data)
+&#123;
+    if (FALSE &#x3D;&#x3D; bsp_4GCat.bsp_4GCat_Sub_Pass_Flag)
+    &#123;
+        return;
+    &#125;
+    uint16_t len &#x3D; 0;
+    len &#x3D; sizeof((char *)rec_data); &#x2F;&#x2F; 长度
+    uint8_t temp[len];
+
+    Public.Memory_Copy((char *)temp, (char *)rec_data, len); &#x2F;&#x2F; 复制
+
+    &#x2F;&#x2F; 数据判断
+    if (strstr((char *)rec_data, &quot;\&quot;switch_1\&quot;:1&quot;) !&#x3D; NULL)
+    &#123;
+        HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,GPIO_PIN_RESET);
+    &#125;
+    if (strstr((char *)rec_data, &quot;\&quot;switch_1\&quot;:0&quot;) !&#x3D; NULL)
+    &#123;   
+        HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,GPIO_PIN_SET);
+    &#125;    
+&#125;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; GPS相关函数 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+&#x2F;*
+* @function: bsp_4GCat_GPS_Handler
+* @param: None
+* @retval: None
+* @brief: GPS处理函数
+*&#x2F;
+static void bsp_4GCat_GPS_Handler(void)
+&#123;
+    uint8_t step &#x3D; 0;
+    uint32_t timeout &#x3D; 0; &#x2F;&#x2F; 重发超时时间计数
+    static uint16_t error_count &#x3D; 0; &#x2F;&#x2F; 错误计数
+
+    if (FALSE &#x3D;&#x3D; bsp_GPS.bsp_GPS_Relay_Flag)    &#x2F;&#x2F; GPS未准备则退出
+    &#123;
+        return;
+    &#125;
+    switch (step)
+    &#123;
+        case 0: &#x2F;&#x2F; 手动获取经纬度,会返回 经纬度数据和&quot;OK&quot;
+        &#123;
+            timeout &#x3D; 0;
+            bsp_4GCat.bsp_4GCat_Rec_Status &#x3D; Rec_Status_CheckCmd_Plan7;
+            bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan7] &#x3D; RET_FAIL;
+            bsp_4GCat_uart.Bsp_4GCat_Uart_Send_String((const uint8_t *)&quot;AT+CGPSINFO\r\n&quot;);            
+            step++;
+        &#125;   
+        case 1: &#x2F;&#x2F; 提取经纬度数据
+        &#123;
+            while (1)
+            &#123;
+                if (RET_PASS &#x3D;&#x3D; bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan7])
+                &#123;
+                    timeout &#x3D; 0;
+                    error_count &#x3D; 0;
+                    bsp_4GCat.bsp_4GCat_Rec_Status &#x3D; Rec_Status_None;
+                    break;
+                &#125;
+
+                timeout++;
+                if (timeout &gt;&#x3D; BSP_4GCAT_WAIT_COUNT)
+                &#123;
+                    error_count++;
+                    bsp_GPS.Latitude &#x3D; 0;
+                    bsp_GPS.Longitude &#x3D; 0;
+                    break;
+                &#125;                 
+            &#125;
+            break;
+        &#125;
+        default:break;
+    &#125;
+    &#x2F;&#x2F; 错误处理---直接GPS准备完成标志位置0
+    if (error_count &gt;&#x3D; 10)
+    &#123;
+        error_count &#x3D; 0;
+        bsp_GPS.bsp_GPS_Relay_Flag &#x3D; FALSE;
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: bsp_4GCat_GPS_Get_Data
+* @param: data_Str -&gt; 接收数组
+* @retval: 成功--RET_PASS 失败--RET_FAIL
+* @brief: 获取GPS数据
+*&#x2F;
+static int8_t bsp_4GCat_GPS_Get_Data(uint8_t* data_Str)
+&#123;
+    uint16_t len &#x3D; 0;
+    GNSSInfo_t info;
+
+    len &#x3D; strlen((char *)data_Str); &#x2F;&#x2F; 长度
+    uint8_t temp[len];
+
+    Public.Memory_Copy((char *)temp, (char *)data_Str, len); &#x2F;&#x2F; 复制
+
+    if (bsp_4GCat_GPS_Data_Analyze((char *)temp, &amp;info) !&#x3D; RET_PASS)
+    &#123;
+        return RET_FAIL;
+    &#125;
+
+    float lat, lon;
+    float minutes;
+
+    lat &#x3D; ((uint16_t)info.latitude) &#x2F; 100;
+    minutes &#x3D; info.latitude - lat * 100;
+    lat +&#x3D; minutes &#x2F; 60;
+
+    lon &#x3D; ((uint16_t)info.longitude) &#x2F; 100;
+    minutes &#x3D; info.longitude - lon * 100;
+    lon +&#x3D; minutes &#x2F; 60;
+
+    if (info.NS &#x3D;&#x3D; &#39;S&#39;)
+    &#123;
+        lat &#x3D; -lat;
+    &#125;
+    if (info.EW &#x3D;&#x3D; &#39;W&#39;)
+    &#123;
+        lon &#x3D; -lon;
+    &#125;
+    &#x2F;&#x2F; 获取经纬度
+    bsp_GPS.Latitude &#x3D; lat;
+    bsp_GPS.Longitude &#x3D; lon;
+
+    return RET_PASS;
+&#125;
+
+&#x2F;*
+* @function: bsp_4GCat_GPS_Data_Analyze
+* @param: None
+* @retval: None
+* @brief: 数据解析
+*&#x2F;
+static int8_t bsp_4GCat_GPS_Data_Analyze(const char *format, GNSSInfo_t *info)
+&#123;
+    char *start &#x3D; strstr(format, &quot;+CGPSINFO: &quot;);
+
+    if (NULL &#x3D;&#x3D; start)
+    &#123;
+        return RET_FAIL;
+    &#125;
+
+    if (strlen(start) &lt; 35)
+    &#123;
+        return RET_FAIL;
+    &#125;
+
+    start +&#x3D; 11; &#x2F;&#x2F; Skip the header.
+
+    uint8_t flag &#x3D; 0;
+    uint8_t finish &#x3D; 0;
+
+    char value[24];
+    Public.Memory_Clear((uint8_t*)value, sizeof(value));
+
+    for (uint8_t counter &#x3D; 0; *start !&#x3D; 0; start++)
+    &#123;
+        if (*start &#x3D;&#x3D; &#39;,&#39;)
+        &#123;
+        &#125;
+        else if (*start &#x3D;&#x3D; &#39;\r&#39;)
+        &#123;
+            finish &#x3D; 1;
+        &#125;
+        else
+        &#123;
+            value[counter++] &#x3D; *start;
+            continue;
+        &#125;
+
+        switch (flag++)
+        &#123;
+            case 0:
+            &#123;
+                info-&gt;latitude &#x3D; (float)atof(value);
+                break;
+            &#125;
+            case 1:
+            &#123;
+                info-&gt;NS &#x3D; value[0];
+                break;
+            &#125;
+            case 2:
+            &#123;
+                info-&gt;longitude &#x3D; (float)atof(value);
+                break;
+            &#125;
+            case 3:
+            &#123;
+                info-&gt;EW &#x3D; value[0];
+                break;
+            &#125;
+            case 4:
+            &#123;
+                info-&gt;UTC.year &#x3D; (uint16_t)atoi(&amp;value[4]);
+                value[4] &#x3D; 0;
+                info-&gt;UTC.month &#x3D; (uint8_t)atoi(&amp;value[2]);
+                value[2] &#x3D; 0;
+                info-&gt;UTC.day &#x3D; (uint8_t)atoi(&amp;value[0]);
+                break;
+            &#125;
+            case 5:
+            &#123;
+                info-&gt;UTC.millisecond &#x3D; (uint16_t)atoi(&amp;value[7]);
+                value[6] &#x3D; 0;
+                info-&gt;UTC.second &#x3D; (uint8_t)atoi(&amp;value[4]);
+                value[4] &#x3D; 0;
+                info-&gt;UTC.minute &#x3D; (uint8_t)atoi(&amp;value[2]);
+                value[2] &#x3D; 0;
+                info-&gt;UTC.hour &#x3D; (uint8_t)atoi(&amp;value[0]);
+                break;
+            &#125;
+            case 6:
+            &#123;
+                info-&gt;altitude &#x3D; (float)atof(value);
+                break;
+            &#125;
+            case 7:
+            &#123;
+                info-&gt;speedOverGround &#x3D; (float)atof(value);
+                break;
+            &#125;
+            default:
+            &#123;
+                finish &#x3D; 1;
+                break;
+            &#125;
+        &#125;
+
+        if (finish)
+        &#123;
+            break;
+        &#125;
+        counter &#x3D; 0;
+        Public.Memory_Clear((uint8_t*)value, sizeof(value));
+    &#125;
+
+    return RET_PASS;
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> bsp_4GCat_uart.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __BSP_4GCAT_UART_H
+#define __BSP_4GCAT_UART_H
+#include &quot;AllHead.h&quot;
+
+&#x2F;&#x2F; 模块使用的串口
+#define BSP_4GCat_USE_Serial huart2
+&#x2F;&#x2F; 模块使用定时器
+#define BSP_4GCat_USE_Timer htim7
+&#x2F;&#x2F; 串口接收最大长度
+#define BSP_4GCat_Rec_MAX_LEN 168
+
+typedef struct
+&#123;
+	uint8_t ucUart_Rec_Over_Flag;	&#x2F;&#x2F; 串口接收完成标志位
+	uint16_t usUart_Rec_Len;	&#x2F;&#x2F; 串口接收数据长度
+    uint8_t *pucRec_Buffer; &#x2F;&#x2F; 接收缓存指针
+    void (*Bsp_4GCat_Uart_Init)(void); &#x2F;&#x2F; 串口初始化
+    void (*Bsp_4GCat_Uart_Send_String)(const uint8_t *); &#x2F;&#x2F; 串口发送字符串
+    void (*Bsp_4GCat_Uart_Data_Parse)(void);   &#x2F;&#x2F; 串口数据解析
+    void (*Bsp_4GCat_Uart_Handler)(void);  &#x2F;&#x2F; 串口处理函数
+&#125; bsp_4GCat_uart_st;
+
+extern bsp_4GCat_uart_st bsp_4GCat_uart;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> bsp_4GCat_uart.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: bsp_4GCat_uart.c
+ * Author: Yang
+ * Date: 2023&#x2F;12&#x2F;06
+ * description: 
+ -----------------------------------
+串口接线：
+        PA2(TX) --- 模块RX
+        PA3(RX) --- 模块TX
+        GND --- GND
+        5V --- 5V
+ -----------------------------------
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;* Private variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static uint8_t uc4GCat_Uart_Rec_Temp_Arr[BSP_4GCat_Rec_MAX_LEN];        &#x2F;&#x2F; 串口接收临时缓存数组
+static uint8_t uc4GCat_Uart_Rec_Arr[BSP_4GCat_Rec_MAX_LEN];   &#x2F;&#x2F; 模块串口接收数组
+
+&#x2F;* Private function prototypes&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void Bsp_4GCat_Uart_Init(void);
+static void Bsp_4GCat_Uart_Send_String(const uint8_t *pStr);
+static void Bsp_4GCat_Uart_Data_Parse(void);
+static void Bsp_4GCat_Uart_Handler(void);
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+bsp_4GCat_uart_st bsp_4GCat_uart &#x3D;
+&#123;
+				.ucUart_Rec_Over_Flag &#x3D; FALSE,
+				.usUart_Rec_Len &#x3D; 0,
+				.pucRec_Buffer &#x3D; uc4GCat_Uart_Rec_Arr,
+				.Bsp_4GCat_Uart_Init &#x3D; &amp;Bsp_4GCat_Uart_Init,
+				.Bsp_4GCat_Uart_Send_String &#x3D; &amp;Bsp_4GCat_Uart_Send_String,
+				.Bsp_4GCat_Uart_Data_Parse &#x3D; &amp;Bsp_4GCat_Uart_Data_Parse,
+				.Bsp_4GCat_Uart_Handler &#x3D; &amp;Bsp_4GCat_Uart_Handler
+&#125;;
+
+&#x2F;*
+ * @function: Bsp_4GCat_Uart_Init
+ * @param: None
+ * @retval: None
+ * @brief: 串口初始化
+ *&#x2F;
+static void Bsp_4GCat_Uart_Init(void)
+&#123;
+    __HAL_UART_ENABLE_IT(&amp;BSP_4GCat_USE_Serial, UART_IT_IDLE); &#x2F;&#x2F; 使能串口空闲中断
+    HAL_UART_Receive_DMA(&amp;BSP_4GCat_USE_Serial, uc4GCat_Uart_Rec_Temp_Arr, (uint16_t)BSP_4GCat_Rec_MAX_LEN);                                                       &#x2F;&#x2F; 接收清0
+&#125;
+
+&#x2F;*
+ * @function: Bsp_4GCat_Uart_Send_String
+ * @param: None
+ * @retval: None
+ * @brief: 串口发送字符串
+ *&#x2F;
+static void Bsp_4GCat_Uart_Send_String(const uint8_t *pStr)
+&#123;
+        HAL_UART_Transmit(&amp;BSP_4GCat_USE_Serial, pStr, strlen((const char *)pStr), 5000);
+#if USE_Debug_Print				
+		HAL_UART_Transmit(&amp;huart1, pStr, strlen((const char *)pStr), 5000);
+#endif				
+&#125;
+
+&#x2F;*
+ * @function: Bsp_4GCat_Uart_Data_Parse
+ * @param: None
+ * @retval: None
+ * @brief: 串口接收数据解析
+ *&#x2F;
+static void Bsp_4GCat_Uart_Data_Parse(void)
+&#123;
+	HAL_UART_DMAStop(&amp;BSP_4GCat_USE_Serial);   &#x2F;&#x2F; 串口停止DMA接收
+	bsp_4GCat_uart.usUart_Rec_Len &#x3D; BSP_4GCat_Rec_MAX_LEN - __HAL_DMA_GET_COUNTER(&amp;hdma_usart2_rx);
+	Public.Memory_Copy((char*)bsp_4GCat_uart.pucRec_Buffer, (char*)uc4GCat_Uart_Rec_Temp_Arr, bsp_4GCat_uart.usUart_Rec_Len);
+	bsp_4GCat_uart.ucUart_Rec_Over_Flag &#x3D; TRUE;
+&#125;
+
+&#x2F;*
+ * @function: Bsp_4GCat_Uart_Handler
+ * @param: None
+ * @retval: None
+ * @brief: 串口接收处理函数
+ *&#x2F;
+static void Bsp_4GCat_Uart_Handler(void)
+&#123;
+	if (bsp_4GCat_uart.ucUart_Rec_Over_Flag)
+	&#123;
+		switch (bsp_4GCat.bsp_4GCat_Rec_Status)
+		&#123;
+			case Rec_Status_None:
+			&#123;
+				break;
+			&#125;
+			case Rec_Status_CheckCmd_Plan1:
+			&#123;
+				if (strstr((char*)bsp_4GCat_uart.pucRec_Buffer, (char*)&quot;OK&quot;) !&#x3D; NULL)
+				&#123;
+					bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan1] &#x3D; RET_PASS;
+				&#125;
+				else
+				&#123;
+					bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan1] &#x3D; RET_FAIL;
+				&#125;
+				break;
+			&#125;
+			case Rec_Status_CheckCmd_Plan2:
+			&#123;
+				if (strstr((char*)bsp_4GCat_uart.pucRec_Buffer, (char*)&quot;+CGATT: 1&quot;) !&#x3D; NULL)
+				&#123;
+					bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan2] &#x3D; RET_PASS;
+				&#125;
+				else
+				&#123;
+					bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan2] &#x3D; RET_FAIL;
+				&#125;				
+				break;
+			&#125;
+			case Rec_Status_CheckCmd_Plan3:
+			&#123;
+				if (strstr((char*)bsp_4GCat_uart.pucRec_Buffer, (char*)&quot;+CGREG: 0,1&quot;) !&#x3D; NULL)
+				&#123;
+					bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan3] &#x3D; RET_PASS;
+				&#125;
+				else if (strstr((char*)bsp_4GCat_uart.pucRec_Buffer, (char*)&quot;+CGREG: 0,5&quot;) !&#x3D; NULL)
+				&#123;
+					bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan3] &#x3D; RET_PASS;
+				&#125;
+				else
+				&#123;
+					bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan3] &#x3D; RET_FAIL;
+				&#125;				
+				break;
+			&#125;
+			case Rec_Status_CheckCmd_Plan4:
+			&#123;
+				if (strstr((char*)bsp_4GCat_uart.pucRec_Buffer, (char*)&quot;+CMQTTCONNECT: 0,0&quot;) !&#x3D; NULL)
+				&#123;
+					bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan4] &#x3D; RET_PASS;
+				&#125;
+				else
+				&#123;
+					bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan4] &#x3D; RET_FAIL;
+				&#125;				
+				break;
+			&#125;
+			case Rec_Status_CheckCmd_Plan5:
+			&#123;
+				if (strstr((char*)bsp_4GCat_uart.pucRec_Buffer, (char*)&quot;&gt;&quot;) !&#x3D; NULL)
+				&#123;
+					bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan5] &#x3D; RET_PASS;
+				&#125;
+				else
+				&#123;
+					bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan5] &#x3D; RET_FAIL;
+				&#125;				
+				break;
+			&#125;
+			case Rec_Status_CheckCmd_Plan6:
+			&#123;
+				if (strstr((char*)bsp_4GCat_uart.pucRec_Buffer, (char*)&quot;READY&quot;) !&#x3D; NULL)
+				&#123;
+					bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan6] &#x3D; RET_PASS;
+				&#125;
+				else
+				&#123;
+					bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan6] &#x3D; RET_FAIL;
+				&#125;				
+				break;
+			&#125;
+			case Rec_Status_CheckCmd_Plan7:
+			&#123;
+				bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan7] &#x3D; bsp_4GCat.bsp_4GCat_GPS_Get_Data(bsp_4GCat_uart.pucRec_Buffer);
+				break;
+			&#125;
+			case Rec_Status_CheckCmd_Plan8:
+			&#123;
+				if (strstr((char*)bsp_4GCat_uart.pucRec_Buffer, (char*)&quot;+CMQTTSUB: 0,0&quot;) !&#x3D; NULL)
+				&#123;
+					bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan8] &#x3D; RET_PASS;
+				&#125;
+				else
+				&#123;
+					bsp_4GCat.bsp_4GCat_Ret_Status_buf[Rec_Status_CheckCmd_Plan8] &#x3D; RET_FAIL;
+				&#125;				
+				break;
+			&#125;
+			default:break;
+		&#125;
+		&#x2F;&#x2F; 订阅主题发送过来的数据解析
+		bsp_4GCat.bsp_4GCat_Sub_Data_Analyze(bsp_4GCat_uart.pucRec_Buffer);
+		bsp_4GCat_uart.ucUart_Rec_Over_Flag &#x3D; FALSE;
+
+#if USE_Debug_Print		
+		printf(&quot;%s\r\n&quot;,bsp_4GCat_uart.pucRec_Buffer);
+#endif
+
+		Public.Memory_Clear(bsp_4GCat_uart.pucRec_Buffer,bsp_4GCat_uart.usUart_Rec_Len);
+		bsp_4GCat_uart.usUart_Rec_Len &#x3D; 0;
+		HAL_UART_Receive_DMA(&amp;BSP_4GCat_USE_Serial, uc4GCat_Uart_Rec_Temp_Arr, (uint16_t)BSP_4GCat_Rec_MAX_LEN);
+	&#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<ul>
+<li>实验现象</li>
+</ul>
+<p>正常</p>
+<h3 id="使用UDP与私有服务器通信">使用UDP与私有服务器通信</h3>
+<blockquote>
+<p>PuTTY登陆的话还是跟4G一样，使用那个IP，用户名，密码</p>
+<p>使用移远串口调试助手</p>
+</blockquote>
+<ul>
+<li>打开串口助手</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231214190312.webp" alt=""></p>
+<ul>
+<li>登陆远程服务器</li>
+</ul>
+<p>登陆后输入指令进入UDP服务</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">.&#x2F;udpserver</code></pre>
+<ul>
+<li>串口助手输入指令</li>
+</ul>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231214191833.webp" style="zoom:67%;" />
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">AT	&#x2F;&#x2F; 测试
+# OK
+AT+QSCLK&#x3D;0	&#x2F;&#x2F; 禁止模块休眠
+# OK
+AT+QIOPEN&#x3D;0,0,&quot;UDP&quot;,&quot;1.15.27.206&quot;,12301	&#x2F;&#x2F; 创建UDP链接
+# OK
+# +QIOPEN: 0,0
+AT+QISEND&#x3D;0,13	&#x2F;&#x2F; 配置待发送数据的长度，会出现一个&gt;
+# &gt;
+&#123;&quot;value&quot;:123&#125;	&#x2F;&#x2F; 输入数据(没有回车换行)
+# OK
+# SEND OK
+AT+QICLOSE&#x3D;0	&#x2F;&#x2F; 关闭连接
+# OK
+# CLOSE OK</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231214192647.webp" alt=""></p>
+<h3 id="使用TCP与私有服务器通信">使用TCP与私有服务器通信</h3>
+<ul>
+<li>登陆远程服务器</li>
+</ul>
+<p>登陆后输入指令进入TCP服务</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">.&#x2F;tcpserver</code></pre>
+<ul>
+<li>串口助手输入指令</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">AT	&#x2F;&#x2F; 测试
+# OK
+AT+QSCLK&#x3D;0	&#x2F;&#x2F; 禁止模块休眠
+# OK
+AT+QIOPEN&#x3D;0,0,&quot;TCP&quot;,&quot;1.15.27.206&quot;,12300	&#x2F;&#x2F; 创建TCP链接
+# OK
+# +QIOPEN: 0,0
+AT+QISEND&#x3D;0,13	&#x2F;&#x2F; 配置待发送数据的长度，会出现一个&gt;
+# &gt;
+&#123;&quot;value&quot;:123&#125;	&#x2F;&#x2F; 输入数据(没有回车换行)
+# OK
+# SEND OK
+AT+QICLOSE&#x3D;0	&#x2F;&#x2F; 关闭连接
+# OK
+# CLOSE OK</code></pre>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231214194140.webp" style="zoom:67%;" />
+<h3 id="使用MQTT与私有云服务器通信">使用MQTT与私有云服务器通信</h3>
+<ul>
+<li>启动MQTT服务，puTTY输入：</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">.&#x2F;killall
+.&#x2F;mosquitto -v</code></pre>
+<ul>
+<li>使用MQTT.fx连接云服务器</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231206115040.webp" alt=""></p>
+<p>然后点击连接即可，然后订阅主题</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231206120956.webp" alt=""></p>
+<ul>
+<li>使用模块连接云服务器进行发布与订阅测试</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">AT	&#x2F;&#x2F; 测试
+# OK
+AT+QSCLK&#x3D;0	&#x2F;&#x2F; 禁止模块休眠
+# OK
+AT+QMTOPEN&#x3D;0,&quot;1.15.27.206&quot;,1883	&#x2F;&#x2F; 打开MQTT连接
+# OK
+# +QMTOPEN: 0,0
+AT+QMTCONN&#x3D;0,&quot;iotdevice&quot;	&#x2F;&#x2F; 连接服务器
+# OK
+# +QMTCONN: 0,0,0
+AT+QMTSUB&#x3D;0,1,&quot;topic&#x2F;report&quot;,2	&#x2F;&#x2F; 订阅了“topic&#x2F;report”这个主题
+# OK
+# +QMTSUB: 0,1,0,2
+# +QMTRECV: 0,1,&quot;topic&#x2F;report&quot;,&quot;　this  that &quot;
+&#x2F;&#x2F; 测试
+AT+QMTSUB&#x3D;0,1,&quot;topic&#x2F;write&quot;,2	&#x2F;&#x2F; 订阅
+# OK
+# +QMTSUB: 0,1,0,2
+AT+QMTUNS&#x3D;0,2,&quot;topic&#x2F;write&quot;	&#x2F;&#x2F; 退订
+# OK
+# +QMTUNS: 0,2,0</code></pre>
+<p>MQTT.fx往订阅的主题发布消息，则串口助手会收到</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231214200408.webp" style="zoom:50%;" />
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231214200525.webp" alt=""></p>
+<p>串口助手发送消息到MQTT.fx：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">AT+QMTPUB&#x3D;0,0,0,0,&quot;topic&#x2F;pub&quot;,13	&#x2F;&#x2F; 向 &quot;topic&#x2F;pub&quot; 主题发送消息数据，数据长度为13
+# &gt;
+&#123;&quot;value&quot;:123&#125;	&#x2F;&#x2F; 不能有回车
+# OK
+# +QMTPUB: 0,0,0</code></pre>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231214201631.webp" style="zoom:67%;" />
+<h3 id="上传数据到腾讯云">上传数据到腾讯云</h3>
+<ul>
+<li>
+<p>腾讯云部分跟4GCat上传数据一样步骤即可</p>
+</li>
+<li>
+<p>MX配置</p>
+</li>
+</ul>
+<p>跟4G配置一样</p>
+<p>任务调度所需定时器，1ms</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231215113955.webp" style="zoom:67%;" />
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/%E5%85%B6%E4%BB%96/QQ%E6%88%AA%E5%9B%BE20231215114014.webp" alt=""></p>
+<ul>
+<li>程序编写</li>
+</ul>
+<p>也是跟4G模块程序大致一样，部分不一样如下</p>
+<details ><summary> CallBack.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: CallBack.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;06&#x2F;19
+ * description: store interrupt function
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+extern uint8_t ucUart1_Rec_Buff[128];
+char AT_String[255];
+extern const char *TOPIC_PROPERTY_SUB;
+&#x2F;*
+* @function: HAL_TIM_PeriodElapsedCallback
+* @param: None
+* @retval: None
+* @brief: timer callback function
+*&#x2F;
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+&#123;
+  if (htim-&gt;Instance &#x3D;&#x3D; htim4.Instance) &#x2F;&#x2F; 1ms
+  &#123;
+    static uint8_t cat_uart_rx &#x3D; 0;
+    static uint16_t cat_reset_cnt &#x3D; 0;  &#x2F;&#x2F; 模块复位所需时间计数
+
+    cat_uart_rx++;
+
+    if (cat_uart_rx &gt;&#x3D; 50)  &#x2F;&#x2F; 串口接收回传校验
+    &#123;
+      cat_uart_rx &#x3D; 0;
+      bsp_NBLOT_uart.Bsp_NBLOT_Uart_Handler();
+    &#125;
+    if (bsp_NBLOT.Reset_Status !&#x3D; RESET_OVER) &#x2F;&#x2F; 复位计数
+    &#123;
+      cat_reset_cnt++;
+
+      if (cat_reset_cnt &gt;&#x3D; BSP_NBLOT_RESET_TIME)
+      &#123;
+        cat_reset_cnt &#x3D; 0;
+        bsp_NBLOT.Reset_Status &#x3D; RESET_OVER;  &#x2F;&#x2F; 复位完成
+      &#125;
+    &#125;
+
+    System.Task_Marks_Handler();
+  &#125;
+&#125;
+
+void USART2_IRQHandler(void)
+&#123;
+	if(__HAL_UART_GET_FLAG(&amp;huart2,UART_FLAG_IDLE) !&#x3D; 0x00u)
+	&#123;
+		bsp_NBLOT_uart.Bsp_NBLOT_Uart_Data_Parse();
+		__HAL_UART_CLEAR_IDLEFLAG(&amp;huart2);
+	&#125;		
+  HAL_UART_IRQHandler(&amp;huart2);
+&#125;
+
+void USART1_IRQHandler(void)
+&#123;
+	if(__HAL_UART_GET_FLAG(&amp;huart1,UART_FLAG_IDLE) !&#x3D; 0x00u)
+	&#123;
+		__HAL_UART_CLEAR_IDLEFLAG(&amp;huart1);
+    HAL_UART_DMAStop(&amp;huart1);   &#x2F;&#x2F; 串口停止DMA接收
+		if (strstr((char*)ucUart1_Rec_Buff, (char*)&quot;MQTT_DISABLE&quot;) !&#x3D; NULL) &#x2F;&#x2F; 断开MQTT连接
+		&#123;
+			bsp_NBLOT.bsp_NBLOT_Step_Status &#x3D; TASK_CIOT_MQTT_DISCONN; &#x2F;&#x2F; 断开
+		&#125;
+    HAL_UART_Receive_DMA(&amp;huart1, ucUart1_Rec_Buff, 128);    
+	&#125;
+	
+	HAL_UART_IRQHandler(&amp;huart1);
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> System_Init.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: System_Init.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;06&#x2F;23
+ * description: 
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void Hardware_Init(void);
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+System_Init_t System_Init &#x3D; 
+&#123;
+    .Hardware_Init &#x3D; &amp;Hardware_Init
+&#125;;
+
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+uint8_t ucUart1_Rec_Buff[128] &#x3D; &#123;0&#125;;    &#x2F;&#x2F; 
+
+
+
+&#x2F;*
+* @function: Hardware_Init
+* @param: None
+* @retval: None
+* @brief: 
+*&#x2F;
+static void Hardware_Init(void)
+&#123;
+#if 1	
+    __HAL_UART_ENABLE_IT(&amp;huart1, UART_IT_IDLE); &#x2F;&#x2F; 
+    HAL_UART_Receive_DMA(&amp;huart1, ucUart1_Rec_Buff, 128);	
+#endif	
+    bsp_NBLOT_uart.Bsp_NBLOT_Uart_Init();   &#x2F;&#x2F; 
+    printf(&quot;Hello\r\n&quot;);
+	HAL_TIM_Base_Start_IT(&amp;htim4);
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> Task.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: Task.c
+ * Author: Luckys.
+ * Date: 2023&#x2F;06&#x2F;23
+ * description: 
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+extern const char *TOPIC_PROPERTY_SUB;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void TasksHandle_200MS(void);
+static void TasksHandle_1S(void);
+static void TasksHandle_2S(void);
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;static function declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+Task_t Task[] &#x3D;
+&#123;
+				&#123;FALSE, 200, 200, TasksHandle_200MS&#125;, &#x2F;&#x2F; task Period: 200ms
+				&#123;FALSE, 1000, 1000, TasksHandle_1S&#125;,	&#x2F;&#x2F; task Period: 1s
+				&#123;FALSE, 2000, 2000, TasksHandle_2S&#125;,	&#x2F;&#x2F; task Period: 2s
+&#125;;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;variable definition declaration area BEGIN&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+uint8_t ucTasks_Max &#x3D; sizeof(Task) &#x2F; sizeof(Task[0]);
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;variable definition declaration area   END&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+static inline void TasksHandle_200MS(void)
+&#123;
+	HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
+	bsp_NBLOT.bsp_NBLOT_Running();
+&#125;
+
+static inline void TasksHandle_1S(void)
+&#123;
+	bsp_NBLOT.bsp_NBLOT_Data_Upload_1();
+&#125;
+
+static inline void TasksHandle_2S(void)
+&#123; 
+
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> bsp_NBLOT.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __BSP_NBLOT_H
+#define __BSP_NBLOT_H
+
+&#x2F;&#x2F; 使用调试打印(可以打印发送与接收回传数据到上位机串口助手)
+#define USE_Debug_Print 1
+&#x2F;&#x2F; 使用正常打印
+#define USE_Normal_Print 1
+&#x2F;&#x2F; 模块复位完成所需时间(大概5s)
+#define BSP_NBLOT_RESET_TIME (uint16_t)5000
+&#x2F;&#x2F; 等待回传的计数值(测试发现大概正常情况下收到回传是330000左右，所以需要设置比它大几倍即可)
+#define BSP_NBLOT_WAIT_COUNT 2000000
+&#x2F;&#x2F; 全自动模式(断开连接后自动重新复位连接)
+#define BSP_NBLOT_AUTO_CONNNECT_MODE 1
+
+&#x2F;* CAT1模块工作步骤列表 *&#x2F;
+typedef enum
+&#123;
+    TASK_CIOT_AT_TEST &#x3D; 0,  &#x2F;&#x2F; 【AT】测试模块是否正常
+    TASK_CIOT_AT_TEST_RSP,
+
+    TASK_NBIOT_DISABLE_PSM,   &#x2F;&#x2F; 【AT+QSCLK&#x3D;0】禁止模块休眠
+    TASK_NBIOT_DISABLE_PSM_RSP,
+
+    TASK_NBIOT_DISABLE_ECHO,    &#x2F;&#x2F; 【ATE0】关闭回显
+    TASK_NBIOT_DISABLE_ECHO_RSP,
+
+    TASK_NBIOT_SET_BAND,    &#x2F;&#x2F; 【AT+QBAND&#x3D;1,8】设置模块的工作频段  3: 中国联通 5: 中国电信 8: 中国移动
+    TASK_NBIOT_SET_BAND_RSP,
+
+    TASK_NBIOT_DHCP,    &#x2F;&#x2F; 【AT+CGPADDR?】读取设备IP地址
+    TASK_NBIOT_DHCP_RSP,
+
+    TASK_CIOT_MQTT_OPEN,    &#x2F;&#x2F; 【AT+QMTOPEN&#x3D;0,[CLIENT_ID],1883】打开MQTT连接，CLIENT_ID是上面定义的那个
+    TASK_CIOT_MQTT_OPEN_RSP,
+
+    TASK_CIOT_MQTT_CONNECT, &#x2F;&#x2F; 【AT+QMTCONN&#x3D;0,[CLIENT_ID],[USERNAME],[PASSWORD]】连接MQTT服务器
+    TASK_CIOT_MQTT_CONNECT_RSP,
+
+    TASK_CONNECT_SUCCESS,   &#x2F;&#x2F; 连接MQTT服务器成功(结束)
+
+    TASK_CIOT_MQTT_DISCONN, &#x2F;&#x2F; 【AT+CMQTTDISC&#x3D;0,120】断开MQTT连接
+    TASK_CIOT_MQTT_DISCONN_RSP,
+
+    TASK_CIOT_RESET,    &#x2F;&#x2F; 【AT+CRESET】 模块复位
+    TASK_CIOT_RESET_RSP,
+
+    TASK_IDLE,  &#x2F;&#x2F; 空闲状态(空转)
+&#125; bsp_NBLOT_Mode_Steps_et;
+
+&#x2F;&#x2F; 返回状态枚举
+typedef enum
+&#123;
+    RET_PASS &#x3D; -1,    &#x2F;&#x2F; 成功
+    RET_FAIL &#x3D; 0    &#x2F;&#x2F; 失败
+&#125; bsp_NBLOT_Return_Status_et;
+
+&#x2F;&#x2F; 复位状态枚举
+typedef enum
+&#123;
+    RESET_NOT &#x3D; 0,   &#x2F;&#x2F; 未复位
+    RESET_OVER &#x3D; 1,  &#x2F;&#x2F; 复位完成
+&#125; bsp_NBLOT_Reset_Status_et;
+
+&#x2F;&#x2F; 模块接收状态
+typedef enum
+&#123;
+    Rec_Status_None &#x3D; 0, &#x2F;&#x2F; 不接收
+    Rec_Status_CheckCmd_Plan1 &#x3D; 1, &#x2F;&#x2F; 校验指令回传 --- &quot;OK&quot;
+    Rec_Status_CheckCmd_Plan2 &#x3D; 2, &#x2F;&#x2F; 校验指令回传 --- &quot;+CGPADDR:  &#x2F; OK&quot;
+    Rec_Status_CheckCmd_Plan3 &#x3D; 3, &#x2F;&#x2F; 校验指令回传 --- &quot;+QMTOPEN: &quot;
+    Rec_Status_CheckCmd_Plan4 &#x3D; 4, &#x2F;&#x2F; 校验指令回传 --- &quot;+QMTCONN: &quot;
+    Rec_Status_CheckCmd_Plan5 &#x3D; 5, &#x2F;&#x2F; 校验指令回传 --- &quot;&gt;&quot;
+    Rec_Status_CheckCmd_Plan6 &#x3D; 6, &#x2F;&#x2F; 校验指令回传 --- &quot;+QMTPUB: &quot;
+    Rec_Status_MAX &#x3D; Rec_Status_CheckCmd_Plan6 + 1,     &#x2F;&#x2F; 枚举成员数量(当做数组的大小)
+&#125; bsp_NBLOT_Rec_Status_et;
+
+typedef struct
+&#123;
+    bsp_NBLOT_Reset_Status_et Reset_Status; &#x2F;&#x2F; 复位状态
+    uint8_t bsp_NBLOT_MQTT_Connect_Flag;    &#x2F;&#x2F; 连接MQTT服务器标志位
+    int8_t bsp_NBLOT_Ret_Status_buf[Rec_Status_MAX];    &#x2F;&#x2F; 存储返回值数组
+    bsp_NBLOT_Rec_Status_et bsp_NBLOT_Rec_Status;   &#x2F;&#x2F; 模块接收状态
+    int16_t bsp_NBLOT_Step_Status;  &#x2F;&#x2F; AT模块工作步骤标记状态
+
+    uint8_t bsp_NBLOT_Pub_Buf[254]; &#x2F;&#x2F; MQTT数据上报存储数组
+    uint8_t bsp_NBLOT_Pub_Len;  &#x2F;&#x2F; MQTT数据上报长度
+
+    void (*bsp_NBLOT_Running)(void);   &#x2F;&#x2F; 模块运行
+    void (*bsp_NBLOT_Data_Upload_1)(void); &#x2F;&#x2F; 数据上传1
+&#125; bsp_NBLOT_st;
+
+extern bsp_NBLOT_st bsp_NBLOT;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> bsp_NBLOT.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: bsp_NBLOT.c
+ * Author: Yang
+ * Date: 2023&#x2F;12&#x2F;15
+ * description: 
+ -----------------------------------
+
+ -----------------------------------
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;* Private variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+&#x2F;* 腾讯云MQTT服务器信息 *&#x2F;
+&#x2F;&#x2F; 域名
+static const char *DOMAIN &#x3D; &quot;J7X2YMW6IU.iotcloud.tencentdevices.com&quot;;
+&#x2F;&#x2F; 客户端ID
+static const char *CLIENT_ID &#x3D; &quot;J7X2YMW6IU&quot;;
+&#x2F;&#x2F; 用户名
+static const char *USERNAME &#x3D; &quot;J7X2YMW6IUTH_Sensor_Test;12010126;0M3Y7;1992171084&quot;;
+&#x2F;&#x2F; 密码
+static const char *PASSWORD &#x3D; &quot;a88fc461af8202b6933524ec9b5c9d2fac226a35cbc09b9d4150a1d00000406f;hmacsha256&quot;;
+&#x2F;&#x2F; 属性发布主题
+static const char *TOPIC_PROPERTY_PUB &#x3D; &quot;$thing&#x2F;up&#x2F;property&#x2F;J7X2YMW6IU&#x2F;TH_Sensor_Test&quot;;
+&#x2F;&#x2F; 模块超时计数
+int16_t bsp_NBLOT_Timeout_Count;    
+&#x2F;&#x2F; 模块AT指令字符串
+char bsp_NNBLOT_AT_String[255];  
+
+&#x2F;* Private function prototypes&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void bsp_NBLOT_Running(void);
+static void bsp_NBLOT_Data_Upload_1(void);
+
+static void bsp_NBLOT_Ret_Check(int8_t ret_status);
+static void bsp_NBLOT_BeforeSending_Parameter_Init(bsp_NBLOT_Rec_Status_et rec_status, uint8_t* str);
+static void bsp_NBLOT_Moduel_Reset(void);
+static void bsp_NBLOT_Upload_Data_To_Pub(const char* pub_string, const char* pub_data_string);
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+bsp_NBLOT_st bsp_NBLOT &#x3D; 
+&#123;
+    .Reset_Status &#x3D; RESET_NOT,
+    .bsp_NBLOT_MQTT_Connect_Flag &#x3D; FALSE,
+    .bsp_NBLOT_Ret_Status_buf &#x3D; &#123;RET_FAIL&#125;,
+    .bsp_NBLOT_Rec_Status &#x3D; Rec_Status_None,
+    .bsp_NBLOT_Step_Status &#x3D; TASK_CIOT_AT_TEST,
+
+    .bsp_NBLOT_Pub_Buf &#x3D; &#123;0&#125;,
+    .bsp_NBLOT_Pub_Len &#x3D; 0,
+    
+    .bsp_NBLOT_Running &#x3D; &amp;bsp_NBLOT_Running,
+    .bsp_NBLOT_Data_Upload_1 &#x3D; &amp;bsp_NBLOT_Data_Upload_1
+&#125;;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 应用层函数 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+&#x2F;*
+ * @function: bsp_NBLOT_Running
+ * @param: None
+ * @retval: None
+ * @brief: 模块运行
+ *&#x2F;
+static void bsp_NBLOT_Running(void)
+&#123;
+    &#x2F;&#x2F; 未复位成功则退出
+    if (bsp_NBLOT.Reset_Status !&#x3D; RESET_OVER)
+    &#123;
+        return;
+    &#125;
+    switch (bsp_NBLOT.bsp_NBLOT_Step_Status)
+    &#123;
+    case TASK_CIOT_AT_TEST:	&#x2F;&#x2F; 【发送AT测试是否正常】
+    &#123;
+        &#x2F;*状态复位*&#x2F;
+        bsp_NBLOT_BeforeSending_Parameter_Init(Rec_Status_CheckCmd_Plan1, (uint8_t *)&quot;AT\r\n&quot;);    
+        break;
+    &#125;
+    case TASK_CIOT_AT_TEST_RSP:	&#x2F;&#x2F; 【判断回传--- &quot;OK&quot;】
+    &#123;
+        bsp_NBLOT_Ret_Check(bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan1]);
+        break;
+    &#125;
+    case TASK_NBIOT_DISABLE_PSM:  &#x2F;&#x2F; 【禁止模块休眠】
+    &#123;
+        &#x2F;*状态复位*&#x2F;
+        bsp_NBLOT_BeforeSending_Parameter_Init(Rec_Status_CheckCmd_Plan1, (uint8_t *)&quot;AT+QSCLK&#x3D;0\r\n&quot;);     
+        break;
+    &#125;
+    case TASK_NBIOT_DISABLE_PSM_RSP: &#x2F;&#x2F; 【判断回传--- &quot;OK&quot;】
+    &#123;
+        bsp_NBLOT_Ret_Check(bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan1]);        
+        break;
+    &#125;
+    case TASK_NBIOT_DISABLE_ECHO:   &#x2F;&#x2F; 【关闭回显】
+    &#123;
+        &#x2F;*状态复位*&#x2F;
+        bsp_NBLOT_BeforeSending_Parameter_Init(Rec_Status_CheckCmd_Plan1, (uint8_t *)&quot;ATE0\r\n&quot;);        
+        break;
+    &#125;
+    case TASK_NBIOT_DISABLE_ECHO_RSP:   &#x2F;&#x2F; 【判断回传--- &quot;OK&quot;】
+    &#123;
+        bsp_NBLOT_Ret_Check(bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan1]);
+        break;
+    &#125;
+    case TASK_NBIOT_SET_BAND:   &#x2F;&#x2F; 【设置模块的工作频段】
+    &#123;
+        &#x2F;*状态复位*&#x2F;
+        bsp_NBLOT_BeforeSending_Parameter_Init(Rec_Status_CheckCmd_Plan1, (uint8_t *)&quot;AT+QBAND&#x3D;1,8\r\n&quot;);       
+        break;
+    &#125;
+    case TASK_NBIOT_SET_BAND_RSP:   &#x2F;&#x2F; 【判断回传--- &quot;OK&quot;】
+    &#123;
+        bsp_NBLOT_Ret_Check(bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan1]);       
+        break;
+    &#125;
+    case TASK_NBIOT_DHCP:   &#x2F;&#x2F; 【读取设备IP地址】
+    &#123;
+        &#x2F;*状态复位*&#x2F;
+        bsp_NBLOT_BeforeSending_Parameter_Init(Rec_Status_CheckCmd_Plan2, (uint8_t *)&quot;AT+CGPADDR?\r\n&quot;);             
+        break;
+    &#125;
+    case TASK_NBIOT_DHCP_RSP:   &#x2F;&#x2F; 【判断回传--- &quot;+CGPADDR: 0,&quot;xxx.xxx.xxx.xxx&quot;&quot;】
+    &#123;
+        bsp_NBLOT_Ret_Check(bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan2]);        
+        break;
+    &#125;
+    case TASK_CIOT_MQTT_OPEN:   &#x2F;&#x2F; 【打开MQTT连接】
+    &#123;
+        &#x2F;*状态复位*&#x2F;
+        Public.Memory_Clear((uint8_t*)bsp_NNBLOT_AT_String, strlen((char*)bsp_NNBLOT_AT_String)); &#x2F;&#x2F; 清0
+        sprintf(bsp_NNBLOT_AT_String,&quot;AT+QMTOPEN&#x3D;0,\&quot;%s\&quot;,1883\r\n&quot;,DOMAIN);
+        bsp_NBLOT_BeforeSending_Parameter_Init(Rec_Status_CheckCmd_Plan3, (uint8_t *)bsp_NNBLOT_AT_String);
+        break;
+    &#125;
+    case TASK_CIOT_MQTT_OPEN_RSP:   &#x2F;&#x2F; 【判断回传--- &quot;+QMTOPEN: &quot;】
+    &#123;
+        if (RET_PASS &#x3D;&#x3D; bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan3])
+        &#123;
+            bsp_NBLOT.bsp_NBLOT_Rec_Status &#x3D; Rec_Status_None;
+            bsp_NBLOT.bsp_NBLOT_Step_Status++;
+        &#125;
+        else
+        &#123;
+            ++bsp_NBLOT_Timeout_Count;
+
+            if (bsp_NBLOT_Timeout_Count &gt;&#x3D; 5)
+            &#123;
+                bsp_NBLOT_Timeout_Count &#x3D; 0;
+                &#x2F;&#x2F; +(重发不生效)
+                bsp_NBLOT_Moduel_Reset();    &#x2F;&#x2F; 复位
+            &#125;
+        &#125;              
+        break;
+    &#125;
+    case TASK_CIOT_MQTT_CONNECT:    &#x2F;&#x2F; 【连接MQTT服务器】
+    &#123;
+        &#x2F;*状态复位*&#x2F;
+        Public.Memory_Clear((uint8_t*)bsp_NNBLOT_AT_String, strlen((char*)bsp_NNBLOT_AT_String)); &#x2F;&#x2F; 清0
+        sprintf(bsp_NNBLOT_AT_String,&quot;AT+QMTCONN&#x3D;0,\&quot;%s\&quot;,\&quot;%s\&quot;,\&quot;%s\&quot;\r\n&quot;,CLIENT_ID,USERNAME,PASSWORD);
+        bsp_NBLOT_BeforeSending_Parameter_Init(Rec_Status_CheckCmd_Plan4, (uint8_t *)bsp_NNBLOT_AT_String);        
+        break;
+    &#125;
+    case TASK_CIOT_MQTT_CONNECT_RSP:    &#x2F;&#x2F; 【判断回传--- &quot;+QMTCONN: &quot;】
+    &#123;
+        if (RET_PASS &#x3D;&#x3D; bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan4])
+        &#123;
+            bsp_NBLOT.bsp_NBLOT_Rec_Status &#x3D; Rec_Status_None;
+            bsp_NBLOT.bsp_NBLOT_Step_Status++;
+        &#125;
+        else
+        &#123;
+            ++bsp_NBLOT_Timeout_Count;
+
+            if (bsp_NBLOT_Timeout_Count &gt;&#x3D; 5)
+            &#123;
+                bsp_NBLOT_Timeout_Count &#x3D; 0;
+                &#x2F;&#x2F; +(重发不生效)
+                bsp_NBLOT_Moduel_Reset();    &#x2F;&#x2F; 复位
+            &#125;
+        &#125;         
+    &#125;
+    case TASK_CONNECT_SUCCESS:  &#x2F;&#x2F; 连接MQTT服务器成功
+    &#123;
+        bsp_NBLOT.bsp_NBLOT_MQTT_Connect_Flag &#x3D; TRUE;
+        bsp_NBLOT.bsp_NBLOT_Step_Status &#x3D; TASK_IDLE;
+#if USE_Normal_Print
+        printf(&quot;MQTT CONNECT SUCCESS\r\n&quot;);
+#endif        
+        break;
+    &#125;
+    case TASK_IDLE: &#x2F;&#x2F; 空闲状态
+    &#123;
+        break;
+    &#125;
+    case TASK_CIOT_MQTT_DISCONN:   &#x2F;&#x2F; 【断开MQTT连接】
+    &#123;
+        bsp_NBLOT.bsp_NBLOT_MQTT_Connect_Flag &#x3D; FALSE;
+        bsp_NBLOT_BeforeSending_Parameter_Init(Rec_Status_CheckCmd_Plan1, (uint8_t *)&quot;AT+QMTDISC&#x3D;0\r\n&quot;);
+        break;
+    &#125;
+    case TASK_CIOT_MQTT_DISCONN_RSP:    &#x2F;&#x2F; 【判断回传---&quot;OK&quot;】
+    &#123;
+        bsp_NBLOT_Ret_Check(bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan1]);
+        break;
+    &#125;
+    default:
+    &#123;
+        bsp_NBLOT.bsp_NBLOT_Step_Status &#x3D; TASK_IDLE;
+        break;
+    &#125;
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: bsp_NBLOT_Data_Upload_1
+* @param: None
+* @retval: None
+* @brief: 数据上传1
+*&#x2F;
+static void bsp_NBLOT_Data_Upload_1(void)
+&#123;
+    static float a &#x3D; 0,b &#x3D; 0,c &#x3D; 0,d &#x3D; 0;
+    Public.Memory_Clear((uint8_t*)bsp_NBLOT.bsp_NBLOT_Pub_Buf, strlen((char*)bsp_NBLOT.bsp_NBLOT_Pub_Buf));
+    sprintf((char *)bsp_NBLOT.bsp_NBLOT_Pub_Buf, &quot;&#123;\&quot;method\&quot;:\&quot;report\&quot;,\&quot;params\&quot;:&#123;\&quot;temp\&quot;:%.1f,\&quot;humi\&quot;:%.1f,\&quot;longitude\&quot;:%f,\&quot;latitude\&quot;:%f&#125;&#125;&quot;, ++a, ++b, ++c, ++d);
+    bsp_NBLOT_Upload_Data_To_Pub(TOPIC_PROPERTY_PUB, (char*)bsp_NBLOT.bsp_NBLOT_Pub_Buf);
+&#125;
+
+&#x2F;*&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 中间层函数 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+
+&#x2F;*
+* @function: bsp_NBLOT_Ret_Check
+* @param: None
+* @retval: None
+* @brief: 回传结果检测
+*&#x2F;
+static void bsp_NBLOT_Ret_Check(int8_t ret_status)
+&#123;
+    static uint16_t error_counter &#x3D; 0;
+
+    if (RET_PASS &#x3D;&#x3D; ret_status)
+    &#123;
+        error_counter &#x3D; 0;
+        bsp_NBLOT.bsp_NBLOT_Rec_Status &#x3D; Rec_Status_None;
+        bsp_NBLOT.bsp_NBLOT_Step_Status++;
+#if 0        
+        printf(&quot;1234\r\n&quot;);
+#endif        
+    &#125;
+    else
+    &#123;
+        ++bsp_NBLOT_Timeout_Count;
+
+        if (bsp_NBLOT_Timeout_Count &gt;&#x3D; 8)
+        &#123;
+            error_counter++;
+            bsp_NBLOT.bsp_NBLOT_Step_Status--;
+        &#125;
+    &#125;
+
+    if (error_counter &gt;&#x3D; 10)
+    &#123;
+        bsp_NBLOT_Moduel_Reset();   &#x2F;&#x2F; 复位
+    &#125;
+&#125;
+
+&#x2F;*
+* @function: bsp_NBLOT_BeforeSending_Parameter_Init
+* @param: None
+* @retval: None
+* @brief: 参数初始化且发送
+*&#x2F;
+static void bsp_NBLOT_BeforeSending_Parameter_Init(bsp_NBLOT_Rec_Status_et rec_status, uint8_t* str)
+&#123;
+        &#x2F;*状态复位*&#x2F;
+        bsp_NBLOT.bsp_NBLOT_Rec_Status &#x3D; rec_status;
+        bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[rec_status] &#x3D; RET_FAIL;
+        bsp_NBLOT_Timeout_Count &#x3D; 0;
+
+        bsp_NBLOT_uart.Bsp_NBLOT_Uart_Send_String((uint8_t *)str);
+        bsp_NBLOT.bsp_NBLOT_Step_Status++;
+&#125;
+
+&#x2F;*
+* @function: bsp_NBLOT_Moduel_Reset
+* @param: None
+* @retval: None
+* @brief: 模块复位
+*&#x2F;
+static void bsp_NBLOT_Moduel_Reset(void)
+&#123;
+    bsp_NBLOT.bsp_NBLOT_MQTT_Connect_Flag &#x3D; FALSE; &#x2F;&#x2F; 标志位置0
+    bsp_NBLOT.Reset_Status &#x3D; RESET_NOT; &#x2F;&#x2F; 未复位
+    bsp_NBLOT_uart.Bsp_NBLOT_Uart_Send_String((uint8_t *)&quot;AT+QRST&#x3D;1\r\n&quot;);
+#if BSP_NBLOT_AUTO_CONNNECT_MODE
+    bsp_NBLOT.bsp_NBLOT_Step_Status &#x3D; TASK_CIOT_AT_TEST;    &#x2F;&#x2F; AT模式
+#endif
+#if USE_Normal_Print
+        printf(&quot;RESET...\r\n&quot;);
+#endif
+&#125;
+
+&#x2F;*
+* @function: bsp_NBLOT_Upload_Data_To_Pub
+* @param: pub_string -&gt; 发送到的目的地主题 pub_data_string -&gt; 要上传到主题的数据内容
+* @retval: None
+* @brief: 上传数据到MQTT主题
+*&#x2F;
+static void bsp_NBLOT_Upload_Data_To_Pub(const char* pub_string, const char* pub_data_string)
+&#123;
+    uint8_t step &#x3D; 0;    &#x2F;&#x2F; 运行到哪步计数
+    uint32_t timeout &#x3D; 0; &#x2F;&#x2F; 重发超时时间计数
+    static uint16_t error_count &#x3D; 0; &#x2F;&#x2F; 错误计数(复位)
+
+    if (bsp_NBLOT.bsp_NBLOT_MQTT_Connect_Flag)
+    &#123;
+        switch (step)
+        &#123;
+        case 0: &#x2F;&#x2F; &#x2F;&#x2F; 向 &quot;xxx&quot; 主题发送消息数据，数据长度为xx
+        &#123;
+            timeout &#x3D; 0;
+            bsp_NBLOT.bsp_NBLOT_Rec_Status &#x3D; Rec_Status_CheckCmd_Plan5;
+            bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan5] &#x3D; RET_FAIL;
+            Public.Memory_Clear((uint8_t*)bsp_NNBLOT_AT_String, strlen((char*)bsp_NNBLOT_AT_String)); &#x2F;&#x2F; 清0
+
+            &#x2F;&#x2F; 设置待发布的主题和要发送的数据长度
+            sprintf(bsp_NNBLOT_AT_String, &quot;AT+QMTPUB&#x3D;0,0,0,0,\&quot;%s\&quot;,%d\r\n&quot;, pub_string, strlen(pub_data_string));
+            bsp_NBLOT_uart.Bsp_NBLOT_Uart_Send_String((uint8_t *)bsp_NNBLOT_AT_String);
+
+            step++;
+        &#125;
+        case 1: &#x2F;&#x2F; 判断回传 &quot;&gt;&quot; 发送数据
+        &#123;
+            &#x2F;&#x2F; 超时等待
+            while (1)
+            &#123;
+                if (RET_PASS &#x3D;&#x3D; bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan5])
+                &#123;
+                    &#x2F;&#x2F; 发送数据
+#if 0                    
+                    printf(&quot;-----%d------\r\n&quot;,timeout);
+#endif
+                    error_count &#x3D; 0;
+                    timeout &#x3D; 0;
+
+                    bsp_NBLOT.bsp_NBLOT_Rec_Status &#x3D; Rec_Status_CheckCmd_Plan6;
+                    bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan6] &#x3D; RET_FAIL;
+
+                    bsp_NBLOT_uart.Bsp_NBLOT_Uart_Send_String((const uint8_t *)pub_data_string);
+
+                    step++;
+                    break; &#x2F;&#x2F; 退出循环
+                &#125;
+
+                timeout++;
+                if (timeout &gt;&#x3D; BSP_NBLOT_WAIT_COUNT)
+                &#123;
+                    error_count++;
+                    goto error_handling;
+                &#125;
+            &#125;
+        &#125;
+        case 2: &#x2F;&#x2F;判断回传 &quot;OK&quot;&#x2F;&quot;+QMTPUB: 0,0,0&quot;
+        &#123;
+            &#x2F;&#x2F; 超时等待
+            while (1)
+            &#123;
+                if (RET_PASS &#x3D;&#x3D; bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan6])
+                &#123;           
+                    error_count &#x3D; 0;
+                    timeout &#x3D; 0;
+
+                    bsp_NBLOT.bsp_NBLOT_Rec_Status &#x3D; Rec_Status_None;
+                    bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_None] &#x3D; RET_FAIL; 
+
+                    step++;
+                    break;  &#x2F;&#x2F; 退出循环
+                &#125;
+
+                timeout++;
+                if (timeout &gt;&#x3D; BSP_NBLOT_WAIT_COUNT)
+                &#123;
+                    error_count++;
+                    goto error_handling;
+                &#125;                
+            &#125;
+        &#125;
+        default:
+            break;
+        &#125;
+    &#125;
+    &#x2F;&#x2F; 错误处理
+    error_handling:
+    &#123;
+        if (error_count &gt;&#x3D; 10) &#x2F;&#x2F; 长时间发送失败
+        &#123;
+            error_count &#x3D; 0;
+            bsp_NBLOT.bsp_NBLOT_Step_Status &#x3D; TASK_CIOT_MQTT_DISCONN; &#x2F;&#x2F; 断开
+        &#125;
+        return;
+    &#125;    
+&#125;</code></pre>
+              </div>
+            </details>
+<details ><summary> bsp_NBLOT_uart.h </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#ifndef __BSP_NBLOT_UART_H
+#define __BSP_NBLOT_UART_H
+#include &quot;AllHead.h&quot;
+
+&#x2F;&#x2F; 模块使用的串口
+#define BSP_NBLOT_USE_Serial huart2
+&#x2F;&#x2F; 串口接收最大长度
+#define BSP_NBLOT_Rec_MAX_LEN 168
+
+typedef struct
+&#123;
+	uint8_t ucUart_Rec_Over_Flag;	&#x2F;&#x2F; 串口接收完成标志位
+	uint16_t usUart_Rec_Len;	&#x2F;&#x2F; 串口接收数据长度
+    uint8_t *pucRec_Buffer; &#x2F;&#x2F; 接收缓存指针
+    void (*Bsp_NBLOT_Uart_Init)(void); &#x2F;&#x2F; 串口初始化
+    void (*Bsp_NBLOT_Uart_Send_String)(const uint8_t *); &#x2F;&#x2F; 串口发送字符串
+    void (*Bsp_NBLOT_Uart_Data_Parse)(void);   &#x2F;&#x2F; 串口数据解析
+    void (*Bsp_NBLOT_Uart_Handler)(void);  &#x2F;&#x2F; 串口处理函数
+&#125; bsp_NBLOT_uart_st;
+
+extern bsp_NBLOT_uart_st bsp_NBLOT_uart;
+
+#endif</code></pre>
+              </div>
+            </details>
+<details ><summary> bsp_NBLOT_uart.c </summary>
+              <div class='content'>
+              <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;***************************************************************************
+ * File: bsp_NBLOT_uart.c
+ * Author: Yang
+ * Date: 2023&#x2F;12&#x2F;06
+ * description: 
+ -----------------------------------
+串口接线：
+        PA2(TX) --- 模块RX
+        PA3(RX) --- 模块TX
+        GND --- GND
+        3.3V --- 3.3V
+ -----------------------------------
+****************************************************************************&#x2F;
+#include &quot;AllHead.h&quot;
+
+&#x2F;* Private variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static uint8_t NBLOT_Uart_Rec_Temp_Arr[BSP_NBLOT_Rec_MAX_LEN];        &#x2F;&#x2F; 串口接收临时缓存数组
+static uint8_t NBLOT_Uart_Rec_Arr[BSP_NBLOT_Rec_MAX_LEN];   &#x2F;&#x2F; 模块串口接收数组
+
+&#x2F;* Private function prototypes&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+static void Bsp_NBLOT_Uart_Init(void);
+static void Bsp_NBLOT_Uart_Send_String(const uint8_t *pStr);
+static void Bsp_NBLOT_Uart_Data_Parse(void);
+static void Bsp_NBLOT_Uart_Handler(void);
+&#x2F;* Public variables&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;*&#x2F;
+bsp_NBLOT_uart_st bsp_NBLOT_uart &#x3D;
+&#123;
+				.ucUart_Rec_Over_Flag &#x3D; FALSE,
+				.usUart_Rec_Len &#x3D; 0,
+				.pucRec_Buffer &#x3D; NBLOT_Uart_Rec_Arr,
+				.Bsp_NBLOT_Uart_Init &#x3D; &amp;Bsp_NBLOT_Uart_Init,
+				.Bsp_NBLOT_Uart_Send_String &#x3D; &amp;Bsp_NBLOT_Uart_Send_String,
+				.Bsp_NBLOT_Uart_Data_Parse &#x3D; &amp;Bsp_NBLOT_Uart_Data_Parse,
+				.Bsp_NBLOT_Uart_Handler &#x3D; &amp;Bsp_NBLOT_Uart_Handler
+&#125;;
+
+&#x2F;*
+ * @function: Bsp_NBLOT_Uart_Init
+ * @param: None
+ * @retval: None
+ * @brief: 串口初始化
+ *&#x2F;
+static void Bsp_NBLOT_Uart_Init(void)
+&#123;
+    __HAL_UART_ENABLE_IT(&amp;BSP_NBLOT_USE_Serial, UART_IT_IDLE); &#x2F;&#x2F; 使能串口空闲中断
+    HAL_UART_Receive_DMA(&amp;BSP_NBLOT_USE_Serial, NBLOT_Uart_Rec_Temp_Arr, (uint16_t)BSP_NBLOT_Rec_MAX_LEN);                                                       &#x2F;&#x2F; 接收清0
+&#125;
+
+&#x2F;*
+ * @function: Bsp_NBLOT_Uart_Send_String
+ * @param: None
+ * @retval: None
+ * @brief: 串口发送字符串
+ *&#x2F;
+static void Bsp_NBLOT_Uart_Send_String(const uint8_t *pStr)
+&#123;
+        HAL_UART_Transmit(&amp;BSP_NBLOT_USE_Serial, pStr, strlen((const char *)pStr), 5000);
+#if USE_Debug_Print				
+		HAL_UART_Transmit(&amp;huart1, pStr, strlen((const char *)pStr), 5000);
+#endif				
+&#125;
+
+&#x2F;*
+ * @function: Bsp_NBLOT_Uart_Data_Parse
+ * @param: None
+ * @retval: None
+ * @brief: 串口接收数据解析
+ *&#x2F;
+static void Bsp_NBLOT_Uart_Data_Parse(void)
+&#123;
+	HAL_UART_DMAStop(&amp;BSP_NBLOT_USE_Serial);   &#x2F;&#x2F; 串口停止DMA接收
+	bsp_NBLOT_uart.usUart_Rec_Len &#x3D; BSP_NBLOT_Rec_MAX_LEN - __HAL_DMA_GET_COUNTER(&amp;hdma_usart2_rx);
+	Public.Memory_Copy((char*)bsp_NBLOT_uart.pucRec_Buffer, (char*)NBLOT_Uart_Rec_Temp_Arr, bsp_NBLOT_uart.usUart_Rec_Len);
+	bsp_NBLOT_uart.ucUart_Rec_Over_Flag &#x3D; TRUE;
+&#125;
+
+&#x2F;*
+ * @function: Bsp_NBLOT_Uart_Handler
+ * @param: None
+ * @retval: None
+ * @brief: 串口接收处理函数
+ *&#x2F;
+static void Bsp_NBLOT_Uart_Handler(void)
+&#123;
+	if (bsp_NBLOT_uart.ucUart_Rec_Over_Flag)
+	&#123;
+		switch (bsp_NBLOT.bsp_NBLOT_Rec_Status)
+		&#123;
+			case Rec_Status_None:
+			&#123;
+				break;
+			&#125;
+			case Rec_Status_CheckCmd_Plan1:
+			&#123;
+				if (strstr((char*)bsp_NBLOT_uart.pucRec_Buffer, (char*)&quot;OK&quot;) !&#x3D; NULL)
+				&#123;
+					bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan1] &#x3D; RET_PASS;
+				&#125;
+				else
+				&#123;
+					bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan1] &#x3D; RET_FAIL;
+				&#125;
+				break;
+			&#125;
+			case Rec_Status_CheckCmd_Plan2:
+			&#123;
+				if (strstr((char*)bsp_NBLOT_uart.pucRec_Buffer, (char*)&quot;OK&quot;) !&#x3D; NULL)	&#x2F;&#x2F; 寻找子串&quot;OK&quot;
+				&#123;
+					char *start &#x3D; strstr((char*)bsp_NBLOT_uart.pucRec_Buffer, (char*)&quot;+CGPADDR: &quot;);	&#x2F;&#x2F; 寻找子串&quot;+CGPADDR: &quot;
+
+					if (NULL &#x3D;&#x3D; start)
+					&#123;
+						bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan2] &#x3D; RET_FAIL;
+					&#125;
+					else
+					&#123;
+						char *ip &#x3D; start + 13;	&#x2F;&#x2F; 获取 IP 地址的起始位置
+						char *end &#x3D; strchr(ip, &#39;&quot;&#39;);	&#x2F;&#x2F; 获取 IP 地址的结束位置
+
+						if (NULL &#x3D;&#x3D; end)
+						&#123;
+							bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan2] &#x3D; RET_FAIL;
+						&#125;
+						else
+						&#123;
+							*end &#x3D; 0;	&#x2F;&#x2F; 在 IP 地址的结束位置处添加 &#39;\0&#39; 字符，表示字符串的结束
+
+							if (strlen(ip) &lt; 7)	&#x2F;&#x2F; 如果 IP 地址的长度小于 7
+							&#123;
+								bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan2] &#x3D; RET_FAIL;
+							&#125;
+							else
+							&#123;
+								bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan2] &#x3D; RET_PASS;
+							&#125;
+						&#125;
+					&#125;
+				&#125;
+				else
+				&#123;
+					bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan2] &#x3D; RET_FAIL;
+				&#125;				
+				break;
+			&#125;
+			case Rec_Status_CheckCmd_Plan3:
+			&#123;
+				if (strstr((char*)bsp_NBLOT_uart.pucRec_Buffer, (char*)&quot;+QMTOPEN: &quot;) !&#x3D; NULL)
+				&#123;
+					bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan3] &#x3D; RET_PASS;
+				&#125;
+				else
+				&#123;
+					bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan3] &#x3D; RET_FAIL;
+				&#125;				
+				break;
+			&#125;
+			case Rec_Status_CheckCmd_Plan4:
+			&#123;
+				if (strstr((char*)bsp_NBLOT_uart.pucRec_Buffer, (char*)&quot;+QMTCONN: &quot;) !&#x3D; NULL)
+				&#123;
+					bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan4] &#x3D; RET_PASS;
+				&#125;
+				else
+				&#123;
+					bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan4] &#x3D; RET_FAIL;
+				&#125;				
+				break;
+			&#125;
+			case Rec_Status_CheckCmd_Plan5:
+			&#123;
+				if (strstr((char*)bsp_NBLOT_uart.pucRec_Buffer, (char*)&quot;&gt;&quot;) !&#x3D; NULL)
+				&#123;
+					bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan5] &#x3D; RET_PASS;
+				&#125;
+				else
+				&#123;
+					bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan5] &#x3D; RET_FAIL;
+				&#125;				
+				break;
+			&#125;
+			case Rec_Status_CheckCmd_Plan6:
+			&#123;
+				if (strstr((char*)bsp_NBLOT_uart.pucRec_Buffer, (char*)&quot;+QMTPUB: &quot;) !&#x3D; NULL)
+				&#123;
+					bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan6] &#x3D; RET_PASS;
+				&#125;
+				else
+				&#123;
+					bsp_NBLOT.bsp_NBLOT_Ret_Status_buf[Rec_Status_CheckCmd_Plan6] &#x3D; RET_FAIL;
+				&#125;				
+				break;
+			&#125;
+			default:break;
+		&#125;
+		bsp_NBLOT_uart.ucUart_Rec_Over_Flag &#x3D; FALSE;
+
+#if USE_Debug_Print		
+		printf(&quot;%s\r\n&quot;,bsp_NBLOT_uart.pucRec_Buffer);
+#endif
+
+		Public.Memory_Clear(bsp_NBLOT_uart.pucRec_Buffer,bsp_NBLOT_uart.usUart_Rec_Len);
+		bsp_NBLOT_uart.usUart_Rec_Len &#x3D; 0;
+		HAL_UART_Receive_DMA(&amp;BSP_NBLOT_USE_Serial, NBLOT_Uart_Rec_Temp_Arr, (uint16_t)BSP_NBLOT_Rec_MAX_LEN);
+	&#125;
+&#125;</code></pre>
+              </div>
+            </details>
+<ul>
+<li>实验现象</li>
+</ul>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/QQ截图20231215144224.webp" style="zoom:67%;" /></article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/num115.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NB-loT"><span class="toc-number">2.</span> <span class="toc-text">NB-loT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6"><span class="toc-number">2.1.</span> <span class="toc-text">硬件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">2.2.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4%E6%B5%8B%E8%AF%95"><span class="toc-number">2.3.</span> <span class="toc-text">模块常用指令测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F"><span class="toc-number">2.4.</span> <span class="toc-text">程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8UDP%E4%B8%8E%E7%A7%81%E6%9C%89%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E4%BF%A1"><span class="toc-number">2.5.</span> <span class="toc-text">使用UDP与私有服务器通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8TCP%E4%B8%8E%E7%A7%81%E6%9C%89%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E4%BF%A1"><span class="toc-number">2.6.</span> <span class="toc-text">使用TCP与私有服务器通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8MQTT%E4%B8%8E%E7%A7%81%E6%9C%89%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E4%BF%A1"><span class="toc-number">2.7.</span> <span class="toc-text">使用MQTT与私有云服务器通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%BC%A0%E6%95%B0%E6%8D%AE%E5%88%B0%E8%85%BE%E8%AE%AF%E4%BA%91"><span class="toc-number">2.8.</span> <span class="toc-text">上传数据到腾讯云</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Yang</div><div class="footer_custom_text"><div class="github-badge"><a href="http://beian.miit.gov.cn/" target="_blank" title="粤ICP备 2022026282号-1" ), pointer;"><span class="badge-subject">粤ICP备</span><span class="badge-value bg-green">2022026282号-1</span></a></div><div class="github-badge"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44070502000559" title="44070502000559号"><span class="badge-subject"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/beian34234242222.webp" style="float:left;zoom:80%;" />粤公网安备</span><span class="badge-value bg-green">44070502000559号</span></a></div><div><a style="margin-inline:5px" target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Frame-Hexo-blue.svg" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/butterfly/blog_other/Theme-Butterfly-6513df.svg" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px" target="_blank" href="https://vercel.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/Hosted-Vercel-brightgreen.svg" title="本站采用多线部署，次线路托管于Vercel" alt="HEXO"></a></div></div><div id="running-time" style="color: #5c5c5c;"><script>setInterval(()=>{let create_time=Math.round(new Date('3/10/2022 08:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml='本站已苟活了 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="nav-music"><div id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()">播放音乐</div><meting-js id="8183137343" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-paw"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="https://yang5201314.cn/"><i class="fa fa-home"></i><span>主页</span></a><a class="rightMenu-item" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a><a class="rightMenu-item" href="/archives/"><i class="fa-solid fa-folder-open"></i><span>文章归档</span></a><a class="rightMenu-item" href="https://www.foreverblog.cn/go.html" target="_blank"><i class="fa fa-certificate"></i><span>虫洞</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script defer src="/js/tw_cn.js"></script><script defer src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module" defer></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script defer src="https://jsd.onmicrosoft.cn/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script defer src="/js/search/algolia.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://lib.baomitu.com/KaTeX/latest/katex.min.css"><script src="https://jsd.onmicrosoft.cn/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div><script src="https://jsd.onmicrosoft.cn/npm/prismjs/prism.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async type="text/javascript" src="https://jsd.onmicrosoft.cn/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script><script>
+    document.body.oncopy = function () {
+        iziToast.info({
+            timeout: 4000, // 关闭弹窗的时间
+          // icon: 'Fontawesome', // 图标类别
+            closeOnEscape: 'true', // 允许使用Esc键关闭弹窗
+            transitionIn: 'bounceInLeft', // 弹窗打开动画
+            transitionOut: 'fadeOutRight', // 弹窗关闭动画
+            displayMode: 'replace', // 替换已经打开的弹窗
+            layout: '2', // Medium模式
+            position: 'topRight', // 弹窗位置
+            //icon: 'fad fa-copy', // 图标类名
+            iconUrl:'https://image-1309791158.cos.ap-guangzhou.myqcloud.com/其他/1122star.svg',
+            backgroundColor: 'rgb(179, 182, 180)', // 弹窗背景色
+            title: '复制成功', // 通知标题
+            message: '键盘敲烂 月薪过万' // 通知消息内容
+        });
+    }
+</script>
+<script defer type="text/javascript" src="/js/rightmenu.js"></script><script  type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script defer type="text/javascript" src="/js/IPdw.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/newYear.js"></script><script defer src="/js/my_aplayer.js"></script><script defer src="/js/meting.js"></script><script id="click-heart" src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.js"></script><script src="https://jsd.onmicrosoft.cn/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '250ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
