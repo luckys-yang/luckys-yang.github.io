@@ -45,7 +45,9 @@ comments: false
 
 {% note green 'fas fa-fan fa-spin' simple%}<center style="    color: #fddd61;text-align: center;font-weight: 600;">实习/工作经历</center>{% endnote %}
 
-待写
+> 2024.1.2 ~ 2024.2.26
+>
+> 中山市央果科技有限公司(奥川稳定器)  --- 负责QT上位机开发与蓝牙SDK开发
 
 
 
