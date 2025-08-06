@@ -1,5 +1,5 @@
 ---
-title: C#上位机学习
+title: CS上位机学习
 cover: /img/num132.webp
 categories:
   - 细化学习
