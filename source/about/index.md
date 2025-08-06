@@ -15,13 +15,13 @@ comments: false
 
 <!-- tab 我的信息 -->
 
-{% label 姓名 blue %} 杨振旺<br>{% label 年龄 blue %} 21<br>{% label 星座 blue %} 处女座(没洁癖！)<br>{% label 家乡 blue %} 广东省江门市新会区<br>{% label 现就读于 blue %} 广东理工职业学院<span style="color: #2d7f70;"> | </span>物联网应用技术专业<span style="color: #2d7f70;"> | </span>大三<br>
+{% label 姓名 blue %} 杨振旺<br>{% label 年龄 blue %} 23<br>{% label 星座 blue %} 处女座(没洁癖！)<br>{% label 家乡 blue %} 广东省江门市新会区<br>{% label 现就读于 blue %} 广东理工职业学院<span style="color: #2d7f70;"> | </span>物联网应用技术专业<span style="color: #2d7f70;"> | </span>已毕业<br>
 
 <!-- endtab -->
 
 <!-- tab 生活方式 -->
 
-{% label 爱好 orange %} 宅(除了宿舍教室就是工作室)，内卷(早八晚十)，敲代码(写Bug)，维护博客(CV工程师)，热衷于并献身于嵌入式事业(一是因为听说工资高，二是因为感兴趣)<br>{% label 当前目标 orange %} 学好技术找个感兴趣的工作努力赚钱<br>{% label 理想中的工作 orange %} 早八晚五，中午来杯卡布奇诺，偶尔加班，放假就去自驾游!<br>{% label 闲谈 orange %}也许是实习时接触的太多事，上了专科也就开始收起以前贪玩的心态(也对各种娱乐项目产生厌倦的感觉),只想着努力学习技术为以后工作打下基础，珍惜当下，毕竟在学校里的日子已经转瞬即逝<br>{% label 人生格言 orange %}**Stay Hungry. Stay Foolish! 求知若渴，虚心若愚!**
+{% label 爱好 orange %} 摸鱼<br>{% label 当前目标 orange %} 努力赚钱 开心点就行<br>{% label 理想中的工作 orange %} 早八晚五，双休!!!!!!!!!!!!!!!!!!!<br>{% label 闲谈 orange %}也许是实习时接触的太多事，上了专科也就开始收起以前贪玩的心态(也对各种娱乐项目产生厌倦的感觉),只想着努力学习技术为以后工作打下基础，珍惜当下，毕竟在学校里的日子已经转瞬即逝<br>{% label 人生格言 orange %}**Stay Hungry. Stay Foolish! 求知若渴，虚心若愚!**
 
 <!-- endtab -->
 
