@@ -38,7 +38,7 @@
     "katex": "^0.16.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.12",
+    "@babel/core": "^7.28.0",
     "@babel/preset-env": "^7.20.2",
     "gulp-babel": "^8.0.0",
     "gulp-clean-css": "^4.3.0",
